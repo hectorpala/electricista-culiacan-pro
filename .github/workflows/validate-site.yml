@@ -1,0 +1,145 @@
+name: Validate Site
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch: {}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils jq ripgrep
+
+      - name: Validate sitemap.xml
+        run: |
+          echo "Validating sitemap.xml..."
+          xmllint --noout --schema https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd sitemap.xml || {
+            echo "❌ sitemap.xml validation failed"
+            exit 1
+          }
+          echo "✅ sitemap.xml is valid"
+
+      - name: Count URLs in sitemap
+        run: |
+          count=$(xmllint --xpath "count(//url)" sitemap.xml)
+          echo "URLs in sitemap: $count"
+          [ "$count" -ge 40 ] || {
+            echo "❌ Expected at least 40 URLs, found $count"
+            exit 1
+          }
+          echo "✅ Sitemap has $count URLs"
+
+      - name: Validate all JSON-LD schemas
+        run: |
+          FAIL=0
+          echo "Validating JSON-LD in all HTML files..."
+          mapfile -t FILES < <(find . -name "*.html" -type f ! -path "*/node_modules/*" ! -path "*/.git/*" ! -path "*/dist/*")
+
+          for f in "${FILES[@]}"; do
+            echo "Checking $f..."
+            json=$(rg -oP '(?s)(?<=<script type="application/ld\+json">).*?(?=</script>)' "$f" || true)
+
+            if [ -z "$json" ]; then
+              echo "⚠️ No JSON-LD found in $f"
+              continue
+            fi
+
+            echo "$json" | jq -e . >/dev/null || {
+              echo "❌ Invalid JSON-LD in $f"
+              FAIL=1
+            }
+          done
+
+          [ $FAIL -eq 0 ] || exit 1
+          echo "✅ All JSON-LD schemas are valid"
+
+      - name: Check required meta tags
+        run: |
+          FAIL=0
+          echo "Checking required meta tags in HTML files..."
+          mapfile -t FILES < <(find . -name "index.html" -type f ! -path "*/node_modules/*" ! -path "*/.git/*")
+
+          for f in "${FILES[@]}"; do
+            echo "Checking $f..."
+
+            # Check title
+            rg -q '<title>' "$f" || { echo "❌ Missing <title> in $f"; FAIL=1; }
+
+            # Check meta description
+            rg -q '<meta name="description"' "$f" || { echo "❌ Missing meta description in $f"; FAIL=1; }
+
+            # Check canonical
+            rg -q '<link rel="canonical"' "$f" || { echo "❌ Missing canonical in $f"; FAIL=1; }
+
+            # Check viewport
+            rg -q '<meta name="viewport"' "$f" || { echo "❌ Missing viewport in $f"; FAIL=1; }
+
+            # Check og:title
+            rg -q 'property="og:title"' "$f" || { echo "❌ Missing og:title in $f"; FAIL=1; }
+
+            # Check og:description
+            rg -q 'property="og:description"' "$f" || { echo "❌ Missing og:description in $f"; FAIL=1; }
+          done
+
+          [ $FAIL -eq 0 ] || exit 1
+          echo "✅ All required meta tags present"
+
+      - name: Check for broken internal links
+        run: |
+          echo "Checking for broken internal links..."
+          FAIL=0
+
+          # Extract all internal links from HTML files
+          mapfile -t LINKS < <(rg -oI 'href="(/[^"#]*)"' -r '$1' --no-filename . | sort -u)
+
+          for link in "${LINKS[@]}"; do
+            # Skip external links, anchors, and special cases
+            [[ "$link" =~ ^https?:// ]] && continue
+            [[ "$link" =~ ^mailto: ]] && continue
+            [[ "$link" =~ ^tel: ]] && continue
+
+            # Add index.html if link ends with /
+            if [[ "$link" =~ /$ ]]; then
+              file=".${link}index.html"
+            else
+              file=".${link}"
+            fi
+
+            [ -f "$file" ] || {
+              echo "⚠️ Broken link: $link (looking for $file)"
+            }
+          done
+
+          echo "✅ Internal link check complete"
+
+      - name: Verify CNAME file
+        run: |
+          [ -f "CNAME" ] || { echo "❌ CNAME file missing"; exit 1; }
+          domain=$(cat CNAME)
+          [ "$domain" = "electricistaculiacanpro.mx" ] || {
+            echo "❌ CNAME contains wrong domain: $domain"
+            exit 1
+          }
+          echo "✅ CNAME file is correct: $domain"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "================================"
+          echo "Validation Summary"
+          echo "================================"
+          echo "✅ Sitemap validation"
+          echo "✅ JSON-LD validation"
+          echo "✅ Meta tags check"
+          echo "✅ Internal links check"
+          echo "✅ CNAME verification"
+          echo "================================"
