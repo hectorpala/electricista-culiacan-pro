@@ -105,6 +105,49 @@
         <priority>0.9</priority>
     </url>
 
+    <!-- Blog Articles -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/cuando-llamar-electricista-emergencia/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
     <!-- Colonias Index Page -->
     <url>
         <loc>https://electricistaculiacanpro.mx/colonias/</loc>
