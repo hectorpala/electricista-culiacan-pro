@@ -7,7 +7,7 @@
     <!-- Homepage -->
     <url>
         <loc>https://electricistaculiacanpro.mx/</loc>
-        <lastmod>2025-11-21</lastmod>
+        <lastmod>2025-11-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -23,30 +23,267 @@
     <!-- Services Pages -->
     <url>
         <loc>https://electricistaculiacanpro.mx/servicios/instalacion-electrica/</loc>
-        <lastmod>2025-11-21</lastmod>
+        <lastmod>2025-11-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
         <loc>https://electricistaculiacanpro.mx/servicios/reparacion-cortocircuitos/</loc>
-        <lastmod>2025-11-21</lastmod>
+        <lastmod>2025-11-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
-        <loc>https://electricistaculiacanpro.mx/servicios/emergencia-24-7/</loc>
-        <lastmod>2025-11-21</lastmod>
+        <loc>https://electricistaculiacanpro.mx/servicios/instalacion-contactos/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/iluminacion-led/</loc>
+        <lastmod>2025-11-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
         <loc>https://electricistaculiacanpro.mx/servicios/mantenimiento-tableros/</loc>
-        <lastmod>2025-11-21</lastmod>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/emergencia-24-7/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Colonias Index Page -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Colonias - Zona Norte -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/las-quintas/</loc>
+        <lastmod>2025-11-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/tres-rios/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/country-tres-rios/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/cumbres-tres-rios/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/campestre/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/hacienda-del-valle/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/hacienda-los-huertos/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/bosques-del-humaya/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Colonias - Zona Centro -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/centro/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/guadalupe/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/chapultepec/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/santa-fe/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/zona-dorada/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Colonias - Zona Sur -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/villa-universidad/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/montebello/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/villa-bonita/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/lomas-del-boulevard/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/real-del-valle/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/jardines-del-valle/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Colonias - Zona Oriente -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/colinas-de-san-miguel/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/lomas-de-san-isidro/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/nuevo-culiacan/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/infonavit-humaya/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/colinas-de-la-rivera/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Colonias - Otras -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/altamira/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/bachigualato/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/isla-del-oeste/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/las-palmas/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/portales-del-rio/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/real-san-angel/</loc>
+        <lastmod>2025-11-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
 
 </urlset>
