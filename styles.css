@@ -338,7 +338,7 @@ p {
   /* Rating badge optimizado */
   .hero-rating {
     margin-bottom: 1.5rem;
-    background: rgba(0, 0, 0, 0.65) !important;
+    background: rgba(0, 0, 0, 0.33) !important;
     padding: 0.75rem 1.25rem !important;
   }
 
@@ -354,7 +354,7 @@ p {
   /* Hero content optimizado para mobile */
   .hero-content {
     padding: 1.75rem 1.5rem !important;
-    background: rgba(0, 0, 0, 0.65) !important;
+    background: rgba(0, 0, 0, 0.33) !important;
   }
 
   /* Ocultar elementos secundarios en móvil */
@@ -416,7 +416,7 @@ p {
   width: 95% !important;
   max-width: 550px !important;
   margin: 0 auto 2rem auto !important;
-  background: rgba(0, 0, 0, 0.5) !important;
+  background: rgba(0, 0, 0, 0.25) !important;
   backdrop-filter: none !important;
   border-radius: 24px !important;
   padding: 2rem 1.5rem !important;
