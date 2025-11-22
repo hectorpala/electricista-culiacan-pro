@@ -95,6 +95,63 @@
   --radius-full: 9999px;
 }
 
+/* Breadcrumb Navigation */
+.breadcrumb {
+    background: #f8f9fa;
+    padding: 12px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #e9ecef;
+}
+.breadcrumb-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.breadcrumb-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+.breadcrumb-item a {
+    color: #1E40AF;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.breadcrumb-item a:hover {
+    color: #3B82F6;
+    text-decoration: underline;
+}
+.breadcrumb-item.active {
+    color: #6c757d;
+}
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: #6c757d;
+    user-select: none;
+}
+@media (max-width: 768px) {
+    .breadcrumb {
+        font-size: 13px;
+        padding: 10px 0;
+    }
+    .breadcrumb-separator {
+        margin: 0 6px;
+    }
+}
+
+/* Animación pulse para CTA flotante */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
 /* Reset y base */
 * {
   margin: 0;
