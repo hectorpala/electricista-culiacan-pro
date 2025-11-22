@@ -1,0 +1,26 @@
+# robots.txt - Electricista Culiacán Pro
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://electricistaculiacanpro.mx/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /scripts/
+
+# Allow important resources
+Allow: /assets/
+Allow: /servicios/
+Allow: /blog/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.jpg$
+
+# Crawl-delay for politeness
+Crawl-delay: 1
