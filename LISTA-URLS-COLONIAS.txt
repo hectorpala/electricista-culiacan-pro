@@ -1,0 +1,53 @@
+LISTA DE URLs CREADAS PARA SEO LOCAL
+=====================================
+
+Página Principal de Colonias:
+https://electricistaculiacanpro.mx/colonias/
+
+Páginas por Colonia (30 páginas):
+----------------------------------
+
+1. https://electricistaculiacanpro.mx/colonias/altamira/
+2. https://electricistaculiacanpro.mx/colonias/bachigualato/
+3. https://electricistaculiacanpro.mx/colonias/bosques-del-humaya/
+4. https://electricistaculiacanpro.mx/colonias/campestre/
+5. https://electricistaculiacanpro.mx/colonias/centro/
+6. https://electricistaculiacanpro.mx/colonias/chapultepec/
+7. https://electricistaculiacanpro.mx/colonias/colinas-de-la-rivera/
+8. https://electricistaculiacanpro.mx/colonias/colinas-de-san-miguel/
+9. https://electricistaculiacanpro.mx/colonias/country-tres-rios/
+10. https://electricistaculiacanpro.mx/colonias/cumbres-tres-rios/
+11. https://electricistaculiacanpro.mx/colonias/guadalupe/
+12. https://electricistaculiacanpro.mx/colonias/hacienda-del-valle/
+13. https://electricistaculiacanpro.mx/colonias/hacienda-los-huertos/
+14. https://electricistaculiacanpro.mx/colonias/infonavit-humaya/
+15. https://electricistaculiacanpro.mx/colonias/isla-del-oeste/
+16. https://electricistaculiacanpro.mx/colonias/jardines-del-valle/
+17. https://electricistaculiacanpro.mx/colonias/las-palmas/
+18. https://electricistaculiacanpro.mx/colonias/las-quintas/
+19. https://electricistaculiacanpro.mx/colonias/lomas-de-san-isidro/
+20. https://electricistaculiacanpro.mx/colonias/lomas-del-boulevard/
+21. https://electricistaculiacanpro.mx/colonias/montebello/
+22. https://electricistaculiacanpro.mx/colonias/nuevo-culiacan/
+23. https://electricistaculiacanpro.mx/colonias/portales-del-rio/
+24. https://electricistaculiacanpro.mx/colonias/real-del-valle/
+25. https://electricistaculiacanpro.mx/colonias/real-san-angel/
+26. https://electricistaculiacanpro.mx/colonias/santa-fe/
+27. https://electricistaculiacanpro.mx/colonias/tres-rios/
+28. https://electricistaculiacanpro.mx/colonias/villa-bonita/
+29. https://electricistaculiacanpro.mx/colonias/villa-universidad/
+30. https://electricistaculiacanpro.mx/colonias/zona-dorada/
+
+TOTAL: 31 URLs (1 índice + 30 colonias)
+
+Para Sitemap XML:
+-----------------
+Agregar estas URLs a sitemap.xml con:
+- <changefreq>monthly</changefreq>
+- <priority>0.7</priority> (colonias principales: 0.8)
+
+Páginas Premium (mayor contenido):
+- /colonias/las-quintas/ (priority: 0.9)
+- /colonias/tres-rios/ (priority: 0.8)
+- /colonias/centro/ (priority: 0.8)
+
