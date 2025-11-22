@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schema.org/FAQPage",
+  "description": "FAQ Schemas para Electricista Culiacán Pro - Preguntas frecuentes sobre servicios eléctricos",
+  "version": "1.0",
+  "lastUpdated": "2025-11-22",
+  "faqs": {
+    "general": [
+      {
+        "question": "¿Cuánto tiempo tardan en llegar en caso de emergencia?",
+        "answer": "En emergencias eléctricas, llegamos en 30-60 minutos a las principales colonias de Culiacán como Las Quintas, Tres Ríos, Centro, Chapultepec y Montebello. Tenemos cobertura 24/7 todos los días del año."
+      },
+      {
+        "question": "¿Cuánto cobran por una visita de diagnóstico?",
+        "answer": "El costo de la visita se cotiza según el tipo de trabajo. El servicio de diagnóstico tiene un costo desde $200 MXN, que se descuenta si decides contratar el servicio de reparación o instalación."
+      },
+      {
+        "question": "¿Atienden emergencias de noche y fines de semana?",
+        "answer": "Sí, tenemos servicio de emergencia 24/7 todos los días del año, incluyendo noches, fines de semana y días festivos. Puedes contactarnos por WhatsApp o teléfono en cualquier momento."
+      },
+      {
+        "question": "¿Dan garantía de los trabajos realizados?",
+        "answer": "Sí, todos nuestros trabajos incluyen garantía por escrito de 30 a 90 días según el tipo de servicio. La garantía cubre tanto mano de obra como materiales utilizados."
+      },
+      {
+        "question": "¿Están certificados por la CFE?",
+        "answer": "Sí, contamos con técnicos electricistas certificados que cumplen con todas las normas de la Comisión Federal de Electricidad (CFE). Todos nuestros trabajos se realizan conforme a las normativas vigentes."
+      },
+      {
+        "question": "¿Qué colonias de Culiacán atienden?",
+        "answer": "Atendemos todas las colonias de Culiacán. Tenemos cobertura prioritaria en Las Quintas, Tres Ríos, Centro, Chapultepec, Montebello, Guadalupe, Campestre, Villa Universidad y más de 30 colonias adicionales."
+      },
+      {
+        "question": "¿Proporcionan factura fiscal?",
+        "answer": "Sí, proporcionamos factura fiscal (CFDI) para todos nuestros servicios. Solo necesitamos tus datos fiscales al momento de solicitar el servicio."
+      },
+      {
+        "question": "¿Qué formas de pago aceptan?",
+        "answer": "Aceptamos efectivo, transferencia bancaria y tarjeta de crédito/débito. El pago se realiza una vez terminado el trabajo y verificada tu satisfacción."
+      }
+    ],
+    "instalacion": [
+      {
+        "question": "¿Cuánto cuesta una instalación eléctrica completa?",
+        "answer": "El costo depende del tamaño de la propiedad y tipo de instalación. Una casa de 100m² tiene un costo aproximado de $8,000 a $15,000 MXN. Incluye cableado, tablero, contactos y apagadores conforme a normas CFE."
+      },
+      {
+        "question": "¿Cuánto tiempo toma hacer una instalación eléctrica?",
+        "answer": "Una instalación eléctrica residencial completa toma entre 3-7 días laborales dependiendo del tamaño. Instalaciones parciales (agregar contactos, cambiar tablero) se completan en 1-2 días."
+      }
+    ],
+    "emergencias": [
+      {
+        "question": "¿Qué hacer si tengo un cortocircuito?",
+        "answer": "1) Apaga el breaker principal inmediatamente. 2) Desconecta todos los aparatos. 3) No toques cables expuestos. 4) Contacta a nuestro servicio de emergencia 24/7. Llegamos en 30-60 minutos."
+      },
+      {
+        "question": "¿Cobran más por servicios de emergencia nocturna?",
+        "answer": "El diagnóstico de emergencia tiene el mismo costo base. Si el trabajo se realiza entre 10pm y 6am, hay un cargo adicional del 20% por horario nocturno. Te lo informamos antes de iniciar cualquier trabajo."
+      }
+    ],
+    "precios": [
+      {
+        "question": "¿Cuánto cuesta cambiar un tablero eléctrico?",
+        "answer": "El cambio de tablero eléctrico tiene un costo de $2,500 a $5,000 MXN dependiendo de la capacidad (8, 12 o 20 circuitos) e incluye breakers, cableado interno y mano de obra. Garantía de 90 días."
+      },
+      {
+        "question": "¿Cuánto cuesta instalar contactos adicionales?",
+        "answer": "La instalación de contactos polarizados tiene un costo de $300 a $600 MXN por punto, dependiendo de la distancia del tablero. Incluye contacto polarizado con tierra física, cableado y mano de obra."
+      },
+      {
+        "question": "¿Cuánto cuesta reparar un cortocircuito?",
+        "answer": "El diagnóstico tiene un costo de $200 MXN. La reparación depende de la causa: cambio de cable dañado ($500-$1,500), reparación de contacto ($300-$500), o reparación de tablero ($800-$2,000). Te cotizamos antes de reparar."
+      }
+    ]
+  },
+  "categories": {
+    "general": "Preguntas generales sobre servicios",
+    "instalacion": "Instalaciones eléctricas",
+    "emergencias": "Emergencias eléctricas 24/7",
+    "precios": "Costos y presupuestos"
+  }
+}

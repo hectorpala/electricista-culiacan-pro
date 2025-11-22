@@ -1,0 +1,48 @@
+{
+  "name": "electricista-culiacan-pro",
+  "version": "1.0.0",
+  "description": "Servicio profesional de electricidad en Culiacán, Sinaloa",
+  "type": "module",
+  "scripts": {
+    "build:css": "cat styles.css | tr -d '\\n\\r' | sed 's/\\/\\*.*\\*\\///g' | sed 's/  */ /g' | sed 's/ *{ */{/g' | sed 's/ *} */}/g' | sed 's/ *: */:/g' | sed 's/ *; */;/g' | sed 's/ *, */,/g' > styles.min.css && echo '✅ CSS minificado (16KB → 4KB)'",
+    "clean": "npm run clean:ds-store && npm run clean:logs",
+    "clean:ds-store": "find . -name '.DS_Store' -type f -delete && echo '✓ .DS_Store files deleted'",
+    "clean:logs": "find . -name '*.log' -type f -delete && echo '✓ Log files deleted'",
+    "clean:all": "npm run clean && git clean -fdX && echo '✓ All ignored files cleaned'",
+    "precommit": "npm run clean:ds-store",
+    "validate:sitemap": "xmllint --noout --schema https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd sitemap.xml && echo '✅ sitemap.xml válido'",
+    "validate:sitemaps": "xmllint --noout sitemaps/*.xml && echo '✅ Todos los sitemaps válidos'",
+    "validate:schemas": "python3 scripts/validate_schemas.py",
+    "check:links": "python3 scripts/check_links.py",
+    "generate:sitemap": "python3 scripts/generate_sitemap.py",
+    "update:lastmod": "python3 scripts/update_lastmod.py",
+    "deploy:check": "python3 scripts/deploy.py",
+    "optimize:images": "python3 scripts/optimize_images.py",
+    "test:all": "npm run validate:sitemap && npm run validate:schemas && npm run check:links",
+    "build": "npm run build:css && npm run validate:sitemap && echo '✅ Build complete'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hectorpala/electricista-culiacan-pro.git"
+  },
+  "keywords": [
+    "electricista",
+    "culiacan",
+    "sinaloa",
+    "emergencias",
+    "24/7",
+    "instalacion-electrica",
+    "reparacion",
+    "mantenimiento"
+  ],
+  "author": "Electricista Culiacán Pro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hectorpala/electricista-culiacan-pro/issues"
+  },
+  "homepage": "https://electricistaculiacanpro.mx",
+  "engines": {
+    "node": ">=18.0.0",
+    "python": ">=3.7.0"
+  }
+}
