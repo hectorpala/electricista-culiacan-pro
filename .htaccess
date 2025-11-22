@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirects 301 - Migración de estructura de carpetas
+# Fecha: 2025-11-22
+# Razón: Unificación de estructura plana en /servicios/
+
+# Redirect de landing pages locales (antiguas rutas → nuevas rutas)
+Redirect 301 /servicios/electricista/24-7/ https://electricistaculiacanpro.mx/servicios/emergencia-24-7/
+Redirect 301 /servicios/electricista/cerca-de-mi/ https://electricistaculiacanpro.mx/servicios/electricista-cerca-de-mi/
+Redirect 301 /servicios/electricista/a-domicilio/ https://electricistaculiacanpro.mx/servicios/electricista-a-domicilio/
+Redirect 301 /servicios/electricista/colonias/ https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
+Redirect 301 /servicios/electricista/precios/ https://electricistaculiacanpro.mx/servicios/electricista-precios/
