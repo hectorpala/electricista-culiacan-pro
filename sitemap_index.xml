@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Sitemap Principal -->
+    <sitemap>
+        <loc>https://electricistaculiacanpro.mx/sitemap.xml</loc>
+        <lastmod>2025-11-22</lastmod>
+    </sitemap>
+
+    <!-- Sitemap de Servicios -->
+    <sitemap>
+        <loc>https://electricistaculiacanpro.mx/sitemaps/servicios_sitemap.xml</loc>
+        <lastmod>2025-11-22</lastmod>
+    </sitemap>
+
+    <!-- Sitemap de Colonias -->
+    <sitemap>
+        <loc>https://electricistaculiacanpro.mx/sitemaps/colonias_sitemap.xml</loc>
+        <lastmod>2025-11-22</lastmod>
+    </sitemap>
+
+    <!-- Sitemap de Blog (Futuro) -->
+    <sitemap>
+        <loc>https://electricistaculiacanpro.mx/sitemaps/blog_sitemap.xml</loc>
+        <lastmod>2025-11-22</lastmod>
+    </sitemap>
+
+</sitemapindex>
