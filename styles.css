@@ -1,5 +1,5 @@
 /* Electricista Culiacán Pro - Main Stylesheet */
-/* Paleta de colores: Azul eléctrico + Amarillo energía */
+/* Paleta de colores: Azul Eléctrico Intenso + Naranja Brillante */
 
 /* Fuentes autohospedadas */
 @font-face {
@@ -43,16 +43,16 @@
 }
 
 :root {
-  /* Colores principales - Azul eléctrico */
-  --brand: #1E40AF;
-  --brand-light: #3B82F6;
-  --brand-dark: #1E3A8A;
+  /* Colores principales - Azul Eléctrico Intenso (Cobalto saturado) */
+  --brand: #0047AB;
+  --brand-light: #0066FF;
+  --brand-dark: #003380;
 
-  /* Color de acento - Amarillo energía */
-  --accent: #FCD34D;
-  --accent-dark: #F59E0B;
+  /* Color de acento - Naranja Brillante (Urgencia) */
+  --accent: #FF6600;
+  --accent-dark: #FF4500;
 
-  /* Color de WhatsApp */
+  /* Color de WhatsApp (se mantiene) */
   --whatsapp: #25D366;
 
   /* Colores de texto */
@@ -71,9 +71,9 @@
   --shadow-lg: rgba(15,23,42,0.15);
 
   /* Gradientes */
-  --gradient-brand: linear-gradient(135deg,#3B82F6 0%,#1E40AF 100%);
-  --gradient-accent: linear-gradient(135deg,#FCD34D 0%,#F59E0B 100%);
-  --gradient-overlay: linear-gradient(135deg,rgba(30,64,175,0.9) 0%,rgba(30,58,138,0.8) 100%);
+  --gradient-brand: linear-gradient(135deg,#0066FF 0%,#0047AB 100%);
+  --gradient-accent: linear-gradient(135deg,#FF7700 0%,#FF6600 100%);
+  --gradient-overlay: linear-gradient(135deg,rgba(0,71,171,0.9) 0%,rgba(0,51,128,0.8) 100%);
 
   /* Espaciado */
   --space-xs: 0.5rem;
@@ -180,12 +180,12 @@ p {
   left: 0;
   right: 0;
   z-index: 50;
-  background: rgba(30, 64, 175, 0.95);
+  background: rgba(0, 71, 171, 0.98);
   backdrop-filter: blur(10px);
   border-bottom: none;
   padding: 16px 0;
   transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
 }
 
 .nav-wrapper {
@@ -553,7 +553,7 @@ p {
 /* Buttons */
 .btn-primary {
   display: inline-block;
-  background: var(--gradient-brand);
+  background: var(--gradient-accent);
   color: white;
   border: none;
   border-radius: 12px;
@@ -564,15 +564,15 @@ p {
   transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(30,64,175,0.3);
+  box-shadow: 0 4px 16px rgba(255,102,0,0.4);
   min-height: 48px;
   min-width: 48px;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(30,64,175,0.4);
-  filter: brightness(1.05);
+  box-shadow: 0 8px 32px rgba(255,102,0,0.5);
+  filter: brightness(1.1);
 }
 
 .btn-whatsapp {
