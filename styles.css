@@ -387,18 +387,28 @@ p {
   }
 
   .hero-rating {
-    margin-top: 20rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
     background: rgba(0, 0, 0, 0.33) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
 
-  .hero-cta,
-  .hero-contact,
-  .hero-guarantee,
+  /* MANTENER VISIBLES ELEMENTOS DE CONVERSIÓN EN MÓVIL */
   .hero .btn-primary {
-    display: none !important;
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+
+  .hero-features {
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .feature-item {
+    font-size: 0.85rem;
   }
 }
 
