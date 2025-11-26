@@ -2280,3 +2280,194 @@ p {
 .card.card--img * {
   text-decoration: none !important;
 }
+
+/* ============================================
+   ENHANCED WHATSAPP WIDGET - CONVERSION OPTIMIZED
+   ============================================ */
+
+/* Pulse animation for WhatsApp button */
+@keyframes pulse-whatsapp {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* Enhanced floating button base */
+.floating-btn {
+  position: fixed;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.floating-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* WhatsApp button with pulse animation */
+.floating-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  bottom: 90px;
+  animation: pulse-whatsapp 2s infinite;
+}
+
+.floating-whatsapp:hover {
+  animation: none;
+}
+
+/* Call button */
+.floating-call {
+  background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
+  bottom: 20px;
+}
+
+/* Tooltip for WhatsApp button */
+.floating-whatsapp::before {
+  content: "¿Necesitas ayuda? Chatea con nosotros";
+  position: absolute;
+  right: 70px;
+  background: #1F2937;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Inter', sans-serif;
+}
+
+.floating-whatsapp::after {
+  content: "";
+  position: absolute;
+  right: 62px;
+  border: 6px solid transparent;
+  border-left-color: #1F2937;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.floating-whatsapp:hover::before,
+.floating-whatsapp:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Tooltip for Call button */
+.floating-call::before {
+  content: "Llama ahora: 667 163 1231";
+  position: absolute;
+  right: 70px;
+  background: #1F2937;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Inter', sans-serif;
+}
+
+.floating-call::after {
+  content: "";
+  position: absolute;
+  right: 62px;
+  border: 6px solid transparent;
+  border-left-color: #1F2937;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.floating-call:hover::before,
+.floating-call:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Online badge for WhatsApp */
+.floating-whatsapp .online-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  background: #10B981;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .floating-btn {
+    width: 56px;
+    height: 56px;
+    right: 16px;
+  }
+
+  .floating-whatsapp {
+    bottom: 80px;
+  }
+
+  .floating-call {
+    bottom: 16px;
+  }
+
+  /* Hide tooltips on mobile (not needed on touch devices) */
+  .floating-whatsapp::before,
+  .floating-whatsapp::after,
+  .floating-call::before,
+  .floating-call::after {
+    display: none;
+  }
+
+  /* Smaller pulse on mobile to avoid distraction */
+  @keyframes pulse-whatsapp {
+    0% {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 0 6px rgba(37, 211, 102, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+  }
+}
+
+/* Ensure buttons don't overlap with footer on scroll */
+@media (max-height: 600px) {
+  .floating-whatsapp {
+    bottom: 70px;
+  }
+
+  .floating-call {
+    bottom: 10px;
+  }
+}
