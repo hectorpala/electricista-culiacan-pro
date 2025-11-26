@@ -79,9 +79,9 @@
         .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
         .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
         .logo{display:block;text-decoration:none;transition:opacity .2s ease}
-        .logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
+        .logo img{height:140px;width:auto;display:block;max-height:160px;mix-blend-mode:multiply}
         .logo:hover{opacity:0.9}
-        @media (max-width:768px){.logo img{height:62px;max-height:72px}}
+        @media (max-width:768px){.logo img{height:90px;max-height:110px}}
         .nav-menu{display:flex;list-style:none;gap:2rem}
         .nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
         .nav-link:hover{color:var(--brand-light)}
@@ -491,7 +491,12 @@
       "@id": "https://electricistaculiacanpro.mx/#website",
       "name": "Electricista Culiacán Pro",
       "url": "https://electricistaculiacanpro.mx/",
-      "logo": "https://electricistaculiacanpro.mx/assets/images/logo-512.webp",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://electricistaculiacanpro.mx/assets/images/logo-512.png",
+        "width": 512,
+        "height": 512
+      },
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -671,7 +676,12 @@
         "https://www.facebook.com/electricistaculiacanpro",
         "https://www.instagram.com/electricistaculiacanpro"
       ],
-      "logo": "https://electricistaculiacanpro.mx/assets/images/logo-512.webp",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://electricistaculiacanpro.mx/assets/images/logo-512.png",
+        "width": 512,
+        "height": 512
+      },
       "image": {
         "@type": "ImageObject",
         "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/emergencia-24-7-nocturna-1200w.webp",
@@ -1368,7 +1378,13 @@
       "name": "Electricista Culiacán Pro",
       "legalName": "Electricista Culiacán Pro",
       "url": "https://electricistaculiacanpro.mx",
-      "logo": "https://electricistaculiacanpro.mx/assets/images/logo-512.webp",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://electricistaculiacanpro.mx/assets/images/logo-512.png",
+        "width": 512,
+        "height": 512,
+        "contentUrl": "https://electricistaculiacanpro.mx/assets/images/logo-512.png"
+      },
       "image": "https://electricistaculiacanpro.mx/assets/images/optimizadas/emergencia-24-7-nocturna-1200w.webp",
       "description": "Servicios profesionales de electricidad en Culiacán las 24 horas del día, los 7 días de la semana. Emergencias, instalaciones y reparaciones con garantía escrita.",
       "slogan": "Electricista Certificado 24/7 en Culiacán - Llegada Inmediata",
