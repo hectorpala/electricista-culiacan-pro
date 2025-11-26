@@ -5,6 +5,7 @@ Allow: /
 
 # Sitemaps
 Sitemap: https://electricistaculiacanpro.mx/sitemap.xml
+Sitemap: https://electricistaculiacanpro.mx/sitemap-images.xml
 
 # Disallow admin areas
 Disallow: /admin/

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+    <!-- Homepage -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/hero-electricista-culiacan-1200w.webp</image:loc>
+            <image:caption>Electricista profesional certificado atendiendo servicio de emergencia eléctrica en Culiacán</image:caption>
+            <image:title>Electricista Culiacán Pro - Servicio 24/7</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/logo-electricista-culiacan-pro-optimized.webp</image:loc>
+            <image:caption>Logo oficial de Electricista Culiacán Pro</image:caption>
+            <image:title>Logo Electricista Culiacán Pro</image:title>
+        </image:image>
+    </url>
+
+    <!-- Servicio: Instalación Eléctrica -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/instalacion-electrica/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/instalacion-electrica-culiacan-800w.webp</image:loc>
+            <image:caption>Instalación eléctrica residencial completa en Culiacán con cableado certificado</image:caption>
+            <image:title>Instalación Eléctrica Profesional Culiacán</image:title>
+        </image:image>
+    </url>
+
+    <!-- Servicio: Reparación de Cortocircuitos -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/reparacion-cortocircuitos/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/reparacion-cortocircuitos-culiacan-800w.webp</image:loc>
+            <image:caption>Electricista reparando cortocircuito con equipo profesional de diagnóstico</image:caption>
+            <image:title>Reparación de Cortocircuitos Culiacán</image:title>
+        </image:image>
+    </url>
+
+    <!-- Servicio: Instalación de Contactos -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/instalacion-contactos/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/instalacion-contactos-culiacan-800w.webp</image:loc>
+            <image:caption>Instalación de contactos eléctricos polarizados con tierra física</image:caption>
+            <image:title>Instalación de Contactos Eléctricos Culiacán</image:title>
+        </image:image>
+    </url>
+
+    <!-- Servicio: Iluminación LED -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/iluminacion-led/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/iluminacion-led-culiacan-800w.webp</image:loc>
+            <image:caption>Instalación de iluminación LED moderna y eficiente en Culiacán</image:caption>
+            <image:title>Iluminación LED Profesional Culiacán</image:title>
+        </image:image>
+    </url>
+
+    <!-- Servicio: Mantenimiento de Tableros -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/mantenimiento-tableros/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/tableros-electricos-culiacan-800w.webp</image:loc>
+            <image:caption>Mantenimiento preventivo de tablero eléctrico con revisión de breakers</image:caption>
+            <image:title>Mantenimiento de Tableros Eléctricos Culiacán</image:title>
+        </image:image>
+    </url>
+
+    <!-- Servicio: Emergencia 24/7 -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/emergencia-24-7/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp</image:loc>
+            <image:caption>Electricista atendiendo emergencia eléctrica nocturna con llegada rápida</image:caption>
+            <image:title>Emergencias Eléctricas 24/7 Culiacán</image:title>
+        </image:image>
+    </url>
+
+    <!-- Blog: Prevenir Cortocircuitos -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/prevenir-cortocircuitos-culiacan-1200w.webp</image:loc>
+            <image:caption>Electricista revisando instalación eléctrica para prevenir cortocircuitos</image:caption>
+            <image:title>Guía para Prevenir Cortocircuitos en Casa</image:title>
+        </image:image>
+    </url>
+
+    <!-- Blog: Instalación Eléctrica Obsoleta -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/instalacion-electrica-obsoleta-culiacan-1200w.webp</image:loc>
+            <image:caption>Señales de una instalación eléctrica antigua que necesita actualización</image:caption>
+            <image:title>Instalación Eléctrica Obsoleta - Señales de Alerta</image:title>
+        </image:image>
+    </url>
+
+    <!-- Blog: Mantenimiento Tablero Eléctrico -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/mantenimiento-tablero-electrico-culiacan-1200w.webp</image:loc>
+            <image:caption>Mantenimiento preventivo profesional de tablero eléctrico residencial</image:caption>
+            <image:title>Mantenimiento Preventivo de Tablero Eléctrico</image:title>
+        </image:image>
+    </url>
+
+    <!-- Blog: Ahorro Energía LED -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/ahorro-energia-iluminacion-led-culiacan-1200w.webp</image:loc>
+            <image:caption>Ahorro de energía mediante instalación de iluminación LED eficiente</image:caption>
+            <image:title>Ahorro de Energía con Iluminación LED</image:title>
+        </image:image>
+    </url>
+
+    <!-- Blog: Seguridad Eléctrica Temporada Lluvias -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/seguridad-electrica-temporada-lluvias-culiacan-1200w.webp</image:loc>
+            <image:caption>Medidas de seguridad eléctrica durante temporada de lluvias en Culiacán</image:caption>
+            <image:title>Seguridad Eléctrica en Temporada de Lluvias</image:title>
+        </image:image>
+    </url>
+
+    <!-- Blog: Cuándo Llamar Electricista -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/cuando-llamar-electricista-emergencia/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/cuando-llamar-electricista-emergencia-culiacan-1200w.webp</image:loc>
+            <image:caption>Situaciones de emergencia eléctrica que requieren atención profesional inmediata</image:caption>
+            <image:title>Cuándo Llamar Electricista de Emergencia</image:title>
+        </image:image>
+    </url>
+
+    <!-- Servicios Adicionales -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/electricista-servicio-7-culiacan-800w.webp</image:loc>
+            <image:caption>Servicio de electricista profesional en Culiacán</image:caption>
+            <image:title>Servicios Eléctricos Profesionales</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/electricista-servicio-8-culiacan-800w.webp</image:loc>
+            <image:caption>Electricista certificado trabajando en instalación residencial</image:caption>
+            <image:title>Electricista Certificado Culiacán</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/electricista-servicio-9-culiacan-800w.webp</image:loc>
+            <image:caption>Servicio profesional de electricidad en Culiacán con garantía</image:caption>
+            <image:title>Servicio Eléctrico con Garantía</image:title>
+        </image:image>
+    </url>
+
+</urlset>
