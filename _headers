@@ -1,0 +1,71 @@
+# Security and Performance Headers for GitHub Pages
+# Electricista Culiacán Pro
+
+# Apply to all pages
+/*
+  # Security Headers
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permissions Policy (formerly Feature-Policy)
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+
+  # Content Security Policy (CSP)
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; frame-src https://www.google.com;
+
+  # Performance and Caching
+  Cache-Control: public, max-age=31536000, immutable
+
+  # HSTS (Strict-Transport-Security)
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+# HTML pages - shorter cache
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Root index
+/
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Images - long cache with immutable
+/assets/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts - long cache with immutable
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# CSS and JS - long cache
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css; charset=utf-8
+
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript; charset=utf-8
+
+# WebP images
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/webp
+
+# Manifest and service worker - shorter cache
+/manifest.json
+  Cache-Control: public, max-age=86400, must-revalidate
+  Content-Type: application/manifest+json
+
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Sitemaps - moderate cache
+/*.xml
+  Cache-Control: public, max-age=86400, must-revalidate
+  Content-Type: application/xml; charset=utf-8
+
+# Robots.txt - moderate cache
+/robots.txt
+  Cache-Control: public, max-age=86400, must-revalidate
+  Content-Type: text/plain; charset=utf-8
