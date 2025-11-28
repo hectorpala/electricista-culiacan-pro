@@ -47,18 +47,20 @@ def get_critical_css():
         h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
         .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
         .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
-        .logo{display:inline-flex;align-items:center;text-decoration:none}
-        .logo img{height:140px;width:auto;object-fit:contain}
-        .nav-menu{display:flex;gap:2rem;align-items:center;list-style:none}
-        .nav-link{color:var(--text);text-decoration:none;font-weight:500;transition:color 0.2s}
-        .nav-link:hover{color:var(--brand)}
+        .logo{display:block;text-decoration:none;transition:opacity .2s ease;contain:layout}
+        .logo img{height:140px;width:auto;display:block;max-height:160px;mix-blend-mode:multiply;aspect-ratio:512/195}
+        .logo:hover{opacity:0.9}
+        @media (max-width:768px){.logo img{height:90px;max-height:100px}}
+        .nav-menu{display:flex;list-style:none;gap:2rem}
+        .nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
+        .nav-link:hover{color:var(--brand-light)}
         .nav-cta{background:var(--gradient-brand);color:white;padding:0.625rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:600}
-        .hero{position:relative;min-height:85vh;display:grid;place-items:center;text-align:center;overflow:hidden;padding:2rem 0}
+        .hero{position:relative;min-height:85vh;display:grid;place-items:center;text-align:center;overflow:hidden;padding:140px 16px}
         .hero-background{position:absolute;inset:0;z-index:0}
-        .hero-background img{width:100%;height:100%;object-fit:cover;content-visibility:auto}
-        .hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:3rem 2rem}
-        .hero h1{color:white;text-shadow:2px 2px 4px rgba(0,0,0,0.5);margin-bottom:1.5rem}
-        .hero-subtitle{font-size:1.25rem;color:rgba(255,255,255,0.95);margin-bottom:2rem;text-shadow:1px 1px 2px rgba(0,0,0,0.5)}
+        .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center;content-visibility:auto}
+        .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(1px);-webkit-backdrop-filter:blur(1px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1);contain:layout paint}
+        .hero h1{color:#FFFFFF;text-shadow:0 2px 8px rgba(0,0,0,0.3);margin-bottom:1.5rem}
+        .hero-subtitle{font-size:1.2rem;color:#F1F5F9;margin-bottom:3rem;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.55;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
         .btn-primary{display:inline-block;background:var(--gradient-brand);color:white;padding:1rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:transform 0.2s,box-shadow 0.2s}
         .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(227,100,20,0.3)}
         .btn-secondary{display:inline-block;background:transparent;color:var(--brand);border:2px solid var(--brand);padding:1rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;transition:all 0.2s}
@@ -97,14 +99,15 @@ def get_critical_css():
         @media (max-width:768px){
             body{padding-top:70px}
             .nav{padding:15px 0}
-            .logo img{height:90px}
-            .nav-menu{position:fixed;top:70px;left:-100%;right:0;background:white;flex-direction:column;padding:2rem;box-shadow:0 2px 10px var(--shadow);transition:left 0.3s}
+            .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem;transition:left 0.3s}
             .nav-menu.active{left:0}
             .hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}
             .hero-background img{object-position:40% 35%}
-            .hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-radius:12px}
-            .hero h1{font-size:clamp(1.5rem,5vw,2rem)!important;color:var(--text)!important;text-shadow:none!important}
-            .hero-subtitle{color:var(--text-light)!important;text-shadow:none!important;font-size:1rem}
+            .hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;backdrop-filter:blur(1px)!important;-webkit-backdrop-filter:blur(1px)!important}
+            .hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important;color:var(--text)!important;text-shadow:none!important}
+            .hero-subtitle{display:none!important}
+            .hero-rating{margin-top:1rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.9)!important;backdrop-filter:blur(0.5px);-webkit-backdrop-filter:blur(0.5px)}
+            .hero .btn-primary{width:100%!important;max-width:100%!important;font-size:1rem!important;padding:0.875rem 1.5rem!important}
             .section{padding:3rem 0}
             .section h2{font-size:1.75rem}
             .benefits-grid{grid-template-columns:1fr}
@@ -157,7 +160,7 @@ def get_floating_buttons():
         </svg>
     </a>"""
 
-def create_landing_page(slug, keyword, h1, meta_description, hero_subtitle, hero_image="hero-electricista-culiacan"):
+def create_landing_page(slug, keyword, h1, meta_description, hero_subtitle, hero_image="emergencia-electrica-culiacan"):
     """Genera una landing page completa"""
 
     # Validar longitudes
@@ -470,11 +473,11 @@ def main():
     hero_subtitle = input("   > ").strip()
 
     print("\n6️⃣ ¿Nombre de imagen hero? (sin extensión)")
-    print("   Ejemplo: hero-electricista-culiacan")
-    print("   Enter para usar: hero-electricista-culiacan")
+    print("   Ejemplo: emergencia-electrica-culiacan")
+    print("   Enter para usar: emergencia-electrica-culiacan")
     hero_image = input("   > ").strip()
     if not hero_image:
-        hero_image = "hero-electricista-culiacan"
+        hero_image = "emergencia-electrica-culiacan"
 
     # Crear directorio
     output_dir = Path(slug)
@@ -494,15 +497,20 @@ def main():
 
     print("\n📋 Checklist de verificación:")
     print("   ✅ Nav completo con menu y teléfono")
-    print("   ✅ Logo con dimensiones correctas:")
-    print("      • Nav: 140x140")
+    print("   ✅ Logo con dimensiones y estilos correctos:")
+    print("      • Nav: 140x140 con mix-blend-mode:multiply")
+    print("      • Mobile: 90x90")
     print("      • Footer: 200x76 con filter:brightness(0) invert(1)")
+    print("   ✅ Nav links blancos (#fff) para contraste sobre hero")
     print("   ✅ Hero con <picture> y <source> para WebP")
     print("   ✅ Botones flotantes con SVG icons (no emojis)")
-    print("   ✅ Critical CSS completo (126 líneas)")
+    print("   ✅ Critical CSS completo actualizado")
     print("   ✅ Colores naranja (#E36414, #F97316)")
     print("   ✅ Nav transparente")
-    print("   ✅ Mobile responsive con backdrop-filter")
+    print("   ✅ Blur optimizado:")
+    print("      • Desktop hero-content: blur(1px)")
+    print("      • Mobile hero-content: blur(1px)")
+    print("      • Mobile hero-rating: blur(0.5px)")
     print("   ✅ Breadcrumb visible para SEO")
     print("   ✅ Sección FAQs incluida")
     print("   ✅ Footer completo con 4 columnas")

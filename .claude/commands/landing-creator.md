@@ -125,8 +125,8 @@ El hero DEBE usar EXACTAMENTE esta estructura (index.html línea 1145):
 - ❌ NO omitir `content-visibility:auto` en el CSS de `.hero-background img`
 
 **Imagen hero por defecto:**
-- USAR: `hero-electricista-trabajo-800w.webp` y `hero-electricista-trabajo-1200w.webp` (igual que index.html)
-- NO USAR: hero-electrical-*.webp u otras imágenes a menos que el usuario las especifique
+- USAR: `emergencia-electrica-culiacan-800w.webp` y `emergencia-electrica-culiacan-1200w.webp` (igual que index.html)
+- NO USAR: hero-electrical-*.webp u otras imágenes obsoletas a menos que el usuario las especifique
 
 **⚠️ REGLA #0.2 - BOTONES FLOTANTES (CRÍTICO):**
 
@@ -184,13 +184,19 @@ Cada página DEBE incluir el bloque COMPLETO de Critical CSS (126 líneas exacta
     /* Nav TRANSPARENTE */
     .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
     .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
-    .logo img{height:140px;width:auto;object-fit:contain}
+    .logo{display:block;text-decoration:none;transition:opacity .2s ease}
+    .logo img{height:140px;width:auto;display:block;max-height:160px;mix-blend-mode:multiply;aspect-ratio:512/195}
+    .logo:hover{opacity:0.9}
+    @media (max-width:768px){.logo img{height:90px;max-height:100px}}
+    .nav-menu{display:flex;list-style:none;gap:2rem}
+    .nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
+    .nav-link:hover{color:var(--brand-light)}
 
     /* Hero (CRÍTICO para centrado) */
-    .hero{min-height:85vh;display:grid;place-items:center;text-align:center;...}
-    .hero-background{position:absolute;inset:0;z-index:0;...}
-    .hero-background img{width:100%;height:100%;object-fit:cover;content-visibility:auto}
-    .hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto;...}
+    .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
+    .hero-background{position:absolute;inset:0;z-index:0}
+    .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center;content-visibility:auto}
+    .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(1px);-webkit-backdrop-filter:blur(1px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
 
     /* Buttons */
     .btn-primary{display:inline-block;background:linear-gradient(...);...}
@@ -202,12 +208,13 @@ Cada página DEBE incluir el bloque COMPLETO de Critical CSS (126 líneas exacta
 
     /* Mobile responsive (CRÍTICO) */
     @media (max-width:768px){
-        .logo img{height:90px;...}
         .hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}
         .hero-background img{object-position:40% 35%}
-        .hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;...}
-        .hero h1{font-size:clamp(1.5rem,5vw,2rem)!important;...}
-        ...
+        .hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;backdrop-filter:blur(1px)!important;-webkit-backdrop-filter:blur(1px)!important}
+        .hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}
+        .hero-subtitle{display:none!important}
+        .hero-rating{margin-top:1rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.9)!important;backdrop-filter:blur(0.5px);-webkit-backdrop-filter:blur(0.5px)}
+        .hero .btn-primary{width:100%!important;max-width:100%!important;font-size:1rem!important;padding:0.875rem 1.5rem!important}
     }
 </style>
 ```
