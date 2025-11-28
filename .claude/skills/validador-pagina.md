@@ -63,7 +63,7 @@ Una vez que el usuario proporcione la ruta, leer en paralelo:
 
 ### Paso 3: Validar según reglas críticas
 
-Verificar las 8 áreas siguientes (basadas en @.claude/commands/validar.md y landing-creator.md):
+Verificar las 13 áreas siguientes (basadas en @.claude/commands/validar.md y landing-creator.md):
 
 #### 3.1 Hero - Estructura (CRÍTICO)
 
@@ -177,7 +177,7 @@ Buscar en el `<body>` dentro de la sección `.benefits-grid`:
 - Tiene `<div class="whatsapp-cta-box">` presente
 - Contiene heading: "¿Tienes dudas? Respondemos en 10 minutos"
 - Tiene botón con clase `whatsapp-cta-button` y texto "Abrir Chat"
-- Link apunta a: `https://wa.me/526673922273?text=...`
+- Link apunta a: `https://wa.me/526671631231?text=...` (electricista)
 - Está ubicado dentro de `.benefits-grid` (después de los 4 benefits)
 - Usa SVG para iconos (NO emojis)
 
@@ -185,10 +185,131 @@ Buscar en el `<body>` dentro de la sección `.benefits-grid`:
 - Falta completamente el elemento `.whatsapp-cta-box`
 - Texto del heading incorrecto o abreviado
 - Botón no dice "Abrir Chat"
-- Link no apunta a WhatsApp correcto
+- Link no apunta a WhatsApp correcto (526671631231)
 - Ubicado fuera de `.benefits-grid`
 
 **Si falta o está mal:** Anotar línea exacta y qué falta/está incorrecto.
+
+#### 3.9 Sección Blog (OBLIGATORIO en homepage)
+
+Buscar en el `<body>` la sección con `id="blog"`:
+
+**✅ DEBE cumplir:**
+- Tiene `<section id="blog" class="section">`
+- Usa estructura `service-card` (NO `news-card`)
+- Cada artículo es un `<a href="/blog/.../" class="card card--img">`
+- Dentro tiene `<div class="service-card">` con `<figure class="media-box">`
+- Imágenes usan `<picture>` con `<source type="image/webp">`
+- Tiene `<span class="service-cta">Leer artículo completo →</span>`
+- Mínimo 3 artículos de blog
+
+**❌ ERROR COMÚN:**
+- Usa estructura `news-card` antigua
+- No tiene `service-cta` en los artículos
+- Imágenes no usan picture/source
+- Menos de 3 artículos
+
+**Si falta o está mal:** Anotar línea exacta.
+
+#### 3.10 Sección Testimoniales (OBLIGATORIO en homepage)
+
+Buscar en el `<body>` la sección "Lo que dicen nuestros clientes":
+
+**✅ DEBE cumplir:**
+- Tiene sección con clase `testimonials`
+- Usa grid con `testimonial-grid`
+- Cada testimonio es `testimonial-card`
+- Tiene estrellas (⭐⭐⭐⭐⭐ o SVG stars)
+- Incluye nombre del cliente y colonia
+- Mínimo 3 testimonios
+
+**CSS DEBE incluir:**
+```css
+.testimonials{padding:4rem 0;background:#ffffff}
+.testimonial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.testimonial-card{background:#ffffff;padding:2rem;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.1);border-left:4px solid var(--brand)}
+```
+
+**Si falta o está mal:** Anotar línea exacta.
+
+#### 3.11 Sección Social Proof (OBLIGATORIO en homepage)
+
+Buscar la sección "💯 Prueba Real de Nuestro Servicio":
+
+**✅ DEBE cumplir:**
+- Tiene `<section class="social-proof">`
+- Subsección "Reseñas Verificadas Google" con `google-reviews-grid`
+- Subsección "Resultados Reales: Antes y Después" con `before-after-grid`
+- Usa imágenes WebP optimizadas
+- Tiene badges/labels en cada imagen
+
+**CSS DEBE incluir:**
+```css
+.social-proof{background:linear-gradient(135deg,#f8fafc 0%,#e0f2fe 100%);padding:4rem 1.5rem;margin:3rem 0}
+.google-reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
+.before-after-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+```
+
+**Si falta o está mal:** Anotar línea exacta.
+
+#### 3.12 Formulario Contacto con Validación (CRÍTICO)
+
+Buscar formulario con `id="contact-form"`:
+
+**HTML DEBE cumplir:**
+- Form tiene atributos: `id="contact-form"` `method="POST"` `netlify`
+- Campos: `nombre`, `telefono`, `email`, `mensaje` (con IDs correctos)
+- Cada campo envuelto en `<div class="form-field">`
+- Cada campo tiene `<span class="error-message">` y `<span class="success-message">`
+- Botón submit tiene `disabled` inicial
+- Tiene `<p class="form-note">` con texto respuesta 30 minutos
+
+**CSS DEBE incluir (en head styles):**
+```css
+.form-field{position:relative;margin-bottom:1.25rem}
+.form-field.valid input,.form-field.valid textarea{border-color:#28a745;background-image:url("data:image/svg+xml,%3Csvg...")}
+.form-field.invalid input,.form-field.invalid textarea{border-color:#dc3545;background-image:url("data:image/svg+xml,%3Csvg...")}
+.error-message{display:none;color:#dc3545}
+.form-field.invalid .error-message{display:block}
+.success-message{display:none;color:#28a745}
+.form-field.valid .success-message{display:block}
+```
+
+**JAVASCRIPT (main.js) DEBE incluir:**
+- Función `validateField(field, validatorKey)`
+- Validators para: nombre (≥2 chars), telefono (10 dígitos), email (formato), mensaje (≥10 chars)
+- Event listeners en `input` y `blur` para cada campo
+- Función `updateSubmitButton()` que habilita/deshabilita submit
+- Multi-layer lead capture (Netlify + localStorage + GA4 + WhatsApp)
+
+**Si falta validación JS:** Anotar que main.js no tiene validación en tiempo real.
+
+#### 3.13 Sección Contacto - CSS Completo (CRÍTICO)
+
+Buscar en `<style>` del head:
+
+**DEBE incluir TODOS estos estilos:**
+```css
+.final-cta{text-align:center;max-width:600px;margin:0 auto 3rem;padding:2rem;background:var(--bg-card);border-radius:20px;box-shadow:0 8px 32px var(--shadow-lg);border:2px solid var(--brand)}
+.cta-text{font-size:1.25rem;color:var(--text);font-weight:600;margin-bottom:0.5rem}
+.cta-subtitle{font-size:1rem;color:var(--text-light);margin-bottom:2rem}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.contact-content{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:900px;margin:0 auto}
+.map-container{margin-top:3rem}
+.map-embed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+.whatsapp-link{color:#22c55e;text-decoration:none;font-weight:600}
+```
+
+**Media queries mobile:**
+```css
+@media (max-width:768px){
+  .contact-content{grid-template-columns:1fr;gap:2rem}
+  .cta-buttons{flex-direction:column;align-items:center}
+  .cta-buttons .btn-primary,.cta-buttons .btn-secondary{width:100%;max-width:320px}
+}
+```
+
+**Si falta CSS:** Anotar bloques faltantes.
 
 ### Paso 4: Generar Reporte
 
@@ -197,7 +318,7 @@ Presentar resultado en este formato:
 ```markdown
 ## 🔍 Validación de [nombre-página]
 
-### ✅ APROBADAS (X/8)
+### ✅ APROBADAS (X/13)
 
 - ✅ Hero estructura correcta
 - ✅ Hero CSS correcto
@@ -207,6 +328,11 @@ Presentar resultado en este formato:
 - ✅ Sin cajas de colores en HTML
 - ✅ Critical CSS completo incluido
 - ✅ Barra WhatsApp CTA presente
+- ✅ Sección Blog con estructura service-card
+- ✅ Sección Testimoniales completa
+- ✅ Sección Social Proof completa
+- ✅ Formulario Contacto con validación JS
+- ✅ CSS Contacto completo (.final-cta, .contact-content, etc.)
 
 ---
 
