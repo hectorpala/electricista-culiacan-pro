@@ -3,18 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electricista Culiacán 24/7 ⚡ Llegada 30-60 min | 667 163 1231</title>
-    <meta name="description" content="⚡ Electricista certificado en Culiacán · Emergencia 24/7 · Llegada 30-60 min · Las Quintas, Tres Ríos, Centro · Cotización gratis WhatsApp · 4.8★">
+    <title>Electricista en Culiacán 24/7 | Llegada en 30-60 min + Garantía</title>
+    <meta name="description" content="Electricista certificado en Culiacán · Emergencia 24/7 · Llegada 30-60 min · Las Quintas, Tres Ríos, Centro · Presupuesto gratis · Garantía escrita">
     <meta name="keywords" content="electricista culiacan, electricista 24 horas culiacan, electricista emergencia culiacan, electricista certificado culiacan, reparacion fallas electricas culiacan, reparación de instalación eléctrica culiacan, instalacion luminarias culiacan, electricidad culiacan">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="author" content="Electricista Culiacán Pro">
     <meta name="google-site-verification" content="JfONDKtu_Qxg9AacfLosDCguTFwYILvx4yBvG-0CNek" />
-
-    <!-- Security Headers -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSV2K9N2ZD"></script>
@@ -34,24 +28,11 @@
 
     <!-- Favicons -->
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/icon-512.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/icon-152.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/icon-144.png">
-    <link rel="apple-touch-icon" sizes="128x128" href="/assets/icons/icon-128.png">
-    <link rel="apple-touch-icon" sizes="96x96" href="/assets/icons/icon-96.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/icon-72.png">
+    <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/icons/favicon.png">
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://electricistaculiacanpro.mx/">
-
-    <!-- Theme Color -->
     <meta name="theme-color" content="#0066cc">
 
     <!-- Preconnect to external domains for faster resource loading -->
@@ -62,16 +43,16 @@
 
     <!-- Preload critical hero image for LCP optimization -->
     <link rel="preload" as="image"
-          href="assets/images/optimizadas/hero-electricista-culiacan-1200w.webp"
-          imagesrcset="assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w,
-                       assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
+          href="/assets/images/optimizadas/hero-electricista-culiacan-1200w.webp"
+          imagesrcset="/assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w,
+                       /assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
           imagesizes="100vw"
           fetchpriority="high">
 
     <!-- Preload critical fonts for LCP optimization -->
-    <link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
-    <link rel="preload" href="assets/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" href="/assets/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
 
     <!-- Critical CSS Inline for LCP optimization -->
     <style>
@@ -80,7 +61,7 @@
         @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/inter-600.woff2') format('woff2')}
         @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/montserrat-700.woff2') format('woff2')}
         @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('assets/fonts/montserrat-800.woff2') format('woff2')}
-        :root{--brand:#E36414;--brand-light:#F97316;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--container-max-width:1200px;--container-gutter:24px}
+        :root{--brand:#1E40AF;--brand-light:#3B82F6;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#3B82F6 0%,#1E40AF 100%);--container-max-width:1200px;--container-gutter:24px}
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text);background-color:var(--bg-soft);padding-top:80px}
         .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
@@ -88,20 +69,22 @@
         h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
         .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
         .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
-        .logo{display:block;text-decoration:none;transition:opacity .2s ease;contain:layout}
-        .logo img{height:140px;width:auto;display:block;max-height:160px;object-fit:contain;aspect-ratio:512/195}
+        .logo{display:block;text-decoration:none;transition:opacity .2s ease}
+        .logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
         .logo:hover{opacity:0.9}
+        @media (max-width:768px){.logo img{height:62px;max-height:72px}}
         .nav-menu{display:flex;list-style:none;gap:2rem}
-        .nav-link{color:#f97316 !important;font-weight:500;text-decoration:none;transition:color .2s ease;text-shadow:0 2px 4px rgba(0,0,0,0.3) !important}
-        .nav-link:hover{color:#ea580c !important;text-shadow:0 2px 6px rgba(0,0,0,0.4) !important}
+        .nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
+        .nav-link:hover{color:var(--brand-light)}
         .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
         .hero-background{position:absolute;inset:0;z-index:0}
-        .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center;content-visibility:auto}
+        .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
+        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:40% 35%}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:1rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.9)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.hero .btn-primary{width:100%!important;max-width:100%!important;font-size:1rem!important;padding:0.875rem 1.5rem!important}.hero-features{gap:1rem;margin:1.5rem 0}.feature-item{font-size:0.85rem}}
         .hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(10,18,36,0.75) 0%,rgba(10,18,36,0.5) 60%,transparent 100%);pointer-events:none}
-        .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1);contain:layout paint}
+        .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
         .hero h1{color:#FFFFFF;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
         .hero-subtitle{font-size:1.2rem;color:#F1F5F9;margin-bottom:3rem;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.55;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
-        .hero-rating{display:inline-flex;align-items:center;gap:0.75rem;margin:1rem 0 1.5rem;padding:0.85rem 1.5rem;background:rgba(255,255,255,0.98);border-radius:50px;box-shadow:0 4px 16px rgba(0,0,0,0.18),0 1px 3px rgba(0,0,0,0.08);font-size:0.95rem;border:1px solid rgba(66,133,244,0.15);contain:layout style}
+        .hero-rating{display:inline-flex;align-items:center;gap:0.75rem;margin:1rem 0 1.5rem;padding:0.85rem 1.5rem;background:rgba(255,255,255,0.98);border-radius:50px;box-shadow:0 4px 16px rgba(0,0,0,0.18),0 1px 3px rgba(0,0,0,0.08);font-size:0.95rem;border:1px solid rgba(66,133,244,0.15)}
         .google-logo{width:20px;height:20px;flex-shrink:0}
         .rating-stars{color:#FBBC04;font-size:1.15rem;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,0.1)}
         .rating-score{font-weight:700;color:#1a73e8;font-size:1.05rem}
@@ -109,68 +92,27 @@
         .rating-count{color:#5f6368;font-size:0.9rem;font-weight:500}
         .hero-features{display:flex;justify-content:center;gap:2rem;margin:2rem 0 2.5rem;flex-wrap:wrap}
         .feature-item{display:flex;align-items:center;gap:0.5rem;color:#fff;font-size:0.95rem;font-weight:500}
-        .feature-icon{width:24px;height:24px;flex-shrink:0;color:#f97316}
-        .btn-primary{display:inline-block;background:linear-gradient(135deg,#fba336 0%,#f97316 45%,#e36414 100%);color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(227,100,20,0.28);min-height:48px;min-width:48px;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;contain:layout style;will-change:transform}
+        .feature-icon{width:24px;height:24px;flex-shrink:0;color:#3B82F6}
+        @media (max-width:640px){.hero-features{gap:1rem;margin:1.5rem 0 2rem}.feature-item{font-size:0.85rem}.feature-icon{width:20px;height:20px}}
+        .hero-contact{color:#ffffff;margin:1rem 0}
+        .hero-contact a{color:#3B82F6;font-weight:700;text-decoration:none}
+        .hero-contact a:hover{color:#60A5FA}
+        .hero-guarantee{color:#ffffff;margin:1rem 0}
+        .btn-primary{display:inline-block;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 45%,#1E40AF 100%);color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(227,100,20,0.28);min-height:48px;min-width:48px;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease}
         .btn-primary:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(227,100,20,0.34);filter:brightness(1.04)}
         .btn-primary:active{transform:translateY(0);box-shadow:0 10px 20px rgba(227,100,20,0.28)}
-        .btn-secondary{display:inline-block;background:transparent;color:var(--brand);border:2px solid var(--brand);padding:1rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;transition:all 0.2s}
-        .btn-secondary:hover{background:var(--brand);color:white}
         .floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}
         .floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
         .floating-call{background:#0f4fa8;bottom:18px}
         .floating-whatsapp{background:#22c55e;bottom:78px}
         .mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;gap:0}
-        .mobile-menu-btn span{display:block;height:3px;width:100%;background:#F97316;border-radius:2px;margin:0;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
-        .section{padding:4rem 0}
-        .section-alt{background:var(--bg-soft)}
-        .section h2{font-size:2.5rem;text-align:center;margin-bottom:3rem}
-        .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:3rem}
-        .benefit-card{background:white;padding:2rem;border-radius:12px;box-shadow:0 2px 10px var(--shadow);text-align:center}
-        .benefit-icon{width:64px;height:64px;margin:0 auto 1rem;color:var(--brand)}
-        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
-        .card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px var(--shadow);transition:transform 0.2s}
-        .card:hover{transform:translateY(-4px)}
-        .card-image{width:100%;height:200px;object-fit:cover}
-        .card-content{padding:1.5rem}
-        .faq{max-width:800px;margin:0 auto}
-        .faq-item{background:white;margin-bottom:1rem;border-radius:8px;overflow:hidden;box-shadow:0 2px 10px var(--shadow)}
-        .faq-item summary{padding:1.25rem;cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center}
-        .faq-item summary::after{content:'+';font-size:1.5rem;color:var(--brand)}
-        .faq-item[open] summary::after{content:'−'}
-        .faq-item p{padding:0 1.25rem 1.25rem;color:var(--text-light)}
-        .final-cta{text-align:center;max-width:600px;margin:0 auto 3rem;padding:2rem;background:var(--bg-card);border-radius:20px;box-shadow:0 8px 32px var(--shadow-lg);border:2px solid var(--brand)}
-        .cta-text{font-size:1.25rem;color:var(--text);font-weight:600;margin-bottom:0.5rem}
-        .cta-subtitle{font-size:1rem;color:var(--text-light);margin-bottom:2rem}
-        .cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-        .btn-whatsapp{background:var(--whatsapp);background:#22c55e}
-        .btn-secondary{background:#64748b;color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(100,116,139,0.28);min-height:48px;min-width:48px;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease}
-        .btn-secondary:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(100,116,139,0.34);filter:brightness(1.04)}
-        .btn-secondary:active{transform:translateY(0);box-shadow:0 10px 20px rgba(100,116,139,0.28)}
-        .footer{background:var(--text);color:white;padding:3rem 0 1rem;margin-top:4rem}
-        .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:2rem}
-        .footer h3{margin-bottom:1rem}
-        .footer-links{list-style:none}
-        .footer-links li{margin-bottom:0.5rem}
-        .footer-links a{color:rgba(255,255,255,0.8);text-decoration:none}
-        .footer-links a:hover{color:white}
+        .mobile-menu-btn span{display:block;height:3px;width:100%;background:#3B82F6;border-radius:2px;margin:0;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
         @media (max-width:768px){
-            .logo img{height:90px;max-height:100px}
-            .hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}
-            .hero-background img{object-position:40% 35%}
-            .hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}
-            .hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}
-            .hero-subtitle{display:none!important}
-            .hero-rating{margin-top:1rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.9)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-            .hero .btn-primary{width:100%!important;max-width:100%!important;font-size:1rem!important;padding:0.875rem 1.5rem!important}
-            .hero-features{gap:1rem;margin:1.5rem 0}
-            .feature-item{font-size:0.85rem}
             .mobile-menu-btn{display:flex}
             .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem}
             .nav-menu.active{left:0}
-            .section{padding:3rem 0}
-            .section h2{font-size:1.75rem}
-            .benefits-grid{grid-template-columns:1fr}
-            .cta-buttons{flex-direction:column}
+            .hero{min-height:70vh;padding:100px 16px 60px}
+            h1{font-size:2rem}
         }
     </style>
 
@@ -200,13 +142,13 @@
         }
 
         .breadcrumb a {
-            color: #E36414;
+            color: #3b82f6;
             text-decoration: none;
             transition: color 0.2s ease;
         }
 
         .breadcrumb a:hover {
-            color: #F97316;
+            color: #1e40af;
             text-decoration: underline;
         }
 
@@ -311,110 +253,6 @@
         #contact-form button[type="submit"]:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-        }
-
-        /* Form note */
-        .form-note {
-            text-align: center;
-            margin-top: 1rem;
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-
-        /* WhatsApp link */
-        .whatsapp-link {
-            color: #22c55e;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .whatsapp-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Map section */
-        .map-container {
-            margin-top: 3rem;
-        }
-
-        .map-title {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .map-embed {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .map-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .map-caption {
-            text-align: center;
-            margin-top: 1rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Contact section */
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .contact-info p {
-            margin-bottom: 1rem;
-        }
-
-        .contact-form form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.75rem;
-            }
-
-            .cta-buttons .btn-primary,
-            .cta-buttons .btn-secondary {
-                width: 100%;
-                max-width: 320px;
-                padding: 18px 24px;
-                font-size: 1.125rem;
-            }
-
-            .final-cta {
-                padding: 1.5rem;
-                margin-bottom: 2rem;
-            }
-
-            .cta-text {
-                font-size: 1.125rem;
-            }
         }
     </style>
 
@@ -562,7 +400,7 @@
         .before-after-label {
             padding: 1rem;
             text-align: center;
-            background: #E36414;
+            background: #0284c7;
             color: white;
             font-weight: 600;
             font-size: 0.95rem;
@@ -600,1121 +438,9 @@
         }
     </style>
 
-    <!-- Service Cards Styles -->
-    <style>
-        /* Service Cards */
-        .service-card {
-            display: block;
-            padding: 1.5rem;
-            height: 100%;
-        }
-
-        .service-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 1.25rem;
-            color: var(--text);
-            margin: 1rem 0 0.75rem;
-            line-height: 1.3;
-        }
-
-        .service-card p {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .media-box {
-            margin: 0;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #f8fafc;
-        }
-
-        .media-box img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
-        .service-list {
-            list-style: none;
-            margin: 1rem 0 1.5rem;
-            padding: 0;
-        }
-
-        .service-list li {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            color: var(--text);
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-            line-height: 1.5;
-        }
-
-        .service-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--brand);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-
-        /* Card links reset */
-        .card {
-            background: var(--bg-card);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 24px var(--shadow);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-brand);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 48px var(--shadow-lg);
-            border-color: var(--brand);
-        }
-
-        .card h3 {
-            color: var(--text);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .card p {
-            color: var(--text-light);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Benefits Section - EXACTO como plomeroculiacanpro.mx */
-        .benefits-container {
-            max-width: 1200px;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem 2.5rem;
-            margin-top: 3rem;
-            max-width: 1100px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .benefit {
-            display: flex;
-            gap: 1.5rem;
-            text-align: left;
-            align-items: flex-start;
-            padding: 2rem;
-            background: #FFFFFF;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-
-        .benefit:hover {
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12), 0 5px 10px rgba(0,0,0,0.08);
-            transform: translateY(-5px);
-        }
-
-        .benefit-icon {
-            width: 48px;
-            height: 48px;
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(249,115,22,0.12) 0%, rgba(249,115,22,0.06) 100%);
-            border-radius: 12px;
-            border: 2px solid rgba(249,115,22,0.25);
-            transition: all 0.3s ease;
-        }
-
-        .benefit:hover .benefit-icon {
-            background: linear-gradient(135deg, rgba(249,115,22,0.2) 0%, rgba(249,115,22,0.12) 100%);
-            border-color: rgba(249,115,22,0.5);
-            transform: scale(1.05);
-        }
-
-        .benefit-icon svg {
-            width: 24px;
-            height: 24px;
-            color: #f97316;
-            stroke-width: 2.5;
-        }
-
-        .benefit-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .benefit h3 {
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-            line-height: 1.3;
-        }
-
-        .benefit p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text-light);
-            margin-bottom: 0.75rem;
-        }
-
-        .benefit p strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* WhatsApp CTA Box */
-        .whatsapp-cta-box {
-            grid-column: 1 / -1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2.5rem;
-            margin-top: 2rem;
-            padding: 2rem 2.5rem;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
-        }
-
-        .whatsapp-cta-icon {
-            width: 48px;
-            height: 48px;
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-        }
-
-        .whatsapp-cta-icon svg {
-            width: 24px;
-            height: 24px;
-            color: #FFFFFF;
-            stroke-width: 2;
-        }
-
-        .whatsapp-cta-content {
-            flex: 1;
-            text-align: left;
-        }
-
-        .whatsapp-cta-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #FFFFFF;
-            margin: 0 0 0.35rem 0;
-            line-height: 1.3;
-        }
-
-        .whatsapp-cta-content p {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .whatsapp-cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
-            background: #FFFFFF;
-            color: #128C7E;
-            font-size: 1.125rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .whatsapp-cta-button:hover {
-            background: #F0F0F0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .whatsapp-cta-button svg {
-            flex-shrink: 0;
-        }
-
-        /* Benefits CTA */
-        .benefits-cta {
-            text-align: center;
-            margin-top: 2.5rem;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .benefits-cta a {
-            color: #0066cc;
-        }
-
-        .benefits-cta-subtitle {
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .benefits-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-
-            .benefit {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-
-            .benefit-icon {
-                margin: 0 auto;
-            }
-
-            .whatsapp-cta-box {
-                flex-direction: column;
-                text-align: center;
-                padding: 2rem 1.5rem;
-                gap: 1.5rem;
-            }
-
-            .whatsapp-cta-icon {
-                margin: 0 auto;
-            }
-
-            .whatsapp-cta-content {
-                text-align: center;
-            }
-
-            .whatsapp-cta-content h3 {
-                font-size: 1.25rem;
-            }
-
-            .whatsapp-cta-button {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* ============================================
-           SERVICE CARDS REDESIGN - EXACTO DEL PLOMERO
-           ============================================ */
-        /* Remove underlines and fix link colors in service cards */
-        .card.card--img {
-            display: flex !important;
-            flex-direction: column !important;
-            text-decoration: none !important;
-            color: inherit !important;
-            padding: 0 !important;
-            border: 1px solid #e5e7eb !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            overflow: hidden !important;
-        }
-
-        /* Remove orange border from first card */
-        .card.card--img::before {
-            display: none !important;
-        }
-
-        /* Hover effect: lift card */
-        .card.card--img:hover {
-            transform: translateY(-5px) !important;
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
-            border-color: #d1d5db !important;
-        }
-
-        /* Image container - FULL BLEED (no padding, touches edges) */
-        .card.card--img .service-card {
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-        }
-
-        .card.card--img .media-box {
-            border-radius: 20px 20px 0 0 !important;
-            margin: 0 !important;
-            width: 100% !important;
-        }
-
-        /* Service card content */
-        .card.card--img h3 {
-            color: #1e3a8a !important; /* Brand blue - dark navy */
-            font-weight: 700 !important;
-            font-size: 1.25rem !important;
-            margin: 1.5rem 1.5rem 1rem 1.5rem !important;
-            text-decoration: none !important;
-        }
-
-        .card.card--img > p {
-            color: #4b5563 !important; /* Gray 600 - NOT blue */
-            line-height: 1.6 !important;
-            margin: 0 1.5rem 1rem 1.5rem !important;
-            font-size: 0.95rem !important;
-            text-decoration: none !important;
-            /* Limit to 3 lines */
-            display: -webkit-box !important;
-            -webkit-line-clamp: 3 !important;
-            -webkit-box-orient: vertical !important;
-            overflow: hidden !important;
-        }
-
-        /* Hide bullet lists */
-        .card.card--img .service-list {
-            display: none !important;
-        }
-
-        /* Hide old CTA text */
-        .card.card--img .service-cta strong {
-            display: none !important;
-        }
-
-        /* New CTA Button at bottom - aligned with mt-auto */
-        a.card.card--img .service-cta,
-        a.card.card--img span.service-cta {
-            display: block !important;
-            margin: auto 1.5rem 1.5rem 1.5rem !important;
-            margin-top: auto !important;
-            padding: 0.75rem 1.25rem !important;
-            background: #f97316 !important; /* Orange */
-            color: #ffffff !important;
-            text-align: center !important;
-            border-radius: 8px !important;
-            font-weight: 600 !important;
-            font-size: 0.95rem !important;
-            text-decoration: none !important;
-            transition: background 0.2s ease !important;
-            box-shadow: none !important;
-        }
-
-        a.card.card--img:hover .service-cta,
-        a.card.card--img:hover span.service-cta {
-            background: #ea580c !important; /* Darker orange on hover */
-            color: #ffffff !important;
-        }
-
-        /* Remove all underlines from nested elements */
-        .card.card--img * {
-            text-decoration: none !important;
-        }
-
-        /* ============================================
-           SEO LINKS SECTION - "Más opciones de electricidad"
-           ============================================ */
-        /* Sección SEO: fila de tarjetas */
-        .seo-links {
-            padding: 3rem 1rem;
-            background: #fffaf5;
-        }
-
-        .seo-links h2 {
-            text-align: center;
-            margin: 0 0 1.5rem;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.75rem;
-        }
-
-        /* Grid responsivo */
-        .seo-grid {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: 1fr;
-        }
-
-        @media (min-width: 768px) {
-            .seo-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .seo-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-        }
-
-        /* Tarjeta clicable */
-        .seo-card {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            min-height: 100%;
-            padding: 1.5rem;
-            text-align: left;
-            background: #f9f9f9;
-            color: #1f2937;
-            text-decoration: none;
-            border: 1px solid rgba(0, 0, 0, .08);
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
-            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-        }
-
-        .seo-card h3 {
-            margin: 0;
-            color: #0066cc;
-            font-size: 1.15rem;
-        }
-
-        .seo-card p {
-            margin: 0;
-            line-height: 1.6;
-            color: #444;
-        }
-
-        .seo-card__cta {
-            margin-top: auto;
-            font-weight: 600;
-            color: #0066cc;
-            text-decoration: underline;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .seo-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
-            border-color: #e67e22;
-        }
-
-        .seo-card:focus-visible {
-            outline: 3px solid #e67e22;
-            outline-offset: 3px;
-        }
-
-        .seo-links__note {
-            text-align: center;
-            margin: 2.5rem auto 0;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #555;
-            max-width: 65ch;
-        }
-
-        @media (max-width: 768px) {
-            .seo-links {
-                padding: var(--space-lg) 0;
-            }
-
-            .seo-links h2 {
-                font-size: 1.75rem;
-                margin-bottom: var(--space-md);
-            }
-
-            .seo-grid {
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
-            }
-
-            .seo-card {
-                padding: 1rem;
-                min-height: 48px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .seo-card span {
-                font-size: 1rem;
-            }
-        }
-
-        /* ============================================
-           URGENCIAS 24/7 Y ZONAS - EXACTO DEL PLOMERO
-           ============================================ */
-        /* Emergency section */
-        .emergency-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .emergency-text {
-            font-size: 1.125rem;
-            color: var(--text);
-            margin-bottom: 1rem;
-        }
-
-        .emergency-action {
-            font-size: 1.25rem;
-            color: var(--brand);
-            margin-bottom: 2rem;
-        }
-
-        .emergency-btn {
-            font-size: 1.125rem;
-            padding: 18px 36px;
-        }
-
-        /* Zones section */
-        .zones-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .zones-content p {
-            font-size: 1.125rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .zones-question {
-            font-size: 1rem;
-            color: var(--text-light);
-        }
-
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .zones-content p {
-                font-size: 1rem;
-            }
-
-            .emergency-text {
-                font-size: 1rem;
-            }
-
-            .emergency-action {
-                font-size: 1.125rem;
-            }
-
-            .emergency-btn {
-                width: 100%;
-                max-width: 320px;
-                padding: 20px 24px;
-                font-size: 1.125rem;
-            }
-        }
-
-        /* ============================================
-           PRECIOS TRANSPARENTES - EXACTO DEL PLOMERO
-           ============================================ */
-        /* Pricing section */
-        .pricing-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .pricing-box {
-            background: var(--bg-card);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 24px var(--shadow);
-            border: 2px solid var(--brand);
-            text-align: center;
-        }
-
-        .pricing-box h3 {
-            font-size: 1.5rem;
-            color: var(--brand);
-            margin-bottom: 1rem;
-        }
-
-        .pricing-box p {
-            margin-bottom: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .pricing-box {
-                padding: 2rem 1.5rem;
-            }
-        }
-
-        /* ============================================
-           NUESTRO PROCESO - EXACTO DEL PLOMERO
-           ============================================ */
-        /* Process section */
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .step {
-            text-align: center;
-            padding: 1.5rem 1rem;
-        }
-
-        .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-brand);
-            color: white;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .step h3 {
-            font-size: 1.125rem;
-            margin-bottom: 0;
-        }
-
-        @media (max-width: 768px) {
-            .process-steps {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-        }
-
-        /* ============================================
-           FAQ SECTION - EXACTO DEL PLOMERO
-           ============================================ */
-        /* FAQ section */
-        .faq {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: var(--bg-card);
-            padding: 1.5rem 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px var(--shadow);
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--brand);
-        }
-
-        .faq-item h3 {
-            font-size: 1.125rem;
-            color: var(--brand);
-            margin-bottom: 0.5rem;
-        }
-
-        .faq-item p {
-            margin: 0;
-            color: var(--text);
-        }
-
-        @media (max-width: 768px) {
-            .faq-item {
-                padding: 0;
-                margin-bottom: 0.75rem;
-            }
-
-            .faq-item summary {
-                padding: 1rem 1.25rem;
-                font-size: 1rem;
-                min-height: 48px;
-                display: flex;
-                align-items: center;
-            }
-
-            .faq-item p {
-                padding: 0 1.25rem 1.25rem;
-                line-height: 1.6;
-            }
-        }
-
-        /* ============================================
-           SOBRE NOSOTROS - EXACTO DEL PLOMERO
-           ============================================ */
-        /* About section */
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
-        }
-
-        .feature {
-            padding: var(--space-md);
-        }
-
-        .feature h3 {
-            color: var(--text);
-            margin-bottom: var(--space-xs);
-        }
-
-        @media (max-width: 768px) {
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ============================================
-           BLOG / NOTICIAS SECTION - EXACTO DEL PLOMERO
-           ============================================ */
-        /* Blog section intro */
-        .blog-intro {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #666;
-        }
-
-        /* News/Blog Grid */
-        .news-grid {
-            display: grid;
-            gap: var(--space-lg);
-            grid-template-columns: 1fr;
-        }
-
-        @media (min-width: 768px) {
-            .news-grid {
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            }
-        }
-
-        /* News Card */
-        .news-card {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .news-card.card {
-            padding: 0 !important;
-        }
-
-        .news-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* News Image */
-        .news-image {
-            margin: 0;
-            overflow: hidden;
-            border-radius: var(--radius-md) var(--radius-md) 0 0;
-        }
-
-        .news-image img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .news-card:hover .news-image img {
-            transform: scale(1.05);
-        }
-
-        /* News Content */
-        .news-content {
-            padding: var(--space-md);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-date {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .news-content h3 {
-            margin: 0 0 0.75rem 0 !important;
-            line-height: 1.3;
-            font-size: 1.25rem;
-        }
-
-        .news-content h3 a {
-            color: var(--text);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .news-content h3 a:hover {
-            color: var(--brand);
-        }
-
-        .news-content p {
-            color: var(--text-light);
-            line-height: 1.5;
-            margin-bottom: auto;
-            flex: 1;
-            font-size: 1rem;
-        }
-
-        .read-more {
-            color: var(--brand);
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: var(--space-sm);
-            transition: color 0.3s ease;
-            align-self: flex-start;
-        }
-
-        .read-more:hover {
-            color: var(--brand-dark);
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .news-image img {
-                height: 180px;
-            }
-
-            .news-content {
-                padding: var(--space-sm);
-            }
-        }
-
-        /* Testimonials header (for blog CTA button) */
-        .testimonials-header {
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        /* ===== TESTIMONIALS SECTION ===== */
-        .testimonials {
-            padding: 4rem 0;
-            background: #ffffff;
-        }
-
-        .testimonials-subtitle {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #666;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .testimonial-card {
-            background: #ffffff;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--brand);
-        }
-
-        .testimonial-card .stars {
-            color: #FFA000;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            letter-spacing: 3px;
-        }
-
-        .testimonial-card p {
-            font-size: 1.125rem;
-            color: var(--text);
-            font-style: italic;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .testimonial-card cite {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            font-weight: 600;
-            font-style: normal;
-        }
-
-        .testimonial-source {
-            color: #888;
-            display: block;
-            margin-top: 0.5rem;
-        }
-
-        .testimonials-cta {
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .btn-inline {
-            display: inline-block;
-            margin: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .testimonials {
-                background: transparent !important;
-                padding: 2rem 0;
-            }
-
-            .testimonial-card {
-                background: rgba(255,255,255,0.85) !important;
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-            }
-
-            .testimonial-grid {
-                gap: 1.5rem;
-            }
-        }
-
-        /* ===== SOCIAL PROOF SECTION ===== */
-        .social-proof {
-            padding: 4rem 0;
-            background: var(--bg-soft);
-        }
-
-        .social-proof-subtitle {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #666;
-            font-size: 1.125rem;
-        }
-
-        .google-reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .google-review-card {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-        }
-
-        .google-review-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .google-review-badge {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .google-review-badge p {
-            margin: 0.25rem 0;
-            font-size: 0.95rem;
-        }
-
-        .before-after-gallery {
-            margin-top: 4rem;
-        }
-
-        .before-after-gallery h3 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .before-after-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .before-after-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-        }
-
-        .before-after-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .before-after-label {
-            padding: 1rem;
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: var(--brand);
-            text-align: center;
-        }
-
-        .before-after-description {
-            padding: 0 1rem 1rem;
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            .google-reviews-grid,
-            .before-after-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-        }
-
-        /* FORCE ORANGE BUTTONS - MUST BE LAST */
-        span.service-cta,
-        .service-cta,
-        a.card .service-cta,
-        .card .service-cta,
-        .card--img .service-cta {
-            background-color: #f97316 !important;
-            background: #f97316 !important;
-            color: #ffffff !important;
-        }
-
-        a.card:hover .service-cta,
-        .card:hover .service-cta {
-            background-color: #ea580c !important;
-            background: #ea580c !important;
-        }
-    </style>
-
-    <!-- No external CSS needed - all critical styles are inline -->
+    <!-- Load full CSS asynchronously -->
+    <link rel="preload" href="styles.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.min.css"></noscript>
     
     
     <!-- JSON-LD Structured Data -->
@@ -1728,9 +454,9 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://electricistaculiacanpro.mx/" />
-<meta property="og:title" content="⚡ Electricista Culiacán 24/7 | Llegada 30-60 min | WhatsApp AHORA" />
-<meta property="og:description" content="Electricista certificado • Emergencia 24/7 • Llegada 30-60 min • Las Quintas, Tres Ríos, Centro • Cotización gratis WhatsApp • Garantía 6 meses • 4.8★ 150+ clientes" />
-<meta property="og:image" content="https://electricistaculiacanpro.mx/assets/images/optimizadas/hero-electricista-culiacan-800w.webp" />
+<meta property="og:title" content="Electricista en Culiacán 24/7 | Llegada en 30-60 min + Garantía" />
+<meta property="og:description" content="Electricista certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
+<meta property="og:image" content="https://electricistaculiacanpro.mx/assets/images/hero-electricista-culiacan-800w.webp" />
 <meta property="og:image:width" content="800" />
 <meta property="og:image:height" content="800" />
 <meta property="og:locale" content="es_MX" />
@@ -1739,9 +465,9 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content="https://electricistaculiacanpro.mx/" />
-<meta name="twitter:title" content="⚡ Electricista Culiacán 24/7 | Llegada 30-60 min | WhatsApp AHORA" />
-<meta name="twitter:description" content="Electricista certificado • Emergencia 24/7 • Llegada 30-60 min • Las Quintas, Tres Ríos, Centro • Cotización gratis WhatsApp • Garantía 6 meses • 4.8★ 150+ clientes" />
-<meta name="twitter:image" content="https://electricistaculiacanpro.mx/assets/images/optimizadas/hero-electricista-culiacan-800w.webp" />
+<meta name="twitter:title" content="Electricista en Culiacán 24/7 | Llegada en 30-60 min + Garantía" />
+<meta name="twitter:description" content="Electricista certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
+<meta name="twitter:image" content="https://electricistaculiacanpro.mx/assets/images/hero-electricista-culiacan-800w.webp" />
 
 <meta name="x-build" content="2025-11-21T10:00:00Z" />
 
@@ -1756,12 +482,7 @@
       "@id": "https://electricistaculiacanpro.mx/#website",
       "name": "Electricista Culiacán Pro",
       "url": "https://electricistaculiacanpro.mx/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/logo-512.png",
-        "width": 512,
-        "height": 512
-      },
+      "logo": "https://electricistaculiacanpro.mx/logo-electricista-culiacan-pro.webp",
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -1941,15 +662,10 @@
         "https://www.facebook.com/electricistaculiacanpro",
         "https://www.instagram.com/electricistaculiacanpro"
       ],
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/logo-512.png",
-        "width": 512,
-        "height": 512
-      },
+      "logo": "https://electricistaculiacanpro.mx/logo-electricista-culiacan-pro.webp",
       "image": {
         "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/emergencia-24-7-nocturna-1200w.webp",
+        "url": "https://electricistaculiacanpro.mx/assets/images/emergencia-24-7-nocturna-1200w.webp",
         "width": "1200",
         "height": "800",
         "caption": "Electricista profesional en Culiacán atendiendo emergencia 24 horas con herramientas especializadas"
@@ -1989,7 +705,7 @@
           },
           "image": {
             "@type": "ImageObject",
-            "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/social-proof/reviews/google-review-installation-1200w.webp",
+            "url": "https://electricistaculiacanpro.mx/assets/images/social-proof/reviews/google-review-installation-1200w.webp",
             "width": 1200,
             "height": 800
           }
@@ -2013,7 +729,7 @@
           },
           "image": {
             "@type": "ImageObject",
-            "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/social-proof/reviews/google-review-emergency-service-1200w.webp",
+            "url": "https://electricistaculiacanpro.mx/assets/images/social-proof/reviews/google-review-emergency-service-1200w.webp",
             "width": 1200,
             "height": 800
           }
@@ -2037,7 +753,7 @@
           },
           "image": {
             "@type": "ImageObject",
-            "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/social-proof/reviews/google-review-leak-repair-1200w.webp",
+            "url": "https://electricistaculiacanpro.mx/assets/images/social-proof/reviews/google-review-leak-repair-1200w.webp",
             "width": 1200,
             "height": 800
           }
@@ -2095,78 +811,6 @@
             "@type": "Organization",
             "name": "Google"
           }
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Carlos M."
-          },
-          "datePublished": "2024-11-10",
-          "reviewBody": "Excelente servicio de emergencia. Tuve un cortocircuito a las 11 PM y llegaron en menos de 45 minutos. Resolvieron el problema rápidamente y con muy buen precio. Totalmente recomendados para emergencias.",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Google"
-          },
-          "image": {
-            "@type": "ImageObject",
-            "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/social-proof/reviews/google-review-emergency-1200w.webp",
-            "width": 1200,
-            "height": 800
-          }
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Andrea L."
-          },
-          "datePublished": "2024-11-15",
-          "reviewBody": "Instalaron iluminación LED en toda mi casa. El resultado quedó increíble y ya noto el ahorro en la luz. Muy profesionales, limpios y puntuales. Además me dieron garantía por escrito.",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Google"
-          },
-          "image": {
-            "@type": "ImageObject",
-            "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/social-proof/reviews/google-review-led-installation-1200w.webp",
-            "width": 1200,
-            "height": 800
-          }
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Miguel A."
-          },
-          "datePublished": "2024-11-20",
-          "reviewBody": "Contraté el mantenimiento de mi tablero eléctrico para mi negocio. Hicieron una revisión completa, etiquetaron todos los circuitos y me entregaron un reporte con fotos. Servicio muy profesional y precio justo.",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Google"
-          },
-          "image": {
-            "@type": "ImageObject",
-            "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/social-proof/reviews/google-review-maintenance-1200w.webp",
-            "width": 1200,
-            "height": 800
-          }
         }
       ]
     },
@@ -2189,7 +833,7 @@
       },
       "image": {
         "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/electricista-servicio-2-culiacan-800w.webp",
+        "url": "https://electricistaculiacanpro.mx/assets/images/electricista-servicio-2-culiacan-800w.webp",
         "width": "800",
         "height": "800",
         "caption": "Electricista reparando instalación eléctrica con herramientas profesionales en Culiacán"
@@ -2212,178 +856,6 @@
         "@type": "Thing",
         "name": "Instalación eléctrica reparada y funcional",
         "description": "Sistema eléctrico restaurado y funcionando correctamente con garantía"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://electricistaculiacanpro.mx/#service-instalacion-iluminacion-led",
-      "serviceType": "Instalación de Iluminación LED",
-      "name": "Instalación de Iluminación LED en Culiacán",
-      "description": "Instalación profesional de iluminación LED para hogares y negocios en Culiacán. Ahorra hasta 80% en consumo eléctrico con tecnología LED de última generación. Incluye diseño de iluminación, instalación completa y asesoría energética.",
-      "provider": {
-        "@id": "https://electricistaculiacanpro.mx/#business"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "containedIn": {
-          "@type": "State",
-          "name": "Sinaloa"
-        }
-      },
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/servicios/servicio-instalacion-led-800w.webp",
-        "width": "800",
-        "height": "447"
-      },
-      "offers": {
-        "@type": "Offer",
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "300",
-          "maxPrice": "2500",
-          "priceCurrency": "MXN"
-        },
-        "availability": "https://schema.org/InStock",
-        "availableAtOrFrom": {
-          "@type": "Place",
-          "name": "Culiacán, Sinaloa"
-        }
-      },
-      "serviceOutput": {
-        "@type": "Thing",
-        "name": "Sistema de iluminación LED instalado",
-        "description": "Iluminación LED eficiente instalada con garantía y ahorro energético inmediato"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://electricistaculiacanpro.mx/#service-instalacion-contactos-apagadores",
-      "serviceType": "Instalación de Contactos y Apagadores",
-      "name": "Instalación de Contactos y Apagadores en Culiacán",
-      "description": "Instalación y reemplazo de contactos y apagadores residenciales y comerciales en Culiacán. Trabajamos con marcas reconocidas, instalación segura según normas NOM, y garantía en mano de obra. Incluye revisión de cableado y pruebas de seguridad.",
-      "provider": {
-        "@id": "https://electricistaculiacanpro.mx/#business"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "containedIn": {
-          "@type": "State",
-          "name": "Sinaloa"
-        }
-      },
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/servicios/servicio-contactos-apagadores-800w.webp",
-        "width": "800",
-        "height": "447"
-      },
-      "offers": {
-        "@type": "Offer",
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "200",
-          "maxPrice": "800",
-          "priceCurrency": "MXN"
-        },
-        "availability": "https://schema.org/InStock",
-        "availableAtOrFrom": {
-          "@type": "Place",
-          "name": "Culiacán, Sinaloa"
-        }
-      },
-      "serviceOutput": {
-        "@type": "Thing",
-        "name": "Contactos y apagadores instalados",
-        "description": "Instalación eléctrica segura con contactos y apagadores funcionando correctamente"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://electricistaculiacanpro.mx/#service-mantenimiento-tableros-electricos",
-      "serviceType": "Mantenimiento de Tableros Eléctricos",
-      "name": "Mantenimiento de Tableros Eléctricos en Culiacán",
-      "description": "Mantenimiento preventivo y correctivo de tableros eléctricos residenciales y comerciales en Culiacán. Incluye revisión de interruptores termomagnéticos, ajuste de conexiones, limpieza de componentes, etiquetado de circuitos y reporte técnico con fotografías.",
-      "provider": {
-        "@id": "https://electricistaculiacanpro.mx/#business"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "containedIn": {
-          "@type": "State",
-          "name": "Sinaloa"
-        }
-      },
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/servicios/servicio-mantenimiento-tablero-800w.webp",
-        "width": "800",
-        "height": "447"
-      },
-      "offers": {
-        "@type": "Offer",
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "600",
-          "maxPrice": "1500",
-          "priceCurrency": "MXN"
-        },
-        "availability": "https://schema.org/InStock",
-        "availableAtOrFrom": {
-          "@type": "Place",
-          "name": "Culiacán, Sinaloa"
-        }
-      },
-      "serviceOutput": {
-        "@type": "Thing",
-        "name": "Tablero eléctrico en óptimas condiciones",
-        "description": "Sistema eléctrico revisado, seguro y funcionando correctamente con reporte técnico"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://electricistaculiacanpro.mx/#service-emergencia-24-7",
-      "serviceType": "Servicio de Emergencia Eléctrica 24/7",
-      "name": "Servicio de Emergencia Eléctrica 24/7 en Culiacán",
-      "description": "Servicio de emergencia eléctrica disponible 24 horas, 7 días a la semana en Culiacán. Atención inmediata para fallas eléctricas, cortos circuitos, apagones y problemas urgentes. Tiempo de respuesta de 30-60 minutos. Incluye diagnóstico en sitio y reparación inmediata.",
-      "provider": {
-        "@id": "https://electricistaculiacanpro.mx/#business"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "containedIn": {
-          "@type": "State",
-          "name": "Sinaloa"
-        }
-      },
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/optimizadas/servicios/servicio-emergencia-24-7-800w.webp",
-        "width": "800",
-        "height": "447"
-      },
-      "offers": {
-        "@type": "Offer",
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "500",
-          "maxPrice": "2000",
-          "priceCurrency": "MXN"
-        },
-        "availability": "https://schema.org/InStock",
-        "availableAtOrFrom": {
-          "@type": "Place",
-          "name": "Culiacán, Sinaloa"
-        }
-      },
-      "serviceOutput": {
-        "@type": "Thing",
-        "name": "Emergencia eléctrica resuelta",
-        "description": "Problema eléctrico resuelto con atención inmediata y servicio de emergencia 24/7"
       }
     },
     {
@@ -2540,30 +1012,6 @@
             "@type": "Answer",
             "text": "Un electricista certificado tiene formación técnica formal y cumple con normativas oficiales (NOM), mientras que un improvisado trabaja por experiencia empírica sin certificación. Diferencias clave: 1) Conocimiento de códigos eléctricos y normativas de seguridad actualizadas, 2) Capacidad para leer diagramas y planos eléctricos complejos, 3) Uso de equipos de diagnóstico profesionales (multímetro, probadores, termografía), 4) Garantía escrita respaldada por empresa establecida, 5) Seguro de responsabilidad civil, 6) Facturación legal y deducible. Un electricista certificado identifica problemas que un improvisado puede pasar por alto, evitando riesgos de incendio o electrocución."
           }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué métodos de pago aceptan para servicios de electricidad?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Aceptamos múltiples formas de pago para tu comodidad: efectivo, transferencia bancaria, depósito bancario, y pago con tarjeta (débito/crédito). Para servicios mayores ofrecemos facilidades de pago y cotizaciones parciales. Emitimos factura electrónica válida ante el SAT el mismo día del servicio, ideal para empresas y personas que requieren deducción fiscal. No solicitamos anticipos en servicios de emergencia menores a $2,000 pesos. Puedes confirmar el método de pago de tu preferencia al agendar por WhatsApp al 667 163 1231."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿En qué horario atienden llamadas para cotizaciones y agendas?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Atendemos llamadas y mensajes de WhatsApp 24 horas, 7 días a la semana. Para cotizaciones y agendas programadas: lunes a viernes de 8:00 AM a 8:00 PM, sábados de 9:00 AM a 6:00 PM, y domingos de 10:00 AM a 4:00 PM. Para emergencias 24/7 el servicio está disponible las 24 horas incluyendo madrugadas, fines de semana y días festivos. Respondemos WhatsApp en menos de 10 minutos durante todo el día. Puedes enviar fotos y descripciones del problema eléctrico en cualquier momento y te respondemos con cotización y tiempo estimado de llegada."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué debo hacer mientras espero al electricista en una emergencia?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Mientras esperas al electricista en una emergencia sigue estos pasos de seguridad: 1) Apaga el interruptor principal del centro de carga o la pastilla del circuito afectado, 2) Desconecta aparatos eléctricos del área con problema, especialmente si hubo chispas o olor a quemado, 3) Ventila la zona si detectas olor a cables quemados, 4) Mantén alejados niños y mascotas del área afectada, 5) Si es de noche, ten a la mano linternas o luz de emergencia, 6) Toma fotos del problema y envíalas por WhatsApp para diagnóstico previo, 7) No intentes reparar por tu cuenta ni toques cables expuestos. Nuestro equipo llegará en 30-60 minutos con todas las herramientas necesarias."
-          }
         }
       ]
     },
@@ -2641,24 +1089,14 @@
       "@type": "Organization",
       "@id": "https://electricistaculiacanpro.mx/#organization",
       "name": "Electricista Culiacán Pro",
-      "legalName": "Electricista Culiacán Pro",
       "url": "https://electricistaculiacanpro.mx",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/logo-512.png",
-        "width": 512,
-        "height": 512,
-        "contentUrl": "https://electricistaculiacanpro.mx/assets/images/logo-512.png"
-      },
-      "image": "https://electricistaculiacanpro.mx/assets/images/optimizadas/emergencia-24-7-nocturna-1200w.webp",
+      "logo": "https://electricistaculiacanpro.mx/logo-electricista-culiacan-pro.webp",
+      "image": "https://electricistaculiacanpro.mx/assets/images/emergencia-24-7-nocturna-1200w.webp",
       "description": "Servicios profesionales de electricidad en Culiacán las 24 horas del día, los 7 días de la semana. Emergencias, instalaciones y reparaciones con garantía escrita.",
       "slogan": "Electricista Certificado 24/7 en Culiacán - Llegada Inmediata",
       "foundingDate": "2018",
       "email": "contacto@electricistaculiacanpro.mx",
       "telephone": "+52-667-163-1231",
-      "priceRange": "$$",
-      "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Bank Transfer"],
-      "currenciesAccepted": "MXN",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Culiacán",
@@ -2715,17 +1153,7 @@
         "https://g.page/r/electricistaculiacanpro",
         "https://www.facebook.com/electricistaculiacanpro",
         "https://www.instagram.com/electricistaculiacanpro"
-      ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "150",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "hasOfferCatalog": {
-        "@id": "https://electricistaculiacanpro.mx/#offercatalog"
-      }
+      ]
     }
   ]
 }
@@ -2762,10 +1190,10 @@ window.dataLayer = window.dataLayer || [];
         <div class="container">
             <div class="nav-wrapper">
                 <a href="#inicio" class="logo">
-                    <img src="assets/images/logo-512.webp"
+                    <img src="logo-electricista-culiacan-pro-optimized.webp"
                          alt="Electricista Culiacán Pro - Logo"
-                         width="140"
-                         height="140">
+                         width="400"
+                         height="152">
                 </a>
                 <button class="mobile-menu-btn" aria-label="Menu">
                     <span></span>
@@ -2801,10 +1229,10 @@ window.dataLayer = window.dataLayer || [];
         <!-- Hero Background Image (LCP optimized with preload) -->
         <picture class="hero-background">
             <source type="image/webp"
-                    srcset="assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w, assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
+                    srcset="/assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w, /assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
                     sizes="100vw">
-            <img src="assets/images/optimizadas/hero-electricista-culiacan-1200w.webp"
-                 srcset="assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w, assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
+            <img src="/assets/images/optimizadas/hero-electricista-culiacan-1200w.webp"
+                 srcset="/assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w, /assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
                  sizes="100vw"
                  alt="Electricista profesional en Culiacán atendiendo emergencia 24 horas con herramientas especializadas"
                  width="1200"
@@ -2816,7 +1244,7 @@ window.dataLayer = window.dataLayer || [];
 
         <div class="container">
             <div class="hero-content">
-                <h1 class="fade-in">Electricista Cerca de Mi en Culiacán | Urgente 24 Horas</h1>
+                <h1 class="fade-in">Electricista en Culiacán – Emergencias 24/7</h1>
 
                 <!-- Rating Badge Visible -->
                 <div class="hero-rating fade-in">
@@ -2832,7 +1260,7 @@ window.dataLayer = window.dataLayer || [];
                     <span class="rating-count">Más de 50 clientes satisfechos</span>
                 </div>
 
-                <p class="hero-subtitle fade-in">Técnico electricista certificado cerca de tu ubicación · Servicio a domicilio 24 horas en Las Quintas, Tres Ríos, Chapultepec y Centro · Electricista de emergencia con llegada en 30-60 minutos · Garantía escrita 6 meses.</p>
+                <p class="hero-subtitle fade-in">Electricista certificado en Culiacán · Emergencia 24/7 con desplazamiento incluido en Las Quintas, Tres Ríos y Centro. Llegada en 30-60 minutos con garantía escrita.</p>
 
                 <!-- Feature List con Iconografía -->
                 <div class="hero-features fade-in">
@@ -2861,29 +1289,7 @@ window.dataLayer = window.dataLayer || [];
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2rem;">
-                    <a href="https://wa.me/526671631231?text=Hola,%20necesito%20un%20electricista%20urgente"
-                       class="btn-primary hover-lift"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                        </svg>
-                        <span><strong>WhatsApp:</strong> 667 163 1231</span>
-                    </a>
-                    <a href="tel:6671631231"
-                       class="btn-secondary hover-lift"
-                       style="display: inline-flex; align-items: center; gap: 0.5rem; background: #fff; color: #E36414; border: 2px solid #E36414; padding: 15px 32px; border-radius: 14px; text-decoration: none; font-weight: 700; min-height: 48px;">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                        </svg>
-                        <span><strong>Llamar:</strong> 667 163 1231</span>
-                    </a>
-                </div>
-                <p style="color: #fff; margin-top: 1rem; font-size: 0.9rem; text-align: center;">
-                    ⚡ <strong>Atendemos AHORA</strong> • Respuesta en menos de 10 minutos
-                </p>
+                <a href="#contacto" class="btn-primary hover-lift">Solicitar Atención Inmediata</a>
             </div>
         </div>
     </header>
@@ -2891,11 +1297,7 @@ window.dataLayer = window.dataLayer || [];
     <main>
     <section class="section section-alt">
         <div class="container benefits-container">
-            <h2>¿Por qué somos el electricista #1 en Culiacán?</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem; color: #475569;">
-                Más de <strong>150 clientes satisfechos</strong> en Las Quintas, Tres Ríos, Chapultepec, Montebello y Centro nos respaldan.
-                <strong style="color: #E36414;">4.8★ en Google</strong> • Electricista certificado disponible 24/7.
-            </p>
+            <h2>¿Por qué elegirnos?</h2>
             <div class="benefits-grid">
                 <div class="benefit">
                     <div class="benefit-icon">
@@ -2905,8 +1307,8 @@ window.dataLayer = window.dataLayer || [];
                         </svg>
                     </div>
                     <div class="benefit-content">
-                        <h3>Llegamos HOY en 30-60 minutos</h3>
-                        <p>Atendemos emergencias eléctricas <strong>el mismo día</strong> en toda Culiacán: Las Quintas, Tres Ríos, Chapultepec, Montebello, Centro y más. Servicio 24/7 con unidad móvil equipada. <strong>Confirmamos tiempo de llegada por WhatsApp.</strong></p>
+                        <h3>Llegamos hoy mismo</h3>
+                        <p>Atendemos emergencias en 30-60 min en Las Quintas, Tres Ríos, Chapultepec y Centro. Servicio 24/7 con herramientas completas.</p>
                     </div>
                 </div>
                 <div class="benefit">
@@ -2917,8 +1319,8 @@ window.dataLayer = window.dataLayer || [];
                         </svg>
                     </div>
                     <div class="benefit-content">
-                        <h3>Precios claros desde $300</h3>
-                        <p><strong>Cotización GRATIS por WhatsApp</strong> con fotos del problema. Desglose completo de mano de obra y materiales antes de iniciar. Sin cargos ocultos. <strong>Aceptamos tarjeta, efectivo y transferencia.</strong></p>
+                        <h3>Precios claros</h3>
+                        <p>Cotización por WhatsApp antes de ir. Desglose completo de mano de obra y materiales. Sin cargos ocultos.</p>
                     </div>
                 </div>
                 <div class="benefit">
@@ -2980,13 +1382,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp 420w, assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w"
+                                        srcset="assets/images/emergencia-electrica-culiacan-420w.webp 420w, assets/images/emergencia-electrica-culiacan-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp 420w, assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w"
+                                <img src="assets/images/emergencia-electrica-culiacan-420w.webp"
+                                     srcset="assets/images/emergencia-electrica-culiacan-420w.webp 420w, assets/images/emergencia-electrica-culiacan-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Electricista reparando corto circuito en cableado con herramientas profesionales en Culiacán"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3004,13 +1406,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp 420w, assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w"
+                                        srcset="assets/images/emergencia-electrica-culiacan-420w.webp 420w, assets/images/emergencia-electrica-culiacan-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp 420w, assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w"
+                                <img src="assets/images/emergencia-electrica-culiacan-420w.webp"
+                                     srcset="assets/images/emergencia-electrica-culiacan-420w.webp 420w, assets/images/emergencia-electrica-culiacan-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Electricista reparando corto circuito profesional en Culiacán"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3028,13 +1430,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-3-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-3-culiacan-800w.webp 800w"
+                                        srcset="assets/images/electricista-servicio-3-culiacan-420w.webp 420w, assets/images/electricista-servicio-3-culiacan-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-3-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-3-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-3-culiacan-800w.webp 800w"
+                                <img src="assets/images/electricista-servicio-3-culiacan-420w.webp"
+                                     srcset="assets/images/electricista-servicio-3-culiacan-420w.webp 420w, assets/images/electricista-servicio-3-culiacan-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Instalación profesional de ventiladores de techo en Culiacán"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3052,13 +1454,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-4-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-4-culiacan-800w.webp 800w"
+                                        srcset="assets/images/electricista-servicio-4-culiacan-420w.webp 420w, assets/images/electricista-servicio-4-culiacan-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-4-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-4-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-4-culiacan-800w.webp 800w"
+                                <img src="assets/images/electricista-servicio-4-culiacan-420w.webp"
+                                     srcset="assets/images/electricista-servicio-4-culiacan-420w.webp 420w, assets/images/electricista-servicio-4-culiacan-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Instalación de iluminación LED"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3076,13 +1478,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-5-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-5-culiacan-800w.webp 800w"
+                                        srcset="assets/images/electricista-servicio-5-culiacan-420w.webp 420w, assets/images/electricista-servicio-5-culiacan-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-5-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-5-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-5-culiacan-800w.webp 800w"
+                                <img src="assets/images/electricista-servicio-5-culiacan-420w.webp"
+                                     srcset="assets/images/electricista-servicio-5-culiacan-420w.webp 420w, assets/images/electricista-servicio-5-culiacan-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Instalación de contactos y apagadores"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3100,13 +1502,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-6-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-6-culiacan-800w.webp 800w"
+                                        srcset="assets/images/electricista-servicio-6-culiacan-420w.webp 420w, assets/images/electricista-servicio-6-culiacan-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-6-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-6-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-6-culiacan-800w.webp 800w"
+                                <img src="assets/images/electricista-servicio-6-culiacan-420w.webp"
+                                     srcset="assets/images/electricista-servicio-6-culiacan-420w.webp 420w, assets/images/electricista-servicio-6-culiacan-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Instalación de Centro de Carga"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3121,8 +1523,8 @@ window.dataLayer = window.dataLayer || [];
                 </a>
             </div>
             <p class="services-intro">
-        ¿Buscas un electricista en tu colonia específica o necesitas atención urgente en horario especial? Explora nuestras <strong>especialidades por zona y tipo de emergencia</strong> en Culiacán. Desde servicio 24/7 hasta cotizaciones por WhatsApp, encuentra exactamente lo que necesitas para resolver tu problema de electricidad hoy mismo.
-      </p>
+                ¿Buscas un electricista en tu colonia específica o necesitas atención urgente en horario especial? Explora nuestras <strong>especialidades por zona y tipo de emergencia</strong> en Culiacán. Desde servicio 24/7 hasta cotizaciones por WhatsApp, encuentra exactamente lo que necesitas para resolver tu problema de electricidad hoy mismo.
+            </p>
         </div>
     </section>
 
@@ -3137,13 +1539,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-7-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-7-culiacan-800w.webp 800w"
+                                        srcset="assets/images/electricista-servicio-7-culiacan-420w.webp 420w, assets/images/electricista-servicio-7-culiacan-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-7-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-7-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-7-culiacan-800w.webp 800w"
+                                <img src="assets/images/electricista-servicio-7-culiacan-420w.webp"
+                                     srcset="assets/images/electricista-servicio-7-culiacan-420w.webp 420w, assets/images/electricista-servicio-7-culiacan-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Electricista certificado en Las Quintas Culiacán"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3157,13 +1559,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/destapandoinstalación eléctrica-420w.webp 420w, assets/images/optimizadas/destapandoinstalación eléctrica-800w.webp 800w"
+                                        srcset="assets/images/destapandoinstalación eléctrica-420w.webp 420w, assets/images/destapandoinstalación eléctrica-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/destapandoinstalación eléctrica-420w.webp"
-                                     srcset="assets/images/optimizadas/destapandoinstalación eléctrica-420w.webp 420w, assets/images/optimizadas/destapandoinstalación eléctrica-800w.webp 800w"
+                                <img src="assets/images/destapandoinstalación eléctrica-420w.webp"
+                                     srcset="assets/images/destapandoinstalación eléctrica-420w.webp 420w, assets/images/destapandoinstalación eléctrica-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Electricista certificado en Tres Ríos Culiacán"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3177,13 +1579,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/taza-de-baño-420w.webp 420w, assets/images/optimizadas/taza-de-baño-800w.webp 800w"
+                                        srcset="assets/images/taza-de-baño-420w.webp 420w, assets/images/taza-de-baño-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/taza-de-baño-420w.webp"
-                                     srcset="assets/images/optimizadas/taza-de-baño-420w.webp 420w, assets/images/optimizadas/taza-de-baño-800w.webp 800w"
+                                <img src="assets/images/taza-de-baño-420w.webp"
+                                     srcset="assets/images/taza-de-baño-420w.webp 420w, assets/images/taza-de-baño-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Electricista certificado en Centro de Culiacán"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3197,13 +1599,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-2-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-2-culiacan-800w.webp 800w"
+                                        srcset="assets/images/electricista-servicio-2-culiacan-420w.webp 420w, assets/images/electricista-servicio-2-culiacan-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-2-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-2-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-2-culiacan-800w.webp 800w"
+                                <img src="assets/images/electricista-servicio-2-culiacan-420w.webp"
+                                     srcset="assets/images/electricista-servicio-2-culiacan-420w.webp 420w, assets/images/electricista-servicio-2-culiacan-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Electricista certificado en Montebello Culiacán"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3217,13 +1619,13 @@ window.dataLayer = window.dataLayer || [];
                         <figure class="media-box">
                             <picture>
                                 <source type="image/webp"
-                                        srcset="assets/images/optimizadas/reivicion-bajapresion-420w.webp 420w, assets/images/optimizadas/reivicion-bajapresion-800w.webp 800w"
+                                        srcset="assets/images/reivicion-bajapresion-420w.webp 420w, assets/images/reivicion-bajapresion-800w.webp 800w"
                                         sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/reivicion-bajapresion-420w.webp"
-                                     srcset="assets/images/optimizadas/reivicion-bajapresion-420w.webp 420w, assets/images/optimizadas/reivicion-bajapresion-800w.webp 800w"
+                                <img src="assets/images/reivicion-bajapresion-420w.webp"
+                                     srcset="assets/images/reivicion-bajapresion-420w.webp 420w, assets/images/reivicion-bajapresion-800w.webp 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
                                      alt="Electricista certificado en Guadalupe Culiacán"
-                                     width="420" height="235"
+                                     width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
@@ -3416,127 +1818,121 @@ window.dataLayer = window.dataLayer || [];
         <div class="container">
             <h2>Blog de Electricidad</h2>
             <p class="blog-intro">Guías técnicas y consejos profesionales para mantener tu hogar</p>
-            <div class="grid">
-                <a href="/blog/como-detectar-fallas-electricas-casa/" class="card card--img">
-                    <div class="service-card">
-                        <figure class="media-box">
-                            <picture>
-                                <source type="image/webp"
-                                        srcset="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp 420w, assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w"
-                                        sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp 420w, assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w"
-                                     sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Cómo detectar fallas eléctricas en casa"
-                                     width="420" height="235"
-                                     loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
+            <div class="news-grid">
+                <article class="news-card card">
+                    <figure class="news-image">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="/assets/images/emergencia-electrica-culiacan-420w.webp 420w, /assets/images/emergencia-electrica-culiacan-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 420px">
+                            <img src="/assets/images/emergencia-electrica-culiacan-420w.webp"
+                                 alt="Cómo detectar fallas eléctricas en casa"
+                                 width="420" height="420"
+                                 loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                    <div class="news-content">
+                        <time datetime="2024-11-11" class="news-date">11 de noviembre, 2024</time>
+                        <h3><a href="/blog/como-detectar-fallas-electricas-casa/">Cómo Detectar Fallas Eléctricas en Casa</a></h3>
+                        <p>Aprende a detectar fallas eléctricas con métodos sencillos. Previene accidentes y ahorra en tu recibo de luz detectando problemas a tiempo. Guía paso a paso para tu seguridad.</p>
+                        <a href="/blog/como-detectar-fallas-electricas-casa/" class="read-more">Leer artículo completo →</a>
                     </div>
-                    <h3>Cómo Detectar Fallas Eléctricas en Casa</h3>
-                    <p>Aprende a detectar fallas eléctricas con métodos sencillos. Previene accidentes y ahorra en tu recibo de luz detectando problemas a tiempo. Guía paso a paso para tu seguridad.</p>
-                    <span class="service-cta">Leer artículo completo →</span>
-                </a>
-                <a href="/blog/mantenimiento-electrico-preventivo/" class="card card--img">
-                    <div class="service-card">
-                        <figure class="media-box">
-                            <picture>
-                                <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-4-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-4-culiacan-800w.webp 800w"
-                                        sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-4-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-4-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-4-culiacan-800w.webp 800w"
-                                     sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Mantenimiento preventivo eléctrico"
-                                     width="420" height="235"
-                                     loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
+                </article>
+                <article class="news-card card">
+                    <figure class="news-image">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="/assets/images/electricista-servicio-4-culiacan-420w.webp 420w, /assets/images/electricista-servicio-4-culiacan-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 420px">
+                            <img src="/assets/images/electricista-servicio-4-culiacan-420w.webp"
+                                 alt="Mantenimiento preventivo eléctrico"
+                                 width="420" height="420"
+                                 loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                    <div class="news-content">
+                        <time datetime="2024-11-12" class="news-date">12 de noviembre, 2024</time>
+                        <h3><a href="/blog/mantenimiento-electrico-preventivo/">Checklist de Mantenimiento Eléctrico Preventivo</a></h3>
+                        <p>Guía completa de mantenimiento preventivo para instalaciones eléctricas. Extiende la vida útil de tu sistema y evita reparaciones costosas con esta checklist profesional.</p>
+                        <a href="/blog/mantenimiento-electrico-preventivo/" class="read-more">Leer artículo completo →</a>
                     </div>
-                    <h3>Checklist de Mantenimiento Eléctrico Preventivo</h3>
-                    <p>Guía completa de mantenimiento preventivo para instalaciones eléctricas. Extiende la vida útil de tu sistema y evita reparaciones costosas con esta checklist profesional.</p>
-                    <span class="service-cta">Leer artículo completo →</span>
-                </a>
-                <a href="/blog/bajo-voltaje-causas-soluciones/" class="card card--img">
-                    <div class="service-card">
-                        <figure class="media-box">
-                            <picture>
-                                <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-5-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-5-culiacan-800w.webp 800w"
-                                        sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-5-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-5-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-5-culiacan-800w.webp 800w"
-                                     sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Bajo voltaje eléctrico en casa"
-                                     width="420" height="235"
-                                     loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
+                </article>
+                <article class="news-card card">
+                    <figure class="news-image">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="/assets/images/electricista-servicio-5-culiacan-420w.webp 420w, /assets/images/electricista-servicio-5-culiacan-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 420px">
+                            <img src="/assets/images/electricista-servicio-5-culiacan-420w.webp"
+                                 alt="Bajo voltaje eléctrico en casa"
+                                 width="420" height="420"
+                                 loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                    <div class="news-content">
+                        <time datetime="2024-11-12" class="news-date">12 de noviembre, 2024</time>
+                        <h3><a href="/blog/bajo-voltaje-causas-soluciones/">Bajo Voltaje Eléctrico: 7 Causas y Soluciones</a></h3>
+                        <p>¿Bajo voltaje en tu hogar? Descubre las 7 causas principales y sus soluciones. Desde problemas en el centro de carga hasta fallas en el cableado, todo lo que necesitas saber.</p>
+                        <a href="/blog/bajo-voltaje-causas-soluciones/" class="read-more">Leer artículo completo →</a>
                     </div>
-                    <h3>Bajo Voltaje Eléctrico: 7 Causas y Soluciones</h3>
-                    <p>¿Bajo voltaje en tu hogar? Descubre las 7 causas principales y sus soluciones. Desde problemas en el centro de carga hasta fallas en el cableado, todo lo que necesitas saber.</p>
-                    <span class="service-cta">Leer artículo completo →</span>
-                </a>
-                <a href="/blog/reparar-apagador-metodos-profesionales/" class="card card--img">
-                    <div class="service-card">
-                        <figure class="media-box">
-                            <picture>
-                                <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-3-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-3-culiacan-800w.webp 800w"
-                                        sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-3-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-3-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-3-culiacan-800w.webp 800w"
-                                     sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Cómo reparar un apagador"
-                                     width="420" height="235"
-                                     loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
+                </article>
+                <article class="news-card card">
+                    <figure class="news-image">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="/assets/images/electricista-servicio-3-culiacan-420w.webp 420w, /assets/images/electricista-servicio-3-culiacan-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 420px">
+                            <img src="/assets/images/electricista-servicio-3-culiacan-420w.webp"
+                                 alt="Cómo reparar un apagador"
+                                 width="420" height="420"
+                                 loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                    <div class="news-content">
+                        <time datetime="2024-11-10" class="news-date">10 de noviembre, 2024</time>
+                        <h3><a href="/blog/reparar-apagador-metodos-profesionales/">Cómo Reparar un Apagador: Métodos Profesionales</a></h3>
+                        <p>Compara métodos caseros vs profesionales para reparar un apagador. Cuándo usar multímetro, probador de voltaje o llamar a un electricista. Evita daños mayores y riesgos eléctricos.</p>
+                        <a href="/blog/reparar-apagador-metodos-profesionales/" class="read-more">Leer artículo completo →</a>
                     </div>
-                    <h3>Cómo Reparar un Apagador: Métodos Profesionales</h3>
-                    <p>Compara métodos caseros vs profesionales para reparar un apagador. Cuándo usar multímetro, probador de voltaje o llamar a un electricista. Evita daños mayores y riesgos eléctricos.</p>
-                    <span class="service-cta">Leer artículo completo →</span>
-                </a>
-                <a href="/blog/instalacion-centro-carga-guia-compra/" class="card card--img">
-                    <div class="service-card">
-                        <figure class="media-box">
-                            <picture>
-                                <source type="image/webp"
-                                        srcset="assets/images/optimizadas/electricista-servicio-6-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-6-culiacan-800w.webp 800w"
-                                        sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/electricista-servicio-6-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/electricista-servicio-6-culiacan-420w.webp 420w, assets/images/optimizadas/electricista-servicio-6-culiacan-800w.webp 800w"
-                                     sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Instalación de centro de carga eléctrico"
-                                     width="420" height="235"
-                                     loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
+                </article>
+                <article class="news-card card">
+                    <figure class="news-image">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="/assets/images/electricista-servicio-6-culiacan-420w.webp 420w, /assets/images/electricista-servicio-6-culiacan-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 420px">
+                            <img src="/assets/images/electricista-servicio-6-culiacan-420w.webp"
+                                 alt="Instalación de centro de carga eléctrico"
+                                 width="420" height="420"
+                                 loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                    <div class="news-content">
+                        <time datetime="2024-11-09" class="news-date">9 de noviembre, 2024</time>
+                        <h3><a href="/blog/instalacion-centro-carga-guia-compra/">Instalación de Centro de Carga: Guía de Compra 2024</a></h3>
+                        <p>Todo lo que debes saber antes de comprar e instalar un centro de carga: capacidad ideal, interruptores termomagnéticos, marcas recomendadas y costos de instalación en Culiacán.</p>
+                        <a href="/blog/instalacion-centro-carga-guia-compra/" class="read-more">Leer artículo completo →</a>
                     </div>
-                    <h3>Instalación de Centro de Carga: Guía de Compra 2024</h3>
-                    <p>Todo lo que debes saber antes de comprar e instalar un centro de carga: capacidad ideal, interruptores termomagnéticos, marcas recomendadas y costos de instalación en Culiacán.</p>
-                    <span class="service-cta">Leer artículo completo →</span>
-                </a>
-                <a href="/blog/sobrecarga-electrica-senales-prevencion/" class="card card--img">
-                    <div class="service-card">
-                        <figure class="media-box">
-                            <picture>
-                                <source type="image/webp"
-                                        srcset="assets/images/optimizadas/iluminacion-led-culiacan-420w.webp 420w, assets/images/optimizadas/iluminacion-led-culiacan-800w.webp 800w"
-                                        sizes="(max-width:768px) 100vw, 420px">
-                                <img src="assets/images/optimizadas/iluminacion-led-culiacan-420w.webp"
-                                     srcset="assets/images/optimizadas/iluminacion-led-culiacan-420w.webp 420w, assets/images/optimizadas/iluminacion-led-culiacan-800w.webp 800w"
-                                     sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Sobrecarga eléctrica señales de alerta"
-                                     width="420" height="235"
-                                     loading="lazy" decoding="async">
-                            </picture>
-                        </figure>
+                </article>
+                <article class="news-card card">
+                    <figure class="news-image">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="/assets/images/emergencia-electrica-culiacan-420w.webp 420w, /assets/images/emergencia-electrica-culiacan-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 420px">
+                            <img src="/assets/images/emergencia-electrica-culiacan-420w.webp"
+                                 alt="Sobrecarga eléctrica señales de alerta"
+                                 width="420" height="420"
+                                 loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                    <div class="news-content">
+                        <time datetime="2024-11-08" class="news-date">8 de noviembre, 2024</time>
+                        <h3><a href="/blog/sobrecarga-electrica-senales-prevencion/">Sobrecarga Eléctrica: Señales de Alerta y Prevención</a></h3>
+                        <p>Identifica las señales de una sobrecarga eléctrica antes de que sea una emergencia. Consejos de prevención específicos para Culiacán y métodos de corrección profesional.</p>
+                        <a href="/blog/sobrecarga-electrica-senales-prevencion/" class="read-more">Leer artículo completo →</a>
                     </div>
-                    <h3>Sobrecarga Eléctrica: Señales de Alerta y Prevención</h3>
-                    <p>Identifica las señales de una sobrecarga eléctrica antes de que sea una emergencia. Consejos de prevención específicos para Culiacán y métodos de corrección profesional.</p>
-                    <span class="service-cta">Leer artículo completo →</span>
-                </a>
+                </article>
             </div>
             <div class="testimonials-header">
                 <a href="/blog/" class="btn-secondary">Ver todos los artículos del blog →</a>
@@ -3629,12 +2025,12 @@ window.dataLayer = window.dataLayer || [];
             <!-- Google Reviews Screenshots -->
             <div class="google-reviews-grid">
                 <div class="google-review-card">
-                    <img src="assets/images/optimizadas/instalacion-electrica-culiacan-800w.webp"
+                    <img src="assets/images/social-proof/reviews/google-review-installation-1200w.webp"
                          alt="Reseña 5 estrellas Google - Instalación de panel eléctrico electricidad Culiacán"
                          class="google-review-image"
                          loading="lazy"
-                         width="800"
-                         height="600">
+                         width="1200"
+                         height="800">
                     <div class="google-review-badge">
                         <p>⭐⭐⭐⭐⭐ Instalación Completa</p>
                         <p>Laura S. - Verificado en Google</p>
@@ -3642,12 +2038,12 @@ window.dataLayer = window.dataLayer || [];
                 </div>
 
                 <div class="google-review-card">
-                    <img src="assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp"
+                    <img src="assets/images/social-proof/reviews/google-review-emergency-service-1200w.webp"
                          alt="Reseña 5 estrellas Google - Servicio de emergencia electricidad Culiacán"
                          class="google-review-image"
                          loading="lazy"
-                         width="800"
-                         height="600">
+                         width="1200"
+                         height="800">
                     <div class="google-review-badge">
                         <p>⭐⭐⭐⭐⭐ Servicio de Emergencia</p>
                         <p>Roberto M. - Verificado en Google</p>
@@ -3655,12 +2051,12 @@ window.dataLayer = window.dataLayer || [];
                 </div>
 
                 <div class="google-review-card">
-                    <img src="assets/images/optimizadas/iluminacion-led-culiacan-800w.webp"
+                    <img src="assets/images/social-proof/reviews/google-review-leak-repair-1200w.webp"
                          alt="Reseña 5 estrellas Google - Los recomiendo electricidad Culiacán"
                          class="google-review-image"
                          loading="lazy"
-                         width="800"
-                         height="600">
+                         width="1200"
+                         height="800">
                     <div class="google-review-badge">
                         <p>⭐⭐⭐⭐⭐ Los Recomiendo</p>
                         <p>María G. - Verificado en Google</p>
@@ -3673,7 +2069,7 @@ window.dataLayer = window.dataLayer || [];
                 <h3>✨ Resultados Reales: Antes y Después</h3>
                 <div class="before-after-grid">
                     <div class="before-after-card">
-                        <img src="assets/images/optimizadas/prevenir-cortocircuitos-culiacan-1200w.webp"
+                        <img src="assets/images/social-proof/before-after/before-after-electrical-repair-1200w.webp"
                              alt="Reparación de corto circuito en Culiacán - Servicio profesional con garantía"
                              class="before-after-image"
                              loading="lazy"
@@ -3686,7 +2082,7 @@ window.dataLayer = window.dataLayer || [];
                     </div>
 
                     <div class="before-after-card">
-                        <img src="assets/images/optimizadas/ahorro-energia-iluminacion-led-culiacan-1200w.webp"
+                        <img src="assets/images/social-proof/before-after/before-after-led-installation-1200w.webp"
                              alt="Instalación de iluminación LED en Culiacán - Servicio profesional certificado"
                              class="before-after-image"
                              loading="lazy"
@@ -3699,7 +2095,7 @@ window.dataLayer = window.dataLayer || [];
                     </div>
 
                     <div class="before-after-card">
-                        <img src="assets/images/optimizadas/mantenimiento-tablero-electrico-culiacan-1200w.webp"
+                        <img src="assets/images/social-proof/before-after/before-after-panel-installation-1200w.webp"
                              alt="Instalación de centro de carga profesional en Culiacán - Servicio rápido certificado"
                              class="before-after-image"
                              loading="lazy"
@@ -3712,7 +2108,7 @@ window.dataLayer = window.dataLayer || [];
                     </div>
 
                     <div class="before-after-card">
-                        <img src="assets/images/optimizadas/instalacion-electrica-obsoleta-culiacan-1200w.webp"
+                        <img src="assets/images/social-proof/before-after/before-after-wiring-installation-1200w.webp"
                              alt="Instalación de cableado eléctrico en Culiacán - Servicio profesional certificado"
                              class="before-after-image"
                              loading="lazy"
@@ -3832,10 +2228,8 @@ window.dataLayer = window.dataLayer || [];
     <footer class="footer">
         <div class="container">
             <div class="footer-logo">
-                <img src="assets/images/logo-512.webp"
+                <img src="logo-electricista-culiacan-pro.webp"
                      alt="Electricista Culiacán Pro"
-                     width="200"
-                     height="200"
                      loading="lazy"
                      decoding="async">
             </div>
@@ -3886,10 +2280,152 @@ window.dataLayer = window.dataLayer || [];
     </div>
 
     <!-- Main JavaScript (defer for optimal performance) -->
-    <script src="main.js" defer></script>
+    <script src="/main.js" defer></script>
 
+    <!-- Google Analytics 4 - Custom Event Tracking -->
+    <script>
+      // Wait for DOM to be ready
+      document.addEventListener('DOMContentLoaded', function() {
 
-    <!-- Google Analytics 4 - Custom Event Tracking (external for better performance) -->
-    <script src="/analytics-events.js" defer></script>
+        // Track WhatsApp clicks (Main floating button)
+        const whatsappBtn = document.getElementById('cta-whatsapp');
+        if (whatsappBtn) {
+          whatsappBtn.addEventListener('click', function() {
+            gtag('event', 'contact_whatsapp', {
+              'event_category': 'Conversion',
+              'event_label': 'WhatsApp Floating Button',
+              'value': 1
+            });
+          });
+        }
+
+        // Track WhatsApp clicks (Exit popup)
+        const exitWhatsappBtn = document.getElementById('exit-popup-whatsapp');
+        if (exitWhatsappBtn) {
+          exitWhatsappBtn.addEventListener('click', function() {
+            gtag('event', 'contact_whatsapp', {
+              'event_category': 'Conversion',
+              'event_label': 'WhatsApp Exit Popup',
+              'value': 1
+            });
+          });
+        }
+
+        // Track phone calls (Main floating button)
+        const phoneBtn = document.getElementById('cta-llamar');
+        if (phoneBtn) {
+          phoneBtn.addEventListener('click', function() {
+            gtag('event', 'contact_phone', {
+              'event_category': 'Conversion',
+              'event_label': 'Phone Floating Button',
+              'value': 1
+            });
+          });
+        }
+
+        // Track phone calls (Exit popup)
+        const exitPhoneBtn = document.getElementById('exit-popup-phone');
+        if (exitPhoneBtn) {
+          exitPhoneBtn.addEventListener('click', function() {
+            gtag('event', 'contact_phone', {
+              'event_category': 'Conversion',
+              'event_label': 'Phone Exit Popup',
+              'value': 1
+            });
+          });
+        }
+
+        // Track all WhatsApp links (hero, services, etc)
+        const allWhatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+        allWhatsappLinks.forEach(function(link) {
+          if (!link.id || (link.id !== 'cta-whatsapp' && link.id !== 'exit-popup-whatsapp')) {
+            link.addEventListener('click', function() {
+              const linkText = this.textContent.trim().substring(0, 50);
+              gtag('event', 'contact_whatsapp', {
+                'event_category': 'Conversion',
+                'event_label': 'WhatsApp Link - ' + linkText,
+                'value': 1
+              });
+            });
+          }
+        });
+
+        // Track all phone links
+        const allPhoneLinks = document.querySelectorAll('a[href^="tel:"]');
+        allPhoneLinks.forEach(function(link) {
+          if (!link.id || (link.id !== 'cta-llamar' && link.id !== 'exit-popup-phone')) {
+            link.addEventListener('click', function() {
+              const linkText = this.textContent.trim().substring(0, 50);
+              gtag('event', 'contact_phone', {
+                'event_category': 'Conversion',
+                'event_label': 'Phone Link - ' + linkText,
+                'value': 1
+              });
+            });
+          }
+        });
+
+        // Track service page clicks
+        const serviceLinks = document.querySelectorAll('a[href*="/servicios/"]');
+        serviceLinks.forEach(function(link) {
+          link.addEventListener('click', function(e) {
+            const serviceName = this.getAttribute('href').split('/').filter(Boolean).pop();
+            gtag('event', 'view_service', {
+              'event_category': 'Engagement',
+              'event_label': serviceName,
+              'value': 0
+            });
+          });
+        });
+
+        // Track navigation menu clicks
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(function(link) {
+          link.addEventListener('click', function() {
+            const linkText = this.textContent.trim();
+            gtag('event', 'navigation_click', {
+              'event_category': 'Navigation',
+              'event_label': linkText,
+              'value': 0
+            });
+          });
+        });
+
+        // Track exit popup shown
+        const exitPopup = document.getElementById('exit-intent-popup');
+        if (exitPopup) {
+          const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+              if (mutation.target.style.display !== 'none') {
+                gtag('event', 'exit_popup_shown', {
+                  'event_category': 'Engagement',
+                  'event_label': 'Exit Intent Triggered',
+                  'value': 0
+                });
+              }
+            });
+          });
+          observer.observe(exitPopup, { attributes: true, attributeFilter: ['style'] });
+        }
+
+        // Track scroll depth (25%, 50%, 75%, 100%)
+        let scrollMarkers = {25: false, 50: false, 75: false, 100: false};
+        window.addEventListener('scroll', function() {
+          const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+
+          Object.keys(scrollMarkers).forEach(function(marker) {
+            if (scrollPercent >= marker && !scrollMarkers[marker]) {
+              scrollMarkers[marker] = true;
+              gtag('event', 'scroll_depth', {
+                'event_category': 'Engagement',
+                'event_label': marker + '%',
+                'value': parseInt(marker)
+              });
+            }
+          });
+        });
+
+      });
+    </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # Landing Creator
 
-Crea nuevas landing pages clonando el estilo exacto de electricistaculiacanpro.mx. Solo necesitas proporcionar contenido y fotos.
+Crea nuevas landing pages clonando el estilo exacto de plomeroculiacanpro.mx (sitio fuente de estilos). Solo necesitas proporcionar contenido y fotos.
 
 ## Qué hace este comando
 
@@ -13,6 +13,12 @@ Crea nuevas landing pages clonando el estilo exacto de electricistaculiacanpro.m
 ## ⚠️ IMPORTANTE - Branding Compartido (Empresa Hermana)
 
 **Electricista Culiacán Pro y Plomero Culiacán Pro son empresas hermanas que comparten IDENTIDAD VISUAL IDÉNTICA.**
+
+### 🎯 FUENTE DE VERDAD PARA ESTILOS
+**CLONAR DE:** https://plomeroculiacanpro.mx/
+- Este es el sitio de referencia para TODOS los estilos, CSS, estructura y colores
+- NO usar electricistaculiacanpro.mx como fuente de estilos (puede estar desactualizado)
+- Ambos sitios deben verse IDÉNTICOS (solo cambia el contenido textual y teléfonos)
 
 🎨 **COLORES Y ESTILOS - MANTENER EXACTOS:**
 
@@ -82,7 +88,8 @@ Si necesitas resaltar contenido, usa SOLO:
   - Listas `<ul>` o `<ol>` sin estilos custom
   - Encabezados `<h2>`, `<h3>` que ya tienen estilos en index.html
 
-**Fuente de verdad:** https://electricistaculiacanpro.mx/ (index.html)
+**Fuente de verdad:** https://plomeroculiacanpro.mx/ (clonar estilos de aquí)
+**Sitio destino:** https://electricistaculiacanpro.mx/ (aplicar estilos aquí)
 **Clona ESTRICTAMENTE** - No agregues, no inventes, no mejores.
 
 **⚠️ REGLA #0.1 - ESTRUCTURA HERO (CRÍTICO):**
@@ -126,12 +133,12 @@ El hero DEBE usar EXACTAMENTE esta estructura (index.html línea 1145):
 Los botones flotantes (WhatsApp + Llamar) DEBEN usar EXACTAMENTE esta estructura (index.html línea 1356-1373):
 
 ```html
-<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20electricista%20urgente"
+<a href="https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20electricista%20urgente"
    id="cta-whatsapp"
    class="floating-btn floating-whatsapp"
    target="_blank"
    rel="noopener noreferrer"
-   aria-label="Contactar por WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a href="tel:+526673922273"
+   aria-label="Contactar por WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a href="tel:+526671631231"
    id="cta-llamar"
    class="floating-btn floating-call"
    aria-label="Llamar ahora"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></a>
@@ -153,31 +160,31 @@ Los botones flotantes (WhatsApp + Llamar) DEBEN usar EXACTAMENTE esta estructura
 
 **⚠️ REGLA #0.3 - CRITICAL CSS COMPLETO (CRÍTICO):**
 
-Cada página DEBE incluir el bloque COMPLETO de Critical CSS de index.html (líneas 9-66). NO es suficiente copiar solo CSS individual de componentes.
+Cada página DEBE incluir el bloque COMPLETO de Critical CSS (126 líneas exactas). NO es suficiente copiar solo CSS individual de componentes.
 
-**✅ DEBE incluir TODO el Critical CSS:**
+**✅ DEBE incluir TODO el Critical CSS (COPIAR DE plomeroculiacanpro.mx):**
 ```css
 <style>
-    /* Fonts (Inter + Montserrat) */
-    @font-face{font-family:'Inter';font-style:normal;font-weight:400;...}
-    @font-face{font-family:'Inter';font-style:normal;font-weight:500;...}
-    @font-face{font-family:'Inter';font-style:normal;font-weight:600;...}
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;...}
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;...}
+    /* 5 Fonts Web (Inter + Montserrat) */
+    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/inter-400.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/inter-500.woff2') format('woff2')}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/inter-600.woff2') format('woff2')}
+    @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/montserrat-700.woff2') format('woff2')}
+    @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('assets/fonts/montserrat-800.woff2') format('woff2')}
 
-    /* CSS Variables */
-    :root{--brand:#E36414;--brand-light:#F97316;...}
+    /* CSS Variables NARANJA (NO AZUL) */
+    :root{--brand:#E36414;--brand-light:#F97316;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--container-max-width:1200px;--container-gutter:24px}
 
     /* Base styles */
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',...;padding-top:80px}
-    .container{max-width:var(--container-max-width);margin:0 auto;...}
-    h1,h2,h3{font-family:'Montserrat',sans-serif;...}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text);background-color:var(--bg-soft);padding-top:80px}
+    .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
+    h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
 
-    /* Nav */
-    .nav{position:fixed;top:0;left:0;right:0;z-index:50;...}
-    .logo{...}
-    .logo img{height:140px;...}
+    /* Nav TRANSPARENTE */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
+    .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+    .logo img{height:140px;width:auto;object-fit:contain}
 
     /* Hero (CRÍTICO para centrado) */
     .hero{min-height:85vh;display:grid;place-items:center;text-align:center;...}
@@ -330,16 +337,17 @@ open "ruta/index.html"
 ```
 
 **4. Logo Footer con Dimensiones (OBLIGATORIO):**
-- ✅ DEBE incluir atributos `width="512" height="195"`
+- ✅ DEBE incluir atributos width y height
 - ✅ Reduce CLS (Cumulative Layout Shift)
 - ✅ Mejora Core Web Vitals de Google
 
-**Ejemplo:**
+**Ejemplo para footer:**
 ```html
-<img src="../../logo-electricista-culiacan-pro.webp"
+<img src="/assets/images/logo-512.webp"
      alt="Electricista Culiacán Pro"
-     width="512"
-     height="195">
+     width="200"
+     height="76"
+     style="filter:brightness(0) invert(1)">
 ```
 
 **Consecuencias de NO incluir estas optimizaciones:**
@@ -380,7 +388,9 @@ open "ruta/index.html"
 
 3.1. **Logo (CRÍTICO):**
    - Archivo: `logo-512.webp` (16KB)
-   - Dimensiones: width="512" height="195"
+   - **Dimensiones según contexto:**
+     - NAV: width="140" height="140"
+     - FOOTER: width="200" height="76" con filter:brightness(0) invert(1)
    - **Ruta según ubicación:**
      - Raíz (index.html): `/assets/images/logo-512.webp`
      - Subdirectorio (blog/, landings/): `../assets/images/logo-512.webp`
@@ -599,7 +609,7 @@ Generar archivo `<slug>/index.html` con:
       "provider": {
         "@type": "Electrician",
         "name": "Electricista Culiacán Pro",
-        "telephone": "+52 667 392 2273",
+        "telephone": "+52 667 163 1231",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Culiacán",
@@ -647,14 +657,23 @@ Generar archivo `<slug>/index.html` con:
 
 ```html
 <body>
-<!-- COPIAR <nav> EXACTO de index.html -->
+<!-- NAV COMPLETO - COPIAR EXACTO -->
 <nav class="nav">
   <div class="container">
     <div class="nav-wrapper">
       <a href="/" class="logo">
-        <img src="/assets/images/logo-512.webp" alt="Electricista Culiacán Pro" width="512" height="195">
+        <img src="/assets/images/logo-512.webp"
+             alt="Electricista Culiacán Pro"
+             width="140"
+             height="140">
       </a>
-      <!-- Menu items -->
+      <ul class="nav-menu">
+        <li><a href="/#inicio" class="nav-link">Inicio</a></li>
+        <li><a href="/#servicios" class="nav-link">Servicios</a></li>
+        <li><a href="/#nosotros" class="nav-link">Nosotros</a></li>
+        <li><a href="/#contacto" class="nav-link">Contacto</a></li>
+        <li><a href="tel:6671631231" class="nav-cta">📞 667 163 1231</a></li>
+      </ul>
     </div>
   </div>
 </nav>
@@ -764,38 +783,38 @@ Generar archivo `<slug>/index.html` con:
   <div class="container">
     <h2>Contacta con Nosotros</h2>
     <div class="final-cta">
-      <p class="cta-text">WhatsApp: 52 667 392 2273 · Llamadas: 667 392 2273</p>
+      <p class="cta-text">WhatsApp: 52 667 163 1231 · Llamadas: 667 163 1231</p>
       <div class="cta-buttons">
-        <a href="https://wa.me/526673922273" target="_blank" class="btn-primary btn-whatsapp">WhatsApp</a>
-        <a href="tel:6673922273" class="btn-secondary">Llamar</a>
+        <a href="https://wa.me/526671631231" target="_blank" class="btn-primary btn-whatsapp">WhatsApp</a>
+        <a href="tel:6671631231" class="btn-secondary">Llamar</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COPIAR Footer EXACTO de index.html -->
-<!-- IMPORTANTE: Logo footer DEBE incluir width="512" height="195" -->
+<!-- Footer con Logo Correcto -->
 <footer class="footer">
   <div class="container">
     <div class="footer-content">
       <div class="footer-section">
-        <img src="../../logo-electricista-culiacan-pro.webp"
+        <img src="/assets/images/logo-512.webp"
              alt="Electricista Culiacán Pro"
-             width="512"
-             height="195">
+             width="200"
+             height="76"
+             style="filter:brightness(0) invert(1)">
         <!-- ... resto del footer ... -->
       </div>
     </div>
   </div>
 </footer>
 
-<!-- COPIAR Botones Flotantes EXACTO de index.html -->
-<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20electricista%20urgente"
+<!-- Botones Flotantes con Teléfonos Correctos -->
+<a href="https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20electricista%20urgente"
    id="cta-whatsapp"
    class="floating-btn floating-whatsapp"
    target="_blank"
    rel="noopener noreferrer"
-   aria-label="Contactar por WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a href="tel:+526673922273"
+   aria-label="Contactar por WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a href="tel:+526671631231"
    id="cta-llamar"
    class="floating-btn floating-call"
    aria-label="Llamar ahora"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></a>

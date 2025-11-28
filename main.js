@@ -47,6 +47,175 @@
     });
 })();
 
+// Real-time form validation
+(function() {
+    const form = document.getElementById('contact-form');
+    if (!form) return; // Exit if form doesn't exist
+
+    const nombreField = document.getElementById('nombre');
+    const telefonoField = document.getElementById('telefono');
+    const emailField = document.getElementById('email');
+    const mensajeField = document.getElementById('mensaje');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    // Validation functions
+    const validators = {
+        nombre: (value) => value.trim().length >= 2,
+        telefono: (value) => /^[0-9]{10}$/.test(value.replace(/\s/g, '')),
+        email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        mensaje: (value) => value.trim().length >= 10
+    };
+
+    // Validate single field
+    function validateField(field, validatorKey) {
+        const value = field.value;
+        const fieldWrapper = field.closest('.form-field');
+        const isValid = validators[validatorKey](value);
+
+        if (value.length === 0) {
+            // Empty: neutral state
+            fieldWrapper.classList.remove('valid', 'invalid');
+        } else if (isValid) {
+            // Valid: green checkmark
+            fieldWrapper.classList.remove('invalid');
+            fieldWrapper.classList.add('valid');
+        } else {
+            // Invalid: red X
+            fieldWrapper.classList.remove('valid');
+            fieldWrapper.classList.add('invalid');
+        }
+
+        updateSubmitButton();
+        return isValid;
+    }
+
+    // Check if form is completely valid
+    function isFormValid() {
+        return validators.nombre(nombreField.value) &&
+               validators.telefono(telefonoField.value) &&
+               validators.email(emailField.value) &&
+               validators.mensaje(mensajeField.value);
+    }
+
+    // Enable/disable submit button based on form validity
+    function updateSubmitButton() {
+        if (isFormValid()) {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.cursor = 'pointer';
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.6';
+            submitBtn.style.cursor = 'not-allowed';
+        }
+    }
+
+    // Add real-time validation listeners
+    nombreField.addEventListener('input', () => validateField(nombreField, 'nombre'));
+    nombreField.addEventListener('blur', () => validateField(nombreField, 'nombre'));
+
+    telefonoField.addEventListener('input', () => {
+        // Only allow numbers
+        telefonoField.value = telefonoField.value.replace(/\D/g, '');
+        validateField(telefonoField, 'telefono');
+    });
+    telefonoField.addEventListener('blur', () => validateField(telefonoField, 'telefono'));
+
+    emailField.addEventListener('input', () => validateField(emailField, 'email'));
+    emailField.addEventListener('blur', () => validateField(emailField, 'email'));
+
+    mensajeField.addEventListener('input', () => validateField(mensajeField, 'mensaje'));
+    mensajeField.addEventListener('blur', () => validateField(mensajeField, 'mensaje'));
+
+    // Initial state: button disabled
+    updateSubmitButton();
+})();
+
+// Multi-layer lead capture: Netlify Forms + localStorage + GA4 + WhatsApp
+(function() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const nombre = formData.get('nombre');
+        const telefono = formData.get('telefono');
+        const email = formData.get('email');
+        const mensaje = formData.get('mensaje');
+
+        const leadData = {
+            timestamp: new Date().toISOString(),
+            nombre: nombre,
+            telefono: telefono,
+            email: email,
+            mensaje: mensaje,
+            source: 'homepage_form',
+            url: window.location.href
+        };
+
+        // 1. Track lead in GA4 via GTM dataLayer (immediate)
+        if (window.dataLayer) {
+            window.dataLayer.push({
+                'event': 'generate_lead',
+                'form_name': 'contact_form_homepage',
+                'method': 'netlify_forms',
+                'value': 1,
+                'currency': 'MXN'
+            });
+        }
+
+        // 2. Store in localStorage as backup (immediate)
+        try {
+            const leads = JSON.parse(localStorage.getItem('electricista_leads') || '[]');
+            leads.push(leadData);
+            localStorage.setItem('electricista_leads', JSON.stringify(leads));
+        } catch (e) {
+            // console.error('Error storing lead in localStorage:', e);
+        }
+
+        // 3. Submit to Netlify Forms (primary backend)
+        try {
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            });
+
+            if (response.ok) {
+                // Success: show thank you and open WhatsApp
+                const whatsappMessage = `Hola! Solicito cotización de servicios eléctricos:\n\n` +
+                                      `Nombre: ${nombre}\n` +
+                                      `Teléfono: ${telefono}\n` +
+                                      `Email: ${email}\n` +
+                                      `Mensaje: ${mensaje}`;
+                const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+
+                // Open WhatsApp in new tab
+                window.open(whatsappURL, '_blank');
+
+                // Redirect to thank you page
+                window.location.href = '/gracias';
+            } else {
+                throw new Error('Netlify form submission failed');
+            }
+        } catch (error) {
+            // console.error('Error submitting to Netlify:', error);
+
+            // Fallback: open WhatsApp directly
+            alert('Formulario enviado. Te redirigiremos a WhatsApp.');
+            const whatsappMessage = `Hola! Solicito cotización de servicios eléctricos:\n\n` +
+                                  `Nombre: ${nombre}\n` +
+                                  `Teléfono: ${telefono}\n` +
+                                  `Email: ${email}\n` +
+                                  `Mensaje: ${mensaje}`;
+            const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+            window.location.href = whatsappURL;
+        }
+    });
+})();
+
 // WhatsApp tracking
 (function() {
     const whatsappLinks = document.querySelectorAll('a[href^="https://wa.me"]');

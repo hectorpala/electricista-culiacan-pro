@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricista en Culiacán 24/7 | Llegada en 30-60 min + Garantía</title>
+    <meta name="description" content="Electricista certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible · Garantía escrita">
+
+    <!-- Internacionalización y Geolocalización -->
+    <meta http-equiv="content-language" content="es-MX">
+    <meta name="geo.region" content="MX-SIN">
+    <meta name="geo.placename" content="Culiacán">
+    <meta name="geo.position" content="24.7903;-107.3878">
+    <meta name="ICBM" content="24.7903, -107.3878">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/icons/favicon.png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1E40AF">
+
+    <!-- Preconnect to external domains for faster resource loading -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://wa.me">
+    <link rel="dns-prefetch" href="https://wa.me">
+
+    <!-- Preload critical hero image for LCP optimization -->
+    <link rel="preload" as="image"
+          href="assets/images/optimizadas/hero-electricista-culiacan-1200w.webp"
+          imagesrcset="assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w,
+                       assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
+          imagesizes="100vw"
+          fetchpriority="high">
+
+    <!-- Preload critical fonts for LCP optimization -->
+    <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" href="/assets/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+
+    <!-- Critical CSS Inline for LCP optimization -->
+    <style>
+        @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/inter-400.woff2') format('woff2')}
+        @font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/inter-500.woff2') format('woff2')}
+        @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/inter-600.woff2') format('woff2')}
+        @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/montserrat-700.woff2') format('woff2')}
+        @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('assets/fonts/montserrat-800.woff2') format('woff2')}
+        :root{--brand:#0047AB;--brand-light:#0066FF;--brand-dark:#003380;--accent:#FF6600;--accent-dark:#FF4500;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#0066FF 0%,#0047AB 100%);--gradient-accent:linear-gradient(135deg,#FF7700 0%,#FF6600 100%);--container-max-width:1200px;--container-gutter:24px}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text);background-color:var(--bg-soft);padding-top:80px}
+        .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
+        h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
+        h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(0,71,171,0.98);backdrop-filter:blur(10px);border-bottom:none;padding:16px 0;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+        .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+        .logo{display:block;text-decoration:none;transition:opacity .2s ease}
+        .logo img{height:60px;width:auto;display:block;max-height:70px}
+        .logo:hover{opacity:0.9}
+        @media (max-width:768px){.logo img{height:50px;max-height:60px}}
+        .nav-menu{display:flex;list-style:none;gap:2rem}
+        .nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease;padding:0.5rem 1rem;border-radius:6px}
+        .nav-link:hover{color:var(--accent);background:rgba(255,255,255,0.1)}
+        .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
+        .hero-background{position:absolute;inset:0;z-index:0}
+        .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
+        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:35% center}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(0,0,0,0.33)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:20rem;margin-bottom:2rem;background:rgba(0,0,0,0.33)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.hero-cta,.hero-contact,.hero-guarantee,.hero .btn-primary{display:none!important}}
+        .hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.4) 60%,transparent 100%);pointer-events:none}
+        .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(0,0,0,0.2);backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
+        .hero h1{font-size:clamp(1.75rem,4vw,2rem)!important;color:#FFFFFF!important;text-shadow:0 2px 8px rgba(0,0,0,0.3)!important;margin-bottom:1rem!important}
+        @media (min-width:769px){.hero h1{font-size:clamp(2.5rem,4vw,3.2rem)!important}}
+        .hero-subtitle{font-size:clamp(1.125rem,2.5vw,1.375rem);color:#F1F5F9;margin-bottom:1rem;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.6;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
+        .hero-contact{color:#FFFFFF;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
+        .hero-rating{display:inline-flex;align-items:center;gap:0.75rem;margin:1.5rem 0 2rem;padding:0.85rem 1.5rem;background:rgba(255,255,255,0.98);border-radius:50px;box-shadow:0 4px 16px rgba(0,0,0,0.18),0 1px 3px rgba(0,0,0,0.08);font-size:0.95rem;border:1px solid rgba(66,133,244,0.15)}
+        .google-logo{width:20px;height:20px;flex-shrink:0}
+        .rating-stars{color:#FBBC04;font-size:1.15rem;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,0.1)}
+        .rating-score{font-weight:700;color:#1a73e8;font-size:1.05rem}
+        .rating-divider{color:#dadce0;margin:0 0.25rem}
+        .rating-count{color:#5f6368;font-size:0.9rem;font-weight:500}
+        .hero-features{display:flex;justify-content:center;gap:2rem;margin:2rem 0 2.5rem;flex-wrap:wrap}
+        .feature-item{display:flex;align-items:center;gap:0.5rem;color:#fff;font-size:0.95rem;font-weight:500}
+        .feature-icon{width:24px;height:24px;flex-shrink:0;color:#FF6600}
+        @media (max-width:640px){.hero-features{gap:1rem;margin:1.5rem 0 2rem}.feature-item{font-size:0.85rem}.feature-icon{width:20px;height:20px}}
+        .btn-primary{display:inline-block;background:var(--gradient-accent);color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(255,102,0,0.4);min-height:48px;transition:transform .12s ease,box-shadow .12s ease}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(255,102,0,0.5)}
+        .btn-whatsapp{background:#25D366;box-shadow:0 10px 24px rgba(37,211,102,0.28)}
+        .btn-whatsapp:hover{background:#128C7E;box-shadow:0 14px 32px rgba(37,211,102,0.34)}
+        .mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0}
+        .mobile-menu-btn span{display:block;height:3px;width:100%;background:#fff;border-radius:2px}
+        @media (max-width:768px){
+            .mobile-menu-btn{display:flex}
+            .nav{background:rgba(0,71,171,0.98)}
+            .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(0,71,171,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem;transition:left 0.3s ease}
+            .nav-menu.active{left:0}
+        }
+        .section{padding:80px 0}
+        .section h2{text-align:center;font-size:clamp(2rem,4vw,2.75rem);margin-bottom:3rem;color:var(--brand)}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2.5rem;margin-top:3rem}
+        .card{background:var(--bg);padding:2.5rem 2rem;border-radius:20px;box-shadow:0 4px 24px var(--shadow);transition:transform 0.3s ease,box-shadow 0.3s ease;border:1px solid var(--border)}
+        .card:hover{transform:translateY(-8px);box-shadow:0 12px 48px rgba(0,0,0,0.15)}
+        .card h3{color:var(--brand);margin-bottom:1rem;font-size:1.5rem}
+        .footer{background:linear-gradient(135deg,#1E40AF 0%,#1E3A8A 100%);color:#F8FAFC;padding:4rem 0 2rem;margin-top:4rem;text-align:center}
+        .footer p{color:#CBD5E1;font-size:0.95rem}
+    </style>
+
+    <!-- Load full CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://electricistaculiacanpro.mx/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://electricistaculiacanpro.mx/" />
+    <meta property="og:title" content="Electricista en Culiacán 24/7 | Llegada en 30-60 min + Garantía" />
+    <meta property="og:description" content="Electricista certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro" />
+    <meta property="og:image" content="https://electricistaculiacanpro.mx/assets/images/electricista-culiacan-hero-800w.webp" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="Electricista Culiacán Pro" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://electricistaculiacanpro.mx/" />
+    <meta name="twitter:title" content="Electricista en Culiacán 24/7 | Llegada en 30-60 min + Garantía" />
+    <meta name="twitter:description" content="Electricista certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro" />
+    <meta name="twitter:image" content="https://electricistaculiacanpro.mx/assets/images/electricista-culiacan-hero-800w.webp" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://electricistaculiacanpro.mx/#website",
+          "url": "https://electricistaculiacanpro.mx/",
+          "name": "Electricista Culiacán Pro",
+          "description": "Servicio profesional de electricidad en Culiacán, Sinaloa",
+          "inLanguage": "es-MX"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://electricistaculiacanpro.mx/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://electricistaculiacanpro.mx/"
+            }
+          ]
+        },
+        {
+          "@type": "Electrician",
+          "@id": "https://electricistaculiacanpro.mx/#business",
+          "name": "Electricista Culiacán Pro",
+          "url": "https://electricistaculiacanpro.mx/",
+          "logo": "https://electricistaculiacanpro.mx/logo-electricista-culiacan-pro.webp",
+          "image": "https://electricistaculiacanpro.mx/assets/images/electricista-culiacan-hero-800w.webp",
+          "telephone": "+52 667 000 0000",
+          "email": "contacto@electricistaculiacanpro.mx",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Culiacán",
+            "addressRegion": "Sinaloa",
+            "addressCountry": "MX"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "24.7903",
+            "longitude": "-107.3878"
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "priceRange": "$$",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "50",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Culiacán",
+              "containedInPlace": {
+                "@type": "State",
+                "name": "Sinaloa"
+              }
+            }
+          ],
+          "sameAs": [
+            "https://www.facebook.com/electricistaculiacanpro",
+            "https://www.instagram.com/electricistaculiacanpro"
+          ]
+        },
+        {
+          "@type": "Service",
+          "@id": "https://electricistaculiacanpro.mx/#service",
+          "serviceType": "Servicio de Electricidad Residencial y Comercial",
+          "name": "Electricista Profesional en Culiacán",
+          "description": "Servicio de emergencia eléctrica 24/7 con llegada en 30-60 minutos. Instalaciones, reparaciones y mantenimiento eléctrico profesional.",
+          "provider": {
+            "@id": "https://electricistaculiacanpro.mx/#business"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Electricidad",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Instalación Eléctrica"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Reparación de Cortocircuitos"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Instalación de Contactos y Apagadores"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Instalación de Iluminación LED"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Mantenimiento de Tableros Eléctricos"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Emergencias Eléctricas 24/7"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://electricistaculiacanpro.mx/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tardan en llegar en caso de emergencia?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En emergencias eléctricas, llegamos en 30-60 minutos a las principales colonias de Culiacán como Las Quintas, Tres Ríos, Centro, Chapultepec y Montebello. Tenemos cobertura 24/7 todos los días del año."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cobran por una visita de diagnóstico?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El costo de la visita se cotiza según el tipo de trabajo. El servicio de diagnóstico tiene un costo desde $200 MXN, que se descuenta si decides contratar el servicio de reparación o instalación."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Atienden emergencias de noche y fines de semana?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, tenemos servicio de emergencia 24/7 todos los días del año, incluyendo noches, fines de semana y días festivos. Puedes contactarnos por WhatsApp o teléfono en cualquier momento."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Dan garantía de los trabajos realizados?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, todos nuestros trabajos incluyen garantía por escrito de 30 a 90 días según el tipo de servicio. La garantía cubre tanto mano de obra como materiales utilizados."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué colonias de Culiacán cubren?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Tenemos cobertura en toda la ciudad de Culiacán, incluyendo Las Quintas, Tres Ríos, Centro, Chapultepec, Montebello, Guadalupe, Campestre, Santa Fe, Zona Dorada, Villa Universidad y más. Si tu colonia no aparece listada, contáctanos para confirmar disponibilidad."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Están certificados por la CFE?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, nuestros electricistas cuentan con certificación profesional y conocimiento de las normativas de CFE. Todos los trabajos se realizan siguiendo los estándares de seguridad eléctrica vigentes en México."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Pueden emitir factura electrónica?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, emitimos factura electrónica (CFDI) para empresas y particulares que lo requieran. Solo necesitamos tus datos fiscales al momento de solicitar el servicio."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué tipo de materiales utilizan?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Utilizamos materiales eléctricos de alta calidad de marcas reconocidas como Voltech, Volteck, Square D y Siemens. Todos los cables, contactos, apagadores y breakers cumplen con las normas NOM de seguridad eléctrica."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <img src="logo-electricista-culiacan-pro.webp" alt="Electricista Culiacán Pro" width="200" height="60">
+                </a>
+                <button class="mobile-menu-btn" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                    <li><a href="#beneficios" class="nav-link">Beneficios</a></li>
+                    <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="hero">
+        <!-- Hero Background Image (LCP optimized with preload) -->
+        <picture class="hero-background">
+            <source type="image/webp"
+                    srcset="assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w, assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
+                    sizes="100vw">
+            <img src="assets/images/optimizadas/hero-electricista-culiacan-1200w.webp"
+                 srcset="assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w, assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
+                 sizes="100vw"
+                 alt="Electricista profesional certificado atendiendo emergencia eléctrica en Culiacán con camioneta de servicio 24/7"
+                 width="1200"
+                 height="800"
+                 fetchpriority="high"
+                 loading="eager">
+        </picture>
+
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in">Electricista en Culiacán – Emergencias 24/7</h1>
+
+                <p class="hero-subtitle fade-in">Electricista certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 minutos en Las Quintas, Tres Ríos y Centro. Reparación de cortocircuitos, instalación eléctrica y mantenimiento con garantía escrita.</p>
+
+                <!-- Rating Badge Visible -->
+                <div class="hero-rating fade-in">
+                    <svg class="google-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    <span class="rating-stars">★★★★★</span>
+                    <span class="rating-score">5.0/5</span>
+                    <span class="rating-divider">·</span>
+                    <span class="rating-count">Más de 50 clientes satisfechos en Culiacán</span>
+                </div>
+
+                <!-- Feature List con Iconografía -->
+                <div class="hero-features fade-in">
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <span>Llegamos en 30-60 min</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span>Garantía por escrito</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                        <span>Factura disponible</span>
+                    </div>
+                </div>
+
+                <a href="#contacto" class="btn-primary hover-lift">Solicitar Atención Inmediata</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Servicios Section -->
+    <section class="section" id="servicios">
+        <div class="container">
+            <h2>Nuestros Servicios</h2>
+            <div class="grid">
+                <a href="/servicios/instalacion-electrica/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/optimizadas/instalacion-electrica-culiacan-420w.webp 420w, assets/images/optimizadas/instalacion-electrica-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
+                        <img src="assets/images/optimizadas/instalacion-electrica-culiacan-420w.webp"
+                             width="800"
+                             height="600"
+                             loading="lazy"
+                             decoding="async"
+                             alt="Electricista instalando cableado eléctrico completo en casa nueva en Las Quintas Culiacán"
+                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
+                    </picture>
+                    <div style="padding:1.5rem">
+                        <h3 style="color:var(--brand);margin-bottom:1rem">⚡ Instalación Eléctrica Completa</h3>
+                        <p>Instalaciones eléctricas residenciales y comerciales. Cableado, tierra física, tableros, contactos y apagadores conforme a normas CFE.</p>
+                        <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                            <li>Cableado de casas nuevas</li>
+                            <li>Actualización de instalaciones antiguas</li>
+                        </ul>
+                    </div>
+                </a>
+                <a href="/servicios/reparacion-cortocircuitos/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/optimizadas/reparacion-cortocircuitos-culiacan-420w.webp 420w, assets/images/optimizadas/reparacion-cortocircuitos-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
+                        <img src="assets/images/optimizadas/reparacion-cortocircuitos-culiacan-420w.webp"
+                             width="800"
+                             height="600"
+                             loading="lazy"
+                             decoding="async"
+                             alt="Electricista detectando cortocircuito con multímetro en Centro de Culiacán"
+                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
+                    </picture>
+                    <div style="padding:1.5rem">
+                        <h3 style="color:var(--brand);margin-bottom:1rem">🔧 Reparación de Cortocircuitos</h3>
+                        <p>Detección y reparación urgente de fallas eléctricas, cortocircuitos y apagones. Servicio de emergencia 24/7.</p>
+                        <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                            <li>Diagnóstico con equipo profesional</li>
+                            <li>Reparación de cables dañados</li>
+                        </ul>
+                    </div>
+                </a>
+                <a href="/servicios/instalacion-contactos/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/optimizadas/instalacion-contactos-culiacan-420w.webp 420w, assets/images/optimizadas/instalacion-contactos-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
+                        <img src="assets/images/optimizadas/instalacion-contactos-culiacan-420w.webp"
+                             width="800"
+                             height="600"
+                             loading="lazy"
+                             decoding="async"
+                             alt="Electricista instalando contacto polarizado con tierra física en Tres Ríos Culiacán"
+                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
+                    </picture>
+                    <div style="padding:1.5rem">
+                        <h3 style="color:var(--brand);margin-bottom:1rem">🔌 Instalación de Contactos</h3>
+                        <p>Instalación de contactos polarizados, apagadores de escalera, dimmers y tomas especiales 220V.</p>
+                        <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                            <li>Contactos con tierra física</li>
+                            <li>Apagadores inteligentes</li>
+                        </ul>
+                    </div>
+                </a>
+                <a href="/servicios/instalacion-iluminacion/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/optimizadas/iluminacion-led-culiacan-420w.webp 420w, assets/images/optimizadas/iluminacion-led-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
+                        <img src="assets/images/optimizadas/iluminacion-led-culiacan-420w.webp"
+                             width="800"
+                             height="600"
+                             loading="lazy"
+                             decoding="async"
+                             alt="Electricista instalando lámparas LED empotradas en residencia de Chapultepec Culiacán"
+                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
+                    </picture>
+                    <div style="padding:1.5rem">
+                        <h3 style="color:var(--brand);margin-bottom:1rem">💡 Instalación de Iluminación LED</h3>
+                        <p>Instalación de lámparas LED, focos ahorradores, spots empotrados, tiras LED y ventiladores de techo.</p>
+                        <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                            <li>Iluminación interior y exterior</li>
+                            <li>Sistemas de ahorro energético</li>
+                        </ul>
+                    </div>
+                </a>
+                <a href="/servicios/mantenimiento-tableros/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/optimizadas/tableros-electricos-culiacan-420w.webp 420w, assets/images/optimizadas/tableros-electricos-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
+                        <img src="assets/images/optimizadas/tableros-electricos-culiacan-420w.webp"
+                             width="800"
+                             height="600"
+                             loading="lazy"
+                             decoding="async"
+                             alt="Electricista revisando centro de carga y breakers en tablero eléctrico de Montebello Culiacán"
+                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
+                    </picture>
+                    <div style="padding:1.5rem">
+                        <h3 style="color:var(--brand);margin-bottom:1rem">⚙️ Mantenimiento de Tableros</h3>
+                        <p>Revisión, actualización y mantenimiento de tableros eléctricos, centros de carga, breakers y fusibles.</p>
+                        <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                            <li>Cambio de breakers defectuosos</li>
+                            <li>Balanceo de cargas eléctricas</li>
+                        </ul>
+                    </div>
+                </a>
+                <a href="/servicios/emergencia-24-7/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp 420w, assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
+                        <img src="assets/images/optimizadas/emergencia-electrica-culiacan-420w.webp"
+                             width="800"
+                             height="600"
+                             loading="lazy"
+                             decoding="async"
+                             alt="Electricista de emergencia atendiendo cortocircuito de noche en Culiacán"
+                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
+                    </picture>
+                    <div style="padding:1.5rem">
+                        <h3 style="color:var(--brand);margin-bottom:1rem">🚨 Emergencias Eléctricas 24/7</h3>
+                        <p>Servicio de emergencia disponible las 24 horas. Atendemos cortocircuitos, apagones, chispas y cables expuestos.</p>
+                        <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                            <li>Llegada en 30-60 minutos</li>
+                            <li>Disponible noches y fines de semana</li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios Section -->
+    <section class="section" id="beneficios" style="background:#F8FAFC">
+        <div class="container">
+            <h2>¿Por Qué Elegirnos?</h2>
+            <div class="grid benefits-grid">
+                <div class="card benefit">
+                    <div style="font-size:3rem;margin-bottom:1rem">⚡</div>
+                    <h3>Llegada el Mismo Día</h3>
+                    <p>Atendemos emergencias eléctricas en 30-60 minutos en Las Quintas, Tres Ríos, Centro y colonias aledañas. Disponibles 24/7 incluyendo fines de semana.</p>
+                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                        <li>Respuesta inmediata por WhatsApp</li>
+                        <li>Cobertura en toda la ciudad de Culiacán</li>
+                    </ul>
+                </div>
+                <div class="card benefit">
+                    <div style="font-size:3rem;margin-bottom:1rem">💡</div>
+                    <h3>Precios Claros y Transparentes</h3>
+                    <p>Cotización detallada antes de iniciar cualquier trabajo. Sin cargos ocultos ni sorpresas en la factura final.</p>
+                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                        <li>Diagnóstico desde $200 MXN</li>
+                        <li>Factura electrónica disponible (CFDI)</li>
+                    </ul>
+                </div>
+                <div class="card benefit">
+                    <div style="font-size:3rem;margin-bottom:1rem">🛡️</div>
+                    <h3>Garantía por Escrito</h3>
+                    <p>Todos nuestros trabajos eléctricos incluyen garantía de 30 a 90 días cubriendo mano de obra y materiales.</p>
+                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                        <li>Garantía en instalaciones nuevas</li>
+                        <li>Garantía en reparaciones</li>
+                    </ul>
+                </div>
+                <div class="card benefit">
+                    <div style="font-size:3rem;margin-bottom:1rem">🔌</div>
+                    <h3>Certificación CFE</h3>
+                    <p>Electricistas certificados con conocimiento actualizado de normas CFE y NOM para instalaciones eléctricas seguras.</p>
+                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                        <li>Cumplimiento normativas mexicanas</li>
+                        <li>Materiales certificados</li>
+                    </ul>
+                </div>
+                <div class="card benefit">
+                    <div style="font-size:3rem;margin-bottom:1rem">⚙️</div>
+                    <h3>Soporte por WhatsApp</h3>
+                    <p>Atención directa por WhatsApp para emergencias, cotizaciones y seguimiento de servicios programados.</p>
+                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
+                        <li>Respuesta en minutos</li>
+                        <li>Envío de fotos para diagnóstico rápido</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA de Emergencias -->
+    <section class="section" style="background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 100%);color:#fff">
+        <div class="container" style="max-width:800px;text-align:center">
+            <h2 style="color:#FCD34D;margin-bottom:1.5rem">¿Emergencia Eléctrica? ¡Apaga el Breaker Principal!</h2>
+            <p style="font-size:1.125rem;margin-bottom:2rem;line-height:1.7">Si detectas chispas, olor a quemado o cables expuestos, apaga el interruptor principal de inmediato y llámanos. Llegamos en 30-60 minutos para resolver cortocircuitos, apagones y fallas eléctricas urgentes en toda la ciudad de Culiacán.</p>
+            <a href="https://wa.me/526670000000?text=Emergencia!%20Necesito%20electricista%20urgente" class="btn-primary" style="background:#25D366;box-shadow:0 10px 24px rgba(37,211,102,0.3)" target="_blank" rel="noopener">
+                🚨 WhatsApp Emergencia 24/7
+            </a>
+        </div>
+    </section>
+
+    <!-- Testimonios Section -->
+    <section class="section" id="testimonios">
+        <div class="container">
+            <h2>Lo Que Dicen Nuestros Clientes</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="rating-stars" style="color:#FBBC04;font-size:1.25rem;margin-bottom:1rem">★★★★★</div>
+                    <p style="font-style:italic;margin-bottom:1rem;color:#475569">"Tuve un cortocircuito a las 10 PM y llegaron en 45 minutos. Encontraron el problema rápido y lo solucionaron con garantía por escrito. Muy profesionales y honestos con los precios."</p>
+                    <cite style="font-weight:700;color:var(--brand);font-style:normal">- María Guadalupe, Las Quintas</cite>
+                    <p style="font-size:0.9rem;color:#64748B;margin-top:0.5rem">Servicio: Reparación de cortocircuito</p>
+                </div>
+                <div class="card">
+                    <div class="rating-stars" style="color:#FBBC04;font-size:1.25rem;margin-bottom:1rem">★★★★★</div>
+                    <p style="font-style:italic;margin-bottom:1rem;color:#475569">"Instalaron toda la iluminación LED de mi oficina en Chapultepec. El trabajo quedó impecable, muy ordenados y limpiaron todo al terminar. El precio fue justo y me dieron factura."</p>
+                    <cite style="font-weight:700;color:var(--brand);font-style:normal">- Carlos Robles, Chapultepec</cite>
+                    <p style="font-size:0.9rem;color:#64748B;margin-top:0.5rem">Servicio: Instalación de iluminación comercial</p>
+                </div>
+                <div class="card">
+                    <div class="rating-stars" style="color:#FBBC04;font-size:1.25rem;margin-bottom:1rem">★★★★★</div>
+                    <p style="font-style:italic;margin-bottom:1rem;color:#475569">"Necesitaba actualizar el tablero eléctrico de mi casa en Tres Ríos porque los breakers se disparaban constantemente. Hicieron un trabajo profesional, todo quedó certificado y con garantía."</p>
+                    <cite style="font-weight:700;color:var(--brand);font-style:normal">- Laura Martínez, Tres Ríos</cite>
+                    <p style="font-size:0.9rem;color:#64748B;margin-top:0.5rem">Servicio: Actualización de tablero eléctrico</p>
+                </div>
+                <div class="card">
+                    <div class="rating-stars" style="color:#FBBC04;font-size:1.25rem;margin-bottom:1rem">★★★★★</div>
+                    <p style="font-style:italic;margin-bottom:1rem;color:#475569">"Excelente servicio de instalación eléctrica completa en mi casa nueva. Cableado, contactos, tierra física, todo quedó perfecto. Recomendados 100% por su profesionalismo."</p>
+                    <cite style="font-weight:700;color:var(--brand);font-style:normal">- Roberto Sánchez, Montebello</cite>
+                    <p style="font-size:0.9rem;color:#64748B;margin-top:0.5rem">Servicio: Instalación eléctrica residencial</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" style="background:#F8FAFC">
+        <div class="container">
+            <h2>Preguntas Frecuentes</h2>
+            <div style="max-width:800px;margin:2rem auto">
+                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
+                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Cuánto tiempo tardan en llegar en caso de emergencia?</summary>
+                    <p style="margin-top:1rem;color:#475569;line-height:1.7">En emergencias eléctricas, llegamos en 30-60 minutos a las principales colonias de Culiacán como Las Quintas, Tres Ríos, Centro, Chapultepec y Montebello. Tenemos cobertura 24/7 todos los días del año.</p>
+                </details>
+                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
+                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Cuánto cobran por una visita de diagnóstico?</summary>
+                    <p style="margin-top:1rem;color:#475569;line-height:1.7">El costo de la visita se cotiza según el tipo de trabajo. El servicio de diagnóstico tiene un costo desde $200 MXN, que se descuenta si decides contratar el servicio de reparación o instalación.</p>
+                </details>
+                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
+                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Atienden emergencias de noche y fines de semana?</summary>
+                    <p style="margin-top:1rem;color:#475569;line-height:1.7">Sí, tenemos servicio de emergencia 24/7 todos los días del año, incluyendo noches, fines de semana y días festivos. Puedes contactarnos por WhatsApp o teléfono en cualquier momento.</p>
+                </details>
+                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
+                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Dan garantía de los trabajos realizados?</summary>
+                    <p style="margin-top:1rem;color:#475569;line-height:1.7">Sí, todos nuestros trabajos incluyen garantía por escrito de 30 a 90 días según el tipo de servicio. La garantía cubre tanto mano de obra como materiales utilizados.</p>
+                </details>
+                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
+                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Qué colonias de Culiacán cubren?</summary>
+                    <p style="margin-top:1rem;color:#475569;line-height:1.7">Tenemos cobertura en toda la ciudad de Culiacán, incluyendo Las Quintas, Tres Ríos, Centro, Chapultepec, Montebello, Guadalupe, Campestre, Santa Fe, Zona Dorada, Villa Universidad y más. Si tu colonia no aparece listada, contáctanos para confirmar disponibilidad.</p>
+                </details>
+                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
+                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Están certificados por la CFE?</summary>
+                    <p style="margin-top:1rem;color:#475569;line-height:1.7">Sí, nuestros electricistas cuentan con certificación profesional y conocimiento de las normativas de CFE. Todos los trabajos se realizan siguiendo los estándares de seguridad eléctrica vigentes en México.</p>
+                </details>
+                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
+                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Pueden emitir factura electrónica?</summary>
+                    <p style="margin-top:1rem;color:#475569;line-height:1.7">Sí, emitimos factura electrónica (CFDI) para empresas y particulares que lo requieran. Solo necesitamos tus datos fiscales al momento de solicitar el servicio.</p>
+                </details>
+                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
+                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Qué tipo de materiales utilizan?</summary>
+                    <p style="margin-top:1rem;color:#475569;line-height:1.7">Utilizamos materiales eléctricos de alta calidad de marcas reconocidas como Voltech, Volteck, Square D y Siemens. Todos los cables, contactos, apagadores y breakers cumplen con las normas NOM de seguridad eléctrica.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Links SEO / Interlinking -->
+    <section class="section">
+        <div class="container">
+            <h2>Servicios Destacados de Electricidad en Culiacán</h2>
+            <div class="grid seo-links">
+                <a href="/servicios/instalacion-electrica/" class="card seo-card" data-card-name="instalacion-electrica" data-card-position="1" style="text-decoration:none;color:inherit">
+                    <h3 style="color:var(--brand);margin-bottom:1rem">⚡ Instalación Eléctrica Residencial</h3>
+                    <p style="color:#475569;margin-bottom:1.5rem">Instalaciones eléctricas completas para casas nuevas y remodelaciones con certificación CFE y garantía por escrito.</p>
+                    <span style="color:var(--brand-light);font-weight:600">Ver más →</span>
+                </a>
+                <a href="/servicios/electricista-colonias-culiacan/" class="card seo-card" data-card-name="electricista-colonias" data-card-position="2" style="text-decoration:none;color:inherit">
+                    <h3 style="color:var(--brand);margin-bottom:1rem">🗺️ Electricista por Colonias</h3>
+                    <p style="color:#475569;margin-bottom:1.5rem">Cobertura en Las Quintas, Tres Ríos, Centro, Chapultepec y todas las colonias de Culiacán con llegada rápida.</p>
+                    <span style="color:var(--brand-light);font-weight:600">Ver colonias →</span>
+                </a>
+                <a href="/servicios/electricista/precios/" class="card seo-card" data-card-name="precios-electricista" data-card-position="3" style="text-decoration:none;color:inherit">
+                    <h3 style="color:var(--brand);margin-bottom:1rem">💰 Precios de Servicios Eléctricos</h3>
+                    <p style="color:#475569;margin-bottom:1.5rem">Consulta nuestros precios claros y transparentes para instalaciones, reparaciones y mantenimiento eléctrico.</p>
+                    <span style="color:var(--brand-light);font-weight:600">Ver precios →</span>
+                </a>
+                <a href="/servicios/emergencia-24-7/" class="card seo-card" data-card-name="emergencias-electricas" data-card-position="4" style="text-decoration:none;color:inherit">
+                    <h3 style="color:var(--brand);margin-bottom:1rem">🚨 Emergencias Eléctricas 24/7</h3>
+                    <p style="color:#475569;margin-bottom:1.5rem">Atención inmediata de emergencias eléctricas, cortocircuitos y apagones con llegada en 30-60 minutos.</p>
+                    <span style="color:var(--brand-light);font-weight:600">Contactar ahora →</span>
+                </a>
+                <a href="/servicios/reparacion-cortocircuitos/" class="card seo-card" data-card-name="reparacion-cortocircuitos" data-card-position="5" style="text-decoration:none;color:inherit">
+                    <h3 style="color:var(--brand);margin-bottom:1rem">🔧 Reparación de Cortocircuitos</h3>
+                    <p style="color:#475569;margin-bottom:1.5rem">Detección y solución profesional de cortocircuitos, cables dañados y fallas eléctricas en Culiacán.</p>
+                    <span style="color:var(--brand-light);font-weight:600">Más información →</span>
+                </a>
+                <a href="/servicios/mantenimiento-tableros/" class="card seo-card" data-card-name="mantenimiento-tableros" data-card-position="6" style="text-decoration:none;color:inherit">
+                    <h3 style="color:var(--brand);margin-bottom:1rem">⚙️ Mantenimiento de Tableros</h3>
+                    <p style="color:#475569;margin-bottom:1.5rem">Revisión, actualización y mantenimiento preventivo de tableros eléctricos y centros de carga.</p>
+                    <span style="color:var(--brand-light);font-weight:600">Solicitar servicio →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zonas de Servicio -->
+    <section class="section" style="background:#F8FAFC">
+        <div class="container">
+            <h2>Zonas de Servicio en Culiacán</h2>
+            <div style="max-width:900px;margin:0 auto;text-align:center">
+                <p style="font-size:1.125rem;color:#475569;margin-bottom:2rem">Brindamos servicio eléctrico profesional en todas estas colonias y zonas de Culiacán:</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem">
+                    <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+                        <h3 style="color:var(--brand);font-size:1rem;margin-bottom:0.5rem">Zona Norte</h3>
+                        <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
+                            <li>Las Quintas</li>
+                            <li>Tres Ríos</li>
+                            <li>Campestre</li>
+                            <li>Hacienda del Valle</li>
+                        </ul>
+                    </div>
+                    <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+                        <h3 style="color:var(--brand);font-size:1rem;margin-bottom:0.5rem">Zona Centro</h3>
+                        <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
+                            <li>Centro</li>
+                            <li>Guadalupe</li>
+                            <li>Chapultepec</li>
+                            <li>Santa Fe</li>
+                            <li>Zona Dorada</li>
+                        </ul>
+                    </div>
+                    <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+                        <h3 style="color:var(--brand);font-size:1rem;margin-bottom:0.5rem">Zona Sur</h3>
+                        <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
+                            <li>Villa Universidad</li>
+                            <li>Montebello</li>
+                            <li>Villa Bonita</li>
+                            <li>Lomas del Boulevard</li>
+                        </ul>
+                    </div>
+                    <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+                        <h3 style="color:var(--brand);font-size:1rem;margin-bottom:0.5rem">Zona Oriente</h3>
+                        <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
+                            <li>Colinas de San Miguel</li>
+                            <li>Lomas de San Isidro</li>
+                            <li>Nuevo Culiacán</li>
+                            <li>Infonavit Humaya</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="color:#64748B;font-size:1rem">¿No ves tu colonia aquí? <a href="https://wa.me/526670000000?text=Hola,%20necesito%20saber%20si%20dan%20servicio%20en%20mi%20colonia" style="color:var(--brand);font-weight:600;text-decoration:none" target="_blank">Contáctanos por WhatsApp</a> para confirmar cobertura.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section class="section" id="contacto">
+        <div class="container">
+            <div style="max-width:1000px;margin:0 auto">
+                <h2 style="text-align:center;margin-bottom:3rem">Contacto</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:3rem">
+                    <!-- Información de Contacto -->
+                    <div>
+                        <h3 style="color:var(--brand);margin-bottom:1.5rem;font-size:1.5rem">Información de Contacto</h3>
+                        <div style="color:#475569;line-height:2">
+                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">📞 Teléfono:</strong><br><a href="tel:+526670000000" style="color:var(--brand);text-decoration:none;font-weight:600">667 000 0000</a></p>
+                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">💬 WhatsApp:</strong><br><a href="https://wa.me/526670000000" style="color:var(--brand);text-decoration:none;font-weight:600" target="_blank" rel="noopener">667 000 0000</a></p>
+                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">📧 Email:</strong><br><a href="mailto:contacto@electricistaculiacanpro.mx" style="color:var(--brand);text-decoration:none">contacto@electricistaculiacanpro.mx</a></p>
+                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">⏰ Horario:</strong><br>24/7 Todos los días (Emergencias)</p>
+                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">📍 Cobertura:</strong><br>Culiacán y zona metropolitana</p>
+                        </div>
+                    </div>
+
+                    <!-- Formulario de Contacto -->
+                    <div>
+                        <h3 style="color:var(--brand);margin-bottom:1.5rem;font-size:1.5rem">Solicita una Cotización</h3>
+                        <form id="contact-form" style="display:flex;flex-direction:column;gap:1rem">
+                            <input type="text" name="nombre" placeholder="Nombre completo" required style="padding:0.875rem;border:1px solid #E2E8F0;border-radius:8px;font-size:1rem;font-family:inherit">
+                            <input type="tel" name="telefono" placeholder="Teléfono" required style="padding:0.875rem;border:1px solid #E2E8F0;border-radius:8px;font-size:1rem;font-family:inherit">
+                            <input type="email" name="email" placeholder="Email (opcional)" style="padding:0.875rem;border:1px solid #E2E8F0;border-radius:8px;font-size:1rem;font-family:inherit">
+                            <textarea name="mensaje" placeholder="Describe el servicio que necesitas" rows="4" required style="padding:0.875rem;border:1px solid #E2E8F0;border-radius:8px;font-size:1rem;font-family:inherit;resize:vertical"></textarea>
+                            <button type="submit" class="btn-primary" style="width:100%;cursor:pointer">Enviar Solicitud</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Google Maps -->
+                <div style="margin-top:3rem">
+                    <h3 style="color:var(--brand);margin-bottom:1.5rem;font-size:1.5rem;text-align:center">Nuestra Área de Cobertura</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116678.27374282976!2d-107.46779564707034!3d24.790341899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86bcd0c6e57c047f%3A0x1c0c1c0c1c0c1c0c!2sCuliac%C3%A1n%2C%20Sinaloa!5e0!3m2!1ses-419!2smx!4v1234567890123!5m2!1ses-419!2smx"
+                            width="100%"
+                            height="400"
+                            style="border:0;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.1)"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Mapa de cobertura de Electricista Culiacán Pro"></iframe>
+                    <p style="text-align:center;margin-top:1.5rem;color:#64748B">Servicio en Las Quintas, Tres Ríos, Centro, Chapultepec, Montebello, Guadalupe, Campestre, Santa Fe y todas las colonias de Culiacán.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Mini Nav -->
+            <nav style="margin-bottom:2rem">
+                <ul style="list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;font-size:0.95rem">
+                    <li><a href="/" style="color:#CBD5E1;text-decoration:none;transition:color 0.2s">Inicio</a></li>
+                    <li><a href="/servicios/instalacion-electrica/" style="color:#CBD5E1;text-decoration:none;transition:color 0.2s">Instalación Eléctrica</a></li>
+                    <li><a href="/servicios/reparacion-cortocircuitos/" style="color:#CBD5E1;text-decoration:none;transition:color 0.2s">Reparación</a></li>
+                    <li><a href="/servicios/emergencia-24-7/" style="color:#CBD5E1;text-decoration:none;transition:color 0.2s">Emergencias 24/7</a></li>
+                    <li><a href="/servicios/electricista/precios/" style="color:#CBD5E1;text-decoration:none;transition:color 0.2s">Precios</a></li>
+                    <li><a href="#contacto" style="color:#CBD5E1;text-decoration:none;transition:color 0.2s">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <p>&copy; 2025 Electricista Culiacán Pro. Todos los derechos reservados.</p>
+            <p style="margin-top:1rem;font-weight:500">Servicio profesional de electricidad en Culiacán, Sinaloa</p>
+            <p style="margin-top:0.5rem;font-size:0.9rem">📞 667 000 0000 | 💬 WhatsApp 24/7 | 📧 contacto@electricistaculiacanpro.mx</p>
+        </div>
+    </footer>
+
+    <!-- CTA Flotante -->
+    <div style="position:fixed;bottom:20px;right:20px;z-index:100;display:flex;flex-direction:column;gap:10px">
+        <a href="https://wa.me/526670000000?text=Hola!%20Necesito%20un%20electricista"
+           class="btn-primary btn-whatsapp"
+           target="_blank"
+           rel="noopener"
+           aria-label="Contactar por WhatsApp"
+           style="display:flex;align-items:center;gap:8px;padding:14px 20px;box-shadow:0 4px 16px rgba(37,211,102,0.4);animation:pulse 2s infinite"
+           onclick="if(typeof dataLayer !== 'undefined') dataLayer.push({'event':'cta_click','cta_type':'floating_whatsapp','cta_position':'bottom_right'})">
+            💬 WhatsApp
+        </a>
+        <a href="tel:+526670000000"
+           class="btn-primary"
+           aria-label="Llamar ahora"
+           style="display:flex;align-items:center;gap:8px;padding:14px 20px;background:var(--gradient-brand);box-shadow:0 4px 16px rgba(0,71,171,0.4)"
+           onclick="if(typeof dataLayer !== 'undefined') dataLayer.push({'event':'cta_click','cta_type':'floating_phone','cta_position':'bottom_right'})">
+            📞 Llamar
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+    // IIFE para evitar variables globales
+    (function() {
+        'use strict';
+
+        // Toggle menú móvil
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (mobileMenuBtn && navMenu) {
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+
+            // Cerrar menú al hacer click en un enlace
+            const navLinks = navMenu.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+
+        // Envío de formulario a WhatsApp
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const nombre = this.nombre.value;
+                const telefono = this.telefono.value;
+                const email = this.email.value || 'No proporcionado';
+                const mensaje = this.mensaje.value;
+
+                const whatsappMsg = `Hola! Mi nombre es ${nombre}
+Teléfono: ${telefono}
+Email: ${email}
+Mensaje: ${mensaje}`;
+
+                const whatsappURL = `https://wa.me/526670000000?text=${encodeURIComponent(whatsappMsg)}`;
+                window.open(whatsappURL, '_blank');
+
+                // Track event
+                if (typeof dataLayer !== 'undefined') {
+                    dataLayer.push({
+                        'event': 'form_submit',
+                        'form_name': 'contact_form'
+                    });
+                }
+            });
+        }
+
+        // Tracking de tarjetas SEO
+        const seoCards = document.querySelectorAll('.seo-card');
+        seoCards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                const cardName = this.getAttribute('data-card-name');
+                const cardPosition = this.getAttribute('data-card-position');
+
+                if (typeof dataLayer !== 'undefined') {
+                    dataLayer.push({
+                        'event': 'seo_card_click',
+                        'card_name': cardName,
+                        'card_position': cardPosition
+                    });
+                }
+            });
+        });
+
+        // Scroll Depth Tracking
+        let scrollDepths = [25, 50, 75, 100];
+        let triggeredDepths = [];
+
+        window.addEventListener('scroll', function() {
+            const scrollPercentage = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+
+            scrollDepths.forEach(function(depth) {
+                if (scrollPercentage >= depth && !triggeredDepths.includes(depth)) {
+                    triggeredDepths.push(depth);
+
+                    if (typeof dataLayer !== 'undefined') {
+                        dataLayer.push({
+                            'event': 'scroll_depth',
+                            'depth': depth
+                        });
+                    }
+                }
+            });
+        });
+
+    })();
+
+    // GTM con fallback
+    (function() {
+        const loadGTM = function() {
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-XXXXXXX');
+        };
+
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadGTM);
+        } else {
+            setTimeout(loadGTM, 200);
+        }
+    })();
+
+    // Animación pulse para CTA flotante
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    `;
+    document.head.appendChild(style);
+    </script>
+
+    <!-- Main JavaScript (si existe) -->
+    <script src="main.js" defer></script>
+</body>
+</html>
