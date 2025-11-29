@@ -1,0 +1,35 @@
+{
+  "seo": {
+    "title": "Cambio Cableado Eléctrico Culiacán | Seguro",
+    "description": "⚡ Cambio de cableado eléctrico en Culiacán. Cable calibre correcto y certificado. Elimina riesgos. ¡Llama: 667 392 2273!",
+    "keywords": "cambio cableado electrico culiacan, recableado culiacan, renovacion instalacion electrica culiacan, cables electricos culiacan, electricista cableado culiacan, actualizacion electrica culiacan"
+  },
+  "content": {
+    "h1": "Cambio de Cableado Eléctrico en Culiacán | Instalación Segura",
+    "subtitle": "Cambio profesional de cableado eléctrico en Culiacán para instalaciones antiguas o deterioradas. Cable calibre certificado según carga eléctrica. Reemplazamos cables sin romper muros completos. Incluye inspección termográfica y cumplimiento NOM-001-SEDE. Garantía de 6 meses.",
+    "whatsapp_text": "cambio de cableado eléctrico",
+    "breadcrumb": "Cambio Cableado",
+    "service_type": "Cambio de Cableado Eléctrico"
+  },
+  "schema": {
+    "description": "Cambio profesional de cableado eléctrico para hogares y negocios en Culiacán. Reemplazo de cables viejos o deteriorados con cable certificado calibre correcto. Incluye inspección termográfica, pruebas de aislamiento y cumplimiento de normas NOM. Garantía de 6 meses."
+  },
+  "benefits": [
+    {
+      "title": "Cable calibre certificado según carga real",
+      "description": "Calculamos carga eléctrica total y seleccionamos calibre correcto: 14 AWG para circuitos de iluminación, 12 AWG para contactos, 10 AWG para aires acondicionados y cargas pesadas. Cable THHN/THWN certificado UL. No usamos cable delgado que sobrecalienta. Cumple NOM-001-SEDE vigente."
+    },
+    {
+      "title": "Inspección termográfica antes y después",
+      "description": "Inspeccionamos con cámara termográfica FLIR antes del cambio para detectar cables sobrecalentados y puntos críticos. Documentamos temperaturas anormales. Después del recableado verificamos que no hay puntos calientes. Entregamos reporte fotográfico completo con temperaturas normales garantizadas debajo de 40°C."
+    },
+    {
+      "title": "Cambio sin demoler muros completos",
+      "description": "Utilizamos técnica de jalado con guía de acero por tubería conduit existente. Solo abrimos registros estratégicos. Evitamos demoler paredes completas. Reparamos y pintamos los registros que abrimos del mismo color. Instalación limpia con mínimo impacto en tu hogar o negocio. Tiempo reducido 50% vs demolición total."
+    },
+    {
+      "title": "Pruebas de aislamiento con megóhmetro",
+      "description": "Probamos cada circuito nuevo con megóhmetro profesional Fluke. Verificamos resistencia de aislamiento mínima 1 MegaOhm por cada circuito. Detectamos fugas de corriente imperceptibles. Entregamos certificado de pruebas con valores medidos. Garantía de cero fugas eléctricas y máxima seguridad por 6 meses."
+    }
+  ]
+}

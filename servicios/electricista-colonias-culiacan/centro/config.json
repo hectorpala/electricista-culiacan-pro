@@ -1,0 +1,35 @@
+{
+  "seo": {
+    "title": "Electricista Centro Culiacán | Servicio en el Centro",
+    "description": "⚡ Electricista en el Centro de Culiacán. Llegada rápida en 15-25 min. Negocios y comercios. Servicio 24/7. ¡Llama: 667 392 2273!",
+    "keywords": "electricista centro culiacan, electricista en centro, servicio electrico centro culiacan, electricista comercios centro, reparacion electrica centro culiacan, emergencia electrica centro"
+  },
+  "content": {
+    "h1": "Electricista en el Centro de Culiacán | Servicio Rápido Comercial",
+    "subtitle": "Servicio profesional de electricista en el Centro de Culiacán. Especializado en comercios, negocios y edificios históricos. Llegada garantizada en 15-25 minutos. Instalaciones, reparaciones y emergencias eléctricas 24/7. Conocemos la zona comercial. Garantía de 6 meses.",
+    "whatsapp_text": "electricista en el Centro",
+    "breadcrumb": "Centro",
+    "service_type": "Electricista en el Centro"
+  },
+  "schema": {
+    "description": "Servicio profesional de electricista en el Centro de Culiacán. Especializado en comercios, negocios y edificios históricos. Llegada rápida en 15-25 minutos. Instalaciones comerciales, reparaciones, mantenimiento y emergencias 24/7. Experiencia en infraestructura eléctrica comercial y edificios antiguos. Garantía de 6 meses."
+  },
+  "benefits": [
+    {
+      "title": "Llegada ultra rápida en zona céntrica",
+      "description": "Electricistas estratégicamente ubicados cerca del Centro. Conocemos perfectamente calles Ángel Flores, Obregón, Rosales, y accesos al centro histórico. Llegada en 15-25 minutos incluso en horarios de alto tráfico. Atención prioritaria 24/7 para comercios y negocios con servicio de emergencia para evitar pérdidas económicas por fallas eléctricas."
+    },
+    {
+      "title": "Experiencia en instalaciones comerciales",
+      "description": "Con 200+ servicios en el Centro, conocemos instalaciones eléctricas comerciales: tableros trifásicos 220V/440V, cargas pesadas de refrigeración comercial, iluminación de vitrinas, sistemas de seguridad, y redes eléctricas en edificios antiguos. Experiencia comprobada en locales comerciales, oficinas y consultorios. Diagnósticos rápidos para minimizar tiempo de inactividad."
+    },
+    {
+      "title": "Trabajo en edificios históricos sin daños",
+      "description": "Especialistas en instalaciones eléctricas para edificios antiguos del centro histórico. Técnicas no invasivas que respetan arquitectura original. Cableado por ductos existentes sin romper muros históricos. Cumplimiento de normativas de INAH y CFE. Instalación limpia que preserva fachadas y acabados originales. Referencia en trabajos patrimoniales verificables."
+    },
+    {
+      "title": "Servicio fuera de horarios comerciales",
+      "description": "Entendemos que los comercios operan en horarios específicos. Ofrecemos servicio después de horarios de cierre (después de 8pm) o antes de apertura (antes de 8am) para no interrumpir ventas. Disponibilidad 24/7 para emergencias que afecten operación de negocio. Rating 4.8 estrellas con 80+ reseñas de comerciantes del Centro. Garantía escrita 6 meses."
+    }
+  ]
+}
