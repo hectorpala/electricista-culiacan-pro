@@ -46,7 +46,7 @@ type: Electrician
 id: https://electricistaculiacanpro.mx/#business
 name: Electricista Culiacán Pro
 url: https://electricistaculiacanpro.mx/
-telephone: +52 667 163 1231
+telephone: +52 667 392 2273
 ```
 
 **Logo incluido**: ✅ ImageObject (512x512 PNG)
@@ -54,7 +54,7 @@ telephone: +52 667 163 1231
 ### **2. Información Completa**
 
 ✅ **Datos de contacto**:
-- Teléfono: +52 667 163 1231
+- Teléfono: +52 667 392 2273
 - Idioma: es-MX
 
 ✅ **Ubicación**:

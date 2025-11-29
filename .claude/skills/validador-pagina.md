@@ -177,7 +177,7 @@ Buscar en el `<body>` dentro de la sección `.benefits-grid`:
 - Tiene `<div class="whatsapp-cta-box">` presente
 - Contiene heading: "¿Tienes dudas? Respondemos en 10 minutos"
 - Tiene botón con clase `whatsapp-cta-button` y texto "Abrir Chat"
-- Link apunta a: `https://wa.me/526671631231?text=...` (electricista)
+- Link apunta a: `https://wa.me/526673922273?text=...` (electricista)
 - Está ubicado dentro de `.benefits-grid` (después de los 4 benefits)
 - Usa SVG para iconos (NO emojis)
 
@@ -185,7 +185,7 @@ Buscar en el `<body>` dentro de la sección `.benefits-grid`:
 - Falta completamente el elemento `.whatsapp-cta-box`
 - Texto del heading incorrecto o abreviado
 - Botón no dice "Abrir Chat"
-- Link no apunta a WhatsApp correcto (526671631231)
+- Link no apunta a WhatsApp correcto (526673922273)
 - Ubicado fuera de `.benefits-grid`
 
 **Si falta o está mal:** Anotar línea exacta y qué falta/está incorrecto.
