@@ -10,23 +10,23 @@ El usuario me activa escribiendo `@validador-pagina` o mencionándome en cualqui
 
 Cuando me activan, sigo estos pasos EXACTAMENTE:
 
-## ⚠️ IMPORTANTE - Qué valido y qué NO valido
+## IMPORTANTE - Qué valido y qué NO valido
 
-**✅ SÍ valido (estructura técnica):**
+**SÍ valido (estructura técnica):**
 - Estructura HTML (`<picture>`, `<source>`, atributos correctos)
 - Clases CSS correctas (`.floating-btn`, `.hero-background`, etc.)
 - Presencia de elementos críticos (botones flotantes con SVG, Critical CSS completo)
 - Atributos técnicos (`fetchpriority`, `decoding`, `srcset`, `sizes`)
 - Prohibiciones (NO custom classes, NO emojis en botones)
 
-**❌ NO valido (diseño/branding):**
+**NO valido (diseño/branding):**
 - Colores específicos en variables CSS (`:root`)
 - Valores de gradientes
 - Tamaños de fuente
 - Espaciado (padding, margin)
 - Contenido textual
 
-**🎨 Branding - NO se valida ni se cambia:**
+**Branding - NO se valida ni se cambia:**
 
 Electricista Culiacán Pro y Plomero Culiacán Pro son empresas hermanas con IDENTIDAD VISUAL IDÉNTICA:
 - Colores naranja (#E36414, #F97316) son CORRECTOS para ambas empresas
@@ -35,22 +35,22 @@ Electricista Culiacán Pro y Plomero Culiacán Pro son empresas hermanas con IDE
 - Solo cambia el contenido textual (plomero → electricista)
 
 **Por lo tanto, este validador:**
-- ✅ Verifica que los botones flotantes tengan las clases correctas
-- ✅ Verifica que exista el Critical CSS completo
-- ❌ NO cambia los colores (ya son los correctos)
-- ❌ NO modifica variables CSS de branding
+- Verifica que los botones flotantes tengan las clases correctas
+- Verifica que exista el Critical CSS completo
+- NO cambia los colores (ya son los correctos)
+- NO modifica variables CSS de branding
 
 ### Paso 1: Preguntar qué validar
 
 ```
-🔍 Validador de Página Activado
+Validador de Página Activado
 
 ¿Qué página quieres validar?
 
 Ejemplos:
-  • blog/como-encontrar-electricista-confiable-culiacan/index.html
-  • electricista-24-horas/index.html
-  • servicios/instalacion-electrica/index.html
+  - blog/como-encontrar-electricista-confiable-culiacan/index.html
+  - electricista-24-horas/index.html
+  - servicios/instalacion-electrica/index.html
 ```
 
 Esperar la respuesta del usuario.
@@ -63,60 +63,60 @@ Una vez que el usuario proporcione la ruta, leer en paralelo:
 
 ### Paso 3: Validar según reglas críticas
 
-Verificar las 13 áreas siguientes (basadas en @.claude/commands/validar.md y landing-creator.md):
+Verificar las 14 áreas siguientes (basadas en @.claude/commands/validar.md y landing-creator.md):
 
 #### 3.1 Hero - Estructura (CRÍTICO)
 
 Buscar `<header` con clase `hero` en la página nueva:
 
-**✅ DEBE cumplir:**
-- Usa `<picture class="hero-background">` (NO `<div>`)
-- Tiene `<source type="image/webp">` con srcset
-- `<img>` tiene `fetchpriority="high"` y `decoding="async"`
-- Imagen es `hero-electricista-trabajo-800w.webp` y `1200w.webp` (o la que especifique usuario)
+**REQUISITOS OBLIGATORIOS:**
+- DEBE usar `<picture class="hero-background">` (NO `<div>`)
+- DEBE tener `<source type="image/webp">` con srcset
+- DEBE tener `fetchpriority="high"` y `decoding="async"` en `<img>`
+- Imagen DEBE ser `hero-electricista-trabajo-800w.webp` y `1200w.webp` (o la que especifique usuario)
 
-**Si encuentra error:** Anotar línea exacta y qué está mal.
+**Si encuentra error:** Anotar línea exacta y qué está mal. FALLA AUTOMÁTICA.
 
 #### 3.2 Hero - CSS (CRÍTICO)
 
 Buscar en el `<style>` la regla `.hero-background img`:
 
-**✅ DEBE incluir:**
-- `content-visibility:auto`
+**OBLIGATORIO:**
+- DEBE incluir `content-visibility:auto`
 
-**Si falta:** Anotar línea y CSS faltante.
+**Si falta:** Anotar línea y CSS faltante. FALLA AUTOMÁTICA.
 
 #### 3.3 Botones Flotantes - HTML (CRÍTICO)
 
 Buscar antes del cierre `</body>`:
 
-**✅ DEBE cumplir:**
-- Botón WhatsApp: clase `floating-btn floating-whatsapp`
-- Botón Teléfono: clase `floating-btn floating-call`
-- Ambos contienen `<svg>` con `<path>` (NO emojis 💬 📞)
-- NO están dentro de `<div class="cta-bar">`
+**REQUISITOS ESTRICTOS:**
+- Botón WhatsApp DEBE tener clase `floating-btn floating-whatsapp`
+- Botón Teléfono DEBE tener clase `floating-btn floating-call`
+- Ambos DEBEN contener `<svg>` con `<path>` (PROHIBIDO usar emojis)
+- PROHIBIDO que estén dentro de `<div class="cta-bar">`
 
-**Si encuentra error:** Anotar línea exacta.
+**Si encuentra error:** Anotar línea exacta. FALLA AUTOMÁTICA.
 
 #### 3.4 Botones Flotantes - CSS (CRÍTICO)
 
 Buscar en el `<style>`:
 
-**✅ DEBE tener:**
-- `.floating-whatsapp{background:#22c55e;...}`
-- `.floating-call{background:#0f4fa8;...}`
+**COLORES OBLIGATORIOS:**
+- `.floating-whatsapp` DEBE ser `background:#22c55e`
+- `.floating-call` DEBE ser `background:#0f4fa8`
 
-**Colores incorrectos comunes:**
-- ❌ #25D366 (WhatsApp incorrecto)
-- ❌ #0066cc (Tel incorrecto)
+**COLORES PROHIBIDOS (FALLA AUTOMÁTICA):**
+- PROHIBIDO: #25D366 (WhatsApp incorrecto)
+- PROHIBIDO: #0066cc (Tel incorrecto)
 
-**Si encuentra error:** Anotar línea y color incorrecto.
+**Si encuentra error:** Anotar línea y color incorrecto. FALLA AUTOMÁTICA.
 
 #### 3.5 Clases CSS Custom Prohibidas
 
 Buscar en el `<style>`:
 
-**❌ PROHIBIDO (NO deben existir):**
+**ESTRICTAMENTE PROHIBIDO (FALLA AUTOMÁTICA SI EXISTE):**
 - `.highlight-box`
 - `.warning-box`
 - `.info-box`
@@ -126,24 +126,24 @@ Buscar en el `<style>`:
 - Cualquier clase con `background:#fee2e2` (rojo)
 - Cualquier clase con `border-left: 4px solid`
 
-**Si encuentra alguna:** Anotar línea exacta.
+**Si encuentra alguna:** Anotar línea exacta. FALLA AUTOMÁTICA.
 
 #### 3.6 HTML con Cajas de Colores
 
 Buscar en el `<body>`:
 
-**❌ PROHIBIDO (NO deben existir):**
+**ESTRICTAMENTE PROHIBIDO (FALLA AUTOMÁTICA SI EXISTE):**
 - `<div class="highlight-box">`
 - `<div class="warning-box">`
 - Divs con `style="background:#fef3c7"` inline
 
-**Si encuentra alguna:** Anotar línea exacta.
+**Si encuentra alguna:** Anotar línea exacta. FALLA AUTOMÁTICA.
 
 #### 3.7 Critical CSS Completo (CRÍTICO)
 
 Buscar en el `<style>` del `<head>`:
 
-**✅ DEBE incluir TODO (mínimo 40+ líneas):**
+**OBLIGATORIO - DEBE incluir TODO (mínimo 40+ líneas):**
 - `@font-face` para Inter (400, 500, 600)
 - `@font-face` para Montserrat (700, 800)
 - `:root` con variables CSS
@@ -160,20 +160,101 @@ Buscar en el `<style>` del `<head>`:
 - `.floating-btn`, `.floating-call`, `.floating-whatsapp`
 - `@media (max-width:768px)` con responsive completo
 
-**❌ ERROR COMÚN:**
-- Solo 3-10 líneas de CSS (incompleto)
-- Falta `@font-face` (fuentes no cargan)
-- Falta `:root` (variables no definidas)
-- Falta `.hero{display:grid;place-items:center}` (desalineación)
-- Falta `@media` queries (roto en mobile)
+**ERRORES QUE CAUSAN FALLA AUTOMÁTICA:**
+- Solo 3-10 líneas de CSS (incompleto) - FALLA
+- Falta `@font-face` (fuentes no cargan) - FALLA
+- Falta `:root` (variables no definidas) - FALLA
+- Falta `.hero{display:grid;place-items:center}` (desalineación) - FALLA
+- Falta `@media` queries (roto en mobile) - FALLA
 
-**Si falta CSS crítico:** Anotar que falta bloque completo de index.html.
+**Si falta CSS crítico:** Anotar que falta bloque completo de index.html. FALLA AUTOMÁTICA.
 
-#### 3.8 Barra WhatsApp CTA (OBLIGATORIO)
+#### 3.8 Service Cards - Estructura (CRÍTICO)
 
-Buscar en el `<body>` dentro de la sección `.benefits-grid`:
+Buscar en las secciones de servicios (id="servicios" o similares):
 
-**✅ DEBE cumplir:**
+**ESTRUCTURA OBLIGATORIA (de index.html):**
+```html
+<a href="..." class="card card--img">
+    <div class="service-card">
+        <figure class="media-box">
+            <picture>
+                <source type="image/webp"
+                        srcset="...420w.webp 420w, ...800w.webp 800w"
+                        sizes="(max-width:768px) 100vw, 420px">
+                <img src="...420w.webp"
+                     srcset="...420w.webp 420w, ...800w.webp 800w"
+                     sizes="(max-width:768px) 100vw, 420px"
+                     alt="..."
+                     width="420" height="420"
+                     loading="lazy" decoding="async">
+            </picture>
+        </figure>
+    </div>
+    <h3>Título del Servicio</h3>
+    <p>Descripción del servicio...</p>
+    <ul class="service-list">
+        <li>Punto 1</li>
+        <li>Punto 2</li>
+    </ul>
+    <span class="service-cta">Más Información →</span>
+</a>
+```
+
+**REQUISITOS ESTRICTOS (CERO TOLERANCIA):**
+- DEBE usar `<div class="service-card">` como contenedor de la imagen
+- DEBE usar `<figure class="media-box">` para envolver el picture
+- Imágenes DEBEN ser 420w y 800w (PROHIBIDO 800w y 1200w)
+- DEBE ser width="420" height="420" - IMÁGENES CUADRADAS (PROHIBIDO 420x235, 800x600 u otros tamaños)
+- sizes DEBE ser "(max-width:768px) 100vw, 420px" (EXACTO, sin variaciones)
+- `<h3>` PROHIBIDO usar emojis (NO: "Instalación", SI: "Instalación")
+- DEBE usar `<ul class="service-list">` (PROHIBIDO estilos inline)
+- DEBE tener `<span class="service-cta">Más Información →</span>` al final
+- PROHIBIDO `style="text-decoration:none;color:inherit;display:block"` en `<a>`
+- PROHIBIDO `style="padding:1.5rem"` en divs custom
+- PROHIBIDO `style="color:var(--brand)"` en h3
+- PROHIBIDO `style="border-radius:12px..."` en imágenes
+
+**ESTRUCTURA INCORRECTA (FALLA AUTOMÁTICA):**
+```html
+<!-- INCORRECTO: Sin service-card/media-box, con emojis, estilos inline -->
+<a href="..." class="card card--img" style="text-decoration:none;color:inherit">
+    <picture>
+        <img src="...800w.webp" width="800" height="600"
+             style="border-radius:12px;width:100%;height:auto">
+    </picture>
+    <div style="padding:1.5rem">
+        <h3 style="color:var(--brand)">⚡ Instalación Eléctrica</h3>
+        <ul style="margin-top:1rem;color:#475569">
+            <li>Punto 1</li>
+        </ul>
+    </div>
+</a>
+```
+
+**ERRORES CRÍTICOS (FALLA AUTOMÁTICA):**
+- Falta `<div class="service-card">` y `<figure class="media-box">` - FALLA
+- Usa emojis en títulos h3 - FALLA
+- Imágenes con tamaño incorrecto (NO CUADRADAS: 420x235, 800x600 en vez de 420x420 SQUARE) - FALLA
+- Srcset incorrecto (usa 800w/1200w en vez de 420w/800w) - FALLA
+- Falta `<span class="service-cta">` al final - FALLA
+- Usa estilos inline custom en vez de clases - FALLA
+- NO usa class="service-list" en las `<ul>` - FALLA
+
+**Si encuentra error:** Anotar línea exacta y mostrar estructura incorrecta vs correcta. FALLA AUTOMÁTICA.
+
+#### 3.9 Benefits Section y Barra WhatsApp CTA (OBLIGATORIO)
+
+Buscar en el `<body>` la sección "¿Por qué elegirnos?" con clase `.benefits-grid`:
+
+**BENEFITS STRUCTURE - OBLIGATORIO:**
+- Cada benefit DEBE usar `<div class="benefit-icon">` con SVG dentro (NO emojis)
+- Cada benefit DEBE usar `<div class="benefit-content">` para h3 y p
+- PROHIBIDO usar emojis grandes (⚡💡🛡️⚙️) con `style="font-size:3rem"`
+- DEBE usar iconos SVG de plomero culiacan pro (reloj, dinero, herramienta, documento)
+- HTML debe estar minificado (sin indentación extra)
+
+**WHATSAPP CTA BOX - OBLIGATORIO:**
 - Tiene `<div class="whatsapp-cta-box">` presente
 - Contiene heading: "¿Tienes dudas? Respondemos en 10 minutos"
 - Tiene botón con clase `whatsapp-cta-button` y texto "Abrir Chat"
@@ -181,20 +262,22 @@ Buscar en el `<body>` dentro de la sección `.benefits-grid`:
 - Está ubicado dentro de `.benefits-grid` (después de los 4 benefits)
 - Usa SVG para iconos (NO emojis)
 
-**❌ ERROR COMÚN:**
-- Falta completamente el elemento `.whatsapp-cta-box`
-- Texto del heading incorrecto o abreviado
-- Botón no dice "Abrir Chat"
-- Link no apunta a WhatsApp correcto (526673922273)
-- Ubicado fuera de `.benefits-grid`
+**ERRORES CRÍTICOS (FALLA AUTOMÁTICA):**
+- Benefits usan emojis (⚡💡🛡️) en vez de SVG icons - FALLA
+- NO usa estructura `.benefit-icon` + `.benefit-content` - FALLA
+- Falta completamente el elemento `.whatsapp-cta-box` - FALLA
+- Texto del heading incorrecto o abreviado - FALLA
+- Botón no dice "Abrir Chat" - FALLA
+- Link no apunta a WhatsApp correcto (526673922273) - FALLA
+- Ubicado fuera de `.benefits-grid` - FALLA
 
 **Si falta o está mal:** Anotar línea exacta y qué falta/está incorrecto.
 
-#### 3.9 Sección Blog (OBLIGATORIO en homepage)
+#### 3.10 Sección Blog (OBLIGATORIO en homepage)
 
 Buscar en el `<body>` la sección con `id="blog"`:
 
-**✅ DEBE cumplir:**
+**OBLIGATORIO - DEBE cumplir:**
 - Tiene `<section id="blog" class="section">`
 - Usa estructura `service-card` (NO `news-card`)
 - Cada artículo es un `<a href="/blog/.../" class="card card--img">`
@@ -203,19 +286,19 @@ Buscar en el `<body>` la sección con `id="blog"`:
 - Tiene `<span class="service-cta">Leer artículo completo →</span>`
 - Mínimo 3 artículos de blog
 
-**❌ ERROR COMÚN:**
-- Usa estructura `news-card` antigua
-- No tiene `service-cta` en los artículos
-- Imágenes no usan picture/source
-- Menos de 3 artículos
+**ERRORES CRÍTICOS (FALLA AUTOMÁTICA):**
+- Usa estructura `news-card` antigua - FALLA
+- No tiene `service-cta` en los artículos - FALLA
+- Imágenes no usan picture/source - FALLA
+- Menos de 3 artículos - FALLA
 
 **Si falta o está mal:** Anotar línea exacta.
 
-#### 3.10 Sección Testimoniales (OBLIGATORIO en homepage)
+#### 3.11 Sección Testimoniales (OBLIGATORIO en homepage)
 
 Buscar en el `<body>` la sección "Lo que dicen nuestros clientes":
 
-**✅ DEBE cumplir:**
+**OBLIGATORIO - DEBE cumplir:**
 - Tiene sección con clase `testimonials`
 - Usa grid con `testimonial-grid`
 - Cada testimonio es `testimonial-card`
@@ -232,11 +315,11 @@ Buscar en el `<body>` la sección "Lo que dicen nuestros clientes":
 
 **Si falta o está mal:** Anotar línea exacta.
 
-#### 3.11 Sección Social Proof (OBLIGATORIO en homepage)
+#### 3.12 Sección Social Proof (OBLIGATORIO en homepage)
 
-Buscar la sección "💯 Prueba Real de Nuestro Servicio":
+Buscar la sección "Prueba Real de Nuestro Servicio":
 
-**✅ DEBE cumplir:**
+**OBLIGATORIO - DEBE cumplir:**
 - Tiene `<section class="social-proof">`
 - Subsección "Reseñas Verificadas Google" con `google-reviews-grid`
 - Subsección "Resultados Reales: Antes y Después" con `before-after-grid`
@@ -252,7 +335,7 @@ Buscar la sección "💯 Prueba Real de Nuestro Servicio":
 
 **Si falta o está mal:** Anotar línea exacta.
 
-#### 3.12 Formulario Contacto con Validación (CRÍTICO)
+#### 3.13 Formulario Contacto con Validación (CRÍTICO)
 
 Buscar formulario con `id="contact-form"`:
 
@@ -284,7 +367,7 @@ Buscar formulario con `id="contact-form"`:
 
 **Si falta validación JS:** Anotar que main.js no tiene validación en tiempo real.
 
-#### 3.13 Sección Contacto - CSS Completo (CRÍTICO)
+#### 3.14 Sección Contacto - CSS Completo (CRÍTICO)
 
 Buscar en `<style>` del head:
 
@@ -316,41 +399,42 @@ Buscar en `<style>` del head:
 Presentar resultado en este formato:
 
 ```markdown
-## 🔍 Validación de [nombre-página]
+## Validación de [nombre-página]
 
-### ✅ APROBADAS (X/13)
+### APROBADAS (X/14)
 
-- ✅ Hero estructura correcta
-- ✅ Hero CSS correcto
-- ✅ Botones flotantes HTML correcto
-- ✅ Botones flotantes CSS correcto
-- ✅ Sin clases CSS custom prohibidas
-- ✅ Sin cajas de colores en HTML
-- ✅ Critical CSS completo incluido
-- ✅ Barra WhatsApp CTA presente
-- ✅ Sección Blog con estructura service-card
-- ✅ Sección Testimoniales completa
-- ✅ Sección Social Proof completa
-- ✅ Formulario Contacto con validación JS
-- ✅ CSS Contacto completo (.final-cta, .contact-content, etc.)
+- Hero estructura correcta
+- Hero CSS correcto
+- Botones flotantes HTML correcto
+- Botones flotantes CSS correcto
+- Sin clases CSS custom prohibidas
+- Sin cajas de colores en HTML
+- Critical CSS completo incluido
+- Service Cards con estructura correcta (service-card + media-box)
+- Barra WhatsApp CTA presente
+- Sección Blog con estructura service-card
+- Sección Testimoniales completa
+- Sección Social Proof completa
+- Formulario Contacto con validación JS
+- CSS Contacto completo (.final-cta, .contact-content, etc.)
 
 ---
 
-### ❌ ERRORES DETECTADOS (X)
+### ERRORES DETECTADOS (X)
 
-#### 🚨 Error 1: [Descripción clara]
+#### Error 1: [Descripción clara]
 - **Archivo:** [ruta]
 - **Línea:** [número exacto]
 - **Encontrado:** `[código incorrecto]`
 - **Debe ser:** `[código correcto]`
 
-#### 🚨 Error 2: [...]
+#### Error 2: [...]
 
 ---
 
-## 📊 Resultado Final
+## Resultado Final
 
-**Estado:** ✅ LISTO PARA COMMIT | ❌ REQUIERE CORRECCIONES (X errores)
+**Estado:** LISTO PARA COMMIT | REQUIERE CORRECCIONES (X errores)
 ```
 
 ### Paso 5: Ofrecer Corrección Automática
@@ -407,14 +491,14 @@ Después de abrir la página con `open`, INSTRUIR al usuario:
 
 La página se abrió en Safari. ANTES de hacer commit, verifica visualmente:
 
-✅ DESKTOP (Ventana completa en Safari):
+DESKTOP (Ventana completa en Safari):
    - Hero centrado con imagen de fondo visible
    - Título h1 centrado horizontalmente
    - Botones flotantes en esquina derecha inferior
    - Todas las secciones alineadas
    - Sin elementos rotos
 
-✅ MOBILE (iPhone 14 Pro - 390px):
+MOBILE (iPhone 14 Pro - 390px):
    1. Presiona Cmd+Opt+I (DevTools)
    2. Click en icono móvil (o Cmd+Shift+M)
    3. Selecciona "iPhone 14 Pro" (390x844)
@@ -451,8 +535,8 @@ Página abierta en Safari para verificación visual.
 
 Antes de hacer commit, verifica visualmente en Safari:
 
-✅ DESKTOP: Hero centrado, botones flotantes visibles
-✅ MOBILE (Cmd+Opt+I → iPhone 14 Pro):
+DESKTOP: Hero centrado, botones flotantes visibles
+MOBILE (Cmd+Opt+I → iPhone 14 Pro):
    - Hero responsive
    - Sin scroll horizontal
    - Botones flotantes visibles
@@ -518,8 +602,8 @@ Yo: [Corrijo error 1 con Edit]
     [Corrijo error 2 con Edit]
     [Valido de nuevo]
 
-    ✅ Errores corregidos
-    ✅ Validación: 8/8 aprobadas
+    Errores corregidos
+    Validación: 14/14 aprobadas
 
     [Abro página con: open "electricista-urgente/index.html"]
 
@@ -543,6 +627,6 @@ Yo: [git add + commit]
 - NUNCA invento errores que no existen
 - SIEMPRE ofrezco corrección automática si hay errores
 - SIEMPRE abro la página en Safari después de validar (con o sin correcciones) para que el usuario vea el resultado
-- 🚨 **SIEMPRE instruyo al usuario a verificar MÓVIL Y ESCRITORIO antes de commit**
-- 🚨 **NO permito commit hasta que ambas versiones se vean perfectas**
-- 🚨 **Si usuario reporta problema en mobile/desktop, corrijo y vuelvo a validar**
+- SIEMPRE instruyo al usuario a verificar MÓVIL Y ESCRITORIO antes de commit
+- NO permito commit hasta que ambas versiones se vean perfectas
+- Si usuario reporta problema en mobile/desktop, corrijo y vuelvo a validar
