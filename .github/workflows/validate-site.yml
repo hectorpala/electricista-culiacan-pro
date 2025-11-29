@@ -31,7 +31,7 @@ jobs:
 
       - name: Count URLs in sitemap
         run: |
-          count=$(xmllint --xpath "count(//url)" sitemap.xml)
+          count=$(xmllint --xpath "count(//*[local-name()='url'])" sitemap.xml)
           echo "URLs in sitemap: $count"
           [ "$count" -ge 40 ] || {
             echo "❌ Expected at least 40 URLs, found $count"
