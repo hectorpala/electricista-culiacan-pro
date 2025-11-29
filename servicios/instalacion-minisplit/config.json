@@ -1,0 +1,41 @@
+{
+  "slug": "instalacion-minisplit",
+  "service_name": "Instalación de Minisplit",
+  "seo": {
+    "title": "Instalación Minisplit Culiacán | Ahorra hasta 40%",
+    "description": "⚡ Instalación de minisplit en Culiacán. Inverter y tradicional. Todas las marcas. Instalación certificada en 3 horas. ¡Llama: 667 392 2273!",
+    "keywords": "instalacion minisplit culiacan, minisplit culiacan, aire acondicionado culiacan, instalacion clima culiacan, electricista minisplit culiacan, minisplit inverter culiacan"
+  },
+  "content": {
+    "h1": "Instalación de Minisplit en Culiacán | Certificada y Rápida",
+    "subtitle": "Instalación profesional de minisplit inverter y tradicional en Culiacán. Todas las marcas: Carrier, York, Mirage, LG, Samsung. Instalación completa en 3 horas con vacuum, carga de gas R410A y pruebas. Garantía por escrito de 6 meses en mano de obra.",
+    "whatsapp_text": "instalación de minisplit",
+    "breadcrumb": "Instalación Minisplit",
+    "service_type": "Instalación de Minisplit"
+  },
+  "schema": {
+    "description": "Servicio profesional de instalación de minisplit inverter y tradicional en hogares y negocios de Culiacán. Instalación completa con vacuum, nitrógeno, carga de gas R410A certificado y pruebas de funcionamiento. Todas las marcas reconocidas. Garantía de 6 meses en mano de obra."
+  },
+  "images": {
+    "hero_base": "instalacion-minisplit-culiacan",
+    "og": "instalacion-minisplit-culiacan-800w.webp"
+  },
+  "benefits": [
+    {
+      "title": "Instalación certificada en 3 horas promedio",
+      "description": "Instalamos tu minisplit en 3 horas promedio con electricistas certificados de 10+ años de experiencia. Incluye: vacuum profesional, prueba de nitrógeno, carga de gas R410A certificado, pruebas de temperatura y limpieza completa. Sin daños a muros, sin sorpresas en el precio."
+    },
+    {
+      "title": "Ahorra hasta 40% en consumo eléctrico",
+      "description": "Los minisplit inverter reducen hasta 40% tu recibo de luz comparado con equipos tradicionales. Te asesoramos en la selección del equipo ideal según tus m² y uso. Instalación optimizada para máximo ahorro: orientación correcta, sello hermético, carga exacta de refrigerante."
+    },
+    {
+      "title": "Todas las marcas con garantía de 6 meses",
+      "description": "Instalamos Carrier, York, Mirage, LG, Samsung, Mabe y todas las marcas del mercado. Garantía por escrito de 6 meses en mano de obra de instalación. Incluye: soporte de condensador, tubo de cobre aislado, canaleta decorativa, sello en muros y conexión eléctrica certificada."
+    },
+    {
+      "title": "Diagnóstico gratis antes de instalar",
+      "description": "Evaluamos gratis tu espacio antes de la instalación: capacidad eléctrica del circuito, estado del muro para soporte, distancia óptima entre unidades y orientación. Te recomendamos la capacidad exacta en BTUs según tus m². Evita gastos innecesarios por instalaciones mal dimensionadas."
+    }
+  ]
+}

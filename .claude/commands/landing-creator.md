@@ -1482,6 +1482,32 @@ jq -r '.contact.whatsapp' config/landing.json  # Debe ser 526673922273
 
 ---
 
+## 🛠️ Procedimiento de Corrección (Top-Down)
+
+Cuando se corrija una landing existente, seguir este flujo exacto y añadir la evidencia en la respuesta:
+
+1. Auditar de arriba hacia abajo: abrir `servicios/[slug]/index.html` y recorrer el HTML en orden. Enumerar cada error encontrado (con línea/archivo) sin corregir aún.
+2. Citar la regla del documento que incumple cada error.
+3. Aplicar las correcciones en el mismo orden enumerado.
+4. Forzar que todos los datos (teléfono, WhatsApp, email, IDs, coordenadas, hero, logos) provengan de `config/landing.json`.
+5. Verificar que usa `assets/css/critical.css` (sin bloque `<style>` inline), meta de versión vigente, hash vigente, rutas relativas, accesibilidad mínima (`alt`, `aria-current` en breadcrumb), canonical/OG por slug, theme-color solo en meta.
+6. Ejecutar `./validate-landing.sh servicios/[slug]/index.html`. Si falla, corregir y revalidar hasta que pase.
+7. Entregar: lista de errores inicial (enumerados), cambios aplicados por regla, resultado del validador.
+
+Prompt sugerido para Claude al corregir:
+```
+Audita y corrige top-down esta landing: servicios/[slug]/index.html.
+1) Recorre el HTML de arriba hacia abajo. Enumera cada error que halles (con línea/archivo). No corrijas aún.
+2) Cita la regla de .claude/commands/landing-creator.md que se incumple.
+3) Aplica las correcciones en ese mismo orden.
+4) Usa siempre config/landing.json para teléfonos/WhatsApp/email/IDs/coords/hero/logos.
+5) Asegura uso de assets/css/critical.css (sin <style> inline), meta versión, hash vigente, rutas relativas, accesibilidad mínima (alt, aria-current), canonical/OG por slug, theme-color solo en meta.
+6) Corre ./validate-landing.sh servicios/[slug]/index.html y reporta el resultado.
+7) Devuelve: lista de errores inicial, cambios aplicados, resultado del validador.
+```
+
+---
+
 ## 📝 Template de Commit con Validación
 
 Cuando hagas commit de una landing page, incluye ESTE template en el mensaje:

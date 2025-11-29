@@ -4,6 +4,15 @@ Guía operativa para crear contenido optimizado para electricistaculiacanpro.mx
 
 ---
 
+## Versión y Fuente de Verdad
+
+- **Versión:** 1.0 (actualizar al editar)
+- **Última actualización:** [ACTUALIZAR]
+- **Fuente de datos:** usar siempre `config/landing.json` para teléfono, WhatsApp, email, hero, logos, URLs base. No hardcodear valores en el copy; referenciar el config vigente.
+- **Rutas de imágenes:** solo usar assets existentes en `assets/images/optimizadas/` y logo oficial. Evitar rutas inventadas.
+
+---
+
 ## 1. Objetivo y Alcance
 
 ### Propósito del documento
@@ -227,28 +236,27 @@ Este documento establece lineamientos para crear contenido SEO de alta calidad q
 - **H3 para subsecciones** (opcional, bajo H2 correspondiente)
 - Jerarquía lógica: H1 > H2 > H3 (nunca saltar niveles)
 
-**Densidad de keywords:**
+**Cobertura semántica (sin % fijos):**
 
-- Keyword primaria: 1-2% del contenido total
-  - Ejemplo: En 600 palabras, aparecer 6-12 veces (incluye H1, H2, body)
-- Keywords secundarias: 0.5-1%
-- **NO keyword stuffing**: Priorizar lectura natural
+- Incluir la keyword primaria en H1, 1-2 H2 y algunas menciones naturales en body.
+- Variar con sinónimos y entidades relacionadas (servicios, ubicación, urgencia).
+- Priorizar intención y claridad; evitar keyword stuffing y conteos rígidos.
 
 ### Meta Title y Description
 
 **Meta Title:**
-- Longitud: **50-60 caracteres** (máximo 65)
+- Longitud: 50-60 caracteres o ~580-600 px (máximo 65).
 - Incluir: Keyword primaria + beneficio + ubicación/marca
 - Ejemplo: `Electricista 24/7 en Culiacán | Llegada 30-60 min ⚡`
 
 **Meta Description:**
-- Longitud: **120-155 caracteres** (máximo 160)
+- Longitud: 120-155 caracteres o ~930-990 px (máximo 160)
 - Incluir: Keyword primaria + propuesta de valor + CTA
-- Ejemplo: `⚡ Electricista certificado en Culiacán. Emergencia 24/7, llegada en 30-60 min. Cotización gratis. ¡Llama ahora al 667 392 2273!`
+- Ejemplo: `⚡ Electricista certificado en Culiacán. Emergencia 24/7, llegada en 30-60 min. Cotización gratis. ¡Llama ahora al [teléfono config]!`
 
 **Tips:**
-- Usar emoji moderadamente (⚡ 📞 ✅) para destacar en SERPs
-- Incluir teléfono en description para CTR
+- Emojis opcionales; si se usan, 1 máximo para no truncar.
+- Incluir teléfono del config en description para CTR.
 - Evitar duplicar title y description entre páginas
 
 ### Keywords locales
@@ -278,6 +286,7 @@ Este documento establece lineamientos para crear contenido SEO de alta calidad q
    - Link a servicio principal relacionado (anchor con keyword)
    - Link a otros posts relacionados
    - Link a homepage en introducción o conclusión
+   - Asegurar retorno al “money page” del servicio principal (cluster)
 
 3. **Formato de anchor text:**
    - ✅ "Conoce nuestro [servicio de electricista 24 horas](URL)"
@@ -286,19 +295,20 @@ Este documento establece lineamientos para crear contenido SEO de alta calidad q
 ### Canonical, Schema y OG
 
 **Canonical:**
-- Siempre incluir: `<link rel="canonical" href="https://electricistaculiacanpro.mx/ruta-exacta/" />`
+- Siempre incluir: `<link rel="canonical" href="https://electricistaculiacanpro.mx/ruta-exacta/" />` usando la URL final/slug.
+
+**Open Graph (og:image):**
+- Usar solo imágenes existentes (ej: `emergencia-electrica-culiacan-800w.webp` / 1200w, `instalacion-electrica-culiacan-800w.webp` / 1200w).
+- Incluir `og:title`, `og:description`, `og:url`, `og:image` con rutas válidas.
 
 **Schema JSON-LD (según tipo de página):**
 
-- **Servicio:** `Service` + `LocalBusiness` + `FAQPage` (si tiene FAQs)
-- **Blog:** `Article` + `BreadcrumbList`
-- **Colonia:** `LocalBusiness` + `Service` + `FAQPage`
+- **Servicio/Colonia:** `Service` + `LocalBusiness` (+ `FAQPage` si hay preguntas). Incluir teléfono/email/URL desde config, coordinates, área servida, y sameAs si aplica.
+- **Blog:** `Article` + `BreadcrumbList`. Campos obligatorios: `headline`, `author` (nombre/rol), `datePublished`, `dateModified`, `image` (con width/height), `description`, `mainEntityOfPage`.
+- **FAQ:** `FAQPage` con IDs y position en `mainEntity`.
 
-**Open Graph (og:image):**
-- Usar imágenes existentes del catálogo:
-  - `emergencia-electrica-culiacan-800w.webp`
-  - `instalacion-electrica-culiacan-800w.webp`
-- NO inventar rutas que no existen
+**Validación:**
+- Validar schemas en schema.org. No dejar campos vacíos o con placeholders.
 
 ---
 
@@ -333,6 +343,13 @@ Este documento establece lineamientos para crear contenido SEO de alta calidad q
 - Clientes: "[X]+ clientes satisfechos"
 - Testimonios breves (si disponibles): 1-2 líneas con nombre del cliente
 
+### E-E-A-T y autoría
+
+- Indicar autor/rol (ej.: Electricista certificado, Equipo técnico).
+- Incluir fecha de publicación y última modificación.
+- Citar fuentes externas cuando se mencionen normas o datos técnicos (p.ej., normas eléctricas, CFE).
+- Mantener tono profesional y verificable; evitar afirmaciones sin respaldo.
+
 ### Llamados a la acción (CTAs)
 
 **Copy para botones WhatsApp:**
@@ -341,13 +358,17 @@ Este documento establece lineamientos para crear contenido SEO de alta calidad q
 - "Contactar Ahora"
 
 **Copy para botones teléfono:**
-- "📞 Llamar Ahora: 667 392 2273"
+- "📞 Llamar Ahora" (usar teléfono desde config)
 - "Llama 24/7"
-- "Emergencia: 667 392 2273"
+- "Emergencia: llama ahora" (sin hardcode; usar variable)
 
 **CTAs en texto:**
-- Urgente: "Contáctanos ahora al 667 392 2273 para atención inmediata"
+- Urgente: "Contáctanos ahora para atención inmediata" (insertar teléfono del config en la plantilla)
 - Suave: "¿Necesitas ayuda? Envíanos un WhatsApp y te respondemos en minutos"
+
+**Buenas prácticas CTA:**
+- Usar teléfono/WhatsApp desde config (no hardcode).
+- No repetir el número más de 1-2 veces en el texto; priorizar botones visibles.
 
 ### Diferenciadores vs competencia
 
@@ -482,16 +503,16 @@ Antes de publicar cualquier contenido, verificar:
 ### SEO Técnico
 
 - [ ] **Título H1 único** con keyword primaria
-- [ ] **Meta title** redactado (50-60 caracteres)
-- [ ] **Meta description** redactada (120-155 caracteres)
-- [ ] **Canonical URL** correcta
-- [ ] **Schema JSON-LD** incluido y válido (validar en schema.org)
-- [ ] **Open Graph tags** completos (og:title, og:description, og:image)
+- [ ] **Meta title** redactado (50-60 caracteres o ~580-600 px)
+- [ ] **Meta description** redactada (120-155 caracteres o ~930-990 px)
+- [ ] **Canonical URL** correcta (por slug final)
+- [ ] **Schema JSON-LD** incluido y válido en schema.org (Article/Service/LocalBusiness/FAQ según corresponda)
+- [ ] **Open Graph tags** completos (og:title, og:description, og:image, og:url)
 
 ### Contenido
 
-- [ ] Keyword primaria aparece 1-2% (densidad natural)
-- [ ] Keywords secundarias integradas naturalmente
+- [ ] Keyword primaria en H1, 1-2 H2 y menciones naturales (sin % fijos)
+- [ ] Keywords secundarias y entidades integradas de forma natural
 - [ ] Menciones de ubicación (Culiacán, colonias específicas)
 - [ ] Propuesta de valor clara (24/7, rapidez, garantía, precio)
 - [ ] Pruebas sociales incluidas (reseñas, experiencia)
@@ -508,14 +529,17 @@ Antes de publicar cualquier contenido, verificar:
 
 - [ ] **3-5 enlaces internos** añadidos (servicios, blog, colonias)
 - [ ] Anchors descriptivos con keywords
-- [ ] Links a homepage y servicios relacionados
+- [ ] Links a homepage y servicios/colonias relacionadas (cluster)
+- [ ] Blog: enlazar a servicios money y 2-3 posts relacionados
+- [ ] Servicio/colonia: enlazar a servicios relacionados y 1-2 colonias cercanas (si aplica)
 
 ### CTAs
 
 - [ ] **WhatsApp CTA** visible y funcional
-- [ ] **Teléfono CTA** (667 392 2273) visible
+- [ ] **Teléfono CTA** visible (usar teléfono de `config/landing.json`)
 - [ ] CTAs en introducción y conclusión
 - [ ] Copy claro y orientado a acción
+- [ ] Datos de contacto y rutas tomadas del config (sin hardcodes)
 
 ### Calidad
 
@@ -528,7 +552,7 @@ Antes de publicar cualquier contenido, verificar:
 ### Imágenes
 
 - [ ] Imágenes existentes reutilizadas (no rutas inventadas)
-- [ ] Alt text descriptivo con keyword natural
+- [ ] Alt text descriptivo con keyword natural y contexto de la escena
 - [ ] `width`, `height`, `loading` especificados
 - [ ] Hero con `loading="eager"` y `fetchpriority="high"`
 
@@ -547,7 +571,7 @@ Electricista de Emergencia 24/7 Culiacán | Llegada Rápida
 
 **Meta Description (148 caracteres):**
 ```
-⚡ Electricista de emergencia en Culiacán las 24 horas. Llegada en 30-60 min. Cotización gratis. Técnicos certificados. ¡Llama: 667 392 2273!
+⚡ Electricista de emergencia en Culiacán las 24 horas. Llegada en 30-60 min. Cotización gratis. Técnicos certificados. ¡Llama: [teléfono config]!
 ```
 
 **H1:**
@@ -629,6 +653,6 @@ Revisar con equipo de marketing cualquier desviación de estas guías antes de p
 
 ---
 
-**Versión:** 1.0
-**Última actualización:** 2025-11-28
+**Versión:** 1.0 (actualizar al editar)
+**Última actualización:** [ACTUALIZAR]
 **Mantenedor:** Electricista Culiacán Pro - Equipo de Contenido
