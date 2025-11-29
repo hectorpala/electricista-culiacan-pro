@@ -1,0 +1,35 @@
+{
+  "seo": {
+    "title": "Electricista a Domicilio Culiacán | Servicio 24/7",
+    "description": "⚡ Electricista a domicilio en Culiacán. Atención rápida en tu hogar o negocio. Servicio 24/7 con garantía. ¡Llama: 667 392 2273!",
+    "keywords": "electricista a domicilio culiacan, electricista culiacan, servicio electrico domicilio, reparacion electrica casa culiacan, electricista 24 horas culiacan, electricista emergencias culiacan"
+  },
+  "content": {
+    "h1": "Electricista a Domicilio en Culiacán | Servicio Rápido y Profesional",
+    "subtitle": "Servicio profesional de electricista a domicilio en Culiacán. Atendemos cualquier reparación, instalación o emergencia eléctrica en tu hogar o negocio. Sin necesidad de traslados. Diagnóstico gratis y servicio 24/7 con garantía.",
+    "whatsapp_text": "electricista a domicilio",
+    "breadcrumb": "Electricista a Domicilio",
+    "service_type": "Electricista a Domicilio"
+  },
+  "schema": {
+    "description": "Servicio profesional de electricista a domicilio para hogares y negocios en Culiacán. Reparaciones, instalaciones y emergencias eléctricas. Atención inmediata sin traslados con diagnóstico gratuito y garantía de 6 meses."
+  },
+  "benefits": [
+    {
+      "title": "Atención inmediata en tu ubicación",
+      "description": "Llegamos a tu hogar o negocio en menos de 45 minutos en zonas como Las Quintas, Tres Ríos, Chapultepec y Montebello. Sin necesidad de traslados o esperas largas. Electricistas certificados con unidad equipada para resolver cualquier problema eléctrico en el momento."
+    },
+    {
+      "title": "Diagnóstico gratuito sin compromiso",
+      "description": "Evaluamos tu instalación eléctrica sin costo. Identificamos fallas, riesgos y soluciones con presupuesto claro antes de iniciar. Sin sorpresas ni cobros ocultos. Solo pagas si autorizas el servicio. Transparencia total en precios y tiempos de reparación."
+    },
+    {
+      "title": "Equipo completo en nuestra unidad",
+      "description": "Unidad móvil equipada con herramientas profesionales, multímetros, probadores de voltaje, cables, contactos, apagadores y refacciones originales. Resolvemos el 95% de problemas eléctricos en la primera visita sin necesidad de regresar por materiales."
+    },
+    {
+      "title": "Servicio 24/7 incluso fines de semana",
+      "description": "Atendemos emergencias eléctricas las 24 horas, los 7 días de la semana incluyendo festivos. Cortocircuitos, apagones, chispas o cables expuestos no esperan. Respuesta inmediata con garantía por escrito de 6 meses en todas las reparaciones realizadas."
+    }
+  ]
+}

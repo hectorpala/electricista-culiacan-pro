@@ -1,0 +1,35 @@
+{
+  "seo": {
+    "title": "Instalación Centro de Carga Culiacán | Seguro",
+    "description": "⚡ Instalación de centro de carga en Culiacán. Breakers certificados y cálculo de capacidad. Cumplimiento NOM. ¡Llama: 667 392 2273!",
+    "keywords": "instalacion centro carga culiacan, centro de carga culiacan, tablero electrico culiacan, breakers culiacan, electricista culiacan, instalacion tablero culiacan"
+  },
+  "content": {
+    "h1": "Instalación de Centro de Carga en Culiacán | Seguro y Certificado",
+    "subtitle": "Instalación profesional de centro de carga en Culiacán. Cálculo correcto de capacidad, breakers certificados y distribución eficiente de circuitos. Cumplimiento de normas NOM-001-SEDE. Instalación ordenada y segura con garantía de 6 meses.",
+    "whatsapp_text": "instalación de centro de carga",
+    "breadcrumb": "Instalación Centro Carga",
+    "service_type": "Instalación de Centro de Carga"
+  },
+  "schema": {
+    "description": "Instalación profesional de centros de carga para hogares y negocios en Culiacán. Incluye cálculo de capacidad eléctrica, breakers certificados, organización de circuitos y cumplimiento de normatividad NOM. Instalación segura con garantía de 6 meses."
+  },
+  "benefits": [
+    {
+      "title": "Cálculo preciso de capacidad eléctrica",
+      "description": "Calculamos exactamente el amperaje necesario según tu carga eléctrica total. Evaluamos consumo de equipos, aires acondicionados, electrodomésticos y futuras ampliaciones. Evitamos sobredimensionar o subdimensionar tu centro de carga. Instalamos 100A, 150A, 200A o más según tu necesidad real."
+    },
+    {
+      "title": "Breakers certificados Square D o Siemens",
+      "description": "Utilizamos exclusivamente breakers originales de marcas certificadas como Square D, Siemens o General Electric. No usamos imitaciones chinas. Cada breaker viene con garantía del fabricante. Protección real contra cortocircuitos y sobrecargas. Durabilidad comprobada de 15+ años en operación continua."
+    },
+    {
+      "title": "Organización profesional de circuitos",
+      "description": "Identificamos cada circuito con etiquetas permanentes y diagrama unifilar. Separamos cargas críticas de iluminación y contactos. Balanceamos fases para evitar sobrecargas. Instalación ordenada con cableado limpio y codificado por colores según norma. Fácil mantenimiento futuro garantizado."
+    },
+    {
+      "title": "Cumplimiento normatividad NOM-001-SEDE",
+      "description": "Instalación 100% apegada a la NOM-001-SEDE vigente. Incluye interruptor general, conexión a tierra física certificada, espacios de reserva para futuras ampliaciones y documentación técnica completa. Pasa cualquier inspección de CFE o verificación municipal. Garantía por escrito de 6 meses."
+    }
+  ]
+}
