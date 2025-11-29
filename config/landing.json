@@ -1,0 +1,51 @@
+{
+  "version": "v2.0.0",
+  "lastUpdate": "2025-01-28T00:00:00Z",
+  "contact": {
+    "phone": "+526673922273",
+    "phoneDisplay": "667 392 2273",
+    "whatsapp": "526673922273",
+    "email": "contacto@electricistaculiacanpro.mx"
+  },
+  "location": {
+    "city": "Culiacán",
+    "state": "Sinaloa",
+    "country": "MX",
+    "coordinates": {
+      "latitude": 24.7903,
+      "longitude": -107.3878
+    }
+  },
+  "tracking": {
+    "googleAnalyticsId": "G-NSV2K9N2ZD",
+    "googleTagManagerId": "GTM-W75CRTX5"
+  },
+  "images": {
+    "heroDefault": {
+      "800w": "assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp",
+      "1200w": "assets/images/optimizadas/emergencia-electrica-culiacan-1200w.webp",
+      "alt": "Electricista profesional en Culiacán atendiendo emergencia 24 horas con camioneta de servicio a domicilio"
+    },
+    "logo": {
+      "main": "logo-electricista-culiacan-pro.webp",
+      "navDimensions": { "width": 140, "height": 140 },
+      "footerDimensions": { "width": 200, "height": 76 }
+    }
+  },
+  "business": {
+    "name": "Electricista Culiacán Pro",
+    "url": "https://electricistaculiacanpro.mx/",
+    "rating": {
+      "value": 4.8,
+      "count": 50
+    },
+    "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59",
+    "priceRange": "$$"
+  },
+  "styles": {
+    "criticalCssFile": "assets/css/critical.css",
+    "criticalCssHash": "53ef5e7f",
+    "mainCssFile": "styles.css",
+    "themeColor": "#0066cc"
+  }
+}
