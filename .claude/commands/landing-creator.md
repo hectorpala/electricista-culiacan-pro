@@ -44,10 +44,434 @@ index.html === nueva-pagina.html (ESTILOS, COLORES, TIPOGRAFÍA, ICONOS)
 
 ## ⚠️ IMPORTANTE - Fuente de Verdad
 
+### 📌 VERSIÓN DE REFERENCIA OFICIAL
+
+**Última actualización:** [ACTUALIZAR AL SUBIR CAMBIOS]
+**Versión de plantilla:** v2.0.0
+**Commit/Hash:** [ACTUALIZAR CON ÚLTIMO COMMIT]
+
+#### Archivos de Referencia
+
 **FUENTE DE ESTILOS:** `index.html` (raíz del proyecto)
+- **Ruta oficial:** `index.html`
+- **Critical CSS:** Extraído a `assets/css/critical.css` (95 líneas, líneas 78-172 de index.html)
+- **Hero structure:** Líneas 2815-2904
+- **Botones flotantes:** Líneas 3862-3876
+- **GTM scripts:** Líneas 19-26 (gtag.js) + 2744-2767 (GTM lazy load)
+- **Breadcrumb:** Líneas 2790-2814
 - Este es el ÚNICO sitio de referencia para TODOS los estilos, CSS, estructura y colores
 - CLONAR EXACTAMENTE los estilos de index.html
 - **NO interpretar, NO adaptar, NO mejorar - SOLO COPIAR**
+
+**ESTILOS ADICIONALES:** `styles.css` (estilos no críticos)
+- **Ruta oficial:** `styles.css`
+- **Última modificación:** [ACTUALIZAR AL CAMBIAR]
+
+#### Configuración Centralizada
+
+**CONFIG CENTRAL:** `config/landing.json`
+- **Ruta oficial:** `config/landing.json`
+- **Contiene:** Teléfonos, WhatsApp, email, coordenadas, rutas de imágenes, IDs de tracking
+
+**Todos los valores DEBEN leerse de este config, NO hardcodear.**
+
+#### Hash de Validación
+
+**Critical CSS Hash (MD5):** `53ef5e7f`
+**Versión mínima requerida:** v2.0.0
+
+**Comando para calcular hash:**
+```bash
+# Hash actual del Critical CSS compartido
+md5 -q assets/css/critical.css | head -c 8
+# Resultado: 53ef5e7f
+```
+
+---
+
+### 📦 CRITICAL CSS COMPARTIDO
+
+**⚠️ IMPORTANTE:** El Critical CSS NO se duplica en cada landing. Se sirve desde un archivo centralizado.
+
+#### Estructura de Archivos
+
+```
+proyecto/
+├── assets/
+│   └── css/
+│       └── critical.css          ← Critical CSS compartido (FUENTE ÚNICA)
+├── config/
+│   └── landing.json              ← Config centralizado
+├── index.html                     ← Plantilla maestra
+└── servicios/
+    └── [slug]/
+        └── index.html             ← Landing (USA critical.css)
+```
+
+#### Qué va INLINE vs Archivo Compartido
+
+**✅ INLINE en cada landing (solo lo mínimo para LCP):**
+```html
+<head>
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" href="../../assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+
+    <!-- Preload hero image -->
+    <link rel="preload" as="image" href="../../assets/images/optimizadas/emergencia-electrica-culiacan-1200w.webp" fetchpriority="high">
+
+    <!-- Critical CSS compartido -->
+    <link rel="stylesheet" href="../../assets/css/critical.css" fetchpriority="high">
+</head>
+```
+
+**✅ EN assets/css/critical.css (95 líneas de index.html):**
+- 5 fuentes web (@font-face)
+- Variables CSS (:root)
+- Base styles (*, body, container, h1/h2/h3)
+- Nav styles
+- Hero styles (desktop + mobile)
+- Button styles
+- Floating buttons
+- Mobile media queries
+
+**❌ NO DUPLICAR:** El bloque `<style>` completo ya NO va inline en cada landing.
+
+#### Ventajas del Critical CSS Compartido
+
+- ✅ **1 fuente de verdad** - Cambio en 1 archivo = actualiza todas las landings
+- ✅ **Cacheable** - Navegador cachea critical.css, mejora performance
+- ✅ **Menos duplicación** - Archivos HTML más pequeños
+- ✅ **Más fácil mantener** - Actualizar estilos en 1 solo lugar
+- ✅ **Validación centralizada** - Hash de critical.css valida todas las landings
+
+#### Migración de Landings Existentes
+
+**Antes (inline):**
+```html
+<head>
+    <style>
+        @font-face{...}  <!-- 95 líneas aquí -->
+        :root{...}
+        ...
+    </style>
+</head>
+```
+
+**Después (compartido):**
+```html
+<head>
+    <link rel="stylesheet" href="../../assets/css/critical.css" fetchpriority="high">
+</head>
+```
+
+**Comando para migrar:**
+```bash
+# 1. Extraer Critical CSS de index.html a archivo (95 líneas)
+sed -n '78,172p' index.html > assets/css/critical.css
+
+# 2. Actualizar landings para usar critical.css
+find servicios/ -name "index.html" -exec sed -i '' 's|<style>.*</style>|<link rel="stylesheet" href="../../assets/css/critical.css" fetchpriority="high">|' {} \;
+```
+
+---
+
+### 🗂️ CONFIGURACIÓN CENTRALIZADA
+
+**config/landing.json** - Archivo de configuración central para TODAS las landings
+
+#### Crear config/landing.json
+
+```json
+{
+  "version": "v2.0.0",
+  "lastUpdate": "2025-01-28T00:00:00Z",
+  "contact": {
+    "phone": "+526673922273",
+    "phoneDisplay": "667 392 2273",
+    "whatsapp": "526673922273",
+    "email": "contacto@electricistaculiacanpro.mx"
+  },
+  "location": {
+    "city": "Culiacán",
+    "state": "Sinaloa",
+    "country": "MX",
+    "coordinates": {
+      "latitude": 24.7903,
+      "longitude": -107.3878
+    }
+  },
+  "tracking": {
+    "googleAnalyticsId": "G-NSV2K9N2ZD",
+    "googleTagManagerId": "GTM-W75CRTX5"
+  },
+  "images": {
+    "heroDefault": {
+      "800w": "assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp",
+      "1200w": "assets/images/optimizadas/emergencia-electrica-culiacan-1200w.webp",
+      "alt": "Electricista profesional en Culiacán atendiendo emergencia 24 horas"
+    },
+    "logo": {
+      "main": "logo-electricista-culiacan-pro.webp",
+      "navDimensions": { "width": 140, "height": 140 },
+      "footerDimensions": { "width": 200, "height": 76 }
+    }
+  },
+  "business": {
+    "name": "Electricista Culiacán Pro",
+    "url": "https://electricistaculiacanpro.mx/",
+    "rating": {
+      "value": 4.8,
+      "count": 50
+    },
+    "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59",
+    "priceRange": "$$"
+  },
+  "styles": {
+    "criticalCssFile": "assets/css/critical.css",
+    "criticalCssHash": "53ef5e7f",
+    "mainCssFile": "styles.css",
+    "themeColor": "#0066cc"
+  }
+}
+```
+
+#### Usar config en las Landings
+
+**❌ ANTES (hardcoded):**
+```html
+<a href="https://wa.me/526673922273">WhatsApp</a>
+<a href="tel:+526673922273">Llamar</a>
+```
+
+**✅ DESPUÉS (desde config):**
+```javascript
+// Cargar config
+fetch('../../config/landing.json')
+  .then(r => r.json())
+  .then(config => {
+    // Usar valores del config
+    document.querySelector('#cta-whatsapp').href =
+      `https://wa.me/${config.contact.whatsapp}`;
+    document.querySelector('#cta-llamar').href =
+      `tel:${config.contact.phone}`;
+  });
+```
+
+**O mejor, usar template variables:**
+```html
+<!-- En el generador de landings, leer config primero -->
+<a href="https://wa.me/{{config.contact.whatsapp}}">WhatsApp: {{config.contact.phoneDisplay}}</a>
+```
+
+#### Comando para Crear Config
+
+```bash
+cat > config/landing.json <<'EOF'
+{
+  "version": "v2.0.0",
+  ...
+}
+EOF
+```
+
+---
+
+### ✅ VALIDACIÓN AUTOMÁTICA DE VERSIONES
+
+#### Script de Validación
+
+**validate-landing.sh** - Valida que la landing use la versión correcta
+
+```bash
+#!/bin/bash
+
+# Validador de Landing Pages v2.0.0
+# Valida que la landing page use la plantilla vigente
+
+LANDING_PATH="$1"
+CONFIG_PATH="config/landing.json"
+CRITICAL_CSS_PATH="assets/css/critical.css"
+
+echo "🔍 Validando: $LANDING_PATH"
+
+# 1. Verificar que existe el config
+if [ ! -f "$CONFIG_PATH" ]; then
+    echo "❌ FALLA: config/landing.json no existe"
+    exit 1
+fi
+
+# 2. Leer versión vigente del config
+VERSION_VIGENTE=$(jq -r '.version' "$CONFIG_PATH")
+echo "✅ Versión vigente: $VERSION_VIGENTE"
+
+# 3. Leer hash vigente del Critical CSS
+CRITICAL_CSS_HASH_VIGENTE=$(jq -r '.styles.criticalCssHash' "$CONFIG_PATH")
+echo "✅ Hash vigente Critical CSS: $CRITICAL_CSS_HASH_VIGENTE"
+
+# 4. Calcular hash real del critical.css
+CRITICAL_CSS_HASH_REAL=$(md5 -q "$CRITICAL_CSS_PATH" | head -c 8)
+
+if [ "$CRITICAL_CSS_HASH_VIGENTE" != "$CRITICAL_CSS_HASH_REAL" ]; then
+    echo "❌ FALLA: Hash de critical.css NO coincide"
+    echo "   Vigente: $CRITICAL_CSS_HASH_VIGENTE"
+    echo "   Real:    $CRITICAL_CSS_HASH_REAL"
+    exit 1
+fi
+
+# 5. Verificar que la landing usa critical.css compartido
+if ! grep -q "href=\".*critical.css\"" "$LANDING_PATH"; then
+    echo "❌ FALLA: Landing NO usa critical.css compartido"
+    exit 1
+fi
+
+# 6. Verificar versión de la landing (meta tag)
+if grep -q "data-template-version=\"$VERSION_VIGENTE\"" "$LANDING_PATH"; then
+    echo "✅ Landing usa versión vigente: $VERSION_VIGENTE"
+else
+    echo "❌ FALLA: Landing NO tiene versión vigente"
+    echo "   Agregar: <meta name=\"template-version\" content=\"$VERSION_VIGENTE\" data-template-version=\"$VERSION_VIGENTE\">"
+    exit 1
+fi
+
+# 7. Verificar teléfonos del config
+CONFIG_PHONE=$(jq -r '.contact.whatsapp' "$CONFIG_PATH")
+if ! grep -q "$CONFIG_PHONE" "$LANDING_PATH"; then
+    echo "❌ FALLA: Landing NO usa teléfono del config"
+    echo "   Config: $CONFIG_PHONE"
+    exit 1
+fi
+
+# 8. Verificar GTM ID del config
+CONFIG_GTM=$(jq -r '.tracking.googleTagManagerId' "$CONFIG_PATH")
+if ! grep -q "$CONFIG_GTM" "$LANDING_PATH"; then
+    echo "❌ FALLA: Landing NO usa GTM ID del config"
+    echo "   Config: $CONFIG_GTM"
+    exit 1
+fi
+
+echo ""
+echo "✅ ✅ ✅ VALIDACIÓN EXITOSA"
+echo "Landing $LANDING_PATH pasa todas las validaciones"
+exit 0
+```
+
+#### Uso del Validador
+
+```bash
+# Validar una landing específica
+./validate-landing.sh servicios/reparacion-cortos-circuitos/index.html
+
+# Validar todas las landings
+find servicios/ -name "index.html" | while read landing; do
+    ./validate-landing.sh "$landing" || exit 1
+done
+```
+
+#### Meta Tag de Versión (OBLIGATORIO)
+
+Cada landing DEBE incluir este meta tag en `<head>`:
+
+```html
+<meta name="template-version" content="v2.0.0" data-template-version="v2.0.0">
+```
+
+Esto permite la validación automática.
+
+---
+
+### 🔄 FLUJO DE ACTUALIZACIÓN DE PLANTILLA
+
+**Cuando cambie index.html o styles.css:**
+
+#### Paso 1: Actualizar Fuente de Verdad
+
+```bash
+# 1. Hacer cambios en index.html
+vim index.html
+
+# 2. Extraer nuevo Critical CSS (95 líneas)
+sed -n '78,172p' index.html > assets/css/critical.css
+
+# 3. Calcular nuevo hash
+NEW_HASH=$(md5 -q assets/css/critical.css | head -c 8)
+echo "Nuevo hash: $NEW_HASH"
+
+# 4. Actualizar config/landing.json
+jq ".styles.criticalCssHash = \"$NEW_HASH\"" config/landing.json > config/landing.json.tmp
+mv config/landing.json.tmp config/landing.json
+
+# 5. Incrementar versión
+jq '.version = "v2.1.0"' config/landing.json > config/landing.json.tmp
+mv config/landing.json.tmp config/landing.json
+
+# 6. Actualizar fecha
+jq ".lastUpdate = \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"" config/landing.json > config/landing.json.tmp
+mv config/landing.json.tmp config/landing.json
+```
+
+#### Paso 2: Actualizar Sección "Fuente de Verdad" en landing-creator.md
+
+```bash
+# Editar .claude/commands/landing-creator.md
+# Actualizar:
+# - Última actualización: [nueva fecha]
+# - Versión de plantilla: [nueva versión]
+# - Commit/Hash: [nuevo hash del commit]
+# - Critical CSS: [verificar líneas exactas]
+```
+
+#### Paso 3: Recalcular Hashes
+
+```bash
+# Recalcular hash del Critical CSS
+md5 -q assets/css/critical.css | head -c 8
+
+# Recalcular hash de styles.css (si cambió)
+md5 -q styles.css
+```
+
+#### Paso 4: Regenerar Landings Afectadas
+
+**Opción A: Regenerar todas las landings**
+```bash
+# Listar todas las landings
+find servicios/ -name "index.html" > landings.txt
+
+# Regenerar cada una (usar landing-creator)
+# Este comando debe ejecutarse manualmente para cada landing
+```
+
+**Opción B: Solo actualizar meta tag de versión**
+```bash
+# Si solo cambió versión, actualizar meta tag
+find servicios/ -name "index.html" -exec sed -i '' 's/data-template-version="v2.0.0"/data-template-version="v2.1.0"/' {} \;
+```
+
+#### Paso 5: Validar Todas las Landings
+
+```bash
+# Ejecutar validador en todas las landings
+find servicios/ -name "index.html" | while read landing; do
+    echo "Validando: $landing"
+    ./validate-landing.sh "$landing" || echo "❌ FALLA: $landing"
+done
+```
+
+#### Paso 6: Commit de Actualización
+
+```bash
+git add index.html assets/css/critical.css config/landing.json .claude/commands/landing-creator.md
+git commit -m "chore(plantilla): actualizar a v2.1.0
+
+- Actualizado Critical CSS con [descripción de cambios]
+- Nuevo hash: $NEW_HASH
+- Regeneradas [N] landings afectadas
+
+✅ Todas las landings validadas contra nueva versión"
+```
+
+---
 
 ## 🎨 VALORES EXACTOS OBLIGATORIOS
 
@@ -92,6 +516,7 @@ index.html === nueva-pagina.html (ESTILOS, COLORES, TIPOGRAFÍA, ICONOS)
 ```css
 theme-color: #0066cc       /* EXACTO - NO #0066CC ni #0066cd */
 ```
+**Nota:** `theme-color` solo para meta; NO usar #0066cc en botones/textos. La paleta UI permitida es la naranja definida arriba.
 
 #### Colores de Botones Flotantes
 ```css
@@ -371,6 +796,79 @@ La sección de beneficios DEBE usar la estructura EXACTA de plomero culiacan pro
 
 ---
 
+### ❌ FALLA AUTOMÁTICA - ESTRUCTURA HTML OBLIGATORIA (v2.0.0)
+
+**🚨 REGLA CRÍTICA: Toda landing v2.0.0 DEBE tener navegación + breadcrumbs**
+
+Esta regla previene el error de remover accidentalmente la navegación o breadcrumbs pensando que no son necesarios.
+
+**ESTRUCTURA OBLIGATORIA (en orden exacto):**
+
+```html
+<body>
+    <!-- 1. GTM noscript -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5" ...></iframe>
+    </noscript>
+
+    <!-- 2. NAVEGACIÓN (OBLIGATORIA) -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <img src="../../logo-electricista-culiacan-pro.webp"
+                         alt="Electricista Culiacán Pro"
+                         width="140" height="140">
+                </a>
+                <button class="mobile-menu-btn" aria-label="Menú">...</button>
+                <ul class="nav-menu">...</ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. BREADCRUMBS (OBLIGATORIOS) -->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <nav aria-label="Breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <ol class="breadcrumb">...</ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 4. Hero y resto del contenido -->
+    <header id="inicio" class="hero">...</header>
+```
+
+**✅ REFERENCIA:**
+- **Archivo:** `servicios/reparacion-cortos-circuitos/index.html`
+- **Navegación:** Líneas 255-278
+- **Breadcrumbs:** Líneas 280-302
+
+**❌ PROHIBIDO:**
+- ❌ Landings SIN navegación - FALLA INMEDIATA
+- ❌ Landings SIN breadcrumbs - FALLA INMEDIATA
+- ❌ Hero que empieza directamente después de GTM - FALLA
+- ❌ Breadcrumbs solo en JSON-LD sin HTML visible - FALLA
+
+**✅ VALIDACIÓN AUTOMÁTICA:**
+El script `validate-landing.sh` verifica automáticamente:
+```bash
+# Verifica que existe <nav class="nav">
+# Verifica que existe class="breadcrumb-wrapper"
+```
+
+**⚠️ POR QUÉ ESTA REGLA:**
+En una sesión anterior se removió accidentalmente la navegación pensando que no era necesaria. Esta regla previene ese error garantizando que TODA landing v2.0.0 tenga estructura completa.
+
+**CHECKLIST PRE-MODIFICACIÓN:**
+Antes de hacer cambios estructurales a una landing:
+1. ✅ Abrir `servicios/reparacion-cortos-circuitos/index.html` (referencia v2.0.0)
+2. ✅ Comparar estructura completa (nav → breadcrumbs → hero)
+3. ✅ Ejecutar `./validate-landing.sh` ANTES de modificar
+4. ✅ Ejecutar `./validate-landing.sh` DESPUÉS de modificar
+
+---
+
 ## 🚨 VALIDACIÓN AUTOMÁTICA
 
 **Antes de hacer commit, verificar CADA UNO de estos valores:**
@@ -481,8 +979,8 @@ El hero DEBE usar EXACTAMENTE esta estructura (index.html línea 2815):
 - ❌ NO usar imágenes diferentes a las de index.html sin verificar
 - ❌ NO omitir `content-visibility:auto` en el CSS de `.hero-background img`
 
-**Imagen hero por defecto:**
-- USAR: `emergencia-electrica-culiacan-800w.webp` y `emergencia-electrica-culiacan-1200w.webp` (igual que index.html)
+**Imagen hero por defecto (desde config):**
+- USAR: `config.images.heroDefault["800w"]` y `config.images.heroDefault["1200w"]` (igual que index.html)
 - NO USAR: hero-electrical-*.webp u otras imágenes obsoletas a menos que el usuario las especifique
 
 **⚠️ REGLA #0.2 - BOTONES FLOTANTES (CRÍTICO):**
@@ -490,7 +988,7 @@ El hero DEBE usar EXACTAMENTE esta estructura (index.html línea 2815):
 Los botones flotantes (WhatsApp + Llamar) DEBEN usar EXACTAMENTE esta estructura (index.html línea 3862-3876):
 
 ```html
-<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20informaci%C3%B3n%20sobre%20servicios%20de%20electricidad%20en%20Culiac%C3%A1n"
+<a href="https://wa.me/{{config.contact.whatsapp}}?text=Hola%2C%20necesito%20informaci%C3%B3n%20sobre%20servicios%20de%20electricidad%20en%20Culiac%C3%A1n"
    id="cta-whatsapp"
    class="floating-btn floating-whatsapp"
    target="_blank"
@@ -500,7 +998,7 @@ Los botones flotantes (WhatsApp + Llamar) DEBEN usar EXACTAMENTE esta estructura
     <span class="online-badge" aria-label="En línea"></span>
 </a>
 
-<a href="tel:+526673922273"
+<a href="tel:{{config.contact.phone}}"
    id="cta-llamar"
    class="floating-btn floating-call"
    aria-label="Llamar ahora">
@@ -521,65 +1019,15 @@ Los botones flotantes (WhatsApp + Llamar) DEBEN usar EXACTAMENTE esta estructura
 - ❌ NO usar `<div class="cta-bar">` - Botones van directos sin contenedor
 - ❌ NO usar clases incorrectas - DEBE usar `.floating-btn`, `.floating-whatsapp`, `.floating-call`
 - ❌ NO usar colores incorrectos - WhatsApp: #22c55e (NO #25D366), Tel: #0f4fa8 (NO #0066cc)
-- ❌ NO usar teléfonos diferentes - WhatsApp: +526673922273, Tel: +526673922273
+- ❌ NO hardcodear teléfonos - Siempre desde `config.contact.*`
 
 **⚠️ REGLA #0.3 - CRITICAL CSS COMPLETO (CRÍTICO):**
 
-Cada página DEBE incluir el bloque COMPLETO de Critical CSS. NO es suficiente copiar solo CSS individual de componentes.
+Cada página DEBE cargar `assets/css/critical.css` (fuente única). NO se permite duplicar el bloque `<style>` inline (salvo preloads mínimos).
 
-**✅ DEBE incluir TODO el Critical CSS (COPIAR DE index.html líneas 77-172):**
-```css
-<style>
-    /* 5 Fonts Web (Inter + Montserrat) */
-    @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/inter-400.woff2') format('woff2')}
-    @font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/inter-500.woff2') format('woff2')}
-    @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/inter-600.woff2') format('woff2')}
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/montserrat-700.woff2') format('woff2')}
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('assets/fonts/montserrat-800.woff2') format('woff2')}
+**Referencia del contenido de critical.css:** ver sección “Critical CSS compartido”. Si algo falta o sobra respecto a index.html, actualizar `assets/css/critical.css` y recalcular hash.
 
-    /* CSS Variables */
-    :root{--brand:#E36414;--brand-light:#F97316;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--container-max-width:1200px;--container-gutter:24px}
-
-    /* Base styles */
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text);background-color:var(--bg-soft);padding-top:80px}
-    .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
-    h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
-    h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
-
-    /* Nav */
-    .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
-    .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
-    .logo{display:block;text-decoration:none;transition:opacity .2s ease;contain:layout}
-    .logo img{height:140px;width:auto;display:block;max-height:160px;mix-blend-mode:multiply;aspect-ratio:512/195}
-    .logo:hover{opacity:0.9}
-    @media (max-width:768px){.logo img{height:90px;max-height:100px}}
-
-    /* Hero (CRÍTICO para centrado) */
-    .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
-    .hero-background{position:absolute;inset:0;z-index:0}
-    .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center;content-visibility:auto}
-    @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:20% 35%}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;backdrop-filter:blur(2px)!important;-webkit-backdrop-filter:blur(2px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero .btn-primary{width:100%!important;max-width:100%!important;font-size:1rem!important;padding:0.875rem 1.5rem!important}}
-    .hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(10,18,36,0.75) 0%,rgba(10,18,36,0.5) 60%,transparent 100%);pointer-events:none}
-    .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1);contain:layout paint}
-
-    /* Buttons */
-    .btn-primary{display:inline-block;background:linear-gradient(135deg,#fba336 0%,#f97316 45%,#e36414 100%);color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(227,100,20,0.28);min-height:48px;min-width:48px;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;contain:layout style;will-change:transform}
-    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(227,100,20,0.34);filter:brightness(1.04)}
-    .btn-primary:active{transform:translateY(0);box-shadow:0 10px 20px rgba(227,100,20,0.28)}
-
-    /* Floating buttons */
-    .floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}
-    .floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
-    .floating-call{background:#0f4fa8;bottom:18px}
-    .floating-whatsapp{background:#22c55e;bottom:78px}
-</style>
-```
-
-❌ **ERROR COMÚN (causa problemas de alineación):**
-Solo copiar CSS de botones flotantes sin incluir el resto del Critical CSS.
-
-**Consecuencias de Critical CSS incompleto:**
+**Consecuencias de Critical CSS incompleto o inline desactualizado:**
 - ❌ Hero desalineado (título muy a la derecha o muy arriba)
 - ❌ Fuentes web no cargan (se ve fuente del sistema)
 - ❌ Variables CSS no definidas (colores rotos)
@@ -629,6 +1077,40 @@ Solo copiar CSS de botones flotantes sin incluir el resto del Critical CSS.
 - ✅ Nav: width="140" height="140"
 - ✅ Footer: width="200" height="76"
 
+**⚠️ REGLA #0.6 - ABRIR PÁGINAS PARA VERIFICACIÓN (CRÍTICO):**
+
+🚨 **NUNCA abrir archivos HTML con `file://` - Safari bloquea CSS por seguridad CORS**
+
+**❌ MAL (CSS NO carga):**
+```bash
+open -a Safari "/ruta/al/proyecto/servicios/[slug]/index.html"
+# Resultado: Sin estilos, imágenes rotas, navegación sin formato
+```
+
+**✅ BIEN (usar servidor HTTP local):**
+```bash
+# 1. Iniciar servidor HTTP en raíz del proyecto
+cd "/ruta/al/proyecto"
+python3 -m http.server 8080 &
+
+# 2. Abrir página vía localhost
+open -a Safari "http://localhost:8080/servicios/[slug]/index.html"
+```
+
+**Problema:** Safari (y otros navegadores) bloquean la carga de archivos CSS, fuentes, e imágenes cuando se abre un archivo HTML local con el protocolo `file://` por razones de seguridad CORS (Cross-Origin Resource Sharing).
+
+**Solución:** Servir los archivos a través de un servidor HTTP local usando `python3 -m http.server` en la raíz del proyecto.
+
+**✅ VERIFICACIÓN CORRECTA:**
+1. Servidor HTTP iniciado en background (`&`)
+2. Página abierta con `http://localhost:8080/...`
+3. Todos los estilos cargan correctamente
+4. Todas las imágenes se muestran
+5. Logo visible
+6. Navegación con formato correcto
+
+**⚠️ IMPORTANTE:** Siempre verificar que el servidor HTTP esté corriendo antes de abrir la página. Si ya hay un servidor corriendo en el puerto 8080, usar otro puerto (8081, 8082, etc.).
+
 ## Proceso Interactivo
 
 ### Paso 1: Solicitar información básica
@@ -662,15 +1144,11 @@ Solo copiar CSS de botones flotantes sin incluir el resto del Critical CSS.
    - USAR SOLO estructura de index.html
    - CREAR backup automático
 
-**Teléfonos oficiales:**
-- WhatsApp: +526673922273
-- Llamadas: +526673922273
+**Teléfonos oficiales:** leer siempre de `config/landing.json` (`contact.whatsapp`, `contact.phone`)
 
-**Imágenes hero por defecto:**
-- emergencia-electrica-culiacan-800w.webp
-- emergencia-electrica-culiacan-1200w.webp
+**Imágenes hero por defecto:** usar `config.images.heroDefault`
 
-**Theme color:** #0066cc
+**Theme color:** #0066cc (solo meta, no UI)
 
 ## Notas finales
 
@@ -691,18 +1169,52 @@ Solo copiar CSS de botones flotantes sin incluir el resto del Critical CSS.
 
 **Ejecuta ESTE checklist COMPLETO antes de hacer commit de cualquier landing page.**
 
-### 📋 1. Critical CSS (OBLIGATORIO)
+### 📋 0. VERSIÓN Y CONFIG (NUEVO - OBLIGATORIO)
 
-- [ ] **Critical CSS inline presente** - Bloque `<style>` completo en `<head>` (líneas 77-172 de index.html)
-- [ ] **5 fuentes web @font-face** - Inter (400, 500, 600) + Montserrat (700, 800)
-- [ ] **Variables CSS :root** - Todas las variables definidas (--brand, --brand-light, --text, etc.)
-- [ ] **Base styles** - *, body, .container, h1/h2/h3 definidos
-- [ ] **Nav styles** - .nav, .nav-wrapper, .logo, .logo img completos
-- [ ] **Hero styles** - .hero, .hero-background, .hero-content, .hero::after, media queries móvil
-- [ ] **Button styles** - .btn-primary con gradientes y transiciones
-- [ ] **Floating buttons** - .floating-btn, .floating-call, .floating-whatsapp
+- [ ] **Versión de plantilla vigente** - Meta tag presente:
+  ```html
+  <meta name="template-version" content="v2.0.0" data-template-version="v2.0.0">
+  ```
+- [ ] **Uso de CSS compartido** - Landing usa `critical.css` compartido:
+  ```html
+  <link rel="stylesheet" href="../../assets/css/critical.css" fetchpriority="high">
+  ```
+- [ ] **Hash/fecha coincide** - Validado con `./validate-landing.sh [ruta]` (hash actual `53ef5e7f`)
+- [ ] **Valores del config central** - Teléfonos, GTM/GA IDs, email, coordenadas, hero, logos tomados de `config/landing.json`
+- [ ] **Config existe** - Archivo `config/landing.json` presente en raíz del proyecto
+- [ ] **Critical.css existe** - Archivo `assets/css/critical.css` presente y actualizado
+- [ ] **Rutas relativas** - Sin rutas absolutas locales
+- [ ] **Accesibilidad mínima** - `alt` descriptivo (hero, servicios), `aria-current="page"` en breadcrumb, foco visible (usa estilos existentes)
 
-**❌ SI FALTA CRITICAL CSS → La página NO funciona correctamente**
+**✅ VALIDAR CON:**
+```bash
+./validate-landing.sh servicios/[slug]/index.html
+```
+
+**❌ SI FALTA VERSIÓN O CONFIG → Landing NO es válida**
+
+---
+
+### 📋 1. Critical CSS Compartido (OBLIGATORIO)
+
+- [ ] **Critical CSS NO inline** - Bloque `<style>` eliminado del `<head>`
+- [ ] **Link a critical.css** - `<link rel="stylesheet" href="../../assets/css/critical.css" fetchpriority="high">`
+- [ ] **Preloads presentes** - Fuentes críticas y hero image preloaded
+- [ ] **Hash coincide** - Hash de `critical.css` coincide con `config/landing.json`:
+  ```bash
+  md5 -q assets/css/critical.css | head -c 8
+  ```
+
+**✅ CONTENIDO DE critical.css (95 líneas de index.html):**
+- 5 fuentes web @font-face - Inter (400, 500, 600) + Montserrat (700, 800)
+- Variables CSS :root - Todas las variables (--brand, --brand-light, --text, etc.)
+- Base styles - *, body, .container, h1/h2/h3
+- Nav styles - .nav, .nav-wrapper, .logo, .logo img
+- Hero styles - .hero, .hero-background, .hero-content, .hero::after, media queries móvil
+- Button styles - .btn-primary con gradientes y transiciones
+- Floating buttons - .floating-btn, .floating-call, .floating-whatsapp
+
+**❌ SI USA CSS INLINE O NO USA critical.css → Landing FALLA validación**
 
 ### 📋 2. Estructura Hero (OBLIGATORIO)
 
@@ -759,8 +1271,9 @@ Solo copiar CSS de botones flotantes sin incluir el resto del Critical CSS.
 ### 📋 5. SEO Meta Tags (OBLIGATORIO)
 
 - [ ] **Title:** 50-60 caracteres (óptimo), máximo 70
-- [ ] **Meta description:** 120-155 caracteres (óptimo), máximo 160
+- [ ] **Meta description:** 120-155 caracteres (óptimo), máximo 160 (revisar ancho en píxeles en SERP)
 - [ ] **Canonical URL:** `<link rel="canonical" href="https://..." />`
+- [ ] **Canonical/OG por slug** - Construidos según la URL final de la landing
 - [ ] **Theme color:** `<meta name="theme-color" content="#0066cc">`
 - [ ] **Open Graph:** og:type, og:url, og:title, og:description, og:image
 - [ ] **Twitter Card:** twitter:card, twitter:title, twitter:description, twitter:image
@@ -831,25 +1344,36 @@ Solo copiar CSS de botones flotantes sin incluir el resto del Critical CSS.
 
 **❌ SI FALTA GTM → Deployment FALLA en SEO audit**
 
-### 📋 8. Teléfonos Correctos (OBLIGATORIO)
+**Nota de tracking:** Usar GA vía gtag o vía GTM. Si se cargan ambos, asegurar que GA no esté duplicado en GTM para evitar doble conteo.
 
-- [ ] **TODOS los teléfonos son 667 392 2273**
-- [ ] **WhatsApp:** `https://wa.me/526673922273`
-- [ ] **Tel links:** `tel:+526673922273`
-- [ ] **NO hay 667 000 0000** en ninguna parte
-- [ ] **NO hay 667 163 1231** en ninguna parte
+### 📋 8. Teléfonos y Datos del Config (OBLIGATORIO)
 
-**❌ SI HAY TELÉFONOS VIEJOS → Cliente no puede contactar correctamente**
+- [ ] **Teléfonos del config** - Leer de `config/landing.json` → `contact.phone` y `contact.whatsapp`
+- [ ] **WhatsApp correcto:** `https://wa.me/{{config.contact.whatsapp}}`
+- [ ] **Tel correcto:** `tel:{{config.contact.phone}}`
+- [ ] **Email del config:** `{{config.contact.email}}`
+- [ ] **Coordenadas del config:** `{{config.location.coordinates.latitude}}`, `{{config.location.coordinates.longitude}}`
+- [ ] **GTM ID del config:** `{{config.tracking.googleTagManagerId}}`
+- [ ] **GA ID del config:** `{{config.tracking.googleAnalyticsId}}`
+
+**✅ VERIFICAR:**
+```bash
+# Teléfonos coinciden con config
+jq -r '.contact.phone' config/landing.json  # Debe ser +526673922273
+jq -r '.contact.whatsapp' config/landing.json  # Debe ser 526673922273
+```
+
+**❌ SI HAY TELÉFONOS HARDCODED → Cliente recibe datos desactualizados**
 
 ### 📋 9. Imágenes Hero Correctas (OBLIGATORIO)
 
-- [ ] **USA:** `emergencia-electrica-culiacan-800w.webp` y `emergencia-electrica-culiacan-1200w.webp`
-- [ ] **NO USA:** hero-electricista-culiacan-*.webp (obsoletas)
+- [ ] **Usar valores del config** `config.images.heroDefault` (800w y 1200w)
+- [ ] **NO usar** hero-electricista-culiacan-*.webp (obsoletas)
 - [ ] **Rutas correctas** según profundidad:
   - Servicios: `../../assets/images/optimizadas/`
   - Colonias: `../../assets/images/optimizadas/`
 
-**❌ SI USA IMÁGENES OBSOLETAS → Inconsistencia visual**
+**❌ SI USA IMÁGENES OBSOLETAS O FUERA DE CONFIG → Inconsistencia visual**
 
 ### 📋 10. JSON-LD Schemas (OBLIGATORIO)
 
@@ -997,8 +1521,11 @@ Estos son los errores MÁS FRECUENTES encontrados en auditorías:
 3. **❌ Logo sin width/height** → CLS alto
 4. **❌ Teléfonos viejos (667 000 0000)** → Cliente no puede llamar
 5. **❌ Hero usa hero-electricista en vez de emergencia-electrica** → Imagen obsoleta
-6. **❌ NO incluir Critical CSS inline** → FOUC (Flash of Unstyled Content)
-7. **❌ GTM con ID placeholder (GTM-XXXXXXX)** → Tracking roto
-8. **❌ Meta description fuera de 120-155 chars** → SEO audit FALLA
-9. **❌ Breadcrumb solo en JSON-LD, NO HTML visible** → UX pobre
-10. **❌ Mobile no probado** → 60% usuarios con experiencia rota
+6. **❌ NO incluir link a critical.css compartido** → FOUC + CSS duplicado
+7. **❌ Usar CSS inline en vez de archivo compartido** → Duplicación + difícil mantener
+8. **❌ GTM con ID placeholder (GTM-XXXXXXX)** → Tracking roto
+9. **❌ Meta description fuera de 120-155 chars** → SEO audit FALLA
+10. **❌ Breadcrumb solo en JSON-LD, NO HTML visible** → UX pobre
+11. **❌ Mobile no probado** → 60% usuarios con experiencia rota
+12. **❌ Valores hardcoded en vez de leer config.json** → Datos desactualizados
+13. **❌ Abrir páginas con `file://` en vez de servidor HTTP** → CSS NO carga, imágenes rotas, sin estilos (usar `python3 -m http.server 8080` y abrir con `http://localhost:8080/...`)
