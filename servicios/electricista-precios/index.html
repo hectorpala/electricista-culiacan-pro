@@ -20,7 +20,7 @@
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="../../manifest.json">
-    <meta name="theme-color" content="#1E40AF">
+    <meta name="theme-color" content="#0066cc">
 
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://www.googletagmanager.com">
@@ -30,10 +30,10 @@
 
     <!-- Preload critical fonts -->
     <link rel="preload" href="../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="../../styles.css">
+    <link rel="preload" href="../../assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://electricistaculiacanpro.mx/servicios/electricista-precios/" />
@@ -42,8 +42,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://electricistaculiacanpro.mx/servicios/electricista-precios/" />
     <meta property="og:title" content="Precios de Electricista en Culiacán | Cotización Gratis" />
-    <meta property="og:description" content="⚡ Precios de electricista en Culiacán. Cotización gratis sin compromiso. Emergencia 24/7, precios transparentes." />
-    <meta property="og:image" content="https://electricistaculiacanpro.mx/assets/images/optimizadas/hero-electricista-culiacan-800w.webp" />
+    <meta property="og:description" content="⚡ Precios de electricista en Culiacán. Cotización gratis sin compromiso. Emergencia 24/7, precios transparentes. Llama: 667 392 2273" />
+    <meta property="og:image" content="https://electricistaculiacanpro.mx/assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp" />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:site_name" content="Electricista Culiacán Pro" />
 
@@ -51,8 +51,118 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://electricistaculiacanpro.mx/servicios/electricista-precios/" />
     <meta name="twitter:title" content="Precios de Electricista en Culiacán | Cotización Gratis" />
-    <meta name="twitter:description" content="⚡ Precios de electricista en Culiacán. Cotización gratis sin compromiso. Emergencia 24/7, precios transparentes." />
-    <meta name="twitter:image" content="https://electricistaculiacanpro.mx/assets/images/optimizadas/hero-electricista-culiacan-800w.webp" />
+    <meta name="twitter:description" content="⚡ Precios de electricista en Culiacán. Cotización gratis sin compromiso. Emergencia 24/7, precios transparentes. Llama: 667 392 2273" />
+    <meta name="twitter:image" content="https://electricistaculiacanpro.mx/assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp" />
+
+    <!-- Critical CSS -->
+    <style>
+        @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('../../assets/fonts/inter-400.woff2') format('woff2')}
+        @font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('../../assets/fonts/inter-500.woff2') format('woff2')}
+        @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/inter-600.woff2') format('woff2')}
+        @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('../../assets/fonts/montserrat-700.woff2') format('woff2')}
+        @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('../../assets/fonts/montserrat-800.woff2') format('woff2')}
+        :root{--brand:#E36414;--brand-light:#F97316;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--container-max-width:1200px;--container-gutter:24px}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text);background-color:var(--bg-soft);padding-top:80px}
+        .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
+        h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
+        h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
+        .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+        .logo{display:block;text-decoration:none;transition:opacity .2s ease;contain:layout}
+        .logo img{height:140px;width:auto;display:block;max-height:160px;mix-blend-mode:multiply;aspect-ratio:512/195}
+        .logo:hover{opacity:0.9}
+        @media (max-width:768px){.logo img{height:90px;max-height:100px}}
+        .nav-menu{display:flex;list-style:none;gap:2rem}
+        .nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
+        .nav-link:hover{color:var(--brand-light)}
+        .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
+        .hero-background{position:absolute;inset:0;z-index:0}
+        .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center;content-visibility:auto}
+        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:20% 35%}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;backdrop-filter:blur(2px)!important;-webkit-backdrop-filter:blur(2px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:1rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.9)!important;backdrop-filter:blur(1px);-webkit-backdrop-filter:blur(1px);padding:0.65rem 1rem!important;font-size:0.8rem!important;gap:0.5rem!important}.hero-rating .rating-stars{font-size:0.95rem!important}.hero-rating .rating-score{font-size:0.85rem!important}.hero-rating .rating-count{font-size:0.75rem!important}.hero .btn-primary{width:100%!important;max-width:100%!important;font-size:1rem!important;padding:0.875rem 1.5rem!important}.hero-features{gap:1rem;margin:1.5rem 0}.feature-item{font-size:0.85rem}}
+        .hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(10,18,36,0.75) 0%,rgba(10,18,36,0.5) 60%,transparent 100%);pointer-events:none}
+        .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1);contain:layout paint}
+        .hero h1{color:#FFFFFF;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+        .hero-subtitle{font-size:1.2rem;color:#F1F5F9;margin-bottom:3rem;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.55;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
+        .hero-rating{display:inline-flex;align-items:center;gap:0.75rem;margin:1rem 0 1.5rem;padding:0.85rem 1.5rem;background:rgba(255,255,255,0.98);border-radius:50px;box-shadow:0 4px 16px rgba(0,0,0,0.18),0 1px 3px rgba(0,0,0,0.08);font-size:1rem;border:1px solid rgba(66,133,244,0.15);contain:layout style}
+        .google-logo{width:20px;height:20px;flex-shrink:0}
+        .rating-stars{color:#FBBC04;font-size:1.15rem;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,0.1)}
+        .rating-score{font-weight:700;color:#1a73e8;font-size:1.05rem}
+        .rating-divider{color:#dadce0;margin:0 0.25rem}
+        .rating-count{color:#5f6368;font-size:0.9rem;font-weight:500}
+        .hero-features{display:flex;justify-content:center;gap:2rem;margin:2rem 0 2.5rem;flex-wrap:wrap}
+        .feature-item{display:flex;align-items:center;gap:0.5rem;color:#fff;font-size:0.95rem;font-weight:500}
+        .feature-icon{width:24px;height:24px;flex-shrink:0;color:#f97316}
+        @media (max-width:640px){.hero-features{gap:1rem;margin:1.5rem 0 2rem}.feature-item{font-size:0.875rem}.feature-icon{width:20px;height:20px}}
+        .hero-contact{color:#ffffff;margin:1rem 0}
+        .hero-contact a{color:#f97316;font-weight:700;text-decoration:none}
+        .hero-contact a:hover{color:#fb923c}
+        .hero-guarantee{color:#ffffff;margin:1rem 0}
+        .btn-primary{display:inline-block;background:linear-gradient(135deg,#fba336 0%,#f97316 45%,#e36414 100%);color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(227,100,20,0.28);min-height:48px;min-width:48px;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;contain:layout style;will-change:transform}
+        .btn-primary:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(227,100,20,0.34);filter:brightness(1.04)}
+        .btn-primary:active{transform:translateY(0);box-shadow:0 10px 20px rgba(227,100,20,0.28)}
+        .btn-secondary{display:inline-block;background:transparent;color:var(--brand);border:2px solid var(--brand);padding:1rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;transition:all 0.2s}
+        .btn-secondary:hover{background:var(--brand);color:white}
+        .floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}
+        .floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
+        .floating-call{background:#0f4fa8;bottom:18px}
+        .floating-whatsapp{background:#22c55e;bottom:78px}
+        .mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;gap:0}
+        .mobile-menu-btn span{display:block;height:3px;width:100%;background:#F97316;border-radius:2px;margin:0;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
+        .section{padding:4rem 0}
+        .section-alt{background:var(--bg-soft)}
+        .section h2{font-size:2.5rem;text-align:center;margin-bottom:3rem}
+        .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:3rem}
+        .benefit-card{background:white;padding:2rem;border-radius:12px;box-shadow:0 2px 10px var(--shadow);text-align:center}
+        .benefit-icon{width:64px;height:64px;margin:0 auto 1rem;color:var(--brand)}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+        .card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px var(--shadow);transition:transform 0.2s}
+        .card:hover{transform:translateY(-4px)}
+        .card-image{width:100%;height:200px;object-fit:cover}
+        .card-content{padding:1.5rem}
+        .faq{max-width:800px;margin:0 auto}
+        .faq-item{background:white;margin-bottom:1rem;border-radius:8px;overflow:hidden;box-shadow:0 2px 10px var(--shadow)}
+        .faq-item summary{padding:1.25rem;cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center}
+        .faq-item summary::after{content:'+';font-size:1.5rem;color:var(--brand)}
+        .faq-item[open] summary::after{content:'−'}
+        .faq-item p{padding:0 1.25rem 1.25rem;color:var(--text-light)}
+        .final-cta{text-align:center;max-width:600px;margin:0 auto 3rem;padding:2rem;background:var(--bg-card);border-radius:20px;box-shadow:0 8px 32px var(--shadow-lg);border:2px solid var(--brand)}
+        .cta-text{font-size:1.25rem;color:var(--text);font-weight:600;margin-bottom:0.5rem}
+        .cta-subtitle{font-size:1rem;color:var(--text-light);margin-bottom:2rem}
+        .cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+        .btn-whatsapp{background:var(--whatsapp);background:#22c55e}
+        .btn-secondary{background:#64748b;color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(100,116,139,0.28);min-height:48px;min-width:48px;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease}
+        .btn-secondary:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(100,116,139,0.34);filter:brightness(1.04)}
+        .btn-secondary:active{transform:translateY(0);box-shadow:0 10px 20px rgba(100,116,139,0.28)}
+        .footer{background:var(--text);color:white;padding:3rem 0 1rem;margin-top:4rem}
+        .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:2rem}
+        .footer h3{margin-bottom:1rem}
+        .footer-links{list-style:none}
+        .footer-links li{margin-bottom:0.5rem}
+        .footer-links a{color:rgba(255,255,255,0.8);text-decoration:none}
+        .footer-links a:hover{color:white}
+        @media (max-width:768px){
+            .mobile-menu-btn{display:flex}
+            .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem;z-index:40;transition:left 0.3s ease}
+            .nav-menu.active{left:0}
+            .nav-link{color:#0F172A!important}
+            .nav-link:hover{color:var(--brand)!important}
+            .hero{min-height:70vh;padding:100px 16px 60px}
+            h1{font-size:2rem}
+        }
+    </style>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="../../styles.css">
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSV2K9N2ZD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NSV2K9N2ZD');
+    </script>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -92,67 +202,27 @@
           ]
         },
         {
-          "@type": "Electrician",
-          "@id": "https://electricistaculiacanpro.mx/#business",
-          "name": "Electricista Culiacán Pro",
-          "url": "https://electricistaculiacanpro.mx/",
-          "logo": "https://electricistaculiacanpro.mx/logo-electricista-culiacan-pro.webp",
-          "image": "https://electricistaculiacanpro.mx/assets/images/optimizadas/hero-electricista-culiacan-800w.webp",
-          "telephone": "+52 667 000 0000",
-          "email": "contacto@electricistaculiacanpro.mx",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Culiacán",
-            "addressRegion": "Sinaloa",
-            "addressCountry": "MX"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "24.7903",
-            "longitude": "-107.3878"
-          },
-          "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-            "opens": "00:00",
-            "closes": "23:59"
-          },
-          "priceRange": "$$",
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "50",
-            "bestRating": "5",
-            "worstRating": "1"
-          },
-          "areaServed": [
-            {
-              "@type": "City",
-              "name": "Culiacán",
-              "containedInPlace": {
-                "@type": "State",
-                "name": "Sinaloa"
-              }
-            }
-          ],
-          "sameAs": [
-            "https://www.facebook.com/electricistaculiacanpro",
-            "https://www.instagram.com/electricistaculiacanpro"
-          ]
-        },
-        {
           "@type": "Service",
           "@id": "https://electricistaculiacanpro.mx/servicios/electricista-precios/#service",
           "serviceType": "Servicios Eléctricos con Precios Transparentes",
           "name": "Precios de Electricista en Culiacán",
           "description": "Precios competitivos y transparentes para servicios eléctricos en Culiacán. Cotización gratuita sin compromiso, diagnóstico desde $200 MXN, instalaciones, reparaciones y emergencias 24/7 con factura incluida.",
           "provider": {
-            "@id": "https://electricistaculiacanpro.mx/#business"
+            "@type": "LocalBusiness",
+            "name": "Electricista Culiacán Pro",
+            "telephone": "+52-667-392-2273",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Culiacán",
+              "addressRegion": "Sinaloa",
+              "addressCountry": "MX"
+            }
           },
           "areaServed": {
             "@type": "City",
             "name": "Culiacán"
-          }
+          },
+          "priceRange": "$$"
         },
         {
           "@type": "FAQPage",
@@ -197,30 +267,6 @@
                 "@type": "Answer",
                 "text": "Sí, emitimos factura electrónica (CFDI) para todos nuestros servicios sin costo adicional. Solo necesitamos tus datos fiscales: RFC, razón social y régimen fiscal. La factura se envía por email el mismo día del pago o al siguiente día hábil."
               }
-            },
-            {
-              "@type": "Question",
-              "name": "¿El precio incluye materiales?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No, los materiales eléctricos se cotizan por separado para garantizar transparencia. Te mostramos opciones de diferentes marcas y calidades (económica, media, premium) para que elijas según tu presupuesto. Trabajamos con materiales certificados de marcas reconocidas."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Hay costo adicional por servicio nocturno?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No cobramos extra por servicio nocturno en emergencias eléctricas. El precio es el mismo 24/7 todos los días del año. Para servicios programados en horario nocturno (después de las 8 PM) puede aplicar un cargo adicional del 20% en mano de obra."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Ofrecen descuentos?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Sí, ofrecemos descuentos especiales: 10% en trabajos mayores a $5,000 MXN, 15% para clientes frecuentes, paquetes de mantenimiento preventivo con precio preferencial, descuentos en instalaciones múltiples (varios contactos o lámparas). Pregunta por promociones vigentes."
-              }
             }
           ]
         }
@@ -234,7 +280,7 @@
         <div class="container">
             <div class="nav-wrapper">
                 <a href="/" class="logo">
-                    <img src="../../logo-electricista-culiacan-pro.webp" alt="Electricista Culiacán Pro" width="200" height="60">
+                    <img src="../../logo-electricista-culiacan-pro.webp" alt="Electricista Culiacán Pro" width="140" height="140">
                 </a>
                 <button class="mobile-menu-btn" aria-label="Menú">
                     <span></span>
@@ -245,31 +291,43 @@
                     <li><a href="/#servicios" class="nav-link">Servicios</a></li>
                     <li><a href="/#beneficios" class="nav-link">Beneficios</a></li>
                     <li><a href="/#testimonios" class="nav-link">Testimonios</a></li>
-                    <li><a href="/#contacto" class="nav-link">Contacto</a></li>
+                    <li><a href="/contacto" class="nav-link">Contacto</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Breadcrumb -->
+    <div class="container" style="margin-top:24px">
+        <nav aria-label="breadcrumb" style="font-size:0.9rem;color:#64748b">
+            <a href="/" style="color:#64748b;text-decoration:none">Inicio</a>
+            <span style="margin:0 8px">›</span>
+            <a href="/#servicios" style="color:#64748b;text-decoration:none">Servicios</a>
+            <span style="margin:0 8px">›</span>
+            <span style="color:var(--brand);font-weight:600">Precios de Electricista</span>
+        </nav>
+    </div>
+
     <!-- Hero Section -->
     <header id="inicio" class="hero">
         <picture class="hero-background">
             <source type="image/webp"
-                    srcset="../../assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w, ../../assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
+                    srcset="../../assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w, ../../assets/images/optimizadas/emergencia-electrica-culiacan-1200w.webp 1200w"
                     sizes="100vw">
-            <img src="../../assets/images/optimizadas/hero-electricista-culiacan-1200w.webp"
-                 alt="Precios transparentes de electricista en Culiacán con cotización gratis y factura incluida"
+            <img src="../../assets/images/optimizadas/emergencia-electrica-culiacan-1200w.webp"
+                 srcset="../../assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w, ../../assets/images/optimizadas/emergencia-electrica-culiacan-1200w.webp 1200w"
+                 sizes="100vw"
+                 alt="Precios transparentes de electricista profesional en Culiacán con cotización gratis y factura incluida"
                  width="1200"
-                 height="800"
+                 height="655"
                  fetchpriority="high"
-                 loading="eager">
+                 loading="eager"
+                 decoding="async">
         </picture>
 
         <div class="container">
             <div class="hero-content">
                 <h1>Precios de Servicios Eléctricos en Culiacán – Transparentes y Justos</h1>
-
-                <p class="hero-subtitle">Precios competitivos de electricista en Culiacán con cotización gratis sin compromiso. Diagnóstico desde $200 MXN descontable, instalaciones desde $150, emergencias 24/7, todas las formas de pago, factura fiscal (CFDI) incluida y garantía por escrito en todos los trabajos.</p>
 
                 <!-- Rating Badge -->
                 <div class="hero-rating">
@@ -280,21 +338,65 @@
                         <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                     </svg>
                     <span class="rating-stars">★★★★★</span>
-                    <span class="rating-score">5.0/5</span>
+                    <span class="rating-score">4.8/5</span>
                     <span class="rating-divider">·</span>
-                    <span class="rating-count">Más de 50 clientes satisfechos en Culiacán</span>
+                    <span class="rating-count">Más de 50 clientes satisfechos</span>
                 </div>
 
-                <!-- Contact Info -->
-                <div class="hero-contact">
-                    <p style="font-size:1.125rem;margin-bottom:0.5rem"><strong>📞 Tel:</strong> <a href="tel:+526670000000" style="color:#FCD34D;text-decoration:none">667 000 0000</a></p>
-                    <p style="font-size:1.125rem"><strong>💬 WhatsApp:</strong> <a href="https://wa.me/526670000000" style="color:#FCD34D;text-decoration:none" target="_blank">667 000 0000</a></p>
+                <p class="hero-subtitle">Precios competitivos de electricista en Culiacán con cotización gratis sin compromiso. Diagnóstico desde $200 MXN descontable, instalaciones desde $150, emergencias 24/7, todas las formas de pago, factura fiscal (CFDI) incluida y garantía por escrito en todos los trabajos.</p>
+
+                <!-- Feature icons -->
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>Cotización Gratis</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>Servicio 24/7</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        <span>Garantía Incluida</span>
+                    </div>
                 </div>
 
-                <a href="#contacto" class="btn-primary hover-lift" style="margin-top:1.5rem">Solicitar Cotización Gratis</a>
+                <!-- CTA buttons -->
+                <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+                    <a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20cotización%20de%20servicio%20eléctrico"
+                       class="btn-primary"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Contactar por WhatsApp para cotización gratis">
+                        Solicitar Cotización Gratis
+                    </a>
+                    <a href="tel:+526673922273"
+                       class="btn-secondary"
+                       aria-label="Llamar al 667 392 2273">
+                        Llamar: 667 392 2273
+                    </a>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- Floating CTAs -->
+    <a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20informaci%C3%B3n%20sobre%20precios%20de%20servicios%20el%C3%A9ctricos"
+       id="cta-whatsapp"
+       class="floating-btn floating-whatsapp"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp - Respuesta inmediata">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="online-badge" aria-label="En línea"></span>
+    </a>
+
+    <a href="tel:+526673922273"
+       id="cta-llamar"
+       class="floating-btn floating-call"
+       aria-label="Llamar ahora al 667 392 2273">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+    </a>
 
     <!-- Tabla de Precios -->
     <section class="section" style="background:#F8FAFC">
@@ -305,7 +407,7 @@
             <div style="max-width:900px;margin:0 auto;overflow-x:auto">
                 <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1)">
                     <thead>
-                        <tr style="background:var(--gradient-brand);color:#fff">
+                        <tr style="background:linear-gradient(135deg,#F97316 0%,#E36414 100%);color:#fff">
                             <th style="padding:1rem;text-align:left;font-size:1.05rem">Servicio</th>
                             <th style="padding:1rem;text-align:center;font-size:1.05rem">Precio Desde</th>
                             <th style="padding:1rem;text-align:center;font-size:1.05rem">Incluye</th>
@@ -367,7 +469,7 @@
             </div>
 
             <div style="max-width:800px;margin:2rem auto;padding:1.5rem;background:#fff;border-radius:12px;border-left:4px solid var(--brand);box-shadow:0 2px 8px rgba(0,0,0,0.1)">
-                <h3 style="color:var(--brand);margin-bottom:1rem">💡 Nota Importante sobre Precios</h3>
+                <h3 style="color:var(--brand);margin-bottom:1rem">Nota Importante sobre Precios</h3>
                 <ul style="color:#475569;line-height:1.8;margin-left:1.5rem">
                     <li>Los precios NO incluyen materiales eléctricos (cables, contactos, lámparas, etc.)</li>
                     <li>Materiales se cotizan por separado según marca y calidad seleccionada</li>
@@ -380,301 +482,8 @@
         </div>
     </section>
 
-    <!-- Beneficios Section -->
-    <section class="section" id="beneficios">
-        <div class="container">
-            <h2>¿Por Qué Nuestros Precios Son los Más Justos?</h2>
-            <div class="grid benefits-grid">
-                <div class="card benefit">
-                    <div style="font-size:3rem;margin-bottom:1rem">💰</div>
-                    <h3>Precios Transparentes</h3>
-                    <p>Cotización detallada antes de iniciar cualquier trabajo. Sin cargos ocultos ni sorpresas. Lo que ves es lo que pagas.</p>
-                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
-                        <li>Desglose completo de costos</li>
-                        <li>Materiales cotizados por separado</li>
-                    </ul>
-                </div>
-                <div class="card benefit">
-                    <div style="font-size:3rem;margin-bottom:1rem">📋</div>
-                    <h3>Cotización Gratis</h3>
-                    <p>Cotización preliminar sin costo por WhatsApp. Diagnóstico en sitio desde $200 MXN 100% descontable al contratar el servicio.</p>
-                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
-                        <li>Envía fotos para estimación</li>
-                        <li>Respuesta en minutos</li>
-                    </ul>
-                </div>
-                <div class="card benefit">
-                    <div style="font-size:3rem;margin-bottom:1rem">💳</div>
-                    <h3>Todas las Formas de Pago</h3>
-                    <p>Aceptamos efectivo, transferencia, tarjetas de crédito y débito. Pagos parciales en trabajos grandes. Factura electrónica incluida.</p>
-                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
-                        <li>CFDI mismo día</li>
-                        <li>50% inicio, 50% al terminar</li>
-                    </ul>
-                </div>
-                <div class="card benefit">
-                    <div style="font-size:3rem;margin-bottom:1rem">🛡️</div>
-                    <h3>Garantía Incluida</h3>
-                    <p>Todos nuestros trabajos incluyen garantía por escrito sin costo adicional. De 30 a 90 días según el tipo de servicio.</p>
-                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
-                        <li>Instalaciones: 90 días</li>
-                        <li>Reparaciones: 30-60 días</li>
-                    </ul>
-                </div>
-                <div class="card benefit">
-                    <div style="font-size:3rem;margin-bottom:1rem">🏷️</div>
-                    <h3>Descuentos Especiales</h3>
-                    <p>Descuentos en trabajos grandes, clientes frecuentes y paquetes de mantenimiento. Pregunta por promociones vigentes.</p>
-                    <ul style="margin-top:1rem;color:#475569;line-height:1.8">
-                        <li>10% en trabajos +$5,000</li>
-                        <li>15% clientes frecuentes</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Qué Incluye el Precio -->
-    <section class="section" style="background:#F8FAFC">
-        <div class="container">
-            <h2>¿Qué Incluye el Precio del Servicio?</h2>
-            <div style="max-width:900px;margin:0 auto">
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem">
-                    <div style="background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:var(--brand);margin-bottom:1rem;font-size:1.1rem">✅ Incluido en el Precio</h3>
-                        <ul style="list-style:none;color:#475569;line-height:2">
-                            <li>✓ Mano de obra especializada</li>
-                            <li>✓ Diagnóstico y detección de fallas</li>
-                            <li>✓ Herramientas profesionales</li>
-                            <li>✓ Traslado dentro de Culiacán</li>
-                            <li>✓ Garantía por escrito</li>
-                            <li>✓ Factura electrónica (CFDI)</li>
-                            <li>✓ Limpieza del área</li>
-                            <li>✓ Asesoría técnica</li>
-                        </ul>
-                    </div>
-                    <div style="background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:#F59E0B;margin-bottom:1rem;font-size:1.1rem">📦 Se Cotiza por Separado</h3>
-                        <ul style="list-style:none;color:#475569;line-height:2">
-                            <li>• Cables eléctricos</li>
-                            <li>• Contactos y apagadores</li>
-                            <li>• Lámparas y focos</li>
-                            <li>• Breakers y fusibles</li>
-                            <li>• Tableros eléctricos</li>
-                            <li>• Tubería y canaletas</li>
-                            <li>• Cajas de conexión</li>
-                            <li>• Materiales especiales</li>
-                        </ul>
-                    </div>
-                </div>
-                <div style="background:#fff;padding:2rem;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.1);text-align:center">
-                    <h3 style="color:var(--brand);margin-bottom:1rem">💡 Opciones de Materiales</h3>
-                    <p style="color:#475569;line-height:1.7;max-width:600px;margin:0 auto">Te ofrecemos opciones de materiales en 3 niveles de calidad: <strong>Económica</strong> (marcas genéricas), <strong>Media</strong> (marcas nacionales) y <strong>Premium</strong> (marcas importadas). Tú decides según tu presupuesto y necesidades.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Nuestros Servicios Section -->
-    <section class="section" id="servicios">
-        <div class="container">
-            <h2>Servicios Eléctricos con Mejor Precio</h2>
-            <div class="grid">
-                <a href="/servicios/instalacion-electrica/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
-                    <picture>
-                        <source type="image/webp" srcset="../../assets/images/optimizadas/instalacion-electrica-culiacan-420w.webp 420w, ../../assets/images/optimizadas/instalacion-electrica-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
-                        <img src="../../assets/images/optimizadas/instalacion-electrica-culiacan-420w.webp"
-                             width="800"
-                             height="600"
-                             loading="lazy"
-                             decoding="async"
-                             alt="Instalación eléctrica a precio justo en Culiacán"
-                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
-                    </picture>
-                    <div style="padding:1.5rem">
-                        <h3 style="color:var(--brand);margin-bottom:1rem">⚡ Instalación Eléctrica</h3>
-                        <p>Instalaciones eléctricas completas desde $8,000 MXN. Cableado, tierra física, tableros conforme a normas CFE.</p>
-                        <p style="color:var(--brand);font-weight:700;margin-top:1rem">Desde $8,000 + materiales</p>
-                    </div>
-                </a>
-                <a href="/servicios/reparacion-cortocircuitos/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
-                    <picture>
-                        <source type="image/webp" srcset="../../assets/images/optimizadas/reparacion-cortocircuitos-culiacan-420w.webp 420w, ../../assets/images/optimizadas/reparacion-cortocircuitos-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
-                        <img src="../../assets/images/optimizadas/reparacion-cortocircuitos-culiacan-420w.webp"
-                             width="800"
-                             height="600"
-                             loading="lazy"
-                             decoding="async"
-                             alt="Reparación de cortocircuitos precio justo Culiacán"
-                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
-                    </picture>
-                    <div style="padding:1.5rem">
-                        <h3 style="color:var(--brand);margin-bottom:1rem">🔧 Reparación de Fallas</h3>
-                        <p>Detección y reparación de cortocircuitos y fallas eléctricas. Emergencias 24/7 sin recargo nocturno.</p>
-                        <p style="color:var(--brand);font-weight:700;margin-top:1rem">$500 - $1,500</p>
-                    </div>
-                </a>
-                <a href="/servicios/instalacion-contactos/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
-                    <picture>
-                        <source type="image/webp" srcset="../../assets/images/optimizadas/instalacion-contactos-culiacan-420w.webp 420w, ../../assets/images/optimizadas/instalacion-contactos-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
-                        <img src="../../assets/images/optimizadas/instalacion-contactos-culiacan-420w.webp"
-                             width="800"
-                             height="600"
-                             loading="lazy"
-                             decoding="async"
-                             alt="Instalación de contactos precio accesible Culiacán"
-                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
-                    </picture>
-                    <div style="padding:1.5rem">
-                        <h3 style="color:var(--brand);margin-bottom:1rem">🔌 Contactos y Apagadores</h3>
-                        <p>Instalación de contactos, apagadores y dimmers. Descuentos en instalaciones múltiples.</p>
-                        <p style="color:var(--brand);font-weight:700;margin-top:1rem">$120 - $300 c/u</p>
-                    </div>
-                </a>
-                <a href="/servicios/instalacion-tierra-fisica/" class="card card--img" style="text-decoration:none;color:inherit;display:block">
-                    <picture>
-                        <source type="image/webp" srcset="../../assets/images/optimizadas/tableros-electricos-culiacan-420w.webp 420w, ../../assets/images/optimizadas/tableros-electricos-culiacan-800w.webp 800w" sizes="(max-width: 420px) 420px, 800px">
-                        <img src="../../assets/images/optimizadas/tableros-electricos-culiacan-420w.webp"
-                             width="800"
-                             height="600"
-                             loading="lazy"
-                             decoding="async"
-                             alt="Instalación tierra física precio certificado Culiacán"
-                             style="border-radius:12px 12px 0 0;width:100%;height:auto">
-                    </picture>
-                    <div style="padding:1.5rem">
-                        <h3 style="color:var(--brand);margin-bottom:1rem">🔌 Tierra Física</h3>
-                        <p>Instalación de tierra física certificada CFE. Protección completa para tu hogar o negocio.</p>
-                        <p style="color:var(--brand);font-weight:700;margin-top:1rem">$1,500 - $3,500</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA de Emergencias -->
-    <section class="section" style="background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 100%);color:#fff">
-        <div class="container" style="max-width:800px;text-align:center">
-            <h2 style="color:#FCD34D;margin-bottom:1.5rem">Solicita tu Cotización Gratis por WhatsApp</h2>
-            <p style="font-size:1.125rem;margin-bottom:2rem;line-height:1.7">Envíanos fotos del trabajo que necesitas y te damos una cotización preliminar sin costo. Para cotización exacta hacemos diagnóstico en sitio por solo $200 MXN que se descuentan 100% al contratar el servicio.</p>
-            <a href="https://wa.me/526670000000?text=Hola!%20Necesito%20cotización%20de%20servicio%20eléctrico" class="btn-primary" style="background:#25D366;box-shadow:0 10px 24px rgba(37,211,102,0.3)" target="_blank" rel="noopener">
-                💬 Solicitar Cotización Gratis
-            </a>
-        </div>
-    </section>
-
-    <!-- Links SEO / Interlinking -->
-    <section class="section">
-        <div class="container">
-            <h2>Más Servicios de Electricista</h2>
-            <div class="grid seo-links">
-                <a href="/servicios/electricista/" class="card seo-card" data-card-name="electricista" data-card-position="1" style="text-decoration:none;color:inherit">
-                    <h3 style="color:var(--brand);margin-bottom:1rem">⚡ Electricista Profesional</h3>
-                    <p style="color:#475569;margin-bottom:1.5rem">Servicio completo de electricista en Culiacán. Instalación, reparación y emergencias 24/7.</p>
-                    <span style="color:var(--brand-light);font-weight:600">Ver más →</span>
-                </a>
-                <a href="/servicios/electricista-a-domicilio/" class="card seo-card" data-card-name="electricista-domicilio" data-card-position="2" style="text-decoration:none;color:inherit">
-                    <h3 style="color:var(--brand);margin-bottom:1rem">🏠 Electricista a Domicilio</h3>
-                    <p style="color:#475569;margin-bottom:1.5rem">Electricista a domicilio con llegada inmediata. Sin costo de traslado en Culiacán.</p>
-                    <span style="color:var(--brand-light);font-weight:600">Ver más →</span>
-                </a>
-                <a href="/servicios/electricista-cerca-de-mi/" class="card seo-card" data-card-name="electricista-cerca" data-card-position="3" style="text-decoration:none;color:inherit">
-                    <h3 style="color:var(--brand);margin-bottom:1rem">📍 Electricista Cerca de Mí</h3>
-                    <p style="color:#475569;margin-bottom:1.5rem">Electricista cerca de ti con llegada en 30-60 minutos. Cobertura todas las colonias.</p>
-                    <span style="color:var(--brand-light);font-weight:600">Ver cobertura →</span>
-                </a>
-                <a href="/servicios/electricista-colonias-culiacan/" class="card seo-card" data-card-name="electricista-colonias" data-card-position="4" style="text-decoration:none;color:inherit">
-                    <h3 style="color:var(--brand);margin-bottom:1rem">🗺️ Todas las Colonias</h3>
-                    <p style="color:#475569;margin-bottom:1.5rem">Electricista en todas las colonias de Culiacán con los mejores precios.</p>
-                    <span style="color:var(--brand-light);font-weight:600">Ver colonias →</span>
-                </a>
-                <a href="/servicios/emergencia-24-7/" class="card seo-card" data-card-name="emergencias" data-card-position="5" style="text-decoration:none;color:inherit">
-                    <h3 style="color:var(--brand);margin-bottom:1rem">🚨 Emergencias 24/7</h3>
-                    <p style="color:#475569;margin-bottom:1.5rem">Emergencias eléctricas sin recargo nocturno. Mismo precio 24/7.</p>
-                    <span style="color:var(--brand-light);font-weight:600">Contactar →</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Zonas de Servicio -->
-    <section class="section" style="background:#F8FAFC">
-        <div class="container">
-            <h2>Precios Justos en Todas las Colonias de Culiacán</h2>
-            <div style="max-width:900px;margin:0 auto;text-align:center">
-                <p style="font-size:1.125rem;color:#475569;margin-bottom:2rem">Sin recargo por ubicación dentro de Culiacán. El mismo precio justo en toda la ciudad:</p>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem">
-                    <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:var(--brand);font-size:1rem;margin-bottom:0.5rem">Zona Norte</h3>
-                        <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
-                            <li>Las Quintas</li>
-                            <li>Tres Ríos</li>
-                            <li>Campestre</li>
-                            <li>Country</li>
-                        </ul>
-                    </div>
-                    <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:var(--brand);font-size:1rem;margin-bottom:0.5rem">Zona Centro</h3>
-                        <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
-                            <li>Centro</li>
-                            <li>Guadalupe</li>
-                            <li>Chapultepec</li>
-                            <li>Santa Fe</li>
-                        </ul>
-                    </div>
-                    <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:var(--brand);font-size:1rem;margin-bottom:0.5rem">Zona Sur</h3>
-                        <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
-                            <li>Villa Universidad</li>
-                            <li>Villa Bonita</li>
-                            <li>Montebello</li>
-                            <li>Real del Valle</li>
-                        </ul>
-                    </div>
-                    <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:var(--brand);font-size:1rem;margin-bottom:0.5rem">Zona Oriente</h3>
-                        <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
-                            <li>Colinas de San Miguel</li>
-                            <li>Lomas de San Isidro</li>
-                            <li>Nuevo Culiacán</li>
-                            <li>Infonavit Humaya</li>
-                        </ul>
-                    </div>
-                </div>
-                <p style="color:#64748B;font-size:1rem">El mismo precio justo en toda la ciudad. <a href="https://wa.me/526670000000?text=Hola,%20necesito%20cotización" style="color:var(--brand);font-weight:600;text-decoration:none" target="_blank">Solicita tu cotización gratis</a>.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonios Section -->
-    <section class="section" id="testimonios">
-        <div class="container">
-            <h2>Lo Que Dicen Nuestros Clientes</h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="rating-stars" style="color:#FBBC04;font-size:1.25rem;margin-bottom:1rem">★★★★★</div>
-                    <p style="font-style:italic;margin-bottom:1rem;color:#475569">"Precios muy justos y transparentes. Me dieron cotización detallada antes de empezar y el costo final fue exactamente lo que me dijeron. Excelente servicio."</p>
-                    <cite style="font-weight:700;color:var(--brand);font-style:normal">- Carlos Mendoza, Campestre</cite>
-                    <p style="font-size:0.9rem;color:#64748B;margin-top:0.5rem">Servicio: Instalación eléctrica completa</p>
-                </div>
-                <div class="card">
-                    <div class="rating-stars" style="color:#FBBC04;font-size:1.25rem;margin-bottom:1rem">★★★★★</div>
-                    <p style="font-style:italic;margin-bottom:1rem;color:#475569">"Contraté el servicio después de comparar varios presupuestos. Sus precios fueron los más competitivos y la calidad del trabajo excelente. 100% recomendados."</p>
-                    <cite style="font-weight:700;color:var(--brand);font-style:normal">- Lucía Torres, Guadalupe</cite>
-                    <p style="font-size:0.9rem;color:#64748B;margin-top:0.5rem">Servicio: Mantenimiento de tablero</p>
-                </div>
-                <div class="card">
-                    <div class="rating-stars" style="color:#FBBC04;font-size:1.25rem;margin-bottom:1rem">★★★★★</div>
-                    <p style="font-style:italic;margin-bottom:1rem;color:#475569">"Me gustó que me mostraron opciones de materiales en diferentes precios para que yo eligiera. Sin presiones ni cargos ocultos. Muy profesionales."</p>
-                    <cite style="font-weight:700;color:var(--brand);font-style:normal">- Antonio Ramírez, Villa Bonita</cite>
-                    <p style="font-size:0.9rem;color:#64748B;margin-top:0.5rem">Servicio: Reparación cortocircuito</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- FAQ Section -->
-    <section class="section" style="background:#F8FAFC">
+    <section class="section" style="background:#FFF">
         <div class="container">
             <h2>Preguntas Frecuentes sobre Precios</h2>
             <div style="max-width:800px;margin:2rem auto">
@@ -698,66 +507,6 @@
                     <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Dan factura fiscal?</summary>
                     <p style="margin-top:1rem;color:#475569;line-height:1.7">Sí, emitimos factura electrónica (CFDI) para todos nuestros servicios sin costo adicional. Solo necesitamos tus datos fiscales: RFC, razón social y régimen fiscal. La factura se envía por email el mismo día del pago o al siguiente día hábil.</p>
                 </details>
-                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
-                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿El precio incluye materiales?</summary>
-                    <p style="margin-top:1rem;color:#475569;line-height:1.7">No, los materiales eléctricos se cotizan por separado para garantizar transparencia. Te mostramos opciones de diferentes marcas y calidades (económica, media, premium) para que elijas según tu presupuesto. Trabajamos con materiales certificados de marcas reconocidas.</p>
-                </details>
-                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
-                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Hay costo adicional por servicio nocturno?</summary>
-                    <p style="margin-top:1rem;color:#475569;line-height:1.7">No cobramos extra por servicio nocturno en emergencias eléctricas. El precio es el mismo 24/7 todos los días del año. Para servicios programados en horario nocturno (después de las 8 PM) puede aplicar un cargo adicional del 20% en mano de obra.</p>
-                </details>
-                <details style="background:#fff;padding:1.5rem;margin-bottom:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">
-                    <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:1.05rem">¿Ofrecen descuentos?</summary>
-                    <p style="margin-top:1rem;color:#475569;line-height:1.7">Sí, ofrecemos descuentos especiales: 10% en trabajos mayores a $5,000 MXN, 15% para clientes frecuentes, paquetes de mantenimiento preventivo con precio preferencial, descuentos en instalaciones múltiples (varios contactos o lámparas). Pregunta por promociones vigentes.</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contacto Section -->
-    <section class="section" id="contacto">
-        <div class="container">
-            <div style="max-width:1000px;margin:0 auto">
-                <h2 style="text-align:center;margin-bottom:3rem">Contacto</h2>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:3rem">
-                    <!-- Información de Contacto -->
-                    <div>
-                        <h3 style="color:var(--brand);margin-bottom:1.5rem;font-size:1.5rem">Información de Contacto</h3>
-                        <div style="color:#475569;line-height:2">
-                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">📞 Teléfono:</strong><br><a href="tel:+526670000000" style="color:var(--brand);text-decoration:none;font-weight:600">667 000 0000</a></p>
-                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">💬 WhatsApp:</strong><br><a href="https://wa.me/526670000000" style="color:var(--brand);text-decoration:none;font-weight:600" target="_blank" rel="noopener">667 000 0000</a></p>
-                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">📧 Email:</strong><br><a href="mailto:contacto@electricistaculiacanpro.mx" style="color:var(--brand);text-decoration:none">contacto@electricistaculiacanpro.mx</a></p>
-                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">⏰ Horario:</strong><br>24/7 Todos los días (Emergencias)</p>
-                            <p style="margin-bottom:1rem"><strong style="color:var(--text)">📍 Cobertura:</strong><br>Culiacán y zona metropolitana</p>
-                        </div>
-                    </div>
-
-                    <!-- Formulario de Contacto -->
-                    <div>
-                        <h3 style="color:var(--brand);margin-bottom:1.5rem;font-size:1.5rem">Solicita una Cotización</h3>
-                        <form id="contact-form" style="display:flex;flex-direction:column;gap:1rem">
-                            <input type="text" name="nombre" placeholder="Nombre completo" required style="padding:0.875rem;border:1px solid #E2E8F0;border-radius:8px;font-size:1rem;font-family:inherit">
-                            <input type="tel" name="telefono" placeholder="Teléfono" required style="padding:0.875rem;border:1px solid #E2E8F0;border-radius:8px;font-size:1rem;font-family:inherit">
-                            <input type="email" name="email" placeholder="Email (opcional)" style="padding:0.875rem;border:1px solid #E2E8F0;border-radius:8px;font-size:1rem;font-family:inherit">
-                            <textarea name="mensaje" placeholder="Describe el servicio que necesitas" rows="4" required style="padding:0.875rem;border:1px solid #E2E8F0;border-radius:8px;font-size:1rem;font-family:inherit;resize:vertical"></textarea>
-                            <button type="submit" class="btn-primary" style="width:100%;cursor:pointer">Enviar Solicitud</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Google Maps -->
-                <div style="margin-top:3rem">
-                    <h3 style="color:var(--brand);margin-bottom:1.5rem;font-size:1.5rem;text-align:center">Nuestra Área de Cobertura</h3>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116678.27374282976!2d-107.46779564707034!3d24.790341899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86bcd0c6e57c047f%3A0x1c0c1c0c1c0c1c0c!2sCuliac%C3%A1n%2C%20Sinaloa!5e0!3m2!1ses-419!2smx!4v1234567890123!5m2!1ses-419!2smx"
-                            width="100%"
-                            height="400"
-                            style="border:0;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.1)"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            title="Mapa de cobertura de Electricista Culiacán Pro"></iframe>
-                    <p style="text-align:center;margin-top:1.5rem;color:#64748B">Precios justos en todas las colonias de Culiacán. Sin recargo por ubicación.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -765,142 +514,38 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <!-- Mini Nav -->
             <nav style="margin-bottom:2rem">
                 <ul style="list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;font-size:0.95rem">
                     <li><a href="/" style="color:#CBD5E1;text-decoration:none">Inicio</a></li>
                     <li><a href="/servicios/electricista/" style="color:#CBD5E1;text-decoration:none">Electricista</a></li>
                     <li><a href="/servicios/electricista-a-domicilio/" style="color:#CBD5E1;text-decoration:none">A Domicilio</a></li>
                     <li><a href="/servicios/electricista-cerca-de-mi/" style="color:#CBD5E1;text-decoration:none">Cerca de Mí</a></li>
-                    <li><a href="/servicios/electricista-colonias-culiacan/" style="color:#CBD5E1;text-decoration:none">Colonias</a></li>
-                    <li><a href="#contacto" style="color:#CBD5E1;text-decoration:none">Contacto</a></li>
+                    <li><a href="/contacto" style="color:#CBD5E1;text-decoration:none">Contacto</a></li>
                 </ul>
             </nav>
 
             <p>&copy; 2025 Electricista Culiacán Pro. Todos los derechos reservados.</p>
             <p style="margin-top:1rem;font-weight:500">Servicio profesional de electricidad en Culiacán, Sinaloa</p>
-            <p style="margin-top:0.5rem;font-size:0.9rem">📞 667 000 0000 | 💬 WhatsApp 24/7 | 📧 contacto@electricistaculiacanpro.mx</p>
+            <p style="margin-top:0.5rem;font-size:0.9rem">📞 667 392 2273 | 💬 WhatsApp 24/7</p>
         </div>
     </footer>
 
-    <!-- CTA Flotante -->
-    <div style="position:fixed;bottom:20px;right:20px;z-index:100;display:flex;flex-direction:column;gap:10px">
-        <a href="https://wa.me/526670000000?text=Hola!%20Necesito%20cotización%20de%20servicio%20eléctrico"
-           class="btn-primary btn-whatsapp"
-           target="_blank"
-           rel="noopener"
-           aria-label="Contactar por WhatsApp"
-           style="display:flex;align-items:center;gap:8px;padding:14px 20px;box-shadow:0 4px 16px rgba(37,211,102,0.4);animation:pulse 2s infinite"
-           onclick="if(typeof dataLayer !== 'undefined') dataLayer.push({'event':'cta_click','cta_type':'floating_whatsapp','cta_position':'bottom_right'})">
-            💬 WhatsApp
-        </a>
-        <a href="tel:+526670000000"
-           class="btn-primary"
-           aria-label="Llamar ahora"
-           style="display:flex;align-items:center;gap:8px;padding:14px 20px;background:var(--gradient-brand);box-shadow:0 4px 16px rgba(0,71,171,0.4)"
-           onclick="if(typeof dataLayer !== 'undefined') dataLayer.push({'event':'cta_click','cta_type':'floating_phone','cta_position':'bottom_right'})">
-            📞 Llamar
-        </a>
-    </div>
+    <!-- Main JavaScript -->
+    <script src="../../main.js" defer></script>
 
-    <!-- Scripts -->
+    <!-- GTM (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- GTM lazy load -->
     <script>
-    (function() {
-        'use strict';
-
-        // Toggle menú móvil
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-
-        if (mobileMenuBtn && navMenu) {
-            mobileMenuBtn.addEventListener('click', function() {
-                navMenu.classList.toggle('active');
-            });
-
-            const navLinks = navMenu.querySelectorAll('.nav-link');
-            navLinks.forEach(function(link) {
-                link.addEventListener('click', function() {
-                    navMenu.classList.remove('active');
-                });
-            });
-        }
-
-        // Envío de formulario a WhatsApp
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const nombre = this.nombre.value;
-                const telefono = this.telefono.value;
-                const email = this.email.value || 'No proporcionado';
-                const mensaje = this.mensaje.value;
-
-                const whatsappMsg = `Hola! Mi nombre es ${nombre}
-Teléfono: ${telefono}
-Email: ${email}
-Mensaje: ${mensaje}`;
-
-                const whatsappURL = `https://wa.me/526670000000?text=${encodeURIComponent(whatsappMsg)}`;
-                window.open(whatsappURL, '_blank');
-
-                if (typeof dataLayer !== 'undefined') {
-                    dataLayer.push({
-                        'event': 'form_submit',
-                        'form_name': 'contact_form'
-                    });
-                }
-            });
-        }
-
-        // Tracking de tarjetas SEO
-        const seoCards = document.querySelectorAll('.seo-card');
-        seoCards.forEach(function(card) {
-            card.addEventListener('click', function() {
-                const cardName = this.getAttribute('data-card-name');
-                const cardPosition = this.getAttribute('data-card-position');
-
-                if (typeof dataLayer !== 'undefined') {
-                    dataLayer.push({
-                        'event': 'seo_card_click',
-                        'card_name': cardName,
-                        'card_position': cardPosition
-                    });
-                }
-            });
-        });
-
-        // Scroll Depth Tracking
-        let scrollDepths = [25, 50, 75, 100];
-        let triggeredDepths = [];
-
-        window.addEventListener('scroll', function() {
-            const scrollPercentage = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
-
-            scrollDepths.forEach(function(depth) {
-                if (scrollPercentage >= depth && !triggeredDepths.includes(depth)) {
-                    triggeredDepths.push(depth);
-
-                    if (typeof dataLayer !== 'undefined') {
-                        dataLayer.push({
-                            'event': 'scroll_depth',
-                            'depth': depth
-                        });
-                    }
-                }
-            });
-        });
-
-    })();
-
-    // GTM con fallback
     (function() {
         const loadGTM = function() {
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-XXXXXXX');
+            })(window,document,'script','dataLayer','GTM-W75CRTX5');
         };
 
         if ('requestIdleCallback' in window) {
@@ -909,16 +554,6 @@ Mensaje: ${mensaje}`;
             setTimeout(loadGTM, 200);
         }
     })();
-
-    // Animación pulse
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-    `;
-    document.head.appendChild(style);
     </script>
 </body>
 </html>
