@@ -1,13 +1,14 @@
 // Service Worker - Electricista Culiacán Pro
-// Version: 1.0.0
+// Version: 2.0.0 - Optimized assets
 
-const CACHE_NAME = 'electricista-culiacan-v1';
+const CACHE_NAME = 'electricista-culiacan-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/styles.css',
-  '/main.js',
+  '/styles.min.css',
+  '/main.min.js',
   '/manifest.json',
+  '/assets/images/electricista-culiacan-pro-logo.webp',
   '/assets/fonts/inter-400.woff2',
   '/assets/fonts/inter-500.woff2',
   '/assets/fonts/inter-600.woff2',

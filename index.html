@@ -61,6 +61,9 @@
     <link rel="preconnect" href="https://wa.me">
     <link rel="dns-prefetch" href="https://wa.me">
 
+    <!-- Preload logo for faster rendering -->
+    <link rel="preload" as="image" href="assets/images/electricista-culiacan-pro-logo.webp" type="image/webp">
+
     <!-- Preload critical hero image for LCP optimization -->
     <link rel="preload" as="image"
           href="assets/images/optimizadas/emergencia-electrica-culiacan-1200w.webp"
@@ -1766,9 +1769,11 @@
       "url": "https://electricistaculiacanpro.mx/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/logo-512.png",
+        "name": "Logo Electricista Culiacán Pro",
+        "url": "https://electricistaculiacanpro.mx/assets/icons/icon-512x512.png",
         "width": 512,
-        "height": 512
+        "height": 512,
+        "caption": "Electricista profesional en Culiacán - Servicios eléctricos 24/7"
       },
       "potentialAction": {
         "@type": "SearchAction",
@@ -1951,9 +1956,11 @@
       ],
       "logo": {
         "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/logo-512.png",
+        "name": "Logo Electricista Culiacán Pro",
+        "url": "https://electricistaculiacanpro.mx/assets/icons/icon-512x512.png",
         "width": 512,
-        "height": 512
+        "height": 512,
+        "caption": "Electricista profesional en Culiacán - Servicios eléctricos 24/7"
       },
       "image": {
         "@type": "ImageObject",
@@ -2653,10 +2660,12 @@
       "url": "https://electricistaculiacanpro.mx",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://electricistaculiacanpro.mx/assets/images/logo-512.png",
+        "name": "Logo Electricista Culiacán Pro",
+        "url": "https://electricistaculiacanpro.mx/assets/icons/icon-512x512.png",
         "width": 512,
         "height": 512,
-        "contentUrl": "https://electricistaculiacanpro.mx/assets/images/logo-512.png"
+        "contentUrl": "https://electricistaculiacanpro.mx/assets/icons/icon-512x512.png",
+        "caption": "Electricista profesional en Culiacán - Servicios eléctricos 24/7"
       },
       "image": "https://electricistaculiacanpro.mx/assets/images/optimizadas/emergencia-24-7-nocturna-1200w.webp",
       "description": "Servicios profesionales de electricidad en Culiacán las 24 horas del día, los 7 días de la semana. Emergencias, instalaciones y reparaciones con garantía escrita.",
@@ -2770,10 +2779,14 @@ window.dataLayer = window.dataLayer || [];
         <div class="container">
             <div class="nav-wrapper">
                 <a href="#inicio" class="logo">
-                    <img src="assets/images/logo-512.webp"
-                         alt="Electricista Culiacán Pro - Logo"
+                    <img src="assets/images/electricista-culiacan-pro-logo.webp"
+                         alt="Electricista Culiacán Pro - Servicios Eléctricos 24 Horas en Culiacán"
+                         title="Electricista profesional en Culiacán - Inicio"
                          width="140"
-                         height="140">
+                         height="140"
+                         loading="eager"
+                         decoding="sync"
+                         fetchpriority="high">
                 </a>
                 <button class="mobile-menu-btn" aria-label="Menu">
                     <span></span>
@@ -3848,8 +3861,9 @@ window.dataLayer = window.dataLayer || [];
     <footer class="footer">
         <div class="container">
             <div class="footer-logo">
-                <img src="assets/images/logo-512.webp"
-                     alt="Electricista Culiacán Pro"
+                <img src="assets/images/electricista-culiacan-pro-logo.webp"
+                     alt="Electricista Culiacán Pro - Servicios Eléctricos Profesionales"
+                     title="Electricista Culiacán Pro"
                      width="200"
                      height="200"
                      loading="lazy"
@@ -3902,10 +3916,9 @@ window.dataLayer = window.dataLayer || [];
     </div>
 
     <!-- Main JavaScript (defer for optimal performance) -->
-    <script src="main.js" defer></script>
-
+    <script src="main.min.js" defer></script>
 
     <!-- Google Analytics 4 - Custom Event Tracking (external for better performance) -->
-    <script src="/analytics-events.js" defer></script>
+    <script src="/analytics-events.min.js" defer></script>
 </body>
 </html>

@@ -8,15 +8,17 @@ Crea landings nuevas clonando `reparacion-cortos-circuitos` y cambiando SOLO el 
 
 Ahora tienes **2 opciones** para crear landings:
 
-### Opción 1: **Automatizado** ⚡ (Recomendado)
+### Opción 1: **Semi-automatizado** ⚡ (Recomendado)
 ```
 /automatizaciondelanding "Nombre del Servicio"
 ```
-- ✅ Más rápido (30 segundos)
-- ✅ Genera contenido SEO con IA
-- ✅ Crea config.json automáticamente
+- ✅ Crea estructura base automáticamente
+- ✅ Genera slug y copia template v2.0.0
 - ✅ Valida imágenes automáticamente
 - ⚠️ Requiere imagen base 800w
+- ⚠️ Requiere generar contenido SEO manualmente
+- ⚠️ Requiere aplicar contenido con @agentconstructor
+- ⏱️ 10-15 minutos totales
 
 ### Opción 2: **Manual** 🔧 (Este documento)
 ```
@@ -33,10 +35,10 @@ cp -r servicios/reparacion-cortos-circuitos servicios/nuevo-slug
 - Tengas el contenido ya preparado
 - Necesites copiar de una landing existente diferente
 
-**Usa el método automático cuando:**
-- Quieras crear una landing nueva rápido
-- Necesites ayuda con el contenido SEO
-- Prefieras que la IA genere los benefits
+**Usa el método semi-automatizado cuando:**
+- Quieras que se genere la estructura base automáticamente
+- Prefieras usar @agentconstructor para aplicar el contenido
+- Necesites validación automática de imágenes
 
 ---
 
