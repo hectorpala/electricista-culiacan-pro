@@ -62,7 +62,7 @@ def create_complete_schema_graph(colonia_slug, colonia_gps):
                 "@type": "WebSite",
                 "name": "Electricista Culiacán Pro",
                 "url": "https://electricistaculiacanpro.mx/",
-                "logo": "https://electricistaculiacanpro.mx/assets/icons/logo-blue.svg"
+                "logo": "https://electricistaculiacanpro.mx/logo-electricista-culiacan-pro.webp"
             },
             # 2. HomeAndConstructionBusiness
             {
@@ -103,7 +103,7 @@ def create_complete_schema_graph(colonia_slug, colonia_gps):
                     "bestRating": "5",
                     "worstRating": "1"
                 },
-                "logo": "https://electricistaculiacanpro.mx/assets/icons/logo-blue.svg"
+                "logo": "https://electricistaculiacanpro.mx/logo-electricista-culiacan-pro.webp"
             },
             # 3. Service
             {
