@@ -1,14 +1,14 @@
 {
   "colonias": [
-    {"nombre": "Solidaridad", "slug": "solidaridad", "tipo": "Colonia"},
-    {"nombre": "Independencia", "slug": "independencia", "tipo": "Colonia"},
-    {"nombre": "Unión de Ladrilleros", "slug": "union-de-ladrilleros", "tipo": "Colonia"},
-    {"nombre": "Lázaro Cárdenas del Río", "slug": "lazaro-cardenas-del-rio", "tipo": "Fraccionamiento"},
-    {"nombre": "Simón Bolívar", "slug": "simon-bolivar", "tipo": "Colonia"},
-    {"nombre": "Las Américas", "slug": "las-americas", "tipo": "Fraccionamiento"},
-    {"nombre": "Brisas del Valle", "slug": "brisas-del-valle", "tipo": "Fraccionamiento"},
-    {"nombre": "Hacienda San José", "slug": "hacienda-san-jose", "tipo": "Fraccionamiento"},
-    {"nombre": "Residencial del Valle", "slug": "residencial-del-valle", "tipo": "Fraccionamiento"},
-    {"nombre": "Valle del Pedregal", "slug": "valle-del-pedregal", "tipo": "Fraccionamiento"}
+    {"nombre": "Miguel Hidalgo", "slug": "miguel-hidalgo", "tipo": "Colonia"},
+    {"nombre": "Humaya", "slug": "humaya", "tipo": "Colonia"},
+    {"nombre": "Barrancos", "slug": "barrancos", "tipo": "Colonia"},
+    {"nombre": "Villa Satélite", "slug": "villa-satelite", "tipo": "Fraccionamiento"},
+    {"nombre": "La Campiña", "slug": "la-campina", "tipo": "Fraccionamiento"},
+    {"nombre": "Infonavit Solidaridad", "slug": "infonavit-solidaridad", "tipo": "Colonia"},
+    {"nombre": "Floresta", "slug": "floresta", "tipo": "Colonia"},
+    {"nombre": "Guadalupe Victoria", "slug": "guadalupe-victoria", "tipo": "Colonia"},
+    {"nombre": "El Tamazula", "slug": "el-tamazula", "tipo": "Colonia"},
+    {"nombre": "Las Palmas II", "slug": "las-palmas-ii", "tipo": "Fraccionamiento"}
   ]
 }
