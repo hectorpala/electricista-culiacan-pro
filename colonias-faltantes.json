@@ -1,10 +1,29 @@
 {
   "colonias": [
     {
-      "nombre": "Humaya",
-      "slug": "humaya",
-      "tipo": "Colonia",
-      "cp": "80020"
+      "nombre": "La Campiña",
+      "slug": "la-campina",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barrancos",
+      "slug": "barrancos",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Miguel Hidalgo",
+      "slug": "miguel-hidalgo",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Tierra Blanca",
+      "slug": "tierra-blanca",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Villa Satelite",
+      "slug": "villa-satelite",
+      "tipo": "Fraccionamiento"
     }
   ]
 }
