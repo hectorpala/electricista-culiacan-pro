@@ -1,29 +1,29 @@
 {
   "colonias": [
     {
-      "nombre": "Rafael Buelna",
-      "slug": "rafael-buelna",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "Recursos Hidraulicos",
-      "slug": "recursos-hidraulicos",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "Loma Linda",
-      "slug": "loma-linda",
+      "nombre": "Bugambilias",
+      "slug": "bugambilias",
       "tipo": "Fraccionamiento"
     },
     {
-      "nombre": "Villas del Rio",
-      "slug": "villas-del-rio",
+      "nombre": "Prados del Sur",
+      "slug": "prados-del-sur",
       "tipo": "Fraccionamiento"
     },
     {
-      "nombre": "Juan de Dios Batiz",
-      "slug": "juan-de-dios-batiz",
+      "nombre": "Riveras del Humaya",
+      "slug": "riveras-del-humaya",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "El Mirador",
+      "slug": "el-mirador",
       "tipo": "Colonia"
+    },
+    {
+      "nombre": "Terranova",
+      "slug": "terranova",
+      "tipo": "Fraccionamiento"
     }
   ]
 }
