@@ -1,14 +1,14 @@
 {
   "colonias": [
-    {"nombre": "Tierra Blanca", "slug": "tierra-blanca", "tipo": "Colonia"},
-    {"nombre": "El Rodeo", "slug": "el-rodeo", "tipo": "Colonia"},
-    {"nombre": "Las Canteras", "slug": "las-canteras", "tipo": "Fraccionamiento"},
-    {"nombre": "Villas del Sol", "slug": "villas-del-sol", "tipo": "Fraccionamiento"},
-    {"nombre": "San Miguel", "slug": "san-miguel", "tipo": "Colonia"},
-    {"nombre": "La Providencia", "slug": "la-providencia", "tipo": "Colonia"},
-    {"nombre": "Infonavit Cañadas", "slug": "infonavit-canadas", "tipo": "Colonia"},
-    {"nombre": "El Toreo", "slug": "el-toreo", "tipo": "Colonia"},
-    {"nombre": "Villas de Cortés", "slug": "villas-de-cortes", "tipo": "Fraccionamiento"},
-    {"nombre": "Las Margaritas", "slug": "las-margaritas", "tipo": "Colonia"}
+    {"nombre": "Los Girasoles", "slug": "los-girasoles", "tipo": "Fraccionamiento"},
+    {"nombre": "Villas del Rey", "slug": "villas-del-rey", "tipo": "Fraccionamiento"},
+    {"nombre": "El Mezquitón", "slug": "el-mezquiton", "tipo": "Colonia"},
+    {"nombre": "La Higuerita", "slug": "la-higuerita", "tipo": "Colonia"},
+    {"nombre": "Infonavit Las Flores", "slug": "infonavit-las-flores", "tipo": "Colonia"},
+    {"nombre": "San José", "slug": "san-jose", "tipo": "Colonia"},
+    {"nombre": "Villa del Real", "slug": "villa-del-real", "tipo": "Fraccionamiento"},
+    {"nombre": "Las Glorias", "slug": "las-glorias", "tipo": "Colonia"},
+    {"nombre": "El Realito", "slug": "el-realito", "tipo": "Colonia"},
+    {"nombre": "Villas del Río III", "slug": "villas-del-rio-iii", "tipo": "Fraccionamiento"}
   ]
 }
