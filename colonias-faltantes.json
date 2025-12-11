@@ -1,8 +1,28 @@
 {
   "colonias": [
     {
-      "nombre": "Industrial Bravo",
-      "slug": "industrial-bravo",
+      "nombre": "Rafael Buelna",
+      "slug": "rafael-buelna",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Recursos Hidraulicos",
+      "slug": "recursos-hidraulicos",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Loma Linda",
+      "slug": "loma-linda",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas del Rio",
+      "slug": "villas-del-rio",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Juan de Dios Batiz",
+      "slug": "juan-de-dios-batiz",
       "tipo": "Colonia"
     }
   ]
