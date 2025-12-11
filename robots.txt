@@ -10,8 +10,11 @@ Sitemap: https://electricistaculiacanpro.mx/sitemap-images.xml
 # Disallow admin areas
 Disallow: /admin/
 Disallow: /private/
-Disallow: /*.json$
 Disallow: /scripts/
+
+# Block JSON except manifest
+Allow: /manifest.json
+Disallow: /*.json$
 
 # Allow important resources
 Allow: /assets/
