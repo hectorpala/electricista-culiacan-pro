@@ -1,54 +1,5 @@
 {
   "colonias": [
-    {
-      "nombre": "Alameda",
-      "slug": "alameda",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "Adolfo Lopez Mateos",
-      "slug": "adolfo-lopez-mateos",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "Genaro Estrada",
-      "slug": "genaro-estrada",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "Primavera",
-      "slug": "primavera",
-      "tipo": "Fraccionamiento"
-    },
-    {
-      "nombre": "El Saucito",
-      "slug": "el-saucito",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "La Conquista",
-      "slug": "la-conquista",
-      "tipo": "Fraccionamiento"
-    },
-    {
-      "nombre": "Las Avenidas",
-      "slug": "las-avenidas",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "Los Fresnos",
-      "slug": "los-fresnos",
-      "tipo": "Fraccionamiento"
-    },
-    {
-      "nombre": "Los Laureles",
-      "slug": "los-laureles",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "Pradera Dorada",
-      "slug": "pradera-dorada",
-      "tipo": "Fraccionamiento"
-    }
+    {"nombre": "Nuevo Horizonte", "slug": "nuevo-horizonte", "tipo": "Fraccionamiento"}
   ]
 }
