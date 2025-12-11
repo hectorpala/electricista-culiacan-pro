@@ -1,14 +1,14 @@
 {
   "colonias": [
-    {"nombre": "Miguel Hidalgo", "slug": "miguel-hidalgo", "tipo": "Colonia"},
-    {"nombre": "Humaya", "slug": "humaya", "tipo": "Colonia"},
-    {"nombre": "Barrancos", "slug": "barrancos", "tipo": "Colonia"},
-    {"nombre": "Villa Satélite", "slug": "villa-satelite", "tipo": "Fraccionamiento"},
-    {"nombre": "La Campiña", "slug": "la-campina", "tipo": "Fraccionamiento"},
-    {"nombre": "Infonavit Solidaridad", "slug": "infonavit-solidaridad", "tipo": "Colonia"},
-    {"nombre": "Floresta", "slug": "floresta", "tipo": "Colonia"},
-    {"nombre": "Guadalupe Victoria", "slug": "guadalupe-victoria", "tipo": "Colonia"},
-    {"nombre": "El Tamazula", "slug": "el-tamazula", "tipo": "Colonia"},
-    {"nombre": "Las Palmas II", "slug": "las-palmas-ii", "tipo": "Fraccionamiento"}
+    {"nombre": "Tierra Blanca", "slug": "tierra-blanca", "tipo": "Colonia"},
+    {"nombre": "El Rodeo", "slug": "el-rodeo", "tipo": "Colonia"},
+    {"nombre": "Las Canteras", "slug": "las-canteras", "tipo": "Fraccionamiento"},
+    {"nombre": "Villas del Sol", "slug": "villas-del-sol", "tipo": "Fraccionamiento"},
+    {"nombre": "San Miguel", "slug": "san-miguel", "tipo": "Colonia"},
+    {"nombre": "La Providencia", "slug": "la-providencia", "tipo": "Colonia"},
+    {"nombre": "Infonavit Cañadas", "slug": "infonavit-canadas", "tipo": "Colonia"},
+    {"nombre": "El Toreo", "slug": "el-toreo", "tipo": "Colonia"},
+    {"nombre": "Villas de Cortés", "slug": "villas-de-cortes", "tipo": "Fraccionamiento"},
+    {"nombre": "Las Margaritas", "slug": "las-margaritas", "tipo": "Colonia"}
   ]
 }
