@@ -854,6 +854,76 @@
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/pueblos-jovenes/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/san-benito/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/la-lomita/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/ejido-el-tamarindo/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/las-cucas/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/fovissste-chapultepec/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/diaz-ordaz/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/lombardo-toledano/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/francisco-villa/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/emiliano-zapata/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
     <!-- Servicios por Colonia -->
     <url>
         <loc>https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/centro/</loc>
