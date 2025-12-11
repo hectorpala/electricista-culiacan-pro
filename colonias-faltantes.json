@@ -1,6 +1,14 @@
 {
   "colonias": [
-    {"nombre": "Rinconada", "slug": "rinconada", "tipo": "Fraccionamiento"},
-    {"nombre": "Las Huertas", "slug": "las-huertas", "tipo": "Colonia"}
+    {"nombre": "Villa Verde", "slug": "villa-verde", "tipo": "Fraccionamiento"},
+    {"nombre": "La Lima", "slug": "la-lima", "tipo": "Colonia"},
+    {"nombre": "El Pedregal", "slug": "el-pedregal", "tipo": "Fraccionamiento"},
+    {"nombre": "Costa Rica", "slug": "costa-rica", "tipo": "Colonia"},
+    {"nombre": "La Costerita", "slug": "la-costerita", "tipo": "Colonia"},
+    {"nombre": "Infonavit Playas", "slug": "infonavit-playas", "tipo": "Fraccionamiento"},
+    {"nombre": "Las Coloradas", "slug": "las-coloradas", "tipo": "Colonia"},
+    {"nombre": "Palos Prietos", "slug": "palos-prietos", "tipo": "Colonia"},
+    {"nombre": "Los Huizaches", "slug": "los-huizaches", "tipo": "Colonia"},
+    {"nombre": "Desarrollo Urbano Tres Ríos", "slug": "desarrollo-urbano-tres-rios", "tipo": "Fraccionamiento"}
   ]
 }
