@@ -406,4 +406,55 @@
         <priority>0.7</priority>
     </url>
 
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/10-de-abril/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Servicios por Colonia -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/centro/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/guadalupe/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/las-quintas/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/montebello/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/tres-rios/</loc>
+        <lastmod>2025-12-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Thank You Page -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/gracias/</loc>
+        <lastmod>2025-12-05</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
 </urlset>
