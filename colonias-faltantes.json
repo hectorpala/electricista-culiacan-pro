@@ -1,28 +1,53 @@
 {
   "colonias": [
     {
-      "nombre": "Bugambilias",
-      "slug": "bugambilias",
-      "tipo": "Fraccionamiento"
-    },
-    {
-      "nombre": "Prados del Sur",
-      "slug": "prados-del-sur",
-      "tipo": "Fraccionamiento"
-    },
-    {
-      "nombre": "Riveras del Humaya",
-      "slug": "riveras-del-humaya",
-      "tipo": "Fraccionamiento"
-    },
-    {
-      "nombre": "El Mirador",
-      "slug": "el-mirador",
+      "nombre": "Alameda",
+      "slug": "alameda",
       "tipo": "Colonia"
     },
     {
-      "nombre": "Terranova",
-      "slug": "terranova",
+      "nombre": "Adolfo Lopez Mateos",
+      "slug": "adolfo-lopez-mateos",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Genaro Estrada",
+      "slug": "genaro-estrada",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Primavera",
+      "slug": "primavera",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "El Saucito",
+      "slug": "el-saucito",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "La Conquista",
+      "slug": "la-conquista",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Avenidas",
+      "slug": "las-avenidas",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Los Fresnos",
+      "slug": "los-fresnos",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Laureles",
+      "slug": "los-laureles",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Pradera Dorada",
+      "slug": "pradera-dorada",
       "tipo": "Fraccionamiento"
     }
   ]
