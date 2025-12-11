@@ -1,14 +1,14 @@
 {
   "colonias": [
-    {"nombre": "Pueblos Jóvenes", "slug": "pueblos-jovenes", "tipo": "Colonia"},
-    {"nombre": "San Benito", "slug": "san-benito", "tipo": "Colonia"},
-    {"nombre": "La Lomita", "slug": "la-lomita", "tipo": "Colonia"},
-    {"nombre": "Ejido El Tamarindo", "slug": "ejido-el-tamarindo", "tipo": "Ejido"},
-    {"nombre": "Las Cucas", "slug": "las-cucas", "tipo": "Colonia"},
-    {"nombre": "Fovissste Chapultepec", "slug": "fovissste-chapultepec", "tipo": "Fraccionamiento"},
-    {"nombre": "Díaz Ordaz", "slug": "diaz-ordaz", "tipo": "Colonia"},
-    {"nombre": "Lombardo Toledano", "slug": "lombardo-toledano", "tipo": "Colonia"},
-    {"nombre": "Francisco Villa", "slug": "francisco-villa", "tipo": "Colonia"},
-    {"nombre": "Emiliano Zapata", "slug": "emiliano-zapata", "tipo": "Colonia"}
+    {"nombre": "Lázaro Cárdenas", "slug": "lazaro-cardenas", "tipo": "Colonia"},
+    {"nombre": "Miguel Alemán", "slug": "miguel-aleman", "tipo": "Colonia"},
+    {"nombre": "Benito Juárez", "slug": "benito-juarez", "tipo": "Colonia"},
+    {"nombre": "21 de Marzo", "slug": "21-de-marzo", "tipo": "Colonia"},
+    {"nombre": "5 de Mayo", "slug": "5-de-mayo", "tipo": "Colonia"},
+    {"nombre": "Lomas de Guadalupe", "slug": "lomas-de-guadalupe", "tipo": "Fraccionamiento"},
+    {"nombre": "Villas del Cedro", "slug": "villas-del-cedro", "tipo": "Fraccionamiento"},
+    {"nombre": "Las Praderas", "slug": "las-praderas", "tipo": "Fraccionamiento"},
+    {"nombre": "El Paraíso", "slug": "el-paraiso", "tipo": "Colonia"},
+    {"nombre": "Nuevo Milenio", "slug": "nuevo-milenio", "tipo": "Fraccionamiento"}
   ]
 }
