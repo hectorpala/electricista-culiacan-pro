@@ -1,14 +1,14 @@
 {
   "colonias": [
-    {"nombre": "Lázaro Cárdenas", "slug": "lazaro-cardenas", "tipo": "Colonia"},
-    {"nombre": "Miguel Alemán", "slug": "miguel-aleman", "tipo": "Colonia"},
-    {"nombre": "Benito Juárez", "slug": "benito-juarez", "tipo": "Colonia"},
-    {"nombre": "21 de Marzo", "slug": "21-de-marzo", "tipo": "Colonia"},
-    {"nombre": "5 de Mayo", "slug": "5-de-mayo", "tipo": "Colonia"},
-    {"nombre": "Lomas de Guadalupe", "slug": "lomas-de-guadalupe", "tipo": "Fraccionamiento"},
-    {"nombre": "Villas del Cedro", "slug": "villas-del-cedro", "tipo": "Fraccionamiento"},
-    {"nombre": "Las Praderas", "slug": "las-praderas", "tipo": "Fraccionamiento"},
-    {"nombre": "El Paraíso", "slug": "el-paraiso", "tipo": "Colonia"},
-    {"nombre": "Nuevo Milenio", "slug": "nuevo-milenio", "tipo": "Fraccionamiento"}
+    {"nombre": "Solidaridad", "slug": "solidaridad", "tipo": "Colonia"},
+    {"nombre": "Independencia", "slug": "independencia", "tipo": "Colonia"},
+    {"nombre": "Unión de Ladrilleros", "slug": "union-de-ladrilleros", "tipo": "Colonia"},
+    {"nombre": "Lázaro Cárdenas del Río", "slug": "lazaro-cardenas-del-rio", "tipo": "Fraccionamiento"},
+    {"nombre": "Simón Bolívar", "slug": "simon-bolivar", "tipo": "Colonia"},
+    {"nombre": "Las Américas", "slug": "las-americas", "tipo": "Fraccionamiento"},
+    {"nombre": "Brisas del Valle", "slug": "brisas-del-valle", "tipo": "Fraccionamiento"},
+    {"nombre": "Hacienda San José", "slug": "hacienda-san-jose", "tipo": "Fraccionamiento"},
+    {"nombre": "Residencial del Valle", "slug": "residencial-del-valle", "tipo": "Fraccionamiento"},
+    {"nombre": "Valle del Pedregal", "slug": "valle-del-pedregal", "tipo": "Fraccionamiento"}
   ]
 }
