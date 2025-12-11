@@ -1,5 +1,6 @@
 {
   "colonias": [
-    {"nombre": "Nuevo Horizonte", "slug": "nuevo-horizonte", "tipo": "Fraccionamiento"}
+    {"nombre": "Rinconada", "slug": "rinconada", "tipo": "Fraccionamiento"},
+    {"nombre": "Las Huertas", "slug": "las-huertas", "tipo": "Colonia"}
   ]
 }
