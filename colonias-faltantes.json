@@ -1,14 +1,14 @@
 {
   "colonias": [
-    {"nombre": "El Carrizal", "slug": "el-carrizal", "tipo": "Colonia"},
-    {"nombre": "Villas de Cortés II", "slug": "villas-de-cortes-ii", "tipo": "Fraccionamiento"},
-    {"nombre": "Las Palomas", "slug": "las-palomas", "tipo": "Colonia"},
-    {"nombre": "San Lorenzo", "slug": "san-lorenzo", "tipo": "Colonia"},
-    {"nombre": "Infonavit Guadalupe", "slug": "infonavit-guadalupe", "tipo": "Colonia"},
-    {"nombre": "Valle de la Laguna", "slug": "valle-de-la-laguna", "tipo": "Fraccionamiento"},
-    {"nombre": "El Trigal", "slug": "el-trigal", "tipo": "Colonia"},
-    {"nombre": "Villas del Bosque", "slug": "villas-del-bosque", "tipo": "Fraccionamiento"},
-    {"nombre": "La Esperanza", "slug": "la-esperanza", "tipo": "Colonia"},
-    {"nombre": "Los Olivos", "slug": "los-olivos", "tipo": "Fraccionamiento"}
+    {"nombre": "El Huayabo", "slug": "el-huayabo", "tipo": "Colonia"},
+    {"nombre": "Valle del Sol", "slug": "valle-del-sol", "tipo": "Fraccionamiento"},
+    {"nombre": "Las Torres", "slug": "las-torres", "tipo": "Fraccionamiento"},
+    {"nombre": "San Antonio", "slug": "san-antonio", "tipo": "Colonia"},
+    {"nombre": "Infonavit El Cedro", "slug": "infonavit-el-cedro", "tipo": "Colonia"},
+    {"nombre": "El Ranchito", "slug": "el-ranchito", "tipo": "Colonia"},
+    {"nombre": "Villas del Parque", "slug": "villas-del-parque", "tipo": "Fraccionamiento"},
+    {"nombre": "La Gloria", "slug": "la-gloria", "tipo": "Colonia"},
+    {"nombre": "Los Mangos", "slug": "los-mangos", "tipo": "Colonia"},
+    {"nombre": "Villa del Campo", "slug": "villa-del-campo", "tipo": "Fraccionamiento"}
   ]
 }
