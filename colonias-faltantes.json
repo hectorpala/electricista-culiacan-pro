@@ -1,0 +1,10 @@
+{
+  "colonias": [
+    {
+      "nombre": "Humaya",
+      "slug": "humaya",
+      "tipo": "Colonia",
+      "cp": "80020"
+    }
+  ]
+}
