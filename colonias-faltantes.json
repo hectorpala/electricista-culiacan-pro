@@ -1,14 +1,14 @@
 {
   "colonias": [
-    {"nombre": "Los Girasoles", "slug": "los-girasoles", "tipo": "Fraccionamiento"},
-    {"nombre": "Villas del Rey", "slug": "villas-del-rey", "tipo": "Fraccionamiento"},
-    {"nombre": "El Mezquitón", "slug": "el-mezquiton", "tipo": "Colonia"},
-    {"nombre": "La Higuerita", "slug": "la-higuerita", "tipo": "Colonia"},
-    {"nombre": "Infonavit Las Flores", "slug": "infonavit-las-flores", "tipo": "Colonia"},
-    {"nombre": "San José", "slug": "san-jose", "tipo": "Colonia"},
-    {"nombre": "Villa del Real", "slug": "villa-del-real", "tipo": "Fraccionamiento"},
-    {"nombre": "Las Glorias", "slug": "las-glorias", "tipo": "Colonia"},
-    {"nombre": "El Realito", "slug": "el-realito", "tipo": "Colonia"},
-    {"nombre": "Villas del Río III", "slug": "villas-del-rio-iii", "tipo": "Fraccionamiento"}
+    {"nombre": "El Carrizal", "slug": "el-carrizal", "tipo": "Colonia"},
+    {"nombre": "Villas de Cortés II", "slug": "villas-de-cortes-ii", "tipo": "Fraccionamiento"},
+    {"nombre": "Las Palomas", "slug": "las-palomas", "tipo": "Colonia"},
+    {"nombre": "San Lorenzo", "slug": "san-lorenzo", "tipo": "Colonia"},
+    {"nombre": "Infonavit Guadalupe", "slug": "infonavit-guadalupe", "tipo": "Colonia"},
+    {"nombre": "Valle de la Laguna", "slug": "valle-de-la-laguna", "tipo": "Fraccionamiento"},
+    {"nombre": "El Trigal", "slug": "el-trigal", "tipo": "Colonia"},
+    {"nombre": "Villas del Bosque", "slug": "villas-del-bosque", "tipo": "Fraccionamiento"},
+    {"nombre": "La Esperanza", "slug": "la-esperanza", "tipo": "Colonia"},
+    {"nombre": "Los Olivos", "slug": "los-olivos", "tipo": "Fraccionamiento"}
   ]
 }
