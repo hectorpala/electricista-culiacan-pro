@@ -13,11 +13,51 @@ from datetime import datetime
 # Configuracion
 COLONIAS_DIR = "colonias"
 FALTANTES_FILE = "colonias-faltantes.json"
+SITEMAP_FILE = "sitemap.xml"
 BLOQUE_SIZE = 15
 PHONE = "667 392 2273"
 PHONE_INTL = "+526673922273"
 DOMAIN = "electricistaculiacanpro.mx"
 GTM_ID = "GTM-XXXXXXX"  # Actualizar con ID real
+
+def add_to_sitemap(slug):
+    """Agrega una colonia al sitemap.xml"""
+    if not os.path.exists(SITEMAP_FILE):
+        print(f"  ⚠️  No se encontró {SITEMAP_FILE}")
+        return False
+
+    url = f"https://{DOMAIN}/colonias/{slug}/"
+    today = datetime.now().strftime('%Y-%m-%d')
+
+    # Leer sitemap actual
+    with open(SITEMAP_FILE, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Verificar si ya existe
+    if url in content:
+        return False  # Ya existe
+
+    # Crear entrada XML
+    new_entry = f'''
+    <url>
+        <loc>{url}</loc>
+        <lastmod>{today}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+'''
+
+    # Insertar antes de "<!-- Servicios por Colonia -->" o antes de "</urlset>"
+    if '<!-- Servicios por Colonia -->' in content:
+        content = content.replace('<!-- Servicios por Colonia -->', new_entry + '    <!-- Servicios por Colonia -->')
+    else:
+        content = content.replace('</urlset>', new_entry + '</urlset>')
+
+    # Guardar sitemap actualizado
+    with open(SITEMAP_FILE, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+    return True
 
 def create_slug(nombre):
     """Convierte nombre a slug URL-friendly"""
@@ -162,20 +202,21 @@ def main():
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(html)
 
-        print(f"  ✅ {col['nombre']} -> colonias/{col['slug']}/")
+        # Agregar al sitemap
+        sitemap_added = add_to_sitemap(col['slug'])
+        sitemap_status = "📍" if sitemap_added else ""
+
+        print(f"  ✅ {col['nombre']} -> colonias/{col['slug']}/ {sitemap_status}")
         created += 1
 
     print("=" * 50)
     print(f"✅ Creadas: {created} | Existentes: {skipped} | Total en bloque: {len(bloque_colonias)}")
+    print(f"📍 = Agregado al sitemap.xml")
 
     if end < total:
         print(f"\n📌 Siguiente bloque: python3 scripts/generar-colonias.py {bloque + 1}")
     else:
         print(f"\n🎉 ¡Todas las colonias han sido procesadas!")
-
-    # Mostrar comando para sitemap
-    if created > 0:
-        print(f"\n📝 No olvides actualizar sitemap.xml con las nuevas colonias")
 
 if __name__ == "__main__":
     main()

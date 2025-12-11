@@ -1,29 +1,9 @@
 {
   "colonias": [
     {
-      "nombre": "La Campiña",
-      "slug": "la-campina",
-      "tipo": "Fraccionamiento"
-    },
-    {
-      "nombre": "Barrancos",
-      "slug": "barrancos",
+      "nombre": "Industrial Bravo",
+      "slug": "industrial-bravo",
       "tipo": "Colonia"
-    },
-    {
-      "nombre": "Miguel Hidalgo",
-      "slug": "miguel-hidalgo",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "Tierra Blanca",
-      "slug": "tierra-blanca",
-      "tipo": "Colonia"
-    },
-    {
-      "nombre": "Villa Satelite",
-      "slug": "villa-satelite",
-      "tipo": "Fraccionamiento"
     }
   ]
 }
