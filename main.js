@@ -323,3 +323,83 @@ window.dataLayer.push({
 });
 
 console.log('✅ Electricista Culiacán Pro - JavaScript loaded successfully');
+
+// Exit Intent Popup
+(function() {
+    const popup = document.getElementById('exit-intent-popup');
+    if (!popup) return;
+
+    let popupShown = false;
+    const POPUP_DELAY = 30000; // 30 segundos para móvil
+    const SESSION_KEY = 'exitPopupShown';
+
+    // No mostrar si ya se mostró en esta sesión
+    if (sessionStorage.getItem(SESSION_KEY)) return;
+
+    function showPopup() {
+        if (popupShown) return;
+        popupShown = true;
+        sessionStorage.setItem(SESSION_KEY, 'true');
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        // Track en GA4
+        if (window.dataLayer) {
+            window.dataLayer.push({
+                'event': 'exit_intent_shown',
+                'trigger': isMobile() ? 'mobile_timer' : 'desktop_mouseleave'
+            });
+        }
+    }
+
+    function hidePopup() {
+        popup.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    function isMobile() {
+        return window.innerWidth <= 768 || 'ontouchstart' in window;
+    }
+
+    // Cerrar popup
+    const closeBtn = popup.querySelector('.exit-popup-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', hidePopup);
+    }
+
+    // Cerrar al hacer clic fuera
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) hidePopup();
+    });
+
+    // Cerrar con ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') hidePopup();
+    });
+
+    // DESKTOP: Detectar cuando el mouse sale hacia arriba
+    if (!isMobile()) {
+        document.addEventListener('mouseleave', function(e) {
+            if (e.clientY < 10) {
+                showPopup();
+            }
+        });
+    }
+
+    // MÓVIL: Mostrar después de 30 segundos sin conversión
+    if (isMobile()) {
+        setTimeout(function() {
+            // Solo mostrar si no han hecho clic en WhatsApp o teléfono
+            showPopup();
+        }, POPUP_DELAY);
+
+        // También al presionar botón "atrás"
+        history.pushState(null, '', location.href);
+        window.addEventListener('popstate', function() {
+            if (!popupShown) {
+                showPopup();
+                history.pushState(null, '', location.href);
+            }
+        });
+    }
+})();
