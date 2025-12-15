@@ -23,7 +23,7 @@ h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:0 0;padding:22px 0;transition:background .3s}
 .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
 .logo{display:block}
-.logo img{height:140px;width:auto;max-height:160px;mix-blend-mode:multiply;aspect-ratio:512/195}
+.logo img{height:140px;width:auto;max-height:160px;mix-blend-mode:multiply;aspect-ratio:1/1}
 @media(max-width:768px){.logo img{height:90px;max-height:100px}}
 .nav-menu{display:flex;list-style:none;gap:2rem}
 .nav-link{color:#f97316;font-weight:500;text-decoration:none;text-shadow:0 2px 4px rgba(0,0,0,.3)}
