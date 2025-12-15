@@ -1,11 +1,29 @@
 # Netlify Configuration - Electricista Culiacán Pro
-# Cache headers optimizados para LCP <2.5s
+# CDN Edge + Brotli (auto) + HTTP/2 (auto) + Early Hints
 
 [build]
   publish = "."
   command = "echo 'Static site - no build needed'"
 
-# Headers globales
+# Optimizaciones de red
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = false
+  minify = false
+
+[build.processing.js]
+  bundle = false
+  minify = false
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+# Headers globales + Security
 [[headers]]
   for = "/*"
   [headers.values]
@@ -13,66 +31,71 @@
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
 
-# HTML - cache corto para contenido fresco
-[[headers]]
-  for = "/*.html"
-  [headers.values]
-    Cache-Control = "public, max-age=3600, must-revalidate"
-
+# HTML - cache corto + Early Hints para assets críticos
 [[headers]]
   for = "/"
   [headers.values]
-    Cache-Control = "public, max-age=3600, must-revalidate"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+    Link = "</assets/css/critical.min.css>; rel=preload; as=style, </assets/fonts/inter-400.woff2>; rel=preload; as=font; crossorigin, </assets/fonts/montserrat-800.woff2>; rel=preload; as=font; crossorigin, </assets/images/optimizadas/hero-mobile-400w.webp>; rel=preload; as=image"
 
-# CSS crítico con cache busting - cache largo
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+# /assets/ - Cache 30 días + immutable
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
 [[headers]]
   for = "/assets/css/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=2592000, immutable"
 
-# CSS principal
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# JavaScript
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# Fuentes - cache muy largo
 [[headers]]
   for = "/assets/fonts/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=2592000, immutable"
     Access-Control-Allow-Origin = "*"
 
-# Imágenes optimizadas - cache muy largo
 [[headers]]
   for = "/assets/images/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=2592000, immutable"
 
+# CSS/JS root - 30 días immutable
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"
+
+# Imágenes - 30 días immutable
 [[headers]]
   for = "/*.webp"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=2592000, immutable"
 
 [[headers]]
   for = "/*.png"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=2592000, immutable"
 
 [[headers]]
   for = "/*.ico"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=2592000, immutable"
 
-# Service Worker - sin cache para actualizaciones inmediatas
+# Service Worker - sin cache
 [[headers]]
   for = "/sw.js"
   [headers.values]
@@ -82,26 +105,38 @@
 [[headers]]
   for = "/manifest.json"
   [headers.values]
-    Cache-Control = "public, max-age=86400, must-revalidate"
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
 # Sitemaps
 [[headers]]
   for = "/*.xml"
   [headers.values]
-    Cache-Control = "public, max-age=86400, must-revalidate"
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
 [[headers]]
   for = "/sitemaps/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400, must-revalidate"
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
 # Robots.txt
 [[headers]]
   for = "/robots.txt"
   [headers.values]
-    Cache-Control = "public, max-age=86400, must-revalidate"
+    Cache-Control = "public, max-age=86400"
 
-# Redirects para trailing slashes consistentes
+# Colonias - cache moderado (contenido semi-estático)
+[[headers]]
+  for = "/colonias/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+# Servicios
+[[headers]]
+  for = "/servicios/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+# Redirects
 [[redirects]]
   from = "/colonias/*/"
   to = "/colonias/:splat/"
