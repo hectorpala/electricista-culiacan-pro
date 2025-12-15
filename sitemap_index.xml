@@ -4,25 +4,25 @@
     <!-- Sitemap Principal -->
     <sitemap>
         <loc>https://electricistaculiacanpro.mx/sitemap.xml</loc>
-        <lastmod>2025-11-22</lastmod>
+        <lastmod>2025-12-14</lastmod>
     </sitemap>
 
     <!-- Sitemap de Servicios -->
     <sitemap>
         <loc>https://electricistaculiacanpro.mx/sitemaps/servicios_sitemap.xml</loc>
-        <lastmod>2025-11-22</lastmod>
+        <lastmod>2025-12-14</lastmod>
     </sitemap>
 
     <!-- Sitemap de Colonias -->
     <sitemap>
         <loc>https://electricistaculiacanpro.mx/sitemaps/colonias_sitemap.xml</loc>
-        <lastmod>2025-11-22</lastmod>
+        <lastmod>2025-12-14</lastmod>
     </sitemap>
 
     <!-- Sitemap de Blog (Futuro) -->
     <sitemap>
         <loc>https://electricistaculiacanpro.mx/sitemaps/blog_sitemap.xml</loc>
-        <lastmod>2025-11-22</lastmod>
+        <lastmod>2025-12-14</lastmod>
     </sitemap>
 
 </sitemapindex>

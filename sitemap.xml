@@ -5099,4 +5099,41 @@
         <priority>0.3</priority>
     </url>
 
+
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/barrancos/</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/humaya/</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/la-campina/</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/miguel-hidalgo/</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/tierra-blanca/</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://electricistaculiacanpro.mx/colonias/villa-satelite/</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
 </urlset>

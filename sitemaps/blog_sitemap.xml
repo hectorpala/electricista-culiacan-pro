@@ -1,51 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-    <!-- Blog - Sitemap Seccional -->
-
-    <url>
-        <loc>https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/</loc>
-        <lastmod>2025-11-22</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/</loc>
-        <lastmod>2025-11-22</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/</loc>
-        <lastmod>2025-11-22</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
         <loc>https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/</loc>
-        <lastmod>2025-11-22</lastmod>
+        <lastmod>2025-12-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-
     <url>
-        <loc>https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/</loc>
-        <lastmod>2025-11-22</lastmod>
+        <loc>https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/</loc>
+        <lastmod>2025-12-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-
     <url>
         <loc>https://electricistaculiacanpro.mx/blog/cuando-llamar-electricista-emergencia/</loc>
-        <lastmod>2025-11-22</lastmod>
+        <lastmod>2025-12-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
 </urlset>
