@@ -76,10 +76,8 @@
     <link rel="preload" href="/assets/css/critical.min.css?v=96f1486a" as="style">
     <link rel="stylesheet" href="/assets/css/critical.min.css?v=96f1486a">
 
-    <!-- Preload hero image - All breakpoints for LCP -->
-    <link rel="preload" as="image" href="assets/images/optimizadas/hero-mobile-480w.webp" type="image/webp" media="(max-width: 480px)">
-    <link rel="preload" as="image" href="assets/images/optimizadas/hero-mobile-640w.webp" type="image/webp" media="(min-width: 481px) and (max-width: 768px)">
-    <link rel="preload" as="image" href="assets/images/optimizadas/hero-electricista-culiacan-800w.webp" type="image/webp" media="(min-width: 769px)">
+    <!-- Preload hero LCP (solo variante móvil principal AVIF) -->
+    <link rel="preload" as="image" href="assets/images/optimizadas/hero-mobile-480w.avif" type="image/avif" media="(max-width: 768px)">
 
     <!-- Preload fonts - Only Inter 400 + 600 for fold -->
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -2716,8 +2714,13 @@ window.dataLayer = window.dataLayer || [];
     </div>
 
     <header id="inicio" class="hero">
-        <!-- Hero Background Image (LCP optimized - srcset con sizes exactos) -->
+        <!-- Hero Background Image (LCP optimizado con AVIF + WebP) -->
         <picture class="hero-background">
+            <source type="image/avif"
+                    srcset="assets/images/optimizadas/hero-mobile-320w.avif 320w,
+                            assets/images/optimizadas/hero-mobile-480w.avif 480w,
+                            assets/images/optimizadas/hero-mobile-640w.avif 640w"
+                    sizes="(max-width: 480px) 100vw, (max-width: 1024px) 60vw, 1200px">
             <source type="image/webp"
                     srcset="assets/images/optimizadas/hero-mobile-320w.webp 320w,
                             assets/images/optimizadas/hero-mobile-480w.webp 480w,
@@ -2730,7 +2733,8 @@ window.dataLayer = window.dataLayer || [];
                  width="320"
                  height="240"
                  fetchpriority="high"
-                 loading="eager">
+                 loading="eager"
+                 decoding="async">
         </picture>
 
         <div class="container">
