@@ -89,19 +89,20 @@
     <link rel="dns-prefetch" href="https://wa.me">
 
     <!-- Preload Critical CSS with cache busting -->
-    <link rel="preload" href="/assets/css/critical.min.css?v=943de1e6" as="style">
-    <link rel="stylesheet" href="/assets/css/critical.min.css?v=943de1e6">
+    <link rel="preload" href="/assets/css/critical.min.css?v=73c3d6d0" as="style">
+    <link rel="stylesheet" href="/assets/css/critical.min.css?v=73c3d6d0">
 
-    <!-- Preload hero image - Optimized 9KB mobile version -->
-    <link rel="preload" as="image" href="assets/images/optimizadas/hero-mobile-400w.webp" type="image/webp" media="(max-width: 480px)" fetchpriority="high">
-    <link rel="preload" as="image" href="assets/images/optimizadas/hero-electricista-culiacan-800w.webp" type="image/webp" media="(min-width: 481px)" fetchpriority="high">
+    <!-- Preload hero image - Optimized variants for LCP -->
+    <link rel="preload" as="image" href="assets/images/optimizadas/hero-mobile-320w.webp" type="image/webp" media="(max-width: 360px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/optimizadas/hero-mobile-640w.webp" type="image/webp" media="(min-width: 361px) and (max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/optimizadas/hero-electricista-culiacan-800w.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
 
-    <!-- Preload fonts - Only Inter 400 + Montserrat 800 (essential) -->
+    <!-- Preload fonts - Only Inter 400 + 600 for fold -->
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Minimal inline CSS for FOUC prevention (external CSS preloaded above) -->
-    <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,-apple-system,sans-serif;background:#F8FAFC;padding-top:80px}.hero{min-height:85vh;background:#1a1a2e}</style>
+    <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,-apple-system,sans-serif;background:#F8FAFC;padding-top:80px}.hero{min-height:85vh;background:#1a1a2e}@media(max-width:768px){.hero{min-height:70vh}}</style>
 
     <!-- Breadcrumb Styles -->
     <style>
@@ -2732,15 +2733,18 @@ window.dataLayer = window.dataLayer || [];
     </div>
 
     <header id="inicio" class="hero">
-        <!-- Hero Background Image (LCP optimized - 9KB mobile) -->
+        <!-- Hero Background Image (LCP optimized - srcset con sizes) -->
         <picture class="hero-background">
-            <source media="(max-width: 480px)" type="image/webp" srcset="assets/images/optimizadas/hero-mobile-400w.webp">
-            <source media="(max-width: 1024px)" type="image/webp" srcset="assets/images/optimizadas/hero-electricista-culiacan-800w.webp">
-            <source type="image/webp" srcset="assets/images/optimizadas/hero-electricista-culiacan-1200w.webp">
-            <img src="assets/images/optimizadas/hero-mobile-400w.webp"
+            <source type="image/webp"
+                    srcset="assets/images/optimizadas/hero-mobile-320w.webp 320w,
+                            assets/images/optimizadas/hero-mobile-640w.webp 640w,
+                            assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w,
+                            assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
+                    sizes="(max-width: 480px) 100vw, (max-width: 1024px) 60vw, 800px">
+            <img src="assets/images/optimizadas/hero-mobile-320w.webp"
                  alt="Electricista profesional en Culiacán atendiendo emergencia 24 horas"
-                 width="400"
-                 height="300"
+                 width="320"
+                 height="240"
                  fetchpriority="high"
                  loading="eager">
         </picture>
