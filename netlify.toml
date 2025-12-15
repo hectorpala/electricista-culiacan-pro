@@ -39,7 +39,7 @@
   for = "/"
   [headers.values]
     Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
-    Link = "</assets/css/critical.min.css>; rel=preload; as=style, </assets/fonts/inter-400.woff2>; rel=preload; as=font; crossorigin, </assets/fonts/inter-600.woff2>; rel=preload; as=font; crossorigin, </assets/images/optimizadas/hero-mobile-480w.webp>; rel=preload; as=image"
+    Link = "</assets/css/critical.min.css>; rel=preload; as=style, </assets/fonts/inter-400.woff2>; rel=preload; as=font; crossorigin, </assets/fonts/inter-600.woff2>; rel=preload; as=font; crossorigin, </assets/images/optimizadas/hero-mobile-480w-lite.avif>; rel=preload; as=image"
 
 [[headers]]
   for = "/*.html"

@@ -76,15 +76,15 @@
     <link rel="preload" href="/assets/css/critical.min.css?v=96f1486a" as="style">
     <link rel="stylesheet" href="/assets/css/critical.min.css?v=96f1486a">
 
-    <!-- Preload hero LCP (solo variante móvil principal AVIF) -->
-    <link rel="preload" as="image" href="assets/images/optimizadas/hero-mobile-480w.avif" type="image/avif" media="(max-width: 768px)">
+    <!-- Preload hero LCP (solo variante móvil principal AVIF-lite 7.8KB) -->
+    <link rel="preload" as="image" href="assets/images/optimizadas/hero-mobile-480w-lite.avif" type="image/avif" media="(max-width: 768px)">
 
     <!-- Preload fonts - Only Inter 400 + 600 for fold -->
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Minimal inline CSS for FOUC prevention (external CSS preloaded above) -->
-    <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,-apple-system,sans-serif;background:#F8FAFC;padding-top:80px}.hero{min-height:85vh;background:#1a1a2e}@media(max-width:768px){.hero{min-height:65vh}}</style>
+    <!-- Minimal inline CSS for FOUC prevention -->
+    <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,-apple-system,sans-serif;background:#F8FAFC;padding-top:80px}.hero{min-height:85vh;background:#1a1a2e}@media(max-width:768px){.hero{min-height:60vh}}</style>
 
     <!-- Breadcrumb Styles -->
     <style>
@@ -2717,24 +2717,23 @@ window.dataLayer = window.dataLayer || [];
         <!-- Hero Background Image (LCP optimizado con AVIF + WebP) -->
         <picture class="hero-background">
             <source type="image/avif"
-                    srcset="assets/images/optimizadas/hero-mobile-320w.avif 320w,
-                            assets/images/optimizadas/hero-mobile-480w.avif 480w,
-                            assets/images/optimizadas/hero-mobile-640w.avif 640w"
-                    sizes="(max-width: 480px) 100vw, (max-width: 1024px) 60vw, 1200px">
+                    srcset="assets/images/optimizadas/hero-mobile-320w-lite.avif 320w,
+                            assets/images/optimizadas/hero-mobile-480w-lite.avif 480w,
+                            assets/images/optimizadas/hero-mobile-640w-lite.avif 640w,
+                            assets/images/optimizadas/hero-electricista-culiacan-800w-lite.avif 800w"
+                    sizes="(max-width:480px) 100vw, (max-width:768px) 100vw, 800px">
             <source type="image/webp"
                     srcset="assets/images/optimizadas/hero-mobile-320w.webp 320w,
                             assets/images/optimizadas/hero-mobile-480w.webp 480w,
                             assets/images/optimizadas/hero-mobile-640w.webp 640w,
-                            assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w,
-                            assets/images/optimizadas/hero-electricista-culiacan-1200w.webp 1200w"
-                    sizes="(max-width: 480px) 100vw, (max-width: 1024px) 60vw, 1200px">
-            <img src="assets/images/optimizadas/hero-mobile-320w.webp"
+                            assets/images/optimizadas/hero-electricista-culiacan-800w.webp 800w"
+                    sizes="(max-width:480px) 100vw, (max-width:768px) 100vw, 800px">
+            <img src="assets/images/optimizadas/hero-mobile-320w-lite.avif"
                  alt="Electricista profesional en Culiacán atendiendo emergencia 24 horas"
                  width="320"
                  height="240"
                  fetchpriority="high"
-                 loading="eager"
-                 decoding="async">
+                 loading="eager">
         </picture>
 
         <div class="container">
@@ -3817,17 +3816,13 @@ window.dataLayer = window.dataLayer || [];
     <script src="main.min.js" defer></script>
     <script src="/analytics-events.min.js" defer></script>
 
-    <!-- Analytics - Moved to end of body for better LCP -->
+    <!-- Analytics - GA in idle, Clarity delayed 6s -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-NSV2K9N2ZD');
-      function loadTracking(){
-        var ga=document.createElement('script');ga.async=1;ga.src='https://www.googletagmanager.com/gtag/js?id=G-NSV2K9N2ZD';document.head.appendChild(ga);
-        (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","ukok9sjrh5");
-      }
-      if(window.requestIdleCallback){requestIdleCallback(loadTracking,{timeout:8000});}else{setTimeout(loadTracking,6000);}
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NSV2K9N2ZD');
+      function loadGA(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-NSV2K9N2ZD';document.head.appendChild(s);}
+      function loadClarity(){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","ukok9sjrh5");}
+      if(window.requestIdleCallback){requestIdleCallback(loadGA,{timeout:5000});}else{setTimeout(loadGA,3000);}
+      setTimeout(loadClarity,6000);
     </script>
 </body>
 </html>
