@@ -1,4 +1,4 @@
-/* Fuentes autohospedadas */
+/* Fuentes autohospedadas - Solo 2 esenciales */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -6,33 +6,6 @@
   font-display: swap;
   size-adjust: 100%;
   src: url('assets/fonts/inter-400.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  size-adjust: 100%;
-  src: url('assets/fonts/inter-500.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  size-adjust: 100%;
-  src: url('assets/fonts/inter-600.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  size-adjust: 105%;
-  src: url('assets/fonts/montserrat-700.woff2') format('woff2');
 }
 
 @font-face {
