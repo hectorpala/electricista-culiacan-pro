@@ -232,8 +232,8 @@ p {
   overflow: hidden;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 20%, rgba(0, 0, 0, 0) 50%),
               image-set(
-                url('assets/images/hero-electricista-culiacan-800w.webp') 1x,
-                url('assets/images/hero-electricista-culiacan-1200w.webp') 2x
+                url('assets/images/optimizadas/hero-electricista-culiacan-800w.webp') 1x,
+                url('assets/images/optimizadas/hero-electricista-culiacan-1200w.webp') 2x
               );
   background-size: cover;
   background-position: center center;
