@@ -72,7 +72,7 @@
     <!-- Preload Critical CSS with cache busting -->
     <link rel="preload" href="/assets/css/critical.min.css?v=96f1486a" as="style">
     <link rel="stylesheet" href="/assets/css/critical.min.css?v=96f1486a">
-    <link rel="stylesheet" href="/assets/css/styles.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/assets/css/styles.min.css"></noscript>
 
     <!-- Preload hero LCP -->
     <link rel="preload" as="image" href="assets/images/optimizadas/hero-mobile-480w-lite.avif" type="image/avif" media="(max-width: 768px)">
@@ -1225,8 +1225,6 @@ window.dataLayer = window.dataLayer || [];
     </div>
 
     <!-- Non-critical CSS - loaded after LCP -->
-    <link rel="stylesheet" href="/styles.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="/styles.min.css"></noscript>
 
     <!-- Main JavaScript (defer + requestIdleCallback for non-critical features) -->
     <script src="main.min.js" defer></script>
