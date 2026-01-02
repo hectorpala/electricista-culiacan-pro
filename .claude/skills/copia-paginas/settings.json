@@ -1,0 +1,25 @@
+{
+  "name": "copia-paginas",
+  "description": "Replica estructura exacta de una página en otra. Ultra-detallista: compara CADA línea, atributo y valor CSS. No deja pasar NADA.",
+  "version": "1.0.0",
+  "author": "Claude",
+  "triggers": [
+    "/copia-paginas",
+    "/copiar-pagina",
+    "/sync-pages"
+  ],
+  "parameters": {
+    "origen": {
+      "type": "string",
+      "description": "Ruta a la página que servirá como plantilla",
+      "required": true
+    },
+    "destino": {
+      "type": "string",
+      "description": "Ruta a la página que será modificada",
+      "required": true
+    }
+  },
+  "tags": ["html", "css", "sync", "structure", "replication"],
+  "category": "development"
+}
