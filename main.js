@@ -1,43 +1,51 @@
 // Main JavaScript - Electricista Culiacán Pro
 // Loaded with defer for optimal performance
-// Last updated: 2025-12-14
+// Last updated: 2026-01-01
 
-// Helper to defer non-critical code until idle
-const deferIdle = (fn, delay = 1500) => {
-    if ('requestIdleCallback' in window) {
-        requestIdleCallback(fn, { timeout: 3000 });
-    } else {
-        setTimeout(fn, delay);
-    }
-};
-
-// ==========================================
-// CRITICAL PATH - Menu & Form Validation
-// ==========================================
-
-// Mobile menu toggle
+// Mobile menu toggle with scroll position preservation
 (function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.querySelector('.nav-menu');
-
     if (!mobileMenuBtn || !navMenu) return;
 
+    let scrollY = 0;
+
+    function openMenu() {
+        scrollY = window.scrollY;
+        document.body.style.top = '-' + scrollY + 'px';
+        document.body.classList.add('menu-open');
+        navMenu.classList.add('active');
+        mobileMenuBtn.classList.add('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        mobileMenuBtn.setAttribute('aria-label', 'Cerrar menú de navegación');
+    }
+
+    function closeMenu() {
+        const savedScrollY = scrollY;
+        document.body.classList.remove('menu-open');
+        document.body.style.top = '';
+        navMenu.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.setAttribute('aria-label', 'Abrir menú de navegación');
+        window.scrollTo(0, savedScrollY);
+    }
+
     mobileMenuBtn.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        mobileMenuBtn.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+        if (document.body.classList.contains('menu-open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
 
+    // Close mobile menu when clicking a link
     document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        });
+        link.addEventListener('click', closeMenu);
     });
 })();
 
-// Real-time form validation (critical for UX)
+// Real-time form validation
 (function() {
     const form = document.getElementById('contact-form');
     if (!form) return;
@@ -111,7 +119,7 @@ const deferIdle = (fn, delay = 1500) => {
     updateSubmitButton();
 })();
 
-// Form submission (critical for conversion)
+// Multi-layer lead capture: Netlify Forms + localStorage + GA4 + WhatsApp
 (function() {
     const form = document.getElementById('contact-form');
     if (!form) return;
@@ -127,7 +135,10 @@ const deferIdle = (fn, delay = 1500) => {
 
         const leadData = {
             timestamp: new Date().toISOString(),
-            nombre, telefono, email, mensaje,
+            nombre: nombre,
+            telefono: telefono,
+            email: email,
+            mensaje: mensaje,
             source: 'homepage_form',
             url: window.location.href
         };
@@ -156,120 +167,142 @@ const deferIdle = (fn, delay = 1500) => {
             });
 
             if (response.ok) {
-                const whatsappMessage = `Hola! Solicito cotización:\n\nNombre: ${nombre}\nTel: ${telefono}\nEmail: ${email}\nMensaje: ${mensaje}`;
-                window.open(`https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+                const whatsappMessage = `Hola! Solicito cotización de servicios eléctricos:\n\n` +
+                                      `Nombre: ${nombre}\n` +
+                                      `Teléfono: ${telefono}\n` +
+                                      `Email: ${email}\n` +
+                                      `Mensaje: ${mensaje}`;
+                const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+                window.open(whatsappURL, '_blank');
                 window.location.href = '/gracias';
             } else {
-                throw new Error('Failed');
+                throw new Error('Netlify form submission failed');
             }
         } catch (error) {
             alert('Formulario enviado. Te redirigiremos a WhatsApp.');
-            const whatsappMessage = `Hola! Solicito cotización:\n\nNombre: ${nombre}\nTel: ${telefono}\nEmail: ${email}\nMensaje: ${mensaje}`;
-            window.location.href = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+            const whatsappMessage = `Hola! Solicito cotización de servicios eléctricos:\n\n` +
+                                  `Nombre: ${nombre}\n` +
+                                  `Teléfono: ${telefono}\n` +
+                                  `Email: ${email}\n` +
+                                  `Mensaje: ${mensaje}`;
+            const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+            window.location.href = whatsappURL;
         }
     });
 })();
 
-// ==========================================
-// DEFERRED - Non-critical tracking & features
-// ==========================================
+// CTA fijo con tracking
+(function(){
+  var PATH = location.pathname;
+  var wa = document.getElementById("cta-whatsapp");
+  var tl = document.getElementById("cta-llamar");
 
-deferIdle(() => {
-    // WhatsApp tracking
-    document.querySelectorAll('a[href^="https://wa.me"]').forEach(link => {
-        link.addEventListener('click', function() {
-            if (window.dataLayer) {
-                window.dataLayer.push({
-                    'event': 'whatsapp_click',
-                    'location': this.closest('section')?.id || 'unknown',
-                    'page_location': window.location.pathname
-                });
-            }
-        });
+  window.dataLayer = window.dataLayer || [];
+  function pushEvt(type, label) {
+    try {
+      window.dataLayer.push({
+        event: "cta_click",
+        cta_type: type,
+        cta_label: label,
+        page: PATH
+      });
+    } catch(e) {}
+  }
+
+  if (wa) {
+    wa.addEventListener("click", function() {
+      pushEvt("whatsapp", "cta_floating");
     });
-
-    // Phone call tracking
-    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
-        link.addEventListener('click', function() {
-            if (window.dataLayer) {
-                window.dataLayer.push({
-                    'event': 'phone_click',
-                    'location': this.closest('section')?.id || 'unknown',
-                    'page_location': window.location.pathname
-                });
-            }
-        });
+  }
+  if (tl) {
+    tl.addEventListener("click", function() {
+      pushEvt("llamar", "cta_floating");
     });
+  }
+})();
 
-    // Scroll depth tracking
-    const scrollDepths = [25, 50, 75, 90];
-    const scrollTracked = {};
-    window.addEventListener('scroll', function() {
-        const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
-        scrollDepths.forEach(function(depth) {
-            if (scrollPercent >= depth && !scrollTracked[depth]) {
-                scrollTracked[depth] = true;
-                if (window.dataLayer) {
-                    window.dataLayer.push({
-                        'event': 'scroll_depth',
-                        'scroll_percentage': depth,
-                        'page_location': window.location.pathname
-                    });
-                }
-            }
-        });
+// Mini footer nav tracking
+(function(){
+  window.dataLayer=window.dataLayer||[];
+  document.querySelectorAll(".site-mini-nav a").forEach(function(a){
+    if(a.dataset.navBound==="1") return; a.dataset.navBound="1";
+    a.addEventListener("click", function(){
+      try{ dataLayer.push({event:"nav_click", nav_label:a.textContent.trim(), nav_href:a.getAttribute("href"), page:location.pathname}); }catch(e){}
     });
+  });
+})();
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href === '#') return;
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-            }
+// Tracking de tarjetas SEO - diferido con requestIdleCallback
+(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
+  document.querySelectorAll('.seo-card[data-event="click_seo_card"]').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      var cardName = this.getAttribute('data-card-name');
+      var cardPosition = this.getAttribute('data-card-position');
+      var cardHref = this.getAttribute('href');
+
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'click_seo_card',
+          'card_name': cardName,
+          'card_position': cardPosition,
+          'card_url': cardHref,
+          'page_location': window.location.pathname
         });
+      } catch(e) {}
     });
+  });
 
-    // Fade-in animation on scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  var scrollDepths = [25, 50, 75, 90];
+  var scrollTracked = {};
+  var scrollTicking = false;
+  var cachedScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-    document.querySelectorAll('.card, .section').forEach(el => observer.observe(el));
+  window.addEventListener('resize', function() {
+    cachedScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+  }, { passive: true });
 
-    // Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-    }
-
-    // DataLayer page view
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-        'event': 'page_view',
-        'page_title': document.title,
-        'page_location': window.location.href,
-        'page_path': window.location.pathname
+  window.addEventListener('scroll', function() {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(function() {
+      var scrollPercent = Math.round((window.scrollY / cachedScrollableHeight) * 100);
+      for (var i = 0; i < scrollDepths.length; i++) {
+        var depth = scrollDepths[i];
+        if (scrollPercent >= depth && !scrollTracked[depth]) {
+          scrollTracked[depth] = true;
+          try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              'event': 'scroll_depth',
+              'scroll_percentage': depth,
+              'page_location': window.location.pathname
+            });
+          } catch(e) {}
+        }
+      }
+      scrollTicking = false;
     });
-});
+  }, { passive: true });
+})();
 
-// Exit Intent Popup (deferred further)
-deferIdle(() => {
-    const popup = document.getElementById('exit-intent-popup');
+// Exit-Intent Popup
+(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
+    var popup = document.getElementById('exit-intent-popup');
     if (!popup) return;
 
-    let popupShown = false;
-    const POPUP_DELAY = 30000;
-    const SESSION_KEY = 'exitPopupShown';
+    var closeBtn = document.querySelector('.exit-popup-close');
+    var whatsappBtn = document.getElementById('exit-popup-whatsapp');
+    var phoneBtn = document.getElementById('exit-popup-phone');
+    var popupShown = false;
+    var POPUP_DELAY = 30000;
+    var SESSION_KEY = 'exitPopupShown';
 
     if (sessionStorage.getItem(SESSION_KEY)) return;
+
+    function isMobile() {
+        return window.innerWidth <= 768 || 'ontouchstart' in window;
+    }
 
     function showPopup() {
         if (popupShown) return;
@@ -277,30 +310,34 @@ deferIdle(() => {
         sessionStorage.setItem(SESSION_KEY, 'true');
         popup.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        if (window.dataLayer) {
+
+        try {
+            window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'event': 'exit_intent_shown',
+                'page_location': window.location.pathname,
                 'trigger': isMobile() ? 'mobile_timer' : 'desktop_mouseleave'
             });
-        }
+        } catch(e) {}
     }
 
     function hidePopup() {
         popup.style.display = 'none';
         document.body.style.overflow = '';
-    }
 
-    function isMobile() {
-        return window.innerWidth <= 768 || 'ontouchstart' in window;
+        try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'exit_intent_closed',
+                'page_location': window.location.pathname
+            });
+        } catch(e) {}
     }
-
-    const closeBtn = popup.querySelector('.exit-popup-close');
-    if (closeBtn) closeBtn.addEventListener('click', hidePopup);
-    popup.addEventListener('click', function(e) { if (e.target === popup) hidePopup(); });
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') hidePopup(); });
 
     if (!isMobile()) {
-        document.addEventListener('mouseleave', function(e) { if (e.clientY < 10) showPopup(); });
+        document.addEventListener('mouseleave', function(e) {
+            if (e.clientY < 10) showPopup();
+        });
     }
 
     if (isMobile()) {
@@ -313,4 +350,282 @@ deferIdle(() => {
             }
         });
     }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            hidePopup();
+        });
+    }
+
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) hidePopup();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (popup.style.display === 'flex' && e.key === 'Escape') hidePopup();
+    });
+
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function() {
+            try {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'exit_intent_whatsapp_click',
+                    'page_location': window.location.pathname
+                });
+            } catch(e) {}
+        });
+    }
+
+    if (phoneBtn) {
+        phoneBtn.addEventListener('click', function() {
+            try {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'exit_intent_phone_click',
+                    'page_location': window.location.pathname
+                });
+            } catch(e) {}
+        });
+    }
 }, 2500);
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {})
+            .catch(err => {});
+    });
+}
+
+// Bottom Sheet Cotización Móvil
+(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
+    var trigger = document.getElementById('quote-trigger');
+    var overlay = document.getElementById('quote-overlay');
+    var sheet = document.getElementById('quote-sheet');
+    var closeBtn = document.querySelector('.quote-sheet-close');
+    var form = document.getElementById('quote-form');
+    var chips = document.querySelectorAll('.quote-chip');
+
+    if (!trigger || !sheet) return;
+
+    var selectedService = '';
+    var scrollY = 0;
+
+    var focusableElements = sheet.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    var firstFocusable = focusableElements[0];
+    var lastFocusable = focusableElements[focusableElements.length - 1];
+
+    function openSheet() {
+        scrollY = window.scrollY;
+        document.body.classList.add('quote-sheet-open');
+        overlay.classList.add('active');
+        sheet.classList.add('active');
+        sheet.setAttribute('aria-hidden', 'false');
+        overlay.setAttribute('aria-hidden', 'false');
+
+        var firstInput = sheet.querySelector('input');
+        if (firstInput) {
+            setTimeout(function() { firstInput.focus(); }, 100);
+        }
+
+        try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'quote_sheet_open',
+                'page_location': window.location.pathname
+            });
+        } catch(e) {}
+    }
+
+    function closeSheet() {
+        document.body.classList.remove('quote-sheet-open');
+        overlay.classList.remove('active');
+        sheet.classList.remove('active');
+        sheet.setAttribute('aria-hidden', 'true');
+        overlay.setAttribute('aria-hidden', 'true');
+        window.scrollTo(0, scrollY);
+        trigger.focus();
+    }
+
+    trigger.addEventListener('click', openSheet);
+    overlay.addEventListener('click', closeSheet);
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeSheet);
+    }
+
+    var touchStartY = 0;
+    var touchCurrentY = 0;
+    var handle = sheet.querySelector('.quote-sheet-handle');
+
+    if (handle) {
+        handle.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        handle.addEventListener('touchmove', function(e) {
+            touchCurrentY = e.touches[0].clientY;
+            var deltaY = touchCurrentY - touchStartY;
+            if (deltaY > 0) {
+                sheet.style.transform = 'translateY(' + deltaY + 'px)';
+            }
+        }, { passive: true });
+
+        handle.addEventListener('touchend', function() {
+            var deltaY = touchCurrentY - touchStartY;
+            if (deltaY > 100) closeSheet();
+            sheet.style.transform = '';
+            touchStartY = 0;
+            touchCurrentY = 0;
+        });
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (!sheet.classList.contains('active')) return;
+
+        if (e.key === 'Escape') {
+            closeSheet();
+            return;
+        }
+
+        if (e.key === 'Tab') {
+            if (e.shiftKey) {
+                if (document.activeElement === firstFocusable) {
+                    e.preventDefault();
+                    lastFocusable.focus();
+                }
+            } else {
+                if (document.activeElement === lastFocusable) {
+                    e.preventDefault();
+                    firstFocusable.focus();
+                }
+            }
+        }
+    });
+
+    chips.forEach(function(chip) {
+        chip.addEventListener('click', function() {
+            chips.forEach(function(c) { c.classList.remove('selected'); });
+            this.classList.add('selected');
+            selectedService = this.getAttribute('data-service');
+        });
+    });
+
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var nombre = document.getElementById('quote-nombre').value.trim();
+            var whatsapp = document.getElementById('quote-whatsapp').value.trim();
+            var mensaje = document.getElementById('quote-mensaje').value.trim();
+
+            if (!nombre || !whatsapp) {
+                alert('Por favor completa los campos obligatorios.');
+                return;
+            }
+
+            var msg = '¡Hola! Solicito cotización:\n\n';
+            msg += 'Nombre: ' + nombre + '\n';
+            msg += 'WhatsApp: ' + whatsapp + '\n';
+            if (selectedService) msg += 'Servicio: ' + selectedService + '\n';
+            if (mensaje) msg += 'Detalle: ' + mensaje + '\n';
+
+            var whatsappURL = 'https://wa.me/526673922273?text=' + encodeURIComponent(msg);
+
+            try {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'generate_lead',
+                    'form_name': 'quote_sheet_mobile',
+                    'method': 'whatsapp',
+                    'service': selectedService || 'no_especificado',
+                    'value': 1,
+                    'currency': 'MXN'
+                });
+            } catch(e) {}
+
+            try {
+                var leads = JSON.parse(localStorage.getItem('electricista_leads') || '[]');
+                leads.push({
+                    timestamp: new Date().toISOString(),
+                    nombre: nombre,
+                    whatsapp: whatsapp,
+                    servicio: selectedService,
+                    mensaje: mensaje,
+                    source: 'quote_sheet_mobile',
+                    url: window.location.href
+                });
+                localStorage.setItem('electricista_leads', JSON.stringify(leads));
+            } catch(e) {}
+
+            window.open(whatsappURL, '_blank');
+            closeSheet();
+            form.reset();
+            chips.forEach(function(c) { c.classList.remove('selected'); });
+            selectedService = '';
+        });
+    }
+
+    var whatsappInput = document.getElementById('quote-whatsapp');
+    if (whatsappInput) {
+        whatsappInput.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+        });
+    }
+})();
+
+// Hide floating buttons in critical sections
+(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
+    var floatingBtns = document.querySelectorAll('.floating-btn');
+    var quoteTrigger = document.getElementById('quote-trigger');
+    if (!floatingBtns.length) return;
+
+    var criticalSections = document.querySelectorAll('#contacto, .footer, .contact-form, .map-embed');
+    if (!criticalSections.length) return;
+
+    var isHidden = false;
+    var menuOpen = false;
+    var sheetOpen = false;
+
+    var bodyObserver = new MutationObserver(function(mutations) {
+        menuOpen = document.body.classList.contains('menu-open');
+        sheetOpen = document.body.classList.contains('quote-sheet-open');
+    });
+    bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    function updateVisibility(shouldHide) {
+        if (shouldHide === isHidden) return;
+        isHidden = shouldHide;
+        var opacity = shouldHide ? '0' : '1';
+        var pointer = shouldHide ? 'none' : 'auto';
+        for (var i = 0; i < floatingBtns.length; i++) {
+            floatingBtns[i].style.cssText = 'opacity:' + opacity + ';pointer-events:' + pointer;
+        }
+        if (quoteTrigger && !sheetOpen) {
+            quoteTrigger.style.cssText = 'opacity:' + opacity + ';pointer-events:' + pointer;
+        }
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+        var anyVisible = false;
+        for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting && entries[i].intersectionRatio > 0.3) {
+                anyVisible = true;
+                break;
+            }
+        }
+        if (!menuOpen) updateVisibility(anyVisible);
+    }, {
+        threshold: [0, 0.3, 0.5],
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    criticalSections.forEach(function(section) {
+        observer.observe(section);
+    });
+})();
