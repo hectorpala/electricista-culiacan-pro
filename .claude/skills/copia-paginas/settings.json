@@ -1,25 +1,42 @@
 {
   "name": "copia-paginas",
-  "description": "Replica estructura exacta de una página en otra. Ultra-detallista: compara CADA línea, atributo y valor CSS. No deja pasar NADA.",
-  "version": "1.0.0",
+  "description": "Clone page structure exactly. Only content changes allowed. Validates with structural diffs. Reports PASS/FAIL with exact line differences.",
+  "version": "2.0.0",
   "author": "Claude",
   "triggers": [
     "/copia-paginas",
-    "/copiar-pagina",
-    "/sync-pages"
+    "/copiar-pagina", 
+    "/sync-pages",
+    "/clone-page"
   ],
   "parameters": {
-    "origen": {
+    "source_path": {
       "type": "string",
-      "description": "Ruta a la página que servirá como plantilla",
+      "description": "Ruta de la página fuente (plantilla)",
       "required": true
     },
-    "destino": {
+    "target_path": {
       "type": "string",
-      "description": "Ruta a la página que será modificada",
+      "description": "Ruta de la página destino",
       "required": true
+    },
+    "content_allowlist": {
+      "type": "array",
+      "description": "Lista de campos que pueden cambiar",
+      "default": ["title", "h1", "p", "href", "src", "tel:", "wa.me/"]
+    },
+    "tracking_allowlist": {
+      "type": "array",
+      "description": "IDs de tracking permitidos (GTM/GA/Clarity)",
+      "default": []
     }
   },
-  "tags": ["html", "css", "sync", "structure", "replication"],
+  "validation": {
+    "html_structure": true,
+    "css_rules": true,
+    "script_order": true
+  },
+  "output_format": "PASS/FAIL with line-by-line diff",
+  "tags": ["html", "css", "sync", "structure", "validation", "diff"],
   "category": "development"
 }

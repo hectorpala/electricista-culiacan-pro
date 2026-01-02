@@ -1,153 +1,158 @@
-# Skill: Copia Páginas (Ultra-Detallista)
+---
+name: copia-paginas
+description: Clone a reference page's HTML/CSS/JS structure exactly while changing only approved content fields; verify with structural diffs and report any deviations.
+metadata:
+  short-description: Copy page structure exactly; content-only changes
+  version: 2.0.0
+  triggers:
+    - /copia-paginas
+    - /copiar-pagina
+    - /sync-pages
+    - /clone-page
+---
 
-Agente OBSESIVO con los detalles. Replica la estructura EXACTA de una página de referencia, comparando CADA línea, CADA atributo, CADA valor CSS. No deja pasar NADA.
+# Page Structure Clone (exact match)
 
-## Uso
+## Objetivo
+Copiar la página A como plantilla exacta para la página B.  
+Solo puede cambiar contenido. Todo lo demás debe quedar idéntico.
 
-```
-/copia-paginas <página-origen> <página-destino>
-```
-
-## Filosofía: CERO DIFERENCIAS
-
-El objetivo es que al comparar el código fuente de ambas páginas:
-- La ESTRUCTURA sea 100% idéntica
-- El CSS sea 100% idéntico  
-- Solo cambien: textos, imágenes, URLs, teléfonos
+## Entradas requeridas
+- `source_path`: ruta de la página fuente (A).
+- `target_path`: ruta de la página destino (B).
+- `content_allowlist`: lista estricta de campos que pueden cambiar.
+- `tracking_allowlist` (opcional): IDs permitidos (GTM/GA/Clarity).
+- `ignore_blocks` (opcional): selectores o bloques completos que pueden excluirse.
 
 ---
 
-## FASE 1: EXTRACCIÓN EXHAUSTIVA
+## Definición de "contenido" (lo único que puede cambiar)
 
-### 1.1 Leer Página Origen Completa
 ```
-Lee TODA la página origen línea por línea.
-Extrae CADA elemento en orden:
+✅ PERMITIDO CAMBIAR:
+- Texto visible (nodos de texto)
+- Valores de href, src, srcset (solo la URL, no atributos asociados)
+- alt, title
+- Teléfonos, emails, nombres de marca
+- IDs de tracking SOLO si están en tracking_allowlist
+- Contenido de JSON-LD (schema) - solo datos, no estructura
 ```
-
-### 1.2 Análisis del `<head>`
-Extraer en orden exacto:
-- [ ] `<meta charset>`
-- [ ] `<meta viewport>` - valor exacto
-- [ ] `<title>` - estructura
-- [ ] `<meta name="description">` - atributos
-- [ ] `<meta name="robots">`
-- [ ] `<link rel="canonical">` 
-- [ ] `<meta property="og:*">` - cada uno
-- [ ] `<meta name="twitter:*">` - cada uno
-- [ ] `<link rel="preconnect">` - orden y atributos
-- [ ] `<link rel="preload">` - cada uno con as, type, fetchpriority
-- [ ] `<link rel="stylesheet">` - orden y atributos
-- [ ] `<style>` inline - CONTENIDO COMPLETO
-- [ ] `<script type="application/ld+json">` - estructura (no contenido)
-
-### 1.3 Análisis del `<nav>`
-Extraer CADA detalle:
-- [ ] `.nav` - todas las clases
-- [ ] `.nav-wrapper` - estructura
-- [ ] `.logo` - tag `<a>` con TODOS los atributos
-- [ ] `.logo img`:
-  - src exacto pattern
-  - srcset con TODOS los breakpoints
-  - sizes con TODOS los valores
-  - alt pattern
-  - width, height
-  - loading (presente o ausente)
-  - fetchpriority
-  - decoding
-- [ ] `.nav-menu`:
-  - id (ej: "nav-menu")
-  - estructura `<ul>/<li>/<a>`
-- [ ] `.nav-link` - cada uno
-- [ ] `.mobile-menu-btn`:
-  - aria-label valor exacto
-  - aria-expanded valor
-  - aria-controls valor
-  - estructura de `<span>` hijos
-
-### 1.4 Análisis del Hero
-- [ ] `.hero` section - id, clases
-- [ ] `<picture class="hero-background">`:
-  - `<source type="image/avif">`:
-    - srcset con TODOS los tamaños (500w, 800w, 1200w, etc.)
-    - sizes exactos
-  - `<source type="image/webp">`:
-    - srcset completo
-    - sizes exactos
-  - `<img>`:
-    - src
-    - alt
-    - width, height
-    - loading
-    - fetchpriority
-    - decoding
-- [ ] `.hero-content`:
-  - clases adicionales
-  - estructura interna
-- [ ] `.hero-eta-badge` - estructura
-- [ ] `.hero h1` - solo estructura
-- [ ] `.hero-subtitle` - solo estructura
-- [ ] `.hero-rating`:
-  - estructura completa
-  - clases de hijos
-- [ ] `.hero-features`:
-  - estructura de `.feature-item`
-  - estructura de `.feature-icon` (SVG inline?)
-- [ ] `.btn-primary` - atributos, clases
-
-### 1.5 Análisis de Secciones
-Para CADA sección principal:
-- [ ] ID de sección
-- [ ] Clases de sección
-- [ ] Estructura de contenedor
-- [ ] Estructura de grid/flex
-- [ ] Estructura de cards/items
-- [ ] Orden de elementos
-
-### 1.6 Análisis de Botones Flotantes
-- [ ] `.floating-btn` estructura
-- [ ] `.floating-call`:
-  - href pattern
-  - aria-label
-  - SVG interno
-- [ ] `.floating-whatsapp`:
-  - href pattern  
-  - aria-label
-  - SVG interno
-
-### 1.7 Análisis del Footer
-- [ ] Estructura completa
-- [ ] Links y su orden
-- [ ] Copyright estructura
 
 ---
 
-## FASE 2: EXTRACCIÓN DE CSS
+## Todo lo demás es ESTRUCTURAL y debe quedar IDÉNTICO
 
-### 2.1 CSS Inline (`<style>` en head)
-Extraer CADA regla en orden:
+```
+🔒 PROHIBIDO CAMBIAR:
+- Árbol de tags y orden exacto de nodos
+- Clases, IDs, roles
+- aria-*, data-* y cualquier atributo no permitido
+- width, height, sizes, loading, decoding, fetchpriority
+- Comentarios HTML
+- Orden y ubicación de scripts y estilos
+- Orden de secciones y bloques (popup, CTA flotantes, footer, etc)
+- Variables CSS (:root)
+- Selectores CSS y sus propiedades
+- Media queries y breakpoints
+- Orden de reglas CSS
+```
+
+---
+
+## Flujo obligatorio
+
+### Paso 1: Lectura
+```bash
+# Abrir ambas páginas
+read source_path  # Página A (plantilla)
+read target_path  # Página B (destino)
+```
+
+### Paso 2: Copia base
+```
+# Copiar estructura de A como base en B
+- HTML completo
+- CSS (inline y externos)
+- JS (orden y atributos)
+- Assets referenciados (verificar existencia)
+```
+
+### Paso 3: Reemplazo de contenido
+```
+# Reemplazar SOLO contenido permitido:
+FOR each element in content_allowlist:
+  - Localizar elemento en B
+  - Preservar estructura/atributos
+  - Cambiar solo el valor de contenido
+  - Verificar que no se alteró estructura
+```
+
+### Paso 4: Validación estructural
+```
+# Validar con diff estructural
+- Comparar HTML normalizado
+- Comparar CSS regla por regla
+- Comparar orden de scripts
+- Generar reporte de diferencias
+```
+
+### Paso 5: Reporte
+```
+# Reportar resultado
+IF diferencias == 0:
+  return PASS
+ELSE:
+  return FAIL + lista_diferencias
+```
+
+---
+
+## Validación mínima obligatoria
+
+### 1) HTML (estructura)
+
+```python
+# Proceso de validación HTML:
+1. Normalizar HTML de A y B
+2. Reemplazar valores permitidos por placeholder <content>
+3. Extraer secuencia de tags + atributos (sin texto visible)
+4. Comparar línea por línea
+5. Debe coincidir 1:1
+```
+
+**Elementos a validar:**
+- [ ] Orden de tags
+- [ ] Nombres de clases (exactos)
+- [ ] IDs (exactos)
+- [ ] Atributos aria-* (todos)
+- [ ] Atributos data-* (todos)
+- [ ] width, height en imágenes
+- [ ] sizes, srcset pattern (no URLs)
+- [ ] loading, fetchpriority, decoding
+- [ ] Estructura de SVG inline
+- [ ] Comentarios HTML
+
+### 2) CSS
+
+```python
+# Proceso de validación CSS:
+1. Extraer todas las reglas de A
+2. Extraer todas las reglas de B
+3. Comparar selector por selector
+4. Comparar propiedad por propiedad
+5. Comparar valor por valor
+```
+
+**Archivos a validar:**
+- [ ] CSS inline (`<style>` en head)
+- [ ] critical.css / critical.min.css
+- [ ] styles.css / styles.min.css
+- [ ] Cualquier otro CSS referenciado
+
+**Reglas clave que DEBEN coincidir:**
 ```css
-/* Para cada selector, extraer: */
-- Selector exacto
-- Cada propiedad y valor
-- Orden de propiedades
-```
-
-### 2.2 Archivos CSS Externos
-Para cada archivo referenciado:
-- Leer contenido completo
-- Extraer cada regla
-- Notar orden de reglas
-
-### 2.3 Lista de Selectores a Comparar
-```
-/* Críticos - deben ser IDÉNTICOS */
-:root { /* todas las variables */ }
-* { }
-body { }
-.container { }
-h1, h2, h3 { }
-h1 { }
+/* Variables */
+:root { }
 
 /* Nav */
 .nav { }
@@ -170,225 +175,163 @@ h1 { }
 .hero h1 { }
 .hero-subtitle { }
 .hero-rating { }
-.hero-eta-badge { }
 .hero-features { }
-.feature-item { }
-.feature-icon { }
-.rating-stars { }
-.rating-score { }
-.rating-count { }
-.eta-dot { }
 .btn-primary { }
-.btn-primary:hover { } /* si existe */
 
 /* Flotantes */
 .floating-btn { }
-.floating-btn:hover { }
-.floating-btn:focus-visible { }
 .floating-call { }
 .floating-whatsapp { }
 
-/* Media Queries - ORDEN EXACTO */
-@media (max-width: 768px) {
-  /* cada regla dentro */
-}
-@media (max-width: 480px) {
-  /* cada regla dentro */
-}
+/* Media Queries */
+@media (max-width: 768px) { /* todas las reglas */ }
+@media (max-width: 480px) { /* todas las reglas */ }
+```
+
+### 3) Scripts
+
+```python
+# Proceso de validación Scripts:
+1. Extraer todos los <script> de A
+2. Extraer todos los <script> de B
+3. Comparar orden exacto
+4. Comparar atributos (async, defer, type, src)
+5. No agregar ni quitar scripts fuera del allowlist
 ```
 
 ---
 
-## FASE 3: COMPARACIÓN LÍNEA POR LÍNEA
+## Output requerido
 
-### 3.1 Crear Tabla de Diferencias
+### PASS (estructura idéntica)
 ```markdown
-| Ubicación | Elemento | Origen | Destino | Acción |
-|-----------|----------|--------|---------|--------|
-| head:15 | meta viewport | content="..." | content="..." | IGUALAR |
-| nav:3 | button aria-label | "Abrir menú" | ausente | AGREGAR |
-| css:23 | .nav padding | 16px 0 | 22px 0 | CAMBIAR |
-```
+## Resultado: ✅ PASS
 
-### 3.2 Tipos de Diferencias a Detectar
+### Resumen
+- Fuente: {source_path}
+- Destino: {target_path}
+- Diferencias estructurales: 0
+- Cambios de contenido: {N}
 
-**HTML:**
-- Tag diferente
-- Atributo ausente
-- Atributo con valor diferente
-- Orden de atributos diferente
-- Elemento hijo faltante
-- Elemento hijo extra
-- Orden de hijos diferente
-
-**CSS:**
-- Selector ausente
-- Selector extra
-- Propiedad ausente
-- Propiedad extra
-- Valor diferente
-- Orden de propiedades diferente
-- Media query ausente
-- Media query con contenido diferente
-
----
-
-## FASE 4: APLICAR CAMBIOS (SIN PERDER CONTENIDO)
-
-### 4.1 Contenido a PRESERVAR (no tocar)
-```
-- Texto dentro de <title>
-- Texto dentro de <meta description>
-- Texto dentro de <h1>, <h2>, <p>, etc.
-- URLs de imágenes del sitio destino
-- Números de teléfono
-- Enlaces de WhatsApp
-- Contenido de JSON-LD (schema)
-- URLs en href (excepto estructura)
-```
-
-### 4.2 Estructura a COPIAR EXACTAMENTE
-```
-- Orden de tags
-- Nombres de clases
-- IDs
-- Atributos aria-*
-- Atributos data-*
-- srcset patterns (reemplazando nombre de imagen)
-- sizes valores
-- width/height valores
-- Estructura de SVG inline
-- Orden de CSS rules
-- Valores CSS
-- Media queries completos
-```
-
-### 4.3 Proceso de Edición
-
-Para cada diferencia:
-1. Leer archivo destino
-2. Localizar línea/sección exacta
-3. Aplicar cambio mínimo necesario
-4. Verificar que no se rompió nada
-5. Si hay .min.css, actualizar AMBOS
-
----
-
-## FASE 5: VERIFICACIÓN EXHAUSTIVA
-
-### 5.1 Comparación Post-Cambio
-```bash
-# Comparar CSS
-diff <(curl -s origen/css) <(curl -s destino/css)
-
-# Comparar estructura HTML (sin contenido)
-# Extraer solo tags y atributos
-```
-
-### 5.2 Checklist de Verificación
-
-**Nav:**
-- [ ] .nav padding idéntico
-- [ ] .logo clases idénticas
-- [ ] .logo img height desktop idéntico
-- [ ] .logo img height mobile idéntico
-- [ ] .logo img srcset pattern idéntico
-- [ ] .logo img sizes idéntico
-- [ ] .logo:hover idéntico
-- [ ] button aria-label presente
-- [ ] button aria-expanded presente
-- [ ] button aria-controls presente
-- [ ] ul#nav-menu presente
-- [ ] .nav-link transition idéntico
-- [ ] .nav-link:hover idéntico
-- [ ] .mobile-menu-btn estructura idéntica
-- [ ] .mobile-menu-btn span idéntico
-
-**Hero:**
-- [ ] .hero clases idénticas
-- [ ] picture.hero-background presente
-- [ ] source[type="image/avif"] presente
-- [ ] source srcset tiene 500w, 800w, 1200w
-- [ ] source sizes idéntico
-- [ ] source[type="image/webp"] presente
-- [ ] img atributos idénticos
-- [ ] .hero-content estructura idéntica
-- [ ] .hero::after CSS idéntico
-
-**CSS General:**
-- [ ] :root variables idénticas
-- [ ] Todos los selectores presentes
-- [ ] Todos los valores idénticos
-- [ ] Media queries idénticos
-- [ ] Orden de reglas idéntico
-
----
-
-## FASE 6: REPORTE FINAL
-
-```markdown
-# Reporte de Sincronización de Páginas
-
-## Resumen
-- **Origen:** {ruta completa}
-- **Destino:** {ruta completa}
-- **Diferencias encontradas:** {número}
-- **Cambios aplicados:** {número}
-- **Errores:** {número o "ninguno"}
-
-## Cambios Detallados
-
-### HTML Changes
-| Línea | Antes | Después | Razón |
-|-------|-------|---------|-------|
-| 45 | `<button>` | `<button aria-label="...">` | Agregar accesibilidad |
-
-### CSS Changes  
-| Archivo | Selector | Propiedad | Antes | Después |
-|---------|----------|-----------|-------|---------|
-| critical.css | .nav | padding | 22px 0 | 16px 0 |
-| critical.css | .logo img | height | 140px | 86px |
-
-### Archivos Modificados
-1. `index.html` - {N} cambios
-2. `assets/css/critical.css` - {N} cambios
-3. `assets/css/critical.min.css` - {N} cambios
+### Contenido actualizado
+| Elemento | Valor anterior | Valor nuevo |
+|----------|---------------|-------------|
+| title | "Plomero..." | "Electricista..." |
+| h1 | "Plomero..." | "Electricista..." |
+| tel: | 6672... | 6671... |
 
 ### Verificación
-| Check | Estado |
-|-------|--------|
-| CSS idéntico | ✅ |
-| Nav structure | ✅ |
-| Hero structure | ✅ |
-| Contenido preservado | ✅ |
+- [x] HTML estructura idéntica
+- [x] CSS idéntico
+- [x] Scripts idénticos
+- [x] Contenido preservado
+```
 
-### Imágenes Creadas (si aplica)
-- hero-{nombre}-500w.avif
-- hero-{nombre}-500w.webp
-- hero-{nombre}-1200w.avif
+### FAIL (hay diferencias)
+```markdown
+## Resultado: ❌ FAIL
+
+### Diferencias encontradas: {N}
+
+| Archivo | Línea | Tipo | Esperado (A) | Encontrado (B) |
+|---------|-------|------|--------------|----------------|
+| index.html | 45 | attr | aria-label="Abrir menú" | (ausente) |
+| critical.css | 23 | value | padding:16px 0 | padding:22px 0 |
+| critical.css | 26 | value | height:86px | height:140px |
+
+### Acciones requeridas
+1. Agregar aria-label en button (línea 45)
+2. Cambiar padding en .nav (línea 23)
+3. Cambiar height en .logo img (línea 26)
 ```
 
 ---
 
-## COMANDOS ÚTILES
+## Reglas estrictas
+
+### ❌ PROHIBIDO
+- No afirmar "listo" sin validación completa
+- No asumir que algo está correcto sin verificar
+- No cambiar estructura "porque parece mejor"
+- No omitir archivos CSS (si hay .min.css, validar ambos)
+- No ignorar diferencias "menores"
+
+### ✅ OBLIGATORIO
+- Validar CADA selector CSS
+- Validar CADA atributo HTML
+- Reportar TODAS las diferencias
+- Si no puedes validar algo, decirlo explícitamente
+- Si hay dudas, preguntar ANTES de cambiar estructura
+
+---
+
+## Ejemplo de content_allowlist
+
+```yaml
+content_allowlist:
+  # Textos
+  - title
+  - meta[name="description"]
+  - h1, h2, h3, p (texto interno)
+  - .hero-subtitle (texto)
+  - .benefit-content p (texto)
+  
+  # URLs
+  - link[rel="canonical"] href
+  - meta[property="og:url"] content
+  - a.logo href (si cambia dominio)
+  - img src, srcset (URLs, no pattern)
+  
+  # Contacto
+  - tel: enlaces
+  - wa.me/ enlaces
+  - mailto: enlaces
+  
+  # Schema
+  - script[type="application/ld+json"] (contenido JSON)
+  
+  # Tracking (solo si en tracking_allowlist)
+  - GTM-XXXXXX
+  - G-XXXXXX
+  - clarity project id
+
+tracking_allowlist:
+  - GTM-ABCD123
+  - G-XYZ789
+
+ignore_blocks:
+  - <!-- Google Tag Manager -->
+  - <!-- End Google Tag Manager -->
+```
+
+---
+
+## Comandos de validación
 
 ```bash
-# Comparar CSS en producción
-echo "=== ORIGEN ===" && curl -s "{url-origen}/css" | grep -oE "selector\{[^}]+\}"
-echo "=== DESTINO ===" && curl -s "{url-destino}/css" | grep -oE "selector\{[^}]+\}"
+# Comparar estructura HTML (sin contenido)
+diff <(grep -oE '<[^>]+>' A.html | sort) <(grep -oE '<[^>]+>' B.html | sort)
 
-# Comparar estructura HTML
-diff <(grep -oE '<[^>]+>' origen.html) <(grep -oE '<[^>]+>' destino.html)
+# Comparar CSS selector por selector
+echo "=== A ===" && curl -s "url-A/css" | grep -oE "\.selector\{[^}]+\}"
+echo "=== B ===" && curl -s "url-B/css" | grep -oE "\.selector\{[^}]+\}"
 
 # Verificar atributos específicos
-grep -n "aria-label\|aria-expanded\|aria-controls" archivo.html
+grep -n "aria-label\|aria-expanded\|aria-controls\|srcset\|sizes" archivo.html
+
+# Comparar archivos CSS completos
+diff <(cat A/critical.min.css) <(cat B/critical.min.css)
 ```
 
 ---
 
-## REGLA DE ORO
+## Regla de oro
 
-> Si hay CUALQUIER diferencia entre origen y destino (excepto contenido de texto/imágenes), 
-> ES UN ERROR que debe corregirse antes de terminar.
-
-El agente NO termina hasta que la comparación muestre CERO diferencias estructurales.
+> **Si hay CUALQUIER diferencia estructural entre A y B, es un FAIL.**
+> 
+> El agente NO puede reportar PASS hasta que la validación muestre 
+> CERO diferencias en estructura, CSS, y orden de elementos.
+> 
+> "Casi igual" NO es igual. 
+> "Solo un atributo" ES una diferencia.
+> "Es menor" NO es excusa.
