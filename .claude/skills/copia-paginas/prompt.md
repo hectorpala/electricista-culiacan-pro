@@ -354,7 +354,7 @@ diff <(cat A/critical.min.css) <(cat B/critical.min.css)
 VIOLACION = FAIL INMEDIATO
 
 1. Estructura HTML identica: mismo arbol, mismo orden, mismas clases/IDs/roles/aria/data-*
-2. Atributos identicos: width, height, sizes, loading, decoding, fetchpriority, rel, type, media
+2. Atributos identicos: orden exacto + comillas, width, height, sizes, loading, decoding, fetchpriority, rel, type, media
 3. Orden identico de scripts y estilos
 4. No anadir ni quitar bloques (popups, CTA flotantes, footer, formularios)
 ```
@@ -391,6 +391,7 @@ VIOLACION = FAIL INMEDIATO
 
 **Checklist HTML:**
 - [ ] Orden de tags identico
+- [ ] Orden de atributos identico (incluye comillas y orden exacto en <a> de tarjetas de servicios)
 - [ ] Nombres de clases identicos
 - [ ] IDs identicos
 - [ ] Atributos aria-* identicos
@@ -517,9 +518,22 @@ VIOLACION = FAIL INMEDIATO
 - [ ] .card o .service-card - misma estructura
 - [ ] .media-box - misma estructura
 - [ ] picture - mismo pattern de sources
+- [ ] <a> usa el mismo orden de atributos que la fuente (href antes de class, comillas dobles)
+- [ ] href es relativo con ./ y termina en /index.html (formato identico a la fuente)
 - [ ] img - width/height/loading/decoding identicos
 - [ ] .service-list - mismo numero de items
 - [ ] .service-cta - misma estructura
+
+Ejemplo exacto (formato del <a>):
+```html
+<a href="./servicios/mi-servicio/index.html" class="card card--img">
+```
+
+Ejemplo exacto (srcset coherente con archivos):
+```html
+<source type="image/webp" srcset="assets/images/mi-servicio-420w.webp 420w, assets/images/mi-servicio-800w.webp 800w">
+<img src="assets/images/mi-servicio-420w.webp" srcset="assets/images/mi-servicio-420w.webp 420w, assets/images/mi-servicio-800w.webp 800w" sizes="(max-width:768px) 100vw, 420px" width="420" height="420" loading="lazy" decoding="async">
+```
 
 ## Blog/Noticias (si existe)
 
