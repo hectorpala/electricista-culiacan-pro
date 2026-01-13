@@ -4,8 +4,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://electricistaculiacanpro.mx/sitemap.xml
-Sitemap: https://electricistaculiacanpro.mx/sitemap-images.xml
+Sitemap: https://electricistaculiacanpro.mx/sitemap_index.xml
 
 # Disallow admin areas
 Disallow: /admin/
