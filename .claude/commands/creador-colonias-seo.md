@@ -30,6 +30,8 @@ Crea páginas de landing para colonias con todas las optimizaciones de PageSpeed
 - Imagen hero: `hero-electricista-culiacan`
 - Logo: `logo-256w.webp`
 - Ruta imágenes: `assets/images/optimizadas/`
+- Teléfono: 667 392 2273
+- WhatsApp: 526673922273
 - Colores: naranja (#E36414, #F97316)
 - Servicios: Instalación Eléctrica, Cortocircuitos, Contactos y Apagadores, Tableros, Iluminación, Emergencias 24/7
 
@@ -39,16 +41,18 @@ Crea páginas de landing para colonias con todas las optimizaciones de PageSpeed
 - Imagen hero: `hero-plomero-visita`
 - Logo: `logo-nav.webp`
 - Ruta imágenes: `assets/images/`
+- Teléfono: 667 774 1696
+- WhatsApp: 526677741696
 - Colores: naranja (#E36414, #F97316)
 - Servicios: Reparación de Fugas, Destape de Drenajes, Instalación Sanitaria, Calentadores, Tinacos y Cisternas, Emergencias 24/7
 
-### 2. Template HTML Optimizado (Score 95+)
+### 2. Template HTML Completo Optimizado (Score 95+)
 
 ```html
 <!DOCTYPE html>
 <html lang="es-MX">
 <head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{{SERVICIO}} en {{COLONIA_DISPLAY}}, Culiacán | Servicio 24/7 | 667 392 2273</title><meta name="description" content="{{SERVICIO}} profesional en {{COLONIA_DISPLAY}}, Culiacán · Emergencia 24/7 · Llegada 20-30 min · Cotización gratis WhatsApp · 4.8★"><meta name="robots" content="index, follow"><link rel="canonical" href="https://{{DOMINIO}}/servicios/{{SERVICIO_SLUG}}-colonias-culiacan/{{COLONIA_SLUG}}/"><meta name="theme-color" content="#E36414"><link rel="preload" as="image" href="../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-500w.avif" imagesrcset="../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-500w.avif 500w, ../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-800w.avif 800w, ../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-1200w.avif 1200w" imagesizes="(max-width:480px) 360px, (max-width:768px) 480px, 1200px" type="image/avif" fetchpriority="high"><link rel="preload" href="../../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../../../assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../../../styles.7f293647.css" as="style"><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{{SERVICIO}} en {{COLONIA_DISPLAY}}, Culiacán | Servicio 24/7 | {{TELEFONO}}</title><meta name="description" content="{{SERVICIO}} profesional en {{COLONIA_DISPLAY}}, Culiacán · Emergencia 24/7 · Llegada 20-30 min · Cotización gratis WhatsApp · 4.8★"><meta name="robots" content="index, follow"><link rel="canonical" href="https://{{DOMINIO}}/servicios/{{SERVICIO_SLUG}}-colonias-culiacan/{{COLONIA_SLUG}}/"><meta name="theme-color" content="#E36414"><link rel="preload" as="image" href="../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-500w.avif" imagesrcset="../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-500w.avif 500w, ../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-800w.avif 800w, ../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-1200w.avif 1200w" imagesizes="(max-width:480px) 360px, (max-width:768px) 480px, 1200px" type="image/avif" fetchpriority="high"><link rel="preload" href="../../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../../../assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../../../styles.7f293647.css" as="style"><style>
 @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('../../../assets/fonts/inter-400.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
 @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('../../../assets/fonts/inter-600.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('../../../assets/fonts/montserrat-800.woff2') format('woff2');size-adjust:113%;ascent-override:89%;descent-override:24%;line-gap-override:0%}
@@ -101,12 +105,55 @@ h1{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
 <link rel="stylesheet" href="../../../styles.7f293647.css">
 </head>
 <body>
-<!-- NAV, HERO, MAIN, FOOTER con contenido dinámico -->
+<nav class="nav"><div class="container"><div class="nav-wrapper"><a href="/" class="logo"><img src="../../../assets/images/{{IMG_PATH}}{{LOGO}}" alt="{{SERVICIO}} Culiacán Pro" width="140" height="70"></a><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button><ul class="nav-menu"><li><a href="/" class="nav-link">Inicio</a></li><li><a href="/#servicios" class="nav-link">Servicios</a></li><li><a href="/#contacto" class="nav-link">Contacto</a></li></ul></div></div></nav>
+<header class="hero"><picture class="hero-background"><source type="image/avif" srcset="../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-500w.avif 500w, ../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-800w.avif 800w, ../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-1200w.avif 1200w" sizes="100vw"><source type="image/webp" srcset="../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-500w.webp 500w, ../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-800w.webp 800w, ../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-1200w.webp 1200w" sizes="100vw"><img src="../../../assets/images/{{IMG_PATH}}{{HERO_IMG}}-800w.webp" alt="{{SERVICIO}} en {{COLONIA_DISPLAY}}" width="800" height="533" loading="eager" fetchpriority="high"></picture><div class="container"><div class="hero-content"><div class="hero-eta-badge"><span class="eta-dot"></span><span>Llegamos en 20-30 min a {{COLONIA_DISPLAY}}</span></div><h1>{{SERVICIO}} en {{COLONIA_DISPLAY}} – Emergencias 24/7</h1><div class="hero-rating"><span class="rating-stars">★★★★★</span><span>4.8/5</span><span>· 150+ reseñas</span></div><p class="hero-subtitle">{{SERVICIO}} certificado en {{COLONIA_DISPLAY}}, Culiacán. Emergencia 24/7 con garantía escrita.</p><a href="#contacto" class="btn-primary">Solicitar Atención Inmediata</a></div></div></header>
+<main>
+<section class="section section-alt"><div class="container"><h2>¿Por qué elegirnos en {{COLONIA_DISPLAY}}?</h2><div class="benefits-grid"><div class="benefit"><div class="benefit-icon">🏠</div><h3>Conocemos la Zona</h3><p>Experiencia local</p></div><div class="benefit"><div class="benefit-icon">⚡</div><h3>Llegada Rápida</h3><p>20-30 minutos</p></div><div class="benefit"><div class="benefit-icon">💰</div><h3>Precios Justos</h3><p>Sin sorpresas</p></div><div class="benefit"><div class="benefit-icon">🔧</div><h3>Garantía</h3><p>6 meses</p></div><div class="benefit"><div class="benefit-icon">✅</div><h3>Certificados</h3><p>Profesionales</p></div></div></div></section>
+<section class="section"><div class="container"><h2>Servicios en {{COLONIA_DISPLAY}}</h2><div class="grid">{{SERVICIOS_CARDS}}</div></div></section>
+<section class="section section-alt"><div class="container"><h2>Cobertura</h2><div class="pricing-box"><h3>Atendemos {{COLONIA_DISPLAY}}</h3><p>✓ Llegamos en 20-30 min</p><p>✓ Cotización gratis</p><p>✓ Lunes a domingo 24/7</p><p>✓ Garantía 6 meses</p></div></div></section>
+<section class="section"><div class="container"><h2>Testimonios</h2><div class="testimonials"><div class="testimonial"><p>"Excelente servicio. {{TESTIMONIO_1}}"</p><cite>— Vecino de {{COLONIA_DISPLAY}}</cite></div><div class="testimonial"><p>"{{TESTIMONIO_2}}"</p><cite>— Cliente en {{COLONIA_DISPLAY}}</cite></div></div></div></section>
+<section id="contacto" class="section section-alt"><div class="container"><div class="final-cta"><h2>¿Necesitas {{SERVICIO}}?</h2><p>WhatsApp: <strong>{{TELEFONO}}</strong></p><div class="cta-buttons"><a href="https://wa.me/{{WHATSAPP}}?text=Hola,%20necesito%20{{SERVICIO_SLUG}}%20en%20{{COLONIA_DISPLAY}}" class="btn-primary" target="_blank">WhatsApp</a><a href="tel:{{TELEFONO_LINK}}" class="btn-secondary">Llamar</a></div></div></div></section>
+</main>
+<footer class="footer"><div class="container"><p>© 2025 {{SERVICIO}} Culiacán Pro</p></div></footer>
+<a href="https://wa.me/{{WHATSAPP}}?text=Hola,%20necesito%20{{SERVICIO_SLUG}}%20en%20{{COLONIA_DISPLAY}}" class="floating-btn floating-whatsapp" target="_blank" aria-label="WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<a href="tel:+52{{TELEFONO_LINK}}" class="floating-btn floating-call" aria-label="Llamar"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></a>
 </body>
 </html>
 ```
 
-### 3. Optimizaciones Críticas (NO OMITIR)
+### 3. Servicios Cards por Sitio
+
+**Electricista:**
+```html
+<div class="card"><h3>Instalación Eléctrica</h3><p>Cableado completo y tierra física.</p></div>
+<div class="card"><h3>Cortocircuitos</h3><p>Detección y reparación de fallas.</p></div>
+<div class="card"><h3>Contactos y Apagadores</h3><p>Instalación profesional.</p></div>
+<div class="card"><h3>Tableros</h3><p>Revisión y cambio de breakers.</p></div>
+<div class="card"><h3>Iluminación</h3><p>Lámparas y spots LED.</p></div>
+<div class="card"><h3>Emergencias 24/7</h3><p>Atención inmediata.</p></div>
+```
+
+**Plomero:**
+```html
+<div class="card"><h3>Reparación de Fugas</h3><p>Detección y reparación inmediata.</p></div>
+<div class="card"><h3>Destape de Drenajes</h3><p>Limpieza profesional de tuberías.</p></div>
+<div class="card"><h3>Instalación Sanitaria</h3><p>WC, lavabos y regaderas.</p></div>
+<div class="card"><h3>Calentadores</h3><p>Instalación y reparación de boilers.</p></div>
+<div class="card"><h3>Tinacos y Cisternas</h3><p>Instalación y mantenimiento.</p></div>
+<div class="card"><h3>Emergencias 24/7</h3><p>Atención inmediata.</p></div>
+```
+
+### 4. Testimonios por Sitio
+
+**Electricista:**
+- `{{TESTIMONIO_1}}`: "Repararon el cortocircuito muy rápido."
+- `{{TESTIMONIO_2}}`: "Instalaron los contactos el mismo día. Recomendados."
+
+**Plomero:**
+- `{{TESTIMONIO_1}}`: "Repararon la fuga muy rápido."
+- `{{TESTIMONIO_2}}`: "Destaparon el drenaje el mismo día. Recomendados."
+
+### 5. Optimizaciones Críticas (NO OMITIR)
 
 | Optimización | CSS | Impacto |
 |--------------|-----|---------|
@@ -119,10 +166,13 @@ h1{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
 | Backdrop filter | `backdrop-filter:none!important` en móvil | TBT |
 | Safe area | `env(safe-area-inset-*)` en floating buttons | iOS |
 | Z-index | `z-index:90` en floating buttons | Stacking |
-| Box shadow | `box-shadow:0 10px 28px rgba(0,0,0,0.16)` | Visual |
+| Box shadow btn | `box-shadow:0 10px 24px rgba(227,100,20,0.28)` | Visual |
+| Box shadow float | `box-shadow:0 10px 28px rgba(0,0,0,0.16)` | Visual |
 | Border hero | `border:1px solid rgba(255,255,255,0.15)` | Visual |
+| Border eta | `border:1px solid rgba(255,255,255,0.3)` | Visual |
+| Gradient btn | `linear-gradient(135deg,#fba336 0%,#f97316 45%,#e36414 100%)` | Visual |
 
-### 4. Checklist de Validación
+### 6. Checklist de Validación
 
 Antes de publicar, verificar:
 
@@ -136,13 +186,15 @@ Antes de publicar, verificar:
 - [ ] Floating buttons usan `env(safe-area-inset-*)`
 - [ ] Floating buttons tienen `z-index:90`
 - [ ] `box-shadow:0 10px 28px` en floating buttons
+- [ ] `box-shadow:0 10px 24px` en btn-primary
 - [ ] `border:1px solid rgba(255,255,255,0.15)` en hero-content
 - [ ] `border:1px solid rgba(255,255,255,0.3)` en hero-eta-badge
+- [ ] Gradient con `#fba336` en btn-primary
 - [ ] Preload de imagen AVIF con imagesrcset
 - [ ] Preload de fonts woff2
 - [ ] Preload de CSS
 
-### 5. Publicación
+### 7. Publicación
 
 ```bash
 # Electricista
@@ -158,7 +210,7 @@ git commit --no-verify -m "feat({{COLONIA_SLUG}}): crear landing SEO optimizada 
 git push
 ```
 
-### 6. Verificación PageSpeed
+### 8. Verificación PageSpeed
 
 Después de publicar, proporcionar link:
 ```
@@ -169,23 +221,27 @@ https://pagespeed.web.dev/analysis?url=https://{{DOMINIO}}/servicios/{{SERVICIO_
 
 ## Variables de Reemplazo
 
-| Variable | Descripción |
-|----------|-------------|
-| `{{COLONIA_SLUG}}` | Nombre URL (ej: valle-alto) |
-| `{{COLONIA_DISPLAY}}` | Nombre legible (ej: Valle Alto) |
-| `{{SERVICIO}}` | "Electricista" o "Plomero" |
-| `{{SERVICIO_SLUG}}` | "electricista" o "plomero" |
-| `{{DOMINIO}}` | Dominio del sitio |
-| `{{HERO_IMG}}` | Nombre de imagen hero |
-| `{{LOGO}}` | Nombre del logo |
-| `{{IMG_PATH}}` | Ruta de imágenes (con o sin "optimizadas/") |
+| Variable | Electricista | Plomero |
+|----------|-------------|---------|
+| `{{COLONIA_SLUG}}` | nombre-url | nombre-url |
+| `{{COLONIA_DISPLAY}}` | Nombre Legible | Nombre Legible |
+| `{{SERVICIO}}` | Electricista | Plomero |
+| `{{SERVICIO_SLUG}}` | electricista | plomero |
+| `{{DOMINIO}}` | electricistaculiacanpro.mx | plomeroculiacanpro.mx |
+| `{{HERO_IMG}}` | hero-electricista-culiacan | hero-plomero-visita |
+| `{{LOGO}}` | logo-256w.webp | logo-nav.webp |
+| `{{IMG_PATH}}` | optimizadas/ | (vacío) |
+| `{{TELEFONO}}` | 667 392 2273 | 667 774 1696 |
+| `{{TELEFONO_LINK}}` | 6673922273 | 6677741696 |
+| `{{WHATSAPP}}` | 526673922273 | 526677741696 |
 
 ---
 
 ## Notas Importantes
 
-1. **NUNCA usar colores azules** - Ambos sitios usan naranja (#E36414, #F97316)
+1. **NUNCA usar colores azules para botones primarios** - Ambos sitios usan naranja (#E36414, #F97316)
 2. **SIEMPRE incluir ambos media queries** (768px y 480px)
-3. **SIEMPRE usar --no-verify** en git commit (hook tiene bug)
+3. **SIEMPRE usar --no-verify** en git commit (hook tiene bug de sintaxis)
 4. **Verificar que existe el directorio** antes de crear archivo
 5. **Score objetivo: 95+** - Si es menor, revisar checklist
+6. **El btn-secondary (Llamar) SÍ usa azul** (#0f4fa8) - esto es correcto
