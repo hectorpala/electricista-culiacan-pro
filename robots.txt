@@ -1,4 +1,4 @@
-# robots.txt - Electricista Culiacán Pro
+# robots.txt - Electricista Culiacan Pro
 
 User-agent: *
 Allow: /
@@ -13,17 +13,17 @@ Disallow: /scripts/
 
 # Block JSON except manifest
 Allow: /manifest.json
-Disallow: /*.json$
+Disallow: /*.json
 
 # Allow important resources
 Allow: /assets/
 Allow: /servicios/
 Allow: /blog/
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.webp$
-Allow: /*.png$
-Allow: /*.jpg$
+Allow: /*.css
+Allow: /*.js
+Allow: /*.webp
+Allow: /*.png
+Allow: /*.jpg
 
 # Crawl-delay for politeness
 Crawl-delay: 1
