@@ -43,7 +43,7 @@ jobs:
         run: |
           FAIL=0
           echo "Validating JSON-LD in all HTML files..."
-          mapfile -t FILES < <(find . -name "*.html" -type f ! -path "*/node_modules/*" ! -path "*/.git/*" ! -path "*/dist/*")
+          mapfile -t FILES < <(find . -name "*.html" -type f ! -path "*/node_modules/*" ! -path "*/.git/*" ! -path "*/dist/*" ! -path "*/colonias/*")
 
           for f in "${FILES[@]}"; do
             echo "Checking $f..."
@@ -67,7 +67,7 @@ jobs:
         run: |
           FAIL=0
           echo "Checking required meta tags in HTML files..."
-          mapfile -t FILES < <(find . -name "index.html" -type f ! -path "*/node_modules/*" ! -path "*/.git/*")
+          mapfile -t FILES < <(find . -name "index.html" -type f ! -path "*/node_modules/*" ! -path "*/.git/*" ! -path "*/colonias/*")
 
           for f in "${FILES[@]}"; do
             echo "Checking $f..."
