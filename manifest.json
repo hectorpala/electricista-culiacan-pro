@@ -4,8 +4,8 @@
   "description": "Servicio profesional de electricidad en Culiacán 24/7. Emergencias, instalaciones y reparaciones eléctricas.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1E40AF",
-  "theme_color": "#1E40AF",
+  "background_color": "#FFFFFF",
+  "theme_color": "#E36414",
   "orientation": "portrait-primary",
   "icons": [
     {
