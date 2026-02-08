@@ -29,7 +29,7 @@
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#1E40AF">
+    <meta name="theme-color" content="#E36414">
 
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://www.googletagmanager.com">
@@ -57,21 +57,21 @@
         @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('/assets/fonts/inter-600.woff2') format('woff2')}
         @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/montserrat-700.woff2') format('woff2')}
         @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('/assets/fonts/montserrat-800.woff2') format('woff2')}
-        :root{--brand:#1E40AF;--brand-light:#3B82F6;--brand-dark:#1E3A8A;--accent:#FCD34D;--accent-dark:#EAB308;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#3B82F6 0%,#1E40AF 100%);--gradient-accent:linear-gradient(135deg,#FCD34D 0%,#EAB308 100%);--container-max-width:1200px;--container-gutter:24px}
+        :root{--brand:#E36414;--brand-light:#F97316;--brand-dark:#C2410C;--accent:#FCD34D;--accent-dark:#EAB308;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--gradient-accent:linear-gradient(135deg,#FCD34D 0%,#EAB308 100%);--container-max-width:1200px;--container-gutter:24px}
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text);background-color:var(--bg-soft);padding-top:80px}
         .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
         h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
         h1{font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1.5rem}
-        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(30,64,175,0.98);backdrop-filter:blur(10px);border-bottom:none;padding:16px 0;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:16px 0}
         .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
         .logo{display:block;text-decoration:none;transition:opacity .2s ease}
-        .logo img{height:60px;width:auto;display:block;max-height:70px}
+        .logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
         .logo:hover{opacity:0.9}
-        @media (max-width:768px){.logo img{height:50px;max-height:60px}}
+        @media (max-width:768px){.logo img{height:62px;max-height:72px}}
         .nav-menu{display:flex;list-style:none;gap:2rem}
-        .nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease;padding:0.5rem 1rem;border-radius:6px}
-        .nav-link:hover{color:var(--accent);background:rgba(255,255,255,0.1)}
+        .nav-link{color:#f97316;font-weight:500;text-decoration:none;transition:color .2s ease;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
+        .nav-link:hover{color:#ea580c;text-shadow:0 2px 6px rgba(0,0,0,0.15)}
         .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
         .hero-background{position:absolute;inset:0;z-index:0}
         .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
@@ -92,16 +92,16 @@
         .feature-item{display:flex;align-items:center;gap:0.5rem;color:#fff;font-size:0.95rem;font-weight:500}
         .feature-icon{width:24px;height:24px;flex-shrink:0;color:#FCD34D}
         @media (max-width:640px){.hero-features{gap:1rem;margin:1.5rem 0 2rem}.feature-item{font-size:0.85rem}.feature-icon{width:20px;height:20px}}
-        .btn-primary{display:inline-block;background:var(--gradient-brand);color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(30,64,175,0.4);min-height:48px;transition:transform .12s ease,box-shadow .12s ease}
-        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(30,64,175,0.5)}
+        .btn-primary{display:inline-block;background:var(--gradient-brand);color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(227,100,20,0.28);min-height:48px;transition:transform .12s ease,box-shadow .12s ease}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(227,100,20,0.35)}
         .btn-whatsapp{background:#25D366;box-shadow:0 10px 24px rgba(37,211,102,0.28)}
         .btn-whatsapp:hover{background:#128C7E;box-shadow:0 14px 32px rgba(37,211,102,0.34)}
         .mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0}
-        .mobile-menu-btn span{display:block;height:3px;width:100%;background:#fff;border-radius:2px}
+        .mobile-menu-btn span{display:block;height:3px;width:100%;background:#F97316;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
         @media (max-width:768px){
             .mobile-menu-btn{display:flex}
-            .nav{background:rgba(30,64,175,0.98)}
-            .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(30,64,175,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem;transition:left 0.3s ease}
+            .nav{background:rgba(255,255,255,0.98)}
+            .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem;transition:left 0.3s ease}
             .nav-menu.active{left:0}
         }
         .section{padding:80px 0}
@@ -110,7 +110,7 @@
         .card{background:var(--bg);padding:2.5rem 2rem;border-radius:20px;box-shadow:0 4px 24px var(--shadow);transition:transform 0.3s ease,box-shadow 0.3s ease;border:1px solid var(--border)}
         .card:hover{transform:translateY(-8px);box-shadow:0 12px 48px rgba(0,0,0,0.15)}
         .card h3{color:var(--brand);margin-bottom:1rem;font-size:1.5rem}
-        .footer{background:linear-gradient(135deg,#1E40AF 0%,#1E3A8A 100%);color:#F8FAFC;padding:4rem 0 2rem;margin-top:4rem;text-align:center}
+        .footer{background:linear-gradient(135deg,#E36414 0%,#C2410C 100%);color:#F8FAFC;padding:4rem 0 2rem;margin-top:4rem;text-align:center}
         .footer p{color:#CBD5E1;font-size:0.95rem}
     </style>
 
@@ -405,17 +405,12 @@
                 <a href="/" class="logo">
                     <img src="/electricista-culiacan-pro-logo.webp" alt="Electricista Culiacán Pro" width="200" height="60">
                 </a>
-                <button class="mobile-menu-btn" aria-label="Menú">
+                <button class="mobile-menu-btn" aria-label="Abrir menu de navegacion" aria-expanded="false" aria-controls="nav-menu">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-                <ul class="nav-menu">
-                    <li><a href="/#servicios" class="nav-link">Servicios</a></li>
-                    <li><a href="/#beneficios" class="nav-link">Beneficios</a></li>
-                    <li><a href="/#testimonios" class="nav-link">Testimonios</a></li>
-                    <li><a href="/#contacto" class="nav-link">Contacto</a></li>
-                </ul>
+                <ul class="nav-menu" id="nav-menu"><li><a href="/" class="nav-link">Inicio</a></li><li><a href="/#servicios" class="nav-link">Servicios</a></li><li><a href="/#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li><li><a href="/blog/" class="nav-link">Blog</a></li><li><a href="/#contacto" class="nav-link">Contacto</a></li></ul>
             </div>
         </div>
     </nav>
@@ -546,7 +541,7 @@
 
                     <div style="background:#DBEAFE;padding:2rem;border-radius:12px;margin:2rem 0;border-left:4px solid var(--brand)">
                         <h3 style="color:var(--brand);margin-bottom:1rem">Beneficios de Actualización:</h3>
-                        <ul style="color:#1E3A8A;line-height:2;margin-left:1.5rem">
+                        <ul style="color:#C2410C;line-height:2;margin-left:1.5rem">
                             <li><strong>Seguridad familiar</strong> - Eliminas el riesgo de incendios eléctricos y electrocución. El 30% de incendios domésticos en México son por fallas eléctricas</li>
                             <li><strong>Ahorro en electricidad</strong> - Instalaciones modernas reducen pérdidas por resistencia en cables viejos, ahorrando 10-15% en tu recibo de CFE</li>
                             <li><strong>Protección de equipos electrónicos</strong> - Tierra física y breakers modernos protegen televisores, computadoras y electrodomésticos de sobretensiones</li>
@@ -584,10 +579,10 @@
                     </ul>
                     <p style="margin-bottom:1.5rem"><strong>Financiamiento disponible:</strong> Ofrecemos planes de pago a 3, 6 y 12 meses sin intereses para trabajos mayores a $15,000 MXN. Consúltanos por WhatsApp.</p>
 
-                    <div style="background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 100%);color:#fff;padding:2.5rem;border-radius:16px;margin:3rem 0;text-align:center">
+                    <div style="background:linear-gradient(135deg,#E36414 0%,#F97316 100%);color:#fff;padding:2.5rem;border-radius:16px;margin:3rem 0;text-align:center">
                         <h3 style="color:#FCD34D;font-size:1.75rem;margin-bottom:1rem">🏠 Inspección Diagnóstica GRATUITA</h3>
                         <p style="font-size:1.125rem;margin-bottom:2rem;line-height:1.7">¿Tu casa tiene más de 15 años sin actualización eléctrica? Solicita inspección gratuita en Las Quintas, Centro, Guadalupe, Chapultepec y toda la zona metropolitana de Culiacán. Sin compromiso.</p>
-                        <a href="#contacto" class="btn-primary" style="background:#FCD34D;color:#1E3A8A;font-weight:700;box-shadow:0 10px 24px rgba(252,211,77,0.3)">Agendar Inspección Gratuita</a>
+                        <a href="#contacto" class="btn-primary" style="background:#FCD34D;color:#C2410C;font-weight:700;box-shadow:0 10px 24px rgba(252,211,77,0.3)">Agendar Inspección Gratuita</a>
                     </div>
 
                     <h2 style="color:var(--brand);font-size:2rem;margin:3rem 0 1.5rem;border-bottom:3px solid var(--accent);padding-bottom:0.5rem">Conclusión</h2>
@@ -734,7 +729,7 @@
     </section>
 
     <!-- CTA de Emergencias -->
-    <section class="section" style="background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 100%);color:#fff">
+    <section class="section" style="background:linear-gradient(135deg,#E36414 0%,#F97316 100%);color:#fff">
         <div class="container" style="max-width:800px;text-align:center">
             <h2 style="color:#FCD34D;margin-bottom:1.5rem">¿Tu Casa Tiene Más de 20 Años?</h2>
             <p style="font-size:1.125rem;margin-bottom:2rem;line-height:1.7">Si tu instalación eléctrica no ha sido actualizada en las últimas dos décadas, agenda una inspección diagnóstica gratuita. Identificamos riesgos y te entregamos presupuesto sin compromiso para actualización completa o por fases.</p>
@@ -898,7 +893,7 @@
                         </ul>
                     </div>
                 </div>
-                <p style="color:#64748B;font-size:1rem">Atención prioritaria en colonias antiguas con instalaciones obsoletas. <a href="https://wa.me/526676673922273?text=Necesito%20actualización%20de%20instalación%20eléctrica%20antigua" style="color:var(--brand);font-weight:600;text-decoration:none" target="_blank">Contáctanos por WhatsApp</a></p>
+                <p style="color:#64748B;font-size:1rem">Atención prioritaria en colonias antiguas con instalaciones obsoletas. <a href="https://wa.me/526676673922273?text=Necesito%20actualización%20de%20instalación%20eléctrica%20antigua" style="color:var(--brand);font-weight:600;text-decoration:none" target="_blank" rel="noopener">Contáctanos por WhatsApp</a></p>
             </div>
         </div>
     </section>
@@ -966,7 +961,7 @@
                 </ul>
             </nav>
 
-            <p>&copy; 2025 Electricista Culiacán Pro. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Electricista Culiacán Pro. Todos los derechos reservados. | <a href="/terminos/" style="color:inherit;text-decoration:underline">Términos</a></p>
             <p style="margin-top:1rem;font-weight:500">Servicio profesional de electricidad en Culiacán, Sinaloa</p>
             <p style="margin-top:0.5rem;font-size:0.9rem">📞 667 392 2273 | 💬 WhatsApp 24/7 | 📧 contacto@electricistaculiacanpro.mx</p>
         </div>
@@ -986,7 +981,7 @@
         <a href="tel:+526676673922273"
            class="btn-primary"
            aria-label="Llamar ahora"
-           style="display:flex;align-items:center;gap:8px;padding:14px 20px;background:var(--gradient-brand);box-shadow:0 4px 16px rgba(30,64,175,0.4)"
+           style="display:flex;align-items:center;gap:8px;padding:14px 20px;background:var(--gradient-brand);box-shadow:0 4px 16px rgba(227,100,20,0.28)"
            onclick="if(typeof dataLayer !== 'undefined') dataLayer.push({'event':'cta_click','cta_type':'floating_phone','cta_position':'bottom_right'})">
             📞 Llamar
         </a>

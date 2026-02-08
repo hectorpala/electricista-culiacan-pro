@@ -6,6 +6,13 @@
     <title>Instalación Eléctrica en Culiacán | Residencial y Comercial</title>
     <meta name="description" content="¿Necesitas instalación eléctrica en Culiacán? Electricista certificado · Residencial y comercial · Llegada 30-60 min · Garantía por escrito · WhatsApp: 667 392 2273">
     <meta name="keywords" content="instalacion electrica, instalacion electrica residencial, instalacion electrica comercial, instalaciones electricas, instalador electrico, electricista instalador, instalacion electrica culiacan, electricista culiacan">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <link rel="canonical" href="https://electricistaculiacanpro.mx/servicios/instalacion-electrica/">
 
     <!-- Template Version -->
@@ -14,21 +21,57 @@
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://www.googletagmanager.com">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSV2K9N2ZD"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-NSV2K9N2ZD');
-    </script>
-
     <!-- Preload critical fonts -->
     <link rel="preload" href="../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 
-    <link rel="stylesheet" href="../../assets/css/critical.css" fetchpriority="high">
-
+    <style>
+        @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('../../assets/fonts/inter-400.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
+        @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/inter-600.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
+        @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('../../assets/fonts/montserrat-800.woff2') format('woff2');size-adjust:113%;ascent-override:89%;descent-override:24%;line-gap-override:0%}
+        :root{--brand:#E36414;--brand-light:#F97316;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--container-max-width:1200px;--container-gutter:24px;--nav-h:74px}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text);background-color:var(--bg-soft);padding-top:80px}
+        .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
+        h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
+        h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:16px 0}
+        .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+        .logo{display:block;text-decoration:none;transition:opacity .2s ease;contain:layout}
+        .logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
+        .logo:hover{opacity:0.9}
+        @media (max-width:768px){.logo img{height:62px;max-height:72px}}
+        .nav-menu{display:flex;list-style:none;gap:2rem}
+        .nav-link{color:#f97316;font-weight:500;text-decoration:none;transition:color .2s ease;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
+        .nav-link:hover{color:#ea580c;text-shadow:0 2px 6px rgba(0,0,0,0.15)}
+        .hero{min-height:85vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;padding:140px 16px 2.5rem 16px}
+        .hero-background{position:absolute;inset:0;z-index:0;display:block}
+        .hero-background img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;content-visibility:visible}
+        @media (max-width:768px){.hero-background img{object-position:55% 35%}}
+        .hero::after{content:"";position:absolute;top:0;left:0;right:0;height:180px;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,0.35) 0%,transparent 100%);pointer-events:none}
+        .hero-content{position:relative;z-index:2;width:95%;max-width:550px;margin:0 auto 2rem;background:rgba(0,0,0,0.35);border-radius:24px;padding:2rem 1.5rem;border:1px solid rgba(255,255,255,0.15)}
+        .hero-subtitle{font-size:clamp(1rem,2vw,1.25rem);color:#F1F5F9;margin-bottom:1.5rem;line-height:1.5}
+        .hero-rating{display:inline-flex;align-items:center;gap:0.5rem;margin:1rem 0;padding:0.75rem 1.25rem;background:rgba(255,255,255,0.98);border-radius:50px;font-size:0.9rem}
+        .hero-eta-badge{display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.3);border-radius:999px;padding:0.5rem 1rem;margin-bottom:0.75rem;font-size:0.85rem;color:#fff}
+        .hero-features{display:flex;justify-content:center;gap:1.5rem;margin:1.5rem 0;flex-wrap:wrap}.feature-item{display:flex;align-items:center;gap:0.5rem;color:#fff;font-size:0.9rem}.feature-icon{width:20px;height:20px}
+        .rating-stars{color:#FBBF24}.rating-score{font-weight:600}.rating-count{color:#64748B;font-size:0.85rem}.eta-dot{width:8px;height:8px;background:#22c55e;border-radius:50%}
+        .btn-primary{display:inline-block;background:linear-gradient(135deg,#fba336 0%,#f97316 45%,#e36414 100%);color:#fff;border:none;border-radius:14px;padding:17px 34px;font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 10px 24px rgba(227,100,20,0.28);min-height:48px;min-width:48px}
+        .mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;gap:0}
+        .mobile-menu-btn span{display:block;height:3px;width:100%;background:#F97316;border-radius:2px;margin:0;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
+        @media (max-width:768px){
+            .mobile-menu-btn{display:flex}
+            .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem}
+            .nav-menu.active{left:0}
+            .hero{min-height:70vh;height:auto;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:calc(var(--nav-h) + 48px) 16px 60px}
+            #inicio{scroll-margin-top:calc(var(--nav-h) + 48px)}
+            .hero h1,.hero-subtitle,.hero .btn-primary,.hero-content,.hero-rating,.hero-features,.fade-in{animation:none!important;opacity:1!important;transform:none!important}
+            .hero-content{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 2px 8px rgba(0,0,0,0.15)!important}
+        }
+        @media (max-width:480px){.hero h1,.hero-subtitle,.hero .btn-primary,.fade-in{animation:none!important;opacity:1!important;transform:none!important}}
+        .floating-btn{position:fixed;right:max(18px,env(safe-area-inset-right,18px));width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease,opacity .2s ease;z-index:90;text-decoration:none}.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}.floating-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(249,115,22,0.5)}.floating-call{background:#0f4fa8;bottom:max(18px,env(safe-area-inset-bottom,18px))}.floating-whatsapp{background:#22c55e;bottom:calc(max(18px,env(safe-area-inset-bottom,18px)) + 60px)}body.menu-open .floating-btn{opacity:0;pointer-events:none}
+    </style>
+    <link rel="stylesheet" href="../../styles.7f293647.css">
+    <style>.breadcrumb-wrapper{background:var(--bg-soft);padding:0.75rem 0;border-bottom:1px solid var(--border)}.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--text-light);list-style:none;flex-wrap:wrap}.breadcrumb li::after{content:">";margin-left:0.5rem;color:var(--text-light)}.breadcrumb li:last-child::after{content:""}.breadcrumb a{color:var(--brand);text-decoration:none;transition:color .2s}.breadcrumb a:hover{color:var(--brand-light);text-decoration:underline}</style>
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
@@ -245,7 +288,50 @@
     <!-- End Google Tag Manager -->
 
 </head>
-<body>
+<body><script>
+window.dataLayer = window.dataLayer || [];
+(function() {
+  var gtmLoaded = false;
+  var clarityLoaded = false;
+
+  var loadGTM = function() {
+    if (gtmLoaded) return;
+    gtmLoaded = true;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+    document.head.appendChild(script);
+  };
+
+  var loadClarity = function() {
+    if (clarityLoaded) return;
+    clarityLoaded = true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ukonwm7t1p");
+  };
+
+  var interactionEvents = ['scroll', 'click', 'touchstart', 'keydown'];
+  var onInteraction = function() {
+    loadGTM();
+    interactionEvents.forEach(function(e) {
+      window.removeEventListener(e, onInteraction, {passive: true, capture: true});
+    });
+  };
+  interactionEvents.forEach(function(e) {
+    window.addEventListener(e, onInteraction, {passive: true, capture: true});
+  });
+
+  setTimeout(loadGTM, 12000);
+
+  window.addEventListener('load', function() {
+    setTimeout(loadClarity, 7000);
+  });
+})();
+</script>
+
 <!-- Google Tag Manager (noscript) -->
 <noscript>
   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5"
@@ -255,21 +341,18 @@
     <nav class="nav">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="../../" class="logo">
-                    <img src="../../assets/images/electricista-culiacan-pro-logo.webp" alt="Electricista Culiacán Pro - Logo">
-                </a>
-                <button class="mobile-menu-btn" aria-label="Menu">
+                <a href="/" class="logo"><img src="/assets/images/optimizadas/logo-256w.webp"
+            srcset="/assets/images/optimizadas/logo-128w.webp 128w, /assets/images/optimizadas/logo-256w.webp 256w"
+            sizes="(max-width:768px) 96px, 140px"
+            alt="Electricista Culiacan Pro - Logo"
+            width="140"
+            height="140"></a>
+                <button class="mobile-menu-btn" aria-label="Abrir menu de navegacion" aria-expanded="false" aria-controls="nav-menu">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-                <ul class="nav-menu">
-                    <li><a href="../../#inicio" class="nav-link">Inicio</a></li>
-                    <li><a href="../../#servicios" class="nav-link">Servicios</a></li>
-                    <li><a href="../../#beneficios" class="nav-link">Beneficios</a></li>
-                    <li><a href="../../#testimonios" class="nav-link">Testimonios</a></li>
-                    <li><a href="../../#contacto" class="nav-link">Contacto</a></li>
-                </ul>
+                <ul class="nav-menu" id="nav-menu"><li><a href="/" class="nav-link">Inicio</a></li><li><a href="/#servicios" class="nav-link">Servicios</a></li><li><a href="/#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li><li><a href="/blog/" class="nav-link">Blog</a></li><li><a href="/#contacto" class="nav-link">Contacto</a></li></ul>
             </div>
         </div>
     </nav>
@@ -302,6 +385,10 @@
 
     <header id="inicio" class="hero">
         <picture class="hero-background">
+            <source type="image/avif"
+                    srcset="../../assets/images/optimizadas/instalacion-electrica-culiacan-800w.avif 800w,
+                            ../../assets/images/optimizadas/instalacion-electrica-culiacan-1200w.avif 1200w"
+                    sizes="(max-width:480px) 360px, (max-width:768px) 480px, 1200px">
             <source type="image/webp"
                     srcset="../../assets/images/optimizadas/instalacion-electrica-culiacan-800w.webp 800w,
                             ../../assets/images/optimizadas/instalacion-electrica-culiacan-1200w.webp 1200w"
@@ -371,7 +458,7 @@
             <h2>¿Por qué contratar instalación eléctrica profesional?</h2>
             <div class="benefits-grid">
                 <div class="benefit">
-                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
                     <h3>Seguridad Certificada</h3>
                     <p>Instalaciones conforme a normas CFE y NOM-001-SEDE para máxima seguridad eléctrica</p>
                     <ul>
@@ -380,7 +467,7 @@
                     </ul>
                 </div>
                 <div class="benefit">
-                    <div class="benefit-icon">🔌</div>
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
                     <h3>Materiales de Calidad</h3>
                     <p>Usamos cables de cobre 100%, tableros certificados y dispositivos de marcas reconocidas</p>
                     <ul>
@@ -389,7 +476,7 @@
                     </ul>
                 </div>
                 <div class="benefit">
-                    <div class="benefit-icon">🛡️</div>
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
                     <h3>Garantía por Escrito</h3>
                     <p>90 días en mano de obra y 1 año en materiales eléctricos instalados</p>
                     <ul>
@@ -398,7 +485,7 @@
                     </ul>
                 </div>
                 <div class="benefit">
-                    <div class="benefit-icon">💡</div>
+                    <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
                     <h3>Plano Eléctrico Incluido</h3>
                     <p>Entregamos diagrama de la instalación para futuras modificaciones o ampliaciones</p>
                     <ul>
@@ -498,12 +585,12 @@
         </div>
     </section>
 
-    <section class="section" style="background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 100%);color:#fff">
+    <section class="section" style="background:linear-gradient(135deg,#E36414 0%,#F97316 100%);color:#fff">
         <div class="container" style="max-width:800px;text-align:center">
             <h2 style="color:#FCD34D;margin-bottom:1.5rem">¿Necesitas Instalación Eléctrica? ¡Cotización Gratuita!</h2>
             <p style="font-size:1.125rem;margin-bottom:2rem;line-height:1.7">Ya sea para casa nueva, remodelación o actualización, te damos cotización detallada sin compromiso. Visita de diagnóstico desde $200 MXN que se descuenta del trabajo. Envianos fotos por WhatsApp para cotización preliminar.</p>
             <a href="https://wa.me/526676673922273?text=Hola!%20Necesito%20cotización%20para%20instalación%20eléctrica" class="btn-primary" style="background:#25D366;box-shadow:0 10px 24px rgba(37,211,102,0.3)" target="_blank" rel="noopener">
-                💬 WhatsApp: Cotización Gratuita
+                WhatsApp: Cotización Gratuita
             </a>
         </div>
     </section>
@@ -513,29 +600,29 @@
             <h2>Servicios relacionados de electricidad</h2>
             <div class="grid seo-links">
                 <a href="../reparacion-cortocircuitos/" class="card seo-card" data-card-name="reparacion-cortocircuitos" data-card-position="1" style="text-decoration:none;color:inherit">
-                    <h3 style="color:#1E40AF;margin-bottom:1rem">🔧 Reparación de Cortocircuitos</h3>
+                    <h3 style="color:#E36414;margin-bottom:1rem">Reparación de Cortocircuitos</h3>
                     <p style="color:#475569;margin-bottom:1.5rem">Detección y solución profesional de cortocircuitos, cables dañados y fallas eléctricas urgentes.</p>
-                    <span style="color:#3B82F6;font-weight:600">Ver servicio →</span>
+                    <span style="color:#F97316;font-weight:600">Ver servicio →</span>
                 </a>
                 <a href="../instalacion-contactos/" class="card seo-card" data-card-name="instalacion-contactos" data-card-position="2" style="text-decoration:none;color:inherit">
-                    <h3 style="color:#1E40AF;margin-bottom:1rem">🔌 Instalación de Contactos</h3>
+                    <h3 style="color:#E36414;margin-bottom:1rem">Instalación de Contactos</h3>
                     <p style="color:#475569;margin-bottom:1.5rem">Instalación de contactos polarizados, apagadores, dimmers y tomas especiales 220V.</p>
-                    <span style="color:#3B82F6;font-weight:600">Ver servicio →</span>
+                    <span style="color:#F97316;font-weight:600">Ver servicio →</span>
                 </a>
                 <a href="../mantenimiento-tableros/" class="card seo-card" data-card-name="mantenimiento-tableros" data-card-position="3" style="text-decoration:none;color:inherit">
-                    <h3 style="color:#1E40AF;margin-bottom:1rem">⚙️ Mantenimiento de Tableros</h3>
+                    <h3 style="color:#E36414;margin-bottom:1rem">Mantenimiento de Tableros</h3>
                     <p style="color:#475569;margin-bottom:1.5rem">Revisión, actualización y mantenimiento de tableros eléctricos y centros de carga.</p>
-                    <span style="color:#3B82F6;font-weight:600">Ver servicio →</span>
+                    <span style="color:#F97316;font-weight:600">Ver servicio →</span>
                 </a>
                 <a href="../iluminacion-led/" class="card seo-card" data-card-name="iluminacion-led" data-card-position="4" style="text-decoration:none;color:inherit">
-                    <h3 style="color:#1E40AF;margin-bottom:1rem">💡 Iluminación LED</h3>
+                    <h3 style="color:#E36414;margin-bottom:1rem">Iluminación LED</h3>
                     <p style="color:#475569;margin-bottom:1.5rem">Instalación de lámparas LED, focos ahorradores y sistemas de iluminación eficiente.</p>
-                    <span style="color:#3B82F6;font-weight:600">Ver servicio →</span>
+                    <span style="color:#F97316;font-weight:600">Ver servicio →</span>
                 </a>
                 <a href="../emergencia-24-7/" class="card seo-card" data-card-name="emergencias" data-card-position="5" style="text-decoration:none;color:inherit">
-                    <h3 style="color:#1E40AF;margin-bottom:1rem">🚨 Emergencias 24/7</h3>
+                    <h3 style="color:#E36414;margin-bottom:1rem">Emergencias 24/7</h3>
                     <p style="color:#475569;margin-bottom:1.5rem">Atención inmediata de emergencias eléctricas con llegada en 30-60 minutos.</p>
-                    <span style="color:#3B82F6;font-weight:600">Contactar ahora →</span>
+                    <span style="color:#F97316;font-weight:600">Contactar ahora →</span>
                 </a>
             </div>
         </div>
@@ -611,7 +698,7 @@
                 <p style="font-size:1.125rem;color:#475569;margin-bottom:2rem">Instalación eléctrica profesional en todas estas colonias de Culiacán:</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem">
                     <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:#1E40AF;font-size:1rem;margin-bottom:0.5rem">Zona Norte</h3>
+                        <h3 style="color:#E36414;font-size:1rem;margin-bottom:0.5rem">Zona Norte</h3>
                         <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
                             <li>Las Quintas</li>
                             <li>Tres Ríos</li>
@@ -620,7 +707,7 @@
                         </ul>
                     </div>
                     <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:#1E40AF;font-size:1rem;margin-bottom:0.5rem">Zona Centro</h3>
+                        <h3 style="color:#E36414;font-size:1rem;margin-bottom:0.5rem">Zona Centro</h3>
                         <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
                             <li>Centro</li>
                             <li>Guadalupe</li>
@@ -630,7 +717,7 @@
                         </ul>
                     </div>
                     <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:#1E40AF;font-size:1rem;margin-bottom:0.5rem">Zona Sur</h3>
+                        <h3 style="color:#E36414;font-size:1rem;margin-bottom:0.5rem">Zona Sur</h3>
                         <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
                             <li>Villa Universidad</li>
                             <li>Montebello</li>
@@ -639,7 +726,7 @@
                         </ul>
                     </div>
                     <div style="background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-                        <h3 style="color:#1E40AF;font-size:1rem;margin-bottom:0.5rem">Zona Oriente</h3>
+                        <h3 style="color:#E36414;font-size:1rem;margin-bottom:0.5rem">Zona Oriente</h3>
                         <ul style="list-style:none;color:#475569;font-size:0.95rem;line-height:1.8">
                             <li>Colinas de San Miguel</li>
                             <li>Lomas de San Isidro</li>
@@ -648,7 +735,7 @@
                         </ul>
                     </div>
                 </div>
-                <p style="color:#64748B;font-size:1rem">¿No ves tu colonia? <a href="https://wa.me/526676673922273?text=Hola,%20necesito%20instalación%20eléctrica%20en%20mi%20colonia" style="color:#1E40AF;font-weight:600;text-decoration:none" target="_blank">Contáctanos por WhatsApp</a></p>
+                <p style="color:#64748B;font-size:1rem">¿No ves tu colonia? <a href="https://wa.me/526676673922273?text=Hola,%20necesito%20instalación%20eléctrica%20en%20mi%20colonia" style="color:#E36414;font-weight:600;text-decoration:none" target="_blank" rel="noopener">Contáctanos por WhatsApp</a></p>
             </div>
         </div>
     </section>
@@ -800,21 +887,7 @@
         </div>
     </section>
 
-    <footer class="footer">
-      <div class="container footer-content">
-        <nav style="margin-bottom:2rem">
-            <ul style="list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;font-size:0.95rem">
-                <li><a href="../../" style="color:#CBD5E1;text-decoration:none">Inicio</a></li>
-                <li><a href="../instalacion-electrica/" style="color:#CBD5E1;text-decoration:none">Instalación Eléctrica</a></li>
-                <li><a href="../reparacion-cortocircuitos/" style="color:#CBD5E1;text-decoration:none">Reparación</a></li>
-                <li><a href="../emergencia-24-7/" style="color:#CBD5E1;text-decoration:none">Emergencias 24/7</a></li>
-                <li><a href="../../#contacto" style="color:#CBD5E1;text-decoration:none">Contacto</a></li>
-            </ul>
-        </nav>
-        <p>&copy; 2025 Electricista Culiacán Pro. Todos los derechos reservados.</p>
-        <p style="margin-top:1rem;font-weight:500">Servicio profesional de electricidad en Culiacán, Sinaloa</p>
-      </div>
-    </footer>
+    <footer class="footer"><div class="container"><div class="footer-logo"><img src="../../assets/images/electricista-culiacan-pro-logo.webp" alt="Electricista Culiacán Pro - Servicio Profesional 24/7" width="200" height="76"></div><p>&copy; 2026 Electricista Culiacán Pro. Todos los derechos reservados. | <a href="/terminos/" style="color:inherit;text-decoration:underline">Términos</a></p></div></footer>
 
     <script>
     (function() {
@@ -888,7 +961,10 @@
     })();
     </script>
 
-        <!-- Floating CTA Buttons -->
+        
+<div id="exit-intent-popup" role="dialog" aria-modal="true" aria-labelledby="exit-popup-title" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.3);z-index:9999;align-items:center;justify-content:center;"><div class="exit-popup-content" style="background:#fff;border-radius:16px;padding:2rem;max-width:400px;margin:1rem;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.3);"><button class="exit-popup-close" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#666;line-height:1;padding:0.25rem 0.5rem;" aria-label="Cerrar popup">&times;</button><h3 id="exit-popup-title" style="color:#0F172A;margin-bottom:1rem;font-size:1.5rem;">Espera!</h3><p style="color:#475569;margin-bottom:1.5rem;line-height:1.6;">Tienes una emergencia de electricidad? Contactanos ahora y llegamos en 30-60 minutos.</p><div style="display:flex;flex-direction:column;gap:0.75rem;"><a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20electricista%20urgente" id="exit-popup-whatsapp" target="_blank" rel="noopener noreferrer" style="background:#22c55e;color:#fff;padding:0.875rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.5rem;"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a><a href="tel:+526673922273" id="exit-popup-phone" style="background:#0f4fa8;color:#fff;padding:0.875rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.5rem;"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>Llamar Ahora</a></div></div></div>
+
+<!-- Floating CTA Buttons -->
 <a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20ayuda%20con%20un%20problema%20de%20electricidad" target="_blank" rel="noopener" class="floating-btn floating-whatsapp" aria-label="WhatsApp"><svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 <a href="tel:+526673922273" class="floating-btn floating-call" aria-label="Llamar"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
 
