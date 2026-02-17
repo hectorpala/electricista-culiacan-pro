@@ -40,9 +40,9 @@
 }
 
 :root {
-  --brand: #C2410C;
-  --brand-light: #E36414;
-  --brand-dark: #9A3412;
+  --brand: #E36414;
+  --brand-light: #F97316;
+  --brand-dark: #C2410C;
   --whatsapp: #075E54;
   --text: #0F172A;
   --text-light: #475569;
@@ -53,7 +53,7 @@
   --border: #E2E8F0;
   --shadow: rgba(15,23,42,0.1);
   --shadow-lg: rgba(15,23,42,0.15);
-  --gradient-brand: linear-gradient(135deg,#E36414 0%,#C2410C 100%);
+  --gradient-brand: linear-gradient(135deg,#F97316 0%,#E36414 100%);
   --gradient-overlay: linear-gradient(135deg,rgba(15,23,42,0.9) 0%,rgba(30,41,59,0.8) 100%);
   
   --space-xs: 0.5rem;
@@ -679,7 +679,7 @@ p {
   display: block;
   height: 3px;
   width: 100%;
-  background: #fff;
+  background: var(--brand);
   border-radius: 2px;
   margin: 0;
   transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
