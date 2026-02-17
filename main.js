@@ -1,6 +1,6 @@
 // Main JavaScript - Electricista Culiacán Pro
 // Loaded with defer for optimal performance
-// Last updated: 2026-01-01
+// Last updated: 2026-02-16
 
 // Mobile menu toggle with scroll position preservation
 (function() {
@@ -43,6 +43,45 @@
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', closeMenu);
     });
+})();
+
+// Nav scroll – fondo solido al hacer scroll
+(function() {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+
+    var ticking = false;
+
+    function updateNav() {
+        if (window.scrollY > 50) {
+            nav.classList.add('nav-scrolled');
+        } else {
+            nav.classList.remove('nav-scrolled');
+        }
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateNav);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    updateNav();
+})();
+
+// Urgency indicator - mensaje dinamico segun hora del dia
+(function() {
+    var el = document.getElementById('urgency-text');
+    if (!el) return;
+
+    var h = new Date().getHours();
+
+    if (h >= 6 && h < 12) el.textContent = 'Agenda tu cita esta mañana';
+    else if (h >= 12 && h < 18) el.textContent = 'Técnicos disponibles esta tarde';
+    else if (h >= 18 && h < 22) el.textContent = 'Servicio nocturno disponible';
+    else el.textContent = 'Emergencias 24h – Llamar ahora';
 })();
 
 // Real-time form validation
@@ -286,7 +325,7 @@
   }, { passive: true });
 })();
 
-// Exit-Intent Popup
+// Exit-Intent Popup - versión simplificada (móvil: back button)
 (typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
     var popup = document.getElementById('exit-intent-popup');
     if (!popup) return;
@@ -295,9 +334,9 @@
     var whatsappBtn = document.getElementById('exit-popup-whatsapp');
     var phoneBtn = document.getElementById('exit-popup-phone');
     var popupShown = false;
-    var POPUP_DELAY = 30000;
     var SESSION_KEY = 'exitPopupShown';
 
+    // Ya se mostró en esta sesión? Salir
     if (sessionStorage.getItem(SESSION_KEY)) return;
 
     function isMobile() {
@@ -316,7 +355,7 @@
             window.dataLayer.push({
                 'event': 'exit_intent_shown',
                 'page_location': window.location.pathname,
-                'trigger': isMobile() ? 'mobile_timer' : 'desktop_mouseleave'
+                'trigger': isMobile() ? 'mobile_back' : 'desktop_mouseleave'
             });
         } catch(e) {}
     }
@@ -334,14 +373,15 @@
         } catch(e) {}
     }
 
+    // DESKTOP: Mouse leave detection
     if (!isMobile()) {
         document.addEventListener('mouseleave', function(e) {
             if (e.clientY < 10) showPopup();
         });
     }
 
+    // MOBILE: Detectar botón back (sin timer de 30s)
     if (isMobile()) {
-        setTimeout(showPopup, POPUP_DELAY);
         history.pushState(null, '', location.href);
         window.addEventListener('popstate', function() {
             if (!popupShown) {
