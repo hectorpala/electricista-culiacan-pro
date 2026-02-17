@@ -27,10 +27,10 @@ h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
 .logo:hover{opacity:0.9}
 @media(max-width:768px){.logo img{height:62px;max-height:72px}}
 .nav-menu{display:flex;list-style:none;gap:2rem}
-.nav-link{color:#f97316;font-weight:500;text-decoration:none;transition:color .2s ease;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
-.nav-link:hover{color:#ea580c;text-shadow:0 2px 6px rgba(0,0,0,0.15)}
+.nav-link{color:#C2410C;font-weight:500;text-decoration:none;transition:color .2s ease;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
+.nav-link:hover{color:#9A3412;text-shadow:0 2px 6px rgba(0,0,0,0.15)}
 .mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;gap:0}
-.mobile-menu-btn span{display:block;height:3px;width:100%;background:#F97316;border-radius:2px;margin:0;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
+.mobile-menu-btn span{display:block;height:3px;width:100%;background:var(--brand);border-radius:2px;margin:0;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
 
 /* Hero - LCP Critical */
 .hero{min-height:85vh;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:140px 16px 2.5rem;position:relative;overflow:hidden;background:#1a1a2e}
@@ -67,7 +67,7 @@ h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
 .mobile-menu-btn{display:flex}
 .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,.98);flex-direction:column;padding:3rem 2rem;gap:2rem}
 .nav-menu.active{left:0}
-.nav-link{color:#f97316;font-size:1.25rem}
+.nav-link{color:#C2410C;font-size:1.25rem}
 .hero{min-height:60vh;padding-top:80px;justify-content:flex-end}
 .hero h1{font-size:clamp(1.5rem,5vw,2rem)}
 .hero-subtitle{font-size:.95rem;margin-bottom:1.5rem}
@@ -86,6 +86,6 @@ h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
 .floating-btn{position:fixed;right:max(18px,env(safe-area-inset-right,18px));width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease,opacity .2s ease;z-index:90;text-decoration:none}
 .floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
 .floating-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(249,115,22,0.5)}
-.floating-call{background:#0f4fa8;bottom:max(18px,env(safe-area-inset-bottom,18px))}
+.floating-call{background:#1e40af;bottom:max(18px,env(safe-area-inset-bottom,18px))}
 .floating-whatsapp{background:#22c55e;bottom:calc(max(18px,env(safe-area-inset-bottom,18px)) + 60px)}
 body.menu-open .floating-btn{opacity:0;pointer-events:none}
