@@ -77,11 +77,11 @@
     if (!el) return;
 
     var h = new Date().getHours();
-
-    if (h >= 6 && h < 12) el.textContent = 'Agenda tu cita esta mañana';
-    else if (h >= 12 && h < 18) el.textContent = 'Técnicos disponibles esta tarde';
-    else if (h >= 18 && h < 22) el.textContent = 'Servicio nocturno disponible';
-    else el.textContent = 'Emergencias 24h – Llamar ahora';
+    if (h >= 7 && h < 22) {
+        el.textContent = 'Disponible ahora – respuesta en ~5 min';
+    } else {
+        el.textContent = 'Servicio nocturno activo';
+    }
 })();
 
 // Real-time form validation
@@ -668,4 +668,116 @@ if ('serviceWorker' in navigator) {
     criticalSections.forEach(function(section) {
         observer.observe(section);
     });
+})();
+
+// Contact link click tracking
+(function() {
+    document.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        var tipo = href.startsWith('tel:') ? 'phone' : 'whatsapp';
+        var numero = href.replace(/[^\d]/g, '');
+        try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'contact_link_click',
+                'contact_type': tipo,
+                'phone_number': numero,
+                'page_location': window.location.pathname,
+                'link_text': link.textContent.trim().substring(0, 50),
+                'link_location': link.getBoundingClientRect().y > window.innerHeight/2 ? 'below_fold' : 'above_fold'
+            });
+        } catch(e) {}
+    }, true);
+})();
+
+// Time-on-page milestone tracking
+(function() {
+    var timeOnPageSegments = [30, 60, 120, 300];
+    var timeTracked = {};
+    var startTime = Date.now();
+    setInterval(function() {
+        var currentTime = Math.floor((Date.now() - startTime) / 1000);
+        for (var i = 0; i < timeOnPageSegments.length; i++) {
+            var segment = timeOnPageSegments[i];
+            if (currentTime >= segment && !timeTracked[segment]) {
+                timeTracked[segment] = true;
+                try {
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({
+                        'event': 'page_time_milestone',
+                        'time_seconds': segment,
+                        'page_location': window.location.pathname
+                    });
+                } catch(e) {}
+            }
+        }
+    }, 1000);
+})();
+
+// Internal link click tracking
+(function() {
+    var mainNavLinks = document.querySelectorAll('a[href^="/servicios/"], a[href^="/blog/"], a[href^="/electricista-colonias/"]');
+    mainNavLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var href = this.getAttribute('href');
+            var text = this.textContent.trim().substring(0, 100);
+            var pageType = 'internal_link';
+            if (href.includes('/servicios/')) pageType = 'service_page';
+            if (href.includes('/blog/')) pageType = 'blog_page';
+            if (href.includes('/electricista-colonias/')) pageType = 'colony_page';
+            try {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'internal_link_click',
+                    'link_text': text,
+                    'link_url': href,
+                    'page_type': pageType,
+                    'page_location': window.location.pathname
+                });
+            } catch(e) {}
+        });
+    });
+})();
+
+// Page view type tracking
+(function() {
+    var pathname = window.location.pathname;
+    if (pathname.includes('/servicios/')) {
+        var serviceMatch = pathname.match(/servicios\/([^\/]+)/);
+        var serviceName = serviceMatch ? serviceMatch[1].replace(/-/g, ' ') : 'unknown';
+        try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'view_service_page',
+                'service_name': serviceName,
+                'page_location': pathname
+            });
+        } catch(e) {}
+    }
+    if (pathname.includes('/electricista-colonias-culiacan/')) {
+        var colonyMatch = pathname.match(/electricista-colonias-culiacan\/([^\/]+)/);
+        var colonyName = colonyMatch ? colonyMatch[1].replace(/-/g, ' ') : 'unknown';
+        try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'view_colony_page',
+                'colony_name': colonyName,
+                'page_location': pathname
+            });
+        } catch(e) {}
+    }
+    if (pathname.includes('/blog/')) {
+        var postMatch = pathname.match(/blog\/([^\/]+)/);
+        var postTitle = postMatch ? postMatch[1].replace(/-/g, ' ') : 'unknown';
+        try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'view_blog_post',
+                'post_title': postTitle,
+                'page_location': pathname
+            });
+        } catch(e) {}
+    }
 })();
