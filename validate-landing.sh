@@ -19,6 +19,18 @@ fi
 
 CONTENT=$(cat "$FILE")
 
+# Las páginas noindex no son landings de ranking: se omite la validación de
+# template v2.0.0 (no tiene sentido exigir schema/exit-popup/etc. a una página
+# que sacamos del índice a propósito).
+if echo "$CONTENT" | grep -qE '<meta name="robots"[^>]*noindex'; then
+    echo "Validando: $FILE"
+    echo "-------------------------------------------"
+    echo "  SKIP  Página noindex — validación de template omitida"
+    echo "-------------------------------------------"
+    echo "RESULTADO: OMITIDO (noindex, no es landing de ranking)"
+    exit 0
+fi
+
 pass() {
     echo "  OK  $1"
 }
