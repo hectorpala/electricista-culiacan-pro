@@ -2323,6 +2323,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  min-width: 0;
 }
 
 .stat-number {
@@ -2342,10 +2343,14 @@ p {
 @media (max-width: 640px) {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem 1rem;
+    gap: 1.25rem 0.75rem;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    overflow-wrap: break-word;
   }
   .stat-number {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
   }
 }
 
