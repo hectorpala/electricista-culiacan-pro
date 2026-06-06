@@ -137,10 +137,7 @@
     Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
 # Redirects
-[[redirects]]
-  from = "/colonias/*/"
-  to = "/colonias/:splat/"
-  status = 200
+# /colonias/ legacy: 301 manejado en _redirects (reemplaza meta-refresh)
 
 [[redirects]]
   from = "/servicios/*/"
