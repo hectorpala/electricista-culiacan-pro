@@ -218,7 +218,7 @@ Si en el futuro se usa un CDN, se han documentado headers adicionales:
 ### 4. **ANALYTICS Y TRACKING** 📈
 
 #### ✅ Google Analytics 4
-**Measurement ID**: G-NSV2K9N2ZD
+**Measurement ID**: G-7CML8QYBGQ
 
 **Eventos personalizados implementados**:
 - `contact_whatsapp` (botón flotante, exit popup, enlaces)
@@ -473,4 +473,4 @@ git push origin main
 **Última actualización**: 26 de noviembre de 2025
 **Versión**: 1.0 - Optimizaciones Técnicas Completas
 **Sitio**: https://electricistaculiacanpro.mx
-**GA4**: G-NSV2K9N2ZD
+**GA4**: G-7CML8QYBGQ

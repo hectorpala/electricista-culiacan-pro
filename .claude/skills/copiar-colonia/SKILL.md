@@ -53,7 +53,7 @@ IMPORTANTE: El nombre es "hero-electricista-culiacan-" NO "electricista-culiacan
 - "plomeroculiacanpro.mx" -> "electricistaculiacanpro.mx"
 
 # GTM
-- GTM-XXXXXX -> GTM-W75CRTX5
+- GTM-XXXXXX -> GTM-5Z2QRZ5Q
 
 # URLs servicios
 - "/servicios/emergencias-plomeria/" -> "/servicios/emergencia-24-7/"
