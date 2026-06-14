@@ -29,3 +29,8 @@
 - 5 páginas tenían canonical apuntando a OTRA URL (4 a `/servicios/reparacion-cortos-circuitos/` que NO existe —typo de "reparacion-cortocircuitos"— y 1 a `.../directorio/`). Google las trataría como duplicados de una 404 → riesgo de desindexación.
 - ARREGLADO: canonical + og:url → self-referencial (derivado del path) en las 5. Checker: 0 canonical-a-otra-URL. Lo detectó el revisor-indexabilidad.
 - PENDIENTE (siguiente pasada, con cuidado): breadcrumbs — el último item del BreadcrumbList no apunta al canonical en ~17 páginas (baja severidad; requiere edición de JSON-LD por página). NO auto-arreglado en esta pasada tras un casi-error (usar URL derivada del path, no el canonical).
+
+## 2026-06-14 (cont.) — Breadcrumbs arreglados (método correcto)
+- 16 páginas: el último item del BreadcrumbList no tenía `item` (apuntaba implícitamente a /#servicios o /blog/). Se añadió `item` = URL propia derivada del PATH (no del canonical, tras el casi-error anterior). Fixer agnóstico al formato (multilínea y single-line), con validación JSON y verificación post-fix por archivo.
+- Checker: 0 breadcrumbs (eran 16). Indexabilidad 36 -> 20.
+- Quedan ~20 en indexabilidad (mayormente "página indexable fuera del sitemap" — revisar si deben ir al sitemap o llevar noindex; decisión SEO, no auto).
