@@ -202,8 +202,8 @@ find servicios/ -name "index.html" -exec sed -i '' 's|<style>.*</style>|<link re
     }
   },
   "tracking": {
-    "googleAnalyticsId": "G-NSV2K9N2ZD",
-    "googleTagManagerId": "GTM-W75CRTX5"
+    "googleAnalyticsId": "G-7CML8QYBGQ",
+    "googleTagManagerId": "GTM-5Z2QRZ5Q"
   },
   "images": {
     "heroDefault": {
@@ -808,7 +808,7 @@ Esta regla previene el error de remover accidentalmente la navegación o breadcr
 <body>
     <!-- 1. GTM noscript -->
     <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5" ...></iframe>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5Z2QRZ5Q" ...></iframe>
     </noscript>
 
     <!-- 2. NAVEGACIÓN (OBLIGATORIA) -->
@@ -1305,12 +1305,12 @@ open -a Safari "http://localhost:8080/servicios/[slug]/index.html"
 
 - [ ] **Google Analytics (gtag.js)** en `<head>`:
   ```html
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSV2K9N2ZD"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7CML8QYBGQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-NSV2K9N2ZD');
+    gtag('config', 'G-7CML8QYBGQ');
   </script>
   ```
 
@@ -1322,7 +1322,7 @@ open -a Safari "http://localhost:8080/servicios/[slug]/index.html"
     var loadGTM = function() {
       var script = document.createElement('script');
       script.async = true;
-      script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+      script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5Z2QRZ5Q';
       document.head.appendChild(script);
     };
     if (window.requestIdleCallback) {
@@ -1337,7 +1337,7 @@ open -a Safari "http://localhost:8080/servicios/[slug]/index.html"
 - [ ] **GTM noscript** después del script anterior:
   ```html
   <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5"
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5Z2QRZ5Q"
             height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
   ```

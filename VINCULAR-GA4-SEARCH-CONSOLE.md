@@ -1,7 +1,7 @@
 # 🔗 Vincular Google Analytics 4 con Search Console - PASO A PASO
 
 **Sitio**: Electricista Culiacán Pro
-**GA4 Measurement ID**: G-NSV2K9N2ZD
+**GA4 Measurement ID**: G-7CML8QYBGQ
 **URL**: https://electricistaculiacanpro.mx
 **Fecha**: 26 de noviembre de 2025
 
@@ -9,7 +9,7 @@
 
 ## ✅ PRE-REQUISITOS (Ya completados)
 
-- ✅ **Google Analytics 4**: Activo y recopilando datos (G-NSV2K9N2ZD)
+- ✅ **Google Analytics 4**: Activo y recopilando datos (G-7CML8QYBGQ)
 - ✅ **Google Search Console**: Propiedad verificada (o en proceso)
 - ✅ **Misma cuenta de Google**: Debes tener acceso a ambas plataformas
 
@@ -68,7 +68,7 @@ Una vez vinculado, podrás ver en Google Analytics 4:
 1. Verás una lista de propiedades de Google Analytics disponibles
 2. Busca la que dice:
    - **Nombre**: "Electricista Culiacán Pro" o similar
-   - **ID de medición**: G-NSV2K9N2ZD
+   - **ID de medición**: G-7CML8QYBGQ
 3. Marca la **casilla** junto a esta propiedad
 4. Haz clic en **"Asociar"** o **"Confirmar"**
 
@@ -89,7 +89,7 @@ Si prefieres hacerlo desde GA4:
 
 1. Ve a: **https://analytics.google.com/**
 2. Selecciona la propiedad: **"Electricista Culiacán Pro"**
-   - Measurement ID: G-NSV2K9N2ZD
+   - Measurement ID: G-7CML8QYBGQ
 
 ### PASO 2: Ir a Administrar
 
@@ -123,7 +123,7 @@ Si prefieres hacerlo desde GA4:
 
 1. Revisa que todo esté correcto:
    - Propiedad de Search Console: `electricistaculiacanpro.mx`
-   - Propiedad de GA4: G-NSV2K9N2ZD
+   - Propiedad de GA4: G-7CML8QYBGQ
 2. Haz clic en **"Siguiente"**
 3. Haz clic en **"Enviar"**
 
@@ -142,7 +142,7 @@ Deberías ver:
 2. Deberías ver:
    - **Google Analytics**
    - Estado: **"Asociado"** ✅
-   - Propiedad: G-NSV2K9N2ZD
+   - Propiedad: G-7CML8QYBGQ
 
 ### Verificar desde Google Analytics:
 
@@ -387,7 +387,7 @@ Marca cada paso cuando lo completes:
 - [ ] Accedido a Google Search Console
 - [ ] Navegado a Configuración → Asociaciones
 - [ ] Asociado con Google Analytics
-- [ ] Seleccionada propiedad G-NSV2K9N2ZD
+- [ ] Seleccionada propiedad G-7CML8QYBGQ
 - [ ] Confirmado mensaje: "Se asoció correctamente" ✅
 
 ### Verificación
@@ -490,4 +490,4 @@ Una vez completada esta integración, tendrás:
 **Última actualización**: 26 de noviembre de 2025
 **Versión**: 1.0 - Integración GA4 ↔ Search Console
 **Sitio**: https://electricistaculiacanpro.mx
-**GA4**: G-NSV2K9N2ZD
+**GA4**: G-7CML8QYBGQ

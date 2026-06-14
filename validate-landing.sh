@@ -148,7 +148,7 @@ else
 fi
 
 # 14. Deferred GTM loading
-if echo "$CONTENT" | grep -q 'GTM-W75CRTX5' || echo "$CONTENT" | grep -q 'googletagmanager'; then
+if echo "$CONTENT" | grep -q 'GTM-5Z2QRZ5Q' || echo "$CONTENT" | grep -q 'googletagmanager'; then
     pass "GTM configurado"
 else
     warn "No se encontro GTM (puede estar en main.min.js)"

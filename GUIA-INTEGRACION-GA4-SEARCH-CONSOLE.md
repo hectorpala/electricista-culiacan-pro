@@ -21,7 +21,7 @@ Conectar Google Analytics 4 (GA4) con Google Search Console (GSC) para obtener d
 Antes de integrar, confirma que GA4 está recopilando datos:
 
 1. Ve a tu cuenta de GA4: [https://analytics.google.com/](https://analytics.google.com/)
-2. Selecciona la propiedad: **Electricista Culiacán Pro** (Measurement ID: G-NSV2K9N2ZD)
+2. Selecciona la propiedad: **Electricista Culiacán Pro** (Measurement ID: G-7CML8QYBGQ)
 3. En el menú lateral, ve a **Informes → Tiempo real**
 4. Abre tu sitio web en otra pestaña: `https://electricistaculiacanpro.mx`
 5. Deberías ver **1 usuario activo** en el reporte de Tiempo Real
@@ -42,7 +42,7 @@ Antes de integrar, confirma que GA4 está recopilando datos:
 5. Haz clic en **Asociar con un producto de Google**
 6. Selecciona **Google Analytics**
 7. Aparecerá una lista de propiedades de Analytics disponibles
-8. Busca la propiedad con Measurement ID: **G-NSV2K9N2ZD**
+8. Busca la propiedad con Measurement ID: **G-7CML8QYBGQ**
 9. Haz clic en **Asociar**
 10. Confirma la asociación
 
@@ -51,7 +51,7 @@ Antes de integrar, confirma que GA4 está recopilando datos:
 ### Opción B: Desde Google Analytics 4
 
 1. Ve a Google Analytics: [https://analytics.google.com/](https://analytics.google.com/)
-2. Selecciona tu propiedad: **Electricista Culiacán Pro** (G-NSV2K9N2ZD)
+2. Selecciona tu propiedad: **Electricista Culiacán Pro** (G-7CML8QYBGQ)
 3. En el menú lateral inferior, haz clic en **Administrar** (ícono de engranaje)
 4. En la columna **Propiedad**, busca **Vínculos de Search Console**
 5. Haz clic en **Vincular Search Console**
@@ -70,7 +70,7 @@ Después de vincular, verifica que la integración esté activa:
 1. Ve a **Google Analytics** → **Administrar** → **Vínculos de Search Console**
 2. Deberías ver: `electricistaculiacanpro.mx` con estado **Vinculado** ✅
 3. Ve a **Google Search Console** → **Configuración** → **Asociaciones**
-4. Deberías ver: **Google Analytics** con la propiedad G-NSV2K9N2ZD asociada ✅
+4. Deberías ver: **Google Analytics** con la propiedad G-7CML8QYBGQ asociada ✅
 
 ---
 
@@ -222,4 +222,4 @@ Una vez que los datos de Search Console estén fluyendo en GA4:
 
 **Última actualización**: 25 de noviembre de 2025
 **Versión**: 1.0 - Electricista Culiacán Pro
-**Measurement ID**: G-NSV2K9N2ZD
+**Measurement ID**: G-7CML8QYBGQ

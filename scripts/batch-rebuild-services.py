@@ -116,7 +116,7 @@ window.dataLayer = window.dataLayer || [];
     gtmLoaded = true;
     var script = document.createElement('script');
     script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5Z2QRZ5Q';
     document.head.appendChild(script);
   };
 
@@ -149,7 +149,7 @@ window.dataLayer = window.dataLayer || [];
 })();
 </script>"""
 
-GTM_NOSCRIPT = """<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5"
+GTM_NOSCRIPT = """<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5Z2QRZ5Q"
      height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </noscript>"""
 
@@ -265,7 +265,7 @@ def fix_page(filepath):
             fixes.append("FIX6: Inserted optimized GTM block after <body>")
     
     # Ensure GTM noscript is present
-    if 'ns.html?id=GTM-W75CRTX5' not in content:
+    if 'ns.html?id=GTM-5Z2QRZ5Q' not in content:
         # Insert after GTM script
         gtm_end = content.find('</script>', content.find('interactionEvents'))
         if gtm_end != -1:

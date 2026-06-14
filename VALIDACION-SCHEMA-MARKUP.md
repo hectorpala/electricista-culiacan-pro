@@ -271,4 +271,4 @@ Si encuentras errores al validar:
 
 **Última actualización**: 25 de noviembre de 2025
 **Versión**: 1.0 - Schema Markup Avanzado
-**Measurement ID GA4**: G-NSV2K9N2ZD
+**Measurement ID GA4**: G-7CML8QYBGQ

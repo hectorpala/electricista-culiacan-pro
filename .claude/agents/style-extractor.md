@@ -85,10 +85,10 @@ Reglas tipograficas:
 - .hover-lift: efecto hover con translateY
 
 #### E. GTM / Analytics (carga optimizada)
-- GTM ID: GTM-W75CRTX5
+- GTM ID: GTM-5Z2QRZ5Q
 - Carga: en primera interaccion (scroll/click/touchstart/keydown), fallback setTimeout 12s
 - Clarity: ID ukonwm7t1p, carga 7s despues de window load
-- GA4: G-NSV2K9N2ZD (NO cargar directo con script async, usar GTM)
+- GA4: G-7CML8QYBGQ (NO cargar directo con script async, usar GTM)
 
 #### F. Secciones del Homepage (orden exacto)
 1. nav.nav (fixed, transparent)
