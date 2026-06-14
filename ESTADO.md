@@ -19,3 +19,8 @@
 - Instalar puppeteer para activar check-produccion.
 - Primera corrida del pipeline para empezar a arreglar los hallazgos mecánicos de alta/media.
 - (Opcional) dar a Electricista su propio contenedor GTM (hoy comparte el de Plomero: GTM-W75CRTX5).
+
+## 2026-06-14 — Primera corrida del pipeline (modo seguro, en rama)
+- Rama: auto/mantenimiento-20260614-1414 (sin publicar; pendiente de revisión humana).
+- ARREGLADO: `aggregateRating` self-serving removido del JSON-LD de **9 posts de blog** (regla 08a95902). JSON-LD validado, checker confirma 0 hallazgos de aggregateRating.
+- PENDIENTE HUMANO: 46 imágenes rotas (varias no existen en disco en ninguna versión → hay que generarlas/conseguirlas, no auto-arreglable) y 17 breadcrumbs de servicio cuyo último item apunta a `/#servicios` en vez del canonical (revisar plantilla de breadcrumb).
