@@ -34,3 +34,11 @@
 - 16 páginas: el último item del BreadcrumbList no tenía `item` (apuntaba implícitamente a /#servicios o /blog/). Se añadió `item` = URL propia derivada del PATH (no del canonical, tras el casi-error anterior). Fixer agnóstico al formato (multilínea y single-line), con validación JSON y verificación post-fix por archivo.
 - Checker: 0 breadcrumbs (eran 16). Indexabilidad 36 -> 20.
 - Quedan ~20 en indexabilidad (mayormente "página indexable fuera del sitemap" — revisar si deben ir al sitemap o llevar noindex; decisión SEO, no auto).
+
+## 2026-06-14 (cont.) — Imágenes rotas: arregladas las seguras
+- ARREGLADO (6, en 11 archivos): refs a imágenes que existían con otro nombre/ruta → apuntadas al archivo real (match ESTRICTO: todos los tokens + mismo tamaño + archivo no-.backup). Incluye el logo roto (`../electricista-culiacan-pro-logo.webp` → `/assets/images/...`) en contacto/gracias/colonias.
+- NO auto-arregladas (~14 refs / pendiente humano): imágenes genuinamente ausentes o sin el tamaño pedido — REQUIEREN generar/subir la imagen:
+  * instalacion-iluminacion-led (420w, 800w) — no existe
+  * mantenimiento-tablero-electrico-420w, reparacion-cortocircuito (420w/800w), prevenir-cortocircuitos-420w — falta ese tamaño (existe 800w/1200w del nombre correcto; decidir si regenerar 420w o ajustar el srcset)
+  * logo-512.webp — no existe (¿usar /assets/icons/icon-512x512.webp? decisión humana)
+- NOTA: el matcher difuso inicial propuso destinos ERRÓNEOS (.backup, imagen distinta); se descartó y solo se aplicaron matches estrictos verificados.

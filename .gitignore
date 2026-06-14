@@ -42,3 +42,6 @@ build/
 
 # Cache
 .cache/
+
+# Local Netlify folder
+.netlify
