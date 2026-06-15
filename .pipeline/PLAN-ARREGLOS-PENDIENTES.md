@@ -51,13 +51,13 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 ## 🟠 ALTA — performance / accesibilidad
 
 ### B1 — CSS render-blocking en ~15 servicios + 10 blogs
-- **Estado:** ⬜ PENDIENTE
+- **Estado:** ✅ HECHO
 - **Qué:** Esas páginas cargan el CSS bloqueando el render (más lento), a diferencia de la home que usa carga async. El blog usa `styles.min.css` sin hash.
 - **Por qué importa:** Peor LCP/performance y Core Web Vitals.
 - **Alcance:** ~25 archivos → corrida dedicada.
 - **Plan:** Replicar EXACTO el patrón async de la homepage (preload + onload, o el que use index.html). Verificar con check-produccion/Lighthouse. Rama dedicada.
-- **Autorización:** ⬜
-- **Resultado:** —
+- **Autorización:** ✅ (dueño, 2026-06-14)
+- **Resultado:** 24 archivos (15 servicios + 9 blogs) convertidos a CSS no-bloqueante: `media="print" onload="this.media='all'"` + `<noscript>`, conservando el archivo CSS de cada página. **OJO:** NO se usó `preload` porque el validador de landings lo prohíbe (`Sin preload de styles externo`) — se descubrió en verificación y se ajustó. CSS crítico inline (7.6-8 KB) evita FOUC. Sin bump de sw.js (no cambia CSS). Verificación: 15 servicios PASAN validate-landing (pre-commit), 0 bloqueantes residuales, CSS sirve HTTP 200 local. Commit `e3ad624`, publicado a `main`. **Pendiente separado:** los blogs siguen usando `styles.min.css` (49KB, distinto y sin hash) vs `styles.7f293647.css` (36KB) del resto — unificarlo es otra decisión (cambia CSS real del blog + cache-busting).
 
 ### B2 — `focus-visible` global ausente (accesibilidad de teclado)
 - **Estado:** ⬜ PENDIENTE
@@ -119,3 +119,4 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - 2026-06-14 · A1 · Quitado `aggregateRating` de 642 colonias vía `.pipeline/fix-a1-aggregaterating.py` (regex puntual + json.loads por archivo) · commit `ec410e2` · publicado SÍ (push a main → Netlify) · verificación: 642 cambiados/0 saltados/0 residuales, diff quirúrgico, check-plantilla limpio, pre-commit validó 642 landings.
 - 2026-06-14 · A2 · Personalizado texto wa.me en 95 colonias vía `.pipeline/fix-a2-wame-colonias.py` (nombre desde `areaServed.name` + URL-encode UTF-8) · commit `ad73fb9` · publicado SÍ (push a main → Netlify) · verificación: 0 fugas residuales, 10-de-abril intacta, indexable de muestra validó, check-plantilla sin hallazgos nuevos.
 - 2026-06-14 · A3 · sitemap +16 colonias indexables; `terminos/`→noindex,follow; +`item`=canonical al último breadcrumb de 14 colonias (igualar a centro/chapultepec) · commit `99fb2d5` · publicado SÍ (push a main → Netlify) · verificación: sitemap 45 URLs y XML bien formado, check-indexabilidad de 14 "alta"→0 en estas colonias, JSON-LD válido, validate-landing PASÓ.
+- 2026-06-14 · B1 · CSS no-bloqueante en 24 archivos (15 servicios + 9 blogs): `media=print onload` + `<noscript>`, SIN preload (prohibido por validate-landing) · commit `e3ad624` · publicado SÍ (push a main → Netlify) · verificación: pre-commit validó 15 servicios, 0 bloqueantes residuales, CSS HTTP 200 local. Nota: blog `styles.min.css` sin hash queda como ítem aparte.
