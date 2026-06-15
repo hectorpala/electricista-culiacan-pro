@@ -60,13 +60,13 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - **Resultado:** 24 archivos (15 servicios + 9 blogs) convertidos a CSS no-bloqueante: `media="print" onload="this.media='all'"` + `<noscript>`, conservando el archivo CSS de cada página. **OJO:** NO se usó `preload` porque el validador de landings lo prohíbe (`Sin preload de styles externo`) — se descubrió en verificación y se ajustó. CSS crítico inline (7.6-8 KB) evita FOUC. Sin bump de sw.js (no cambia CSS). Verificación: 15 servicios PASAN validate-landing (pre-commit), 0 bloqueantes residuales, CSS sirve HTTP 200 local. Commit `e3ad624`, publicado a `main`. **Pendiente separado:** los blogs siguen usando `styles.min.css` (49KB, distinto y sin hash) vs `styles.7f293647.css` (36KB) del resto — unificarlo es otra decisión (cambia CSS real del blog + cache-busting).
 
 ### B2 — `focus-visible` global ausente (accesibilidad de teclado)
-- **Estado:** ⬜ PENDIENTE
+- **Estado:** ✅ HECHO
 - **Qué:** No hay outline de foco visible para navegación con teclado (salvo `.seo-card`/`.floating-btn`).
 - **Por qué importa:** Accesibilidad (WCAG) — usuarios de teclado no ven dónde están.
 - **Alcance:** los 3 CSS + crítico inline → **ceremonia de versionado** (`?v=` + sw.js).
 - **Plan:** Añadir regla `:focus-visible { outline }` a los 3 CSS + inline crítico, bump `?v=` y sw.js. Rama dedicada.
-- **Autorización:** ⬜
-- **Resultado:** —
+- **Autorización:** ✅ (dueño, 2026-06-14 — "ceremonia completa")
+- **Resultado:** Regla global `:focus-visible{outline:3px solid #e67e22;outline-offset:2px}` en los 3 CSS. Cache-busting: `?v=20260614` en 1322 referencias de 670 HTML (el CSS se sirve `immutable` en netlify.toml/_headers, por eso era obligatorio). sw.js v6→v7 + precache con `?v=`. NO se duplicó en inline crítico (redundante: con `?v=` el CSS externo ya llega garantizado y el foco se activa post-carga). Verificación: paridad CSS OK, validate-landing PASÓ con `?v=`, CSS sirve HTTP 200 con la regla, pre-commit validó servicios. Commit `a60843b`, publicado a `main`.
 
 ## 🟡 MEDIA / BAJA — chico o editorial
 
@@ -120,3 +120,4 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - 2026-06-14 · A2 · Personalizado texto wa.me en 95 colonias vía `.pipeline/fix-a2-wame-colonias.py` (nombre desde `areaServed.name` + URL-encode UTF-8) · commit `ad73fb9` · publicado SÍ (push a main → Netlify) · verificación: 0 fugas residuales, 10-de-abril intacta, indexable de muestra validó, check-plantilla sin hallazgos nuevos.
 - 2026-06-14 · A3 · sitemap +16 colonias indexables; `terminos/`→noindex,follow; +`item`=canonical al último breadcrumb de 14 colonias (igualar a centro/chapultepec) · commit `99fb2d5` · publicado SÍ (push a main → Netlify) · verificación: sitemap 45 URLs y XML bien formado, check-indexabilidad de 14 "alta"→0 en estas colonias, JSON-LD válido, validate-landing PASÓ.
 - 2026-06-14 · B1 · CSS no-bloqueante en 24 archivos (15 servicios + 9 blogs): `media=print onload` + `<noscript>`, SIN preload (prohibido por validate-landing) · commit `e3ad624` · publicado SÍ (push a main → Netlify) · verificación: pre-commit validó 15 servicios, 0 bloqueantes residuales, CSS HTTP 200 local. Nota: blog `styles.min.css` sin hash queda como ítem aparte.
+- 2026-06-14 · B2 · `:focus-visible` global en los 3 CSS + `?v=20260614` en 1322 refs de 670 HTML + sw.js v6→v7 · commit `a60843b` · publicado SÍ (push a main → Netlify) · verificación: paridad CSS OK, validate-landing PASÓ, CSS HTTP 200 con la regla, pre-commit OK.
