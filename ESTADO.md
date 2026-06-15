@@ -1,5 +1,23 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-14 (corrida 6:20 PM) — PUBLICADO ✅ (commit 40beb89)
+- Rama `auto/mantenimiento-20260614-1820`, mergeada a main y pusheada (auto-indexación: 14 URLs a Google).
+- **ARREGLADO (alta, mecánico):** 18 enlaces rotos en 14 páginas de servicio → slug correcto `reparacion-cortocircuitos` (eran `reparacion-cortos-circuitos`, 404). Checker plantilla 28→14 (los 14 restantes son falsos positivos: `${c.s}` template-literal JS y fonts `../../../` que el navegador recorta).
+- **ARREGLADO (alta, mecánico):** `/gracias/` (noindex) removida de `sitemap.xml`. Checker indexabilidad 20→19, gracias=0, XML válido.
+- Candados: diff = 15 archivos (límite), 0 borrados estructurales inesperados, auto-revisión OK → publicado.
+- Incidencia operativa resuelta: pre-push hook necesitaba node en PATH (ver REGLAS.md OPERACIÓN-PIPELINE).
+
+### PENDIENTE HUMANO (detectado por revisores LLM esta corrida — NO auto: masivo/estratégico)
+- **aggregateRating self-serving en ~642 páginas de colonia** (alta, seo-004): mismo ratingValue 4.8/reviewCount 150 replicado en masa → riesgo de acción manual de Google. Requiere quitar el bloque de schema en lote (642 archivos, > candado de 15). Decidir batch dedicado.
+- **Fuga de copy "necesito electricista en 10 de Abril" en wa.me de ~96 colonias** (alta, seo-001): texto de plantilla origen no personalizado por colonia (6 son indexables). Cambio de contenido en lote.
+- **16 colonias indexables fuera del sitemap + terminos/** (alta, idx/seo-003): decisión SEO (agregar al sitemap o noindex). Las thin pages doorway están en noindex (correcto); las ~16 con contenido único deberían entrar al sitemap.
+- **CSS render-blocking en /servicios/ (~15) y /blog/ (10)** (perf alta, perf-001/002): no replican el patrón async de la homepage; blog usa `styles.min.css` sin hash. Toca >15 archivos → corrida dedicada.
+- **3 tablas de blog sin `table-wrapper`** (movil alta) + tabla en homepage (baja): mecánico pero fuera del alcance de esta corrida (otra mejora).
+- **focus-visible global ausente** (a11y alta, a11y-001): falta outline de foco para teclado salvo .seo-card/.floating-btn; fix en los 3 CSS + crítico inline.
+- **ETA inconsistente** 20-30 min (colonias) vs 30-60 min (home/servicios) (seo-005): unificar — decisión de contenido.
+- **theme-color placeholder #0066cc** en servicios/electricista/ (baja) y faltante en contacto/terminos (baja). Marca = `#F97316`.
+- Duplicado title/description directorio vs colonias index (media): editorial.
+
 ## 2026-06-14 — Instalación del pipeline de mantenimiento
 - Se portó el pipeline de mantenimiento autónomo desde Plomero Culiacán (rama `feat/checkers-deterministas`).
 - **Checkers deterministas instalados** (`.pipeline/`): check-plantilla.py, check-indexabilidad.py, check-produccion.mjs.
