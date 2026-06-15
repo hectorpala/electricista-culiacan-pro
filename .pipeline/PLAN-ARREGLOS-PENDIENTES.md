@@ -22,13 +22,13 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 ## 🔴 ALTA — riesgo SEO / penalización
 
 ### A1 — Quitar `aggregateRating` self-serving de 642 colonias
-- **Estado:** ⬜ PENDIENTE
+- **Estado:** ✅ HECHO
 - **Qué:** Cada página de colonia tiene un schema `aggregateRating` idéntico ("4.8★, 150 reseñas") replicado en masa.
 - **Por qué importa:** Google prohíbe reseñas self-serving/falsas; 642 idénticas = riesgo de **acción manual** (penalización).
 - **Alcance:** 642 archivos (`servicios/electricista-colonias-culiacan/*/index.html`). > candado de 15 → batch dedicado.
 - **Plan:** Script Python que, por archivo, quita SOLO la propiedad `aggregateRating` del JSON-LD (como en los 9 blogs), valida que el JSON-LD siga parseando, y verifica con check-plantilla. Rama dedicada. Diff enorme pero mecánico y validado.
-- **Autorización:** ⬜
-- **Resultado:** —
+- **Autorización:** ✅ (dueño, 2026-06-14)
+- **Resultado:** 642 archivos limpiados, 0 saltados, 0 residuales. JSON-LD validado por archivo (json.loads). check-plantilla sin hallazgos de aggregateRating. Pre-commit (validate-landing) pasó las 642. Commit `ec410e2`, publicado a `main` (Netlify auto-deploy).
 
 ### A2 — Personalizar fuga de copy "10 de Abril" en wa.me de 96 colonias
 - **Estado:** ⬜ PENDIENTE
@@ -103,3 +103,4 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 
 ## Bitácora (se llena conforme se ejecuta)
 <!-- fecha · ID · acción · commit · publicado sí/no · verificación -->
+- 2026-06-14 · A1 · Quitado `aggregateRating` de 642 colonias vía `.pipeline/fix-a1-aggregaterating.py` (regex puntual + json.loads por archivo) · commit `ec410e2` · publicado SÍ (push a main → Netlify) · verificación: 642 cambiados/0 saltados/0 residuales, diff quirúrgico, check-plantilla limpio, pre-commit validó 642 landings.
