@@ -2667,3 +2667,5 @@ p {
 
 /* B2: foco de teclado global visible (WCAG 2.4.7) — 2026-06-14 */
 :focus-visible{outline:3px solid #e67e22;outline-offset:2px}
+/* C1: scroll horizontal de tablas en móvil — 2026-06-14 */
+.table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
