@@ -102,3 +102,6 @@
 
 # Resto -> su página de colonia correspondiente
 /colonias/*    /servicios/electricista-colonias-culiacan/:splat    301!
+
+# Consolidación: /directorio/ duplicado -> hub de colonias
+/servicios/electricista-colonias-culiacan/directorio/    /servicios/electricista-colonias-culiacan/    301!
