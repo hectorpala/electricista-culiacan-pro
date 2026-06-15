@@ -71,12 +71,12 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 ## 🟡 MEDIA / BAJA — chico o editorial
 
 ### C1 — 3 tablas de blog sin `<div class="table-wrapper">`
-- **Estado:** ⬜ PENDIENTE
+- **Estado:** ✅ HECHO
 - **Qué:** 3 tablas en blogs se desbordan en móvil (sin scroll wrapper).
-- **Alcance:** 3 archivos (chico).
+- **Alcance:** 3 archivos (chico). → **En realidad 5**: 3 blogs + homepage + `electricista-precios` (el checker las detectó todas; la home es la referencia, se incluyó por la regla dura).
 - **Plan:** Envolver cada `<table>` en `table-wrapper`. Rama.
-- **Autorización:** ⬜
-- **Resultado:** —
+- **Autorización:** ✅ ("OK todo", 2026-06-14)
+- **Resultado:** 5 tablas envueltas en `<div class="table-wrapper">`. Regla canónica `.table-wrapper{overflow-x:auto;...}` añadida a los 3 CSS (no existía; tampoco había fallback global — solo `overflow-x:hidden` que recortaba la tabla). Para entrega inmediata sin re-bump de `?v=`, la regla se inyectó también en el CSS crítico inline de las 5 páginas. Verificación: check-plantilla 0 tablas sin wrapper, electricista-precios PASÓ validate-landing, home sin errores nuevos (los 4 que marca son preexistentes del validador sobre la propia referencia). Commit `11d2b37`, publicado a `main`.
 
 ### C2 — ETA inconsistente (20-30 vs 30-60 min)
 - **Estado:** ⬜ PENDIENTE
@@ -121,3 +121,4 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - 2026-06-14 · A3 · sitemap +16 colonias indexables; `terminos/`→noindex,follow; +`item`=canonical al último breadcrumb de 14 colonias (igualar a centro/chapultepec) · commit `99fb2d5` · publicado SÍ (push a main → Netlify) · verificación: sitemap 45 URLs y XML bien formado, check-indexabilidad de 14 "alta"→0 en estas colonias, JSON-LD válido, validate-landing PASÓ.
 - 2026-06-14 · B1 · CSS no-bloqueante en 24 archivos (15 servicios + 9 blogs): `media=print onload` + `<noscript>`, SIN preload (prohibido por validate-landing) · commit `e3ad624` · publicado SÍ (push a main → Netlify) · verificación: pre-commit validó 15 servicios, 0 bloqueantes residuales, CSS HTTP 200 local. Nota: blog `styles.min.css` sin hash queda como ítem aparte.
 - 2026-06-14 · B2 · `:focus-visible` global en los 3 CSS + `?v=20260614` en 1322 refs de 670 HTML + sw.js v6→v7 · commit `a60843b` · publicado SÍ (push a main → Netlify) · verificación: paridad CSS OK, validate-landing PASÓ, CSS HTTP 200 con la regla, pre-commit OK.
+- 2026-06-14 · C1 · 5 tablas envueltas en `.table-wrapper` (3 blogs + home + electricista-precios); regla `.table-wrapper{overflow-x:auto}` en los 3 CSS + inline en las 5 páginas (sin re-bump ?v=) · commit `11d2b37` · publicado SÍ (push a main → Netlify) · verificación: check-plantilla 0 tablas sin wrapper, validate-landing del servicio PASÓ, home sin errores nuevos.
