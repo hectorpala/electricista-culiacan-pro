@@ -58,6 +58,18 @@ async function doResize(img) {
 }
 
 // ---- tarea IA (OpenAI gpt-image-1) -----------------------------------------
+// La key se toma de OPENAI_API_KEY o, si no está, de .pipeline/.openai-key
+// (archivo LOCAL gitignored — nunca se commitea ni se expone en el chat).
+function loadKey() {
+  if (process.env.OPENAI_API_KEY) return true;
+  const kf = path.join(ROOT, ".pipeline", ".openai-key");
+  if (fs.existsSync(kf)) {
+    const k = fs.readFileSync(kf, "utf8").trim();
+    if (k) { process.env.OPENAI_API_KEY = k; return true; }
+  }
+  return false;
+}
+
 let _openai = null;
 async function getOpenAI() {
   if (_openai) return _openai;
@@ -100,8 +112,9 @@ async function doIA(img, estilo) {
 // ---- main ------------------------------------------------------------------
 async function main() {
   const m = loadManifest();
+  const hayKey = loadKey();
   const enabled = m.imagenes.filter((x) => x.enabled);
-  log(`Generador de imágenes — ${enabled.length} entradas habilitadas${FORCE ? " (--force)" : ""}\n`);
+  log(`Generador de imágenes — ${enabled.length} entradas habilitadas${FORCE ? " (--force)" : ""}${hayKey ? "" : " (sin OPENAI_API_KEY: solo tareas resize)"}\n`);
 
   const stats = { generado: 0, saltado: 0, pendiente: 0, error: 0 };
   for (const img of enabled) {

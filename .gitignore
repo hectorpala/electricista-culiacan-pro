@@ -45,3 +45,4 @@ build/
 
 # Local Netlify folder
 .netlify
+.pipeline/.openai-key
