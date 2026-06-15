@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Electricista instalando iluminación LED en una vivienda">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EAF3FB"/>
+      <stop offset="1" stop-color="#DCE9F6"/>
+    </linearGradient>
+    <linearGradient id="ceil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4F9FE"/>
+      <stop offset="1" stop-color="#E4EFF9"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#CFDBEA"/>
+      <stop offset="1" stop-color="#BCCBDD"/>
+    </linearGradient>
+    <radialGradient id="bigglow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFF6DC" stop-opacity="0.95"/>
+      <stop offset="0.45" stop-color="#FFE39B" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFE39B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF5"/>
+      <stop offset="1" stop-color="#FFE9A8"/>
+    </linearGradient>
+    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE9A8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFE9A8" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="overall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2E8BCB"/>
+      <stop offset="1" stop-color="#1C6FB0"/>
+    </linearGradient>
+    <linearGradient id="hat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFB23E"/>
+      <stop offset="1" stop-color="#F39200"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ===================== fondo ===================== -->
+  <rect width="1200" height="675" fill="url(#wall)"/>
+  <rect width="1200" height="135" fill="url(#ceil)"/>
+  <rect y="131" width="1200" height="6" fill="#CFE0F0"/>
+  <rect y="560" width="1200" height="115" fill="url(#floor)"/>
+  <!-- zócalo -->
+  <rect y="548" width="1200" height="14" fill="#C6D4E5"/>
+
+  <!-- cuadro decorativo en la pared (profundidad) -->
+  <g>
+    <rect x="170" y="250" width="120" height="90" rx="6" fill="#FFFFFF" stroke="#B9CBDE" stroke-width="4"/>
+    <rect x="184" y="264" width="92" height="62" rx="3" fill="#DCEBF7"/>
+    <circle cx="252" cy="284" r="12" fill="#FFD36A"/>
+    <path d="M184 326 l28 -26 18 16 22 -22 24 32 z" fill="#9FC0DE"/>
+  </g>
+
+  <!-- ===================== panel LED ===================== -->
+  <circle cx="560" cy="190" r="240" fill="url(#bigglow)"/>
+  <!-- rayos -->
+  <polygon points="470,210 360,560 560,560" fill="url(#ray)"/>
+  <polygon points="650,210 560,560 770,560" fill="url(#ray)"/>
+  <!-- marco del panel empotrado -->
+  <rect x="430" y="150" width="260" height="86" rx="20" fill="#0E4C7A"/>
+  <rect x="440" y="160" width="240" height="66" rx="14" fill="url(#panel)"/>
+  <line x1="560" y1="160" x2="560" y2="226" stroke="#FFE9A8" stroke-width="2" opacity="0.7"/>
+  <!-- downlights chicos a los lados -->
+  <g>
+    <circle cx="270" cy="150" r="46" fill="url(#bigglow)"/>
+    <circle cx="270" cy="150" r="16" fill="#0E4C7A"/><circle cx="270" cy="150" r="11" fill="#FFF4D6"/>
+  </g>
+  <g>
+    <circle cx="900" cy="150" r="46" fill="url(#bigglow)"/>
+    <circle cx="900" cy="150" r="16" fill="#0E4C7A"/><circle cx="900" cy="150" r="11" fill="#FFF4D6"/>
+  </g>
+
+  <!-- partículas de luz -->
+  <g fill="#FFD36A">
+    <circle cx="700" cy="300" r="5"/><circle cx="745" cy="360" r="3.5"/><circle cx="430" cy="330" r="4"/>
+    <circle cx="660" cy="420" r="3"/><circle cx="500" cy="280" r="3"/><circle cx="772" cy="270" r="4"/>
+  </g>
+  <g fill="#FFFFFF" opacity="0.8">
+    <path d="M735 250 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 z"/>
+    <path d="M420 400 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3 z"/>
+  </g>
+
+  <!-- ===================== planta (primer plano izq) ===================== -->
+  <ellipse cx="150" cy="556" rx="70" ry="12" fill="#000000" opacity="0.08"/>
+  <path d="M122 556 l-8 -54 h72 l-8 54 z" fill="#E07B39"/>
+  <path d="M122 514 h56 l-3 -16 h-50 z" fill="#C8662B"/>
+  <g fill="#2E8B57">
+    <path d="M150 498 q-44 -20 -54 -70 q42 6 54 70 z"/>
+    <path d="M150 498 q44 -20 54 -70 q-42 6 -54 70 z"/>
+    <path d="M150 498 q-8 -64 0 -96 q8 32 0 96 z" fill="#3DA76A"/>
+  </g>
+
+  <!-- ===================== escalera ===================== -->
+  <ellipse cx="855" cy="600" rx="120" ry="16" fill="#000000" opacity="0.1"/>
+  <g stroke="#8A99AD" stroke-width="12" stroke-linecap="round" fill="none">
+    <line x1="930" y1="600" x2="872" y2="250"/>
+    <line x1="800" y1="600" x2="858" y2="250"/>
+  </g>
+  <g stroke="#A7B4C6" stroke-width="11" stroke-linecap="round">
+    <line x1="826" y1="430" x2="904" y2="430"/>
+    <line x1="816" y1="500" x2="912" y2="500"/>
+    <line x1="808" y1="565" x2="920" y2="565"/>
+  </g>
+
+  <!-- ===================== electricista ===================== -->
+  <g>
+    <!-- pierna trasera -->
+    <path d="M858 432 l-6 78 -22 2 4 -84 z" fill="#16527E"/>
+    <path d="M826 508 l28 0 2 18 -34 2 z" fill="#3A3F47"/>
+    <!-- pierna delantera apoyada en peldaño -->
+    <path d="M884 430 l10 76 22 -4 -10 -78 z" fill="#1C6FB0"/>
+    <path d="M912 498 l-26 6 6 18 32 -6 z" fill="#2B2F36"/>
+    <!-- torso / overol -->
+    <path d="M846 330 q40 -26 78 2 l8 96 q-46 22 -92 2 z" fill="url(#overall)"/>
+    <!-- cinturón de herramientas -->
+    <rect x="844" y="408" width="92" height="16" rx="4" fill="#3A3F47"/>
+    <rect x="858" y="408" width="16" height="30" rx="3" fill="#64748B"/>
+    <rect x="906" y="408" width="14" height="26" rx="3" fill="#F39200"/>
+    <!-- bolsillo pecho -->
+    <rect x="868" y="356" width="34" height="26" rx="4" fill="#16527E"/>
+    <!-- brazo que sostiene (abajo, en la escalera) -->
+    <path d="M850 352 q-24 26 -18 64 l16 4 q4 -34 18 -56 z" fill="#1C6FB0"/>
+    <circle cx="846" cy="420" r="12" fill="#F0B48A"/>
+    <!-- brazo levantado hacia el panel + desarmador -->
+    <path d="M918 346 q34 -30 60 -76 l-16 -12 q-30 40 -56 64 z" fill="#2E8BCB"/>
+    <circle cx="966" cy="262" r="12" fill="#F0B48A"/>
+    <rect x="946" y="226" width="9" height="40" rx="4" fill="#F39200" transform="rotate(34 950 246)"/>
+    <rect x="952" y="232" width="7" height="14" rx="2" fill="#64748B" transform="rotate(34 955 239)"/>
+    <!-- cuello / cabeza -->
+    <rect x="876" y="300" width="22" height="22" fill="#E3A074"/>
+    <circle cx="887" cy="296" r="26" fill="#F0B48A"/>
+    <path d="M872 300 q6 10 30 6" stroke="#D99A6C" stroke-width="2" fill="none"/>
+    <!-- oreja -->
+    <circle cx="864" cy="296" r="5" fill="#E3A074"/>
+    <!-- casco -->
+    <path d="M858 290 a30 28 0 0 1 60 -2 l2 6 -64 0 z" fill="url(#hat)"/>
+    <rect x="852" y="292" width="74" height="9" rx="4" fill="#F39200"/>
+    <rect x="884" y="266" width="8" height="14" rx="3" fill="#FFB23E"/>
+  </g>
+
+  <!-- rayo de marca (esquina, sutil) -->
+  <g opacity="0.9">
+    <path d="M70 470 l40 0 -26 48 56 0 -76 96 20 -76 -36 0 z" fill="#F39200"/>
+  </g>
+
+  <!-- etiqueta LED -->
+  <g transform="translate(70,300)">
+    <rect x="0" y="0" width="116" height="48" rx="12" fill="#0E4C7A"/>
+    <circle cx="26" cy="24" r="11" fill="#FFD36A"/>
+    <path d="M26 16 l-5 9 5 0 -2 8 7 -11 -5 0 2 -6z" fill="#0E4C7A"/>
+    <text x="74" y="32" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="26" fill="#FFFFFF">LED</text>
+  </g>
+</svg>

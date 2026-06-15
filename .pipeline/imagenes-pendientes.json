@@ -21,7 +21,7 @@
       "nota": "versión PNG del logo referenciada en el JSON-LD (Organization.logo)."
     },
     {
-      "tipo": "ia",
+      "tipo": "svg",
       "enabled": true,
       "base": "instalacion-iluminacion-led",
       "dir": "assets/images/optimizadas",
@@ -29,8 +29,8 @@
         420,
         800
       ],
-      "prompt": "Un electricista profesional instalando iluminación LED moderna en una vivienda: montando o ajustando luminarias/paneles LED en el techo o en la fachada, con las luces LED encendidas y visibles dando una luz blanca/cálida agradable. Se aprecia el trabajo de instalación eléctrica de iluminación. Atardecer o interior bien iluminado.",
-      "nota": "imagen genuinamente ausente, usada en 2 blogs (ahorro-LED y seguridad-lluvias)."
+      "nota": "ilustración flat hecha como código (SVG -> WebP), sin IA ni costo.",
+      "fuente": "assets/illustrations/instalacion-iluminacion-led.svg"
     },
     {
       "tipo": "ia",

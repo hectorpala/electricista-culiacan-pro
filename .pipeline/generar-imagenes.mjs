@@ -70,6 +70,24 @@ async function doResize(img) {
   return { estado: "generado", out: img.salida };
 }
 
+// ---- tarea SVG -> WebP (ilustración vectorial hecha como código, sin IA) ----
+async function doSVG(img) {
+  const dir = path.join(ROOT, img.dir);
+  const sizes = img.tamanos || [800];
+  const src = path.join(ROOT, img.fuente);
+  const targets = sizes.map((w) => path.join(dir, `${img.base}-${w}w.webp`));
+  if (targets.every((t) => fs.existsSync(t)) && !FORCE)
+    return { estado: "saltado", out: `${img.base} (${sizes.join("/")}w)` };
+  if (!fs.existsSync(src)) return { estado: "error", out: img.base, motivo: `SVG no existe: ${img.fuente}` };
+  fs.mkdirSync(dir, { recursive: true });
+  const svg = fs.readFileSync(src);
+  for (const w of sizes) {
+    const out = path.join(dir, `${img.base}-${w}w.webp`);
+    await sharp(svg, { density: 200 }).resize({ width: w }).webp({ quality: WEBP_Q }).toFile(out);
+  }
+  return { estado: "generado", out: `${img.base} (${sizes.join("/")}w)` };
+}
+
 // ---- llamada a Google Gemini (genera 1 imagen, devuelve Buffer PNG) --------
 async function geminiGenerate(prompt) {
   const key = process.env.GEMINI_API_KEY;
@@ -127,7 +145,9 @@ async function main() {
   for (const img of enabled) {
     let r;
     try {
-      r = img.tipo === "resize" ? await doResize(img) : await doIA(img, m.estilo);
+      r = img.tipo === "resize" ? await doResize(img)
+        : img.tipo === "svg" ? await doSVG(img)
+        : await doIA(img, m.estilo);
     } catch (e) {
       r = { estado: "error", out: img.base || img.salida || "?", motivo: e.message };
     }
