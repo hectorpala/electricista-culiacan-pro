@@ -1,0 +1,28 @@
+name: Checkers deterministas (gate)
+
+# Corre los checkers de DISCO (check-plantilla + check-indexabilidad) en cada
+# push/PR a main y BLOQUEA si hay severidad 'alta'. Es el gate pre-merge que
+# antes solo existía en el pipeline nocturno (post-deploy) o local.
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Gate determinista (bloquea en severidad alta)
+        run: python3 .pipeline/ci-gate.py

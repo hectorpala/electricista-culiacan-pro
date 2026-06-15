@@ -20,14 +20,16 @@ jobs:
           sudo apt-get install -y libxml2-utils jq ripgrep
 
       - name: Validate sitemap.xml
-        continue-on-error: true
         run: |
-          echo "Validating sitemap.xml..."
-          xmllint --noout --schema https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd sitemap.xml || {
-            echo "⚠️ sitemap.xml validation skipped (schema download failed)"
-            exit 0
-          }
-          echo "✅ sitemap.xml is valid"
+          echo "Well-formedness (bloqueante, sin red)..."
+          xmllint --noout sitemap.xml
+          echo "✅ sitemap.xml bien formado"
+          echo "Schema XSD (best-effort, requiere red)..."
+          if xmllint --noout --schema https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd sitemap.xml; then
+            echo "✅ sitemap.xml válido contra el XSD"
+          else
+            echo "⚠️ validación contra XSD omitida (descarga del schema falló) — well-formedness ya pasó"
+          fi
 
       - name: Count URLs in sitemap
         run: |

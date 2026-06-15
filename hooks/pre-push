@@ -1,0 +1,23 @@
+#!/bin/bash
+# Hook VERSIONADO. Auto-indexación en Google Search Console al pushear a main.
+# Robustez: node no siempre está en el PATH de un hook (gotcha documentado en
+# REGLAS.md) → lo añadimos. Y si node o el indexador no existen (otra máquina),
+# se AVISA y se deja pasar el push en vez de abortarlo.
+BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null)
+[ "$BRANCH" != "main" ] && [ "$BRANCH" != "master" ] && exit 0
+
+export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
+INDEXER="$HOME/gsc-mcp/auto-index.mjs"
+
+if ! command -v node >/dev/null 2>&1; then
+    echo "⚠️ node no disponible en el PATH del hook — se omite auto-indexación GSC (push continúa)."
+    exit 0
+fi
+if [ ! -f "$INDEXER" ]; then
+    echo "⚠️ $INDEXER no existe en esta máquina — se omite auto-indexación GSC (push continúa)."
+    exit 0
+fi
+
+echo "🔍 Auto-indexando cambios en Google..."
+node "$INDEXER" "electricistaculiacanpro.mx" || echo "⚠️ auto-indexación falló (push continúa)."
+exit 0

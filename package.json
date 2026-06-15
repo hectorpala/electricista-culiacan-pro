@@ -10,6 +10,8 @@
     "clean:logs": "find . -name '*.log' -type f -delete && echo '✓ Log files deleted'",
     "clean:all": "npm run clean && git clean -fdX && echo '✓ All ignored files cleaned'",
     "precommit": "npm run clean:ds-store",
+    "prepare": "git config core.hooksPath hooks || true",
+    "gate": "python3 .pipeline/ci-gate.py",
     "validate:sitemap": "xmllint --noout --schema https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd sitemap.xml && echo '✅ sitemap.xml válido'",
     "validate:sitemaps": "xmllint --noout sitemaps/*.xml && echo '✅ Todos los sitemaps válidos'",
     "validate:schemas": "python3 scripts/validate_schemas.py",

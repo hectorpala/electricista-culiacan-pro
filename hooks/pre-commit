@@ -1,0 +1,51 @@
+#!/bin/bash
+# Hook VERSIONADO (se activa con `git config core.hooksPath hooks`, lo hace el
+# script "prepare" de package.json en `npm install`).
+#
+# Dos capas:
+#  1) Gate determinista de DISCO en TODO el sitio (check-plantilla +
+#     check-indexabilidad): bloquea si hay severidad 'alta'. Cubre blog,
+#     colonias y home (no solo servicios/).
+#  2) validate-landing.sh sobre las landings de servicios/ staged (plantilla).
+
+set -u
+
+# --- Capa 1: gate determinista site-wide ---
+echo "🔍 Gate determinista (check-plantilla + check-indexabilidad)..."
+if ! python3 .pipeline/ci-gate.py; then
+    echo ""
+    echo "❌ COMMIT BLOQUEADO: hay hallazgos de severidad ALTA (ver arriba)."
+    echo "   Corre:  python3 .pipeline/ci-gate.py"
+    exit 1
+fi
+echo ""
+
+# --- Capa 2: validación de plantilla en landings de servicios staged ---
+STAGED_LANDINGS=$(git diff --cached --name-only --diff-filter=ACM | grep '^servicios/.*/index\.html$')
+
+if [ -z "$STAGED_LANDINGS" ]; then
+    echo "✅ No hay landings de servicios modificadas; gate OK → commit permitido."
+    exit 0
+fi
+
+echo "📄 Validando landings de servicios staged:"
+echo "$STAGED_LANDINGS"
+VALIDATION_FAILED=0
+while IFS= read -r landing; do
+    if [ -f "$landing" ]; then
+        if ./validate-landing.sh "$landing"; then
+            echo "✅ $landing"
+        else
+            echo "❌ $landing - VALIDACIÓN FALLIDA"
+            VALIDATION_FAILED=1
+        fi
+    fi
+done <<< "$STAGED_LANDINGS"
+
+if [ $VALIDATION_FAILED -eq 1 ]; then
+    echo "❌ COMMIT BLOQUEADO: una o más landings no pasaron validate-landing.sh"
+    exit 1
+fi
+
+echo "✅ Gate + landings OK → commit permitido."
+exit 0

@@ -206,15 +206,22 @@ def resolve_to_disk(value, page_dir):
     return cand, url_path  # se reportara como inexistente (index.html del dir)
 
 
+def _is_template_literal(v):
+    """href/src construido dinámicamente en JS (`${...}`) o plantillas (`{{...}}`):
+    no es una ruta estática, no se valida como archivo en disco."""
+    return "${" in v or "{{" in v
+
+
 def link_candidates(t):
     """Lista de valores de href/src/srcset del documento."""
     vals = []
     for m in re.finditer(r'(?:href|src)\s*=\s*["\']([^"\']+)["\']', t, re.I):
-        vals.append(m.group(1))
+        if not _is_template_literal(m.group(1)):
+            vals.append(m.group(1))
     for m in re.finditer(r'srcset\s*=\s*["\']([^"\']+)["\']', t, re.I):
         for piece in m.group(1).split(","):
             url = piece.strip().split()[0] if piece.strip() else ""
-            if url:
+            if url and not _is_template_literal(url):
                 vals.append(url)
     return vals
 
