@@ -99,6 +99,19 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - **Autorización:** ⬜
 - **Resultado:** —
 
+## 🟢 ESTRATEGIA DE CONTENIDO (decisión grande)
+
+### D1 — Diferenciar las 17 colonias INDEXABLES con contenido local único
+- **Estado:** ⬜ PENDIENTE
+- **Qué:** De las 643 colonias, **626 están en `noindex`** (Google las ignora — se dejan como están, no estorban) y **17 son indexables**. Esas 17 hoy son **casi calcadas** entre sí (mismo template) → riesgo de doorway/contenido duplicado.
+- **Por qué importa:** Páginas indexables casi idénticas = señal de thin/doorway. Diferenciarlas las vuelve **valiosas e indexables de verdad** → tráfico local real por colonia.
+- **Alcance:** **17 archivos** (solo las indexables). Es **contenido, no mecánico** → requiere criterio/generación.
+- **Decisión previa (TUYA):** **(1) diferenciar** las 17 con contenido único, **(2) consolidar** (quedarte con pocas páginas de zona fuertes y 301 el resto, como Plomero), o **(3) dejar** (solo limpiar, sin tocar contenido).
+- **Plan si eliges (1) diferenciar:** por cada una de las 17, generar contenido LOCAL ÚNICO (puntos conocidos, calles, datos y problemas eléctricos típicos de esa zona), variando intro, FAQ y meta — **manteniendo EXACTO la estructura de la homepage** (regla de consistencia). Verificar con check-indexabilidad (sin title/desc duplicados) y validate-landing. Rama dedicada.
+- **Nota:** las 626 `noindex` NO se tocan en este ítem (no compiten); opcional borrarlas algún día por orden.
+- **Autorización:** ⬜ (dime: **diferenciar**, **consolidar** o **dejar**)
+- **Resultado:** —
+
 ---
 
 ## Bitácora (se llena conforme se ejecuta)
