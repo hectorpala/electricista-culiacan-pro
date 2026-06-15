@@ -1,21 +1,24 @@
 #!/usr/bin/env node
 /**
- * Generador automático de imágenes del sitio.
+ * Generador automático de imágenes del sitio (Google Gemini / Imagen).
  *
  * Lee .pipeline/imagenes-pendientes.json y, por cada entrada `enabled`:
- *   - tipo "ia":     genera con la API de OpenAI (gpt-image-1), optimiza a WebP
- *                    en los tamaños pedidos y guarda con la convención del sitio.
+ *   - tipo "ia":     genera con la API de Google (gemini-3-pro-image-preview),
+ *                    optimiza a WebP en los tamaños pedidos y guarda con la
+ *                    convención de nombres del sitio.
  *   - tipo "resize": deriva la imagen de un archivo existente con sharp (sin IA).
  *
  * IDEMPOTENTE: salta lo que ya existe (usa --force para regenerar).
  * No aborta si una imagen falla; reporta al final.
  *
+ * Key: se toma de GEMINI_API_KEY o de .pipeline/.gemini-key (gitignored).
+ *      Sácala gratis en https://aistudio.google.com/apikey
+ *
  * Uso:
- *   export OPENAI_API_KEY="sk-..."        # solo para las tareas tipo "ia"
  *   node .pipeline/generar-imagenes.mjs            # genera lo pendiente
  *   node .pipeline/generar-imagenes.mjs --force    # regenera todo
  *
- * Requiere: npm i openai sharp
+ * Requiere: npm i sharp   (la llamada a la API usa fetch nativo de Node 18+)
  */
 import fs from "fs";
 import path from "path";
@@ -26,8 +29,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const MANIFEST = path.join(ROOT, ".pipeline", "imagenes-pendientes.json");
 const FORCE = process.argv.includes("--force");
-const QUALITY = process.env.IMG_QUALITY || "high"; // gpt-image-1: low|medium|high
-const GEN_SIZE = "1536x1024"; // landscape para heroes
+const MODEL = process.env.GEMINI_IMAGE_MODEL || "gemini-3-pro-image-preview";
+const ASPECT = "16:9"; // landscape para heroes
 const WEBP_Q = 82;
 
 const log = (...a) => console.log(...a);
@@ -37,9 +40,19 @@ function loadManifest() {
   if (!Array.isArray(m.imagenes)) throw new Error("manifiesto sin 'imagenes'");
   return m;
 }
-
 function ensureDir(p) {
   fs.mkdirSync(path.dirname(p), { recursive: true });
+}
+
+// La key se toma de GEMINI_API_KEY o de .pipeline/.gemini-key (gitignored).
+function loadKey() {
+  if (process.env.GEMINI_API_KEY) return true;
+  const kf = path.join(ROOT, ".pipeline", ".gemini-key");
+  if (fs.existsSync(kf)) {
+    const k = fs.readFileSync(kf, "utf8").trim();
+    if (k) { process.env.GEMINI_API_KEY = k; return true; }
+  }
+  return false;
 }
 
 // ---- tarea RESIZE (sin IA) -------------------------------------------------
@@ -57,49 +70,43 @@ async function doResize(img) {
   return { estado: "generado", out: img.salida };
 }
 
-// ---- tarea IA (OpenAI gpt-image-1) -----------------------------------------
-// La key se toma de OPENAI_API_KEY o, si no está, de .pipeline/.openai-key
-// (archivo LOCAL gitignored — nunca se commitea ni se expone en el chat).
-function loadKey() {
-  if (process.env.OPENAI_API_KEY) return true;
-  const kf = path.join(ROOT, ".pipeline", ".openai-key");
-  if (fs.existsSync(kf)) {
-    const k = fs.readFileSync(kf, "utf8").trim();
-    if (k) { process.env.OPENAI_API_KEY = k; return true; }
+// ---- llamada a Google Gemini (genera 1 imagen, devuelve Buffer PNG) --------
+async function geminiGenerate(prompt) {
+  const key = process.env.GEMINI_API_KEY;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${key}`;
+  const body = {
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { responseModalities: ["IMAGE"], imageConfig: { aspectRatio: ASPECT } },
+  };
+  const r = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) {
+    const t = await r.text();
+    throw new Error(`HTTP ${r.status} del modelo ${MODEL}: ${t.slice(0, 400)}`);
   }
-  return false;
+  const j = await r.json();
+  const parts = j?.candidates?.[0]?.content?.parts || [];
+  const img = parts.find((p) => p.inlineData?.data || p.inline_data?.data);
+  const data = img?.inlineData?.data || img?.inline_data?.data;
+  if (!data) throw new Error("respuesta sin imagen: " + JSON.stringify(j).slice(0, 400));
+  return Buffer.from(data, "base64");
 }
 
-let _openai = null;
-async function getOpenAI() {
-  if (_openai) return _openai;
-  const { default: OpenAI } = await import("openai");
-  _openai = new OpenAI(); // usa OPENAI_API_KEY del entorno
-  return _openai;
-}
-
+// ---- tarea IA --------------------------------------------------------------
 async function doIA(img, estilo) {
   const dir = path.join(ROOT, img.dir);
   const sizes = img.tamanos || [800];
   const targets = sizes.map((w) => path.join(dir, `${img.base}-${w}w.webp`));
   if (targets.every((t) => fs.existsSync(t)) && !FORCE)
     return { estado: "saltado", out: `${img.base} (${sizes.join("/")}w)` };
+  if (!process.env.GEMINI_API_KEY)
+    return { estado: "pendiente", out: `${img.base} (${sizes.join("/")}w)`, motivo: "falta GEMINI_API_KEY" };
 
-  if (!process.env.OPENAI_API_KEY)
-    return { estado: "pendiente", out: `${img.base} (${sizes.join("/")}w)`, motivo: "falta OPENAI_API_KEY" };
-
-  const prompt = `${estilo}\n\nESCENA: ${img.prompt}`;
-  const openai = await getOpenAI();
-  const res = await openai.images.generate({
-    model: "gpt-image-1",
-    prompt,
-    size: GEN_SIZE,
-    quality: QUALITY,
-    n: 1,
-  });
-  const b64 = res.data?.[0]?.b64_json;
-  if (!b64) throw new Error("la API no devolvió imagen (b64_json vacío)");
-  const buf = Buffer.from(b64, "base64");
+  const prompt = `${estilo}\n\nESCENA: ${img.prompt}\n\nFormato: foto horizontal 16:9 (landscape), sin texto superpuesto.`;
+  const buf = await geminiGenerate(prompt);
 
   fs.mkdirSync(dir, { recursive: true });
   for (const w of sizes) {
@@ -114,7 +121,7 @@ async function main() {
   const m = loadManifest();
   const hayKey = loadKey();
   const enabled = m.imagenes.filter((x) => x.enabled);
-  log(`Generador de imágenes — ${enabled.length} entradas habilitadas${FORCE ? " (--force)" : ""}${hayKey ? "" : " (sin OPENAI_API_KEY: solo tareas resize)"}\n`);
+  log(`Generador de imágenes (modelo ${MODEL}) — ${enabled.length} entradas${FORCE ? " (--force)" : ""}${hayKey ? "" : " (sin GEMINI_API_KEY: solo tareas resize)"}\n`);
 
   const stats = { generado: 0, saltado: 0, pendiente: 0, error: 0 };
   for (const img of enabled) {
@@ -131,7 +138,7 @@ async function main() {
 
   log(`\nResumen: ${stats.generado} generadas · ${stats.saltado} ya existían · ${stats.pendiente} pendientes (sin key) · ${stats.error} errores`);
   if (stats.pendiente > 0)
-    log(`\n⏳ Hay imágenes IA pendientes. Exporta tu key y vuelve a correr:\n   export OPENAI_API_KEY="sk-..."\n   node .pipeline/generar-imagenes.mjs`);
+    log(`\n⏳ Hay imágenes IA pendientes. Pon tu key de Google AI Studio y vuelve a correr:\n   echo 'AIza...' > .pipeline/.gemini-key\n   node .pipeline/generar-imagenes.mjs`);
   if (stats.error > 0) process.exitCode = 1;
 }
 

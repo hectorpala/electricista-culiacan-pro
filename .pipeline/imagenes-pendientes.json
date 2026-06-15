@@ -1,5 +1,5 @@
 {
-  "_descripcion": "Manifiesto de imágenes a generar. tipo='ia' usa la API de OpenAI (gpt-image-1); tipo='resize' deriva de un archivo existente con sharp (sin IA). El generador (.pipeline/generar-imagenes.mjs) es idempotente: salta lo que ya existe. enabled=false queda documentado pero no se genera.",
+  "_descripcion": "Manifiesto de imágenes a generar. tipo='ia' usa la API de Google (gemini-3-pro-image-preview, Google AI Studio); tipo='resize' deriva de un archivo existente con sharp (sin IA). El generador (.pipeline/generar-imagenes.mjs) es idempotente: salta lo que ya existe. enabled=false queda documentado pero no se genera.",
   "estilo": "Fotografía profesional realista, horizontal (landscape), de alta calidad, luz natural cálida de Culiacán (Sinaloa, México). Protagonista: un electricista mexicano con uniforme azul marino y casco/gorra de la marca 'Electricista Culiacán Pro'. Cuando aparezca, la camioneta de servicio es blanca con el texto 'ELECTRICISTA CULIACÁN PRO 24/7'. Ambiente: vecindario residencial mexicano de clase media. Estilo coherente con la homepage: limpio, confiable, profesional. Sin texto superpuesto, sin marcas de agua, sin collage.",
   "imagenes": [
     {
@@ -25,17 +25,23 @@
       "enabled": true,
       "base": "instalacion-iluminacion-led",
       "dir": "assets/images/optimizadas",
-      "tamanos": [420, 800],
+      "tamanos": [
+        420,
+        800
+      ],
       "prompt": "Un electricista profesional instalando iluminación LED moderna en una vivienda: montando o ajustando luminarias/paneles LED en el techo o en la fachada, con las luces LED encendidas y visibles dando una luz blanca/cálida agradable. Se aprecia el trabajo de instalación eléctrica de iluminación. Atardecer o interior bien iluminado.",
       "nota": "imagen genuinamente ausente, usada en 2 blogs (ahorro-LED y seguridad-lluvias)."
     },
-
     {
       "tipo": "ia",
       "enabled": false,
       "base": "electricista-las-quintas-culiacan",
       "dir": "assets/images/optimizadas",
-      "tamanos": [420, 800, 1200],
+      "tamanos": [
+        420,
+        800,
+        1200
+      ],
       "prompt": "Electricista atendiendo en una casa residencial de la colonia Las Quintas en Culiacán (zona de casas amplias y modernas); camioneta de servicio estacionada al frente. Escena ÚNICA, distinta a las de otras colonias (variar fachada, hora del día y ángulo).",
       "nota": "EJEMPLO de des-duplicación: hoy todas las colonias comparten la MISMA imagen (doorway). Habilita y duplica este bloque por colonia con prompts distintos para des-doorway."
     },
@@ -44,7 +50,11 @@
       "enabled": false,
       "base": "seguridad-electrica-temporada-lluvias-culiacan",
       "dir": "assets/images/optimizadas",
-      "tamanos": [420, 800, 1200],
+      "tamanos": [
+        420,
+        800,
+        1200
+      ],
       "prompt": "Seguridad eléctrica en temporada de lluvias: electricista revisando un tablero/contactos bajo lluvia ligera o cielo nublado, con cinta de precaución; ambiente mojado. Temáticamente claro (lluvia + electricidad).",
       "nota": "EJEMPLO de mejora de relevancia: este blog hoy reusa la foto genérica del panel. Habilita para una imagen temática propia."
     }
