@@ -79,18 +79,18 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - **Resultado:** 5 tablas envueltas en `<div class="table-wrapper">`. Regla canónica `.table-wrapper{overflow-x:auto;...}` añadida a los 3 CSS (no existía; tampoco había fallback global — solo `overflow-x:hidden` que recortaba la tabla). Para entrega inmediata sin re-bump de `?v=`, la regla se inyectó también en el CSS crítico inline de las 5 páginas. Verificación: check-plantilla 0 tablas sin wrapper, electricista-precios PASÓ validate-landing, home sin errores nuevos (los 4 que marca son preexistentes del validador sobre la propia referencia). Commit `11d2b37`, publicado a `main`.
 
 ### C2 — ETA inconsistente (20-30 vs 30-60 min)
-- **Estado:** ⬜ PENDIENTE
+- **Estado:** ✅ HECHO
 - **Qué:** Las colonias dicen "20-30 min"; home/servicios dicen "30-60 min".
 - **Plan (requiere TU decisión):** ¿cuál es el correcto? Lo unifico en todo el sitio.
-- **Autorización:** ⬜ (dime el ETA correcto)
-- **Resultado:** —
+- **Autorización:** ✅ Decisión dueño 2026-06-14: **30-60 min**.
+- **Resultado:** 3196 reemplazos de `20-30 min`→`30-60 min` en 643 archivos (colonias). Cubre también "20-30 minutos". Preservado el "20-30%" del blog de ahorro (porcentaje, no ETA). 0 "20-30 min" residuales, sitio uniforme en 30-60 min. Commit `e23b7d9`, publicado a `main`.
 
 ### C3 — theme-color #0066cc / faltante
-- **Estado:** ⬜ PENDIENTE
+- **Estado:** ✅ HECHO
 - **Qué:** Algunas páginas usan el placeholder `#0066cc` o no tienen `theme-color`.
 - **Plan (requiere TU decisión):** ¿cuál es tu color de marca exacto? Lo aplico a todas.
-- **Autorización:** ⬜ (dime el hex de marca)
-- **Resultado:** —
+- **Autorización:** ✅ Decisión dueño 2026-06-14: **#E36414**.
+- **Resultado:** home `#F97316`→`#E36414`, `servicios/electricista` `#0066cc`→`#E36414`, `contacto` +theme-color. Stub `google…html` omitido (no es página). 671 páginas uniformes en #E36414, 0 con #F97316/#0066cc. Commit `9f8105f`, publicado a `main`.
 
 ### C4 — Títulos/descripciones duplicados (directorio vs colonias index)
 - **Estado:** ⬜ PENDIENTE
@@ -122,3 +122,5 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - 2026-06-14 · B1 · CSS no-bloqueante en 24 archivos (15 servicios + 9 blogs): `media=print onload` + `<noscript>`, SIN preload (prohibido por validate-landing) · commit `e3ad624` · publicado SÍ (push a main → Netlify) · verificación: pre-commit validó 15 servicios, 0 bloqueantes residuales, CSS HTTP 200 local. Nota: blog `styles.min.css` sin hash queda como ítem aparte.
 - 2026-06-14 · B2 · `:focus-visible` global en los 3 CSS + `?v=20260614` en 1322 refs de 670 HTML + sw.js v6→v7 · commit `a60843b` · publicado SÍ (push a main → Netlify) · verificación: paridad CSS OK, validate-landing PASÓ, CSS HTTP 200 con la regla, pre-commit OK.
 - 2026-06-14 · C1 · 5 tablas envueltas en `.table-wrapper` (3 blogs + home + electricista-precios); regla `.table-wrapper{overflow-x:auto}` en los 3 CSS + inline en las 5 páginas (sin re-bump ?v=) · commit `11d2b37` · publicado SÍ (push a main → Netlify) · verificación: check-plantilla 0 tablas sin wrapper, validate-landing del servicio PASÓ, home sin errores nuevos.
+- 2026-06-14 · C2 · ETA unificado a "30-60 min" (3196 reemplazos en 643 colonias; "20-30%" preservado) · commit `e23b7d9` · publicado SÍ (push a main → Netlify) · verificación: 0 "20-30 min" residuales, pre-commit OK.
+- 2026-06-14 · C3 · theme-color unificado a #E36414 (home, electricista, contacto; stub google omitido) · commit `9f8105f` · publicado SÍ (push a main → Netlify) · verificación: 671 páginas uniformes, 0 #F97316/#0066cc, pre-commit OK.
