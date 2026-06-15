@@ -16,3 +16,5 @@ patrones nuevos, decisiones de contenido/estrategia, y regresiones.
 > - CONTENIDO: email correcto = `contacto@electricistaculiacanpro.mx` (nunca con "plomero").
 
 <!-- Las reglas específicas de Electricista se añaden debajo, una por línea, conforme se aprendan. -->
+
+- [2026-06-14] CONSISTENCIA/PLANTILLA (regla dura del dueño): toda página nueva o modificada debe replicar EXACTAMENTE la homepage (`index.html`) — tipografía (Montserrat 800 + @font-face inline), CSS crítico, estructura HTML, botones flotantes, breadcrumb, popup, footer y la MISMA estructura/markup de imágenes (`<picture>`/`srcset`, 420/800/1200w WebP, fetchpriority del hero, lazy del resto). `index.html` = FUENTE DE VERDAD. Por qué: evita la deriva (ej. el form de la home quedó con `.error-message`/`.success-message` visibles que las páginas de servicio NO tienen → inconsistencia). Si la homepage tiene un defecto, se arregla PRIMERO en la homepage y luego se propaga. Verificación: `validate-landing.sh` (pre-commit) + skills `page-validator`/`page-consistency-enforcer`. Severidad: alta.

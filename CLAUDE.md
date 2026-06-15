@@ -19,6 +19,7 @@
 - SEO: nada de doorways (páginas casi idénticas); coordenadas GPS reales y únicas; sin aggregateRating self-serving en blog; og:image/twitter:image deben existir; al borrar páginas, cero enlaces rotos + actualizar sitemap.
 - JS: tras minificar, verificar que las URLs wa.me no queden truncadas (rompe todo el sitio).
 - CONTACTO: el email correcto es `contacto@electricistaculiacanpro.mx`. NUNCA un email con "plomero" (sería una fuga de copy-paste de la plantilla origen).
+- CONSISTENCIA / PLANTILLA (regla dura del dueño): TODA página nueva o que se modifique debe replicar EXACTAMENTE la estructura de la homepage (`index.html`) — misma tipografía (Montserrat 800 + @font-face inline), mismo CSS crítico, misma estructura HTML, botones flotantes, breadcrumb, popup, footer, y la MISMA estructura/markup de imágenes (mismo patrón `<picture>`/`srcset`, tamaños 420/800/1200w WebP, fetchpriority del hero, loading lazy del resto). `index.html` es la FUENTE DE VERDAD. Validar SIEMPRE con `bash validate-landing.sh <pagina>` (corre en pre-commit) y las skills `page-validator` / `page-consistency-enforcer`. Si la homepage tiene un defecto, se corrige PRIMERO en la homepage (es la referencia) y luego se propaga.
 
 ## Pipeline de mantenimiento autónomo
 - Invocar con `/mantener-sitio` (skill en `.claude/skills/mantener-sitio/SKILL.md`) o con `.pipeline/mantener-prompt.txt`.
