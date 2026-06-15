@@ -31,13 +31,13 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - **Resultado:** 642 archivos limpiados, 0 saltados, 0 residuales. JSON-LD validado por archivo (json.loads). check-plantilla sin hallazgos de aggregateRating. Pre-commit (validate-landing) pasó las 642. Commit `ec410e2`, publicado a `main` (Netlify auto-deploy).
 
 ### A2 — Personalizar fuga de copy "10 de Abril" en wa.me de 96 colonias
-- **Estado:** ⬜ PENDIENTE
+- **Estado:** ✅ HECHO
 - **Qué:** 96 colonias tienen el enlace `wa.me` con el texto fijo *"necesito electricista en 10 de Abril"* (copiado de la colonia plantilla, sin personalizar).
 - **Por qué importa:** Un cliente en otra colonia manda un WhatsApp citando "10 de Abril" → se ve descuidado y confunde el lead. 6 de esas páginas son indexables.
 - **Alcance:** 96 archivos. Cambio de contenido en lote.
 - **Plan:** Script que reemplace el nombre de colonia en el texto del `wa.me` por el de CADA página (derivado del path/título). Validar muestra. Rama dedicada.
-- **Autorización:** ⬜
-- **Resultado:** —
+- **Autorización:** ✅ (dueño, 2026-06-14)
+- **Resultado:** 95 colonias personalizadas (la nº96, `10-de-abril`, ya era correcta: es su nombre real). Nombre derivado de `areaServed.name`; URL-encoding UTF-8 idéntico al de las correctas (acentos/paréntesis). 0 fugas residuales. Indexable de muestra (Guadalupe) validó. Commit `ad73fb9`, publicado a `main`.
 
 ### A3 — Sitemap: 16 colonias con contenido único + `terminos/` fuera del sitemap
 - **Estado:** ⬜ PENDIENTE
@@ -104,3 +104,4 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 ## Bitácora (se llena conforme se ejecuta)
 <!-- fecha · ID · acción · commit · publicado sí/no · verificación -->
 - 2026-06-14 · A1 · Quitado `aggregateRating` de 642 colonias vía `.pipeline/fix-a1-aggregaterating.py` (regex puntual + json.loads por archivo) · commit `ec410e2` · publicado SÍ (push a main → Netlify) · verificación: 642 cambiados/0 saltados/0 residuales, diff quirúrgico, check-plantilla limpio, pre-commit validó 642 landings.
+- 2026-06-14 · A2 · Personalizado texto wa.me en 95 colonias vía `.pipeline/fix-a2-wame-colonias.py` (nombre desde `areaServed.name` + URL-encode UTF-8) · commit `ad73fb9` · publicado SÍ (push a main → Netlify) · verificación: 0 fugas residuales, 10-de-abril intacta, indexable de muestra validó, check-plantilla sin hallazgos nuevos.
