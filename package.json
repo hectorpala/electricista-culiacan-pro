@@ -14,14 +14,9 @@
     "gate": "python3 .pipeline/ci-gate.py",
     "validate:sitemap": "xmllint --noout --schema https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd sitemap.xml && echo '✅ sitemap.xml válido'",
     "validate:sitemaps": "xmllint --noout sitemaps/*.xml && echo '✅ Todos los sitemaps válidos'",
-    "validate:schemas": "python3 scripts/validate_schemas.py",
-    "check:links": "python3 scripts/check_links.py",
-    "generate:sitemap": "python3 scripts/generate_sitemap.py",
-    "update:lastmod": "python3 scripts/update_lastmod.py",
-    "deploy:check": "python3 scripts/deploy.py",
-    "optimize:images": "python3 scripts/optimize_images.py",
-    "test:all": "npm run validate:sitemap && npm run validate:schemas && npm run check:links",
-    "build": "npm run build:css && npm run validate:sitemap && echo '✅ Build complete'"
+    "bump:css": "python3 scripts/bump-css-version.py",
+    "test:all": "npm run gate && xmllint --noout sitemap.xml && echo '✅ test:all OK'",
+    "build": "npm run build:css && xmllint --noout sitemap.xml && echo '✅ Build complete'"
   },
   "repository": {
     "type": "git",

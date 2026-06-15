@@ -28,8 +28,15 @@ jobs:
           PARTIAL="partials/gtm.html"
           test -f "$PARTIAL" || { echo "ERROR: $PARTIAL no existe"; exit 1; }
 
-          # Archivos HTML candidatos (excluye carpetas típicas y el propio parcial)
-          mapfile -t FILES < <(rg -l --glob '!node_modules/**' --glob '!dist/**' --glob '!build/**' --glob '!partials/**' --glob '!**/.git/**' '\.html$' || true)
+          # Archivos HTML candidatos POR NOMBRE (rg --files --glob), no por contenido.
+          # Bug previo: `rg -l '\.html$'` buscaba el PATRÓN .html en el CONTENIDO
+          # (líneas que terminan en .html), no archivos *.html → detección errónea.
+          # Exclusiones: carpetas técnicas, el parcial, y los stubs de verificación
+          # de Google (google*.html: deben quedar intactos, sin GTM).
+          mapfile -t FILES < <(rg --files \
+            --glob '*.html' \
+            --glob '!node_modules/**' --glob '!dist/**' --glob '!build/**' \
+            --glob '!partials/**' --glob '!**/.git/**' --glob '!google*.html' || true)
           echo "HTML detectados: ${#FILES[@]}"
 
           for f in "${FILES[@]}"; do
