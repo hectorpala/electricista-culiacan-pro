@@ -10,10 +10,10 @@
 //
 // Chequeos:
 //  1. Errores de consola JS en producción (pageerror = ALTA; console.error = media)
-//     en /, /contacto/, /servicios/ + wa.me del DOM con número completo 526673922273.
+//     en / y /contacto/ + wa.me del DOM con número completo 526673922273.
 //  2. Uptime: cada URL clave debe dar 200 (no 3xx/4xx/5xx) en producción.
 //  3. Headers de seguridad (HSTS, X-Content-Type-Options, Referrer-Policy) + mixed content (http://).
-//  4. Formulario de /contacto/: action válido + endpoint 2xx (sin enviar lead real).
+//  4. Formulario de captación (en la HOME): action válido + endpoint 2xx (sin enviar lead real).
 
 import puppeteer from "puppeteer";
 import fs from "fs";
@@ -22,9 +22,9 @@ const BASE = "https://electricistaculiacanpro.mx";
 const WA_NUMBER = "526673922273";
 const UA = "Mozilla/5.0 (revisor-produccion; +pipeline-mantenimiento)";
 
-const CONSOLE_PAGES = ["/", "/contacto/", "/servicios/"];
+const CONSOLE_PAGES = ["/", "/contacto/"];
 const KEY_URLS = [
-  "/", "/servicios/", "/contacto/", "/blog/",
+  "/", "/contacto/", "/blog/",
   "/servicios/instalacion-electrica/", "/servicios/emergencia-24-7/",
   "/servicios/electricista-a-domicilio/", "/servicios/iluminacion-led/",
 ];
@@ -173,19 +173,19 @@ async function main() {
             "Cambiar el recurso a https:// en el HTML fuente (mecánico)");
         }
 
-        // 4: formulario de contacto (sin enviar lead real)
-        if (path === "/contacto/") {
+        // 4: formulario de captación (está en la HOME, no en /contacto/, que usa mailto/WhatsApp)
+        if (path === "/") {
           const form = await page.evaluate(() => {
-            const f = document.querySelector("form#lead-form") ||
+            const f = document.querySelector("form#contact-form") ||
                       document.querySelector('form[data-netlify], form[name], form');
             if (!f) return { exists: false };
             return { exists: true, action: f.getAttribute("action"), method: f.getAttribute("method"), netlify: f.hasAttribute("data-netlify") };
           });
           if (!form.exists) {
-            add("alta", path, `PRODUCCIÓN: no se encontró ningún <form> en ${BASE}/contacto/`,
+            add("alta", path, `PRODUCCIÓN: no se encontró ningún <form> en ${BASE}/ (home)`,
               "PENDIENTE HUMANO: el formulario de captación de leads desapareció del render — revisar plantilla/contenido");
           } else if (!form.action) {
-            add("alta", path, `PRODUCCIÓN: el formulario de /contacto/ no tiene atributo action`,
+            add("alta", path, `PRODUCCIÓN: el formulario de la home no tiene atributo action`,
               "PENDIENTE HUMANO: añadir action válido al form (o confirmar manejo por Netlify Forms)");
           } else {
             const actionUrl = new URL(form.action, BASE).href;
