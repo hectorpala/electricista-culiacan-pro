@@ -111,7 +111,7 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - **Nota:** las 626 `noindex` NO se tocan en este ítem (no compiten); opcional borrarlas algún día por orden.
 - **Autorización:** ✅ Decisión dueño 2026-06-14: **(1) diferenciar** → FAQ única por colonia.
 - **Resultado:** **Hallazgo:** las 16 colonias NO estaban calcadas — ya tenían bloque local único y preciso ("lo que debes saber") + títulos/descripciones únicos (check-indexabilidad=0 duplicados). Lo único idéntico eran los **testimonios** (no se tocan: inventar únicos = reseñas falsas = problema de A1). Diferenciación añadida: **FAQ única (3 Q&A) por colonia**, anclada en la realidad eléctrica de cada zona, + schema **FAQPage** (rich results), manejando las 2 formas de JSON-LD (array plano y @graph). Modelo (Centro+Tres Ríos) aprobado por el dueño antes de propagar. 16/16 con FAQ visible + schema válido (3 preguntas), validate-landing PASÓ, pre-commit OK. La 17ª (`/directorio/`) es un listado, no lleva FAQ. Commit `fcd7917`, publicado a `main`.
-- **Pendiente opcional futuro:** testimonios idénticos en las 16 (decidir: quitar/genericar, no fabricar); consolidar index de colonias vs `/directorio/` (casi duplicados).
+- **Pendiente opcional futuro:** testimonios idénticos en las 16 (decidir: quitar/genericar, no fabricar). ~~consolidar index de colonias vs `/directorio/`~~ ✅ HECHO 2026-06-14 (commit `8db9ae8`): 301 de `/directorio/`→hub, enlaces de la home repuntados, fuera del sitemap, archivo eliminado, 0 enlaces rotos.
 
 ---
 
@@ -127,3 +127,4 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - 2026-06-14 · C3 · theme-color unificado a #E36414 (home, electricista, contacto; stub google omitido) · commit `9f8105f` · publicado SÍ (push a main → Netlify) · verificación: 671 páginas uniformes, 0 #F97316/#0066cc, pre-commit OK.
 - 2026-06-14 · C4 · title/description/og diferenciados entre index de colonias ("por colonia/tu zona") y directorio ("A-Z") · commit `d706f7a` · publicado SÍ (push a main → Netlify) · verificación: check-indexabilidad 0 duplicados.
 - 2026-06-14 · D1 · FAQ única (3 Q&A ancladas en la zona) + schema FAQPage en las 16 colonias indexables; modelo Centro+Tres Ríos aprobado antes de propagar · commit `fcd7917` · publicado SÍ (push a main → Netlify) · verificación: 16/16 FAQ visible + schema válido, validate-landing PASÓ, pre-commit OK. Sin fabricar datos ni testimonios.
+- 2026-06-14 · Consolidación · `/directorio/` (duplicado del hub de colonias) → 301 al hub en `_redirects`, enlaces de la home repuntados, fuera del sitemap (45→44), archivo eliminado · commit `8db9ae8` · publicado SÍ (push a main → Netlify) · verificación: 0 enlaces rotos, check-indexabilidad 0 hallazgos.
