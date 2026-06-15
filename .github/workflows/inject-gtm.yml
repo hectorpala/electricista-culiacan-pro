@@ -1,12 +1,15 @@
 name: Inject GTM partial
 
 on:
-  push:
-    branches: [ main, master ]
+  # SOLO manual. No corre en cada push porque:
+  #  (a) este repo no permite que GitHub Actions cree PRs (ajuste de repo) → el
+  #      paso de PR fallaba en cada push;
+  #  (b) inyectar GTM en ~645 páginas (sobre todo las colonias, hoy SIN analítica)
+  #      es una decisión estratégica del dueño, no una automatización de cada push.
+  # Para usarlo: Actions → "Inject GTM partial" → Run workflow.
   workflow_dispatch: {}
 
-# Ya NO pushea a main: inyecta GTM en una rama y abre un PR (main con un único
-# escritor automático directo; evita la divergencia/carrera con otros escritores).
+# Inyecta GTM en una rama y abre un PR (no pushea a main directamente).
 permissions:
   contents: write
   pull-requests: write
@@ -104,8 +107,12 @@ jobs:
           _Generado automáticamente por inject-gtm.yml_
           EOF
 
-          gh pr create \
+          if ! gh pr create \
             --base "${{ github.ref_name }}" \
             --head "$BRANCH" \
             --title "fix(gtm): inyectar GTM en HTML que no lo tienen" \
-            --body-file /tmp/pr-body.md
+            --body-file /tmp/pr-body.md; then
+            echo "⚠️ No se pudo crear el PR (probable ajuste del repo: 'Allow GitHub Actions to create pull requests')."
+            echo "   La rama '$BRANCH' quedó pusheada; abre el PR a mano:"
+            echo "   https://github.com/${{ github.repository }}/pull/new/$BRANCH"
+          fi
