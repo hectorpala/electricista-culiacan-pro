@@ -102,15 +102,16 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 ## 🟢 ESTRATEGIA DE CONTENIDO (decisión grande)
 
 ### D1 — Diferenciar las 17 colonias INDEXABLES con contenido local único
-- **Estado:** ⬜ PENDIENTE
+- **Estado:** ✅ HECHO (FAQ) — diferenciación reforzada
 - **Qué:** De las 643 colonias, **626 están en `noindex`** (Google las ignora — se dejan como están, no estorban) y **17 son indexables**. Esas 17 hoy son **casi calcadas** entre sí (mismo template) → riesgo de doorway/contenido duplicado.
 - **Por qué importa:** Páginas indexables casi idénticas = señal de thin/doorway. Diferenciarlas las vuelve **valiosas e indexables de verdad** → tráfico local real por colonia.
 - **Alcance:** **17 archivos** (solo las indexables). Es **contenido, no mecánico** → requiere criterio/generación.
 - **Decisión previa (TUYA):** **(1) diferenciar** las 17 con contenido único, **(2) consolidar** (quedarte con pocas páginas de zona fuertes y 301 el resto, como Plomero), o **(3) dejar** (solo limpiar, sin tocar contenido).
 - **Plan si eliges (1) diferenciar:** por cada una de las 17, generar contenido LOCAL ÚNICO (puntos conocidos, calles, datos y problemas eléctricos típicos de esa zona), variando intro, FAQ y meta — **manteniendo EXACTO la estructura de la homepage** (regla de consistencia). Verificar con check-indexabilidad (sin title/desc duplicados) y validate-landing. Rama dedicada.
 - **Nota:** las 626 `noindex` NO se tocan en este ítem (no compiten); opcional borrarlas algún día por orden.
-- **Autorización:** ⬜ (dime: **diferenciar**, **consolidar** o **dejar**)
-- **Resultado:** —
+- **Autorización:** ✅ Decisión dueño 2026-06-14: **(1) diferenciar** → FAQ única por colonia.
+- **Resultado:** **Hallazgo:** las 16 colonias NO estaban calcadas — ya tenían bloque local único y preciso ("lo que debes saber") + títulos/descripciones únicos (check-indexabilidad=0 duplicados). Lo único idéntico eran los **testimonios** (no se tocan: inventar únicos = reseñas falsas = problema de A1). Diferenciación añadida: **FAQ única (3 Q&A) por colonia**, anclada en la realidad eléctrica de cada zona, + schema **FAQPage** (rich results), manejando las 2 formas de JSON-LD (array plano y @graph). Modelo (Centro+Tres Ríos) aprobado por el dueño antes de propagar. 16/16 con FAQ visible + schema válido (3 preguntas), validate-landing PASÓ, pre-commit OK. La 17ª (`/directorio/`) es un listado, no lleva FAQ. Commit `fcd7917`, publicado a `main`.
+- **Pendiente opcional futuro:** testimonios idénticos en las 16 (decidir: quitar/genericar, no fabricar); consolidar index de colonias vs `/directorio/` (casi duplicados).
 
 ---
 
@@ -125,3 +126,4 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - 2026-06-14 · C2 · ETA unificado a "30-60 min" (3196 reemplazos en 643 colonias; "20-30%" preservado) · commit `e23b7d9` · publicado SÍ (push a main → Netlify) · verificación: 0 "20-30 min" residuales, pre-commit OK.
 - 2026-06-14 · C3 · theme-color unificado a #E36414 (home, electricista, contacto; stub google omitido) · commit `9f8105f` · publicado SÍ (push a main → Netlify) · verificación: 671 páginas uniformes, 0 #F97316/#0066cc, pre-commit OK.
 - 2026-06-14 · C4 · title/description/og diferenciados entre index de colonias ("por colonia/tu zona") y directorio ("A-Z") · commit `d706f7a` · publicado SÍ (push a main → Netlify) · verificación: check-indexabilidad 0 duplicados.
+- 2026-06-14 · D1 · FAQ única (3 Q&A ancladas en la zona) + schema FAQPage en las 16 colonias indexables; modelo Centro+Tres Ríos aprobado antes de propagar · commit `fcd7917` · publicado SÍ (push a main → Netlify) · verificación: 16/16 FAQ visible + schema válido, validate-landing PASÓ, pre-commit OK. Sin fabricar datos ni testimonios.
