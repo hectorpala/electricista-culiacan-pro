@@ -93,11 +93,11 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - **Resultado:** home `#F97316`→`#E36414`, `servicios/electricista` `#0066cc`→`#E36414`, `contacto` +theme-color. Stub `google…html` omitido (no es página). 671 páginas uniformes en #E36414, 0 con #F97316/#0066cc. Commit `9f8105f`, publicado a `main`.
 
 ### C4 — Títulos/descripciones duplicados (directorio vs colonias index)
-- **Estado:** ⬜ PENDIENTE
+- **Estado:** ✅ HECHO
 - **Qué:** Title/description repetidos entre la página directorio y el index de colonias.
 - **Plan:** Editorial — propongo variantes y tú apruebas.
-- **Autorización:** ⬜
-- **Resultado:** —
+- **Autorización:** ✅ (dueño aprobó copy 2026-06-14)
+- **Resultado:** Index → "Electricista por Colonia en Culiacán | Cobertura 24/7 en tu Zona" (ángulo zona); Directorio → "Directorio A-Z de Colonias con Electricista | Culiacán Pro" (ángulo lista). Description y og: actualizados en ambas. check-indexabilidad: 0 duplicados (de 2 a 0). Commit `d706f7a`, publicado. **Nota:** ambas son casi el directorio completo (~627 enlaces) → consolidar/301 una es decisión estratégica aparte (relacionada con D1).
 
 ## 🟢 ESTRATEGIA DE CONTENIDO (decisión grande)
 
@@ -124,3 +124,4 @@ El agente **avanza solo por la lista**; tú solo **apruebas**. Por cada ítem:
 - 2026-06-14 · C1 · 5 tablas envueltas en `.table-wrapper` (3 blogs + home + electricista-precios); regla `.table-wrapper{overflow-x:auto}` en los 3 CSS + inline en las 5 páginas (sin re-bump ?v=) · commit `11d2b37` · publicado SÍ (push a main → Netlify) · verificación: check-plantilla 0 tablas sin wrapper, validate-landing del servicio PASÓ, home sin errores nuevos.
 - 2026-06-14 · C2 · ETA unificado a "30-60 min" (3196 reemplazos en 643 colonias; "20-30%" preservado) · commit `e23b7d9` · publicado SÍ (push a main → Netlify) · verificación: 0 "20-30 min" residuales, pre-commit OK.
 - 2026-06-14 · C3 · theme-color unificado a #E36414 (home, electricista, contacto; stub google omitido) · commit `9f8105f` · publicado SÍ (push a main → Netlify) · verificación: 671 páginas uniformes, 0 #F97316/#0066cc, pre-commit OK.
+- 2026-06-14 · C4 · title/description/og diferenciados entre index de colonias ("por colonia/tu zona") y directorio ("A-Z") · commit `d706f7a` · publicado SÍ (push a main → Netlify) · verificación: check-indexabilidad 0 duplicados.
