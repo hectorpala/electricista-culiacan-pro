@@ -1,27 +1,40 @@
 # Última corrida — Electricista Culiacán
 
-**Fecha:** 2026-06-14 (corrida 6:20 PM)
-**Resultado:** PUBLICADO ✅ — commit `40beb89` en `main`, push OK, auto-indexación disparada (14 URLs a Google).
+**Fecha:** 2026-06-16 (corrida 9:00 AM)
+**Resultado:** PUBLICADO ✅ — commit `f221d4ee` en `main`, push OK, auto-indexación disparada (3 URLs a Google).
+
+## Health check
+- Home, `/contacto/`, `/servicios/instalacion-electrica/`, `/blog/` → 200. Nada roto de entrada.
 
 ## Qué se arregló (mecánico, alta severidad, verificado)
-1. **18 enlaces internos rotos** en 14 páginas de servicio: apuntaban a `/servicios/reparacion-cortos-circuitos/` (404, slug con guion extra). Corregidos a `/servicios/reparacion-cortocircuitos/` (directorio real, responde 200). Checker plantilla: 28 → 14 hallazgos (los 14 restantes son falsos positivos confirmados por el revisor-links: enlaces dentro de `<script>` con template literal `${c.s}` y rutas de fonts `../../../` que el navegador recorta a la raíz y resuelven OK).
-2. **`/gracias/` removida de `sitemap.xml`**: la página tiene `robots noindex,follow` pero estaba listada en el sitemap (contradicción → warning en GSC). XML validado. Checker indexabilidad: 20 → 19, gracias = 0.
+**1 mejora (regla "una mejora por sesión"): a11y — labels de formulario en 3 páginas.**
+- `servicios/electricista-cerca-de-mi/index.html`, `blog/como-prevenir-cortocircuitos-casa/index.html`, `blog/senales-instalacion-electrica-obsoleta/index.html` tenían el form con inputs solo-placeholder, SIN `<label>` (la homepage —fuente de verdad— sí los tiene). Regresión de plantilla.
+- Fix additivo: `id` único por campo + `<label for="…" class="sr-only">` (nombre/teléfono/email/mensaje).
+- **Hallazgo clave durante la verificación:** `.sr-only` NO está definida en ningún CSS externo; solo vive en el `<style>` inline de `index.html`. Sin añadir la regla, los labels se renderizarían VISIBLES. Se añadió la definición `.sr-only` al `<style>` crítico inline de cada una de las 3 páginas. (Regla nueva en REGLAS.md.)
+
+## Verificación (escéptica)
+- 4 labels + 4 ids coincidentes por página; 0 ids duplicados; `.sr-only` def = 1 por página; HTTP 200.
+- `validate-landing.sh` PASA en la página de servicio (las 2 de blog fallan por diferencias pre-existentes blog-vs-landing: sin exit-popup / sin main.min.js — NO introducidas por este cambio, y el pre-commit solo valida `servicios/`).
+- Checkers deterministas sin regresión: check-plantilla 2 (pre-existentes: img eager en blog/index + theme-color en archivo de verificación Google), check-indexabilidad 0.
 
 ## Candados de publicación (todos OK)
-- Auto-revisión sin problemas de correctitud (diff = solo el href del slug en 14 archivos + bloque gracias en sitemap).
-- Diff toca **15 archivos** (= límite máximo permitido).
-- 0 borrados estructurales inesparados; sin tocar tests ni contenido/copy.
+- Auto-revisión sin problemas de correctitud (diff = solo labels + def .sr-only).
+- Diff toca **3 archivos** (≤ 15). 0 borrados estructurales. Sin tocar tests/copy/precios.
 
-## Incidencia operativa (resuelta)
-- El primer `git push` abortó: el hook `.git/hooks/pre-push` llama `node` (auto-indexación GSC) y node está en `/usr/local/bin`, fuera del PATH del shell del pipeline. Resuelto reintentando con `PATH="/usr/local/bin:$PATH" git push` (sin `--no-verify`, para no omitir la indexación). Regla añadida a REGLAS.md.
-- Nota zsh: `for f in $files` no hace word-splitting → un `sed -i` en lote falló silencioso; se rehízo con `while IFS= read`. Regla añadida.
+## Verificación ciega — GSC (resuelta, NO era ceguera)
+- El subagente `revisor-gsc` está cableado a `mcp__local-seo` (propiedad de Plomero) y emitió "verificación ciega" para electricista. Correcto que lo emita dado SU tooling.
+- PERO el servidor MCP `gsc` del entorno SÍ expone `https://electricistaculiacanpro.mx/` (verificado con `gsc_list_sites`). La indexación NO está ciega; el revisor está mal configurado. → Pendiente humano: reapuntar `revisor-gsc` a `mcp__gsc__*`.
+- Los otros 3 deterministas (plantilla, indexabilidad, producción) corrieron sanos sobre datos reales (673 archivos / 44 URLs / 9 páginas en vivo), no ciegos.
 
-## Pendiente para humano (NO auto — masivo o estratégico)
-Detectado por los revisores LLM (seo, perf, a11y, movil). Detalle en ESTADO.md:
-- **aggregateRating self-serving en ~642 colonias** (alta) — riesgo de acción manual de Google; quitar schema en lote (batch dedicado, > candado 15 archivos).
-- **Fuga de copy "10 de Abril" en wa.me de ~96 colonias** (alta) — personalizar por colonia.
-- **16 colonias indexables + terminos/ fuera del sitemap** (alta) — decisión SEO (agregar o noindex).
-- **CSS render-blocking en ~15 servicios + 10 blog** (perf alta) — replicar patrón async de la home; corrida dedicada.
-- **3 tablas de blog sin table-wrapper** (movil alta) — siguiente mejora.
-- **focus-visible global ausente** (a11y alta) — fix en los 3 CSS + crítico.
-- **ETA inconsistente** 20-30 vs 30-60 min (contenido); theme-color #0066cc/faltante (baja); títulos/descr duplicados directorio vs colonias (editorial).
+## Pendiente para humano (NO auto — estratégico/masivo/diseño)
+- Reconfigurar `revisor-gsc` → `mcp__gsc__*`.
+- Contraste WCAG AA del CTA naranja (#F97316 2.8:1, #E36414 3.44:1) — decisión de diseño + 3 CSS + sw bump.
+- focus-visible global (3 CSS + sw bump).
+- CSS render-blocking en 642 colonias + contacto/gracias/blog-index (>15 archivos, corrida dedicada).
+- aggregateRating/Review self-serving en homepage + 16 servicios (+ ~642 colonias ya anotadas).
+- 8 meta descriptions de blog/servicio demasiado largas (edición de copy).
+- Heredados: fuga copy "10 de Abril" en wa.me de colonias, 16 colonias indexables fuera del sitemap, 3 tablas de blog sin table-wrapper, ETA inconsistente, theme-color placeholder.
+
+## Aprendizajes (REGLAS.md)
+- Nueva regla A11Y/CSS: `.sr-only` solo existe inline en index.html → al propagar markup sr-only a otra página, copiar también la definición a su `<style>` inline.
+- Nueva regla PIPELINE/GSC: revisor-gsc mal apuntado; el MCP `gsc` real sí tiene la propiedad — no confundir "revisor mal configurado" con "indexación ciega".

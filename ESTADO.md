@@ -1,5 +1,22 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-16 (corrida 9:00 AM) — PUBLICADO ✅ (commit f221d4ee)
+- Rama `auto/mantenimiento-20260616-0900`, mergeada (`--no-ff`) a main y pusheada. Auto-indexación: 3 URLs enviadas a Google.
+- HEALTH CHECK previo OK (home, /contacto/, /servicios/instalacion-electrica/, /blog/ → 200).
+- **ARREGLADO (alta, mecánico — regresión de plantilla):** 3 páginas (servicios/electricista-cerca-de-mi, blog/como-prevenir-cortocircuitos-casa, blog/senales-instalacion-electrica-obsoleta) tenían el formulario SIN `<label>` (solo placeholder → invisible para lectores de pantalla). Se añadió `id` único + `<label for class="sr-only">` por campo. OJO: hubo que añadir también la definición `.sr-only` al `<style>` crítico inline de cada página (no existe en CSS externo, solo inline en index.html) — sin ella el texto quedaría visible. Verificado: 4 labels/4 ids por página, 0 ids duplicados, sr-only def=1, HTTP 200, validate-landing.sh PASA en la de servicio, checkers deterministas sin regresión (plantilla 2 pre-existentes, indexabilidad 0).
+- Candados: diff = 3 archivos (≤15), 0 borrados estructurales, auto-revisión OK → publicado.
+- **Verificación ciega GSC RESUELTA (no era ceguera real):** el subagente revisor-gsc está cableado a `mcp__local-seo` (apunta a plomero) y emitió "verificación ciega"; pero el MCP `gsc` del entorno SÍ tiene la propiedad `https://electricistaculiacanpro.mx/` (confirmado con gsc_list_sites). La indexación NO está ciega; el revisor está MAL CONFIGURADO → pendiente humano (reapuntar revisor-gsc a `mcp__gsc__*`).
+
+### PENDIENTE HUMANO (esta corrida — NO auto: estratégico/masivo/diseño)
+- **revisor-gsc mal configurado** (media): reapuntar a `mcp__gsc__*` con la propiedad `https://electricistaculiacanpro.mx/` para que deje de emitir falsa "verificación ciega".
+- **Contraste WCAG AA del CTA de marca** (alta, a11y-004/005): `#F97316` 2.8:1 y `#E36414` 3.44:1 sobre blanco fallan AA. Decisión de diseño (qué tono oscuro, p.ej. `#C2410C`). Toca 3 CSS + bump sw.js.
+- **focus-visible global ausente** (media, a11y-006): falta foco de teclado salvo .seo-card. 3 CSS + sw bump (ya venía de antes).
+- **CSS render-blocking en 642 colonias + contacto/gracias/blog-index** (perf alta): no replican patrón async de la home. >15 archivos → corrida dedicada.
+- **aggregateRating/Review self-serving en homepage + 16 servicios** (alta, seo): además de las ~642 colonias ya anotadas. Riesgo de acción manual. Batch dedicado (>15 archivos).
+- **8 meta descriptions de blog/servicio > 155-160 car.** (baja): edición de copy, no auto.
+- **`.service-cta` y formularios de blog/servicio sin replicar EXACTO la plantilla** (consistencia): los 2 blogs fallan validate-landing.sh (sin exit-popup ni main.min.js) — pre-existente, decisión de plantilla del dueño.
+- Heredados sin resolver de corridas previas: fuga copy "10 de Abril" en wa.me de ~96 colonias; 16 colonias indexables fuera del sitemap; 3 tablas de blog sin table-wrapper; ETA inconsistente; theme-color placeholder.
+
 ## 2026-06-14 (corrida 6:20 PM) — PUBLICADO ✅ (commit 40beb89)
 - Rama `auto/mantenimiento-20260614-1820`, mergeada a main y pusheada (auto-indexación: 14 URLs a Google).
 - **ARREGLADO (alta, mecánico):** 18 enlaces rotos en 14 páginas de servicio → slug correcto `reparacion-cortocircuitos` (eran `reparacion-cortos-circuitos`, 404). Checker plantilla 28→14 (los 14 restantes son falsos positivos: `${c.s}` template-literal JS y fonts `../../../` que el navegador recorta).
