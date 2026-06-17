@@ -1,6 +1,7 @@
 # ESTADO — Electricista Culiacán
 
-## 2026-06-17 (paridad con Plomero — privacidad + 5 zona-pages) — EN RAMA, sin publicar ⏳
+## 2026-06-17 (paridad con Plomero — privacidad + 5 zona-pages) — PUBLICADO ✅
+Rama `feat/paridad-plomero-privacidad-zonas` mergeada (`--no-ff`) a main y pusheada (commit f8cff0a1). Auto-indexación GSC: 6 URLs enviadas (5 zona-pages + índice de colonias); privacidad NO enviada (noindex, correcto).
 Petición del dueño: replicar la estructura de **Plomero Culiacán** y crear lo que le falta a Electricista.
 Diagnóstico de huecos reales (Plomero tiene, Electricista no): `/privacidad/`, 5 zona-pages, partials (descartados: andamiaje no usado). NO-huecos: `/precios/` top-level (Electricista usa `/servicios/electricista-precios/`) y dirs de tooling.
 
