@@ -17,10 +17,18 @@ else
   AGE_H=999
 fi
 
+# La última corrida FALLÓ si su log trae el marcador de error de claude.
+FAILED=0
+[ -n "$NEWEST" ] && grep -qiE "termin. con error|API Error" "$NEWEST" && FAILED=1
+
 if [ "$AGE_H" -ge 20 ]; then
-  echo "[$STAMP] catch-up electricista: última corrida hace ${AGE_H}h (>=20) -> RECUPERANDO" >> "$LOG_DIR/electricista-catchup.log"
+  echo "[$STAMP] catch-up electricista: última corrida hace ${AGE_H}h (>=20, ausente) -> RECUPERANDO" >> "$LOG_DIR/electricista-catchup.log"
+  bash "$SCRIPT"
+  echo "[$STAMP] catch-up electricista: terminado" >> "$LOG_DIR/electricista-catchup.log"
+elif [ "$FAILED" = 1 ]; then
+  echo "[$STAMP] catch-up electricista: última corrida (hace ${AGE_H}h) FALLÓ -> RECUPERANDO" >> "$LOG_DIR/electricista-catchup.log"
   bash "$SCRIPT"
   echo "[$STAMP] catch-up electricista: terminado" >> "$LOG_DIR/electricista-catchup.log"
 else
-  echo "[$STAMP] catch-up electricista: última corrida hace ${AGE_H}h (<20) -> sin acción" >> "$LOG_DIR/electricista-catchup.log"
+  echo "[$STAMP] catch-up electricista: última corrida hace ${AGE_H}h, OK -> sin acción" >> "$LOG_DIR/electricista-catchup.log"
 fi
