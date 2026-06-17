@@ -1,5 +1,21 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (corrida 11:26 AM) — PUBLICADO ✅
+- Rama `auto/mantenimiento-20260617-1126`, mergeada (`--no-ff`) a main y pusheada.
+- HEALTH CHECK previo OK (home, /contacto/, /servicios/instalacion-electrica/, /blog/, /servicios/electricista/ → 200).
+- **ARREGLADO (media, mecánico — leak de plantilla):** `twitter:url` apuntaba a `/servicios/reparacion-cortocircuitos/` en vez del canonical propio en 4 páginas de servicio (cambio-cableado-electrico, electricista-a-domicilio, instalacion-centro-carga, instalacion-ventiladores-techo). El 2026-06-14 se arreglaron canonical+og:url de estas mismas pero `twitter:url` (3er campo de URL) sobrevivió. Fix: `twitter:url` = canonical propio. Verificado site-wide: 0 mismatch canonical-vs-twitter en 674 HTML; la página legítima reparacion-cortocircuitos intacta; validate-landing.sh PASA en las 4; HTTP 200; checkers sin regresión (plantilla 2 pre-existentes, indexabilidad 0).
+- Candados: diff = 4 archivos (≤15), 0 borrados estructurales, auto-revisión OK → publicado.
+- **GSC verificado con datos REALES (no ciego):** consulté `mcp__gsc__*` con la propiedad real `https://electricistaculiacanpro.mx/`. Sitemaps 0 errores (sitemap.xml 30 envíadas/3 warn, colonias 16/0, images 14/1 warn). Home y /servicios/instalacion-electrica/ indexadas; `/blog/` "Descubierta: sin indexar aún" (informativo, nunca crawleada — no mecánico). Producción en vivo: 0 hallazgos.
+
+### PENDIENTE HUMANO (nuevos esta corrida — NO auto: copy/diseño/estrategia o fuera de la "una mejora")
+- **Copy leak "reparación de cortocircuitos"** (media, seo): H2 principal y CTA de `cambio-cableado-electrico` e `instalacion-ventiladores-techo` (13 menciones) hablan de cortocircuitos en páginas de otro servicio. Cambio de copy.
+- **`<h1>` duplicado** en `servicios/electricista-colonias-culiacan/` (media, a11y): único con 2 h1 idénticos; mecánico 1 línea (degradar 2º a h2), próxima corrida.
+- **`.letter-btn` tap target <44px** en colonias (media, móvil): 23 botones A-Z ~38x34px; fix inline min-height/min-width 44px.
+- **Tarjetas sociales incompletas** en `servicios/electricista-colonias-culiacan/` (media, seo): sin og:url/og:image ni twitter cards; replicar bloque de index.html.
+- **`gracias/` carga main.js sin minificar** (baja, perf) + **footer logo de index.html sin loading=lazy** (baja, perf, se hereda).
+- **blog/index.html img featured eager sin fetchpriority** (plt-001, media): fix template-correcto = añadir `fetchpriority="high"` (es el LCP, NO lazy), próxima corrida.
+- 8 meta descriptions de blog con cola comercial de plantilla + og:image temáticamente incoherentes en varios blogs/servicios (baja, copy).
+
 ## 2026-06-16 (corrida 9:00 AM) — PUBLICADO ✅ (commit f221d4ee)
 - Rama `auto/mantenimiento-20260616-0900`, mergeada (`--no-ff`) a main y pusheada. Auto-indexación: 3 URLs enviadas a Google.
 - HEALTH CHECK previo OK (home, /contacto/, /servicios/instalacion-electrica/, /blog/ → 200).
