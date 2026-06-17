@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+# Forzar IPv4: el 2026-06-16 fallaron corrida y correo por IPv6 roto (EHOSTUNREACH).
+# Hace que node (claude CLI + send-report) prefiera IPv4.
+export NODE_OPTIONS="--dns-result-order=ipv4first"
+
 cd "/Users/openclaw/Sitios Web/Electricista Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
