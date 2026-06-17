@@ -1,5 +1,16 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (paridad con Plomero — privacidad + 5 zona-pages) — EN RAMA, sin publicar ⏳
+Petición del dueño: replicar la estructura de **Plomero Culiacán** y crear lo que le falta a Electricista.
+Diagnóstico de huecos reales (Plomero tiene, Electricista no): `/privacidad/`, 5 zona-pages, partials (descartados: andamiaje no usado). NO-huecos: `/precios/` top-level (Electricista usa `/servicios/electricista-precios/`) y dirs de tooling.
+
+- **CREADO — `/privacidad/` (Aviso de Privacidad, LFPDPPP):** Plomero la tenía y Electricista no (ni se enlazaba). Molde = `terminos/` (plantilla legal `noindex,follow`), branding electricista, `GTM-5Z2QRZ5Q`, Clarity, email `contacto@electricistaculiacanpro.mx`. 0 fugas de "plomero". Enlazada desde `terminos/` (descubrible site-wide). Fuera del sitemap (correcto, noindex). validate-landing → OMITIDO (noindex). HTTP 200.
+- **CREADO — 5 zona-pages** (`servicios/electricista-zona-{norte,sur,oriente,poniente}-culiacan/` + `electricista-centro-culiacan/`), paridad con las de Plomero:
+  - **Método:** generador determinista (`/tmp/gen-zonas.py`) que copia el esqueleto `electricista-cerca-de-mi/index.html` byte a byte (paridad estructural por construcción → no hay drift de plantilla) y sustituye SOLO regiones de contenido, afirmando cada replace (aborta si una no ocurre). Corrigió de paso el bug zsh de no-word-splitting (REGLAS OPERACIÓN-PIPELINE) en el loop de verificación.
+  - **Anti-doorway:** contenido ÚNICO por zona (title/desc/kw, H1, hero, benefits, grid de colonias con enlaces, 3 testimonios, 5 FAQ JSON-LD+HTML, schema Service, coords meta). Jaccard de contenido visible 0.61–0.69 (<0.75). Mapeo geográfico REAL de Culiacán cruzado con las 16 colonias indexables (cada zona ≥2 colonias propias; coords meta únicas por zona; el schema `#business` mantiene el HQ 24.7903 como el resto del sitio).
+  - **Verificación:** validate-landing.sh PASA en las 5; JSON-LD válido; canonical==og:url==twitter:url; 0 enlaces de colonia rotos (16 slugs confirmados en disco); agregadas a `sitemap.xml` (44→49 URLs, priority 0.8); enlaces entrantes desde el índice de colonias (bloque "Electricista por Zona"); checkers deterministas sin regresión (plantilla 2 pre-existentes, indexabilidad 0 sobre las nuevas); HTTP 200 en las 5 + hero/main.min.js/colonia.
+- **PENDIENTE:** revisión humana + publicar (rama/commit). Diff > candado de 15 archivos (7 nuevos + sitemap + colonias-index + terminos) → corrida fuera de la automatización de "una mejora", por petición explícita del dueño.
+
 ## 2026-06-17 (corrida 11:26 AM) — PUBLICADO ✅
 - Rama `auto/mantenimiento-20260617-1126`, mergeada (`--no-ff`) a main y pusheada.
 - HEALTH CHECK previo OK (home, /contacto/, /servicios/instalacion-electrica/, /blog/, /servicios/electricista/ → 200).
