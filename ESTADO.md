@@ -1,5 +1,11 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (4 servicios de alta intencion de llamada) — PUBLICADO ✅
+Buscamos huecos que JALAN LLAMADAS (intencion transaccional/urgencia). El dueno confirmo que SI ofrece estos 4 servicios (que no tenian pagina):
+- **CREADOS Y PUBLICADOS:** `/servicios/instalacion-calentador-electrico/` (calentador/regadera/boiler), `/servicios/instalacion-porton-electrico/` (porton/motor), `/servicios/contrato-luz-medidor-cfe/` (contrato/medidor/aumento de carga), `/servicios/instalacion-bomba-agua/` (bomba/hidroneumatico). gen-landing desde cerca-de-mi (con hero 2 botones), contenido unico enfocado a urgencia + FAQ.
+- **Candado:** validate-landing PASA las 4, anti-doorway 0.55-0.60, ci-gate 0 ALTA, JSON-LD OK, HTTP 200. Sitemap 76->80; enlazados desde la home; sw v10->v11. Servicios totales 21->25.
+
+
 ## 2026-06-17 (colonias LOTE 3 — 8 mas) — PUBLICADO ✅
 Tercer lote de 8 colonias diferenciadas+enriquecidas (meta unica + 3 parrafos + problemas + servicios).
 - **8:** el-vallado, jorge-almada, los-pinos, adolfo-lopez-mateos, libertad, pemex, campestre, juntas-de-humaya.
