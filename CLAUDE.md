@@ -35,6 +35,9 @@
 - Backbone determinista (garantiza paridad de plantilla y bloquea doorways):
   - `python3 .pipeline/gen-landing.py spec.json` — genera una landing copiando un esqueleto byte a byte + sustituciones afirmadas (aborta si no calzan o si hay fuga "plomero").
   - `python3 .pipeline/gate-pagina.py <ruta/index.html> ...` — candado todo-en-uno: validate-landing + ci-gate (0 ALTA) + anti-doorway (Jaccard < 0.80 vs hermanas).
+- Generadores reusables (se apoyan en gen-landing.py; corren `--ejemplo` para ver el spec):
+  - `python3 scripts/crear-servicio.py spec.json` — crea una página de SERVICIO nueva.
+  - `python3 scripts/diferenciar-colonia.py spec.json` — promueve una colonia noindex→indexable con contenido único.
 
 ## Comandos útiles
 - git log --oneline -30  (ver historia reciente)
