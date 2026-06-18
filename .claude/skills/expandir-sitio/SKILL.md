@@ -17,6 +17,16 @@ Muestra EVIDENCIA (salida de comando) en cada fase. NO afirmes éxito sin probar
 - `AUTO_PUBLICA = sí` — si los candados pasan, mergea a main + indexa. Si fallan, NO publica.
 - Propiedad GSC: `https://electricistaculiacanpro.mx/`. Email del sitio: `contacto@electricistaculiacanpro.mx`.
 
+## MODO AUTÓNOMO (NO PARAR)
+Una vez invocado, ejecuta las 8 fases de corrido **sin detenerte a pedir confirmación**.
+Decide con las REGLAS DURAS y los datos; no preguntes al humano. Al inicio, anuncia en UNA
+lista breve QUÉ vas a hacer (las acciones priorizadas) y luego hazlo todo hasta publicar.
+Las ÚNICAS razones legítimas para no publicar algo son:
+  (a) un CANDADO falla → deja esa página en la rama, NO la publiques, y sigue con las demás;
+  (b) una acción marcada como **decisión de negocio** (p.ej. nicho "eléctrico automotriz"):
+      NO la ejecutes; solo anótala como PENDIENTE HUMANO y continúa.
+Nunca te detengas "por si acaso". Si una acción es de bajo riesgo y pasa candados, publícala.
+
 ## REGLAS DURAS (innegociables — leer antes de crear nada)
 1. **Anti-doorway:** jamás crear páginas casi-idénticas. Cada página debe tener contenido
    sustancialmente único (H1, hero, secciones, FAQ, testimonios, schema). El candado

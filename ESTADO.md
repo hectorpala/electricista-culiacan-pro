@@ -1,5 +1,11 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (agente /expandir-sitio — 1ª corrida autónoma) — PUBLICADO ✅
+Agente de crecimiento autónomo. Auditoría GSC (28 días: 94 clics / 4,164 impr / pos 6.8) → reporte en `.pipeline/oportunidades-20260617.md`.
+- **DETERMINÓ y DESCARTÓ (juicio anti-doorway, lo correcto):** `electricista-urgente` NO se crea (la home y sobre todo `emergencia-24-7` —titulada "Electricista 24 Horas… Emergencia Urgente"— ya cubren "urgente/24 horas" → sería canibalización); mejora de "evitar cortocircuito" NO se hace (el post ya tiene "10 Medidas para Evitar Cortocircuitos").
+- **CREADO Y PUBLICADO:** `/servicios/electricista-comercial/` — hueco estructural de paridad (Plomero tiene `plomeria-comercial`), intención B2B distinta (negocios/locales/oficinas, trifásica, mantenimiento programado, factura). Generada con `gen-landing.py` (27 sustituciones, paridad por construcción). **Candado VERDE:** validate-landing PASA, ci-gate 0 ALTA, anti-doorway Jaccard **0.55**. Sitemap 49→50; enlace entrante desde la pillar `/servicios/electricista/` (tarjeta con imagen real); HTTP 200.
+- **PENDIENTE HUMANO (decisión de negocio):** "eléctrico automotriz a domicilio" rankea pos 2.6 (21 impr) sin página → definir si el negocio entra a ese nicho antes de crearla.
+
 ## 2026-06-17 (paridad con Plomero — privacidad + 5 zona-pages) — PUBLICADO ✅
 Rama `feat/paridad-plomero-privacidad-zonas` mergeada (`--no-ff`) a main y pusheada (commit f8cff0a1). Auto-indexación GSC: 6 URLs enviadas (5 zona-pages + índice de colonias); privacidad NO enviada (noindex, correcto).
 Petición del dueño: replicar la estructura de **Plomero Culiacán** y crear lo que le falta a Electricista.
