@@ -12,7 +12,7 @@ Rendimiento global: **94 clics / 4,164 impresiones · CTR 2.26% · pos. media 6.
 | 3 | Mejorar CTR de la home para "cerca de mi ubicación" | mejora | "electrica cerca de mi ubicación" pos 2.2 (30 impr, 0 clics), "electricista a domicilio cerca de mi ubicación" pos 2.0 (23 impr, 0 clics) | Alto | Nulo | Afinar title/meta (toca index.html = fuente de verdad → con cuidado) |
 | 4 | Consolidar "electricista / electricista culiacan" (canibalización) | mejora | "electricista culiacan" lo sirven a la vez `colonias/santa-aynes` y `/contacto/`; "electricista" lo sirven `instalacion-electrica` y `electricista-precios` | Medio | Nulo | Reforzar la página canónica del término y su interlinking |
 | 5 | Cluster blog "cuánto cuesta" / precios eléctricos | blog | intención comercial recurrente del nicho; complementa `electricista-precios` | Medio | Bajo | Post "¿cuánto cobra un electricista en Culiacán?" |
-| 6 | ⚠️ "eléctrico automotriz a domicilio" | gsc | "eléctrico automotriz a domicilio 24 horas" pos 2.6 (21 impr, 1 clic) + variante culiacán pos 7 | ? | — | **PENDIENTE HUMANO**: ¿el negocio ofrece electricidad automotriz? Si no, ignorar (tráfico off-target) |
+| 6 | ❌ "eléctrico automotriz a domicilio" | gsc | pos 2.6 (21 impr) | — | — | **DESCARTADA 2026-06-17 (dueño): el negocio NO hace automotriz. NO crear. Ver REGLAS.md** |
 
 ## Lectura del agente
 - **Quick wins de menor riesgo (auto-construibles):** #1 y #5 (mejora + blog) — cero riesgo doorway, respaldo de datos.
