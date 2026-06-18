@@ -130,10 +130,48 @@ la próxima vez. Para cada error corregido este día —sobre todo REGRESIONES y
      "arreglado"/"pendiente", regla aplicada/creada). El sistema se vuelve más listo midiéndose por esto: cada
      clase de error vista una vez debe quedar blindada por una regla o un checker.
 
-==================== FASE 10 — Bitácora y parte ====================
-Apaga el servidor local. Escribe en .pipeline/ultima-corrida.md un resumen claro: qué errores se corrigieron
-(mecánicos y humanos), qué páginas se crearon (o por qué 0), veredicto del verificador, qué se aprendió (reglas/
-checkers nuevos), si se publicó o no y POR QUÉ, y qué quedó como PENDIENTE HUMANO. Actualiza ESTADO.md (entrada
-nueva ARRIBA con fecha y evidencia). Sé honesto: si no se creó nada o no se publicó, dilo con su motivo.
+==================== FASE 10 — Bitácora y PARTE por email (lenguaje claro, NO técnico) ====================
+Apaga el servidor local. Actualiza ESTADO.md (entrada nueva ARRIBA con fecha y evidencia técnica) y registra en
+HISTORIAL.jsonl. Luego escribe `.pipeline/ultima-corrida.md`, que es EXACTAMENTE lo que se le envía al dueño por
+email. Va dirigido a un DUEÑO DE NEGOCIO, no a un técnico. Reglas de redacción del parte:
+  • Lenguaje claro y humano. PROHIBIDAS las palabras técnicas: nada de "Jaccard", "candado", "anti-doorway",
+    "ci-gate", "HTTP 200", "JSON-LD", "canonical", "commit", "merge", "branch", "schema". Traduce todo a beneficio:
+    "revisé que todo quedara bien y funcionando", "lo subí al sitio", "le avisé a Google para que lo muestre".
+  • SIEMPRE incluye los LINKS COMPLETOS (https://electricistaculiacanpro.mx/...) de CADA página creada o mejorada,
+    uno por línea (en el correo se vuelven clicables). Nunca pongas solo la ruta suelta.
+  • La 2ª línea DEBE ser exactamente `**Resultado:** <frase corta>` — de ahí sale el ASUNTO del correo. Ej.:
+    `**Resultado:** arreglé 3 páginas · 1 mejora · publicado` o `**Resultado:** revisé el sitio, 0 cambios hoy`.
+  • SIEMPRE incluye "Aprendí hoy" con las reglas nuevas del día en lenguaje simple, y al final cuántas lleva el
+    sistema en total ("ya van N reglas aprendidas"). Si hoy no aprendió nada nuevo, dilo con esa frase.
+  • Honestidad: si no creó páginas o no publicó, dilo con el motivo en UNA frase simple.
+
+Estructura EXACTA del parte (respétala):
+
+  # Auto Agente Electricista — parte del <fecha>
+  **Resultado:** <frase corta para el asunto>
+
+  Hola Héctor, esto es lo que hice hoy solo:
+
+  ## ✅ Arreglé (<n>)
+  - <qué estaba mal, en simple> → https://electricistaculiacanpro.mx/<ruta>/
+  (si no hubo nada: "Revisé todo y no encontré errores que corregir hoy.")
+
+  ## 🌱 Mejoré / agregué (<m>)
+  - NUEVA: <para qué sirve> → https://electricistaculiacanpro.mx/<ruta>/
+  - MEJORÉ: <qué mejoré y por qué> → https://electricistaculiacanpro.mx/<ruta>/
+  (si no hubo: "Sin páginas nuevas hoy: revisé Google y tu sitio ya cubre lo que la gente busca; no inventé
+   páginas porque eso dañaría tu posicionamiento.")
+
+  ## 🧠 Aprendí hoy (para no volver a fallar)
+  - <regla nueva en lenguaje simple>
+  (ya van <N> reglas aprendidas en total)
+
+  ## ⏳ Necesito que tú decidas
+  - <solo decisiones tuyas: precios, estrategia, un servicio nuevo> — <por qué no lo hago yo>
+  (si no hay: "Nada pendiente de tu parte hoy.")
+
+  ## 📦 ¿Se publicó?
+  <"Sí, todo revisado y en vivo; le avisé a Google para que lo muestre." | "No publiqué: <motivo simple>;
+   lo dejé guardado para revisión.">
 
 Ante cualquier ambigüedad o riesgo, prefiere NO publicar y dejarlo para revisión humana.
