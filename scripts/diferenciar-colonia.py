@@ -85,8 +85,10 @@ def main():
     ss = h.rfind('<section', 0, fc)
     h = h[:ss] + seccion(z["nombre"], z["p1"], z["p2"], z["p3"], z["problemas"], z["servicios"]) + h[ss:]
     # 4) breadcrumb item 3 con URL propia
+    # Reemplazo con FUNCIÓN (no string): así el slug se inserta LITERAL y un '\1'/'\g<>'
+    # en el slug no se interpreta como backreference (corrompería el JSON-LD). B-N3.
     h = re.sub(r'(\{"@type": "ListItem", "position": 3, "name": "[^"]*")\}',
-               r'\1, "item": "%s%s/"}' % (BASEURL, slug), h, count=1)
+               lambda m: m.group(1) + ', "item": "%s%s/"}' % (BASEURL, slug), h, count=1)
 
     open(f, "w", encoding="utf-8").write(h)
     print("✅ %s diferenciada e indexable (meta única x%d + sección + breadcrumb)" % (slug, n_meta))
