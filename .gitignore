@@ -47,3 +47,6 @@ build/
 .netlify
 .pipeline/.openai-key
 .pipeline/.gemini-key
+
+# artefactos internos del pipeline (no publicar)
+.pipeline/*.patch
