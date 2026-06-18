@@ -1058,8 +1058,8 @@ function renderPagination() {
 
   // Build pagination HTML
   let html = `
-    <button class="pagination-btn" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <button class="pagination-btn" data-page="${currentPage - 1}" aria-label="Página anterior" ${currentPage === 1 ? 'disabled' : ''}>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
         <polyline points="15 18 9 12 15 6"/>
       </svg>
     </button>
@@ -1075,8 +1075,8 @@ function renderPagination() {
   });
 
   html += `
-    <button class="pagination-btn" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <button class="pagination-btn" data-page="${currentPage + 1}" aria-label="Página siguiente" ${currentPage === totalPages ? 'disabled' : ''}>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
         <polyline points="9 18 15 12 9 6"/>
       </svg>
     </button>

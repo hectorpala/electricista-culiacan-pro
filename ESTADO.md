@@ -1,5 +1,19 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (REMEDIACION tras revision de 4 agentes) — PUBLICADO ✅
+4 revisores independientes auditaron las paginas nuevas (servicios, blogs, colonias) con rubrica adversarial. Hallazgos de RIESGO corregidos:
+- **dictamen-electrico:** reescrito honesto — NO promete el certificado oficial (lo emite una UVIE acreditada); solo deja la instalacion 'a norma' + orienta. Testimonio 'ya me conectaron' removido. (decision del dueno).
+- **paneles-solares:** fuera 'se pagan solos' y 'eliminar tu recibo' -> 'se pagan en pocos años / reducir al minimo'.
+- **cercas-electricas:** fuera 'sin riesgos para tu familia' -> 'de forma segura a norma'.
+- **contrato-luz-cfe:** fuera framing de emergencia '30-60 min' (es trabajo planeado).
+- **2 blogs:** CTA correcto (ya no 'bajar tu recibo'); fuera 'datos del verano sinaloense' inexistente.
+- **Reseñas:** unificadas a 150 (texto '50 clientes' -> '150', 36 paginas; decision del dueno).
+- **'rastreo en tiempo real':** removido site-wide (18 paginas, poco creible).
+- **calentador:** 'e' cirilica corregida.
+- Gate VERDE, JSON-LD valido, anti-doorway 0.53-0.61. sw v12->v13.
+- **PENDIENTE (garantia):** '6 meses' esta en ~650 colonias + terminos + home; '30-90 dias' en 36 servicios. El dueno eligio 30-90, pero cambiar 650 archivos es downgrade de un gancho de venta -> confirmar alcance antes de tocar.
+
+
 ## 2026-06-17 (7 servicios mas de alta intencion) — PUBLICADO ✅
 Segundo lote de servicios jala-llamadas. El dueno confirmo que SI ofrece los 4 de mayor ticket.
 - **CREADOS Y PUBLICADOS (7):** instalacion-planta-luz-generador (fuerte por apagones), instalacion-paneles-solares, instalacion-camaras-seguridad, instalacion-cercas-electricas, reparacion-minisplit, dictamen-electrico, no-hay-luz-en-parte-casa. gen-landing desde cerca-de-mi, contenido unico + FAQ por servicio.
