@@ -37,6 +37,14 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     fallback CSS global, por eso baja).                 (f44ef39f)
  11. perf   (baja)  theme-color == #0066cc (placeholder prohibido); o pagina indexable
                     sin meta theme-color alguna.                   (bd9ccadf, fdc89c6c)
+ 12. links  (alta)  Telefono NO canonico: cualquier wa.me/<digitos>, tel:<...> o
+                    "telephone":"<...>" cuyo numero (solo digitos) no sea 526673922273
+                    ni 6673922273. Caza el placeholder 6677890000, el corrupto
+                    526676673922273 y el tel sin +52.                 (2026-06-17)
+ 13. seo    (media) Overclaim "certificada/certificacion CFE" o "certificado oficial"+
+                    "cfe": solo una UVIE acreditada certifica; nosotros entregamos
+                    constancia/a norma NOM-001-SEDE.                  (2026-06-17)
+ 14. perf   (baja)  Referencia a main.js sin minificar (debe ser main.min.js). (2026-06-17)
 """
 import os
 import re
@@ -45,6 +53,13 @@ import glob
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # raiz del repo
 BASE = "https://electricistaculiacanpro.mx"
+
+# Telefono canonico UNICO del sitio (solo digitos). Se aceptan dos formas:
+# con lada nacional 52 (526673922273, p.ej. wa.me/tel/JSON-LD) y sin ella
+# (6673922273, p.ej. un tel: nacional). Cualquier otro numero = fuga/placeholder/
+# corrupcion. Patrones malos vistos el 2026-06-17: placeholder de plantilla
+# 6677890000, corrupto por digitos duplicados 526676673922273, tel sin +52.
+PHONE_CANONICAL = {"526673922273", "6673922273"}
 
 # Directorios que NUNCA son paginas servidas del sitio (mismo criterio que
 # check-indexabilidad.py).
@@ -354,6 +369,57 @@ def check_page(fpath, t, noindex, redirects):
         add("baja", r, "perf",
             "Página indexable sin <meta name=\"theme-color\">",
             "Añadir <meta name=\"theme-color\" content=\"#...\"> con el color de marca en el <head>")
+
+    # --- 12. telefono NO canonico (alta, links) — contacto roto = leads perdidos
+    #         Normaliza a solo digitos (ignora +, espacios y guiones). Si el numero
+    #         no es 526673922273 ni 6673922273 -> fuga/placeholder/corrupcion.
+    seen_phones = set()
+    for m in re.finditer(
+            r'wa\.me/(\+?[\d\s\-]+)'                       # wa.me/<numero>
+            r'|tel:(\+?[\d\s\-]+)'                          # tel:<numero>
+            r'|"telephone"\s*:\s*"(\+?[\d\s\-]+)"',         # JSON-LD telephone
+            t, re.I):
+        raw = m.group(1) or m.group(2) or m.group(3) or ""
+        digits = re.sub(r'\D', "", raw)
+        if not digits:
+            continue
+        if digits in PHONE_CANONICAL:
+            continue
+        if digits in seen_phones:
+            continue
+        seen_phones.add(digits)
+        add("alta", r, "links",
+            "Teléfono no canónico (%s); el único número del sitio es 526673922273"
+            % m.group(0).strip(),
+            "Reemplazar por el teléfono canónico: wa.me/526673922273 · tel:+526673922273 · "
+            '"telephone":"+526673922273" (display "667 392 2273"). Patrones malos: placeholder '
+            "6677890000, corrupto 526676673922273, tel sin +52")
+
+    # --- 13. overclaim certificación CFE (media — NO bloquea; visibiliza el lote)
+    #         Solo una UVIE acreditada emite la verificación oficial para CFE; el
+    #         negocio entrega "constancia de instalación / a norma NOM-001-SEDE".
+    low_t = t.lower()
+    overclaim = None
+    if "certificada cfe" in low_t:
+        overclaim = "certificada CFE"
+    elif "certificación cfe" in low_t or "certificacion cfe" in low_t:
+        overclaim = "certificación CFE"
+    elif "certificado oficial" in low_t and "cfe" in low_t:
+        overclaim = "certificado oficial + CFE"
+    if overclaim:
+        add("media", r, "seo",
+            "Overclaim certificación CFE (\"%s\"): solo una UVIE acreditada certifica para CFE"
+            % overclaim,
+            'Reescribir a "constancia de instalación" / "a norma NOM-001-SEDE" (NO "certificada/'
+            'certificación/certificado oficial CFE"). Lote teaser de ~18 páginas deferido el '
+            "2026-06-17 (tarjeta de servicio relacionado + 1 H3)")
+
+    # --- 14. main.js sin minificar (baja, perf)
+    for m in re.finditer(r'src\s*=\s*["\']([^"\']*main\.js)["\']', t, re.I):
+        add("baja", r, "perf",
+            "Referencia a main.js sin minificar: %s (debe ser main.min.js)" % m.group(1),
+            "Cambiar el src a main.min.js (mismo path, versión minificada que usa index.html). "
+            "Tras el cambio verificar que las URLs wa.me no quedaron truncadas")
 
 
 # ================================================================ CHECK global: paridad CSS
