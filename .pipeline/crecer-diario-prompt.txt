@@ -80,6 +80,17 @@ Sigue el skill /expandir-sitio (.claude/skills/expandir-sitio/SKILL.md) y usa el
      contenido de la FASE 5 (sin claims engañosos, sin tocar precios). El objetivo de esta fase es: SIEMPRE
      crear una página con señal real O, si no la hay, dejar el sitio MÁS RICO mejorando lo existente — nunca
      ambas cosas a cero. Tope: hasta 3 acciones (crear y/o mejorar) por corrida.
+  2b. COLONIAS — estrategia de CALIDAD DIRIGIDA, no de volumen (decisión del dueño, respaldada por datos
+     GSC del 2026-06-17): NO diferenciar las 602 colonias noindex en masa. La inspección real de GSC mostró
+     que Google SÍ indexa las colonias PROMINENTES (Tres Ríos, Rafael Buelna ✅) y NO indexa las pequeñas/
+     oscuras (6 de Enero, Bachigualato, Bugambilias → "rastreada sin indexar"). Por tanto:
+       - Diferenciar SOLO colonias prominentes (grandes, conocidas, o con alguna impresión en GSC): realistamente
+         ~20-40 en total, NO 602. Las chicas se quedan noindex (Google ya nos dijo que no las quiere).
+       - Cuando el día se dedique a colonias, hacer HASTA 5 por corrida, priorizadas por prominencia/demanda
+         (NO alfabético). Tras diferenciar, pedir indexación (mcp__gsc__gsc_index) de las nuevas.
+       - MEDIR: a las ~3-4 semanas, inspeccionar con mcp__gsc__gsc_inspect las diferenciadas. Si una tanda sigue
+         "rastreada sin indexar", ESE tipo de colonia no rinde → PARAR de diferenciar colonias y mover el esfuerzo
+         diario a páginas con tráfico real (home/servicios/blog, optimización de CTR). Calidad > cantidad.
   3. Por cada página elegida (servicio / zona / colonia):
        - genera el spec con scripts/crear-servicio.py --ejemplo (o diferenciar-colonia.py --ejemplo) y rellénalo
          con contenido ÚNICO y verídico (H1, hero, beneficios, FAQ y testimonios propios, coords GPS reales y
