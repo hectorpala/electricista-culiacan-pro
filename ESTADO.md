@@ -1,5 +1,13 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (colonias LOTE 2 — 8 mas, ya enriquecidas) — PUBLICADO ✅
+Segundo lote de 8 colonias diferenciadas+promovidas, ya con el template enriquecido completo desde el inicio (meta unica + 3 parrafos + 'Problemas comunes' + servicios).
+- **8 colonias:** barrancos, lazaro-cardenas, gabriel-leyva, la-campina, valle-alto, recursos-hidraulicos, hacienda-del-valle, antonio-toledo-corro. ~390 palabras c/u.
+- **Candado:** anti-doorway 0.49-0.64 (<0.80), ci-gate 0 ALTA, HTTP 200. Indexables de colonia: 24 -> **32** (de 642). Sitemap 60->68.
+- **Indexacion:** cuota diaria de la Indexing API agotada hoy; el pre-push hook las encolo y las reintenta manana automaticamente (ese mecanismo ya es el "siempre indexa al crear").
+- **PENDIENTE:** medir en GSC (gsc_inspect) en 2-3 semanas si los 2 lotes (16 colonias) se indexan, antes de escalar.
+
+
 ## 2026-06-17 (colonias piloto — enriquecimiento para indexabilidad) — PUBLICADO ✅
 Sobre el piloto de 8 colonias: para que Google SI las indexe (no las deje en "descubierta sin indexar" por delgadas), se subio el contenido unico.
 - **ENRIQUECIDAS las 8** (6-de-enero, bachigualato, bugambilias, nuevo-culiacan, colinas-de-san-miguel, lomas-de-tamazula, rafael-buelna, las-americas): meta description UNICA por colonia (antes era plantilla con solo el nombre), 3er parrafo unico + lista "Problemas electricos comunes en X" (4 propios). Palabras ~320 -> ~390-450; contenido unico ~120 -> ~240.
