@@ -26,8 +26,12 @@ echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # Corrida autónoma del pipeline (auto-permiso → 9 revisores, arregla y publica según candados)
-"$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/mantener-prompt.txt)" >> "$LOG_DIR/electricista-$STAMP.log" 2>&1 \
-  || echo "[$STAMP] La corrida de claude terminó con error (continúo para enviar el parte)." >> "$LOG_DIR/electricista-$STAMP.log"
+if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/mantener-prompt.txt)" >> "$LOG_DIR/electricista-$STAMP.log" 2>&1; then
+  CLAUDE_OK=1
+else
+  CLAUDE_OK=0
+  echo "[$STAMP] La corrida de claude terminó con error (continúo para enviar el parte)." >> "$LOG_DIR/electricista-$STAMP.log"
+fi
 
 # Parte por email — SIEMPRE, aun si la corrida falló (send-report alerta si el resumen es viejo/ausente).
 /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
@@ -35,5 +39,6 @@ trap 'rm -rf "$LOCK_DIR"' EXIT
   "Electricista Culiacán" "18:20" >> "$LOG_DIR/electricista-$STAMP.log" 2>&1 \
   || echo "[$STAMP] No se pudo enviar el email del parte (electricista)." >> "$LOG_DIR/electricista-$STAMP.log"
 
-# B-N2: marca el día corrido (compartida con crecer-diario) para que catchup.sh no duplique.
-date +%Y%m%d > "$LOG_DIR/auto-agente-last-run-day"
+# B-N2: marca el día corrido SOLO si tuvo éxito (compartida con crecer-diario) para que
+# catchup.sh no duplique pero SÍ pueda recuperar una corrida fallida el mismo día.
+[ "${CLAUDE_OK:-0}" = 1 ] && date +%Y%m%d > "$LOG_DIR/auto-agente-last-run-day"

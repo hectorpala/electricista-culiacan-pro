@@ -123,8 +123,10 @@ ESTADO.md. Si pasan TODOS, publica sincronizando ANTES con el remoto (git push -
      ABORTA, deja la rama sin fusionar, escribe en ESTADO.md "publicación detenida: main local divergió" y termina.
   c. `git merge --no-ff <rama> -m "auto-diario $(date +%Y-%m-%d): N arreglos + M páginas"`
   d. `git push` (el pre-push auto-indexa en GSC; deja que corra).
-  e. Si el push es RECHAZADO: NO uses --force. Reintegra UNA vez (`git fetch origin && git rebase origin/main &&
-     git push`); si el segundo push también falla, ABORTA, deja la rama, anota el motivo en ESTADO.md y termina.
+  e. Si el push es RECHAZADO: NO uses --force NI rebase (rebase aplanaría el merge --no-ff y dejaría la rama
+     "sin fusionar" → el branch -d fallaría y la rama quedaría colgada). Reintegra UNA vez con re-merge LIMPIO:
+     `git fetch origin && git reset --hard origin/main && git merge --no-ff <rama> -m "<mismo mensaje>" && git push`.
+     Si ese segundo push también falla, ABORTA, deja la rama, anota el motivo en ESTADO.md y termina.
   f. Solo si el push tuvo éxito: borra la rama fusionada. Luego, para páginas nuevas indexables, refuerza la
      indexación por MCP: mcp__gsc__gsc_index(site, [urls nuevas]).
 
