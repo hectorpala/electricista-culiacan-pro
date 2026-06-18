@@ -1,5 +1,12 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (7 servicios mas de alta intencion) — PUBLICADO ✅
+Segundo lote de servicios jala-llamadas. El dueno confirmo que SI ofrece los 4 de mayor ticket.
+- **CREADOS Y PUBLICADOS (7):** instalacion-planta-luz-generador (fuerte por apagones), instalacion-paneles-solares, instalacion-camaras-seguridad, instalacion-cercas-electricas, reparacion-minisplit, dictamen-electrico, no-hay-luz-en-parte-casa. gen-landing desde cerca-de-mi, contenido unico + FAQ por servicio.
+- **Candado:** validate-landing PASA las 7, anti-doorway 0.53-0.64 (no canibalizo emergencia/minisplit), ci-gate 0 ALTA. Sitemap 80->87; enlazados desde la home; sw v11->v12. Servicios totales 25->32.
+- Encolados para indexar (cuota MCP agotada hoy; pre-push reintenta manana).
+
+
 ## 2026-06-17 (4 servicios de alta intencion de llamada) — PUBLICADO ✅
 Buscamos huecos que JALAN LLAMADAS (intencion transaccional/urgencia). El dueno confirmo que SI ofrece estos 4 servicios (que no tenian pagina):
 - **CREADOS Y PUBLICADOS:** `/servicios/instalacion-calentador-electrico/` (calentador/regadera/boiler), `/servicios/instalacion-porton-electrico/` (porton/motor), `/servicios/contrato-luz-medidor-cfe/` (contrato/medidor/aumento de carga), `/servicios/instalacion-bomba-agua/` (bomba/hidroneumatico). gen-landing desde cerca-de-mi (con hero 2 botones), contenido unico enfocado a urgencia + FAQ.
