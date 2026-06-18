@@ -2,15 +2,17 @@
 # catchup.sh — Recupera la corrida diaria del ELECTRICISTA si se saltó (Mac apagada/dormida a la hora).
 # Lo dispara el LaunchAgent com.electricistaculiacan.catchup con RunAtLoad (al iniciar sesión/boot).
 # Regla: si la última corrida fue hace >= 20h, se saltó al menos una diaria -> recuperar ahora.
-# El lock de mantener-diario.sh (/tmp/electricista-mantener-sitio.lock) evita doble corrida.
+# El lock de crecer-diario.sh (/tmp/auto-agente-electricista.lock) evita doble corrida.
 set -uo pipefail
 
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
-SCRIPT="/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/mantener-diario.sh"
+# Apunta al sistema unificado (Auto Agente Electricista), no al viejo de solo-mantenimiento.
+SCRIPT="/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/crecer-diario.sh"
 STAMP=$(date "+%Y-%m-%d %H:%M:%S")
 
-NEWEST=$(ls -t "$LOG_DIR"/electricista-2*.log 2>/dev/null | head -1)
+# Busca el log más reciente de cualquiera de los dos drivers (auto-agente nuevo o el viejo electricista-*).
+NEWEST=$(ls -t "$LOG_DIR"/auto-agente-2*.log "$LOG_DIR"/electricista-2*.log 2>/dev/null | head -1)
 if [ -n "$NEWEST" ]; then
   AGE_H=$(( ( $(date +%s) - $(stat -f %m "$NEWEST") ) / 3600 ))
 else
