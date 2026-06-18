@@ -11,13 +11,19 @@ mkdir -p "$LOG_DIR"
 STAMP=$(date +%Y%m%d-%H%M%S)
 RUTA_CLAUDE="/Users/openclaw/.npm-global/bin/claude"
 
-# Lock propio de electricista (independiente del de plomero)
-LOCK_DIR="/tmp/electricista-mantener-sitio.lock"
+# Lock por-REPO COMPARTIDO con crecer-diario.sh (el Auto Agente lo reemplaza; este script
+# queda como respaldo manual). Mismo lock = NUNCA dos pipelines a la vez sobre el mismo repo.
+LOCK_DIR="/tmp/auto-agente-electricista.lock"
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
-  echo "[$STAMP] Ya hay una corrida de mantenimiento (electricista) activa; saliendo." >> "$LOG_DIR/electricista-$STAMP.log"
-  exit 0
+  OLDPID=$(cat "$LOCK_DIR/pid" 2>/dev/null || echo "")
+  if [ -n "$OLDPID" ] && kill -0 "$OLDPID" 2>/dev/null; then
+    echo "[$STAMP] Ya hay una corrida activa (pid $OLDPID); saliendo." >> "$LOG_DIR/electricista-$STAMP.log"
+    exit 0
+  fi
+  rm -rf "$LOCK_DIR"; mkdir "$LOCK_DIR" 2>/dev/null || exit 0
 fi
-trap 'rmdir "$LOCK_DIR"' EXIT
+echo "$$" > "$LOCK_DIR/pid"
+trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # Corrida autónoma del pipeline (auto-permiso → 9 revisores, arregla y publica según candados)
 "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/mantener-prompt.txt)" >> "$LOG_DIR/electricista-$STAMP.log" 2>&1 \

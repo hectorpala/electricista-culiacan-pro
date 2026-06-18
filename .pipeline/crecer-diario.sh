@@ -17,13 +17,23 @@ mkdir -p "$LOG_DIR"
 STAMP=$(date +%Y%m%d-%H%M%S)
 RUTA_CLAUDE="/Users/openclaw/.npm-global/bin/claude"
 
-# Lock propio del Auto Agente Electricista (no choca con el de plomero ni el viejo de mantener).
+# Lock por-REPO (lo comparten crecer-diario.sh y mantener-diario.sh para que NUNCA corran
+# dos pipelines a la vez sobre el mismo repo). Resistente a cuelgues: si el dueño del lock
+# ya murió (SIGKILL/corte de luz/reboot), se roba el lock en vez de quedar apagado en silencio.
 LOCK_DIR="/tmp/auto-agente-electricista.lock"
+LOG="$LOG_DIR/auto-agente-$STAMP.log"
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
-  echo "[$STAMP] Ya hay una corrida del Auto Agente Electricista activa; saliendo." >> "$LOG_DIR/auto-agente-$STAMP.log"
-  exit 0
+  OLDPID=$(cat "$LOCK_DIR/pid" 2>/dev/null || echo "")
+  if [ -n "$OLDPID" ] && kill -0 "$OLDPID" 2>/dev/null; then
+    echo "[$STAMP] Ya hay una corrida activa (pid $OLDPID); saliendo." >> "$LOG"
+    exit 0
+  fi
+  echo "[$STAMP] Lock huérfano (pid '$OLDPID' ya no vive) -> lo robo y continúo." >> "$LOG"
+  rm -rf "$LOCK_DIR"
+  mkdir "$LOCK_DIR" 2>/dev/null || { echo "[$STAMP] No pude tomar el lock; saliendo." >> "$LOG"; exit 0; }
 fi
-trap 'rmdir "$LOCK_DIR"' EXIT
+echo "$$" > "$LOCK_DIR/pid"
+trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # Corrida autónoma del sistema completo (auto-permiso). El prompt orquesta las 10 fases.
 "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG_DIR/auto-agente-$STAMP.log" 2>&1 \

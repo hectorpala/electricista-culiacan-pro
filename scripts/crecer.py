@@ -41,6 +41,27 @@ def _restore(snap):
         _write(p, h)
 
 
+_SLUG_RE = re.compile(r"^[a-z0-9]([a-z0-9-]*[a-z0-9])?$")
+
+
+def _valid_slug(slug):
+    """Un slug seguro: solo minúsculas/números/guiones, ≤80 car. Bloquea vacío, '/', '..'."""
+    return isinstance(slug, str) and 0 < len(slug) <= 80 and bool(_SLUG_RE.match(slug))
+
+
+def _rm_page_dir(parent_rel, slug):
+    """Borra servicios/<...>/<slug>/ SOLO si el slug es válido y la ruta queda DENTRO de
+    parent_rel (defensa en profundidad contra rm -rf de rutas computadas — ver C1)."""
+    if not _valid_slug(slug):
+        print("  ⚠️ rollback: slug inválido %r — NO borro nada por seguridad." % slug); return
+    base = os.path.realpath(os.path.join(ROOT, parent_rel))
+    target = os.path.realpath(os.path.join(base, slug))
+    if target != os.path.join(base, slug) or not target.startswith(base + os.sep):
+        print("  ⚠️ rollback: ruta fuera de %s — NO borro nada." % parent_rel); return
+    if os.path.isdir(target):
+        sh(["rm", "-rf", target])
+
+
 # ───────────────────────── herramientas de "plomería" ─────────────────────────
 def sitemap_add(loc, priority):
     sm = _read("sitemap.xml")
@@ -113,6 +134,8 @@ def cmd_servicio(args):
     spec = args[0]
     z = json.load(open(spec, encoding="utf-8"))
     slug = z["slug"]
+    if not _valid_slug(slug):
+        sys.exit("❌ slug inválido: %r (solo minúsculas, números y guiones; nada de '/', '..' ni vacío)" % slug)
     page = "servicios/%s/index.html" % slug
     print("── crear-servicio: %s ──" % slug)
     r = sh([PY, "scripts/crear-servicio.py", spec])
@@ -130,7 +153,7 @@ def cmd_servicio(args):
     if not ok:
         print("\n↩️  FALLÓ el candado o el enlace en home — revirtiendo para dejar el árbol LIMPIO…")
         _restore(snap)
-        sh(["rm", "-rf", os.path.dirname(os.path.join(ROOT, page))])
+        _rm_page_dir("servicios", slug)
         print("   revertido: sitemap.xml, index.html, sw.js · eliminada servicios/%s/" % slug)
         print("❌ NO se publica. Corrige el spec (%s) y reintenta. Motivo arriba." % spec)
         sys.exit(1)
@@ -141,6 +164,8 @@ def cmd_colonia(args):
     spec = args[0]
     z = json.load(open(spec, encoding="utf-8"))
     slug = z["slug"]
+    if not _valid_slug(slug):
+        sys.exit("❌ slug inválido: %r (solo minúsculas, números y guiones)" % slug)
     page = "servicios/electricista-colonias-culiacan/%s/index.html" % slug
     # La colonia YA existe (noindex) y diferenciar-colonia la edita en sitio.
     # Snapshot ANTES de editar para poder restaurarla (NO borrarla) si algo falla.
@@ -199,7 +224,12 @@ def cmd_publicar(args):
         print("❌ publicación detenida: la main local divergió de origin/main.")
         print("   La rama %s queda SIN fusionar para revisión humana. (No se forzó nada.)" % branch)
         sys.exit(1)
-    sh(["git", "merge", "--no-ff", branch, "-m", "Merge: " + msg])
+    mg = git("merge", "--no-ff", branch, "-m", "Merge: " + msg)
+    if mg.returncode != 0:
+        git("merge", "--abort")
+        print("❌ publicación detenida: el merge tuvo CONFLICTOS (rama y main tocaron lo mismo).")
+        print("   Aborté el merge; la rama %s queda intacta para revisión humana. (No se pusheó nada.)" % branch)
+        sys.exit(1)
     p = git("push", "origin", "main")
     out = (p.stdout + p.stderr).strip()
     print(out[-600:])
