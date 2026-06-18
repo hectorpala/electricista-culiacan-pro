@@ -77,7 +77,9 @@ def main():
     h = h2
     # 2) meta única (meta + og + twitter, todas las que usen la plantilla)
     n_meta = len(DESC_OLD.findall(h))
-    h = DESC_OLD.sub(html.escape(z["meta"]), h)
+    # Reemplazo con FUNCIÓN: el meta se inserta LITERAL (un '\1'/'\g<>' en el texto no se
+    # interpreta como backreference de regex, que corrompería la meta). Mismo fix que el breadcrumb.
+    h = DESC_OLD.sub(lambda m: html.escape(z["meta"]), h)
     # 3) inyectar sección única antes del bloque final-cta
     fc = h.find('class="final-cta"')
     if fc < 0:

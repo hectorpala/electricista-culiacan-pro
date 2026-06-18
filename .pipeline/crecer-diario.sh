@@ -36,8 +36,12 @@ echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # Corrida autónoma del sistema completo (auto-permiso). El prompt orquesta las 10 fases.
-"$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG_DIR/auto-agente-$STAMP.log" 2>&1 \
-  || echo "[$STAMP] La corrida de claude terminó con error (continúo para enviar el parte)." >> "$LOG_DIR/auto-agente-$STAMP.log"
+if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG_DIR/auto-agente-$STAMP.log" 2>&1; then
+  CLAUDE_OK=1
+else
+  CLAUDE_OK=0
+  echo "[$STAMP] La corrida de claude terminó con error (continúo para enviar el parte)." >> "$LOG_DIR/auto-agente-$STAMP.log"
+fi
 
 # Parte por email — SIEMPRE, aun si la corrida falló (send-report alerta si el resumen es viejo/ausente).
 /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
@@ -45,5 +49,6 @@ trap 'rm -rf "$LOCK_DIR"' EXIT
   "Auto Agente Electricista" "18:20" >> "$LOG_DIR/auto-agente-$STAMP.log" 2>&1 \
   || echo "[$STAMP] No se pudo enviar el email del parte (Auto Agente Electricista)." >> "$LOG_DIR/auto-agente-$STAMP.log"
 
-# A3: marca que YA corrió hoy (el catch-up lo lee para no duplicar corrida el mismo día).
-date +%Y%m%d > "$LOG_DIR/auto-agente-last-run-day"
+# A3: marca que YA corrió hoy SOLO si la corrida tuvo éxito. Si falló, NO se marca → el
+# catch-up sí podrá recuperarla hoy (si se marcara siempre, una corrida fallida quedaría sin recuperar).
+[ "${CLAUDE_OK:-0}" = 1 ] && date +%Y%m%d > "$LOG_DIR/auto-agente-last-run-day"
