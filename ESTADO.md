@@ -1,5 +1,11 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (consistencia de botones del hero) — PUBLICADO ✅
+Revisión exacta (con CSS real + medición puppeteer) del acomodo de botones escritorio vs movil. Unico desajuste: el HERO. Lo demas (flotantes, CTA final, form) ya era consistente.
+- **ARREGLADO:** hero CTA unificado a 2 botones (WhatsApp naranja + Llamar azul) IGUALES en ambas vistas — misma fila en escritorio, apilados full-width en movil. Antes: escritorio mostraba 1 boton (ancho auto) y ocultaba el telefono (`hero-phone-link display:none`); movil mostraba boton full-width + link "O llama". Solucion: clase propia `.hero-cta-buttons` con CSS inline en index.html (NO toca los 3 CSS externos → sin problema de paridad), reusando `btn-primary`/`btn-secondary`. Bump service worker v8→v9.
+- **Verificado:** puppeteer mide escritorio=misma fila (lado a lado), movil=apilados anchos iguales; checkers 0 ALTA; HTTP 200. Revisado visualmente por el dueño (eligio el diseno de 2 botones).
+
+
 ## 2026-06-17 (agente /expandir-sitio — blog de precios) — PUBLICADO ✅
 2ª acción del agente autónomo. Hueco: blog "¿cuánto cuesta?" (Plomero tiene `cuanto-cobra-plomero`, Electricista no; intención comercial sin canibalizar la pagina de servicio precios).
 - **CREADO Y PUBLICADO:** `/blog/cuanto-cuesta-electricista-culiacan/` — generado con `gen-landing.py` (33 sustituciones) desde el esqueleto `recibo-luz-alto`. Contenido original: **tabla de precios por servicio 2026** (visita, contactos, pastilla, cortocircuito, tablero, minisplit, tierra física, LED, cableado), factores que mueven el costo, pasos para cotizar sin pagar de más, FAQ de precios. **Candado VERDE:** ci-gate 0 ALTA, anti-doorway Jaccard **0.25** (muy distinta). Sitemap 50→51; enlace entrante desde `blog/index.html` (tarjeta + JSON-LD); HTTP 200; **revisado visualmente** (desktop+móvil) por el dueño.
