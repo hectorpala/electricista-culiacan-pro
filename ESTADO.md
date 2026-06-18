@@ -1,5 +1,11 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (agente /expandir-sitio — blog de precios) — PUBLICADO ✅
+2ª acción del agente autónomo. Hueco: blog "¿cuánto cuesta?" (Plomero tiene `cuanto-cobra-plomero`, Electricista no; intención comercial sin canibalizar la pagina de servicio precios).
+- **CREADO Y PUBLICADO:** `/blog/cuanto-cuesta-electricista-culiacan/` — generado con `gen-landing.py` (33 sustituciones) desde el esqueleto `recibo-luz-alto`. Contenido original: **tabla de precios por servicio 2026** (visita, contactos, pastilla, cortocircuito, tablero, minisplit, tierra física, LED, cableado), factores que mueven el costo, pasos para cotizar sin pagar de más, FAQ de precios. **Candado VERDE:** ci-gate 0 ALTA, anti-doorway Jaccard **0.25** (muy distinta). Sitemap 50→51; enlace entrante desde `blog/index.html` (tarjeta + JSON-LD); HTTP 200; **revisado visualmente** (desktop+móvil) por el dueño.
+- **Mejora de tooling:** `gate-pagina.py` ahora detecta blogs y omite validate-landing (plantilla distinta), evaluando paridad contra hermanas de blog.
+
+
 ## 2026-06-17 (agente /expandir-sitio — 1ª corrida autónoma) — PUBLICADO ✅
 Agente de crecimiento autónomo. Auditoría GSC (28 días: 94 clics / 4,164 impr / pos 6.8) → reporte en `.pipeline/oportunidades-20260617.md`.
 - **DETERMINÓ y DESCARTÓ (juicio anti-doorway, lo correcto):** `electricista-urgente` NO se crea (la home y sobre todo `emergencia-24-7` —titulada "Electricista 24 Horas… Emergencia Urgente"— ya cubren "urgente/24 horas" → sería canibalización); mejora de "evitar cortocircuito" NO se hace (el post ya tiene "10 Medidas para Evitar Cortocircuitos").

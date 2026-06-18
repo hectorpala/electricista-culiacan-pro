@@ -58,10 +58,14 @@ def main():
 
     errors = 0
 
-    # 1) validate-landing.sh por página
+    # 1) validate-landing.sh por página (solo landings de servicio; los blogs usan
+    #    otra plantilla y se omiten — su paridad se evalúa contra hermanas de blog).
     print("── 1) validate-landing.sh ──")
     vs = os.path.join(ROOT, "validate-landing.sh")
     for p in pages:
+        if "blog" in p.replace("\\", "/").split("/"):
+            print("  ⏭  " + p + " → blog (plantilla distinta a servicios; validate-landing omitido)")
+            continue
         r = subprocess.run(["bash", vs, p], capture_output=True, text=True, cwd=ROOT)
         last = (r.stdout.strip().splitlines() or ["(sin salida)"])[-1]
         ok = r.returncode == 0
