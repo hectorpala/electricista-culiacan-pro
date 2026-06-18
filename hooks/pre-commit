@@ -21,7 +21,10 @@ fi
 echo ""
 
 # --- Capa 2: validación de plantilla en landings de servicios staged ---
-STAGED_LANDINGS=$(git diff --cached --name-only --diff-filter=ACM | grep '^servicios/.*/index\.html$')
+# Las colonias (servicios/electricista-colonias-culiacan/*/) usan OTRA plantilla
+# (más ligera, no v2.0.0) y se excluyen de validate-landing.sh: su validación
+# mecánica la cubre la Capa 1 (check-plantilla + check-indexabilidad).
+STAGED_LANDINGS=$(git diff --cached --name-only --diff-filter=ACM | grep '^servicios/.*/index\.html$' | grep -v '/electricista-colonias-culiacan/')
 
 if [ -z "$STAGED_LANDINGS" ]; then
     echo "✅ No hay landings de servicios modificadas; gate OK → commit permitido."
