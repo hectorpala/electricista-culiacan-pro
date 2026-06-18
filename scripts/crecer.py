@@ -31,6 +31,16 @@ def _read(p): return open(os.path.join(ROOT, p), encoding="utf-8").read()
 def _write(p, h): open(os.path.join(ROOT, p), "w", encoding="utf-8").write(h)
 
 
+def _snapshot(paths):
+    """Guarda los bytes EXACTOS de archivos existentes para poder revertir (atomicidad)."""
+    return {p: _read(p) for p in paths if os.path.isfile(os.path.join(ROOT, p))}
+
+
+def _restore(snap):
+    for p, h in snap.items():
+        _write(p, h)
+
+
 # ───────────────────────── herramientas de "plomería" ─────────────────────────
 def sitemap_add(loc, priority):
     sm = _read("sitemap.xml")
@@ -43,17 +53,22 @@ def sitemap_add(loc, priority):
 
 
 def home_link_add(slug, label):
-    """Añade <li><a> a la lista 'Servicios de Electricidad' de la home."""
+    """Añade <li><a> a la lista 'Servicios de Electricidad' de la home.
+    Devuelve True si la página quedó enlazada (o ya lo estaba); False si NO se
+    pudo enlazar — en ese caso la página sería HUÉRFANA y la operación debe FALLAR
+    (no dejar páginas sin enlaces entrantes en una corrida autónoma)."""
     h = _read("index.html")
     href = "/servicios/%s/" % slug
     if href in h:
-        print("  • enlace home: ya estaba"); return
+        print("  • enlace home: ya estaba"); return True
     anchor = '</a></li></ul></div></section><!-- SECCION SOCIAL-PROOF'
     if anchor not in h:
-        print("  ⚠️ enlace home: no encontré la lista de servicios (enlázalo a mano)"); return
+        print("  ❌ enlace home: no encontré la lista de servicios — la página quedaría HUÉRFANA")
+        return False
     li = '</a></li><li><a href="%s">%s</a></li></ul></div></section><!-- SECCION SOCIAL-PROOF' % (href, label)
     _write("index.html", h.replace(anchor, li, 1))
     print("  • enlace home: +1 (%s)" % label)
+    return True
 
 
 def sw_bump():
@@ -98,35 +113,55 @@ def cmd_servicio(args):
     spec = args[0]
     z = json.load(open(spec, encoding="utf-8"))
     slug = z["slug"]
+    page = "servicios/%s/index.html" % slug
     print("── crear-servicio: %s ──" % slug)
     r = sh([PY, "scripts/crear-servicio.py", spec])
     print(r.stdout.rstrip())
     if r.returncode != 0:
-        sys.exit("❌ falló crear-servicio")
+        sys.exit("❌ falló crear-servicio (no se cableó ni tocó nada).")
+    # Snapshot de los archivos rastreados que vamos a mutar -> rollback atómico.
+    snap = _snapshot(["sitemap.xml", "index.html", "sw.js"])
     print("── wiring automático ──")
     sitemap_add("%s/servicios/%s/" % (SITE, slug), "0.8")
-    home_link_add(slug, z.get("bc", slug))
+    linked = home_link_add(slug, z.get("bc", slug))
     sw_bump()
     print("── candado ──")
-    ok = gate(["servicios/%s/index.html" % slug])
-    print("\n%s" % ("✅ LISTO. Revisa, luego:  python3 scripts/crecer.py publicar \"feat: %s\"" % slug
-                    if ok else "❌ candado FALLA — NO publiques; revisa arriba."))
+    ok = gate([page]) and linked
+    if not ok:
+        print("\n↩️  FALLÓ el candado o el enlace en home — revirtiendo para dejar el árbol LIMPIO…")
+        _restore(snap)
+        sh(["rm", "-rf", os.path.dirname(os.path.join(ROOT, page))])
+        print("   revertido: sitemap.xml, index.html, sw.js · eliminada servicios/%s/" % slug)
+        print("❌ NO se publica. Corrige el spec (%s) y reintenta. Motivo arriba." % spec)
+        sys.exit(1)
+    print("\n✅ LISTO. Revisa, luego:  python3 scripts/crecer.py publicar \"feat: %s\"" % slug)
 
 
 def cmd_colonia(args):
     spec = args[0]
     z = json.load(open(spec, encoding="utf-8"))
     slug = z["slug"]
+    page = "servicios/electricista-colonias-culiacan/%s/index.html" % slug
+    # La colonia YA existe (noindex) y diferenciar-colonia la edita en sitio.
+    # Snapshot ANTES de editar para poder restaurarla (NO borrarla) si algo falla.
+    snap = _snapshot([page, "sitemap.xml"])
     print("── diferenciar-colonia: %s ──" % slug)
     r = sh([PY, "scripts/diferenciar-colonia.py", spec])
     print(r.stdout.rstrip())
     if r.returncode != 0:
-        sys.exit("❌ falló diferenciar-colonia")
+        _restore(snap)
+        sys.exit("❌ falló diferenciar-colonia (revertido; la colonia quedó como estaba).")
     print("── wiring automático ──")
     sitemap_add("%s/servicios/electricista-colonias-culiacan/%s/" % (SITE, slug), "0.6")
     print("── candado ──")
-    ok = gate(["servicios/electricista-colonias-culiacan/%s/index.html" % slug])
-    print("\n%s" % ("✅ LISTO. Revisa, luego: publicar" if ok else "❌ candado FALLA — revisa."))
+    ok = gate([page])
+    if not ok:
+        print("\n↩️  FALLÓ el candado — revirtiendo (la colonia vuelve a noindex como estaba)…")
+        _restore(snap)
+        print("   revertido: %s + sitemap.xml" % page)
+        print("❌ NO se publica. Hazla más única en el spec y reintenta.")
+        sys.exit(1)
+    print("\n✅ LISTO. Revisa, luego: publicar")
 
 
 def cmd_gate(args):
@@ -150,11 +185,38 @@ def cmd_publicar(args):
     print(c.stdout.rstrip() + c.stderr.rstrip())
     if "BLOQUEADO" in (c.stdout + c.stderr) or c.returncode != 0:
         print("❌ commit bloqueado por el hook — revisa; quedó en la rama %s" % branch); sys.exit(1)
-    sh(["git", "checkout", "main"])
-    sh(["git", "merge", "--no-ff", branch, "-m", "Merge: " + msg])
+
     env = dict(os.environ); env["PATH"] = "/usr/local/bin:" + env.get("PATH", "")
-    p = subprocess.run(["git", "push", "origin", "main"], cwd=ROOT, text=True, capture_output=True, env=env)
-    print((p.stdout + p.stderr).strip()[-600:])
+
+    def git(*a):
+        return subprocess.run(["git", *a], cwd=ROOT, text=True, capture_output=True, env=env)
+
+    # Publicación SEGURA: sincroniza con el remoto antes de mergear; NUNCA --force.
+    sh(["git", "checkout", "main"])
+    git("fetch", "origin")
+    ff = git("merge", "--ff-only", "origin/main")
+    if ff.returncode != 0:
+        print("❌ publicación detenida: la main local divergió de origin/main.")
+        print("   La rama %s queda SIN fusionar para revisión humana. (No se forzó nada.)" % branch)
+        sys.exit(1)
+    sh(["git", "merge", "--no-ff", branch, "-m", "Merge: " + msg])
+    p = git("push", "origin", "main")
+    out = (p.stdout + p.stderr).strip()
+    print(out[-600:])
+    if p.returncode != 0:
+        # Reintegra UNA sola vez y reintenta; si vuelve a fallar, ABORTA (sin force).
+        print("↻ push rechazado — reintegro con rebase y reintento UNA vez…")
+        git("fetch", "origin")
+        rb = git("rebase", "origin/main")
+        if rb.returncode != 0:
+            git("rebase", "--abort")
+            print("❌ publicación detenida: rebase falló. Rama %s sin publicar; revísalo a mano." % branch)
+            sys.exit(1)
+        p2 = git("push", "origin", "main")
+        print((p2.stdout + p2.stderr).strip()[-600:])
+        if p2.returncode != 0:
+            print("❌ publicación detenida: push rechazado tras el reintento. Rama %s sin publicar." % branch)
+            sys.exit(1)
     sh(["git", "branch", "-d", branch])
     print("\n✅ Publicado. (El pre-push ya encoló la indexación en GSC.)")
     print("   Refuerza la indexación por MCP desde /expandir-sitio si quieres acelerar.")
