@@ -1,5 +1,10 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (agente /expandir-sitio — blog 'como elegir electricista') — PUBLICADO ✅
+Hueco de paridad con Plomero (tiene `como-identificar-buen-plomero`, Electricista no). Intencion confianza/seleccion, sin canibalizar (distinto a precios).
+- **CREADO Y PUBLICADO:** `/blog/como-elegir-buen-electricista-culiacan/` — gen-landing.py (33 sustituciones) desde esqueleto recibo-luz. Contenido original: tabla "buen electricista vs señal de alerta", 6 pasos para verificar antes de contratar, FAQ de confianza (garantia, factura, norma CFE). **Candado VERDE:** ci-gate 0 ALTA, anti-doorway Jaccard **0.36**. Sitemap 51→52; enlace entrante desde blog/index (tarjeta + JSON-LD); HTTP 200.
+
+
 ## 2026-06-17 (consistencia de botones del hero) — PUBLICADO ✅
 Revisión exacta (con CSS real + medición puppeteer) del acomodo de botones escritorio vs movil. Unico desajuste: el HERO. Lo demas (flotantes, CTA final, form) ya era consistente.
 - **ARREGLADO:** hero CTA unificado a 2 botones (WhatsApp naranja + Llamar azul) IGUALES en ambas vistas — misma fila en escritorio, apilados full-width en movil. Antes: escritorio mostraba 1 boton (ancho auto) y ocultaba el telefono (`hero-phone-link display:none`); movil mostraba boton full-width + link "O llama". Solucion: clase propia `.hero-cta-buttons` con CSS inline en index.html (NO toca los 3 CSS externos → sin problema de paridad), reusando `btn-primary`/`btn-secondary`. Bump service worker v8→v9.
