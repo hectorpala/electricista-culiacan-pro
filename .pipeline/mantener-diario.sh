@@ -34,3 +34,6 @@ trap 'rm -rf "$LOCK_DIR"' EXIT
   "/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/ultima-corrida.md" \
   "Electricista Culiacán" "18:20" >> "$LOG_DIR/electricista-$STAMP.log" 2>&1 \
   || echo "[$STAMP] No se pudo enviar el email del parte (electricista)." >> "$LOG_DIR/electricista-$STAMP.log"
+
+# B-N2: marca el día corrido (compartida con crecer-diario) para que catchup.sh no duplique.
+date +%Y%m%d > "$LOG_DIR/auto-agente-last-run-day"

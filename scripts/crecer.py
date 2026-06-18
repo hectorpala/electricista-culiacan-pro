@@ -213,7 +213,10 @@ def cmd_publicar(args):
         b = b.strip().lstrip("*").strip()
         if b.startswith("auto/"):
             sh(["git", "branch", "-d", b])
-    sh(["git", "checkout", "-b", branch])
+    cob = sh(["git", "checkout", "-b", branch])
+    if cob.returncode != 0:
+        print("❌ no pude crear la rama %s (%s). Aborté sin commitear." % (branch, (cob.stderr or "").strip()[:80]))
+        sys.exit(1)
     sh(["git", "add", "-A"])
     full = msg + "\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"
     c = sh(["git", "commit", "-m", full])
@@ -245,12 +248,16 @@ def cmd_publicar(args):
     print(out[-600:])
     if p.returncode != 0:
         # Reintegra UNA sola vez y reintenta; si vuelve a fallar, ABORTA (sin force).
-        print("↻ push rechazado — reintegro con rebase y reintento UNA vez…")
+        print("↻ push rechazado — reintegro con el remoto y reintento UNA vez (sin rebase ni force)…")
         git("fetch", "origin")
-        rb = git("rebase", "origin/main")
-        if rb.returncode != 0:
-            git("rebase", "--abort")
-            print("❌ publicación detenida: rebase falló. Rama %s sin publicar; revísalo a mano." % branch)
+        # Re-merge LIMPIO sobre el remoto fresco. NO rebase: aplanaría el merge --no-ff y dejaría
+        # la rama 'sin fusionar' (el branch -d fallaría y quedaría colgada). reset --hard descarta
+        # nuestro merge local; la rama conserva sus commits y el re-merge los recoloca encima.
+        rs = git("reset", "--hard", "origin/main")
+        mg2 = git("merge", "--no-ff", branch, "-m", "Merge: " + msg)
+        if rs.returncode != 0 or mg2.returncode != 0:
+            git("merge", "--abort")
+            print("❌ publicación detenida: no pude reintegrar limpio. Rama %s sin publicar; revísalo a mano." % branch)
             sys.exit(1)
         p2 = git("push", "origin", "main")
         print((p2.stdout + p2.stderr).strip()[-600:])
