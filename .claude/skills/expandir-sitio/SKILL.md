@@ -40,6 +40,12 @@ Nunca te detengas "por si acaso". Si una acción es de bajo riesgo y pasa candad
    PRIMERO ahí y se propaga; no es el objetivo de este agente (su objetivo es crear páginas).
 6. **noindex fuera del sitemap;** índex dentro del sitemap. Cada página nueva indexable
    se agrega a `sitemap.xml` y se le dan enlaces ENTRANTES (no huérfanas).
+7. **Hero CTA estándar (botones):** toda página con hero usa el MISMO acomodo de botones
+   que `index.html`: DOS botones — WhatsApp (`btn-primary`) + Llamar (`btn-secondary`) —
+   dentro de `<div class="hero-cta-buttons">`, iguales en escritorio (misma fila) y móvil
+   (apilados full-width). Copia también el bloque CSS de `.hero-cta-buttons` al `<style>`
+   inline de la página (vive inline en index.html, NO en los CSS externos). Detalle y
+   snippet exacto en `REGLAS.md` (entrada PLANTILLA/HERO-CTA 2026-06-17).
 
 ---
 
