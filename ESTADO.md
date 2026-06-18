@@ -1,5 +1,12 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (colonias piloto — enriquecimiento para indexabilidad) — PUBLICADO ✅
+Sobre el piloto de 8 colonias: para que Google SI las indexe (no las deje en "descubierta sin indexar" por delgadas), se subio el contenido unico.
+- **ENRIQUECIDAS las 8** (6-de-enero, bachigualato, bugambilias, nuevo-culiacan, colinas-de-san-miguel, lomas-de-tamazula, rafael-buelna, las-americas): meta description UNICA por colonia (antes era plantilla con solo el nombre), 3er parrafo unico + lista "Problemas electricos comunes en X" (4 propios). Palabras ~320 -> ~390-450; contenido unico ~120 -> ~240.
+- **Candado:** anti-doorway MEJORO 0.61 -> **0.50-0.59**; ci-gate 0 ALTA; HTTP 200; revisado visual.
+- **PENDIENTE:** medir indexacion real en GSC en 2-3 semanas (gsc_inspect) antes de escalar a mas colonias.
+
+
 ## 2026-06-17 (agente /expandir-sitio — PILOTO diferenciacion de colonias) — PUBLICADO ✅
 Diagnostico: 642 colonias, 16 indexables (unicas, Jaccard 0.35-0.48), 626 noindex doorways (Jaccard 0.95-0.98, ~80 palabras). GSC SIN demanda por nombre de colonia (apuesta long-tail, ROI a medir).
 - **DIFERENCIADAS Y PROMOVIDAS 8 colonias reconocidas** (6-de-enero, bachigualato, bugambilias, nuevo-culiacan, colinas-de-san-miguel, lomas-de-tamazula, rafael-buelna, las-americas): a cada una se le inyecto seccion UNICA "Electricidad en <Colonia>: lo que debes saber" (2 parrafos propios reales + servicios), flip noindex->index, fix breadcrumb (item 3 sin URL propia), sitemap 52->60. **Candado:** anti-doorway Jaccard **0.61-0.62** (<0.80), ci-gate 0 ALTA, HTTP 200, revisado visualmente.
