@@ -29,6 +29,13 @@
   - `python3 .pipeline/check-indexabilidad.py` — sitemap vs realidad, canonical/og:url/breadcrumbs.
   - `node .pipeline/check-produccion.mjs` — producción en vivo (requiere `npm i puppeteer`).
 
+## Pipeline de crecimiento autónomo
+- Invocar con `/expandir-sitio` (skill en `.claude/skills/expandir-sitio/SKILL.md`). Hermano de `/mantener-sitio`: aquél ARREGLA, éste CREA lo que falta.
+- Determina huecos en 4 dimensiones (oportunidades GSC con datos reales, geo, blog, mejoras), crea páginas con contenido único y **auto-publica solo si pasan TODOS los candados** (si fallan, deja en rama y avisa). Tope duro `MAX_PAGINAS=3` por corrida.
+- Backbone determinista (garantiza paridad de plantilla y bloquea doorways):
+  - `python3 .pipeline/gen-landing.py spec.json` — genera una landing copiando un esqueleto byte a byte + sustituciones afirmadas (aborta si no calzan o si hay fuga "plomero").
+  - `python3 .pipeline/gate-pagina.py <ruta/index.html> ...` — candado todo-en-uno: validate-landing + ci-gate (0 ALTA) + anti-doorway (Jaccard < 0.80 vs hermanas).
+
 ## Comandos útiles
 - git log --oneline -30  (ver historia reciente)
 - Servidor local para probar: `python3 -m http.server 8080`
