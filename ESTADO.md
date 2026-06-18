@@ -1,5 +1,19 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (Auto Agente diario — 12 arreglos + 1 mejora SEO) — PUBLICADO ✅
+Corrida diaria unificada (mantener+crecer+verificar+aprender), lock propio confirmado mío. 9 revisores en paralelo. Diff 16→18 archivos (≤18).
+- **TELÉFONOS DE CONTACTO ROTOS (alta, 9 páginas):** lo más grave. 4 blogs traían el teléfono PLACEHOLDER de plantilla (wa.me/5216677890000, "667-789-0000"); 2 blogs + /gracias/ traían un número CORRUPTO con dígitos duplicados (526676673922273); /terminos/ y /privacidad/ tenían tel sin +52. Todos → 526673922273. Los botones de WhatsApp/llamar llevaban a números inexistentes = leads perdidos. Verificado en vivo (0 patrones malos restantes).
+- **OVERCLAIM CERTIFICACIÓN CFE (alta, instalacion-tierra-fisica):** decía "certificado oficial válido para CFE / Certificada CFE" en title, og/twitter, JSON-LD, badge, H3 y cuerpo. La verificación OFICIAL la emite una UVIE acreditada (decisión del dueño, ya aplicada en dictamen-electrico). Reescrito a "constancia de instalación / a norma NOM-001-SEDE". El verificador escéptico cazó que el <title>/og/twitter seguían con "Certificada CFE" (mayúscula) en la 1ª pasada → corregido y re-verificado ok=true.
+- **RATING 5.0★→4.8★** (tierra-fisica, instalacion-electrica): el texto visible contradecía el schema (4.8). Unificado a 4.8★.
+- **© 2025→2026** en footer de electricista-colonias-culiacan.
+- **gracias:** main.js (sin minificar) → main.min.js.
+- **MEJORA SEO (pivote, sin página nueva):** GSC no muestra hueco para páginas nuevas (sitio saturado; forzar = doorway). La query "electricista a domicilio cerca de mi ubicación" rankeaba en el home (pos 2, 0 clics) en vez de su página dedicada. Optimizado title/meta/og/H1 de /servicios/electricista-cerca-de-mi/ hacia esa query exacta. gate-pagina OK, anti-doorway 0.62.
+- **APRENDIZAJE:** +5 reglas (14→19). check-plantilla.py ahora caza DETERMINISTA: teléfono no canónico (ALTA — habría cazado los 9 de hoy), overclaim CFE (media), main.js sin minificar (baja). ci-gate sigue 0 ALTA.
+- **DEFERIDO (lote dedicado):** el teaser "Instalación de tierra física certificada CFE" + 1 H3 sigue en ~18-22 páginas de servicio (tarjeta de servicio relacionado); el nuevo check CFE los marca media para el próximo lote (no caben en el candado de 18 archivos de hoy).
+- **PENDIENTE-HUMANO:** skip-link/`<main>` faltan en 691/33 páginas (migración masiva de plantilla, >18 archivos); CTR del home en head-terms (estrategia de title/meta); revisor-gsc mal cableado a plomero.
+- Verificador independiente: ok=true. ci-gate 0 ALTA. sw NO bumpeado (no se tocó CSS). Servidor local 200 en todas las páginas tocadas.
+
+
 ## 2026-06-17 (REMEDIACION tras revision de 4 agentes) — PUBLICADO ✅
 4 revisores independientes auditaron las paginas nuevas (servicios, blogs, colonias) con rubrica adversarial. Hallazgos de RIESGO corregidos:
 - **dictamen-electrico:** reescrito honesto — NO promete el certificado oficial (lo emite una UVIE acreditada); solo deja la instalacion 'a norma' + orienta. Testimonio 'ya me conectaron' removido. (decision del dueno).
