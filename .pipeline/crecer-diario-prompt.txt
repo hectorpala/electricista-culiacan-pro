@@ -70,6 +70,16 @@ Sigue el skill /expandir-sitio (.claude/skills/expandir-sitio/SKILL.md) y usa el
      Escribe .pipeline/oportunidades-$(date +%Y%m%d).md con una tabla rankeada por impacto/riesgo-doorway.
   2. PRIORIZA las top ≤3 de mayor impacto y MENOR riesgo, respaldadas por datos de GSC sobre las especulativas.
      Está PERMITIDO crear 0 páginas si no hay señal real de bajo riesgo: NO fuerces crecimiento (eso es doorway).
+     REGLA DE PIVOTE (obligatoria — el crecimiento NUNCA queda ocioso): si NO hay hueco para páginas
+     nuevas (el sitio ya cubre la demanda, o crear canibalizaría a una página existente), NO termines sin
+     hacer nada — PIVOTA a MEJORAR/ENRIQUECER las páginas que ya tenemos a partir de la misma tabla de
+     oportunidades: query con impresiones que rankea en una página genérica (p.ej. el home) en vez de en su
+     página dedicada → optimiza title/meta/H1 de la página dedicada hacia esa query y enlázala internamente;
+     cluster informativo que rankea pos 8-15 en un blog existente → añade esas variantes (H2/FAQ) al blog;
+     CTR 0 con buena posición → afina title/meta. Cada mejora pasa por el CANDADO y respeta las reglas de
+     contenido de la FASE 5 (sin claims engañosos, sin tocar precios). El objetivo de esta fase es: SIEMPRE
+     crear una página con señal real O, si no la hay, dejar el sitio MÁS RICO mejorando lo existente — nunca
+     ambas cosas a cero. Tope: hasta 3 acciones (crear y/o mejorar) por corrida.
   3. Por cada página elegida (servicio / zona / colonia):
        - genera el spec con scripts/crear-servicio.py --ejemplo (o diferenciar-colonia.py --ejemplo) y rellénalo
          con contenido ÚNICO y verídico (H1, hero, beneficios, FAQ y testimonios propios, coords GPS reales y
