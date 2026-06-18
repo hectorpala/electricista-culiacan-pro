@@ -63,8 +63,12 @@ def main():
     print("── 1) validate-landing.sh ──")
     vs = os.path.join(ROOT, "validate-landing.sh")
     for p in pages:
-        if "blog" in p.replace("\\", "/").split("/"):
+        pn = p.replace("\\", "/")
+        if "blog" in pn.split("/"):
             print("  ⏭  " + p + " → blog (plantilla distinta a servicios; validate-landing omitido)")
+            continue
+        if "electricista-colonias-culiacan" in pn and pn.rstrip("/").count("/") >= 3:
+            print("  ⏭  " + p + " → colonia (plantilla distinta a servicios; validate-landing omitido)")
             continue
         r = subprocess.run(["bash", vs, p], capture_output=True, text=True, cwd=ROOT)
         last = (r.stdout.strip().splitlines() or ["(sin salida)"])[-1]

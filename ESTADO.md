@@ -1,5 +1,12 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-17 (agente /expandir-sitio — PILOTO diferenciacion de colonias) — PUBLICADO ✅
+Diagnostico: 642 colonias, 16 indexables (unicas, Jaccard 0.35-0.48), 626 noindex doorways (Jaccard 0.95-0.98, ~80 palabras). GSC SIN demanda por nombre de colonia (apuesta long-tail, ROI a medir).
+- **DIFERENCIADAS Y PROMOVIDAS 8 colonias reconocidas** (6-de-enero, bachigualato, bugambilias, nuevo-culiacan, colinas-de-san-miguel, lomas-de-tamazula, rafael-buelna, las-americas): a cada una se le inyecto seccion UNICA "Electricidad en <Colonia>: lo que debes saber" (2 parrafos propios reales + servicios), flip noindex->index, fix breadcrumb (item 3 sin URL propia), sitemap 52->60. **Candado:** anti-doorway Jaccard **0.61-0.62** (<0.80), ci-gate 0 ALTA, HTTP 200, revisado visualmente.
+- **Tooling:** gate-pagina.py ahora omite validate-landing en colonias (plantilla distinta a servicios v2.0.0). Leccion del breadcrumb guardada en REGLAS para futuras promociones.
+- **PENDIENTE:** medir en GSC en 2-3 semanas si estas 8 traen trafico antes de escalar a mas colonias.
+
+
 ## 2026-06-17 (agente /expandir-sitio — blog 'como elegir electricista') — PUBLICADO ✅
 Hueco de paridad con Plomero (tiene `como-identificar-buen-plomero`, Electricista no). Intencion confianza/seleccion, sin canibalizar (distinto a precios).
 - **CREADO Y PUBLICADO:** `/blog/como-elegir-buen-electricista-culiacan/` — gen-landing.py (33 sustituciones) desde esqueleto recibo-luz. Contenido original: tabla "buen electricista vs señal de alerta", 6 pasos para verificar antes de contratar, FAQ de confianza (garantia, factura, norma CFE). **Candado VERDE:** ci-gate 0 ALTA, anti-doorway Jaccard **0.36**. Sitemap 51→52; enlace entrante desde blog/index (tarjeta + JSON-LD); HTTP 200.
