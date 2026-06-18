@@ -100,6 +100,14 @@ oportunidad de bajo riesgo y alto impacto, está PERMITIDO crear 0 páginas esta
 solo dejar el reporte (no fuerces crecimiento sin señal — eso genera doorways).
 
 ## FASE 4 — CONSTRUIR (autónomo)
+Para los dos casos más comunes hay GENERADORES REUSABLES (úsalos en vez de escribir
+código desde cero; se apoyan en `gen-landing.py`, mantienen la garantía anti-drift):
+- **Servicio nuevo:** `python3 scripts/crear-servicio.py spec.json`
+  (plantilla del spec: `python3 scripts/crear-servicio.py --ejemplo`).
+- **Promover una colonia** (noindex doorway → indexable con contenido único):
+  `python3 scripts/diferenciar-colonia.py spec.json` (`--ejemplo` para la plantilla).
+Para blog o casos especiales, escribe un spec de `gen-landing.py` a mano.
+
 Para cada acción elegida:
 
 **Página de servicio / zona / colonia (geo):**
