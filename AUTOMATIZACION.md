@@ -1,7 +1,36 @@
 # Sistema de automatización — Electricista Culiacán
 
-Mapa único de cómo está organizado todo lo que crea/mantiene el sitio. Hay **dos
-capas**: el **cerebro** (un skill LLM que decide y usa el MCP de Google) y el
+## 🤖 Auto Agente Electricista (todo el sistema junto, 1 corrida diaria)
+
+**Auto Agente Electricista** es el sistema completo corriendo solo, sin supervisión, una vez
+al día (18:20). En una sola corrida hace CUATRO trabajos:
+
+| Fase | Qué hace |
+|---|---|
+| **A) Corrige** | Errores **mecánicos** (CSS, links/imágenes rotas, schema, CLS…) **y humanos/de contenido** (ortografía, caracteres mal codificados, claims que violan reglas, email contaminado) — reescritos bien y por completo. |
+| **B) Crece** | Hasta **3 páginas nuevas al día según Google Search Console** (MCP): detecta huecos con datos reales (impresiones sin página propia) y los llena. 0 si no hay señal — nunca fuerza doorways. |
+| **C) Verifica** | Un **agente verificador** independiente y escéptico re-corre los candados y carga cada página tocada para demostrar que **todo quedó bien** ANTES de publicar. Si algo falla, no publica. |
+| **D) Aprende** | Un **agente aprendiz** convierte cada error en una **regla permanente** (REGLAS.md) y, si es mecanizable, en un **checker** — para que ese error no se repita. El sistema se vuelve más inteligente con cada corrida. |
+
+Solo publica si pasa TODOS los candados (verificador ok + diff acotado + sin borrados raros) y
+sincronizando con el remoto (jamás `git push --force`). Te manda el **parte por email** siempre.
+
+**Piezas:** `.pipeline/crecer-diario-prompt.txt` (las 10 fases) · `.pipeline/crecer-diario.sh` (driver) ·
+`.pipeline/launchd/com.electricistaculiacan.autoagente.plist` (horario 18:20).
+
+**Activar** (reemplaza al viejo job de solo-mantenimiento para no correr ambos):
+```bash
+launchctl unload ~/Library/LaunchAgents/com.electricistaculiacan.mantener.plist 2>/dev/null
+cp ".pipeline/launchd/com.electricistaculiacan.autoagente.plist" ~/Library/LaunchAgents/
+launchctl load  ~/Library/LaunchAgents/com.electricistaculiacan.autoagente.plist
+launchctl start com.electricistaculiacan.autoagente   # opcional: probar una corrida YA
+```
+
+---
+
+## Mapa técnico
+
+Hay **dos capas**: el **cerebro** (un skill LLM que decide y usa el MCP de Google) y el
 **motor determinista** (scripts que garantizan calidad y hacen el trabajo mecánico).
 
 ```
