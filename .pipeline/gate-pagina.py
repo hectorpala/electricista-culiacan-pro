@@ -27,14 +27,23 @@ UMBRAL_FAIL = 0.80   # ≥ esto = doorway (bloquea)
 UMBRAL_WARN = 0.72   # ≥ esto = advertencia (revisar, no bloquea)
 
 
+_TOK_CACHE = {}
+
+
 def visible_tokens(path):
+    key = os.path.abspath(path)
+    if key in _TOK_CACHE:
+        return _TOK_CACHE[key]
     h = open(path, encoding="utf-8").read()
     if re.search(r'<meta name="robots"[^>]*noindex', h):
+        _TOK_CACHE[key] = None
         return None  # noindex → no entra al anti-doorway
     h = re.sub(r"<script.*?</script>", " ", h, flags=re.S)
     h = re.sub(r"<style.*?</style>", " ", h, flags=re.S)
     h = re.sub(r"<[^>]+>", " ", h)
-    return set(re.findall(r"\w{4,}", html.unescape(h).lower()))
+    toks = set(re.findall(r"\w{4,}", html.unescape(h).lower()))
+    _TOK_CACHE[key] = toks
+    return toks
 
 
 def jaccard(a, b):
@@ -42,12 +51,21 @@ def jaccard(a, b):
 
 
 def siblings(path):
-    """index.html hermanas (mismo directorio padre de la familia)."""
-    parent = os.path.dirname(os.path.dirname(os.path.abspath(path)))  # .../servicios
-    out = []
-    for f in glob.glob(os.path.join(parent, "*", "index.html")):
-        if os.path.abspath(f) != os.path.abspath(path):
-            out.append(f)
+    """TODAS las páginas indexables del sitio (servicios, colonias y blog), MENOS la propia —
+    no solo las del mismo directorio (M1: cierra el hueco de un duplicado escondido en otra
+    familia, p.ej. un servicio que clona una colonia o un blog)."""
+    me = os.path.abspath(path)
+    pats = [
+        os.path.join(ROOT, "servicios", "*", "index.html"),
+        os.path.join(ROOT, "servicios", "electricista-colonias-culiacan", "*", "index.html"),
+        os.path.join(ROOT, "blog", "*", "index.html"),
+    ]
+    out, seen = [], set()
+    for pat in pats:
+        for f in glob.glob(pat):
+            af = os.path.abspath(f)
+            if af != me and af not in seen:
+                seen.add(af); out.append(f)
     return out
 
 
@@ -86,7 +104,7 @@ def main():
         errors += 1
 
     # 3) Anti-doorway
-    print("── 3) Anti-doorway (Jaccard vs hermanas indexables) ──")
+    print("── 3) Anti-doorway (Jaccard vs todo el sitio indexable) ──")
     for p in pages:
         tv = visible_tokens(p)
         if tv is None:

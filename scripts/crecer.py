@@ -93,13 +93,17 @@ def home_link_add(slug, label):
 
 
 def sw_bump():
+    """Sube CACHE_VERSION del service worker. Devuelve True si lo logró; False si no encontró
+    el patrón (B1: antes fallaba en SILENCIO y se publicaba sin bump → CSS viejo cacheado)."""
     sw = _read("sw.js")
     m = re.search(r"const CACHE_VERSION = 'v(\d+)';", sw)
     if not m:
-        print("  ⚠️ sw: no encontré CACHE_VERSION"); return
+        print("  ❌ sw: no encontré CACHE_VERSION — NO puedo versionar el cache (no publicar así)")
+        return False
     n = int(m.group(1)); new = "v%d" % (n + 1)
     _write("sw.js", sw.replace(m.group(0), "const CACHE_VERSION = '%s';" % new, 1))
     print("  • sw: v%s -> %s" % (m.group(1), new))
+    return True
 
 
 def gate(paths):
@@ -147,9 +151,9 @@ def cmd_servicio(args):
     print("── wiring automático ──")
     sitemap_add("%s/servicios/%s/" % (SITE, slug), "0.8")
     linked = home_link_add(slug, z.get("bc", slug))
-    sw_bump()
+    bumped = sw_bump()
     print("── candado ──")
-    ok = gate([page]) and linked
+    ok = gate([page]) and linked and bumped
     if not ok:
         print("\n↩️  FALLÓ el candado o el enlace en home — revirtiendo para dejar el árbol LIMPIO…")
         _restore(snap)
@@ -203,6 +207,12 @@ def cmd_publicar(args):
     if not st:
         sys.exit("nada que publicar (working tree limpio)")
     print("Cambios:\n" + st)
+    # M4: purga ramas auto/* YA fusionadas (git branch -d solo borra las mergeadas; las no
+    # fusionadas se conservan porque tienen trabajo pendiente de revisión humana).
+    for b in sh(["git", "branch", "--merged", "main"]).stdout.splitlines():
+        b = b.strip().lstrip("*").strip()
+        if b.startswith("auto/"):
+            sh(["git", "branch", "-d", b])
     sh(["git", "checkout", "-b", branch])
     sh(["git", "add", "-A"])
     full = msg + "\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"

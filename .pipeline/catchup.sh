@@ -11,6 +11,14 @@ mkdir -p "$LOG_DIR"
 SCRIPT="/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/crecer-diario.sh"
 STAMP=$(date "+%Y-%m-%d %H:%M:%S")
 
+# A3 — anti doble-corrida: si YA hubo una corrida HOY (marca datada que escribe el driver al
+# terminar), no dispares otra aunque hayan pasado >=20h (evita 1 corrida por reinicio + 1 por launchd).
+TODAY=$(date +%Y%m%d)
+if [ "$(cat "$LOG_DIR/auto-agente-last-run-day" 2>/dev/null || echo "")" = "$TODAY" ]; then
+  echo "[$STAMP] catch-up electricista: ya corrió hoy ($TODAY) -> sin acción" >> "$LOG_DIR/electricista-catchup.log"
+  exit 0
+fi
+
 # Busca el log más reciente de cualquiera de los dos drivers (auto-agente nuevo o el viejo electricista-*).
 NEWEST=$(ls -t "$LOG_DIR"/auto-agente-2*.log "$LOG_DIR"/electricista-2*.log 2>/dev/null | head -1)
 if [ -n "$NEWEST" ]; then
