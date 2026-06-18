@@ -16,12 +16,24 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHECKERS = ["check-plantilla.py", "check-indexabilidad.py"]
 
+def _parse_json_lenient(s):
+    """B2: tolera texto extra antes/después del JSON (p.ej. un warning a stdout) extrayendo
+    el objeto {…} más externo. Sigue fallando cerrado (lanza) si no hay JSON parseable."""
+    try:
+        return json.loads(s)
+    except Exception:
+        i, j = s.find("{"), s.rfind("}")
+        if i != -1 and j > i:
+            return json.loads(s[i:j + 1])
+        raise
+
+
 total_alta = 0
 for c in CHECKERS:
     path = os.path.join(ROOT, ".pipeline", c)
     res = subprocess.run([sys.executable, path], capture_output=True, text=True, cwd=ROOT)
     try:
-        data = json.loads(res.stdout)
+        data = _parse_json_lenient(res.stdout)
     except Exception as e:
         print(f"❌ {c}: la salida no es JSON válido ({e})")
         sys.stderr.write(res.stdout[:800] + "\n" + res.stderr[:800] + "\n")
