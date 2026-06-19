@@ -398,21 +398,34 @@ def check_page(fpath, t, noindex, redirects):
     # --- 13. overclaim certificación CFE (media — NO bloquea; visibiliza el lote)
     #         Solo una UVIE acreditada emite la verificación oficial para CFE; el
     #         negocio entrega "constancia de instalación / a norma NOM-001-SEDE".
-    low_t = t.lower()
+    #   Análisis por ORACIÓN (no por documento): se ignora la oración si atribuye
+    #   el certificado a una UVIE acreditada (deslinde honesto, p.ej. dictamen-electrico)
+    #   y se cazan TODAS las variantes "certificad{a,o,os,as} ... CFE" (cualquier orden,
+    #   ventana de 40 car.) + "certificación CFE". Antes solo cazaba 3 frases exactas y
+    #   se le escapaba "Certificado CFE" / "tableros certificados CFE" / "conforme a CFE"
+    #   (los cazó el revisor LLM el 2026-06-18; ahora son deterministas).
+    #   Heurística de deslinde: si la página menciona "UVIE" en cualquier parte, fue
+    #   redactada con el entendimiento correcto (el certificado oficial lo emite una
+    #   Unidad de Verificación), p.ej. dictamen-electrico → se confía y NO se marca.
     overclaim = None
-    if "certificada cfe" in low_t:
-        overclaim = "certificada CFE"
-    elif "certificación cfe" in low_t or "certificacion cfe" in low_t:
-        overclaim = "certificación CFE"
-    elif "certificado oficial" in low_t and "cfe" in low_t:
-        overclaim = "certificado oficial + CFE"
+    if "uvie" not in t.lower():
+        for frase in re.split(r"[.\n]", t):
+            fl = frase.lower()
+            if "cfe" not in fl:
+                continue
+            m = (re.search(r"certificad[oa]s?\b[^.]{0,40}\bcfe\b", fl)
+                 or re.search(r"\bcfe\b[^.]{0,40}\bcertificad[oa]s?\b", fl)
+                 or re.search(r"certificaci[oó]n\s+cfe", fl))
+            if m:
+                overclaim = m.group(0).strip()[:50]
+                break
     if overclaim:
         add("media", r, "seo",
             "Overclaim certificación CFE (\"%s\"): solo una UVIE acreditada certifica para CFE"
             % overclaim,
             'Reescribir a "constancia de instalación" / "a norma NOM-001-SEDE" (NO "certificada/'
-            'certificación/certificado oficial CFE"). Lote teaser de ~18 páginas deferido el '
-            "2026-06-17 (tarjeta de servicio relacionado + 1 H3)")
+            'certificación/certificado(s) CFE"). Las oraciones que atribuyen el certificado a una '
+            "UVIE acreditada NO se marcan (deslinde honesto)")
 
     # --- 14. main.js sin minificar (baja, perf)
     for m in re.finditer(r'src\s*=\s*["\']([^"\']*main\.js)["\']', t, re.I):

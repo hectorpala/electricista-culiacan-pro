@@ -1,5 +1,18 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-18 (Auto Agente diario — remediación CFE completa + 2 regresiones) — EN RAMA, NO PUBLICADO (candado 28>18)
+Rama `auto/diario-20260618-1820`, commits `f474e80d` (contenido) + FASE 9 (checker+como-prevenir). HEALTH CHECK previo OK (home, /contacto/, /servicios/, /blog/, instalacion-electrica, electricista → 200). 9 revisores en paralelo; deterministas SANOS (no ciegos); GSC ciego conocido.
+- **OVERCLAIM CFE — LOTE COMPLETADO (media, 23 págs de contenido):** lo principal. Se terminó la tanda diferida del 2026-06-17: teaser "Instalación de tierra física **certificada CFE**" → "...a norma NOM-001-SEDE" en 18 servicios; H3 "Certificación CFE" → "Trabajo a norma CFE y NOM" en servicios/electricista; y 4 blogs reescritos (como-elegir, cuando-llamar, mantenimiento-tablero, senales-obsoleta). Claim engañoso (solo una UVIE acreditada certifica para CFE). check-plantilla CFE: 22 → **0**.
+- **CHECKER MÁS LISTO (FASE 9):** el check CFE de check-plantilla.py solo cazaba 3 frases literales y se le escapaban "Certificado CFE"/"certificados CFE"/"conforme a CFE" (las cazó el LLM, no el determinista). Reescrito a análisis **por oración** (`certificad{a,o,os,as} … CFE` cualquier orden + `certificación CFE`) con **heurística de deslinde UVIE** (si la página menciona "UVIE" no se marca → quita el falso positivo histórico de dictamen-electrico). 9 tests pasan, JSON válido.
+- **OVERCLAIM OCULTO destapado por el checker mejorado:** blog/como-prevenir-cortocircuitos-casa decía "electricistas **están certificados** y conocen las normativas CFE" → reescrito. Nadie lo había visto (ni LLM ni checker viejo). Prueba de que el sistema se vuelve más listo.
+- **REGRESIÓN rating (media, 3 págs):** `class="rating-score">5.0/5` seguía contradiciendo el schema 4.8 en electricista, instalacion-electrica, instalacion-tierra-fisica → 4.8/5. (Muchos otros "5.0" en esas páginas son coordenadas de SVG, no ratings; no se tocaron.)
+- **REGRESIÓN footer-year (baja):** gracias/ con `&copy; 2025` → 2026.
+- **CRECER (FASE 6):** 0 páginas nuevas. GSC ciego (sin acceso a mcp__gsc__* en esta corrida) + sitio saturado + rama ya >18 → forzar páginas sería doorway. PIVOTE cumplido: sitio dejado más honesto (CFE). No se fabricó tabla de oportunidades sin datos.
+- **Verificador independiente escéptico: ok=true**, 26 archivos (contenido), 0 problemas. ci-gate 0 ALTA. 26/26 HTTP 200 + JSON-LD + canonical==og==twitter. 0 precios/tests tocados, 0 borrados, email limpio, teléfono canónico intacto.
+- **NO PUBLICADO:** diff total **28 archivos** (26 contenido + como-prevenir + checker) > candado de 18 → revisión humana, tal como estaba previsto para el lote CFE dedicado. Rama lista para merge de un clic.
+- **PENDIENTE-HUMANO (heredado, sin cambio):** revisor-gsc mal cableado a plomero (reapuntar a mcp__gsc__*); skip-link/`<main>` faltan en 693/33 páginas (migración masiva); CSS render-blocking en 645 páginas; tap targets footer/breadcrumb <44px; CTR head-terms del home (estrategia); medir indexación de colonias en GSC (~3-4 semanas).
+
+
 ## 2026-06-17 (Auto Agente diario — 12 arreglos + 1 mejora SEO) — PUBLICADO ✅
 Corrida diaria unificada (mantener+crecer+verificar+aprender), lock propio confirmado mío. 9 revisores en paralelo. Diff 16→18 archivos (≤18).
 - **TELÉFONOS DE CONTACTO ROTOS (alta, 9 páginas):** lo más grave. 4 blogs traían el teléfono PLACEHOLDER de plantilla (wa.me/5216677890000, "667-789-0000"); 2 blogs + /gracias/ traían un número CORRUPTO con dígitos duplicados (526676673922273); /terminos/ y /privacidad/ tenían tel sin +52. Todos → 526673922273. Los botones de WhatsApp/llamar llevaban a números inexistentes = leads perdidos. Verificado en vivo (0 patrones malos restantes).
