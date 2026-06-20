@@ -1,55 +1,50 @@
-# Auto Agente Electricista — parte del 18 de junio de 2026
-**Resultado:** arreglé 4 (lo más importante: borré claims falsos de "certificación CFE") · listo para tu OK de publicación
+# Auto Agente Electricista — parte del 19 de junio de 2026
+**Resultado:** encontré 9, arreglé 6, 1 para ti, 2 no pude solo · NO publicado (espera tu visto bueno)
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 7 cosas: arreglé 4 · 1 necesita tu decisión · 2 no pude arreglar solo.
+Encontré 9 cosas: arreglé 6 · 1 necesita tu decisión · 2 no pude arreglar solo.
 
-## ✅ Arreglé (4)
-
-- **Quité una promesa que NO es cierta y nos podía meter en problemas: que damos "certificación CFE".** En México, el certificado oficial para la CFE solo lo puede emitir una empresa verificadora autorizada (una "UVIE"), no el electricista. Tu sitio lo prometía en muchas páginas. Lo cambié por lo correcto: que dejamos la instalación **"a norma"** y te entregamos una **constancia** (que es lo que de verdad hacemos). Esto venía pendiente desde ayer porque tocaba muchas páginas; hoy lo terminé completo. Páginas tocadas:
-  - El texto "Instalación de tierra física certificada CFE" (que aparecía abajo, como servicio relacionado) lo corregí en 18 páginas de servicio, por ejemplo:
-    - https://electricistaculiacanpro.mx/servicios/electricista-comercial/
-    - https://electricistaculiacanpro.mx/servicios/instalacion-camaras-seguridad/
-    - https://electricistaculiacanpro.mx/servicios/instalacion-paneles-solares/
-    - https://electricistaculiacanpro.mx/servicios/instalacion-planta-luz-generador/
-    - https://electricistaculiacanpro.mx/servicios/reparacion-minisplit/
-    - (…y 13 páginas de servicio más, todas con el mismo arreglo)
-  - El título "Certificación CFE" en la página principal de electricista → "Trabajo a norma CFE y NOM": https://electricistaculiacanpro.mx/servicios/electricista/
-  - 4 artículos del blog donde también lo decía, reescritos bien:
-    - https://electricistaculiacanpro.mx/blog/como-elegir-buen-electricista-culiacan/
-    - https://electricistaculiacanpro.mx/blog/cuando-llamar-electricista-emergencia/
-    - https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/
-    - https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
-
-- **Destapé y corregí OTRO claim parecido que estaba escondido y que nadie había visto** (ni yo en revisiones pasadas): un artículo decía "nuestros electricistas están certificados y conocen las normativas CFE". Lo cambié a que **conocen las normativas CFE y trabajan a norma** (sin dar a entender que la CFE nos certifica). Lo encontré porque hoy hice más listo a mi propio detector de errores (ver "Aprendí hoy"). → https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/
-
-- **Arreglé las estrellas de reseñas: decían "5.0" pero los datos que lee Google dicen "4.8".** Esa contradicción se ve mal y puede contar como información inflada. Lo dejé en **4.8** (que es tu calificación real y la que estaba registrada). En 3 páginas:
-  - https://electricistaculiacanpro.mx/servicios/electricista/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-electrica/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-tierra-fisica/
-
-- **Corregí el año del pie de página:** una página seguía diciendo "© 2025" y el resto del sitio ya está en 2026. → https://electricistaculiacanpro.mx/gracias/
+## ✅ Arreglé (6)
+- **Las estrellas decían "5.0" en vez de "4.8" en 6 artículos del blog.** En tu sitio la calificación oficial es 4.8 estrellas (es la que ve Google), pero en estos 6 artículos el numerito visible decía 5.0 — una contradicción que resta credibilidad. Lo igualé a 4.8 en todos:
+  - https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/
+  - https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/
+  - https://electricistaculiacanpro.mx/blog/cuando-llamar-electricista-emergencia/
+  - https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
+  - https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/
+  - https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/
+- **Una promesa exagerada de dinero: "retorno garantizado en menos de un año".** Eso promete algo que en realidad depende de cuánto gaste cada cliente; lo cambié por algo honesto: "suele recuperarse en pocos meses según tu consumo" → https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/
+- **Dos promesas de "Cero riesgo" en la página de ventiladores de techo.** Prometer riesgo cero no es sostenible (ningún trabajo lo es al 100%); lo cambié a "minimiza el riesgo" / "reduce al mínimo el riesgo" → https://electricistaculiacanpro.mx/servicios/instalacion-ventiladores-techo/
+- **Un año viejo (2025) en un título de artículo.** Un encabezado decía "Costos de Actualización en Culiacán 2025"; lo puse en 2026 → https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
+- **Un enlace roto en la lista de colonias.** En el buscador de colonias había una entrada falsa ("Directorio") que llevaba a una página inexistente (error 404); la quité para que nadie caiga ahí → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
+- **Imágenes recortadas en el celular en 11 artículos del blog.** Al final de cada artículo hay tarjetas de "servicios relacionados" con foto; en el celular esas fotos se salían de la tarjeta y se cortaban por la derecha (unos 77 píxeles). Las acomodé igual que en tu página principal y ya se ven completas (lo medí con un celular simulado: antes se cortaban, ahora encajan perfecto). Artículos corregidos:
+  - https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/
+  - https://electricistaculiacanpro.mx/blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/
+  - https://electricistaculiacanpro.mx/blog/como-elegir-buen-electricista-culiacan/
+  - https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/
+  - https://electricistaculiacanpro.mx/blog/cuando-llamar-electricista-emergencia/
+  - https://electricistaculiacanpro.mx/blog/cuanto-cuesta-electricista-culiacan/
+  - https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/
+  - https://electricistaculiacanpro.mx/blog/por-que-se-bota-el-breaker-pastilla-culiacan/
+  - https://electricistaculiacanpro.mx/blog/recibo-luz-alto-culiacan-como-bajarlo/
+  - https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/
+  - https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
 
 ## ⚠️ Encontré pero NO pude arreglar solo (2)
+- **El verde de los enlaces de WhatsApp (cuando van como texto) tiene poco contraste** y cuesta leerlo para personas con baja visión. El arreglo está en el archivo de estilos compartido de todo el sitio, y por cómo está armado, tocarlo obliga a actualizar cientos de páginas de golpe — demasiado para hacerlo solo sin tu visto bueno. Te lo dejo identificado y listo para una sesión dedicada.
+- **Google Search Console sigue desconectado para tu sitio** (la herramienta que me dice qué busca la gente en Google). Por eso hoy tampoco pude revisar oportunidades reales de páginas nuevas. Es un ajuste técnico de conexión que necesita hacerse una vez: apuntar mi revisor a tu propiedad de Google.
 
-- **El "termómetro" de Google (Search Console) sigue mal conectado:** apunta al sitio de Plomero, no al de Electricista, así que hoy no pude leer qué está buscando la gente para decidir si crear páginas nuevas. No es que tu sitio esté mal; es una conexión que hay que reapuntar (un ajuste técnico de configuración). Por eso hoy no creé páginas nuevas (sin esos datos, inventarlas dañaría tu posición en Google).
-- **Mejoras grandes de accesibilidad y velocidad que tocan cientos de páginas a la vez:** falta un "saltar al contenido" para personas que navegan con teclado/lectores de pantalla, y la forma en que carga el diseño en ~645 páginas se puede acelerar. Son cambios masivos (muchísimos archivos de golpe), así que los dejo para una corrida dedicada y no meterlos a ciegas.
-
-## 🌱 Mejoré / agregué (0 páginas nuevas, pero el sitio quedó más confiable)
-
-Sin páginas nuevas hoy: no tenía los datos de Google para saber qué busca la gente (ver arriba), y forzar páginas dañaría tu posicionamiento. En cambio dejé tu sitio **más honesto y limpio**: 23 páginas dejaron de prometer una "certificación CFE" que no podemos dar. Eso te protege y da más confianza al cliente.
+## 🌱 Mejoré / agregué (0 páginas nuevas, pero dejé el sitio más rico)
+Sin páginas nuevas hoy: como no tengo conectado Google Search Console no puedo ver con datos reales qué páginas faltan, y tu sitio ya cubre bien lo que la gente busca. **Inventar páginas sin datos dañaría tu posicionamiento**, así que no lo hice. En su lugar enriquecí lo que ya tienes: el arreglo de las imágenes en celular mejora la experiencia móvil en 11 artículos del blog, y quité las promesas exageradas para que tu sitio se vea más serio y confiable.
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-
-- Hice **más listo a mi detector automático de errores**: antes solo cazaba 3 formas exactas de decir "certificación CFE" y se le escapaban otras ("Certificado CFE", "tableros certificados CFE", etc.). Ahora las caza todas — y gracias a eso, hoy destapé un error escondido que llevaba tiempo ahí.
-- También le enseñé a **no marcar por error** la página de dictámenes (esa sí está bien escrita, porque aclara que el certificado oficial lo emite la empresa verificadora autorizada).
-- Apunté que las estrellas visibles (5.0) y el año del pie (2025) tienden a "colarse" al copiar bloques entre páginas; ahora quedan vigiladas.
-- (ya van 22 reglas aprendidas en total)
+- Si un numerito de estrellas visible dice "5.0", ahora lo detecto solo: el estándar de tu marca es 4.8 y debe coincidir en todo el sitio.
+- Las frases de "riesgo cero" o "retorno garantizado" ahora las caza mi revisor automático (son promesas que no se sostienen). Ojo: un "sin riesgo de descarga" normal en un consejo de seguridad NO se toca, eso es correcto.
+- Cuando una tarjeta de servicio con foto no está armada igual que tu página principal, ahora lo detecto antes de que la imagen se recorte en el celular.
+- Una entrada falsa en la lista de colonias puede crear un enlace roto; aprendí a revisarlo.
+(ya van 26 reglas aprendidas en total)
 
 ## ⏳ Necesito que tú decidas (1)
-
-- **¿Publico este paquete de hoy?** Lo dejé listo y revisado, pero **no lo publiqué solo** porque toca 28 páginas de una vez, y mi regla de seguridad es: cuando un cambio toca tantas páginas, lo ve un humano antes de salir en vivo (para evitar que algo se salga de control sin que nadie lo note). Está todo verificado y esperando tu visto bueno para publicarlo de un clic. Si me dices que sí, lo subo.
+- **El color del botón naranja "Más Información"** tiene el contraste un poco bajo con el texto blanco. Es tu color de marca, así que no lo cambio por mi cuenta: si quieres, lo oscurezco un punto para que se lea mejor sin perder la identidad. Tú decides.
 
 ## 📦 ¿Se publicó?
-
-**No publiqué todavía:** el arreglo es bueno y está 100% revisado (un verificador independiente lo aprobó: todas las páginas cargan bien y nada quedó roto), pero toca 28 páginas de una sola vez y mi regla de seguridad pide tu visto bueno antes de publicar un cambio tan grande. Lo dejé guardado en una rama, listo para subir en cuanto me digas. Nada de precios, nada de páginas borradas, tu teléfono y correo intactos.
+**No publiqué.** Lo de hoy (6 arreglos) se juntó con el lote de ayer —la limpieza de los claims de "certificación CFE" en 23 páginas— y entre los dos suman 40 archivos cambiados, muy por encima del límite de seguridad de 18 que pide tu revisión antes de subir. Además comparten archivos, así que no se pueden separar. **Todo está guardado y revisado en una sola rama, listo para que lo subas de un clic** cuando le des el visto bueno. Una vez que lo apruebes, le aviso a Google automáticamente para que lo muestre.
