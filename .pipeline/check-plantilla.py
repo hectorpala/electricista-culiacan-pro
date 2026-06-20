@@ -370,19 +370,30 @@ def check_page(fpath, t, noindex, redirects):
             "Página indexable sin <meta name=\"theme-color\">",
             "Añadir <meta name=\"theme-color\" content=\"#...\"> con el color de marca en el <head>")
 
-    # --- 11b. marca/color: paleta AZUL off-brand prohibida (seo) [preventivo]
-    # La marca es NARANJA (--brand:#E36414, --brand-light:#F97316, --brand-dark:#C2410C).
-    # Hoy el sitio esta limpio (0 azul), pero el sitio hermano traia un esquema AZUL inline
-    # en el blog (#0066cc/#0284c7/#0369a1) que hacia verse esas paginas distintas de la home.
-    # Este check evita que entre por copy-paste/clonacion. La home es la fuente de verdad.
-    BLUES = ("#0066cc", "#0284c7", "#0369a1")
-    azul = {h: len(re.findall(h, t, re.I)) for h in BLUES}
-    if any(azul.values()):
-        detalle = ", ".join("%s×%d" % (h, n) for h, n in azul.items() if n)
+    # --- 11b. marca/color: hex off-brand prohibidos (seo)
+    # La marca de ESTE sitio es NARANJA + AZUL (la home la usa): naranja #E36414/#F97316/#C2410C
+    # y AZUL DE MARCA #1e40af/#0f4fa8/#1a73e8/#0d3f8a. LEGÍTIMOS además: #22c55e (disponibilidad),
+    # WhatsApp #25d366/#128c7e, logo Google #4285f4/#ea4335/#34a853/#fbbc05, neutros slate, ámbar
+    # de avisos. PROHIBIDO: azules que NO son los de marca, morado, rojo y verde decorativo (se
+    # colaban por clonación del sitio hermano). OJO: NO incluir aquí los azules de marca.
+    # Casos color-elec-20260620. Si aparece un tono nuevo off-brand, añádelo aquí.
+    OFFBRAND_HEX = (
+        # azules NO-marca (los de marca #1e40af/#0f4fa8/#1a73e8/#0d3f8a NO van aquí)
+        "#0066cc", "#0284c7", "#0369a1", "#004499", "#0c4a6e", "#0ea5e9", "#075985",
+        "#1a5276", "#bae6fd", "#e8f4fd", "#f0f8ff", "#f0f9ff", "#e0f2fe", "#2c3e50",
+        # morado / rojo
+        "#667eea", "#764ba2", "#dc2626", "#dc3545", "#b91c1c", "#991b1b", "#fef2f2",
+        # verde decorativo (NO el #22c55e de marca, NI WhatsApp #25d366/#128c7e, NI Google #34a853)
+        "#059669", "#166534", "#16a34a", "#28a745", "#10b981", "#dcfce7", "#f0fdf4", "#ecfdf5",
+    )
+    offb = {h: len(re.findall(h, t, re.I)) for h in OFFBRAND_HEX}
+    offb = {h: n for h, n in offb.items() if n}
+    if offb:
+        detalle = ", ".join("%s×%d" % (h, n) for h, n in offb.items())
         add("media", r, "seo",
-            "Color AZUL off-brand en la página (%s) — la marca es NARANJA como la home" % detalle,
-            "Reemplazar por la paleta de marca preservando la jerarquía: "
-            "#0284c7→#F97316 (claro), #0066cc→#E36414 (base), #0369a1→#C2410C (oscuro).")
+            "Color off-brand (azul-no-marca/morado/rojo/verde) en la página: %s — la marca es NARANJA+AZUL como la home" % detalle,
+            "Reemplazar por la paleta: naranja #C2410C / azul de marca #1e40af; verde→#22c55e; "
+            "fondos claros #FFF7ED. No tocar el logo de Google (#4285f4/#ea4335 en <path fill> de SVG).")
 
     # --- 12. telefono NO canonico (alta, links) — contacto roto = leads perdidos
     #         Normaliza a solo digitos (ignora +, espacios y guiones). Si el numero
