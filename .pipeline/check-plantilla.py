@@ -370,6 +370,20 @@ def check_page(fpath, t, noindex, redirects):
             "Página indexable sin <meta name=\"theme-color\">",
             "Añadir <meta name=\"theme-color\" content=\"#...\"> con el color de marca en el <head>")
 
+    # --- 11b. marca/color: paleta AZUL off-brand prohibida (seo) [preventivo]
+    # La marca es NARANJA (--brand:#E36414, --brand-light:#F97316, --brand-dark:#C2410C).
+    # Hoy el sitio esta limpio (0 azul), pero el sitio hermano traia un esquema AZUL inline
+    # en el blog (#0066cc/#0284c7/#0369a1) que hacia verse esas paginas distintas de la home.
+    # Este check evita que entre por copy-paste/clonacion. La home es la fuente de verdad.
+    BLUES = ("#0066cc", "#0284c7", "#0369a1")
+    azul = {h: len(re.findall(h, t, re.I)) for h in BLUES}
+    if any(azul.values()):
+        detalle = ", ".join("%s×%d" % (h, n) for h, n in azul.items() if n)
+        add("media", r, "seo",
+            "Color AZUL off-brand en la página (%s) — la marca es NARANJA como la home" % detalle,
+            "Reemplazar por la paleta de marca preservando la jerarquía: "
+            "#0284c7→#F97316 (claro), #0066cc→#E36414 (base), #0369a1→#C2410C (oscuro).")
+
     # --- 12. telefono NO canonico (alta, links) — contacto roto = leads perdidos
     #         Normaliza a solo digitos (ignora +, espacios y guiones). Si el numero
     #         no es 526673922273 ni 6673922273 -> fuga/placeholder/corrupcion.
