@@ -398,21 +398,34 @@ def check_page(fpath, t, noindex, redirects):
     # --- 13. overclaim certificación CFE (media — NO bloquea; visibiliza el lote)
     #         Solo una UVIE acreditada emite la verificación oficial para CFE; el
     #         negocio entrega "constancia de instalación / a norma NOM-001-SEDE".
-    low_t = t.lower()
+    #   Análisis por ORACIÓN (no por documento): se ignora la oración si atribuye
+    #   el certificado a una UVIE acreditada (deslinde honesto, p.ej. dictamen-electrico)
+    #   y se cazan TODAS las variantes "certificad{a,o,os,as} ... CFE" (cualquier orden,
+    #   ventana de 40 car.) + "certificación CFE". Antes solo cazaba 3 frases exactas y
+    #   se le escapaba "Certificado CFE" / "tableros certificados CFE" / "conforme a CFE"
+    #   (los cazó el revisor LLM el 2026-06-18; ahora son deterministas).
+    #   Heurística de deslinde: si la página menciona "UVIE" en cualquier parte, fue
+    #   redactada con el entendimiento correcto (el certificado oficial lo emite una
+    #   Unidad de Verificación), p.ej. dictamen-electrico → se confía y NO se marca.
     overclaim = None
-    if "certificada cfe" in low_t:
-        overclaim = "certificada CFE"
-    elif "certificación cfe" in low_t or "certificacion cfe" in low_t:
-        overclaim = "certificación CFE"
-    elif "certificado oficial" in low_t and "cfe" in low_t:
-        overclaim = "certificado oficial + CFE"
+    if "uvie" not in t.lower():
+        for frase in re.split(r"[.\n]", t):
+            fl = frase.lower()
+            if "cfe" not in fl:
+                continue
+            m = (re.search(r"certificad[oa]s?\b[^.]{0,40}\bcfe\b", fl)
+                 or re.search(r"\bcfe\b[^.]{0,40}\bcertificad[oa]s?\b", fl)
+                 or re.search(r"certificaci[oó]n\s+cfe", fl))
+            if m:
+                overclaim = m.group(0).strip()[:50]
+                break
     if overclaim:
         add("media", r, "seo",
             "Overclaim certificación CFE (\"%s\"): solo una UVIE acreditada certifica para CFE"
             % overclaim,
             'Reescribir a "constancia de instalación" / "a norma NOM-001-SEDE" (NO "certificada/'
-            'certificación/certificado oficial CFE"). Lote teaser de ~18 páginas deferido el '
-            "2026-06-17 (tarjeta de servicio relacionado + 1 H3)")
+            'certificación/certificado(s) CFE"). Las oraciones que atribuyen el certificado a una '
+            "UVIE acreditada NO se marcan (deslinde honesto)")
 
     # --- 14. main.js sin minificar (baja, perf)
     for m in re.finditer(r'src\s*=\s*["\']([^"\']*main\.js)["\']', t, re.I):
@@ -421,36 +434,133 @@ def check_page(fpath, t, noindex, redirects):
             "Cambiar el src a main.min.js (mismo path, versión minificada que usa index.html). "
             "Tras el cambio verificar que las URLs wa.me no quedaron truncadas")
 
+    # --- 15. rating visible 5.0 (media, seo): el estándar de marca es 4.8 (coherente con
+    #         el aggregateRating del schema). Un span.rating-score ">5.0/5" visible —sobre
+    #         todo en blogs SIN aggregateRating propio— contradice el estándar y se cuela al
+    #         copiar bloques de prueba social. Regresión vista 2026-06-17/18 (servicios) y
+    #         2026-06-19 (6 blogs). OJO: no confundir con "ratingValue":"5" de reviews
+    #         individuales ni con "5.0" dentro de paths SVG (este patrón solo caza el span).
+    if re.search(r'rating-score"\s*>\s*5\.0', t):
+        add("media", r, "seo",
+            'Rating visible "5.0" en span.rating-score (el estándar del sitio es 4.8)',
+            'Cambiar el "5.0" del span.rating-score a "4.8" (el ratingValue del JSON-LD y todo '
+            '"N.N" visible deben coincidir en 4.8). NO tocar "5.0" que sean coordenadas en SVG')
+
+    # --- 16. overclaim absoluto / garantía financiera (media, seo): claims no sostenibles
+    #         tipo "cero riesgo", "retorno garantizado", "se pagan solos" — familia de los ya
+    #         prohibidos ("sin riesgos para tu familia"/"se pagan solos", remediados 2026-06-17).
+    #         NO se incluye "sin riesgo" a secas: tiene usos legítimos (instrucción de
+    #         seguridad, "sin riesgo de descarga" tras instalar tierra física).
+    for pat_oc, etiqueta in (
+        (r"cero\s+riesgo", "cero riesgo"),
+        (r"riesgo\s+cero", "riesgo cero"),
+        (r"retorno\s+garantizado", "retorno garantizado"),
+        (r"se\s+pagan\s+solos?", "se pagan solos"),
+        (r"se\s+paga\s+solo\b", "se paga solo"),
+    ):
+        if re.search(pat_oc, t, re.I):
+            add("media", r, "seo",
+                'Overclaim absoluto/garantía financiera ("%s"): claim no sostenible' % etiqueta,
+                'Suavizar a algo verificable: "minimiza/reduce el riesgo", "suele recuperarse en '
+                'pocos meses según el consumo". Evitar "cero riesgo"/"garantizado"/"se pagan solos"')
+            break
+
+    # --- 17. tarjeta card--img sin wrapper media-box (media, movil): si un <a class="card
+    #         card--img"> contiene <picture> SIN el <figure class="media-box"> de la homepage
+    #         (fuente de verdad), la imagen se renderiza a su ancho intrínseco (~420px) y se
+    #         recorta ~77px en móvil. Pasó en 11 blogs (remediado 2026-06-19).
+    if re.search(r'class="card card--img"[^>]*>\s*<picture', t):
+        add("media", r, "movil",
+            "Tarjeta card--img con <picture> sin envolver en figure.media-box (la imagen se "
+            "recorta en móvil)",
+            'Envolver el <picture> en <div class="service-card"><figure class="media-box">...'
+            '</figure></div> replicando la estructura de index.html (fuente de verdad)')
+
 
 # ================================================================ CHECK global: paridad CSS
-# Firmas EXACTAS (normalizadas sin espacios) de reglas que REGLAS.md documenta como
-# reincidentes en paridad. Se comprueba PRESENCIA (>=1) en cada styles*.css: si una
-# firma esta en algun archivo pero falta (0) en otro -> regresion de paridad.
-CSS_PARITY_SIGNATURES = [
-    "table-wrapper{overflow-x:auto",          # envoltura de tablas (f44ef39f)
-    "table{display:block;overflow-x:auto",    # fallback global de tablas (movil-203)
-    ".footer-logoimg",                         # regla del logo del footer (f44ef39f)
-]
+# PARIDAD TOTAL (no solo firmas): las 689 paginas sirven styles.7f293647.css (el VIVO, =
+# index.html FUENTE DE VERDAD); styles.min.css esta huerfana (nadie la sirve) y styles.css
+# es la fuente. Las tres DEBEN tener las mismas reglas: si la fuente/min se desvian del
+# vivo, son una bomba latente (si algun build reconstruye el servido desde ahi, el sitio
+# cambia de colores/logo sin querer; caso real 20260619: la fuente traia otro esquema de
+# marca y otro .logo). El checker viejo solo comparaba 3 firmas hardcodeadas.
+#
+# Se descompone cada styles*.css en ATOMOS (selector individual + bloque de declaraciones
+# normalizado, con su contexto @media) y se reporta todo atomo presente en alguna hoja pero
+# ausente en otra. Ignora minificacion (espacios) y agrupacion de selectores -> sin falsos
+# positivos. (Logica espejo de .pipeline/check-css-paridad.py.)
+def _css_norm_sel(s):
+    s = re.sub(r"\s+", " ", s).strip()  # conserva el combinador descendiente (' '), semantico
+    return re.sub(r"\s*([>+~,])\s*", r"\1", s)
+
+
+def _css_norm_decls(body):
+    b = re.sub(r"\s+", " ", body).strip()
+    b = re.sub(r"\s*([;:,])\s*", r"\1", b)
+    return ";".join(sorted(d.strip() for d in b.split(";") if d.strip()))
+
+
+def _css_split_rules(css):
+    rules, depth, prelude, buf, prelude_s = [], 0, [], [], ""
+    for ch in css:
+        if ch == "{":
+            if depth == 0:
+                prelude_s, prelude, depth = "".join(prelude), [], 1
+            else:
+                depth += 1
+                buf.append(ch)
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                rules.append((prelude_s.strip(), "".join(buf)))
+                buf = []
+            else:
+                buf.append(ch)
+        else:
+            (prelude if depth == 0 else buf).append(ch)
+    return rules
+
+
+def _css_style_atoms(prelude, body, ctx=""):
+    decls = _css_norm_decls(body)
+    return ["%s%s{%s}" % (ctx, sel, decls)
+            for sel in _css_norm_sel(prelude).split(",") if sel]
+
+
+def _css_atoms(css):
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    out = set()
+    for prelude, body in _css_split_rules(css):
+        p = _css_norm_sel(prelude)
+        head = p.split("(")[0].lower()
+        if head.startswith("@media") or head.startswith("@supports"):
+            ctx = re.sub(r"\s+", "", p) + "||"
+            for ip, ib in _css_split_rules(body):
+                out.update(_css_style_atoms(ip, ib, ctx))
+        elif p.startswith("@"):
+            out.add(re.sub(r"\s+", "", p) + "{" + re.sub(r"\s+", "", body) + "}")
+        else:
+            out.update(_css_style_atoms(prelude, body))
+    return out
 
 
 def check_css_parity():
     css_files = sorted(glob.glob(os.path.join(ROOT, "styles*.css")))
     if len(css_files) < 2:
         return  # nada que comparar
-    norm = {}
-    for c in css_files:
-        norm[c] = re.sub(r"\s+", "", read(c))
-    for sig in CSS_PARITY_SIGNATURES:
-        present = {c: (sig in norm[c]) for c in css_files}
-        if any(present.values()) and not all(present.values()):
-            tienen = sorted(rel(c) for c in css_files if present[c])
-            faltan = sorted(c for c in css_files if not present[c])
-            for c in faltan:
+    A = {c: _css_atoms(read(c)) for c in css_files}
+    union = set().union(*A.values())
+    for atom in sorted(union):
+        tienen = [c for c in css_files if atom in A[c]]
+        if len(tienen) == len(css_files):
+            continue
+        nombres = ", ".join(sorted(os.path.basename(c) for c in tienen))
+        for c in css_files:
+            if atom not in A[c]:
                 add("media", rel(c), "movil",
-                    "Paridad CSS rota: la regla '%s' existe en %s pero falta aquí"
-                    % (sig, ", ".join(tienen)),
-                    "Copiar la regla '%s' a este archivo para mantener los 3 CSS en paridad "
-                    "(styles.css fuente + styles.min.css + styles.<hash>.css servido)" % sig)
+                    "Paridad CSS rota: la regla '%s' existe en %s pero falta aquí" % (atom, nombres),
+                    "Unificar las 3 hojas al VIVO (styles.7f293647.css = index.html fuente de verdad). "
+                    "Si el cambio toca el archivo servido, versionar ?v= y subir CACHE_NAME en sw.js.")
 
 
 # ================================================================ MAIN
