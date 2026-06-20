@@ -39,6 +39,14 @@ reaparece, márcalo REGRESIÓN (prioridad alta: falta una regla/checker que lo p
 cuéntalo. Ignora lo marcado como decisión humana. Añade nuevos y regresiones a HISTORIAL.jsonl con la fecha de hoy.
 
 ==================== FASE 5 — CORREGIR (mecánicos + humanos), uno por uno ====================
+PRIMERO drena lo MECÁNICO con el auto-fixer determinista (sin límite, no requiere criterio):
+  `python3 .pipeline/auto-fixers.py run --apply`   (lista: `… auto-fixers.py list`; dry-run: `… run`)
+  Cubre: og:url faltante, theme-color placeholder #0066cc→#E36414, email contaminado con "plomero"→
+  contacto@electricistaculiacanpro.mx, meta-robots faltante, y COLOR off-brand (azul-no-marca→#1e40af azul
+  de marca, morado/rojo→#C2410C, verde decorativo→#22c55e, fondos claros→#FFF7ED; conserva el azul de marca
+  #1e40af/#0f4fa8/#1a73e8, #22c55e, WhatsApp y el logo de Google). OJO: si tocó algún styles*.css o el HTML
+  servido, versiona ?v= + sube CACHE_VERSION en sw.js. Lo que el auto-fixer NO cubra, arréglalo a mano abajo:
+
 Arregla, con cambios MÍNIMOS y respetando TODAS las reglas de REGLAS.md, los hallazgos de severidad alta y media:
 
   • MECÁNICOS: envolver/ajustar CSS, max-width, table-wrapper, aria-label, foco visible, versionar assets con ?v=
