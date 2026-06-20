@@ -434,6 +434,48 @@ def check_page(fpath, t, noindex, redirects):
             "Cambiar el src a main.min.js (mismo path, versión minificada que usa index.html). "
             "Tras el cambio verificar que las URLs wa.me no quedaron truncadas")
 
+    # --- 15. rating visible 5.0 (media, seo): el estándar de marca es 4.8 (coherente con
+    #         el aggregateRating del schema). Un span.rating-score ">5.0/5" visible —sobre
+    #         todo en blogs SIN aggregateRating propio— contradice el estándar y se cuela al
+    #         copiar bloques de prueba social. Regresión vista 2026-06-17/18 (servicios) y
+    #         2026-06-19 (6 blogs). OJO: no confundir con "ratingValue":"5" de reviews
+    #         individuales ni con "5.0" dentro de paths SVG (este patrón solo caza el span).
+    if re.search(r'rating-score"\s*>\s*5\.0', t):
+        add("media", r, "seo",
+            'Rating visible "5.0" en span.rating-score (el estándar del sitio es 4.8)',
+            'Cambiar el "5.0" del span.rating-score a "4.8" (el ratingValue del JSON-LD y todo '
+            '"N.N" visible deben coincidir en 4.8). NO tocar "5.0" que sean coordenadas en SVG')
+
+    # --- 16. overclaim absoluto / garantía financiera (media, seo): claims no sostenibles
+    #         tipo "cero riesgo", "retorno garantizado", "se pagan solos" — familia de los ya
+    #         prohibidos ("sin riesgos para tu familia"/"se pagan solos", remediados 2026-06-17).
+    #         NO se incluye "sin riesgo" a secas: tiene usos legítimos (instrucción de
+    #         seguridad, "sin riesgo de descarga" tras instalar tierra física).
+    for pat_oc, etiqueta in (
+        (r"cero\s+riesgo", "cero riesgo"),
+        (r"riesgo\s+cero", "riesgo cero"),
+        (r"retorno\s+garantizado", "retorno garantizado"),
+        (r"se\s+pagan\s+solos?", "se pagan solos"),
+        (r"se\s+paga\s+solo\b", "se paga solo"),
+    ):
+        if re.search(pat_oc, t, re.I):
+            add("media", r, "seo",
+                'Overclaim absoluto/garantía financiera ("%s"): claim no sostenible' % etiqueta,
+                'Suavizar a algo verificable: "minimiza/reduce el riesgo", "suele recuperarse en '
+                'pocos meses según el consumo". Evitar "cero riesgo"/"garantizado"/"se pagan solos"')
+            break
+
+    # --- 17. tarjeta card--img sin wrapper media-box (media, movil): si un <a class="card
+    #         card--img"> contiene <picture> SIN el <figure class="media-box"> de la homepage
+    #         (fuente de verdad), la imagen se renderiza a su ancho intrínseco (~420px) y se
+    #         recorta ~77px en móvil. Pasó en 11 blogs (remediado 2026-06-19).
+    if re.search(r'class="card card--img"[^>]*>\s*<picture', t):
+        add("media", r, "movil",
+            "Tarjeta card--img con <picture> sin envolver en figure.media-box (la imagen se "
+            "recorta en móvil)",
+            'Envolver el <picture> en <div class="service-card"><figure class="media-box">...'
+            '</figure></div> replicando la estructura de index.html (fuente de verdad)')
+
 
 # ================================================================ CHECK global: paridad CSS
 # Firmas EXACTAS (normalizadas sin espacios) de reglas que REGLAS.md documenta como
