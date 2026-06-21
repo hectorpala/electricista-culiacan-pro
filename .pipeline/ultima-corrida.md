@@ -1,41 +1,35 @@
-# Auto Agente Electricista — parte del 20 de junio de 2026
-**Resultado:** encontré 6, arreglé 4, 2 quedan para un ajuste técnico · publicado
+# Auto Agente Electricista — parte del 2026-06-21
+**Resultado:** encontré 11, arreglé 6, 2 para ti · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 6 cosas: arreglé 4 · 0 necesitan tu decisión · 2 no pude arreglar solo.
+Encontré 11 cosas: arreglé 6 · 2 necesitan tu decisión · 3 no pude arreglar solo (las dejo explicadas).
 
-## ✅ Arreglé (4)
-- **Los botones flotantes de WhatsApp y "Llamar" estaban ROTOS en el celular en 13 páginas** (las 11 notas del blog, la página de Contacto y la de Gracias): en lugar de salir como los dos botones redondos grandes de siempre (abajo a la derecha), aparecían diminutos y mal puestos, prácticamente invisibles. Eso es justo el botón con el que la gente te contacta desde el teléfono → estabas perdiendo clics. Les devolví el estilo correcto y lo comprobé en pantalla de celular: ahora salen redondos, grandes y bien (verde WhatsApp arriba, azul "Llamar" abajo). →
-  https://electricistaculiacanpro.mx/contacto/
-  https://electricistaculiacanpro.mx/blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/
-  https://electricistaculiacanpro.mx/blog/cuanto-cuesta-electricista-culiacan/
-  https://electricistaculiacanpro.mx/blog/recibo-luz-alto-culiacan-como-bajarlo/
-  https://electricistaculiacanpro.mx/blog/por-que-se-bota-el-breaker-pastilla-culiacan/
-  https://electricistaculiacanpro.mx/blog/como-elegir-buen-electricista-culiacan/
-  https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/
-  https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/
-  https://electricistaculiacanpro.mx/blog/cuando-llamar-electricista-emergencia/
-  https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/
-  https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
-  https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/
-  https://electricistaculiacanpro.mx/gracias/
-- **En la página que lista todas las colonias, dos botones eran demasiado chicos para el dedo en celular** (el botón de menú "☰" y los botones de número de página): los agrandé al tamaño mínimo recomendado para tocar sin fallar (44–48 px). → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
-- **Quité una promesa exagerada en la página de cambio de cableado:** decía "Elimina riesgos de corto" (sonaba a garantía de cero riesgo, que no se puede prometer). Lo dejé honesto: "Reduce el riesgo de corto". → https://electricistaculiacanpro.mx/servicios/cambio-cableado-electrico/
-- **Actualicé la fecha de "última modificación" de 6 notas del blog:** decían enero 2025 aunque las reescribimos hace poco; a Google le gusta ver contenido fresco, así que les puse la fecha real de actualización. (La fecha de publicación original la dejé como estaba.) → https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/
+## ✅ Arreglé (6)
+- **La garantía en tu página principal se contradecía sola.** Arriba, en los números destacados ("2,000+ servicios", "4.8★"...), uno decía "6 Meses garantía", pero TODO el resto de tu sitio —y la ficha que Google lee— dice "garantía de 30 a 90 días". Quien lo viera notaba el choque. Lo cambié a "30-90 Días garantía" para que todo diga lo mismo → https://electricistaculiacanpro.mx/
+- **Tres colonias tenían el nombre mal escrito en la página que Google muestra.** Una decía "Santa Aynes" cuando la colonia se llama **Santa Inés** (nadie busca "Aynes", así que perdías a quien busca "electricista Santa Inés"); otra decía "Tres Rios" sin acento (su propio texto ya usaba "Tres Ríos"); y otra "Lazaro Cardenas" en vez de "Lázaro Cárdenas". Corregí el nombre visible en las tres, dejando la dirección web igual para no romper lo que Google ya tiene guardado, y le avisé a Google del cambio.
+  - https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/santa-aynes/
+  - https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/tres-rios/
+  - https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/lazaro-cardenas/
+- **Una página prometía de más en su título.** La de centros de carga ("pastillas"/breakers) titulaba "NOM Certificado", que se entiende como que tú emites una certificación oficial NOM (eso solo lo da un organismo acreditado, no el electricista). Lo cambié a "a Norma NOM-001", que es lo correcto y honesto (el texto de adentro ya lo decía bien) → https://electricistaculiacanpro.mx/servicios/instalacion-centro-carga/
+- **Un texto trataba un servicio tranquilo como si fuera urgencia.** La página de iluminación LED invitaba a "reportar emergencias de iluminación LED" (la iluminación se planea, no es una emergencia). Lo cambié a "agenda tu instalación de iluminación LED" → https://electricistaculiacanpro.mx/servicios/iluminacion-led/
 
-## ⚠️ Encontré pero NO pude arreglar solo (2)
-- **No tengo conectada la herramienta de Google Search Console** (la que me dice qué busca la gente en Google para llegar a tu sitio). Es el 4º día seguido sin ella. Sin esos datos NO creo páginas nuevas a ciegas, porque inventar páginas sin demanda real le hace daño a tu posición en Google. Necesito que se reconecte esa herramienta (es un ajuste técnico de configuración, no algo que yo pueda activar desde aquí). En cuanto la tenga, retomo el crecimiento con datos.
-- **Hay mejoras grandes que tocan el archivo de estilo compartido por TODO el sitio** (que algunos enlaces verdes se vean con más contraste para personas con baja visión, y que la página cargue todavía más rápido). El problema no es el arreglo en sí, sino que cambiar ese archivo obliga a tocar cientos de páginas de golpe → eso prefiero dejártelo para una revisión, no hacerlo solo de madrugada. (Esto venía pendiente de días anteriores.) Detalles menores que también vigilo: 6 páginas no tienen una etiqueta de "tarjeta de Twitter/X" (no pasa nada, X usa la de Facebook como respaldo) y una frase en ~9 páginas de servicio que conviene afinar a futuro.
+## ⚠️ Encontré pero NO pude arreglar solo (3)
+- **Tres mejoras técnicas chicas que conviene hacer en bloque, no de a poquito.** (1) Dos páginas (el directorio de colonias y el blog) podrían cargar su imagen principal un poco más rápido; (2) en ~11 artículos del blog el botón de menú del celular no le avisa a los lectores de pantalla que usan las personas ciegas si está abierto o cerrado; (3) en la lista de colonias salen nombres como "10 De Abril" donde el "de" debería ir en minúscula. Las tres aparecen igual en muchísimas páginas: si arreglo solo unas, queda más disparejo que ahora. Conviene hacerlas todas juntas en una pasada dedicada (puedo automatizarla otro día). Las dejé anotadas.
 
-## 🌱 Mejoré / agregué (0 páginas nuevas)
-Sin páginas nuevas hoy: además de que tu sitio ya cubre lo que la gente busca, sigo sin la herramienta de Google para detectar huecos reales; no inventé páginas porque eso dañaría tu posicionamiento. En vez de eso dejé el sitio MÁS RICO arreglando el botón de contacto en el celular en 13 páginas (eso sí mueve la aguja en llamadas) y limpiando detalles.
+## 🌱 Mejoré / agregué (0 páginas nuevas, pero dejé el sitio más rico)
+Sin páginas nuevas hoy: sigo sin acceso a los datos de Google Search Console (es el 5º día; quedó pendiente reconectarlo, ver abajo), y sin datos reales NO invento páginas porque eso dañaría tu posicionamiento. En vez de quedarme quieto, dejé el sitio mejor: las tres colonias ahora tienen su nombre bien escrito (así pueden aparecer cuando alguien busca "electricista Santa Inés / Tres Ríos / Lázaro Cárdenas"), la página principal quedó coherente y una página dejó de prometer de más.
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Aprendí que el estilo de los botones flotantes de contacto solo estaba "escrito" dentro de la página principal, y al crear otras páginas no se copiaba → salían rotos. Le enseñé al sistema a **detectar solo** cualquier página que tenga el botón pero le falte su estilo, para que nunca más se publique con el botón roto.
-(ya van 27 reglas aprendidas en total)
+- Cuando corrija palabras con acentos (í, é, á, ñ) debo usar siempre una herramienta que los respete. Hoy un primer intento dejó un nombre roto ("Santa InÃ©s") — lo detecté ANTES de publicar, lo deshice y lo rehice bien. Ahora es regla dura y siempre lo reviso después.
+- La garantía "6 meses" del inicio se me había escapado en limpiezas anteriores porque el número y la palabra estaban en piezas separadas del código. Le puse un detector automático para que, si vuelve a aparecer cualquier "Meses garantía", salte solo.
+- Los nombres de colonia en las páginas que Google muestra deben ir siempre bien escritos y con acento, y coincidir con el texto de adentro.
+- Un título nunca debe decir "NOM Certificado" (ni "CFE Certificado"): se entiende como una certificación que no emitimos; lo correcto es "a Norma".
 
-## ⏳ Necesito que tú decidas (0)
-Nada pendiente de tu parte hoy.
+(ya van 35 reglas aprendidas en total)
+
+## ⏳ Necesito que tú decidas (2)
+- **Reconectar el panel de Google (Search Console).** Llevo 5 días sin poder leer qué busca la gente en Google sobre tu sitio; por eso no creo páginas nuevas (sería a ciegas y riesgoso). Necesito que se reconecte esa herramienta para volver a crecer con datos reales. Mientras tanto, sí sigo arreglando y mejorando lo que hay.
+- **Dos páginas compiten por la misma búsqueda de precios.** Tu página de "precios de electricista" y el artículo del blog "¿cuánto cuesta un electricista?" apuntan a lo mismo. No es urgente y están diferenciadas, pero conviene que decidas cuál quieres que Google muestre como la principal para esa búsqueda, y yo enlazo en consecuencia.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo. Le avisé a Google para que lo muestre, aunque hoy se agotó el cupo diario de avisos a Google, así que esas 14 páginas se reintentan solas mañana.
+Sí, todo revisado y en vivo; le avisé a Google de las 6 páginas para que muestre los cambios (esta vez sí aceptó las 6 al instante).

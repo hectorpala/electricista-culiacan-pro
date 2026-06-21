@@ -527,6 +527,22 @@ def check_page(fpath, t, noindex, redirects):
             '.floating-whatsapp y .floating-btn--phone/.floating-btn--whatsapp/.floating-cta. NO se '
             'arregla por el CSS servido (es hasheado: obligaría a re-versionar cientos de HTML)')
 
+    # --- 19. garantía inconsistente en stat-badge (alta, seo): el estándar del sitio es
+    #         "garantía de 30 a 90 días" (hero, schema/aggregateRating, FAQ; unificado
+    #         2026-06-17). Un badge de stats con label "Meses garantía" —markup PARTIDO
+    #         <span class="stat-number">6</span><span class="stat-label">Meses garantía</span>—
+    #         contradice el resto del sitio y el schema. El grep de texto "6 meses" NO lo caza
+    #         porque el número y la unidad viven en spans separados; por eso sobrevivió a la
+    #         unificación y salió como ALTA el 2026-06-21 (index.html, remediado). NO confundir
+    #         con "6 meses" legítimos (pagos diferidos CFE, mantenimiento cada 6 meses): este
+    #         check SOLO mira dentro de un stat-label de garantía.
+    if re.search(r'stat-label"\s*>\s*[^<]*\bmeses\s+garant', t, re.I):
+        add("alta", r, "seo",
+            'Badge de stats con "Meses garantía" contradice el estándar del sitio (garantía de '
+            '30 a 90 días, coherente con el aggregateRating del schema)',
+            'Cambiar el stat-badge a "30-90" / "Días garantía" para alinear con el hero, el '
+            'JSON-LD y el resto del sitio')
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): las 689 paginas sirven styles.7f293647.css (el VIVO, =
