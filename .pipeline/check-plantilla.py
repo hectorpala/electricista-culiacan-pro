@@ -45,6 +45,10 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     "cfe": solo una UVIE acreditada certifica; nosotros entregamos
                     constancia/a norma NOM-001-SEDE.                  (2026-06-17)
  14. perf   (baja)  Referencia a main.js sin minificar (debe ser main.min.js). (2026-06-17)
+ 18. movil  (media) Página con markup class="floating-btn ..." pero SIN la regla CSS
+                    `.floating-btn{` en su <style> inline -> los botones flotantes CTA
+                    se renderizan static/diminutos (CSS critico inline no propagado, misma
+                    familia que .sr-only / .hero-cta-buttons).        (2026-06-20)
 """
 import os
 import re
@@ -500,6 +504,28 @@ def check_page(fpath, t, noindex, redirects):
             "recorta en móvil)",
             'Envolver el <picture> en <div class="service-card"><figure class="media-box">...'
             '</figure></div> replicando la estructura de index.html (fuente de verdad)')
+
+    # --- 18. floating-btn sin CSS inline (media, movil): la regla `.floating-btn{...}`
+    #         (+ .floating-call/.floating-whatsapp/.floating-btn--phone/--whatsapp/.floating-cta)
+    #         que posiciona los botones flotantes WhatsApp/Llamar vive SOLO en el <style>
+    #         critico inline (NO en el CSS servido hasheado). Si una pagina lleva el markup
+    #         class="floating-btn ..." pero NO trae la regla `.floating-btn{` en su mismo
+    #         <style>, los botones se renderizan static/diminutos (~20x26px) = CTA movil roto.
+    #         Misma familia que .sr-only (2026-06-16) y .hero-cta-buttons (2026-06-17). Pasaron
+    #         13 paginas (11 blogs + contacto + gracias), remediadas 2026-06-20. El check ignora
+    #         espacios entre `.floating-btn` y la llave. NO marca index.html ni las paginas que
+    #         SI tienen la regla. OJO: hay DOS convenciones de markup (floating-whatsapp/-call
+    #         y floating-btn--whatsapp/-phone); el markup que dispara este check es `class="floating-btn`
+    #         (literal), presente en AMBAS porque comparten la clase base.
+    if re.search(r'class="floating-btn\b', t) and not re.search(r'\.floating-btn\s*\{', t):
+        add("media", r, "movil",
+            "Markup class=\"floating-btn\" presente pero SIN la regla CSS .floating-btn{ en el "
+            "<style> inline -> los botones flotantes WhatsApp/Llamar se renderizan static y "
+            "diminutos (CTA móvil roto)",
+            'Replicar el bloque CSS inline de los botones flotantes (de index.html) en el <style> '
+            'de esta página, cubriendo AMBAS variantes de markup: .floating-btn/.floating-call/'
+            '.floating-whatsapp y .floating-btn--phone/.floating-btn--whatsapp/.floating-cta. NO se '
+            'arregla por el CSS servido (es hasheado: obligaría a re-versionar cientos de HTML)')
 
 
 # ================================================================ CHECK global: paridad CSS
