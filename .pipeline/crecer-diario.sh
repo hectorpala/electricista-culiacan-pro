@@ -11,6 +11,10 @@ set -euo pipefail
 # Forzar IPv4: el 2026-06-16 fallaron corrida y correo por IPv6 roto (EHOSTUNREACH).
 export NODE_OPTIONS="--dns-result-order=ipv4first"
 
+# launchd arranca con PATH mínimo (sin node) → el MCP de GSC ("command":"node") no
+# arrancaba y el agente quedaba "ciego" de GSC (5 días seguidos). Aseguramos node en PATH.
+export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
+
 cd "/Users/openclaw/Sitios Web/Electricista Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
@@ -36,7 +40,10 @@ echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # Corrida autónoma del sistema completo (auto-permiso). El prompt orquesta las 10 fases.
-if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG_DIR/auto-agente-$STAMP.log" 2>&1; then
+# --mcp-config: carga el MCP de GSC con node ABSOLUTO (clave para que arranque bajo launchd).
+# --strict-mcp-config: usa SOLO ese server (ignora ~/.claude.json: tradingview, etc. no hacen falta aquí).
+MCP_GSC="/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/mcp-gsc.json"
+if "$RUTA_CLAUDE" --permission-mode auto --mcp-config "$MCP_GSC" --strict-mcp-config -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG_DIR/auto-agente-$STAMP.log" 2>&1; then
   CLAUDE_OK=1
 else
   CLAUDE_OK=0
