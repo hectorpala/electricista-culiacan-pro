@@ -1,29 +1,42 @@
-# Auto Agente Electricista — parte del 21 de junio de 2026
-**Resultado:** encontré 7, arreglé 4, 1 para ti · publicado
+# Auto Agente Electricista — parte del 2026-06-22
+**Resultado:** encontré 5, arreglé 1 (en 16 páginas), 3 para después, 1 para ti · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 7 cosas: arreglé 4 · 1 necesita tu decisión · 2 las dejé en cola para un día dedicado.
+Encontré 5 cosas: arreglé 1 · 1 necesita tu decisión · 3 no pude arreglar solo (las dejé en la lista de pendientes para no hacer un cambio gigante de una sola vez).
 
-## ✅ Arreglé (4)
-- El botón de menú (las 3 rayitas ☰) de 11 páginas no le "avisaba" a los lectores de pantalla que usan las personas ciegas si el menú estaba abierto o cerrado, ni qué menú abría — tu página principal sí lo hacía bien. Se lo puse igual en las 11 (10 artículos del blog + la página de colonias). → https://electricistaculiacanpro.mx/blog/ y https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
-- La página del blog cargaba su imagen principal "tarde" (no le avisaba al navegador que la fuera bajando desde el inicio). Le puse el aviso de carga anticipada para que el blog se vea completo más rápido. → https://electricistaculiacanpro.mx/blog/
-- En esa misma página del blog, los estilos visuales (colores, tipografía) bloqueaban un poquito la primera pintada de la pantalla. Lo cambié a la forma "no bloqueante" que ya usa tu página principal, así carga antes sin cambiar cómo se ve. → https://electricistaculiacanpro.mx/blog/
-- Una de las fotos del blog ("Cómo elegir un buen electricista") usaba una versión chica estirada a tamaño grande, así que se veía algo borrosa. La cambié por la versión grande correcta. → https://electricistaculiacanpro.mx/blog/
+## ✅ Arreglé (1, que afectaba 16 páginas)
+- **Quité la promesa de "llegamos en 30-60 minutos" de los servicios que se agendan con cita.** Tú decidiste ayer (lo dejaste escrito en las reglas del negocio) que ese "llegada en 30-60 min" solo debe ir en emergencias reales, porque prometer que llegamos en una hora a una instalación que se agenda no es realista. Lo cambié por **"Cotización sin costo"** y **"Agenda el mismo día"** en estas 16 páginas. **Dejé el "30-60 minutos" donde SÍ es verdad**: en la sección de emergencias 24/7, en la ventanita que salta al salir, y en las páginas de "electricista a domicilio / cerca de mí / por zona" (ahí la rapidez sí es tu gancho).
+  - https://electricistaculiacanpro.mx/servicios/instalacion-contactos/
+  - https://electricistaculiacanpro.mx/servicios/iluminacion-led/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-paneles-solares/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-camaras-seguridad/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-cercas-electricas/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-centro-carga/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-calentador-electrico/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-bomba-agua/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-porton-electrico/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-minisplit/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-ventiladores-techo/
+  - https://electricistaculiacanpro.mx/servicios/cambio-cableado-electrico/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-planta-luz-generador/
+  - https://electricistaculiacanpro.mx/servicios/mantenimiento-tableros/
+  - https://electricistaculiacanpro.mx/servicios/reparacion-minisplit/
+  - https://electricistaculiacanpro.mx/servicios/instalacion-electrica/
 
-## ⚠️ Encontré pero NO pude arreglar solo (2)
-- A 41 páginas (las 40 de colonias y la portada del blog) les falta una etiqueta de "imagen para Twitter/X" que sí tienen el resto. Es un detalle menor (X usa la otra imagen de respaldo), pero son demasiadas páginas para tocarlas en una sola corrida sin riesgo. La dejé anotada en mi lista de pendientes para hacerla en un día dedicado a ese solo cambio.
-- El menú ☰ ya "avisa" si está abierto, pero para que ese aviso cambie en vivo al abrir/cerrar hace falta tocar el código de comportamiento que es compartido por todo el sitio (más delicado). También lo dejé anotado para un día dedicado, tocando primero tu página principal como referencia.
+## ⚠️ Encontré pero NO pude arreglar solo (3)
+- **La ventanita que salta cuando alguien va a cerrar la página tiene los signos de apertura mal** ("Espera!" en vez de "¡Espera!", "Tienes una emergencia?" sin el "¿", y "Contactanos" sin acento). Es un error de redacción heredado de la plantilla — pequeño, pero está en unas 49 páginas. No lo metí hoy para no hacer un cambio enorme junto con el de arriba; lo dejé apuntado para arreglarlo en una pasada dedicada.
+- **Cinco páginas con detalles de velocidad de carga / una imagen que se ve un poco borrosa** (las páginas de "gracias" y "contacto" cargan el estilo de forma más lenta que el resto; 2 artículos del blog y el directorio de colonias tienen un detalle de imagen). Son mejoras de rendimiento; las dejé en la lista para que no choquen con el cambio grande de hoy.
+- **Google sigue intentando leer un mapa del sitio viejo que ya borramos** (el de las colonias). No es un error del sitio; se quita con un clic desde tu consola de Search Console (Sitemaps → quitar el viejo). Te lo señalo porque ensucia el reporte de Google, pero no afecta a tus visitantes.
 
-## 🌱 Mejoré / agregué (4)
-- Las 4 mejoras de arriba son justamente eso: tu sitio quedó más accesible (para personas con lectores de pantalla) y la página del blog carga más rápido y se ve más nítida. No creé páginas nuevas hoy (te explico abajo por qué).
+## 🌱 Mejoré / agregué (0 páginas nuevas)
+Sin páginas nuevas hoy: revisé lo que la gente busca en Google y tu sitio ya cubre esa demanda; no inventé páginas porque crear páginas casi iguales dañaría tu posicionamiento. El trabajo de hoy dejó tu sitio **más honesto** (16 páginas que ya no prometen un tiempo de llegada que no aplica), que es justo lo que pediste.
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Le enseñé a mi revisor automático a detectar solo, de ahora en adelante, cualquier página cuyo botón de menú ☰ no le avise correctamente a los lectores de pantalla — así no se me vuelve a escapar en páginas nuevas.
-- Anoté la regla de que la portada del blog (y páginas similares) deben cargar su imagen principal de forma anticipada y sin estilos que bloqueen, igual que tu página principal.
-(ya van 39 reglas aprendidas en total)
+- Le enseñé al sistema una regla nueva: **"el aviso de 30-60 minutos solo va en emergencias, nunca en servicios que se agendan con cita"**. De ahora en adelante, si esa promesa se vuelve a colar en una página de instalación, el revisor automático la detecta solo (antes dependía de que yo me acordara).
+- (ya van 40 reglas aprendidas en total)
 
 ## ⏳ Necesito que tú decidas (1)
-- En las 33 páginas de servicio aparece la promesa "Llegada en 30-60 min". En las de emergencia tiene sentido, pero también está en servicios que se agendan con cita (instalar contactos, iluminación LED, paneles solares…), donde prometer un tiempo de llegada puede no ser realista. Cambiarlo o no es una decisión tuya de cómo quieres que se vea la marca; no lo toqué yo porque está en todas las páginas de servicio a la vez. Dime si quieres que lo deje solo en las de emergencia.
+- **El color naranja de los botones y del menú tiene poco contraste para leer cómodo** (no cumple del todo la norma de accesibilidad sobre fondo blanco). Cambiarlo a un naranja un poco más oscuro lo resolvería, pero es una **decisión de tu marca** (qué tono usar) y toca el estilo de todo el sitio, así que no lo hago sin tu visto bueno.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; le avisé a Google de las páginas que cambié (7 entraron de inmediato y 4 quedaron en cola para mañana porque se llenó el cupo diario de avisos de Google).
+Sí, todo revisado y en vivo; le avisé a Google de las 16 páginas para que muestre la versión corregida. Un revisor independiente confirmó que quedó bien (las 16 cargan, sin textos rotos, sin contradicciones) antes de publicar.
