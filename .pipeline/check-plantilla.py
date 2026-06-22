@@ -696,6 +696,45 @@ def check_page(fpath, t, noindex, redirects):
                 'mobile-menu-btn"> (y asegurar que el <ul class="nav-menu"> lleve id="nav-menu"), '
                 "replicando index.html (fuente de verdad)")
 
+    # --- 22. claim "30-60 min" INCONDICIONAL en servicio AGENDABLE (media, contenido):
+    #         NEGOCIO.md > Promesas de marca (decisión del dueño 2026-06-22): el badge de
+    #         "llegada en 30-60 min" va SOLO en servicios de EMERGENCIA/URGENCIA. En servicios
+    #         que se AGENDAN con cita (instalación, reparación, mantenimiento, trámite) NO se
+    #         promete tiempo de llegada (no es realista). Pasó en 16 servicios (corrida 2026-06-22).
+    #         SOLO marca marcadores INCONDICIONALES propios de la página: el feature del hero
+    #         <span>Llegamos en 30-60 min</span>, el H3 de beneficio "Llegada Rápida 30-60 Min",
+    #         y "30-60 min" dentro de la meta/og/twitter description. NO marca lo legítimo: el
+    #         bloque cross-sell "...en emergencias 24/7", el popup, ni las FAQs condicionadas a
+    #         emergencia ("En emergencias...", "si tu tablero está quemado..."), que viven en el
+    #         <body>, no en la meta. Allowlist = páginas de DESPACHO/EMERGENCIA donde 30-60 SÍ aplica.
+    EMERG_DISPATCH = {
+        "emergencia-24-7", "no-hay-luz-en-parte-casa", "reparacion-cortocircuitos",
+        "electricista", "electricista-a-domicilio", "electricista-cerca-de-mi",
+        "electricista-comercial", "electricista-centro-culiacan",
+        "electricista-zona-norte-culiacan", "electricista-zona-sur-culiacan",
+        "electricista-zona-oriente-culiacan", "electricista-zona-poniente-culiacan",
+        "electricista-colonias-culiacan",  # hub de cobertura a domicilio (despacho, no install)
+    }
+    m_serv = re.match(r'^servicios/([^/]+)/index\.html$', r)
+    if m_serv and m_serv.group(1) not in EMERG_DISPATCH:
+        if ("<span>Llegamos en 30-60 min</span>" in t
+                or re.search(r'>\s*Llegada Rápida 30-60 Min\s*<', t)):
+            add("media", r, "contenido",
+                'Promesa INCONDICIONAL de "llegada 30-60 min" en servicio agendable (hero/beneficio)',
+                'Quitar el feature/H3 de 30-60 min en servicios que se agendan con cita; el badge '
+                'va SOLO en emergencia/urgencia (NEGOCIO.md). Usar "cotización sin costo"/"agenda el '
+                'mismo día". CONSERVAR el cross-sell "...en emergencias 24/7" y el popup.')
+        for mm in re.finditer(r'<meta\b[^>]*>', t, re.I):
+            tag = mm.group(0)
+            key = (attr(tag, "name") or attr(tag, "property") or "").lower()
+            if key in ("description", "og:description", "twitter:description"):
+                if re.search(r'30[ -]?(a )?60\s*min', attr(tag, "content") or "", re.I):
+                    add("media", r, "contenido",
+                        'Meta "%s" promete "30-60 min" en servicio agendable' % key,
+                        'Quitar el claim de tiempo de llegada de la meta/og/twitter description; '
+                        'va SOLO en emergencia/urgencia (NEGOCIO.md).')
+                    break
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): las 689 paginas sirven styles.7f293647.css (el VIVO, =
