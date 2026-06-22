@@ -5,7 +5,7 @@
 - **NEGOCIO.md** = fuente de verdad del NEGOCIO (servicios que ofrece/no, "auto si es electricidad", anti-fuga "jamás plomero"). Las decisiones de negocio se DERIVAN de ahí, no se mandan a humano si la respuesta ya está en el archivo.
 - Registra hallazgos nuevos en HISTORIAL.jsonl (una línea JSON por hallazgo).
 - El estado de la última corrida está en ESTADO.md.
-- AUTONOMÍA (portada del plomero 2026-06-21): `auto-fixers.py` trae ASSET FIXERS de CSS (`tap-target-44`: 3 CSS + bump `?v=` + CACHE_VERSION en sw.js; el CSS es immutable → cambiar contenido no basta). `limpiar-huerfanos.py run --apply` borra artefactos huérfanos (4 condiciones de seguridad). VERIFICADOR = `subagent_type: verificador` (`.claude/agents/`), SOLO-LECTURA (sin Edit/Write). RED en `.git/hooks/pre-push` (copia rastreada en `.pipeline/hooks/`, `install.sh`): gate por ref de destino + aborta si se borra una página viva/home.
+- AUTONOMÍA (portada del plomero 2026-06-21): `auto-fixers.py` trae ASSET FIXERS de CSS (`tap-target-44`: 3 CSS + bump `?v=` + CACHE_VERSION en sw.js; el CSS es immutable → cambiar contenido no basta). `limpiar-huerfanos.py run --apply` borra artefactos huérfanos (4 condiciones de seguridad). VERIFICADOR = `subagent_type: verificador` (`.claude/agents/`), SOLO-LECTURA (sin Edit/Write). RED anti-borrado en `hooks/pre-commit` Capa 0 (los hooks viven en `hooks/` vía `core.hooksPath`): aborta el commit si se borra una página viva (referenciada/en sitemap) o la home; artefactos huérfanos pasan.
 
 ## Reglas de trabajo (estilo Anthropic)
 - VERIFICA tu trabajo antes de darlo por hecho: corre el sitio y compruébalo, no asumas que "se ve bien".

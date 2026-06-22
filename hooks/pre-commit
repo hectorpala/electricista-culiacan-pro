@@ -10,6 +10,36 @@
 
 set -u
 
+# --- Capa 0: NUNCA borrar una página VIVA (defensa anti-borrado, portada del plomero) ---
+# Aunque el agente desatendido borre algo por error, aquí se ABORTA si un archivo eliminado
+# (staged) sigue referenciado por una página viva o está en el sitemap. Los artefactos huérfanos
+# de verdad (cero referencias, vía limpiar-huerfanos.py) pasan sin problema.
+DELETED=$(git diff --cached --name-only --diff-filter=D 2>/dev/null || true)
+if [ -n "$DELETED" ]; then
+  DELPROB=""
+  while IFS= read -r f; do
+    [ -z "$f" ] && continue
+    if [ "$f" = "index.html" ]; then DELPROB="$DELPROB
+   - $f (la home NUNCA se borra)"; continue; fi
+    case "$f" in
+      */index.html) NEEDLE="${f%index.html}" ;;   # página: su URL de directorio
+      *)            NEEDLE="$(basename "$f")" ;;   # otros: por basename
+    esac
+    if git grep -l --cached --fixed-strings "$NEEDLE" -- '*.html' '*.xml' '_redirects' >/dev/null 2>&1 \
+       || grep -qF "$NEEDLE" sitemap.xml 2>/dev/null; then
+      DELPROB="$DELPROB
+   - $f (era página indexable / aún referenciado o en el sitemap)"
+    fi
+  done <<EOF
+$DELETED
+EOF
+  if [ -n "$DELPROB" ]; then
+    echo "❌ COMMIT BLOQUEADO: borrado ESTRUCTURAL (archivo en uso, no un huérfano):$DELPROB"
+    echo "   Restáuralo o quita primero las referencias. (Huérfanos de verdad: limpiar-huerfanos.py)"
+    exit 1
+  fi
+fi
+
 # --- Capa 1: gate determinista site-wide ---
 echo "🔍 Gate determinista (check-plantilla + check-indexabilidad)..."
 if ! python3 .pipeline/ci-gate.py; then
