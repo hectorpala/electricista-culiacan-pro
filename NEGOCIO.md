@@ -46,6 +46,12 @@ ELECTRICIDAD (instalación, reparación, mantenimiento eléctrico) cae en el gir
   aparecer en este sitio. El email correcto es **contacto@electricistaculiacanpro.mx** (NUNCA un
   email con "plomero"). Si una query es de plomería pura (agua/tubería) → humano, no es tu giro.
 
+## Promesas de marca
+- El badge **"Llegada en 30-60 min"** va SOLO en servicios de EMERGENCIA/URGENCIA (emergencia-24-7,
+  no-hay-luz-en-parte-casa, reparacion-cortocircuitos y similares urgentes). En servicios que se AGENDAN
+  con cita (instalar contactos, iluminación LED, paneles solares, dictamen, cámaras, cableado, centro de
+  carga, etc.) NO prometer tiempo de llegada (no es realista). Decisión del dueño 2026-06-22.
+
 ## Precios
 - **NUNCA** precio visible en el cuerpo. Lenguaje: "cotización sin costo / cotización clara".
   Las cifras solo en JSON-LD (priceRange/offers). No inventar precios nuevos.
