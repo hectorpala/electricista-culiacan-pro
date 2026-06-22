@@ -35,9 +35,11 @@ ELECTRICIDAD (instalación, reparación, mantenimiento eléctrico) cae en el gir
 3. Ante la duda de si algo "es electricidad" → trátalo como ambiguo (riesgo alto), nunca lo fuerces.
 
 ## Servicios que NO ofreces  (jamás crear; si hay demanda, va a humano)
-<!-- Curado por el dueño. Agrega aquí lo que NO haces aunque la gente lo busque. Vacío = todo
-     lo eléctrico se auto-crea; lo no-eléctrico ya se escala solo por la regla de arriba. -->
-- (ninguno declarado todavía)
+<!-- Curado por el dueño. Agrega aquí lo que NO haces aunque la gente lo busque. -->
+- **Eléctrico AUTOMOTRIZ** (instalación/reparación eléctrica de autos). Confirmado por el dueño
+  2026-06-22: NO se ofrece, aunque GSC muestre demanda ("eléctrico automotriz a domicilio" ~32 impr,
+  pos 2.9). JAMÁS crear página de este servicio; si aparece la query, ignorar (no escalar a humano,
+  ya está decidido).
 
 ## ANTI-FUGA (este sitio es CLON adaptado — al revés que el plomero)
 - La palabra **"plomero"/"plomería"** y cualquier branding/GTM/email de plomería **JAMÁS** deben
