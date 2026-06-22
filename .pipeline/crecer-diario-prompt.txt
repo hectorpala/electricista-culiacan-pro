@@ -9,8 +9,10 @@ Haces, en orden, CUATRO trabajos en la misma corrida:
   D) APRENDER  — un agente convierte cada error en una REGLA permanente para que el sistema se vuelva más listo.
 
 ================================ FASE 0 — Memoria ================================
-Lee CLAUDE.md, REGLAS.md, ESTADO.md y las últimas ~40 líneas de HISTORIAL.jsonl. Anota qué ya se hizo/decidió
-(p.ej. servicios que el dueño NO ofrece, zona-pages ya creadas) para no repetir ni contradecir.
+Lee CLAUDE.md, REGLAS.md, ESTADO.md, NEGOCIO.md y las últimas ~40 líneas de HISTORIAL.jsonl. Anota qué ya se
+hizo/decidió (zona-pages ya creadas) para no repetir ni contradecir. NEGOCIO.md es la FUENTE DE VERDAD del negocio
+(servicios que ofrece/no, política precios/año, "auto si es electricidad", anti-fuga "jamás plomero"): DERIVA de
+él las decisiones de negocio en vez de mandarlas a humano si la respuesta ya está ahí.
 
 ================================ FASE 1 — Health check ================================
 Levanta un servidor local estático (`python3 -m http.server 8080` en background) sobre la raíz. Con `curl -sI`
@@ -45,7 +47,13 @@ PRIMERO drena lo MECÁNICO con el auto-fixer determinista (sin límite, no requi
   contacto@electricistaculiacanpro.mx, meta-robots faltante, y COLOR off-brand (azul-no-marca→#1e40af azul
   de marca, morado/rojo→#C2410C, verde decorativo→#22c55e, fondos claros→#FFF7ED; conserva el azul de marca
   #1e40af/#0f4fa8/#1a73e8, #22c55e, WhatsApp y el logo de Google). OJO: si tocó algún styles*.css o el HTML
-  servido, versiona ?v= + sube CACHE_VERSION en sw.js. Lo que el auto-fixer NO cubra, arréglalo a mano abajo:
+  servido, versiona ?v= + sube CACHE_VERSION en sw.js.
+  ASSET FIXERS de CSS compartido: `auto-fixers.py` también trae `tap-target-44` (garantiza tap targets ≥44px en
+  los 3 CSS) que YA bumpea el ?v= en las páginas + CACHE_VERSION de sw.js solo (el CSS es `immutable` → cambiar
+  contenido no basta, hay que cambiar la URL). Un changeset "solo CSS + ?v= + sw.js" es UN cambio lógico site-wide.
+  HUÉRFANOS: `python3 .pipeline/limpiar-huerfanos.py run --apply` borra artefactos viejos (*.min.html/*.bak) SOLO
+  si pasan 4 condiciones (cero referencias + no en sitemap + git-trackeado = recuperable). NO es cola humana.
+  Lo que el auto-fixer NO cubra, arréglalo a mano abajo:
 
 Arregla, con cambios MÍNIMOS y respetando TODAS las reglas de REGLAS.md, los hallazgos de severidad alta y media:
 
@@ -109,8 +117,10 @@ Sigue el skill /expandir-sitio (.claude/skills/expandir-sitio/SKILL.md) y usa el
        - para blog: gen-landing desde un esqueleto de blog que pase los checkers; agrégala a sitemap y enlázala.
 
 ==================== FASE 7 — VERIFICAR (agente independiente: "¿quedó todo bien?") ====================
-Lanza un subagente VERIFICADOR (Task, general-purpose) con instrucción de ser ESCÉPTICO: su trabajo es intentar
-demostrar que algo quedó MAL, no confirmar que está bien. Debe, sobre la rama de la corrida:
+Lanza el subagente VERIFICADOR de SOLO-LECTURA (Task, `subagent_type: verificador` — definido en
+.claude/agents/verificador.md, SIN Edit/Write y con git de solo-lectura; JAMÁS general-purpose, por el incidente
+verifier-rogue del sitio hermano). Su instrucción es ser ESCÉPTICO: demostrar que algo quedó MAL, no confirmar que
+está bien. NO publica ni edita nada — solo lee, corre checkers y devuelve un veredicto. Debe, sobre la rama de la corrida:
   a. Releer `git diff main --stat` y confirmar que el alcance es razonable y nada quedó fuera de lo previsto.
   b. Re-correr los checkers deterministas desde cero: `python3 .pipeline/ci-gate.py` (0 ALTA) y, por CADA página
      nueva/modificada, `python3 .pipeline/gate-pagina.py <ruta/index.html>` (validate + checkers + anti-doorway).
@@ -123,8 +133,11 @@ problema: NO se publica nada; deja la rama, escribe el motivo en ESTADO.md y sal
 
 ==================== FASE 8 — PUBLICAR (solo si la FASE 7 fue 100% verde) ====================
 Candados de publicación (TODOS deben cumplirse): el verificador dio ok=true; el diff toca como máximo 18 archivos
-(corrida normal: 1–8; un diff mayor en un sitio de ~100 páginas es señal de que algo se salió de alcance → lo ve
-un humano); sin borrados estructurales inesperados. Si cualquiera falla: NO publiques; deja la rama y explica en
+de PÁGINA HTML (corrida normal: 1–8; un diff mayor en un sitio de ~100 páginas es señal de que algo se salió de
+alcance → lo ve un humano). NO cuentan contra ese cap: un cambio de ASSET compartido (styles*.css + el bump de ?v=
+en las páginas que lo referencian + sw.js — UN cambio lógico aunque toque muchas) ni los borrados de artefactos
+huérfanos que pasaron limpiar-huerfanos.py. Sí se prohíben los borrados ESTRUCTURALES inesperados (una página
+indexable, una entrada de sitemap, un asset en uso). Si cualquiera falla: NO publiques; deja la rama y explica en
 ESTADO.md. Si pasan TODOS, publica sincronizando ANTES con el remoto (git push --force PROHIBIDO):
   a. `git checkout main`
   b. `git fetch origin` y `git merge --ff-only origin/main`. Si el --ff-only FALLA (la main local divergió):
