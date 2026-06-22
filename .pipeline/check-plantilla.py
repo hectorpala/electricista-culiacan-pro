@@ -49,11 +49,18 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     `.floating-btn{` en su <style> inline -> los botones flotantes CTA
                     se renderizan static/diminutos (CSS critico inline no propagado, misma
                     familia que .sr-only / .hero-cta-buttons).        (2026-06-20)
+ 19. seo    (alta)  Badge de stats con label "Meses garantía" (markup partido) contradice
+                    el estándar "30 a 90 días" del hero/schema.        (2026-06-21)
+ 20. seo    (alta)  Incoherencia de nombre de colonia: el nombre del <title> ("Electricista
+                    en <X>, Culiacán") aparece en el MISMO documento con distinta acentuación
+                    o caja de preposición (misma colonia escrita de 2 maneras). Solo páginas
+                    indexables de colonia (no el hub).                 (2026-06-21)
 """
 import os
 import re
 import json
 import glob
+import unicodedata
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # raiz del repo
 BASE = "https://electricistaculiacanpro.mx"
@@ -167,6 +174,76 @@ def has_noindex(t):
         if c and "noindex" in c.group(1).lower():
             return True
     return False
+
+
+# ---------------------------------------------------------------- nombre de colonia
+# (check 20: incoherencia interna title vs cuerpo). Preposiciones/artículos cuya
+# CAPITALIZACIÓN sí distingue grafías ("De San Miguel" vs "de San Miguel"): un cambio
+# SOLO en estas palabras = misma colonia escrita de 2 maneras (no es un nombre distinto).
+_PREPS = {"de", "del", "la", "las", "los", "y", "el", "san", "santa"}
+
+
+def _strip_accents(s):
+    return "".join(c for c in unicodedata.normalize("NFD", s)
+                   if unicodedata.category(c) != "Mn")
+
+
+def _accent_variant(a, b):
+    """True si a y b son la MISMA palabra/frase salvo por las TILDES (insensible a
+    mayúsculas): 'Hidraulicos' vs 'Hidráulicos', 'Culiacan' vs 'Culiacán'."""
+    return (_strip_accents(a).casefold() == _strip_accents(b).casefold()
+            and a.casefold() != b.casefold())
+
+
+def _prep_case_variant(name, var):
+    """True si name y var difieren SOLO en la capitalización de una preposición/artículo
+    ('Hacienda Del Valle' vs 'Hacienda del Valle'). NO marca el cambio de caja de una
+    palabra de contenido (p.ej. el slug en minúsculas 'bachigualato' vs 'Bachigualato')."""
+    nw, vw = name.split(), var.split()
+    if len(nw) != len(vw):
+        return False
+    cambio_prep = False
+    for a, b in zip(nw, vw):
+        if a == b:
+            continue
+        if a.casefold() != b.casefold():
+            return False  # palabra realmente distinta (o diff de tilde, va por otro lado)
+        if _strip_accents(a).casefold() not in _PREPS:
+            return False  # difiere la caja de una palabra de contenido -> no se marca
+        cambio_prep = True
+    return cambio_prep
+
+
+def _colonia_title_name(t):
+    """Nombre de colonia del <title> 'Electricista en <NOMBRE>, Culiacán | ...' (la parte
+    tras 'Electricista en ' y hasta la primera coma). None si no calza el patrón."""
+    m = re.search(r'<title>\s*Electricista en (.+?),', t, re.I)
+    return m.group(1).strip() if m else None
+
+
+def _colonia_body_variants(t, name):
+    """Ocurrencias en el documento de una frase con la MISMA secuencia de palabras que
+    `name` ignorando tildes/caja, que normalizada (sin tildes, casefold) coincide con name."""
+    words = name.split()
+    if not words:
+        return set()
+
+    def wpat(w):
+        out = []
+        for ch in w:
+            base = _strip_accents(ch)
+            out.append(r"[^\s,<>]" if base.isalpha() else re.escape(ch))
+        return "".join(out)
+
+    pat = (r'(?<![A-Za-zÀ-ÿ])' + r'\s+'.join(wpat(w) for w in words)
+           + r'(?![A-Za-zÀ-ÿ])')
+    target = _strip_accents(name).casefold()
+    out = set()
+    for m in re.finditer(pat, t):
+        v = m.group(0)
+        if _strip_accents(v).casefold() == target:
+            out.add(v)
+    return out
 
 
 # ---------------------------------------------------------------- recoleccion de paginas
@@ -542,6 +619,51 @@ def check_page(fpath, t, noindex, redirects):
             '30 a 90 días, coherente con el aggregateRating del schema)',
             'Cambiar el stat-badge a "30-90" / "Días garantía" para alinear con el hero, el '
             'JSON-LD y el resto del sitio')
+
+    # --- 20. incoherencia de nombre de colonia: title vs cuerpo (alta, seo). SOLO sobre
+    #         páginas INDEXABLES de colonia (servicios/electricista-colonias-culiacan/<slug>/
+    #         index.html, NUNCA el index.html del hub). El nombre del <title> ('Electricista
+    #         en <NOMBRE>, Culiacán | ...') a veces queda mal escrito en title/H1/schema
+    #         (sin tilde, p.ej. "Recursos Hidraulicos") MIENTRAS el cuerpo (description +
+    #         sección única) ya trae la forma correcta acentuada ("Recursos Hidráulicos") —
+    #         la MISMA colonia escrita de 2 maneras DENTRO de la misma página. Eso es lo que
+    #         lo hace mecanizable. Mismo patrón para preposiciones con caja distinta ("Hacienda
+    #         Del Valle" en title vs "Hacienda del Valle" en cuerpo). Cluster re-aparecido el
+    #         2026-06-21 en 6 colonias (recursos-hidraulicos, las-americas, la-campina,
+    #         adolfo-lopez-mateos, colinas-de-san-miguel, hacienda-del-valle) + nuevo-culiacan;
+    #         la regla SOLO-LLM previa (2026-06-21) dejó escapar 6 páginas. Heurística robusta:
+    #         normalizar quitando tildes y bajando a minúsculas ambas formas; si normalizadas
+    #         son iguales pero las originales difieren EN TILDES o en la caja de una preposición
+    #         -> es la misma colonia escrita de 2 maneras = incoherencia. NO marca el cambio de
+    #         caja de una palabra de contenido (el slug en minúsculas 'bachigualato' que aparece
+    #         en URLs/JS NO dispara). El SLUG/URL se conserva siempre (regla 2026-06-21); lo que
+    #         se corrige es el TEXTO VISIBLE para que title/H1 == cuerpo.
+    rl = r.lower()
+    is_colonia_slug = bool(re.match(
+        r'^servicios/electricista-colonias-culiacan/[^/]+/index\.html$', rl))
+    if is_colonia_slug and not noindex:
+        name = _colonia_title_name(t)
+        if name:
+            target = _strip_accents(name).casefold()
+            malas = set()
+            for v in _colonia_body_variants(t, name):
+                if v == name:
+                    continue
+                # defensa: misma colonia normalizada y difiere SOLO en tildes o caja de prep
+                if _strip_accents(v).casefold() != target:
+                    continue
+                if _accent_variant(name, v) or _prep_case_variant(name, v):
+                    malas.add(v)
+            if malas:
+                detalle = ", ".join('"%s"' % v for v in sorted(malas))
+                add("alta", r, "seo",
+                    "Incoherencia de nombre de colonia (title vs cuerpo): el <title> dice "
+                    "\"%s\" pero el mismo documento usa %s (misma colonia, distinta "
+                    "acentuación/caja de preposición)" % (name, detalle),
+                    "Unificar el TEXTO VISIBLE del nombre de la colonia en TODA la página "
+                    "(title, H1, description, og/twitter, breadcrumb, schema, wa.me ?text=) a la "
+                    "grafía correcta acentuada que ya usa el cuerpo. CONSERVAR el slug/URL en "
+                    "disco (canonical/og:url/breadcrumb-item) para no romper la URL indexada")
 
 
 # ================================================================ CHECK global: paridad CSS
