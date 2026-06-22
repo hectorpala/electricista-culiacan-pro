@@ -36,7 +36,7 @@
 - **Mapa completo del sistema: `AUTOMATIZACION.md`** (cómo encajan skill + orquestador + motor + hooks + memoria).
 - **Orquestador (punto de entrada determinista): `scripts/crecer.py`** — `estado` | `servicio spec.json` | `colonia spec.json` | `gate <ruta>` | `publicar "msg"`. Automatiza crear + sitemap + enlace en la home + bump sw + candado + publicar.
 - Invocar con `/expandir-sitio` (skill en `.claude/skills/expandir-sitio/SKILL.md`). Hermano de `/mantener-sitio`: aquél ARREGLA, éste CREA lo que falta. La auditoría GSC y la indexación por MCP viven en el skill.
-- Determina huecos en 4 dimensiones (oportunidades GSC con datos reales, geo, blog, mejoras), crea páginas con contenido único y **auto-publica solo si pasan TODOS los candados** (si fallan, deja en rama y avisa). Tope duro `MAX_PAGINAS=3` por corrida.
+- Determina huecos en 4 dimensiones (oportunidades GSC con datos reales, geo, blog, mejoras), crea páginas con contenido único y **auto-publica solo si pasan TODOS los candados** (si fallan, deja en rama y avisa). SIN tope numérico: loop-until-dry sobre el backlog (`.pipeline/gestor-backlog.py`), freno por DEMANDA REAL + anti-doorway. El panel `decisor-negocio` decide qué crear/escalar (FASE 6).
 - Backbone determinista (garantiza paridad de plantilla y bloquea doorways):
   - `python3 .pipeline/gen-landing.py spec.json` — genera una landing copiando un esqueleto byte a byte + sustituciones afirmadas (aborta si no calzan o si hay fuga "plomero").
   - `python3 .pipeline/gate-pagina.py <ruta/index.html> ...` — candado todo-en-uno: validate-landing + ci-gate (0 ALTA) + anti-doorway (Jaccard < 0.80 vs hermanas).

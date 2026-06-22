@@ -74,9 +74,12 @@ Arregla, con cambios MÍNIMOS y respetando TODAS las reglas de REGLAS.md, los ha
   Tras CADA arreglo, verifícalo con el sitio corriendo, escéptico (asume que NO se arregló salvo prueba).
   Reintenta máximo 2 veces; si no se logra, REVIERTE ese arreglo y márcalo pendiente.
 
-==================== FASE 6 — CRECER (hasta 3 páginas según GSC) ====================
-Objetivo: llenar huecos REALES con datos, no inventar páginas (eso genera doorways). Tope duro: MAX_PAGINAS = 3.
-Sigue el skill /expandir-sitio (.claude/skills/expandir-sitio/SKILL.md) y usa el ORQUESTADOR scripts/crecer.py.
+==================== FASE 6 — CRECER (loop-until-dry con DEMANDA REAL) ====================
+Objetivo: construir y optimizar LO MÁS posible esta corrida, SIN tope numérico (ya NO existe MAX_PAGINAS). El freno
+son los frenos NATURALES que protegen el SEO: (1) DEMANDA REAL en GSC para cada página NUEVA; (2) ANTI-DOORWAY
+(Jaccard < 0.80, lo bloquea gate-pagina.py); (3) el verificador + diff cap de la FASE 8. La OPTIMIZACIÓN (ctr-fix,
+enriquecer, enlazar) NO tiene riesgo de doorway: drénala sin límite. Cota práctica: MINUTOS_MAX = 35 (tiempo, no
+tokens). Sigue el skill /expandir-sitio y usa el ORQUESTADOR scripts/crecer.py + la cola .pipeline/gestor-backlog.py.
 
   1. AUDITA con el MCP de GSC sobre https://electricistaculiacanpro.mx/:
        - mcp__gsc__gsc_opportunities / mcp__gsc__gsc_keywords → queries con IMPRESIONES reales y posición 8-30 sin
@@ -84,18 +87,24 @@ Sigue el skill /expandir-sitio (.claude/skills/expandir-sitio/SKILL.md) y usa el
        - mcp__gsc__gsc_performance → CTR bajo + impresiones altas (mejora) y queries emergentes.
        - mcp__gsc__gsc_inspect → páginas nuevas "descubiertas sin indexar" = reforzar enlaces internos, no duplicar.
      Escribe .pipeline/oportunidades-$(date +%Y%m%d).md con una tabla rankeada por impacto/riesgo-doorway.
-  2. PRIORIZA las top ≤3 de mayor impacto y MENOR riesgo, respaldadas por datos de GSC sobre las especulativas.
-     Está PERMITIDO crear 0 páginas si no hay señal real de bajo riesgo: NO fuerces crecimiento (eso es doorway).
-     REGLA DE PIVOTE (obligatoria — el crecimiento NUNCA queda ocioso): si NO hay hueco para páginas
-     nuevas (el sitio ya cubre la demanda, o crear canibalizaría a una página existente), NO termines sin
-     hacer nada — PIVOTA a MEJORAR/ENRIQUECER las páginas que ya tenemos a partir de la misma tabla de
-     oportunidades: query con impresiones que rankea en una página genérica (p.ej. el home) en vez de en su
-     página dedicada → optimiza title/meta/H1 de la página dedicada hacia esa query y enlázala internamente;
-     cluster informativo que rankea pos 8-15 en un blog existente → añade esas variantes (H2/FAQ) al blog;
-     CTR 0 con buena posición → afina title/meta. Cada mejora pasa por el CANDADO y respeta las reglas de
-     contenido de la FASE 5 (sin claims engañosos, sin tocar precios). El objetivo de esta fase es: SIEMPRE
-     crear una página con señal real O, si no la hay, dejar el sitio MÁS RICO mejorando lo existente — nunca
-     ambas cosas a cero. Tope: hasta 3 acciones (crear y/o mejorar) por corrida.
+     QUIÉN decide crear/enriquecer/escalar: NO a ojo. Lanza el subagente `decisor-negocio` (Task) — el panel de DOS
+     personalidades (dev senior + maestro electricista de Culiacán) que lee NEGOCIO.md + la demanda GSC y devuelve por
+     oportunidad {accion: crear|enriquecer|enlazar|humano, riesgo, porque}. Encola EXACTAMENTE lo que decida:
+     echo '<spec json>' | python3 .pipeline/gestor-backlog.py add - (servicio de electricidad con demanda → crear,
+     riesgo medio/auto; fuera del oficio/ambiguo/dato 100% del dueño → humano, riesgo alto). Si los 2 expertos no
+     concuerdan, gana el conservador (humano). Nunca inventes que el dueño ofrece un servicio.
+  2. DRENAR EN LOOP (loop-until-dry, SIN tope de 3):
+       repite:
+         a. `python3 .pipeline/gestor-backlog.py next --max 1 --riesgo-max medio` → toma la tarea de mayor prioridad.
+            Si no hay ninguna → sal del loop.
+         b. EJECÚTALA según su tipo (página nueva → paso 3; optimización → mejora directa: title/meta, H2/FAQ,
+            enlace interno, schema, perf). Pasa SIEMPRE por el CANDADO (gate-pagina.py) y las reglas de la FASE 5.
+         c. Si pasa: `gestor-backlog.py close --id <id> --estado hecho --commit <sha-o-rama>`.
+            Si falla 2 veces: REVIERTE esa tarea y `close --id <id> --estado bloqueado --nota "<motivo>"`.
+       hasta que el backlog auto-ejecutable quede vacío (2 vueltas sin sacar nada) O se alcance MINUTOS_MAX. Lo que
+       NO se alcance queda en el backlog y se drena la próxima corrida — NADA se pierde. PERMITIDO 0 páginas nuevas
+       si no hay demanda; lo que NUNCA queda ocioso es la OPTIMIZACIÓN (el viejo "pivote" —enriquecer/CTR/enlazar lo
+       existente— ahora es simplemente una tarea de optimización en la cola, sin riesgo de doorway, que se drena igual).
   2b. COLONIAS — estrategia de CALIDAD DIRIGIDA, no de volumen (decisión del dueño, respaldada por datos
      GSC del 2026-06-17): NO diferenciar las 602 colonias noindex en masa. La inspección real de GSC mostró
      que Google SÍ indexa las colonias PROMINENTES (Tres Ríos, Rafael Buelna ✅) y NO indexa las pequeñas/
