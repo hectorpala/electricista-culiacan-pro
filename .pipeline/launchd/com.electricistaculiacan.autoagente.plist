@@ -21,9 +21,9 @@
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>18</integer>
-        <key>Minute</key>
         <integer>20</integer>
+        <key>Minute</key>
+        <integer>0</integer>
     </dict>
     <key>StandardOutPath</key>
     <string>/Users/openclaw/Library/Logs/mantener-sitio/auto-agente-launchd.out.log</string>

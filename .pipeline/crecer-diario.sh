@@ -53,7 +53,7 @@ fi
 # Parte por email — SIEMPRE, aun si la corrida falló (send-report alerta si el resumen es viejo/ausente).
 /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
   "/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/ultima-corrida.md" \
-  "Auto Agente Electricista" "18:20" >> "$LOG_DIR/auto-agente-$STAMP.log" 2>&1 \
+  "Auto Agente Electricista" "20:00" >> "$LOG_DIR/auto-agente-$STAMP.log" 2>&1 \
   || echo "[$STAMP] No se pudo enviar el email del parte (Auto Agente Electricista)." >> "$LOG_DIR/auto-agente-$STAMP.log"
 
 # A3: marca que YA corrió hoy SOLO si la corrida tuvo éxito. Si falló, NO se marca → el
