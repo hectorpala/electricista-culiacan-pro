@@ -55,6 +55,10 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     en <X>, Culiacán") aparece en el MISMO documento con distinta acentuación
                     o caja de preposición (misma colonia escrita de 2 maneras). Solo páginas
                     indexables de colonia (no el hub).                 (2026-06-21)
+ 21. a11y   (media) Botón hamburguesa <button class="mobile-menu-btn"> sin aria-expanded
+                    y/o aria-controls (la home index.html SÍ los tiene). Misma familia de
+                    "deriva de ARIA/CSS crítico vs homepage" (.sr-only/.hero-cta-buttons/
+                    .floating-btn). Solo marca HTML con el botón.       (2026-06-21)
 """
 import os
 import re
@@ -664,6 +668,33 @@ def check_page(fpath, t, noindex, redirects):
                     "(title, H1, description, og/twitter, breadcrumb, schema, wa.me ?text=) a la "
                     "grafía correcta acentuada que ya usa el cuerpo. CONSERVAR el slug/URL en "
                     "disco (canonical/og:url/breadcrumb-item) para no romper la URL indexada")
+
+    # --- 21. hamburguesa sin aria-expanded/aria-controls (media, a11y): el botón
+    #         <button class="mobile-menu-btn"> de la home (index.html, FUENTE DE VERDAD) lleva
+    #         aria-expanded="false" + aria-controls="nav-menu"; sin ellos el lector de pantalla
+    #         no anuncia que es un toggle ni a qué controla. Misma familia de "deriva vs homepage"
+    #         ya mecanizada para .sr-only/.hero-cta-buttons/.floating-btn (check 18). Pasó en 11
+    #         páginas (10 blogs + el hub electricista-colonias-culiacan), remediadas 2026-06-21.
+    #         SOLO mira el <button> con la clase (no las reglas CSS `.mobile-menu-btn{...}` del
+    #         <style>, ni `id="mobile-menu-btn"` del JS): localiza tags <button ...> cuyo
+    #         atributo class contenga la palabra mobile-menu-btn. NO marca páginas sin el botón.
+    for bm in re.finditer(r'<button\b[^>]*>', t, re.I):
+        btag = bm.group(0)
+        cls = (attr(btag, "class") or "")
+        if "mobile-menu-btn" not in cls.split():
+            continue
+        falta = []
+        if not re.search(r'\baria-expanded\s*=', btag, re.I):
+            falta.append("aria-expanded")
+        if not re.search(r'\baria-controls\s*=', btag, re.I):
+            falta.append("aria-controls")
+        if falta:
+            add("media", r, "a11y",
+                "Botón hamburguesa <button class=\"mobile-menu-btn\"> sin %s (deriva del patrón "
+                "de la home index.html, que sí los tiene)" % " y ".join(falta),
+                'Añadir aria-expanded="false" y aria-controls="nav-menu" al <button class="'
+                'mobile-menu-btn"> (y asegurar que el <ul class="nav-menu"> lleve id="nav-menu"), '
+                "replicando index.html (fuente de verdad)")
 
 
 # ================================================================ CHECK global: paridad CSS
