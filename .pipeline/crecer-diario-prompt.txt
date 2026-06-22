@@ -82,6 +82,14 @@ enriquecer, enlazar) NO tiene riesgo de doorway: drénala sin límite. Cota prá
 tokens). Sigue el skill /expandir-sitio y usa el ORQUESTADOR scripts/crecer.py + la cola .pipeline/gestor-backlog.py.
 
   1. AUDITA con el MCP de GSC sobre https://electricistaculiacanpro.mx/:
+     ⚠️ OBLIGATORIO PRIMERO — CARGAR LAS TOOLS DIFERIDAS: las herramientas `mcp__gsc__*` son DIFERIDAS en este
+     entorno (aparecen por NOMBRE pero SIN esquema, así que un ToolSearch genérico NO las "encuentra" y NO se
+     pueden invocar todavía). ANTES de usarlas corre EXACTAMENTE:
+       ToolSearch  select:mcp__gsc__gsc_opportunities,mcp__gsc__gsc_keywords,mcp__gsc__gsc_performance,mcp__gsc__gsc_inspect,mcp__gsc__gsc_index,mcp__gsc__gsc_list_sites,mcp__gsc__gsc_sitemaps
+     Eso carga sus esquemas y YA puedes llamarlas. PROHIBIDO declarar "GSC ciego/desconectado" sin antes hacer este
+     `select:` — GSC SÍ está conectado (token vigente, propiedad `https://electricistaculiacanpro.mx/` en la cuenta);
+     si tras el `select:` una llamada falla de verdad, recién entonces repórtalo con el error exacto. Verifícalo con
+     `mcp__gsc__gsc_list_sites` (debe listar electricistaculiacanpro.mx) antes de decir que no hay datos.
        - mcp__gsc__gsc_opportunities / mcp__gsc__gsc_keywords → queries con IMPRESIONES reales y posición 8-30 sin
          página propia (el sitio sale "de rebote"): cada una es candidata a página que captaría ese tráfico.
        - mcp__gsc__gsc_performance → CTR bajo + impresiones altas (mejora) y queries emergentes.
