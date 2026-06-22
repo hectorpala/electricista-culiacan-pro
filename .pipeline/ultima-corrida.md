@@ -1,39 +1,29 @@
-# Auto Agente Electricista — parte del 2026-06-21
-**Resultado:** encontré 15, arreglé 9, mejoré 1, 2 para ti · publicado
+# Auto Agente Electricista — parte del 21 de junio de 2026
+**Resultado:** encontré 7, arreglé 4, 1 para ti · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 15 cosas: arreglé 9 · 2 necesitan tu decisión · 4 no pude arreglar solo.
+Encontré 7 cosas: arreglé 4 · 1 necesita tu decisión · 2 las dejé en cola para un día dedicado.
 
-Hoy pasó algo importante: **se reconectó la conexión con Google Search Console** (los datos de qué busca la gente en Google). Llevaba 5 días "a ciegas"; hoy volví a ver los números reales y de ahí salió una de las mejoras.
+## ✅ Arreglé (4)
+- El botón de menú (las 3 rayitas ☰) de 11 páginas no le "avisaba" a los lectores de pantalla que usan las personas ciegas si el menú estaba abierto o cerrado, ni qué menú abría — tu página principal sí lo hacía bien. Se lo puse igual en las 11 (10 artículos del blog + la página de colonias). → https://electricistaculiacanpro.mx/blog/ y https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
+- La página del blog cargaba su imagen principal "tarde" (no le avisaba al navegador que la fuera bajando desde el inicio). Le puse el aviso de carga anticipada para que el blog se vea completo más rápido. → https://electricistaculiacanpro.mx/blog/
+- En esa misma página del blog, los estilos visuales (colores, tipografía) bloqueaban un poquito la primera pintada de la pantalla. Lo cambié a la forma "no bloqueante" que ya usa tu página principal, así carga antes sin cambiar cómo se ve. → https://electricistaculiacanpro.mx/blog/
+- Una de las fotos del blog ("Cómo elegir un buen electricista") usaba una versión chica estirada a tamaño grande, así que se veía algo borrosa. La cambié por la versión grande correcta. → https://electricistaculiacanpro.mx/blog/
 
-## ✅ Arreglé (9)
-- El nombre de 7 de tus páginas de colonia estaba mal escrito SIN acentos en el título que ve Google (mientras el texto de adentro sí los tenía) — eso confunde a Google y pierde búsquedas; lo dejé bien escrito (sin cambiar la dirección web, que ya está indexada):
-  - "Recursos Hidraulicos" → "Recursos Hidráulicos" → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/recursos-hidraulicos/
-  - "Las Americas" → "Las Américas" → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/las-americas/
-  - "La Campina" → "La Campiña" → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/la-campina/
-  - "Adolfo Lopez Mateos" → "Adolfo López Mateos" → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/adolfo-lopez-mateos/
-  - "Colinas De San Miguel" → "Colinas de San Miguel" → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/colinas-de-san-miguel/
-  - "Hacienda Del Valle" → "Hacienda del Valle" → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/hacienda-del-valle/
-  - "Nuevo Culiacan" → "Nuevo Culiacán" → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/nuevo-culiacan/
-- En la lista de colonias, los enlaces eran tan chiquitos (19 píxeles de alto) que en celular era fácil picarle al equivocado — los agrandé al tamaño recomendado para el dedo (44 px) → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
-- El título del Blog era tan largo que Google lo cortaba a la mitad en los resultados — lo acorté para que se lea completo → https://electricistaculiacanpro.mx/blog/
+## ⚠️ Encontré pero NO pude arreglar solo (2)
+- A 41 páginas (las 40 de colonias y la portada del blog) les falta una etiqueta de "imagen para Twitter/X" que sí tienen el resto. Es un detalle menor (X usa la otra imagen de respaldo), pero son demasiadas páginas para tocarlas en una sola corrida sin riesgo. La dejé anotada en mi lista de pendientes para hacerla en un día dedicado a ese solo cambio.
+- El menú ☰ ya "avisa" si está abierto, pero para que ese aviso cambie en vivo al abrir/cerrar hace falta tocar el código de comportamiento que es compartido por todo el sitio (más delicado). También lo dejé anotado para un día dedicado, tocando primero tu página principal como referencia.
 
-## 🌱 Mejoré / agregué (1)
-- MEJORÉ: en Google la gente busca "mantenimiento de tableros de control" (64 veces este mes) pero tu página de mantenimiento de tableros ni siquiera mencionaba esa palabra, así que Google mostraba un artículo del blog en su lugar y nadie le picaba. Le agregué una pregunta frecuente y texto sobre "tableros de control" (para comercios y locales, trabajo a norma) para que ahora aparezca tu página de servicio correcta → https://electricistaculiacanpro.mx/servicios/mantenimiento-tableros/
-
-## ⚠️ Encontré pero NO pude arreglar solo (4)
-- Las fotos de los 11 artículos del Blog pesan más de lo necesario en celular (les falta el formato moderno AVIF y un tamaño chico para pantallas pequeñas) — hay que generar esas imágenes nuevas, es un lote dedicado, no un cambio de texto.
-- El botón de menú (las tres rayitas) en celular no le "avisa" a los lectores de pantalla de personas ciegas cuando se abre o se cierra — está en el código compartido de todo el sitio (JavaScript), lo dejo para un cambio cuidadoso aparte para no romper nada.
-- Lo mismo en las tres rayitas de los 12 artículos del Blog: les falta esa etiqueta de accesibilidad (es un arreglo de plantilla que toca muchas páginas a la vez).
-- En tus 5 páginas de zona (norte, sur, oriente, poniente, centro) las coordenadas del mapa no coinciden entre dos lugares de la misma página — conviene unificarlas a una sola fuente; lo dejo como lote para no tocar 5 páginas a medias.
+## 🌱 Mejoré / agregué (4)
+- Las 4 mejoras de arriba son justamente eso: tu sitio quedó más accesible (para personas con lectores de pantalla) y la página del blog carga más rápido y se ve más nítida. No creé páginas nuevas hoy (te explico abajo por qué).
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Aprendí a detectar SOLO el error de los nombres de colonia mal escritos: ahora una revisión automática compara el nombre del título contra el nombre del texto de adentro, y si uno tiene acentos y el otro no (la misma colonia escrita de dos formas), lo marca como error grave. Esto habría cazado las 6 de hoy sin que yo tuviera que "acordarme".
-(ya van 36 reglas aprendidas en total)
+- Le enseñé a mi revisor automático a detectar solo, de ahora en adelante, cualquier página cuyo botón de menú ☰ no le avise correctamente a los lectores de pantalla — así no se me vuelve a escapar en páginas nuevas.
+- Anoté la regla de que la portada del blog (y páginas similares) deben cargar su imagen principal de forma anticipada y sin estilos que bloqueen, igual que tu página principal.
+(ya van 39 reglas aprendidas en total)
 
-## ⏳ Necesito que tú decidas (2)
-- El color del botón naranja con letras blancas tiene poco contraste (no cumple del todo la norma de accesibilidad). Oscurecerlo un poco lo arreglaría, pero es tocar el COLOR DE TU MARCA en todo el sitio — eso es decisión tuya, no la tomo solo.
-- Google me mostró que "electricista 24 horas / urgente" y tu página de precios reciben muchas vistas pero casi nadie les pica (aparecen pero por tu página de inicio, no por la dedicada). Mejorarlo implica cambiar el título de tu PÁGINA DE INICIO, que es lo más delicado del posicionamiento — prefiero que tú decidas antes de tocarlo.
+## ⏳ Necesito que tú decidas (1)
+- En las 33 páginas de servicio aparece la promesa "Llegada en 30-60 min". En las de emergencia tiene sentido, pero también está en servicios que se agendan con cita (instalar contactos, iluminación LED, paneles solares…), donde prometer un tiempo de llegada puede no ser realista. Cambiarlo o no es una decisión tuya de cómo quieres que se vea la marca; no lo toqué yo porque está en todas las páginas de servicio a la vez. Dime si quieres que lo deje solo en las de emergencia.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; le avisé a Google de las 10 páginas para que muestre los cambios pronto.
+Sí, todo revisado y en vivo; le avisé a Google de las páginas que cambié (7 entraron de inmediato y 4 quedaron en cola para mañana porque se llenó el cupo diario de avisos de Google).
