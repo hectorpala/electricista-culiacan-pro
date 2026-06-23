@@ -59,6 +59,15 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     y/o aria-controls (la home index.html SÍ los tiene). Misma familia de
                     "deriva de ARIA/CSS crítico vs homepage" (.sr-only/.hero-cta-buttons/
                     .floating-btn). Solo marca HTML con el botón.       (2026-06-21)
+ 22. contenido(media) Claim "30-60 min" INCONDICIONAL en SERVICIO agendable (hero feature span,
+                    H3 de beneficio o meta/og/twitter description). Allowlist = despacho/
+                    emergencia. La promesa de llegada va SOLO en emergencia. (2026-06-22)
+ 23. contenido(media) Claim "30-60 min" en BLOG no-emergencia: hero feature span literal
+                    <span>Llegamos en 30-60 min</span> en blog/<slug>/index.html cuyo slug NO
+                    está en la allowlist de emergencia. El check 22 solo mira servicios/, así
+                    que el blog escapaba (5 blogs regresaron el 2026-06-22).   (2026-06-22)
+ 24. seo    (media) "priceRange":"<dígitos>" con valor NUMÉRICO crudo (p.ej. "18270") en vez
+                    del formato schema.org ($, $$, $$$, $$$$).                 (2026-06-22)
 """
 import os
 import re
@@ -734,6 +743,45 @@ def check_page(fpath, t, noindex, redirects):
                         'Quitar el claim de tiempo de llegada de la meta/og/twitter description; '
                         'va SOLO en emergencia/urgencia (NEGOCIO.md).')
                     break
+
+    # --- 23. claim "30-60 min" en BLOG no-emergencia (media, contenido): el check 22
+    #         SOLO escanea servicios/, así que el hero feature span <span>Llegamos en 30-60
+    #         min</span> (promesa INCONDICIONAL de llegada) se coló en 5 blogs informativos
+    #         (ahorro-energia-iluminacion-led, senales-instalacion-electrica-obsoleta,
+    #         seguridad-electrica-temporada-lluvias, como-prevenir-cortocircuitos-casa,
+    #         mantenimiento-tablero-electrico-preventivo) y escapó. Decisión del dueño
+    #         (NEGOCIO.md): 30-60 min va SOLO en emergencia/urgencia. Se corrigió a
+    #         "Cotización sin costo" (2026-06-22). Este check marca SOLO el hero feature span
+    #         literal en blog/<slug>/index.html cuando el slug NO es de emergencia. NO marca el
+    #         30-60 de cards/FAQ/cross-sell de emergencia (solo el hero feature span). Allowlist
+    #         = blogs de emergencia explícita (cuando-llamar-electricista-emergencia + cualquier
+    #         slug con 'emergencia'/'urgente').
+    BLOG_EMERG_ALLOW = {"cuando-llamar-electricista-emergencia"}
+    m_blog = re.match(r'^blog/([^/]+)/index\.html$', r)
+    if m_blog:
+        slug = m_blog.group(1)
+        es_emergencia = (slug in BLOG_EMERG_ALLOW
+                         or "emergencia" in slug or "urgente" in slug)
+        if not es_emergencia and "<span>Llegamos en 30-60 min</span>" in t:
+            add("media", r, "contenido",
+                'Claim "30-60 min" (hero) en blog no-emergencia',
+                'Quitar el hero feature span <span>Llegamos en 30-60 min</span>; la promesa de '
+                'llegada va SOLO en emergencia/urgencia (NEGOCIO.md). Usar "Cotización sin costo". '
+                'CONSERVAR el 30-60 dentro de cards/FAQ/cross-sell de emergencia explícita.')
+
+    # --- 24. priceRange numérico crudo (media, seo): schema.org/LocalBusiness.priceRange es
+    #         un INDICADOR relativo de precio ($, $$, $$$, $$$$), NUNCA un número de pesos.
+    #         servicios/instalacion-electrica traía "priceRange":"18270" (pesos crudos) — única
+    #         página así, remediado 2026-06-22. Marca cualquier valor cuyo contenido (tras
+    #         recortar) sean SOLO dígitos (con o sin separadores/decimales/moneda inicial),
+    #         es decir, que NO sea uno de los símbolos $ válidos.
+    for m in re.finditer(r'"priceRange"\s*:\s*"([^"]*)"', t):
+        val = m.group(1).strip()
+        if re.search(r'\d', val) and not re.search(r'[A-Za-z]', val):
+            add("media", r, "seo",
+                'priceRange numérico crudo (usar $-$$$$): "priceRange":"%s"' % val,
+                'Reemplazar el valor numérico por el indicador relativo de schema.org: uno de '
+                '"$", "$$", "$$$", "$$$$" (el estándar del sitio es "$$").')
 
 
 # ================================================================ CHECK global: paridad CSS

@@ -1,42 +1,40 @@
 # Auto Agente Electricista — parte del 2026-06-22
-**Resultado:** encontré 5, arreglé 1 (en 16 páginas), 3 para después, 1 para ti · publicado
+
+**Resultado:** encontré 9, arreglé 8, 1 para ti · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 5 cosas: arreglé 1 · 1 necesita tu decisión · 3 no pude arreglar solo (las dejé en la lista de pendientes para no hacer un cambio gigante de una sola vez).
+Encontré 9 cosas: arreglé 8 · 1 necesita tu decisión · 0 no pude arreglar solo.
 
-## ✅ Arreglé (1, que afectaba 16 páginas)
-- **Quité la promesa de "llegamos en 30-60 minutos" de los servicios que se agendan con cita.** Tú decidiste ayer (lo dejaste escrito en las reglas del negocio) que ese "llegada en 30-60 min" solo debe ir en emergencias reales, porque prometer que llegamos en una hora a una instalación que se agenda no es realista. Lo cambié por **"Cotización sin costo"** y **"Agenda el mismo día"** en estas 16 páginas. **Dejé el "30-60 minutos" donde SÍ es verdad**: en la sección de emergencias 24/7, en la ventanita que salta al salir, y en las páginas de "electricista a domicilio / cerca de mí / por zona" (ahí la rapidez sí es tu gancho).
-  - https://electricistaculiacanpro.mx/servicios/instalacion-contactos/
-  - https://electricistaculiacanpro.mx/servicios/iluminacion-led/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-paneles-solares/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-camaras-seguridad/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-cercas-electricas/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-centro-carga/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-calentador-electrico/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-bomba-agua/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-porton-electrico/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-minisplit/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-ventiladores-techo/
-  - https://electricistaculiacanpro.mx/servicios/cambio-cableado-electrico/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-planta-luz-generador/
-  - https://electricistaculiacanpro.mx/servicios/mantenimiento-tableros/
-  - https://electricistaculiacanpro.mx/servicios/reparacion-minisplit/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-electrica/
+## ✅ Arreglé (8)
+- En **5 artículos del blog** había una promesa que ya decidiste quitar: arriba del todo decía "Llegamos en 30-60 min" como si en cualquier trabajo llegáramos en ese tiempo. Eso solo es real en emergencias. Lo cambié por "Cotización sin costo" (lo dejé igual donde sí habla de emergencias, ahí sí aplica). Artículos:
+  → https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/
+  → https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
+  → https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/
+  → https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/
+  → https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/
+- En la página de **Instalación Eléctrica** un dato oculto para Google traía un precio en crudo ("18270") en un campo donde Google espera un símbolo de rango ("$$"). Eso hacía que Google ignorara ese dato. Lo corregí → https://electricistaculiacanpro.mx/servicios/instalacion-electrica/
+- **Imágenes borrosas en 3 artículos**: la foto principal estaba estirada (se mostraba más grande de lo que realmente medía el archivo, se veía algo borrosa en pantallas grandes). Ajusté para que se muestre a su tamaño real y nítida.
+  → https://electricistaculiacanpro.mx/blog/cuanto-cuesta-electricista-culiacan/
+  → https://electricistaculiacanpro.mx/blog/recibo-luz-alto-culiacan-como-bajarlo/
+  → https://electricistaculiacanpro.mx/blog/como-elegir-buen-electricista-culiacan/
+- Otras dos fotos chicas dentro de los artículos de **prevención** y **señales** también se servían en versión pequeña estirada → las cambié a la versión grande nítida (son las mismas dos páginas "prevenir-cortocircuitos" y "señales obsoleta" de la lista de más arriba).
+- En la **portada del blog** faltaban los datos para que, al compartir el enlace en X/Twitter, salga la tarjeta con foto y título (antes salía como enlace pelón). Se los puse → https://electricistaculiacanpro.mx/blog/
+- En la **portada del blog**, en celulares muy chicos la cuadrícula de artículos se salía un poco de la pantalla → la ajusté para que siempre quepa.
+- En la **página principal**, el bloque de números (servicios hechos, calificación, garantía) no tenía un nombre para los lectores de pantalla que usan las personas ciegas → le puse uno → https://electricistaculiacanpro.mx/
 
-## ⚠️ Encontré pero NO pude arreglar solo (3)
-- **La ventanita que salta cuando alguien va a cerrar la página tiene los signos de apertura mal** ("Espera!" en vez de "¡Espera!", "Tienes una emergencia?" sin el "¿", y "Contactanos" sin acento). Es un error de redacción heredado de la plantilla — pequeño, pero está en unas 49 páginas. No lo metí hoy para no hacer un cambio enorme junto con el de arriba; lo dejé apuntado para arreglarlo en una pasada dedicada.
-- **Cinco páginas con detalles de velocidad de carga / una imagen que se ve un poco borrosa** (las páginas de "gracias" y "contacto" cargan el estilo de forma más lenta que el resto; 2 artículos del blog y el directorio de colonias tienen un detalle de imagen). Son mejoras de rendimiento; las dejé en la lista para que no choquen con el cambio grande de hoy.
-- **Google sigue intentando leer un mapa del sitio viejo que ya borramos** (el de las colonias). No es un error del sitio; se quita con un clic desde tu consola de Search Console (Sitemaps → quitar el viejo). Te lo señalo porque ensucia el reporte de Google, pero no afecta a tus visitantes.
+## ⚠️ Encontré pero NO pude arreglar solo (0)
+Todo lo que encontré hoy lo pude arreglar.
 
 ## 🌱 Mejoré / agregué (0 páginas nuevas)
-Sin páginas nuevas hoy: revisé lo que la gente busca en Google y tu sitio ya cubre esa demanda; no inventé páginas porque crear páginas casi iguales dañaría tu posicionamiento. El trabajo de hoy dejó tu sitio **más honesto** (16 páginas que ya no prometen un tiempo de llegada que no aplica), que es justo lo que pediste.
+Sin páginas nuevas hoy: revisé en Google qué busca la gente y todo lo que tiene demanda real ya lo cubre tu sitio (página principal, servicios, emergencias, precios, "cerca de mí"). Crear una página repetida dañaría tu posición en Google, así que no inventé ninguna. Sí dejé anotadas 3 mejoras de Google para las próximas corridas (reforzar la página de emergencias para "electricista urgente", afinar la de precios, etc.).
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Le enseñé al sistema una regla nueva: **"el aviso de 30-60 minutos solo va en emergencias, nunca en servicios que se agendan con cita"**. De ahora en adelante, si esa promesa se vuelve a colar en una página de instalación, el revisor automático la detecta solo (antes dependía de que yo me acordara).
-- (ya van 40 reglas aprendidas en total)
+- La promesa de "30-60 min" también se puede colar en los **artículos del blog**, no solo en las páginas de servicio. Ahora el sistema la detecta sola en ambos lados (antes solo miraba los servicios).
+- Un precio metido "en crudo" en los datos para Google (un número en vez de "$$") ahora se detecta solo.
+(ya van 41 reglas aprendidas en total)
 
 ## ⏳ Necesito que tú decidas (1)
-- **El color naranja de los botones y del menú tiene poco contraste para leer cómodo** (no cumple del todo la norma de accesibilidad sobre fondo blanco). Cambiarlo a un naranja un poco más oscuro lo resolvería, pero es una **decisión de tu marca** (qué tono usar) y toca el estilo de todo el sitio, así que no lo hago sin tu visto bueno.
+- **Tu sitio aparece en Google para "electrician near me" en inglés** (36 veces este mes) y la búsqueda "electricista culiacán" está en posición 4-5 (muy cerca del top 3). Subir esas dos requiere decisiones tuyas: (a) ¿atiendes a clientes que escriben en inglés? y (b) cambiar el título de la página principal es estrategia de marca, prefiero que lo apruebes tú antes de tocarlo. Lo dejé anotado para cuando me digas.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; le avisé a Google de las 16 páginas para que muestre la versión corregida. Un revisor independiente confirmó que quedó bien (las 16 cargan, sin textos rotos, sin contradicciones) antes de publicar.
+Sí, todo revisado y en vivo; le avisé a Google de las 11 páginas para que muestre los cambios.
