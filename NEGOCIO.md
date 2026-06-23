@@ -64,3 +64,11 @@ ELECTRICIDAD (instalación, reparación, mantenimiento eléctrico) cae en el gir
 - Contacto: **contacto@electricistaculiacanpro.mx** · tel/WhatsApp = el de la home (NAP).
 - Anti-doorway: Jaccard < 0.80 (lo bloquea `gate-pagina.py`).
 - Marca: azul eléctrico (la home `index.html` es la fuente de verdad del estilo).
+
+## Decisiones de SEO/marca (2026-06-22)
+- **Inglés ("electrician near me"): NO perseguir.** 36 impr/mes, fuera del top-15 de keywords,
+  conversión marginal. NO crear contenido en inglés ni hreflang (diluiría el sitio en español).
+  Si aparece la query, ignorar (ya decidido).
+- **Título de la home optimizado** para "electricista culiacán" (keyword #1, era pos 8.2): de
+  "...Cerca de Ti | A Domicilio 24/7" → "Electricista en Culiacán 24/7 | A Domicilio con Garantía".
+  MEDIR posición/CTR en GSC ~2026-07-15 (3-4 semanas). Si baja, revertir.
