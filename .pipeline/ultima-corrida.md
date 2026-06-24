@@ -1,40 +1,29 @@
-# Auto Agente Electricista — parte del 2026-06-22
-
-**Resultado:** encontré 9, arreglé 8, 1 para ti · publicado
+# Auto Agente Electricista — parte del 23 de junio de 2026
+**Resultado:** encontré 6, arreglé 4, 1 para más adelante · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 9 cosas: arreglé 8 · 1 necesita tu decisión · 0 no pude arreglar solo.
+Encontré 6 cosas: arreglé 4 · 0 necesitan tu decisión hoy · 1 la dejé encolada para una tanda dedicada (no cabía hoy sin riesgo).
 
-## ✅ Arreglé (8)
-- En **5 artículos del blog** había una promesa que ya decidiste quitar: arriba del todo decía "Llegamos en 30-60 min" como si en cualquier trabajo llegáramos en ese tiempo. Eso solo es real en emergencias. Lo cambié por "Cotización sin costo" (lo dejé igual donde sí habla de emergencias, ahí sí aplica). Artículos:
-  → https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/
-  → https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
-  → https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/
-  → https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/
-  → https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/
-- En la página de **Instalación Eléctrica** un dato oculto para Google traía un precio en crudo ("18270") en un campo donde Google espera un símbolo de rango ("$$"). Eso hacía que Google ignorara ese dato. Lo corregí → https://electricistaculiacanpro.mx/servicios/instalacion-electrica/
-- **Imágenes borrosas en 3 artículos**: la foto principal estaba estirada (se mostraba más grande de lo que realmente medía el archivo, se veía algo borrosa en pantallas grandes). Ajusté para que se muestre a su tamaño real y nítida.
-  → https://electricistaculiacanpro.mx/blog/cuanto-cuesta-electricista-culiacan/
-  → https://electricistaculiacanpro.mx/blog/recibo-luz-alto-culiacan-como-bajarlo/
-  → https://electricistaculiacanpro.mx/blog/como-elegir-buen-electricista-culiacan/
-- Otras dos fotos chicas dentro de los artículos de **prevención** y **señales** también se servían en versión pequeña estirada → las cambié a la versión grande nítida (son las mismas dos páginas "prevenir-cortocircuitos" y "señales obsoleta" de la lista de más arriba).
-- En la **portada del blog** faltaban los datos para que, al compartir el enlace en X/Twitter, salga la tarjeta con foto y título (antes salía como enlace pelón). Se los puse → https://electricistaculiacanpro.mx/blog/
-- En la **portada del blog**, en celulares muy chicos la cuadrícula de artículos se salía un poco de la pantalla → la ajusté para que siempre quepa.
-- En la **página principal**, el bloque de números (servicios hechos, calificación, garantía) no tenía un nombre para los lectores de pantalla que usan las personas ciegas → le puse uno → https://electricistaculiacanpro.mx/
+## ✅ Arreglé (4)
+- **Mi propio "detector de errores de Google" estaba ciego sin que nadie lo supiera.** Una de las herramientas internas que revisa cada día que tus páginas estén bien listadas para Google buscaba el archivo de índice (el "sitemap") en una carpeta que NO existe en tu sitio (era la carpeta del otro sitio, el del plomero, de donde copié esa herramienta). Por eso "no veía nada" y lo reportaba como "todo limpio" — una falsa tranquilidad. Lo apunté al archivo correcto: ahora sí revisa tus 87 páginas listadas, y además lo dejé de tal forma que si algún día vuelve a quedarse sin ver, AVISA en rojo en vez de callar. → revisión interna, no es una página del sitio.
+- **Tu página de contacto cargaba más lento de lo necesario.** El archivo de estilos (lo que le da el diseño) frenaba el dibujado de la página hasta terminar de bajar. Lo cambié al mismo método rápido que ya usan tus páginas de servicio, para que la gente vea el contenido antes. → https://electricistaculiacanpro.mx/contacto/
+- **La página de "Gracias" (la que ve quien te deja sus datos) tenía el mismo freno.** Mismo arreglo de velocidad. → https://electricistaculiacanpro.mx/gracias/
+- **El directorio de colonias tardaba en mostrar su foto principal.** Le agregué una instrucción para que el navegador baje esa imagen de inmediato (mejora la sensación de "carga rápida", que Google premia). → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
 
-## ⚠️ Encontré pero NO pude arreglar solo (0)
-Todo lo que encontré hoy lo pude arreglar.
+## ⚠️ Encontré pero NO pude arreglar solo (1)
+- **Las 40 páginas de colonia que SÍ salen en Google no muestran bien su tarjeta al compartirlas en X/Twitter.** Tienen la foto configurada pero les falta una etiqueta obligatoria (llamada `twitter:card`); sin ella, X ignora la foto y el título cuando alguien comparte el link. No las arreglé hoy porque son 40 páginas y mi regla de seguridad me impide tocar tantas de golpe en una sola corrida (eso es señal de que algo se salió de control). La dejé en mi lista de pendientes para una tanda dedicada, y de paso le enseñé a mi revisor automático a detectar esta falla solo de ahora en adelante. → ejemplo: https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/tres-rios/
 
 ## 🌱 Mejoré / agregué (0 páginas nuevas)
-Sin páginas nuevas hoy: revisé en Google qué busca la gente y todo lo que tiene demanda real ya lo cubre tu sitio (página principal, servicios, emergencias, precios, "cerca de mí"). Crear una página repetida dañaría tu posición en Google, así que no inventé ninguna. Sí dejé anotadas 3 mejoras de Google para las próximas corridas (reforzar la página de emergencias para "electricista urgente", afinar la de precios, etc.).
+Sin páginas nuevas hoy: tu sitio ya cubre lo que la gente busca y Google no muestra un hueco real con demanda que pueda llenar sin arriesgar tu posicionamiento (lo que buscan —"electricista", "electricista culiacán", "24 horas"— ya lo cubren tu página principal y tus servicios). No inventé páginas porque eso dañaría tu SEO. El trabajo del día fueron los arreglos de velocidad y de mi propio sistema de revisión.
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- La promesa de "30-60 min" también se puede colar en los **artículos del blog**, no solo en las páginas de servicio. Ahora el sistema la detecta sola en ambos lados (antes solo miraba los servicios).
-- Un precio metido "en crudo" en los datos para Google (un número en vez de "$$") ahora se detecta solo.
-(ya van 41 reglas aprendidas en total)
+- Cuando copio una herramienta del otro sitio (el del plomero), tengo que revisar TODAS las rutas y nombres de archivo que trae, porque tu sitio está organizado distinto — si no, la herramienta "apunta al lugar equivocado" y falla en silencio.
+- Ninguna de mis herramientas de revisión puede volver a decir "todo limpio" cuando en realidad "no pudo mirar": ahora avisa en rojo si se queda ciega.
+- Toda página que aparezca en Google y tenga foto para redes debe llevar la etiqueta que hace válida la tarjeta de X/Twitter.
+(ya van 44 reglas aprendidas en total)
 
-## ⏳ Necesito que tú decidas (1)
-- **Tu sitio aparece en Google para "electrician near me" en inglés** (36 veces este mes) y la búsqueda "electricista culiacán" está en posición 4-5 (muy cerca del top 3). Subir esas dos requiere decisiones tuyas: (a) ¿atiendes a clientes que escriben en inglés? y (b) cambiar el título de la página principal es estrategia de marca, prefiero que lo apruebes tú antes de tocarlo. Lo dejé anotado para cuando me digas.
+## ⏳ Necesito que tú decidas (0)
+Nada urgente de tu parte hoy. (Pendiente de fondo, sin prisa: Google muestra que la búsqueda "electricista culiacán" se reparte entre tu página principal, la de contacto y la de precios —se quitan fuerza entre ellas—; resolverlo implica cambiar títulos, que es decisión de estrategia, y justo el título de tu página principal lo cambiamos el 22-jun y lo estamos midiendo. Lo reviso en ~3 semanas.)
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; le avisé a Google de las 11 páginas para que muestre los cambios.
+Sí, todo revisado por un segundo agente que intentó tumbarlo (encontró 2 detalles en el primer intento, los corregí, y en el segundo dio luz verde total) y ya está en vivo. Le avisé a Google de las 2 páginas que cambié y aparecen en buscador (contacto y el directorio de colonias) para que las vuelva a mirar.
