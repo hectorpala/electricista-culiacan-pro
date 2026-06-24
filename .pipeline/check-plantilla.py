@@ -783,6 +783,22 @@ def check_page(fpath, t, noindex, redirects):
                 'Reemplazar el valor numérico por el indicador relativo de schema.org: uno de '
                 '"$", "$$", "$$$", "$$$$" (el estándar del sitio es "$$").')
 
+    # --- 25. twitter:image sin twitter:card (media, seo): una página INDEXABLE que declara
+    #         twitter:image PERO no <meta name="twitter:card"> produce una Twitter/X Card
+    #         INVÁLIDA — X ignora TODAS las etiquetas twitter:* si falta twitter:card, así que
+    #         la imagen/título/descripción nunca renderizan al compartir. Pasó en las 40 colonias
+    #         indexables: el lote 'twitter-image-parity' (bk-c7879cde) añadió twitter:image pero
+    #         NO el twitter:card; las páginas de servicio sí lo tienen. SOLO indexables (una
+    #         noindex no necesita preview social). Detectado por revisor-seo 2026-06-23.
+    if not noindex and re.search(r'<meta[^>]+name=["\']twitter:image["\']', t, re.I) \
+            and not re.search(r'<meta[^>]+name=["\']twitter:card["\']', t, re.I):
+        add("media", r, "seo",
+            'twitter:image presente pero falta <meta name="twitter:card"> '
+            '-> la Twitter/X Card es inválida (X ignora todo sin twitter:card)',
+            'Añadir <meta name="twitter:card" content="summary_large_image"> en el <head> '
+            '(replicar el patrón de las páginas de servicio). Corregir también el generador '
+            'de colonias para que las nuevas la hereden.')
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): las 689 paginas sirven styles.7f293647.css (el VIVO, =

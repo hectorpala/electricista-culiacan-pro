@@ -25,7 +25,10 @@ from urllib.error import HTTPError, URLError
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # raiz del repo
 BASE = "https://electricistaculiacanpro.mx"
-SITEMAP = os.path.join(ROOT, "sitemaps", "main_sitemap.xml")
+# El sitio Electricista tiene el sitemap principal en la raiz (sitemap.xml),
+# NO en sitemaps/main_sitemap.xml (eso era la estructura del sitio hermano Plomero,
+# de donde se porto este checker). Si algun dia se vuelve a un sub-sitemap, ajustar aqui.
+SITEMAP = os.path.join(ROOT, "sitemap.xml")
 
 hallazgos = []
 _seq = 0
@@ -236,7 +239,15 @@ def http_code(port, loc):
 # ================================================================ MAIN
 def main():
     if not os.path.isfile(SITEMAP):
-        print(json.dumps({"hallazgos": [], "error": "no se encontro main_sitemap.xml"}))
+        # NO devolver hallazgos vacíos en silencio: eso es "verificación ciega" (un
+        # consumidor que solo lee 'hallazgos' lo tomaría por "sitio limpio"). Emite ALTA.
+        add("alta", os.path.relpath(SITEMAP, ROOT),
+            "verificación ciega: no se encontró el sitemap (%s) — el checker no pudo "
+            "recorrer ninguna URL" % os.path.basename(SITEMAP),
+            "Confirmar que el sitemap principal existe en %s o ajustar la constante SITEMAP"
+            % os.path.relpath(SITEMAP, ROOT))
+        print(json.dumps({"hallazgos": hallazgos,
+                          "error": "no se encontro %s" % os.path.basename(SITEMAP)}))
         return
     sm = read(SITEMAP)
     locs = re.findall(r'<loc>\s*([^<]+?)\s*</loc>', sm)
