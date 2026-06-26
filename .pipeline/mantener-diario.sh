@@ -26,7 +26,7 @@ echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # Corrida autónoma del pipeline (auto-permiso → 9 revisores, arregla y publica según candados)
-if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/mantener-prompt.txt)" >> "$LOG_DIR/electricista-$STAMP.log" 2>&1; then
+if "$RUTA_CLAUDE" --model sonnet --permission-mode auto -p "$(cat .pipeline/mantener-prompt.txt)" >> "$LOG_DIR/electricista-$STAMP.log" 2>&1; then
   CLAUDE_OK=1
 else
   CLAUDE_OK=0

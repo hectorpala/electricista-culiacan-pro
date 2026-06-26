@@ -36,6 +36,18 @@ fi
 echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
+# Resiliencia a NordVPN: espera a que la API vuelva antes de cada unidad (kill switch
+# bloquea la salida al reconectar). curl a /v1/messages da HTTP 405 = conectó.
+wait_for_net() {
+  local i
+  for i in $(seq 1 32); do
+    curl -sS -o /dev/null --max-time 6 https://api.anthropic.com/v1/messages 2>/dev/null && return 0
+    echo "[$(date)] red caída (¿NordVPN reconectando?); espero 15s ($i/32)…" >> "$MLOG"
+    sleep 15
+  done
+  return 1
+}
+
 END=$(( $(date +%s) + DUR ))
 PASS=0; DRY=0; HECHAS=0
 echo "[$(date)] === MARATÓN inicio · dura ${DUR}s · máx ${MAX_PASS} pasadas ===" | tee -a "$MLOG"
@@ -46,7 +58,13 @@ while [ "$(date +%s)" -lt "$END" ] && [ "$PASS" -lt "$MAX_PASS" ]; do
   REST=$(( END - $(date +%s) ))
   echo "[$(date)] --- pasada $PASS (quedan ${REST}s) -> $PLOG" | tee -a "$MLOG"
 
-  "$CLAUDE_CMD" --permission-mode auto -p "$(cat .pipeline/maraton-prompt.txt)" >> "$PLOG" 2>&1 || true
+  if ! wait_for_net; then
+    echo "[$(date)] la red no volvió tras ~8 min -> termino el maratón (el catch-up/diario lo retoma)." | tee -a "$MLOG"
+    break
+  fi
+
+  # Orquestador en SONNET (~5x más barato); el juicio crítico vive en subagentes model:opus.
+  "$CLAUDE_CMD" --model sonnet --permission-mode auto -p "$(cat .pipeline/maraton-prompt.txt)" >> "$PLOG" 2>&1 || true
 
   LAST=$(grep -E '^(HECHO|SIN TRABAJO):' "$PLOG" | tail -1)
   echo "    -> ${LAST:-(sin línea de cierre — pasada incompleta)}" | tee -a "$MLOG"
