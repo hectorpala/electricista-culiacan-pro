@@ -75,7 +75,7 @@
         .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
         .hero-background{position:absolute;inset:0;z-index:0}
         .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
-        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:35% center}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(0,0,0,0.33)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:20rem;margin-bottom:2rem;background:rgba(0,0,0,0.33)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.hero-cta,.hero-contact,.hero-guarantee,.hero .btn-primary{display:none!important}}
+        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:35% center}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(0,0,0,0.33)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:1rem;margin-bottom:2rem;background:rgba(0,0,0,0.33)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.hero-cta,.hero-contact,.hero-guarantee,.hero .btn-primary{display:none!important}}
         .hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.4) 60%,transparent 100%);pointer-events:none}
         .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(0,0,0,0.2);backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
         .hero h1{font-size:clamp(1.75rem,4vw,2rem)!important;color:#FFFFFF!important;text-shadow:0 2px 8px rgba(0,0,0,0.3)!important;margin-bottom:1rem!important}
@@ -523,7 +523,7 @@
             <h2>Situaciones que requieren electricista de emergencia inmediato</h2>
             <div class="benefits-grid">
                 <div class="benefit">
-                    <div class="benefit-icon">🔥</div>
+                    <div class="benefit-icon" aria-hidden="true">🔥</div>
                     <h3>Chispas, humo u olor a quemado</h3>
                     <p>EMERGENCIA CRÍTICA - Indica cortocircuito activo o sobrecalentamiento con riesgo inminente de incendio.</p>
                     <ul>
@@ -533,7 +533,7 @@
                 </div>
 
                 <div class="benefit">
-                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-icon" aria-hidden="true">⚡</div>
                     <h3>Descargas eléctricas al tocar aparatos</h3>
                     <p>Riesgo FATAL de electrocución - Indica falla de aislamiento o ausencia de tierra física adecuada.</p>
                     <ul>
@@ -543,7 +543,7 @@
                 </div>
 
                 <div class="benefit">
-                    <div class="benefit-icon">💧</div>
+                    <div class="benefit-icon" aria-hidden="true">💧</div>
                     <h3>Agua en contacto con electricidad</h3>
                     <p>PELIGRO EXTREMO - Inundaciones, goteras o humedad en tableros e instalaciones energizadas.</p>
                     <ul>
@@ -553,7 +553,7 @@
                 </div>
 
                 <div class="benefit">
-                    <div class="benefit-icon">🔌</div>
+                    <div class="benefit-icon" aria-hidden="true">🔌</div>
                     <h3>Interruptores que se disparan constantemente</h3>
                     <p>Indica sobrecarga peligrosa o cortocircuito activo que el sistema está intentando contener.</p>
                     <ul>
@@ -563,7 +563,7 @@
                 </div>
 
                 <div class="benefit">
-                    <div class="benefit-icon">🌡️</div>
+                    <div class="benefit-icon" aria-hidden="true">🌡️</div>
                     <h3>Cables, contactos o apagadores calientes</h3>
                     <p>Sobrecalentamiento por sobrecarga, conexiones defectuosas o cables subdimensionados - precursor de incendio.</p>
                     <ul>
@@ -573,7 +573,7 @@
                 </div>
 
                 <div class="benefit">
-                    <div class="benefit-icon">⚠️</div>
+                    <div class="benefit-icon" aria-hidden="true">⚠️</div>
                     <h3>Apagón total sin causa aparente</h3>
                     <p>Falla crítica en acometida, tablero principal o cortocircuito severo que requiere diagnóstico urgente.</p>
                     <ul>
