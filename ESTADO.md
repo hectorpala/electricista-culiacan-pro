@@ -1,5 +1,35 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-26 (Auto Agente diario 2ª corrida — 13 fixes home/zonas/blogs/tierra-fisica) — PUBLICADO ✅
+Rama `auto/diario-20260626-1227`, merge `296c0208` a main (push OK; pre-push **auto-indexó 13 URLs**: home, 5 zonas, 6 blogs, tierra-fisica). HEALTH CHECK: ci-gate 0 ALTA · 1 baja (falso positivo google-stub pre-existente). check-indexabilidad 0. 13 HTML + sitemap (16 archivos diff).
+
+- **HOME — og:image/CLS/logo (media, index.html) — lo principal:** (a) `og:image`/`twitter:image` apuntaban a `reparacion-cortocircuitos-culiacan-800w.webp` en vez del hero → corregido a `hero-electricista-culiacan-800w.webp`; `og:image:height` 800→437 (reales del WebP). (b) Hero `<img height="800">` cuando `hero-electricista-culiacan-1200w.webp` mide 1200×655 → CLS fijo con `height="655"`. (c) JSON-LD logo usaba `logo-512.webp` (y antes .png) → corregido a `electricista-culiacan-pro-logo.webp` (que es el logo de marca, 512×512) en las 2 ocurrencias de JSON-LD; `height` 366→512. Anchor `<a href="/servicios/emergencia-24-7/">Electricista 24 horas Culiacán</a>` añadido a lista semántica.
+
+- **HOME — validate-landing pre-existente (fix estructural):** index.html fallaba gate-pagina.py con 4 errores pre-existentes que bloquearon el candidato en primera pasada del verificador. Corregidos: (a) security headers meta (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection); (b) `<meta name="template-version" content="v2.0.0">`; (c) JSON-LD logo → logo correcto (también arreglaba punto c de arriba); (d) eliminado `<link rel="preload" href="styles.*.css" as="style">` pre-existente (CSS sigue cargando async vía media=print trick, el preload era redundante y validate-landing lo prohibía). Ahora `bash validate-landing.sh index.html` → PASO (1 warning no-crítico: meta author).
+
+- **5 ZONAS — GPS inconsistentes en JSON-LD (media):** Las 5 páginas de zona tenían `meta geo.position` con coords reales de la zona, pero el JSON-LD `GeoCoordinates` usaba el centro de la ciudad (24.7903/-107.3878) para todas. Corregido con las coords únicas de cada zona: norte 24.8230/-107.4090, sur 24.7560/-107.3960, oriente 24.8050/-107.3760, poniente 24.8090/-107.4180, centro 24.7993/-107.3938.
+
+- **6 BLOGS — margin-top:20rem (baja, layout móvil):** Los 6 blogs tenían `.hero-rating { margin-top:20rem }` en el bloque `@media(max-width:768px)`, empujando el badge de calificación 320px debajo del H1 en móvil. Corregido a `margin-top:1rem`. Además: blog cortocircuitos H2 renombrado a la keyword exacta del query; blog emergencia y blog lluvias — 6 y 5 `.benefit-icon` decorativos añadidos `aria-hidden="true"`.
+
+- **TIERRA FÍSICA — precio visible en body (media):** `servicios/instalacion-tierra-fisica/index.html` tenía "Desde $1,500 MXN" en meta description (ya corregido corrida anterior), PERO también en el hero-subtitle y en el FAQ HTML body. NEGOCIO.md: "NUNCA precio visible en el cuerpo". Eliminado de ambos lugares; FAQ ahora dice "cotización sin costo para tu caso específico". El JSON-LD `priceRange`/`offers` con precios se conserva (es el lugar correcto per NEGOCIO.md).
+
+- **VERIFICACIÓN (3 rondas):** 1ª: ok=false (contacto/ falla gate pre-existente; precio tierra-fisica body; servidor :8080 era del sitio hermano) → contacto/ revertido (backlog), precio corregido, servidor :8091. 2ª: ok=false (index.html falla gate por 4 errores pre-existentes) → 5 fixes en index.html para que pase validate-landing. 3ª: **ok=true, 0 problemas** (ci-gate 0 ALTA; validate-landing index.html PASO; gate-pagina todos los archivos OK; GPS únicos; precios solo en JSON-LD; og:image correcto; 0 mojibake; 0 plomero; 13/13 URLs 200).
+
+- **APRENDIZAJE (FASE 9):** +5 reglas nuevas: `gps-jsonld-meta-inconsistency`, `hero-rating-margin-top-20rem`, `og-image-hero-match`, `jsonld-logo-brand-asset`, `precio-visible-body`. +3 checks en check-plantilla.py: GPS inconsistency (MEDIA), precio en body visible (MEDIA), logo JSON-LD asset (MEDIA).
+
+- **ENCOLADO/DIFERIDO:** bk-72cc7764 popup ortografía ~49 págs; bk-b7465a9a aria-expanded JS toggle; bk-dbdf31bc ctr-fix electricista-precios; bk nuevo contacto/ emoji aria-hidden (bloqueado hasta migración plantilla v2.0.0).
+
+- **PENDIENTE-HUMANO (heredados + nuevos de esta corrida):**
+  - Precios visibles en body: home `section#precios` FAQ (estrategia conversión); emergencia-24-7, mantenimiento-tableros, páginas de zona con precios de $200 (estrategia)
+  - Página `electricista-precios` y blog `cuanto-cuesta` (precio table — decisión dueño)
+  - Sitemap fantasma `/sitemaps/servicios_colonias_sitemap.xml` (consola GSC, borrar manual)
+  - Canibalización "electricista culiacán" home/contacto/precios
+  - skip-link/`<main>` template-wide (~31-47 págs)
+  - Contraste WCAG AA `.nav-link` y `.btn-primary`
+  - preload as=style hint en 33 servicios + 11 blogs (lote > cap)
+  - CLS height fix en blog articles (heights variadas por imagen)
+  - contacto/index.html migración a plantilla v2.0.0 (pre-requisito para el fix emoji a11y)
+
 ## 2026-06-26 (Auto Agente maratón — twitter:card en 40 colonias indexables) — PUBLICADO ✅
 Rama `auto/twitter-card-colonias-20260626`. HEALTH CHECK: ci-gate 0 ALTA · 0 media (solo falso positivo baja google-stub pre-existente). check-indexabilidad 0. Cambio puro mecánico, solo HTML inline (no CSS servido → sin bump ?v=/sw.js). 42 archivos: 40 colonias + HISTORIAL + REGLAS.
 - **TWITTER:CARD FALTANTE EN 40 COLONIAS INDEXABLES (media, seo/social) — lo principal:** cierra el backlog `bk-228a32dd` encolado 2026-06-23. Las 40 colonias indexables tenían `<meta name="twitter:image">` pero NO `<meta name="twitter:card" content="summary_large_image">` → Twitter/X ignoraba toda la metadata (sin card, no se genera tarjeta social). El lote previo `twitter-image-parity` añadió la imagen pero olvidó el card. Fix: `<meta name="twitter:card" content="summary_large_image" />` insertado antes de `twitter:image` en las 40 colonias con Python UTF-8. Verificado: 0 mojibake (`Ã` / replacement char), orden card-antes-image correcto en muestra, ci-gate VERDE, check-plantilla 0 ALTA · 0 MEDIA.
@@ -9,320 +39,17 @@ Rama `auto/twitter-card-colonias-20260626`. HEALTH CHECK: ci-gate 0 ALTA · 0 me
 
 ## 2026-06-23 (Auto Agente diario — destapa checker de indexabilidad CIEGO + perf contacto/gracias/hub + check 25) — PUBLICADO ✅
 Rama `auto/diario-20260623-2000`, merge `9406d9f7` a main (push OK; pre-push **auto-indexó 2 URLs**: /contacto/ y el hub de colonias — 0 en cola). HEALTH CHECK previo OK (home, /contacto/, /servicios/, /blog/, instalacion-electrica, electricista → 200 en :8080). Sincronizado main con origin (--ff-only "Already up to date") antes de ramificar. 9 revisores en paralelo. **GSC FUNCIONAL** (`mcp__gsc__*` cargadas con ToolSearch select:; `gsc_list_sites` confirmó la propiedad): 85 clics, 4199 impr, CTR 2.02%, pos 7.1 (clics −9%, impr −2% vs periodo anterior).
-- **CHECKER DE INDEXABILIDAD CIEGO (alta, infra) — lo principal:** `.pipeline/check-indexabilidad.py` apuntaba a `sitemaps/main_sitemap.xml` (estructura del sitio HERMANO Plomero, de donde se portó en commit 20d41380) pero ESTE sitio tiene el sitemap en `sitemap.xml` en la RAÍZ. Devolvía `{"hallazgos":[], "error":"no se encontro main_sitemap.xml"}` → un consumidor que solo lee 'hallazgos' lo tomaba por "sitio limpio" = verificación CIEGA silenciosa (justo la trampa que el mandato advierte). El revisor-indexabilidad lo cazó esta corrida (emitió ALTA "verificación ciega"). FIX: (a) `SITEMAP=sitemap.xml` en raíz; (b) si el sitemap NO existe, ahora EMITE un hallazgo ALTA "verificación ciega" en vez de vaciar en silencio. Ahora recorre las 87 URLs (0 hallazgos = realmente limpio). ci-gate ya lo corre (reporta "0 ALTA · 0 media/baja").
-- **PERF render-blocking + LCP (media, 3 págs):** contacto/ y gracias/ cargaban el CSS BLOQUEANTE (no el patrón no-bloqueante del estándar del sitio) → patrón `media="print" onload` + `<noscript>` IDÉNTICO a las páginas de servicio (sin la línea `preload as=style`, que validate-landing check 6 prohíbe — el verificador lo cazó en el 1er intento y se corrigió). El hub `electricista-colonias-culiacan` no precargaba su imagen LCP del hero → +`<link rel="preload" as="image">`. Cierra el backlog bk-5f77e166 (los 2 blogs upscale de esa tarea ya estaban hechos el 22-jun).
-- **twitter:card FALTANTE en 40 colonias (media, seo) — encolado:** las 40 colonias indexables tienen twitter:image pero NO `<meta name="twitter:card">` → Twitter/X Card inválida (X ignora todo sin twitter:card; el lote previo twitter-image-parity añadió la imagen pero no el card). 40 archivos > candado 18 → NO inline; MECANIZADO (check 25) + lote encolado bk-228a32dd.
-- **FALSO POSITIVO descartado (verificación escéptica que evitó romper 9 págs):** el revisor-links marcó ALTA "9 blogs sin main.min.js". Verificado: esos blogs NO están rotos — tienen un IIFE inline (menú+CTA flotante+formulario) y NO tienen markup de exit-popup. Añadir main.min.js DUPLICARÍA el listener del menú → lo rompería. NO se tocaron.
-- **CRECER (FASE 6): 0 páginas nuevas.** GSC funcional sin demanda limpia para página nueva sin doorway (head-terms servidos; automotriz/inglés excluidos por NEGOCIO; canibalización home/contacto/precios = decisión de título/estrategia humana, y el título home está en experimento desde el 22-jun). La optimización publicable del día = los 3 perf.
-- **Verificador independiente escéptico: 2 rondas.** 1ª: ok=false (mi preload-as-style disparaba validate-landing check 6 en contacto; cadena de error stale en el checker) → ambos corregidos. 2ª: **ok=true, 0 problemas** (validate-landing OK, contacto/gracias 200 con CSS aplicado, checker no-ciego con 87 URLs, ci-gate 0 ALTA, check 25 caza 40 colonias/0 servicios, 0 borrados, email/teléfono intactos, 0 mojibake).
-- **APRENDIZAJE (FASE 9):** +3 reglas (41→**44**): INFRA/PORT-CHECKER-CIEGO (al portar del hermano, auditar rutas hardcodeadas + ningún checker devuelve vacío silencioso), SEO/TWITTER-CARD (indexable con twitter:image debe tener twitter:card; check 25), y nota PERF/JS-INLINE-IIFE (no añadir main.min.js a blogs con IIFE inline). check 25 nuevo en check-plantilla.py + el checker de indexabilidad ahora emite ALTA si va ciego.
-- **PUBLICADO:** diff 3 páginas HTML ≤ candado 18 (+2 checkers +BACKLOG, no cuentan como página); solo HTML inline (no CSS servido, no sw.js → sin bump). main local NO divergió.
-- **ENCOLADO/DIFERIDO a backlog (no se pierde):** bk-228a32dd twitter:card 40 colonias (lote >cap); bk-72cc7764 popup ortografía ~49 págs; bk-b7465a9a aria-expanded JS toggle; bk-4654c8eb enriquecer emergencia-24-7; bk-dbdf31bc ctr-fix electricista-precios.
-- **PENDIENTE-HUMANO (heredados + nuevos):** canibalización "electricista culiacán" entre home/contacto/electricista-precios (cambiar títulos = estrategia, y el de home está midiéndose); contraste WCAG AA `.nav-link` #f97316 (2.8:1) y `.btn-primary` (CSS servido + color de marca); foco/focus-trap del exit-popup en main.js (JS site-wide); skip-link/`<main>` en ~31-47 págs (migración masiva); reapuntar el subagente `revisor-gsc` a `mcp__gsc__*` en su definición; sitemap fantasma `/sitemaps/servicios_colonias_sitemap.xml` (1 error en GSC, consola no repo).
-
+- **CHECKER DE INDEXABILIDAD CIEGO (alta, infra) — lo principal:** `.pipeline/check-indexabilidad.py` apuntaba a `sitemaps/main_sitemap.xml` (estructura del sitio HERMANO Plomero, de donde se portó en commit 20d41380) pero ESTE sitio tiene el sitemap en `sitemap.xml` en la RAÍZ. Devolvía `{"hallazgos":[], "error":"no se encontro main_sitemap.xml"}` → un consumidor que solo lee 'hallazgos' lo tomaba por "sitio limpio" = verificación CIEGA silenciosa (justo la trampa que el mandato advierte). El revisor-indexabilidad lo cazó esta corrida (emitió ALTA "verificación ciega"). FIX: (a) `SITEMAP=sitemap.xml` en raíz; (b) si el sitemap NO existe, ahora EMITE un hallazgo ALTA "verificación ciega" en vez de vaciar en silencio. Ahora recorre las 87 URLs (0 hallazgos = realmente limpio).
+- **PERF render-blocking + LCP (media, 3 págs):** contacto/ y gracias/ cargaban el CSS BLOQUEANTE → patrón `media="print" onload` + `<noscript>`. Hub colonias sin preload LCP del hero → `<link rel="preload" as="image">`. Cierra bk-5f77e166.
+- **twitter:card FALTANTE en 40 colonias (media, seo) — encolado:** 40 archivos > candado 18 → bk-228a32dd.
+- **CRECER (FASE 6): 0 páginas nuevas.**
+- **APRENDIZAJE:** +3 reglas (41→44): INFRA/PORT-CHECKER-CIEGO, SEO/TWITTER-CARD, PERF/JS-INLINE-IIFE. check 25 nuevo.
 
 ## 2026-06-22 (Auto Agente diario 2ª corrida — honestidad "30-60 min" en 5 BLOGS + priceRange + perf upscale + checks 23/24) — PUBLICADO ✅
 Rama `auto/diario-20260622-2213`, merge `c971a3d4` a main (push OK; pre-push **auto-indexó las 11 URLs**, 0 en cola). HEALTH CHECK previo OK (home, /contacto/, /servicios/, /blog/, instalacion-electrica, electricista → 200 en :8080). Sincronizado main con origin (--ff-only "Already up to date") antes de ramificar. 9 revisores; **deterministas SANOS y NO ciegos** (ci-gate 0 ALTA; indexabilidad 87 URLs/0; producción en vivo 0; plantilla solo el falso positivo google-stub). **GSC FUNCIONAL** (`mcp__gsc__*` cargadas con ToolSearch select:; `gsc_list_sites` confirmó la propiedad): 89 clics, 4376 impr, CTR 2.03%, pos 7.1 (impr +3%, clics −5% vs periodo anterior).
 - **REGRESIÓN 30-60 MIN EN BLOGS (media, 5 blogs) — lo principal:** el badge de plantilla hero `<span>Llegamos en 30-60 min</span>` (promesa incondicional de llegada) sobrevivía en 5 blogs INFORMATIVOS (ahorro-energia-iluminacion-led, senales-instalacion-electrica-obsoleta, seguridad-electrica-temporada-lluvias, como-prevenir-cortocircuitos-casa, mantenimiento-tablero-electrico-preventivo). La corrida de ayer (check 22) solo escaneaba `servicios/`, así que los blogs escaparon. Decisión del dueño (NEGOCIO.md, 2026-06-22): 30-60 solo en emergencia. Reescrito el hero → "Cotización sin costo"; quitado bullet "· Llegada 30-60 min" de meta/og en ahorro/senales/como-prevenir; 2 frases de body de servicio AGENDABLE (instalación LED, mantenimiento tableros). **CONSERVADO lo legítimo:** cards "Emergencias 24/7", FAQ schema de cortocircuito, cross-sell emergencia-24-7, y el blog `cuando-llamar-electricista-emergencia` (NO tocado, sí es de emergencia). Editado con Python UTF-8 (0 mojibake).
-- **BUG priceRange (alta mecánica, instalacion-electrica):** `"priceRange": "18270"` (pesos crudos) en el JSON-LD → `"$$"` (formato schema.org). Única página así; Google ignora valores numéricos en priceRange.
-- **PERF imágenes upscale (media, 5 blogs):** hero `instalacion-minisplit-culiacan-1200w.webp` era realmente 800×447 y se declaraba `width="1200" height="800"` (upscale + CLS) en cuanto-cuesta/recibo-luz/como-elegir → honestado a 800w real (refs, srcset sin descriptor 1200w falso, dims 800×447). Fallback `src` de 7 tarjetas `-420w`→`-800w` en como-prevenir/senales (el srcset ya servía 800w).
-- **SEO twitter (media, blog/index + 3 blogs):** blog/index solo tenía twitter:image (sin card/title/description → no renderizaba preview en X) → +4 tags; +twitter:url en cuanto-cuesta/recibo-luz/como-elegir (paridad). Grid de blog bulletproof `minmax(min(100%,320px),1fr)` (evita overflow @320px).
-- **A11Y (baja, home):** `<section class="stats-bar">` sin nombre accesible → +`aria-label="Estadísticas del servicio"`.
-- **CRECER (FASE 6): 0 páginas nuevas.** Panel `decisor-negocio`: sin demanda limpia para página nueva sin doorway (head-terms ya servidos; automotriz excluido por NEGOCIO; inglés/títulos = humano). 3 optimizaciones GSC encoladas a backlog (bk-4654c8eb enriquecer emergencia-24-7 por "urgente"/"24h"; bk-dbdf31bc ctr-fix electricista-precios; bk-25cc68fa humano títulos home/precios + inglés). cerca-de-mi NO tocada (su meta ya está bien optimizada; cambiarla sería especular).
-- **Verificador independiente escéptico: ok=true**, 0 problemas. 11/11 HTTP 200, JSON-LD parsea, canonical==og:url, 0 mojibake, priceRange "$$", minisplit sin -1200w + dims 800×447, 30-60 de emergencia intacto, 0 borrados, email limpio.
-- **APRENDIZAJE (FASE 9):** check 23 (`claim 30-60 min hero en blog no-emergencia`, MEDIA; allowlist emergencia/urgente) y check 24 (`priceRange numérico crudo`, MEDIA) nuevos en check-plantilla.py — py_compile OK, JSON válido, caza-malo=1/caza-bueno=0 cada uno. +regla 30-60 ampliada a blogs + regla SEO/SCHEMA-PRICERANGE en REGLAS.md. **41 reglas en total.**
-- **PUBLICADO:** diff 11 páginas HTML ≤ candado 18; solo HTML inline + checker/memoria (no CSS servido, no sw.js → sin bump). main local NO divergió.
-- **DIFERIDO a backlog (no se pierde):** popup ortografía apertura ~49 págs (bk-72cc7764); perf render-blocking gracias/contacto + hub preload (bk-5f77e166, el upscale de sus 2 blogs YA se hizo hoy); aria-expanded JS toggle (bk-b7465a9a).
-- **PENDIENTE-HUMANO (heredados):** contraste WCAG AA de `.nav-link`/`.btn-primary`/`.whatsapp-cta-box`/popup #22c55e (CSS servido hasheado + decisión de color de marca); skip-link/`<main>` en ~44 páginas (migración masiva); BreadcrumbList item 2 → `/#servicios` en 32 servicios (template-wide); sitemap fantasma `/sitemaps/servicios_colonias_sitemap.xml` (1 error en GSC, consola no repo); reapuntar subagente `revisor-gsc` a `mcp__gsc__*` en su definición.
-
-
-## 2026-06-22 (Auto Agente diario — honestidad "30-60 min" en 16 servicios agendables + check 22) — PUBLICADO ✅
-Rama `auto/diario-20260622-1114`. HEALTH CHECK previo OK (home, /contacto/, /servicios/, /blog/, instalacion-electrica, electricista → 200 en :8080; el :8080 lo ocupaba un server viejo que servía ESTE sitio, reiniciado limpio desde mi working tree). Sincronizado main con origin (--ff-only OK) antes de ramificar. 9 revisores; **deterministas SANOS y NO ciegos** (ci-gate 0 ALTA; indexabilidad 87 URLs/0; producción 7 págs/headers OK/0; plantilla solo el falso positivo google-stub; **paridad CSS total** 403 átomos en las 3 hojas). **GSC FUNCIONAL** (`mcp__gsc__*` cargadas con ToolSearch select:; `gsc_list_sites` confirmó la propiedad): 94 clics, 4442 impr, CTR 2.12%, pos 7.0 (+3%/+5% vs periodo anterior).
-- **CLAIM "30-60 min" EN SERVICIOS AGENDABLES (media, 16 págs) — lo principal:** el badge de plantilla "llegada en 30-60 min" estaba en 32 de 33 páginas de servicio. El dueño decidió HOY (NEGOCIO.md > Promesas de marca, 2026-06-22) que va SOLO en emergencia/urgencia. Reescritas las promesas PROPIAS INCONDICIONALES (hero feature `<span>Llegamos en 30-60 min</span>`, H3 "Llegada Rápida 30-60 Min", subtítulo, meta/og/twitter, schema, FAQ, body) en 16 servicios agendables (contactos, iluminación LED, paneles-solares, cámaras, cercas, centro-carga, calentador, bomba, portón, minisplit-install, ventiladores, cambio-cableado, planta-luz, mantenimiento-tableros, reparación-minisplit, instalación-eléctrica) → "Cotización sin costo" / "Agenda el Mismo Día" / "coordinamos la visita el mismo día". **CONSERVADO lo legítimo** (NO tocado): bloque cross-sell "Llegada en 30-60 minutos **en emergencias 24/7**", popup, FAQs condicionadas a emergencia (portón/minisplit/tableros "si tu tablero está quemado"), y las páginas de DESPACHO general (electricista, a-domicilio, cerca-de-mí, 4 zonas, comercial, centro, hub-colonias) cuyo valor propio SÍ es la rapidez. Editado con Python UTF-8 (0 mojibake). Drena la tarea de backlog `bk-58c4f494` (esperaba decisión humana desde 2026-06-19).
-- **CRECER (FASE 6): 0 páginas nuevas.** GSC funcional pero sin demanda limpia para página nueva (head-terms ya servidos; automotriz excluido por NEGOCIO). Las oportunidades GSC son de OPTIMIZACIÓN (cerca-de-mí pos 13, blog cortocircuitos pos 8.5) → se difieren para no exceder el candado de 18 ni mezclar con la corrección de honestidad. La corrección de 16 páginas ES la tarea de backlog drenada hoy.
-- **Verificador independiente escéptico: ok=true**, 16 HTML (57 ins = 57 del, sustituciones puras), 0 problemas. ci-gate 0 ALTA; gate-pagina/validate-landing PASA en las 16; 16/16 HTTP 200, JSON-LD parsea, canonical==og:url==twitter:url, 0 mojibake, email/teléfono intactos. Único matiz (pulido tras verificar): meta de instalacion-electrica quedaba "cotización sin costo. Cotiza gratis" (redundante) → "atención el mismo día. Cotiza gratis".
-- **APRENDIZAJE (FASE 9):** check 22 nuevo en check-plantilla.py (`claim 30-60 min en servicio agendable`, MEDIA): allowlist de emergencia/despacho; marca el hero span, el H3 y "30-60 min" en meta/og/twitter (no el cross-sell/popup/FAQ del body). caza-malo=2, ignora-bueno=0 (emergencia/despacho/cross-sell/popup), JSON válido, py_compile OK, 0 sobre el sitio corregido. +1 regla en REGLAS.md (CONTENIDO/CLAIM-30-60-MIN). 40 reglas en total.
-- **PUBLICADO:** diff 16 páginas HTML ≤ candado 18; solo HTML inline + checker/memoria (no CSS servido, no sw.js → sin bump). main local NO divergió.
-- **DIFERIDO a backlog (no se pierde):** popup con ortografía de apertura rota (¡Espera! / ¿Tienes…? / Contáctanos) en ~49 páginas (`bk-72cc7764`, bajo, lote mecánico >cap); perf: gracias/+contacto/ CSS render-blocking, 2 blogs con upscale 420w/width=800, hub-colonias sin preload LCP (`bk-5f77e166`, medio). Tareas de optimización GSC (enriquecer cerca-de-mí pos 13, blog cortocircuitos pos 8.5).
-- **PENDIENTE-HUMANO (heredados):** contraste WCAG AA del `.nav-link` naranja (2.8:1 scrolleado) y del `.btn-primary` (2.8-3.44:1) — CSS servido + decisión de color de marca (familia contraste-css-hasheado); reapuntar el subagente `revisor-gsc` a `mcp__gsc__*` en su definición (el MCP gsc YA funciona, pero el agente sigue cableado a plomero); sitemap fantasma `/sitemaps/servicios_colonias_sitemap.xml` (1 error en GSC, limpieza en la consola, no en repo).
-
-
-## 2026-06-21 (Auto Agente diario 3ª corrida — a11y aria hamburguesa 11 págs + perf blog/index + check 21) — PUBLICADO ✅
-Rama `auto/diario-20260621-2226`, merge `7073a48e` a main (push OK; pre-push **auto-indexó 7 URLs**, 4 en cola por cuota diaria del Indexing API). HEALTH CHECK previo OK (home, /contacto/, /servicios/, /blog/, instalacion-electrica, electricista → 200 en :8080). 9 revisores; deterministas SANOS y limpios (ci-gate 0 ALTA, indexabilidad 87 URLs/692 págs/0, producción 7 págs/headers OK/0, plantilla solo falso positivo google-stub). **GSC FUNCIONAL** vía `mcp__gsc__*` (tools diferidas cargadas con `ToolSearch select:`; `gsc_list_sites` confirmó la propiedad): 94 clics, 4442 impr, CTR 2.12%, pos 7.0 (+3%/+5% vs periodo anterior).
-- **A11Y HAMBURGUESA SIN ARIA (media, 11 págs):** lo principal. El botón del menú móvil `<button class="mobile-menu-btn">` carecía de `aria-expanded`/`aria-controls` en 10 blogs + servicios/electricista-colonias-culiacan (la home `index.html` SÍ los tiene) → el lector de pantalla no anunciaba si el menú está abierto/cerrado. Añadidos `aria-expanded="false"` + `aria-controls="nav-menu"`; a colonias-index además `id="nav-menu"` en el `<ul>` (no lo tenía) y `aria-label="Menu"→"Abrir menú de navegación"`. Misma familia de "deriva vs homepage" que .sr-only/.hero-cta-buttons/.floating-btn. **MECANIZADO (check 21).** Editado con Python UTF-8 (0 mojibake).
-- **PERF blog/index.html (alta+media):** (1) ALTA: el listado de blog NO precargaba su imagen LCP (la tarjeta featured `instalacion-minisplit-culiacan-800w.webp`) — añadido `<link rel="preload" as="image" fetchpriority="high">` como en la home; (2) media: CSS render-blocking → patrón no-bloqueante de la home (`preload as=style` + `media="print" onload` + `<noscript>`), MISMO href `styles.7f293647.css?v=20260621` (sin re-versionar, no toca CSS servido); (3) media: una tarjeta servía `instalacion-electrica-culiacan-420w.webp` declarando `width="800"` (imagen borrosa/upscale) → corregida a `-800w`.
-- **CRECER (FASE 6): 0 páginas nuevas.** GSC FUNCIONAL pero el panel `decisor-negocio` confirmó: todas las queries con impresiones reales (electricista/electricista culiacan/electricas/cerca-de-mi/urgente) caen en términos-cabeza YA servidos por home/servicios → crear = doorway/canibalización (lo bloquearía gate-pagina de todas formas). `emergencia-24-7` ya está completamente optimizado para "urgente/24 horas" (×9/×14). Automotriz y "certificado CFE" excluidos por REGLAS/NEGOCIO. La optimización del día = el trabajo a11y/perf (sitio más accesible y rápido). 3 tareas template-wide ENCOLADAS en BACKLOG.jsonl (no se pierden): twitter:image en 40 colonias+blog (41>cap 18), aria-expanded toggle JS site-wide (riesgo medio), y "30-60 min" en servicios planeados (→ requiere_humano, decisión de marca).
-- **Verificador independiente escéptico: ok=true**, 17 archivos (11 HTML + check-plantilla.py + 4 memoria/config), 0 problemas. ci-gate 0 ALTA; gate-pagina colonias-index OK (Jaccard 0.09). 11/11 HTTP 200, JSON-LD parsea, canonical==og:url, aria-controls apunta a id real, assets 800w existen, 0 mojibake, 0 fuga "plomero".
-- **APRENDIZAJE (FASE 9):** check 21 nuevo en check-plantilla.py (`hamburguesa sin aria-expanded/aria-controls`, MEDIA a11y): caza-malo (sin aria + falta-solo-controls)=OK, ignora-bueno (botón completo / solo regla CSS / sin botón / sitio real)=0, JSON válido, py_compile OK. +2 reglas en REGLAS.md (A11Y/HAMBURGUESA-ARIA consolidada en la familia de deriva; PERF/BLOG-INDEX). 39 reglas en total.
-- **PUBLICADO:** diff 11 páginas HTML ≤ candado 18; solo HTML inline + checker + memoria (no CSS servido, no sw.js → sin bump). main local NO divergió (--ff-only "Already up to date").
-- **PENDIENTE-HUMANO (nuevos + heredados):** "30-60 min" en servicios planeados (decisión de marca, encolado requiere_humano); contraste `.btn-primary` naranja 2.9:1 (color de marca + CSS servido); CTR del home en head-terms "electricista culiacan"/"electricista urgente" (cambiar título home = estrategia); reapuntar el subagente `revisor-gsc` a `mcp__gsc__*` (sigue cableado a plomero, aunque el MCP gsc YA funciona). DEFERIDOS template-wide en backlog: twitter:image (41 págs), aria-JS toggle, tap-targets breadcrumb/read-more.
-
-
-## 2026-06-21 (Auto Agente diario 2ª corrida — cluster colonia-nombre + opt GSC tableros-control + check 20) — PUBLICADO ✅
-Rama `auto/diario-20260621-1716` (continuación: la corrida se había interrumpido dejando staged el fix de nuevo-culiacan + la auditoría GSC). Merge `1b3b30ae` a main (push OK; pre-push **auto-indexó las 10 URLs** en Google — 10 enviadas · 0 en cola). HEALTH CHECK previo OK (home, /contacto/, /servicios/, /blog/, instalacion-electrica, electricista → 200 en :8095). 9 revisores; deterministas SANOS y limpios (ci-gate 0 ALTA, indexabilidad 87 URLs+694 págs/0, producción 7+2 págs/0, plantilla 693 págs/1 baja=falso positivo google-stub). **GSC FUNCIONAL** (1er día tras 5 ciego, vía `mcp__gsc__*`: 202 queries, 964 impr, 28 clics).
-- **CLUSTER COLONIA-NOMBRE re-aparece (alta, 6 colonias indexables + nuevo-culiacan):** lo principal. Mismo patrón que santa-aynes/tres-rios/lazaro-cardenas (1ª corrida del día) pero en 6 páginas más: title/H1/schema con nombre mal escrito (sin tilde / preposición capitalizada) MIENTRAS el cuerpo ya usaba la forma correcta = INCOHERENCIA INTERNA. recursos-hidraulicos "Hidraulicos"→"Hidráulicos", las-americas "Americas"→"Américas", la-campina "Campina"→"Campiña", adolfo-lopez-mateos "Lopez"→"López", colinas-de-san-miguel "De San Miguel"→"de San Miguel", hacienda-del-valle "Del Valle"→"del Valle"; nuevo-culiacan "Culiacan"→"Culiacán" (venía staged). Texto visible + wa.me URL-encoded (%C3%A1/%C3%A9/%C3%B1/%C3%B3) corregido con Python (jamás perl); SLUG/URL conservado (canonical/og:url/breadcrumb intactos). 0 mojibake verificado leyendo bytes UTF-8. **MECANIZADO (check 20).**
-- **OPTIMIZACIÓN GSC (alta, demanda real, mantenimiento-tableros):** "mantenimiento de tableros de control" = 64 impr/28d, pos 41, 0 clics, aterrizaba en el BLOG en vez de la página de SERVICIO dedicada (que no mencionaba "tableros de control" ni una vez). Enriquecida: FAQ visible nueva (`<details>`) + entrada SINCRONIZADA en el FAQPage schema (9 details == 9 Question) + meta description; ahora menciona "tableros de control" ×4. Sin precios nuevos, sin overclaim ("a norma NOM-001-SEDE"). Es OPTIMIZACIÓN (no doorway, Jaccard 0.40).
-- **MÓVIL TAP-TARGET (media, electricista-colonias-culiacan/index.html):** los 642 enlaces del directorio de colonias medían ~19px de alto → `.colonias-index-list a` a `min-height:44px;display:flex;align-items:center`. CSS inline de la página (sin bump ?v=). Misma familia que pagination-btn/mobile-menu-btn (2026-06-20).
-- **TITLE BLOG (baja, blog/index.html):** 79 chars (truncaba en SERP) → 51 ("Blog de Electricidad en Culiacán | Guías y Consejos"), quitada marca redundante.
-- **APRENDIZAJE (FASE 9):** check 20 nuevo en check-plantilla.py (`incoherencia de nombre de colonia title vs cuerpo`, ALTA): normaliza sin tildes + minúsculas; si normalizadas coinciden pero las originales difieren en tildes o caja de preposición → marca. Verificado: caza-malo (página sintética → ALTA), ignora-bueno (0 sobre el sitio corregido), JSON válido, exit 0, py_compile OK. Regla SEO/COLONIA-NOMBRE en REGLAS.md consolidada (ahora mecanizada). Habría cazado las 6 de hoy.
-- **Verificador independiente escéptico: ok=true**, 11 archivos (10 HTML + 1 .md), 0 problemas. ci-gate 0 ALTA; gate-pagina OK en las 8 de servicio/colonia (Jaccard 0.40–0.65). 10/10 HTTP 200, canonical==og:url, JSON-LD parsea, 0 mojibake, schema FAQ sincronizado 9==9, tap-target 44px confirmado.
-- **PUBLICADO:** diff 10 páginas HTML ≤ candado 18; solo HTML inline (no CSS servido, no sw.js → sin bump). main local NO divergió (--ff-only OK).
-- **DEFERIDO template-wide (lote mecánico, no criterio humano):** AVIF + variante hero 420w en los 11 blogs (perf); aria-expanded toggle en main.min.js (menú móvil, JS site-wide) + aria-expanded/aria-controls en hamburguesa de 12 blogs (a11y); geo.position vs GeoCoordinates JSON-LD desalineados en las 5 páginas de zona.
-- **PENDIENTE-HUMANO:** contraste del botón naranja `.btn-primary` (blanco sobre #F97316 ≈2.9:1 <4.5:1 → decisión de color de marca + CSS servido site-wide); CTR del home en "electricista 24 horas"/"electricista urgente" (pos 9-13, aterrizan en home no en emergencia-24-7) y de electricista-precios (627 impr, CTR ~1%) → tocar título del home = estrategia; reapuntar el subagente `revisor-gsc` a `mcp__gsc__*` (sigue cableado a local-seo/plomero, aunque el MCP gsc YA funciona).
-
-
-## 2026-06-21 (Auto Agente diario — 6 arreglos de contenido + check 19) — PUBLICADO ✅
-Rama `auto/diario-20260621-1518`, merge `338df338` a main (push OK; pre-push **auto-indexó las 6 URLs** en Google — esta vez sí, no se agotó cuota). HEALTH CHECK previo OK (home, /contacto/, /blog/, instalacion-electrica, electricista → 200; el 8080 lo ocupaba el server de Plomero → usé :8090). Lock stale del wrapper refrescado. 9 revisores; deterministas SANOS y limpios (ci-gate 0 ALTA, indexabilidad 0, plantilla solo el falso positivo google-stub, producción en vivo confirmada 200). **GSC CIEGO 5º día** (sin `mcp__gsc__*`; confirmado por ToolSearch).
-- **GARANTÍA CONTRADICTORIA EN EL HOME (alta, index.html):** lo principal. El badge de stats decía "6 Meses garantía" mientras TODO el sitio + el aggregateRating del schema dicen "30 a 90 días". Sobrevivió a la unificación del 17-jun porque el número y la unidad viven en spans SEPARADOS (`<span>6</span><span>Meses garantía</span>`) y el grep de texto "6 meses" no lo cazó. → "30-90 / Días garantía". MECANIZADO (check 19).
-- **COLONIAS INDEXABLES MAL ESCRITAS (alta/media, 3 págs):** `santa-aynes` decía "Santa Aynes"/"Santa Aynés" (typo de "Santa Inés", colonia real) → corregido a "Santa Inés" en 27 lugares; `tres-rios` title/H1 "Tres Rios" (incoherente con su propio cuerpo "Tres Ríos") → "Tres Ríos"; `lazaro-cardenas` "Lazaro Cardenas" → "Lázaro Cárdenas". Texto visible corregido; SLUG/URL conservado para no romper la URL ya indexada (canonical/og:url/breadcrumb intactos). El push pidió re-indexación de las 3 → Google captará el nombre correcto.
-- **OVERCLAIM NOM EN TÍTULO (media, instalacion-centro-carga):** title + og:title "| NOM Certificado" (sugiere certificación propia, familia CFE) → "| a Norma NOM-001". El cuerpo ya era honesto.
-- **FRAMING DE EMERGENCIA (baja, iluminacion-led):** CTA "reporta emergencias de iluminación LED" (servicio planeado, no emergencia) → "agenda tu instalación de iluminación LED".
-- **SUSTO DE MOJIBAKE (cazado pre-publicación):** el 1er intento con `perl -CSD` dejó doble codificación ("Santa InÃ©s"). Detectado leyendo bytes reales con python3, REVERTIDO con `git checkout --` y rehecho con Python (UTF-8 correcto). Nueva regla dura + aprendizaje.
-- **APRENDIZAJE (FASE 9):** +4 reglas (31→35). Check 19 nuevo en check-plantilla.py (`garantia-badge-meses`, ALTA): caza-malo OK / ignora-bueno OK / ignora-legit (6 meses CFE/mantenimiento) OK / JSON válido / exit 0 / 0 sobre el sitio arreglado. El NOM-título NO se mecanizó (falsos positivos sobre "breakers certificados").
-- **CRECER (FASE 6):** 0 páginas nuevas. GSC ciego (5º día) → sin datos no se fabrica tabla de oportunidades (sería doorway). PIVOTE cumplido: el sitio quedó MÁS RICO (3 colonias indexables ahora con nombre correcto = mejor long-tail; home coherente; overclaim NOM honesto), no ocioso.
-- **Verificador independiente escéptico: ok=true**, 6 archivos, 0 problemas (verificó UTF-8 real anti-mojibake; cazó un resto "Santa Aynés" en el FAQ que se completó después y se re-verificó). ci-gate 0 ALTA; gate-pagina OK en las 5 (Jaccard 0.46–0.71). 6/6 HTTP 200, canonical==og:url, JSON-LD parsea, tel/email intactos.
-- **PUBLICADO:** diff 6 ≤ candado 18; solo HTML inline (no CSS servido, no sw.js → sin bump). main local NO divergió (--ff-only OK).
-- **DEFERIDO template-wide (no es pendiente-humano de criterio, es lote mecánico):** preload del hero LCP en colonias-index/blog-index; aria-expanded/aria-controls en hamburguesa de ~11 blogs; "De"→"de" en ~130 nombres de colonia con fecha. Mejor como lote dedicado/auto-fixer (arreglar 2-11 de cientos crea más inconsistencia).
-- **PENDIENTE-HUMANO (heredados):** reconectar GSC (`revisor-gsc`→`mcp__gsc__*`); contraste whatsapp-link/CTA y CSS render-blocking (lote que toca el CSS servido); skip-link/`<main>` (migración masiva); drift CFE borderline en ~9 servicios; canibalización electricista-precios vs blog cuanto-cuesta (estrategia); medir indexación de colonias en GSC.
-
-
-## 2026-06-20 (Auto Agente diario — 4 arreglos móvil/contenido + check 18) — PUBLICADO ✅
-Rama `auto/diario-20260620-1820`, merge `1dd9d03b` a main (push OK; pre-push intentó indexar 14 URLs pero cuota Indexing API agotada → en cola). HEALTH CHECK previo OK (home, /contacto/, /servicios/, /blog/, instalacion-electrica, electricista → 200 en :8080). 9 revisores; deterministas SANOS (indexabilidad 0, producción en vivo 0, plantilla 1 baja=falso positivo google stub). GSC CIEGO 4º día (sin `mcp__gsc__*` ni `mcp__local-seo__*` expuestos al agente; confirmado por ToolSearch).
-- **CTA FLOTANTE ROTO (media→alta UX, 13 págs):** lo más importante. La regla `.floating-btn{...}` (botones flotantes WhatsApp/Llamar) vivía SOLO en el `<style>` inline de index.html y servicios; AUSENTE del CSS servido `styles.7f293647.css`. 11 blogs + contacto + gracias llevaban el markup pero no la regla → botones `static` ~20×26px (CTA de conversión móvil invisible/diminuto). Replicada la regla inline cubriendo AMBAS variantes de markup que coexisten (`floating-whatsapp/-call` e `floating-btn--whatsapp/-phone`, a veces en wrapper `.floating-cta`). Verificado puppeteer @375px en las 13: `fixed` 54×54, WhatsApp `#22c55e` arriba / Llamar `#1e40af` abajo, en pantalla. NO por CSS servido (hasheado → re-versionar cientos de HTML, fuera de alcance). MECANIZADO (check 18). MISMA familia que `.sr-only`/`.hero-cta-buttons`.
-- **TAP TARGETS <44px (media, colonias):** servicios/electricista-colonias-culiacan: hamburguesa `.mobile-menu-btn` 33×40→48×48 y paginación `.pagination-btn` 38→44px alto (faltaba `min-height` + centrado flex). Verificado @375px.
-- **OVERCLAIM ABSOLUTO (media, cambio-cableado-electrico):** "Elimina riesgos de corto"/"Elimina riesgos" → "Reduce el riesgo de corto" en meta/og/twitter description (familia "cero riesgo" no cazada por check 16 al ser variante en metadatos).
-- **FRESCURA (baja, 6 blogs):** `dateModified` 2025-01 → 2026-06-20 en 6 blogs reescritos en jun-2026 (rating/CFE); `datePublished` conservado como histórico.
-- **APRENDIZAJE (FASE 9):** +1 regla consolidada en REGLAS.md (floating-btn, familia sr-only/hero-cta) + nota tap-target min-height. Check 18 nuevo en check-plantilla.py (`floating-btn-sin-css-inline`, media/movil): probado caza-malo=1 / ignora-bueno=0 / JSON válido / exit 0; sobre el sitio arreglado da 0.
-- **CRECER (FASE 6):** 0 páginas nuevas. GSC ciego (4º día) → sin datos no se fabrica tabla de oportunidades (sería doorway). PIVOTE cumplido: el sitio quedó MÁS RICO hoy (CTA de conversión móvil reparado en 13 páginas + tap targets + honestidad + frescura), no ocioso.
-- **Verificador independiente escéptico: ok=true**, 15 archivos, 0 problemas. ci-gate 0 ALTA; gate-pagina cambio-cableado OK (Jaccard 0.45). 15/15 HTTP 200, canonical==og:url, JSON-LD parsea, tel/email intactos. Único matiz pre-existente (fuera de alcance): 6 págs sin `twitter:url`.
-- **PUBLICADO:** diff 15 ≤ candado 18; solo HTML inline (no CSS servido, no sw.js → sin bump). main local NO divergió (--ff-only OK).
-- **PENDIENTE-HUMANO (heredados):** reconectar GSC (`revisor-gsc`→`mcp__gsc__*`); contraste whatsapp-link/CTA y CSS render-blocking (lote que toca el CSS servido = cientos de HTML); skip-link/`<main>` (migración masiva); `twitter:url` ausente en 6 págs (menor, X usa og: como fallback); drift CFE borderline en ~9 servicios ("certificación profesional"+"normas CFE"+"materiales certificados", no afirma certificar para CFE → vigilar); medir indexación de colonias en GSC.
-
-
-## 2026-06-19 (Auto Agente diario — 6 arreglos contenido/móvil + 3 checks nuevos) — EN RAMA, NO PUBLICADO (candado 40>18, incluye lote CFE heredado)
-Rama `auto/diario-20260619-1918` (ramificada DESDE `auto/diario-20260618-1820` para preservar el lote CFE verificado-sin-publicar). Commits `92bd2d0c` (arreglos) + `b9422fe0` (aprendizaje). HEALTH CHECK previo OK (home, /contacto/, /servicios/, /blog/, instalacion-electrica, electricista → 200; el 404 inicial era un servidor de Plomero ocupando :8080 → usé :8090). 9 revisores; deterministas SANOS (no ciegos); GSC ciego conocido (sin mcp__gsc__*).
-- **REGRESIÓN rating 5.0→4.8 (media, 6 BLOGS):** `span.rating-score>5.0/5` sobrevivió en 6 blogs (sin aggregateRating propio) tras unificar servicios el 17/18-jun. → 4.8/5. MECANIZADO (check 15).
-- **OVERCLAIM ABSOLUTO (media, 2 págs):** blog/ahorro-led "retorno garantizado en menos de un año" → "suele recuperarse en pocos meses según tu consumo"; servicios/instalacion-ventiladores-techo "Cero riesgo de caída/cortocircuito" ×2 → "minimiza/reduce al mínimo el riesgo". MECANIZADO (check 16). OJO: "sin riesgo" a secas NO se toca (usos legítimos).
-- **AÑO CADUCO en H2 (baja):** blog/senales-obsoleta "Costos de Actualización en Culiacán 2025" → 2026.
-- **ENLACE 404 (media):** array JS de colonias traía `{s:"directorio"}` espuria → enlace interno a /directorio/ (404). Eliminada.
-- **FIX MÓVIL (media, 11 BLOGS / 39 tarjetas):** tarjetas `a.card.card--img` sin wrapper `figure.media-box` de la homepage → imagen a 420px recortada ~77px en móvil. Envueltas en `div.service-card>figure.media-box`. Medido con puppeteer @375px: clip +77 → −1 (resuelto). NO por CSS (es hasheado → re-versionar cientos de HTML, fuera de alcance) sino markup autocontenido. MECANIZADO (check 17).
-- **APRENDIZAJE (FASE 9):** +4 reglas (22→26). 3 checks deterministas nuevos en check-plantilla.py (15 rating 5.0, 16 overclaim absoluto, 17 card--img sin media-box); cada uno probado caza-malo/ignora-bueno; JSON válido, exit 0.
-- **CRECER (FASE 6):** 0 páginas nuevas. GSC ciego (3er día) + sitio saturado → forzar = doorway. PIVOTE cumplido: sitio dejado más rico (fix móvil del cluster de blog) y más honesto (overclaims). No se fabricó tabla de oportunidades sin datos.
-- **Verificador independiente escéptico: ok=true**, 13 archivos hoy (contenido/markup), 0 problemas. ci-gate 0 ALTA, gate-pagina ventiladores OK (Jaccard 0.44). 13/13 HTTP 200 + JSON-LD + canonical==og==twitter. Puppeteer 375px clip=0. 0 precios/tests tocados, 0 borrados, email limpio, tel canónico intacto.
-- **NO PUBLICADO:** diff vs main **40 archivos** (13 hoy + 27 del lote CFE heredado del 18-jun que espera merge humano) > candado 18. El lote CFE y los blogs de hoy comparten archivos → no se pueden separar limpio. Rama lista para merge de un clic (incluye TODO: CFE + hoy).
-- **PENDIENTE-HUMANO (nuevos + heredados):** contraste verde whatsapp-link (2.28:1) y CTA naranja (2.8:1) → CSS hasheado + color de marca; revisor-gsc mal cableado a plomero (reapuntar a mcp__gsc__*); skip-link/`<main>` faltan en cientos de páginas (migración masiva); CSS render-blocking; "30-60 min" en instalacion-electrica (badge de marca, baja, borderline); medir indexación de colonias en GSC (~3-4 semanas).
-
-
-## 2026-06-18 (Auto Agente diario — remediación CFE completa + 2 regresiones) — EN RAMA, NO PUBLICADO (candado 28>18)
-Rama `auto/diario-20260618-1820`, commits `f474e80d` (contenido) + FASE 9 (checker+como-prevenir). HEALTH CHECK previo OK (home, /contacto/, /servicios/, /blog/, instalacion-electrica, electricista → 200). 9 revisores en paralelo; deterministas SANOS (no ciegos); GSC ciego conocido.
-- **OVERCLAIM CFE — LOTE COMPLETADO (media, 23 págs de contenido):** lo principal. Se terminó la tanda diferida del 2026-06-17: teaser "Instalación de tierra física **certificada CFE**" → "...a norma NOM-001-SEDE" en 18 servicios; H3 "Certificación CFE" → "Trabajo a norma CFE y NOM" en servicios/electricista; y 4 blogs reescritos (como-elegir, cuando-llamar, mantenimiento-tablero, senales-obsoleta). Claim engañoso (solo una UVIE acreditada certifica para CFE). check-plantilla CFE: 22 → **0**.
-- **CHECKER MÁS LISTO (FASE 9):** el check CFE de check-plantilla.py solo cazaba 3 frases literales y se le escapaban "Certificado CFE"/"certificados CFE"/"conforme a CFE" (las cazó el LLM, no el determinista). Reescrito a análisis **por oración** (`certificad{a,o,os,as} … CFE` cualquier orden + `certificación CFE`) con **heurística de deslinde UVIE** (si la página menciona "UVIE" no se marca → quita el falso positivo histórico de dictamen-electrico). 9 tests pasan, JSON válido.
-- **OVERCLAIM OCULTO destapado por el checker mejorado:** blog/como-prevenir-cortocircuitos-casa decía "electricistas **están certificados** y conocen las normativas CFE" → reescrito. Nadie lo había visto (ni LLM ni checker viejo). Prueba de que el sistema se vuelve más listo.
-- **REGRESIÓN rating (media, 3 págs):** `class="rating-score">5.0/5` seguía contradiciendo el schema 4.8 en electricista, instalacion-electrica, instalacion-tierra-fisica → 4.8/5. (Muchos otros "5.0" en esas páginas son coordenadas de SVG, no ratings; no se tocaron.)
-- **REGRESIÓN footer-year (baja):** gracias/ con `&copy; 2025` → 2026.
-- **CRECER (FASE 6):** 0 páginas nuevas. GSC ciego (sin acceso a mcp__gsc__* en esta corrida) + sitio saturado + rama ya >18 → forzar páginas sería doorway. PIVOTE cumplido: sitio dejado más honesto (CFE). No se fabricó tabla de oportunidades sin datos.
-- **Verificador independiente escéptico: ok=true**, 26 archivos (contenido), 0 problemas. ci-gate 0 ALTA. 26/26 HTTP 200 + JSON-LD + canonical==og==twitter. 0 precios/tests tocados, 0 borrados, email limpio, teléfono canónico intacto.
-- **NO PUBLICADO:** diff total **28 archivos** (26 contenido + como-prevenir + checker) > candado de 18 → revisión humana, tal como estaba previsto para el lote CFE dedicado. Rama lista para merge de un clic.
-- **PENDIENTE-HUMANO (heredado, sin cambio):** revisor-gsc mal cableado a plomero (reapuntar a mcp__gsc__*); skip-link/`<main>` faltan en 693/33 páginas (migración masiva); CSS render-blocking en 645 páginas; tap targets footer/breadcrumb <44px; CTR head-terms del home (estrategia); medir indexación de colonias en GSC (~3-4 semanas).
-
-
-## 2026-06-17 (Auto Agente diario — 12 arreglos + 1 mejora SEO) — PUBLICADO ✅
-Corrida diaria unificada (mantener+crecer+verificar+aprender), lock propio confirmado mío. 9 revisores en paralelo. Diff 16→18 archivos (≤18).
-- **TELÉFONOS DE CONTACTO ROTOS (alta, 9 páginas):** lo más grave. 4 blogs traían el teléfono PLACEHOLDER de plantilla (wa.me/5216677890000, "667-789-0000"); 2 blogs + /gracias/ traían un número CORRUPTO con dígitos duplicados (526676673922273); /terminos/ y /privacidad/ tenían tel sin +52. Todos → 526673922273. Los botones de WhatsApp/llamar llevaban a números inexistentes = leads perdidos. Verificado en vivo (0 patrones malos restantes).
-- **OVERCLAIM CERTIFICACIÓN CFE (alta, instalacion-tierra-fisica):** decía "certificado oficial válido para CFE / Certificada CFE" en title, og/twitter, JSON-LD, badge, H3 y cuerpo. La verificación OFICIAL la emite una UVIE acreditada (decisión del dueño, ya aplicada en dictamen-electrico). Reescrito a "constancia de instalación / a norma NOM-001-SEDE". El verificador escéptico cazó que el <title>/og/twitter seguían con "Certificada CFE" (mayúscula) en la 1ª pasada → corregido y re-verificado ok=true.
-- **RATING 5.0★→4.8★** (tierra-fisica, instalacion-electrica): el texto visible contradecía el schema (4.8). Unificado a 4.8★.
-- **© 2025→2026** en footer de electricista-colonias-culiacan.
-- **gracias:** main.js (sin minificar) → main.min.js.
-- **MEJORA SEO (pivote, sin página nueva):** GSC no muestra hueco para páginas nuevas (sitio saturado; forzar = doorway). La query "electricista a domicilio cerca de mi ubicación" rankeaba en el home (pos 2, 0 clics) en vez de su página dedicada. Optimizado title/meta/og/H1 de /servicios/electricista-cerca-de-mi/ hacia esa query exacta. gate-pagina OK, anti-doorway 0.62.
-- **APRENDIZAJE:** +5 reglas (14→19). check-plantilla.py ahora caza DETERMINISTA: teléfono no canónico (ALTA — habría cazado los 9 de hoy), overclaim CFE (media), main.js sin minificar (baja). ci-gate sigue 0 ALTA.
-- **DEFERIDO (lote dedicado):** el teaser "Instalación de tierra física certificada CFE" + 1 H3 sigue en ~18-22 páginas de servicio (tarjeta de servicio relacionado); el nuevo check CFE los marca media para el próximo lote (no caben en el candado de 18 archivos de hoy).
-- **PENDIENTE-HUMANO:** skip-link/`<main>` faltan en 691/33 páginas (migración masiva de plantilla, >18 archivos); CTR del home en head-terms (estrategia de title/meta); revisor-gsc mal cableado a plomero.
-- Verificador independiente: ok=true. ci-gate 0 ALTA. sw NO bumpeado (no se tocó CSS). Servidor local 200 en todas las páginas tocadas.
-
-
-## 2026-06-17 (REMEDIACION tras revision de 4 agentes) — PUBLICADO ✅
-4 revisores independientes auditaron las paginas nuevas (servicios, blogs, colonias) con rubrica adversarial. Hallazgos de RIESGO corregidos:
-- **dictamen-electrico:** reescrito honesto — NO promete el certificado oficial (lo emite una UVIE acreditada); solo deja la instalacion 'a norma' + orienta. Testimonio 'ya me conectaron' removido. (decision del dueno).
-- **paneles-solares:** fuera 'se pagan solos' y 'eliminar tu recibo' -> 'se pagan en pocos años / reducir al minimo'.
-- **cercas-electricas:** fuera 'sin riesgos para tu familia' -> 'de forma segura a norma'.
-- **contrato-luz-cfe:** fuera framing de emergencia '30-60 min' (es trabajo planeado).
-- **2 blogs:** CTA correcto (ya no 'bajar tu recibo'); fuera 'datos del verano sinaloense' inexistente.
-- **Reseñas:** unificadas a 150 (texto '50 clientes' -> '150', 36 paginas; decision del dueno).
-- **'rastreo en tiempo real':** removido site-wide (18 paginas, poco creible).
-- **calentador:** 'e' cirilica corregida.
-- Gate VERDE, JSON-LD valido, anti-doorway 0.53-0.61. sw v12->v13.
-- **PENDIENTE (garantia):** '6 meses' esta en ~650 colonias + terminos + home; '30-90 dias' en 36 servicios. El dueno eligio 30-90, pero cambiar 650 archivos es downgrade de un gancho de venta -> confirmar alcance antes de tocar.
-
-
-## 2026-06-17 (7 servicios mas de alta intencion) — PUBLICADO ✅
-Segundo lote de servicios jala-llamadas. El dueno confirmo que SI ofrece los 4 de mayor ticket.
-- **CREADOS Y PUBLICADOS (7):** instalacion-planta-luz-generador (fuerte por apagones), instalacion-paneles-solares, instalacion-camaras-seguridad, instalacion-cercas-electricas, reparacion-minisplit, dictamen-electrico, no-hay-luz-en-parte-casa. gen-landing desde cerca-de-mi, contenido unico + FAQ por servicio.
-- **Candado:** validate-landing PASA las 7, anti-doorway 0.53-0.64 (no canibalizo emergencia/minisplit), ci-gate 0 ALTA. Sitemap 80->87; enlazados desde la home; sw v11->v12. Servicios totales 25->32.
-- Encolados para indexar (cuota MCP agotada hoy; pre-push reintenta manana).
-
-
-## 2026-06-17 (4 servicios de alta intencion de llamada) — PUBLICADO ✅
-Buscamos huecos que JALAN LLAMADAS (intencion transaccional/urgencia). El dueno confirmo que SI ofrece estos 4 servicios (que no tenian pagina):
-- **CREADOS Y PUBLICADOS:** `/servicios/instalacion-calentador-electrico/` (calentador/regadera/boiler), `/servicios/instalacion-porton-electrico/` (porton/motor), `/servicios/contrato-luz-medidor-cfe/` (contrato/medidor/aumento de carga), `/servicios/instalacion-bomba-agua/` (bomba/hidroneumatico). gen-landing desde cerca-de-mi (con hero 2 botones), contenido unico enfocado a urgencia + FAQ.
-- **Candado:** validate-landing PASA las 4, anti-doorway 0.55-0.60, ci-gate 0 ALTA, JSON-LD OK, HTTP 200. Sitemap 76->80; enlazados desde la home; sw v10->v11. Servicios totales 21->25.
-
-
-## 2026-06-17 (colonias LOTE 3 — 8 mas) — PUBLICADO ✅
-Tercer lote de 8 colonias diferenciadas+enriquecidas (meta unica + 3 parrafos + problemas + servicios).
-- **8:** el-vallado, jorge-almada, los-pinos, adolfo-lopez-mateos, libertad, pemex, campestre, juntas-de-humaya.
-- adolfo-lopez-mateos se REESCRIBIO (angulo medidores/comercio) porque salio 0.73 vs antonio-toledo-corro -> 0.53.
-- **Candado:** anti-doorway 0.53-0.72 (<0.80), ci-gate 0 ALTA, HTTP 200. Colonias indexables: 32 -> **40** (de 642). Sitemap 68->76.
-- Indexacion encolada (cuota MCP agotada hoy; pre-push reintenta manana).
-- **PENDIENTE:** medir en GSC (gsc_inspect) en 2-3 semanas si los 3 lotes (24 colonias) se indexan, antes de seguir.
-
-
-## 2026-06-17 (colonias LOTE 2 — 8 mas, ya enriquecidas) — PUBLICADO ✅
-Segundo lote de 8 colonias diferenciadas+promovidas, ya con el template enriquecido completo desde el inicio (meta unica + 3 parrafos + 'Problemas comunes' + servicios).
-- **8 colonias:** barrancos, lazaro-cardenas, gabriel-leyva, la-campina, valle-alto, recursos-hidraulicos, hacienda-del-valle, antonio-toledo-corro. ~390 palabras c/u.
-- **Candado:** anti-doorway 0.49-0.64 (<0.80), ci-gate 0 ALTA, HTTP 200. Indexables de colonia: 24 -> **32** (de 642). Sitemap 60->68.
-- **Indexacion:** cuota diaria de la Indexing API agotada hoy; el pre-push hook las encolo y las reintenta manana automaticamente (ese mecanismo ya es el "siempre indexa al crear").
-- **PENDIENTE:** medir en GSC (gsc_inspect) en 2-3 semanas si los 2 lotes (16 colonias) se indexan, antes de escalar.
-
-
-## 2026-06-17 (colonias piloto — enriquecimiento para indexabilidad) — PUBLICADO ✅
-Sobre el piloto de 8 colonias: para que Google SI las indexe (no las deje en "descubierta sin indexar" por delgadas), se subio el contenido unico.
-- **ENRIQUECIDAS las 8** (6-de-enero, bachigualato, bugambilias, nuevo-culiacan, colinas-de-san-miguel, lomas-de-tamazula, rafael-buelna, las-americas): meta description UNICA por colonia (antes era plantilla con solo el nombre), 3er parrafo unico + lista "Problemas electricos comunes en X" (4 propios). Palabras ~320 -> ~390-450; contenido unico ~120 -> ~240.
-- **Candado:** anti-doorway MEJORO 0.61 -> **0.50-0.59**; ci-gate 0 ALTA; HTTP 200; revisado visual.
-- **PENDIENTE:** medir indexacion real en GSC en 2-3 semanas (gsc_inspect) antes de escalar a mas colonias.
-
-
-## 2026-06-17 (agente /expandir-sitio — PILOTO diferenciacion de colonias) — PUBLICADO ✅
-Diagnostico: 642 colonias, 16 indexables (unicas, Jaccard 0.35-0.48), 626 noindex doorways (Jaccard 0.95-0.98, ~80 palabras). GSC SIN demanda por nombre de colonia (apuesta long-tail, ROI a medir).
-- **DIFERENCIADAS Y PROMOVIDAS 8 colonias reconocidas** (6-de-enero, bachigualato, bugambilias, nuevo-culiacan, colinas-de-san-miguel, lomas-de-tamazula, rafael-buelna, las-americas): a cada una se le inyecto seccion UNICA "Electricidad en <Colonia>: lo que debes saber" (2 parrafos propios reales + servicios), flip noindex->index, fix breadcrumb (item 3 sin URL propia), sitemap 52->60. **Candado:** anti-doorway Jaccard **0.61-0.62** (<0.80), ci-gate 0 ALTA, HTTP 200, revisado visualmente.
-- **Tooling:** gate-pagina.py ahora omite validate-landing en colonias (plantilla distinta a servicios v2.0.0). Leccion del breadcrumb guardada en REGLAS para futuras promociones.
-- **PENDIENTE:** medir en GSC en 2-3 semanas si estas 8 traen trafico antes de escalar a mas colonias.
-
-
-## 2026-06-17 (agente /expandir-sitio — blog 'como elegir electricista') — PUBLICADO ✅
-Hueco de paridad con Plomero (tiene `como-identificar-buen-plomero`, Electricista no). Intencion confianza/seleccion, sin canibalizar (distinto a precios).
-- **CREADO Y PUBLICADO:** `/blog/como-elegir-buen-electricista-culiacan/` — gen-landing.py (33 sustituciones) desde esqueleto recibo-luz. Contenido original: tabla "buen electricista vs señal de alerta", 6 pasos para verificar antes de contratar, FAQ de confianza (garantia, factura, norma CFE). **Candado VERDE:** ci-gate 0 ALTA, anti-doorway Jaccard **0.36**. Sitemap 51→52; enlace entrante desde blog/index (tarjeta + JSON-LD); HTTP 200.
-
-
-## 2026-06-17 (consistencia de botones del hero) — PUBLICADO ✅
-Revisión exacta (con CSS real + medición puppeteer) del acomodo de botones escritorio vs movil. Unico desajuste: el HERO. Lo demas (flotantes, CTA final, form) ya era consistente.
-- **ARREGLADO:** hero CTA unificado a 2 botones (WhatsApp naranja + Llamar azul) IGUALES en ambas vistas — misma fila en escritorio, apilados full-width en movil. Antes: escritorio mostraba 1 boton (ancho auto) y ocultaba el telefono (`hero-phone-link display:none`); movil mostraba boton full-width + link "O llama". Solucion: clase propia `.hero-cta-buttons` con CSS inline en index.html (NO toca los 3 CSS externos → sin problema de paridad), reusando `btn-primary`/`btn-secondary`. Bump service worker v8→v9.
-- **Verificado:** puppeteer mide escritorio=misma fila (lado a lado), movil=apilados anchos iguales; checkers 0 ALTA; HTTP 200. Revisado visualmente por el dueño (eligio el diseno de 2 botones).
-
-
-## 2026-06-17 (agente /expandir-sitio — blog de precios) — PUBLICADO ✅
-2ª acción del agente autónomo. Hueco: blog "¿cuánto cuesta?" (Plomero tiene `cuanto-cobra-plomero`, Electricista no; intención comercial sin canibalizar la pagina de servicio precios).
-- **CREADO Y PUBLICADO:** `/blog/cuanto-cuesta-electricista-culiacan/` — generado con `gen-landing.py` (33 sustituciones) desde el esqueleto `recibo-luz-alto`. Contenido original: **tabla de precios por servicio 2026** (visita, contactos, pastilla, cortocircuito, tablero, minisplit, tierra física, LED, cableado), factores que mueven el costo, pasos para cotizar sin pagar de más, FAQ de precios. **Candado VERDE:** ci-gate 0 ALTA, anti-doorway Jaccard **0.25** (muy distinta). Sitemap 50→51; enlace entrante desde `blog/index.html` (tarjeta + JSON-LD); HTTP 200; **revisado visualmente** (desktop+móvil) por el dueño.
-- **Mejora de tooling:** `gate-pagina.py` ahora detecta blogs y omite validate-landing (plantilla distinta), evaluando paridad contra hermanas de blog.
-
-
-## 2026-06-17 (agente /expandir-sitio — 1ª corrida autónoma) — PUBLICADO ✅
-Agente de crecimiento autónomo. Auditoría GSC (28 días: 94 clics / 4,164 impr / pos 6.8) → reporte en `.pipeline/oportunidades-20260617.md`.
-- **DETERMINÓ y DESCARTÓ (juicio anti-doorway, lo correcto):** `electricista-urgente` NO se crea (la home y sobre todo `emergencia-24-7` —titulada "Electricista 24 Horas… Emergencia Urgente"— ya cubren "urgente/24 horas" → sería canibalización); mejora de "evitar cortocircuito" NO se hace (el post ya tiene "10 Medidas para Evitar Cortocircuitos").
-- **CREADO Y PUBLICADO:** `/servicios/electricista-comercial/` — hueco estructural de paridad (Plomero tiene `plomeria-comercial`), intención B2B distinta (negocios/locales/oficinas, trifásica, mantenimiento programado, factura). Generada con `gen-landing.py` (27 sustituciones, paridad por construcción). **Candado VERDE:** validate-landing PASA, ci-gate 0 ALTA, anti-doorway Jaccard **0.55**. Sitemap 49→50; enlace entrante desde la pillar `/servicios/electricista/` (tarjeta con imagen real); HTTP 200.
-- **PENDIENTE HUMANO (decisión de negocio):** "eléctrico automotriz a domicilio" rankea pos 2.6 (21 impr) sin página → definir si el negocio entra a ese nicho antes de crearla.
-
-## 2026-06-17 (paridad con Plomero — privacidad + 5 zona-pages) — PUBLICADO ✅
-Rama `feat/paridad-plomero-privacidad-zonas` mergeada (`--no-ff`) a main y pusheada (commit f8cff0a1). Auto-indexación GSC: 6 URLs enviadas (5 zona-pages + índice de colonias); privacidad NO enviada (noindex, correcto).
-Petición del dueño: replicar la estructura de **Plomero Culiacán** y crear lo que le falta a Electricista.
-Diagnóstico de huecos reales (Plomero tiene, Electricista no): `/privacidad/`, 5 zona-pages, partials (descartados: andamiaje no usado). NO-huecos: `/precios/` top-level (Electricista usa `/servicios/electricista-precios/`) y dirs de tooling.
-
-- **CREADO — `/privacidad/` (Aviso de Privacidad, LFPDPPP):** Plomero la tenía y Electricista no (ni se enlazaba). Molde = `terminos/` (plantilla legal `noindex,follow`), branding electricista, `GTM-5Z2QRZ5Q`, Clarity, email `contacto@electricistaculiacanpro.mx`. 0 fugas de "plomero". Enlazada desde `terminos/` (descubrible site-wide). Fuera del sitemap (correcto, noindex). validate-landing → OMITIDO (noindex). HTTP 200.
-- **CREADO — 5 zona-pages** (`servicios/electricista-zona-{norte,sur,oriente,poniente}-culiacan/` + `electricista-centro-culiacan/`), paridad con las de Plomero:
-  - **Método:** generador determinista (`/tmp/gen-zonas.py`) que copia el esqueleto `electricista-cerca-de-mi/index.html` byte a byte (paridad estructural por construcción → no hay drift de plantilla) y sustituye SOLO regiones de contenido, afirmando cada replace (aborta si una no ocurre). Corrigió de paso el bug zsh de no-word-splitting (REGLAS OPERACIÓN-PIPELINE) en el loop de verificación.
-  - **Anti-doorway:** contenido ÚNICO por zona (title/desc/kw, H1, hero, benefits, grid de colonias con enlaces, 3 testimonios, 5 FAQ JSON-LD+HTML, schema Service, coords meta). Jaccard de contenido visible 0.61–0.69 (<0.75). Mapeo geográfico REAL de Culiacán cruzado con las 16 colonias indexables (cada zona ≥2 colonias propias; coords meta únicas por zona; el schema `#business` mantiene el HQ 24.7903 como el resto del sitio).
-  - **Verificación:** validate-landing.sh PASA en las 5; JSON-LD válido; canonical==og:url==twitter:url; 0 enlaces de colonia rotos (16 slugs confirmados en disco); agregadas a `sitemap.xml` (44→49 URLs, priority 0.8); enlaces entrantes desde el índice de colonias (bloque "Electricista por Zona"); checkers deterministas sin regresión (plantilla 2 pre-existentes, indexabilidad 0 sobre las nuevas); HTTP 200 en las 5 + hero/main.min.js/colonia.
-- **PENDIENTE:** revisión humana + publicar (rama/commit). Diff > candado de 15 archivos (7 nuevos + sitemap + colonias-index + terminos) → corrida fuera de la automatización de "una mejora", por petición explícita del dueño.
-
-## 2026-06-17 (corrida 11:26 AM) — PUBLICADO ✅
-- Rama `auto/mantenimiento-20260617-1126`, mergeada (`--no-ff`) a main y pusheada.
-- HEALTH CHECK previo OK (home, /contacto/, /servicios/instalacion-electrica/, /blog/, /servicios/electricista/ → 200).
-- **ARREGLADO (media, mecánico — leak de plantilla):** `twitter:url` apuntaba a `/servicios/reparacion-cortocircuitos/` en vez del canonical propio en 4 páginas de servicio (cambio-cableado-electrico, electricista-a-domicilio, instalacion-centro-carga, instalacion-ventiladores-techo). El 2026-06-14 se arreglaron canonical+og:url de estas mismas pero `twitter:url` (3er campo de URL) sobrevivió. Fix: `twitter:url` = canonical propio. Verificado site-wide: 0 mismatch canonical-vs-twitter en 674 HTML; la página legítima reparacion-cortocircuitos intacta; validate-landing.sh PASA en las 4; HTTP 200; checkers sin regresión (plantilla 2 pre-existentes, indexabilidad 0).
-- Candados: diff = 4 archivos (≤15), 0 borrados estructurales, auto-revisión OK → publicado.
-- **GSC verificado con datos REALES (no ciego):** consulté `mcp__gsc__*` con la propiedad real `https://electricistaculiacanpro.mx/`. Sitemaps 0 errores (sitemap.xml 30 envíadas/3 warn, colonias 16/0, images 14/1 warn). Home y /servicios/instalacion-electrica/ indexadas; `/blog/` "Descubierta: sin indexar aún" (informativo, nunca crawleada — no mecánico). Producción en vivo: 0 hallazgos.
-
-### PENDIENTE HUMANO (nuevos esta corrida — NO auto: copy/diseño/estrategia o fuera de la "una mejora")
-- **Copy leak "reparación de cortocircuitos"** (media, seo): H2 principal y CTA de `cambio-cableado-electrico` e `instalacion-ventiladores-techo` (13 menciones) hablan de cortocircuitos en páginas de otro servicio. Cambio de copy.
-- **`<h1>` duplicado** en `servicios/electricista-colonias-culiacan/` (media, a11y): único con 2 h1 idénticos; mecánico 1 línea (degradar 2º a h2), próxima corrida.
-- **`.letter-btn` tap target <44px** en colonias (media, móvil): 23 botones A-Z ~38x34px; fix inline min-height/min-width 44px.
-- **Tarjetas sociales incompletas** en `servicios/electricista-colonias-culiacan/` (media, seo): sin og:url/og:image ni twitter cards; replicar bloque de index.html.
-- **`gracias/` carga main.js sin minificar** (baja, perf) + **footer logo de index.html sin loading=lazy** (baja, perf, se hereda).
-- **blog/index.html img featured eager sin fetchpriority** (plt-001, media): fix template-correcto = añadir `fetchpriority="high"` (es el LCP, NO lazy), próxima corrida.
-- 8 meta descriptions de blog con cola comercial de plantilla + og:image temáticamente incoherentes en varios blogs/servicios (baja, copy).
-
-## 2026-06-16 (corrida 9:00 AM) — PUBLICADO ✅ (commit f221d4ee)
-- Rama `auto/mantenimiento-20260616-0900`, mergeada (`--no-ff`) a main y pusheada. Auto-indexación: 3 URLs enviadas a Google.
-- HEALTH CHECK previo OK (home, /contacto/, /servicios/instalacion-electrica/, /blog/ → 200).
-- **ARREGLADO (alta, mecánico — regresión de plantilla):** 3 páginas (servicios/electricista-cerca-de-mi, blog/como-prevenir-cortocircuitos-casa, blog/senales-instalacion-electrica-obsoleta) tenían el formulario SIN `<label>` (solo placeholder → invisible para lectores de pantalla). Se añadió `id` único + `<label for class="sr-only">` por campo. OJO: hubo que añadir también la definición `.sr-only` al `<style>` crítico inline de cada página (no existe en CSS externo, solo inline en index.html) — sin ella el texto quedaría visible. Verificado: 4 labels/4 ids por página, 0 ids duplicados, sr-only def=1, HTTP 200, validate-landing.sh PASA en la de servicio, checkers deterministas sin regresión (plantilla 2 pre-existentes, indexabilidad 0).
-- Candados: diff = 3 archivos (≤15), 0 borrados estructurales, auto-revisión OK → publicado.
-- **Verificación ciega GSC RESUELTA (no era ceguera real):** el subagente revisor-gsc está cableado a `mcp__local-seo` (apunta a plomero) y emitió "verificación ciega"; pero el MCP `gsc` del entorno SÍ tiene la propiedad `https://electricistaculiacanpro.mx/` (confirmado con gsc_list_sites). La indexación NO está ciega; el revisor está MAL CONFIGURADO → pendiente humano (reapuntar revisor-gsc a `mcp__gsc__*`).
-
-### PENDIENTE HUMANO (esta corrida — NO auto: estratégico/masivo/diseño)
-- **revisor-gsc mal configurado** (media): reapuntar a `mcp__gsc__*` con la propiedad `https://electricistaculiacanpro.mx/` para que deje de emitir falsa "verificación ciega".
-- **Contraste WCAG AA del CTA de marca** (alta, a11y-004/005): `#F97316` 2.8:1 y `#E36414` 3.44:1 sobre blanco fallan AA. Decisión de diseño (qué tono oscuro, p.ej. `#C2410C`). Toca 3 CSS + bump sw.js.
-- **focus-visible global ausente** (media, a11y-006): falta foco de teclado salvo .seo-card. 3 CSS + sw bump (ya venía de antes).
-- **CSS render-blocking en 642 colonias + contacto/gracias/blog-index** (perf alta): no replican patrón async de la home. >15 archivos → corrida dedicada.
-- **aggregateRating/Review self-serving en homepage + 16 servicios** (alta, seo): además de las ~642 colonias ya anotadas. Riesgo de acción manual. Batch dedicado (>15 archivos).
-- **8 meta descriptions de blog/servicio > 155-160 car.** (baja): edición de copy, no auto.
-- **`.service-cta` y formularios de blog/servicio sin replicar EXACTO la plantilla** (consistencia): los 2 blogs fallan validate-landing.sh (sin exit-popup ni main.min.js) — pre-existente, decisión de plantilla del dueño.
-- Heredados sin resolver de corridas previas: fuga copy "10 de Abril" en wa.me de ~96 colonias; 16 colonias indexables fuera del sitemap; 3 tablas de blog sin table-wrapper; ETA inconsistente; theme-color placeholder.
-
-## 2026-06-14 (corrida 6:20 PM) — PUBLICADO ✅ (commit 40beb89)
-- Rama `auto/mantenimiento-20260614-1820`, mergeada a main y pusheada (auto-indexación: 14 URLs a Google).
-- **ARREGLADO (alta, mecánico):** 18 enlaces rotos en 14 páginas de servicio → slug correcto `reparacion-cortocircuitos` (eran `reparacion-cortos-circuitos`, 404). Checker plantilla 28→14 (los 14 restantes son falsos positivos: `${c.s}` template-literal JS y fonts `../../../` que el navegador recorta).
-- **ARREGLADO (alta, mecánico):** `/gracias/` (noindex) removida de `sitemap.xml`. Checker indexabilidad 20→19, gracias=0, XML válido.
-- Candados: diff = 15 archivos (límite), 0 borrados estructurales inesperados, auto-revisión OK → publicado.
-- Incidencia operativa resuelta: pre-push hook necesitaba node en PATH (ver REGLAS.md OPERACIÓN-PIPELINE).
-
-### PENDIENTE HUMANO (detectado por revisores LLM esta corrida — NO auto: masivo/estratégico)
-- **aggregateRating self-serving en ~642 páginas de colonia** (alta, seo-004): mismo ratingValue 4.8/reviewCount 150 replicado en masa → riesgo de acción manual de Google. Requiere quitar el bloque de schema en lote (642 archivos, > candado de 15). Decidir batch dedicado.
-- **Fuga de copy "necesito electricista en 10 de Abril" en wa.me de ~96 colonias** (alta, seo-001): texto de plantilla origen no personalizado por colonia (6 son indexables). Cambio de contenido en lote.
-- **16 colonias indexables fuera del sitemap + terminos/** (alta, idx/seo-003): decisión SEO (agregar al sitemap o noindex). Las thin pages doorway están en noindex (correcto); las ~16 con contenido único deberían entrar al sitemap.
-- **CSS render-blocking en /servicios/ (~15) y /blog/ (10)** (perf alta, perf-001/002): no replican el patrón async de la homepage; blog usa `styles.min.css` sin hash. Toca >15 archivos → corrida dedicada.
-- **3 tablas de blog sin `table-wrapper`** (movil alta) + tabla en homepage (baja): mecánico pero fuera del alcance de esta corrida (otra mejora).
-- **focus-visible global ausente** (a11y alta, a11y-001): falta outline de foco para teclado salvo .seo-card/.floating-btn; fix en los 3 CSS + crítico inline.
-- **ETA inconsistente** 20-30 min (colonias) vs 30-60 min (home/servicios) (seo-005): unificar — decisión de contenido.
-- **theme-color placeholder #0066cc** en servicios/electricista/ (baja) y faltante en contacto/terminos (baja). Marca = `#F97316`.
-- Duplicado title/description directorio vs colonias index (media): editorial.
-
-## 2026-06-14 — Instalación del pipeline de mantenimiento
-- Se portó el pipeline de mantenimiento autónomo desde Plomero Culiacán (rama `feat/checkers-deterministas`).
-- **Checkers deterministas instalados** (`.pipeline/`): check-plantilla.py, check-indexabilidad.py, check-produccion.mjs.
-- **9 revisores** disponibles en `.claude/agents/`: 5 LLM (seo, movil, a11y, perf, links) + 4 deterministas (gsc, indexabilidad, produccion, plantilla).
-- Skill `/mantener-sitio` y `.pipeline/mantener-prompt.txt` adaptados a este sitio.
-
-### Estado de los checkers
-- ✅ check-plantilla.py — operativo.
-- ✅ check-indexabilidad.py — operativo (lee `sitemap.xml`).
-- ⚠️ check-produccion.mjs — portado pero **requiere `npm i puppeteer`** para correr.
-
-### Hallazgos iniciales detectados (aún NO arreglados — pendientes para la primera corrida del pipeline)
-- check-plantilla: **65** (46 links/recursos rotos [alta], 9 schema con aggregateRating/Review en blog [alta], y varios baja/media de perf/movil).
-- check-indexabilidad: **46** (17 BreadcrumbList con último item apuntando a `/#servicios` en vez del canonical, 21 páginas indexables fuera del sitemap, duplicados de title/description).
-
-### Pendiente
-- Instalar puppeteer para activar check-produccion.
-- Primera corrida del pipeline para empezar a arreglar los hallazgos mecánicos de alta/media.
-- (Opcional) dar a Electricista su propio contenedor GTM (hoy comparte el de Plomero: GTM-W75CRTX5).
-
-## 2026-06-14 — Primera corrida del pipeline (modo seguro, en rama)
-- Rama: auto/mantenimiento-20260614-1414 (sin publicar; pendiente de revisión humana).
-- ARREGLADO: `aggregateRating` self-serving removido del JSON-LD de **9 posts de blog** (regla 08a95902). JSON-LD validado, checker confirma 0 hallazgos de aggregateRating.
-- PENDIENTE HUMANO: 46 imágenes rotas (varias no existen en disco en ninguna versión → hay que generarlas/conseguirlas, no auto-arreglable) y 17 breadcrumbs de servicio cuyo último item apunta a `/#servicios` en vez del canonical (revisar plantilla de breadcrumb).
-
-## 2026-06-14 (cont.) — BUG SERIO encontrado y arreglado: canonicals incorrectos
-- 5 páginas tenían canonical apuntando a OTRA URL (4 a `/servicios/reparacion-cortos-circuitos/` que NO existe —typo de "reparacion-cortocircuitos"— y 1 a `.../directorio/`). Google las trataría como duplicados de una 404 → riesgo de desindexación.
-- ARREGLADO: canonical + og:url → self-referencial (derivado del path) en las 5. Checker: 0 canonical-a-otra-URL. Lo detectó el revisor-indexabilidad.
-- PENDIENTE (siguiente pasada, con cuidado): breadcrumbs — el último item del BreadcrumbList no apunta al canonical en ~17 páginas (baja severidad; requiere edición de JSON-LD por página). NO auto-arreglado en esta pasada tras un casi-error (usar URL derivada del path, no el canonical).
-
-## 2026-06-14 (cont.) — Breadcrumbs arreglados (método correcto)
-- 16 páginas: el último item del BreadcrumbList no tenía `item` (apuntaba implícitamente a /#servicios o /blog/). Se añadió `item` = URL propia derivada del PATH (no del canonical, tras el casi-error anterior). Fixer agnóstico al formato (multilínea y single-line), con validación JSON y verificación post-fix por archivo.
-- Checker: 0 breadcrumbs (eran 16). Indexabilidad 36 -> 20.
-- Quedan ~20 en indexabilidad (mayormente "página indexable fuera del sitemap" — revisar si deben ir al sitemap o llevar noindex; decisión SEO, no auto).
-
-## 2026-06-14 (cont.) — Imágenes rotas: arregladas las seguras
-- ARREGLADO (6, en 11 archivos): refs a imágenes que existían con otro nombre/ruta → apuntadas al archivo real (match ESTRICTO: todos los tokens + mismo tamaño + archivo no-.backup). Incluye el logo roto (`../electricista-culiacan-pro-logo.webp` → `/assets/images/...`) en contacto/gracias/colonias.
-- NO auto-arregladas (~14 refs / pendiente humano): imágenes genuinamente ausentes o sin el tamaño pedido — REQUIEREN generar/subir la imagen:
-  * instalacion-iluminacion-led (420w, 800w) — no existe
-  * mantenimiento-tablero-electrico-420w, reparacion-cortocircuito (420w/800w), prevenir-cortocircuitos-420w — falta ese tamaño (existe 800w/1200w del nombre correcto; decidir si regenerar 420w o ajustar el srcset)
-  * logo-512.webp — no existe (¿usar /assets/icons/icon-512x512.webp? decisión humana)
-- NOTA: el matcher difuso inicial propuso destinos ERRÓNEOS (.backup, imagen distinta); se descartó y solo se aplicaron matches estrictos verificados.
+- **BUG priceRange (alta mecánica, instalacion-electrica):** `"priceRange": "18270"` (pesos crudos) en el JSON-LD → `"$$"` (formato schema.org).
+- **PERF imágenes upscale (media, 5 blogs):** hero `instalacion-minisplit-culiacan-1200w.webp` era realmente 800×447 → honestado.
+- **SEO twitter (media, blog/index + 3 blogs):** blog/index solo tenía twitter:image → +4 tags.
+- **A11Y (baja, home):** `<section class="stats-bar">` sin nombre accesible → +`aria-label`.
+- **APRENDIZAJE:** +2 reglas (39→41): SEO/BLOG-30-60-MIN, PERF/UPSCALE-CLS. checks 23/24 nuevos.
