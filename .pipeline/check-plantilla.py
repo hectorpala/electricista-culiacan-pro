@@ -68,6 +68,12 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     que el blog escapaba (5 blogs regresaron el 2026-06-22).   (2026-06-22)
  24. seo    (media) "priceRange":"<dígitos>" con valor NUMÉRICO crudo (p.ej. "18270") en vez
                     del formato schema.org ($, $$, $$$, $$$$).                 (2026-06-22)
+ 26. seo    (media) GPS inconsistente: meta geo.position y JSON-LD GeoCoordinates difieren
+                    en más de 0.01 grado. Solo páginas en servicios/.           (2026-06-26)
+ 27. seo    (media) Logo en JSON-LD con asset incorrecto (logo-512.png/webp en vez de
+                    electricista-culiacan-pro-logo.webp).                        (2026-06-26)
+ 28. contenido(media) Precio visible en body HTML ($N,NNN) fuera de <script>/<style>/JSON-LD.
+                    NEGOCIO.md prohíbe precios en el cuerpo visible.            (2026-06-26)
 """
 import os
 import re
@@ -798,6 +804,89 @@ def check_page(fpath, t, noindex, redirects):
             'Añadir <meta name="twitter:card" content="summary_large_image"> en el <head> '
             '(replicar el patrón de las páginas de servicio). Corregir también el generador '
             'de colonias para que las nuevas la hereden.')
+
+    # --- 26. GPS inconsistente: meta geo.position vs JSON-LD GeoCoordinates (media, seo):
+    #         Las páginas de zona/servicio pueden tener <meta name="geo.position" content="lat;lon">
+    #         (coordenadas específicas de la zona) PERO el JSON-LD GeoCoordinates con las coordenadas
+    #         del centro de la ciudad, o viceversa. La discrepancia es invisible en el render pero
+    #         confunde a los crawlers y a Google Maps. Detectado 2026-06-26 en 5 páginas de zona
+    #         (meta con coord de zona, JSON-LD con 24.7903/-107.3878 para todas).
+    #         SOLO aplica a páginas en servicios/ (las demás no suelen tener geo.position).
+    #         Tolerancia: 0.01 grado (~1.1 km); una diferencia mayor = coordenadas distintas = error.
+    if r.startswith("servicios/"):
+        m_geo = re.search(r'<meta[^>]+name=["\']geo\.position["\'][^>]*content=["\']([^"\']+)["\']',
+                          t, re.I)
+        if not m_geo:
+            m_geo = re.search(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]*name=["\']geo\.position["\']',
+                              t, re.I)
+        if m_geo:
+            geo_val = m_geo.group(1).strip()
+            parts = re.split(r'[;,\s]+', geo_val)
+            if len(parts) >= 2:
+                try:
+                    meta_lat = float(parts[0])
+                    meta_lon = float(parts[1])
+                    # Extraer latitude y longitude del JSON-LD GeoCoordinates
+                    m_jlat = re.search(r'"latitude"\s*:\s*"?([\d.\-]+)"?', t)
+                    m_jlon = re.search(r'"longitude"\s*:\s*"?([\d.\-]+)"?', t)
+                    if m_jlat and m_jlon:
+                        jld_lat = float(m_jlat.group(1))
+                        jld_lon = float(m_jlon.group(1))
+                        if abs(meta_lat - jld_lat) > 0.01 or abs(meta_lon - jld_lon) > 0.01:
+                            add("media", r, "seo",
+                                "GPS inconsistente: meta geo.position (%s, %s) difiere del "
+                                "JSON-LD GeoCoordinates (%s, %s) en más de 0.01 grado"
+                                % (meta_lat, meta_lon, jld_lat, jld_lon),
+                                "Unificar las coordenadas: el JSON-LD GeoCoordinates latitude/"
+                                "longitude debe coincidir con el meta geo.position (ambos deben "
+                                "apuntar a la misma ubicación real de la zona/servicio)")
+                except ValueError:
+                    pass
+
+    # --- 27. logo en JSON-LD con asset incorrecto (media, seo): el logo canónico para JSON-LD
+    #         es electricista-culiacan-pro-logo.webp. Los nombres logo-512.png y logo-512.webp
+    #         son de la plantilla origen / sitio hermano y están PROHIBIDOS en JSON-LD.
+    #         Detectado 2026-06-26: index.html tenía "logo-512.png" (y tras fix parcial "logo-512.webp")
+    #         mientras todas las páginas de servicio usaban electricista-culiacan-pro-logo.webp.
+    for m_logo in re.finditer(r'"logo"\s*:\s*\{[^}]*"url"\s*:\s*"([^"]+)"', t, re.S):
+        logo_url = m_logo.group(1)
+        if re.search(r'logo-512\.(png|webp)', logo_url, re.I):
+            add("media", r, "seo",
+                'Logo en JSON-LD usa asset incorrecto: "%s" (debe ser electricista-culiacan-pro-logo.webp)'
+                % logo_url,
+                'Cambiar la URL del logo en el JSON-LD a la ruta de electricista-culiacan-pro-logo.webp '
+                '(el asset canónico de marca). Nunca usar logo-512.png ni logo-512.webp en JSON-LD.')
+    # Alternativa: "logo":"<url>" (string directo, no objeto)
+    for m_logo2 in re.finditer(r'"logo"\s*:\s*"([^"]+)"', t):
+        logo_url2 = m_logo2.group(1)
+        if re.search(r'logo-512\.(png|webp)', logo_url2, re.I):
+            add("media", r, "seo",
+                'Logo en JSON-LD usa asset incorrecto: "%s" (debe ser electricista-culiacan-pro-logo.webp)'
+                % logo_url2,
+                'Cambiar la URL del logo en el JSON-LD a la ruta de electricista-culiacan-pro-logo.webp '
+                '(el asset canónico de marca). Nunca usar logo-512.png ni logo-512.webp en JSON-LD.')
+
+    # --- 28. precio visible en body HTML (media, contenido): NEGOCIO.md prohíbe mostrar precios
+    #         ($MXN) en el cuerpo visible de la página. Los precios están SOLO en JSON-LD
+    #         (priceRange schema.org). Detectado 2026-06-26: instalacion-tierra-fisica tenía
+    #         "Desde $1,500 MXN" en el hero-subtitle y en el FAQ HTML body.
+    #         Estrategia: eliminar el contenido de <script> y <style> para no cazar precios en
+    #         JSON-LD ni en CSS, luego buscar patrón $digits en el resto del HTML visible.
+    #         Se excluyen los patrones dentro de comentarios HTML (<!-- ... -->).
+    t_no_script = re.sub(r'<script\b[^>]*>.*?</script>', '', t, flags=re.S | re.I)
+    t_no_script = re.sub(r'<style\b[^>]*>.*?</style>', '', t_no_script, flags=re.S | re.I)
+    t_no_script = re.sub(r'<!--.*?-->', '', t_no_script, flags=re.S)
+    # Buscar "$N" donde N es un número con posibles comas/puntos (precios MXN).
+    # Se usa [0-9,\.]{2,} para capturar tanto "$1500" como "$1,500".
+    price_pat = re.compile(r'\$\s*[1-9][0-9,\.]{2,}(?:\s*(?:MXN|pesos?|mx))?', re.I)
+    price_hit = price_pat.search(t_no_script)
+    if price_hit:
+        add("media", r, "contenido",
+            'Precio visible en body HTML ("%s"): NEGOCIO.md prohíbe precios en el cuerpo visible'
+            % price_hit.group(0).strip()[:40],
+            'Eliminar el precio del body HTML (hero-subtitle, FAQ, párrafos). Los precios van SOLO '
+            'en JSON-LD como priceRange con formato $/$$/$$$ (sin valor numérico). Usar en su lugar '
+            '"cotización sin costo" / "agenda una visita" como CTA.')
 
 
 # ================================================================ CHECK global: paridad CSS
