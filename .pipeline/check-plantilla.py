@@ -74,6 +74,9 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     electricista-culiacan-pro-logo.webp).                        (2026-06-26)
  28. contenido(media) Precio visible en body HTML ($N,NNN) fuera de <script>/<style>/JSON-LD.
                     NEGOCIO.md prohíbe precios en el cuerpo visible.            (2026-06-26)
+ 29. perf    (media) JS duplicado: IIFE inline (function() en <script> no-JSON-LD) Y TAMBIÉN
+                    <script src="main.min.js"> en la misma página → listener del menú duplicado
+                    → toggle roto. Los dos patrones son mutuamente excluyentes.  (2026-06-27)
 """
 import os
 import re
@@ -887,6 +890,33 @@ def check_page(fpath, t, noindex, redirects):
             'Eliminar el precio del body HTML (hero-subtitle, FAQ, párrafos). Los precios van SOLO '
             'en JSON-LD como priceRange con formato $/$$/$$$ (sin valor numérico). Usar en su lugar '
             '"cotización sin costo" / "agenda una visita" como CTA.')
+
+    # --- 29. JS duplicado: IIFE inline + main.min.js coexisten (media, perf): la regla
+    #         [2026-06-17] PERF/JS-MINIFICADO obliga a usar main.min.js (no main.js), y la
+    #         regla [2026-06-23] PERF/JS-INLINE-IIFE dice que páginas con IIFE inline NO deben
+    #         cargar main.min.js (duplicaría listeners). El caso opuesto ocurrió el 2026-06-27:
+    #         2 blogs (como-prevenir-cortocircuitos-casa, senales-instalacion-electrica-obsoleta)
+    #         tenían AMBOS — el IIFE inline completo Y <script src="/main.min.js" defer> —
+    #         duplicando el listener del toggle de menú móvil y rompiéndolo.
+    #         Detección: un <script> no-ld+json que contiene "(function()" (IIFE) en la misma
+    #         página que un <script src=...main.min.js...> es el patrón doble prohibido.
+    #         SOLO mira páginas con src a main.min.js (el check 14 ya caza main.js sin minificar).
+    # El marcador ÚNICO del IIFE de blog es el comentario "// IIFE para evitar variables globales"
+    # que diferencia el bloque de menú/CTA/form inline del GTM y otros scripts de terceros que
+    # también usan (function(). NO usar la detección genérica de (function() porque da 677 falsos
+    # positivos (GTM, Clarity, etc. que son (function() LEGÍTIMAS junto con main.min.js).
+    has_iife_inline = bool(re.search(
+        r'//\s*IIFE\s+para\s+evitar\s+variables\s+globales',
+        t, re.I))
+    has_main_min = bool(re.search(r'<script\b[^>]+src=["\'][^"\']*main\.min\.js["\']', t, re.I))
+    if has_iife_inline and has_main_min:
+        add("media", r, "perf",
+            "JS duplicado: IIFE inline y <script src=\"main.min.js\"> coexisten en la misma página "
+            "— el listener del menú móvil se registra dos veces y el toggle queda roto",
+            "Elegir UN patrón: (a) si la página tiene IIFE inline funcional, eliminar el "
+            "<script src=\"/main.min.js\" defer> (dejar solo el IIFE); (b) si se migra al script "
+            "externo, eliminar el IIFE inline. Los dos son mutuamente excluyentes. "
+            "Regla: [2026-06-23] PERF/JS-INLINE-IIFE + [2026-06-27] js-iife-main-doble.")
 
 
 # ================================================================ CHECK global: paridad CSS

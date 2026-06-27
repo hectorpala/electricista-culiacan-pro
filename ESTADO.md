@@ -1,5 +1,25 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-27 (Auto Agente diario — 9 fixes 6-blogs/1-servicio: JSON-LD image, JS-IIFE, precio-FAQ, CTR) — PUBLICADO ✅
+Rama `auto/diario-20260626-2000`, merge `1f5f5836` a main (push OK; pre-push **auto-indexó 7 URLs**: 6 blogs + instalacion-contactos). HEALTH CHECK: home/contacto/servicios/blog → 200. ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 7 HTML (dentro del cap de 18).
+
+- **4 BLOGS — JSON-LD "image" URL incorrecta (media, schema):** ahorro-energia-led, cuando-llamar-emergencia, mantenimiento-tablero, seguridad-lluvias tenían `"image": "...electricista-culiacan-hero-800w.webp"` (nombre del esqueleto) en el JSON-LD Electrician en vez del nombre real del asset `hero-electricista-culiacan-800w.webp`. Corregido en los 4 blogs.
+
+- **2 BLOGS — main.min.js duplicado en blogs con IIFE inline (baja→media, JS):** como-prevenir-cortocircuitos-casa y senales-instalacion-electrica-obsoleta tenían `<script src="/main.min.js" defer>` ADEMÁS de su IIFE inline completo (~4512 chars). Per REGLAS.md 2026-06-23 (PERF/JS-INLINE-IIFE), añadir main.min.js a un blog con IIFE propio duplicaría el listener del menú toggle y lo rompería. Eliminado main.min.js de los 2 blogs.
+
+- **2 BLOGS — precio de servicio en FAQ body (media, negocio):** como-prevenir-cortocircuitos-casa tenía en el FAQ visible `"cuesta desde $500 MXN"` y mantenimiento-tablero tenía `"desde $600 hasta $1,500 MXN"`. NEGOCIO.md: "NUNCA precio visible en el cuerpo". Reemplazados por "Solicita tu cotización sin costo" en ambos lugares (HTML visible + JSON-LD FAQPage text).
+
+- **1 SERVICIO — CTR optimization contactos (media, seo):** instalacion-contactos/index.html: title/og/twitter actualizados de "Instalación de Contactos Eléctricos en Culiacán | 24 Horas" → "Contactos Eléctricos Culiacán | Instalación y Cambio · 24/7" para capturar keyword `contactos culiacan` (pos 4.9, 15 impr, 0 clics en GSC).
+
+- **GSC (FASE 6):** 87 clics, 4381 impr, CTR 1.99%, pos 7.2. Clics -15% vs anterior. `electricista culiacán` pos 4.7 (↑ desde 8.2 — título cambiado 2026-06-22 funcionó). No se crearon páginas nuevas: el sitio cubre la demanda; la única acción de crecimiento fue la optimización CTR de contactos ya en working tree.
+
+- **VERIFICACIÓN (1 ronda):** ok=true, 0 problemas (7 archivos verificados: ci-gate 0 ALTA, HTTP 200 en todos, JSON-LD image correcto, main.min.js ausente en IIFE blogs, precios quitados del HTML, nuevo title contactos, 0 plomero, 0 borrados).
+
+- **PENDIENTE-HUMANO (heredados + nuevos de esta corrida):**
+  - `/servicios/index.html` NO existe → 404 en Netlify (breadcrumbs de TODAS las páginas de servicio enlazan ahí). Opciones: (1) crear hub servicios/index.html o (2) hacer la miga no-enlazable. Candidata a corrida de crecimiento.
+  - Precios en body HTML: 33 páginas (blogs + servicios) con precios de mercado, testimonios y nuestra tarifa. Check 28 los detecta pero son decisión de estrategia (cuanto-cuesta y electricista-precios son páginas DE precios — quitarles el precio destruiría el contenido). Pendiente: ¿tolerar precios educativos/de mercado en blog o reescribir?
+  - Heredados: popup ortografía (~49 págs, bk-72cc7764); aria-expanded JS toggle (bk-b7465a9a); canibalización home/contacto; contraste WCAG AA nav-link/btn-primary; skip-link/main (~31-47 págs); preload as=style hint en 33 servicios + 11 blogs
+
 ## 2026-06-26 (Auto Agente diario 2ª corrida — 13 fixes home/zonas/blogs/tierra-fisica) — PUBLICADO ✅
 Rama `auto/diario-20260626-1227`, merge `296c0208` a main (push OK; pre-push **auto-indexó 13 URLs**: home, 5 zonas, 6 blogs, tierra-fisica). HEALTH CHECK: ci-gate 0 ALTA · 1 baja (falso positivo google-stub pre-existente). check-indexabilidad 0. 13 HTML + sitemap (16 archivos diff).
 

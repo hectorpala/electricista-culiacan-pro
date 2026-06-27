@@ -1,44 +1,61 @@
-# Auto Agente Electricista — 26 de junio de 2026 (tarde)
-**Resultado:** 13 páginas corregidas · 0 páginas nuevas · publicado ✅
+# Auto Agente Electricista — parte del 2026-06-27
+**Resultado:** encontré 9, arreglé 9 · 1 necesita tu decisión · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
+Encontré 9 cosas: arreglé 9 · 0 que no pude arreglar · 1 necesita tu decisión.
 
----
+## ✅ Arreglé (9)
 
-## Los 5 arreglos principales
+**4 blogs con imagen incorrecta en el esquema para Google (datos invisibles al visitante pero importantes para el SEO):**
+Los 4 blogs de abajo le decían a Google que la imagen del negocio era un archivo con el nombre equivocado (`electricista-culiacan-hero-800w.webp` en lugar del correcto `hero-electricista-culiacan-800w.webp`). En el navegador se ve igual, pero los robots de Google usaban el nombre viejo que no corresponde a ningún archivo real del sitio.
+- https://electricistaculiacanpro.mx/blog/ahorro-energia-iluminacion-led/
+- https://electricistaculiacanpro.mx/blog/cuando-llamar-electricista-emergencia/
+- https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/
+- https://electricistaculiacanpro.mx/blog/seguridad-electrica-temporada-lluvias/
 
-**1. La foto al compartir en redes era la equivocada**
-Cuando alguien compartía tu sitio en WhatsApp o Facebook, aparecía la imagen de "reparación de cortocircuitos" en vez del electricista trabajando. Corregido: ahora muestra la foto del hero.
+**2 blogs con JavaScript doble que podía romper el menú en móvil:**
+Dos blogs (cómo prevenir cortocircuitos y señales de instalación obsoleta) cargaban DOS versiones del mismo código JavaScript: una vez dentro de la página y otra vez como archivo externo. Eso puede hacer que el menú de hamburguesa se comporte de forma rara al abrirlo/cerrarlo en móvil. Quité el archivo externo (el que sobraba), ya que la versión interna es la correcta.
+- https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/
+- https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
 
-**2. Coordenadas GPS equivocadas en las 5 páginas de zona**
-Las páginas "Zona Norte", "Zona Sur", etc. tenían las coordenadas del centro de la ciudad en los datos técnicos que lee Google — en todas por igual. Google usa eso para búsquedas de "electricista cerca de mí". Corregido con las coords reales de cada zona.
+**2 blogs con precio de servicio propio visible (que no deberíamos publicar):**
+Dos artículos del blog citaban explícitamente precios que cobramos — algo que según tu política de negocio jamás debe aparecer en el texto visible de la página (los precios van en cotización, no publicados en internet). Lo cambié por "Solicita tu cotización sin costo".
+- Blog cortocircuitos decía en el FAQ "cuesta desde $500 MXN" → https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/
+- Blog mantenimiento tablero decía "desde $600 hasta $1,500 MXN" → https://electricistaculiacanpro.mx/blog/mantenimiento-tablero-electrico-preventivo/
 
-**3. En celular, la calificación 4.8★ aparecía muy abajo en los blogs**
-En los 6 blogs, la etiqueta de calificación quedaba separada del título como si flotara (era un error de CSS de 320 píxeles). Corregido.
+**1 página de servicio con título y descripción mejorada para Google:**
+La página de "Instalación de Contactos" aparece en posición 5 de Google cuando alguien busca "contactos culiacán", pero nadie hace clic (0 de 15 personas que te ven). Reescribí el título para que sea más directo y también mencione el cambio de contactos, no solo la instalación.
+- Antes: "Instalación de Contactos Eléctricos en Culiacán | 24 Horas"
+- Ahora: "Contactos Eléctricos Culiacán | Instalación y Cambio · 24/7"
+- → https://electricistaculiacanpro.mx/servicios/instalacion-contactos/
 
-**4. Precios visibles en tierra física**
-La página de "Instalación de Tierra Física" mostraba "Desde $1,500 MXN" en el subtítulo y en las preguntas frecuentes. Tus reglas dicen que no deben verse precios en el cuerpo. Eliminados del texto visible.
+## ⚠️ Encontré pero NO pude arreglar solo (0)
 
-**5. Correcciones técnicas en la home**
-La página principal fallaba el control de calidad automático por problemas pre-existentes: le faltaban etiquetas de seguridad estándar, la versión de plantilla, y usaba el logo incorrecto en los datos técnicos de Google. Corregido todo.
+Todo lo que encontré lo pude arreglar.
 
----
+## 🌱 Mejoré / agregué (0)
 
-## Google ya recibió las 13 páginas
+Sin páginas nuevas hoy. Tus datos de Google confirman que el sitio ya cubre bien la demanda actual. En vez de inventar páginas que podrían dañar tu posicionamiento, me enfoqué en mejorar las páginas existentes.
 
-Las URLs se enviaron automáticamente a Google al publicar. Tardará 1-7 días en reflejarlos.
+**Nota de Google Search Console:** tus clics bajaron 15% este mes (102 → 87 clics). La buena noticia: la palabra clave principal "electricista culiacán" subió de posición 8.2 a posición 4.7 — el cambio de título de la portada que hicimos el 22 de junio SÍ está funcionando. Los clics deberían subir en las próximas 2-4 semanas. Sugiero revisarlo el 15 de julio.
 
----
+## 🧠 Aprendí hoy (para no volver a fallar)
+- Si un blog tiene su propio código JavaScript interno, no cargar también el archivo externo adicional — se duplicarían instrucciones y el menú podría romperse en móvil.
+- La imagen del negocio que ve Google (en los datos estructurados invisibles) debe usar el nombre exacto del archivo; si el nombre no coincide, Google no puede mostrarla aunque haya un archivo parecido.
+- Los precios de nuestro servicio en el cuerpo de un artículo del blog también violan la política "nunca precio visible" — no solo las páginas de servicio. Ahora el sistema detecta esto automáticamente en todos los archivos.
+(ya van ~52 reglas aprendidas en total)
 
-## Necesito tu decisión (no urgente)
+## ⏳ Necesito que tú decidas (1)
 
-1. **¿Quitamos los precios visibles del cuerpo en otras páginas?** — home, emergencia-24-7, mantenimiento-tableros y zonas también muestran precios ($200, etc.). La regla del sitio dice que no deberían estar, pero son páginas que convierten bien. Dime si los quito o los dejo.
+**La página `/servicios/` no existe y da error 404:** Cada página de servicio tiene una "miga de pan" (el camino de navegación arriba que dice "Inicio > Servicios > [nombre del servicio]"). El enlace del segundo nivel ("Servicios") va a una página que no existe — da error 404. Esto afecta a TODAS las páginas de servicio del sitio.
 
-2. **Sitemap fantasma en Google Search Console** — hay un sitemap registrado en GSC que ya no existe (`/sitemaps/servicios_colonias_sitemap.xml`). Hay que borrarlo manualmente entrando a GSC → Sitemaps → seleccionarlo → eliminar.
+Dos opciones:
+1. **Crear una página hub en `/servicios/`** que liste todos tus servicios con fotos y enlaces (yo la puedo hacer, solo dime que sí).
+2. **Quitar el enlace de "Servicios"** en la miga de pan para que no sea clicable (solución más rápida, menos valor SEO).
 
----
+Avísame cuál prefieres y lo hago en la próxima corrida.
 
-## Estado del sistema: saludable ✅
-- 0 errores críticos
-- Verificador independiente: aprobado (3 rondas de verificación esta tarde)
-- Todas las páginas pasan el control de calidad automático
+**Pendiente anterior que sigue en cola:** hay 33 páginas más con precios en el texto (testimonios de clientes que dicen cuánto ahorraron, rangos de mercado educativos, y páginas como "¿Cuánto cuesta un electricista?" donde los precios SON el contenido). Necesito saber si quieres excepciones para esas páginas o si las reescribo sin números.
+
+## 📦 ¿Se publicó?
+Sí, todo revisado y en vivo. Le avisé a Google para que lo muestre en las próximas horas (7 páginas enviadas para re-indexación automática).
