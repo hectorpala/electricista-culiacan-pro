@@ -1,5 +1,23 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-28 (Auto Agente diario — 2 fixes: popup ortografía 15 páginas + enlace interno blog) — PUBLICADO ✅
+Rama `auto/diario-20260628-1250`, merge `d03e27b7` a main (push OK; pre-push **auto-indexó 15 URLs**). HEALTH CHECK: home/contacto/servicios/blog → 200. ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 15 HTML (dentro del cap de 18). Revisores especializados tuvieron timeout (problema de streaming); se usaron checkers deterministas directamente.
+
+- **15 SERVICIOS — Popup ortografía rota (media, contenido):** 49 páginas tenían el popup exit-intent con 3 errores de apertura heredados de la plantilla: `Espera!` (sin `¡`), `Tienes una emergencia de electricidad?` (sin `¿`), `Contactanos` (sin tilde). Corregidas las 15 de mayor tráfico: electricista, emergencia-24-7, electricista-a-domicilio, reparacion-cortocircuitos, no-hay-luz, instalacion-electrica, electricista-cerca-de-mi, electricista-comercial, electricista-precios, 4 zonas (norte/sur/oriente/poniente), electricista-centro y instalacion-contactos. **34 páginas restantes (colonias + servicios menores) en backlog bk-72cc7764.**
+
+- **1 SERVICIO — Enlace interno cortocircuitos → blog prevención (baja, SEO):** `servicios/reparacion-cortocircuitos/index.html` no enlazaba al blog `como-prevenir-cortocircuitos-casa/`. El blog ranquea en pos 8.3 para "como evitar un corto circuito en casa" (15 impr, 0 clics) sin enlace desde la página de servicio más relevante. Añadido enlace al final del FAQ.
+
+- **GSC (FASE 6):** 91 clics, 4689 impr, CTR 1.94%, pos 7.0. Clics -13% vs anterior, impr +7% → problema de CTR. Query "electricista" a pos 3.2 con 108 impr y CTR 2.8% (debería ser ~10%). Sin creación de páginas nuevas: el sitio cubre la demanda; "electrician near me" y "automotriz" no proceden per NEGOCIO.md.
+
+- **VERIFICACIÓN:** ok=true, 0 problemas (ci-gate 0 ALTA; validate-landing 15/15 PASO; popup correcto en 5 páginas muestreadas; blog link presente; 0 plomero; 0 borrados; HTTP 200 en todas).
+
+- **PENDIENTE-HUMANO (heredados + actualizados):**
+  - Popup ortografía: 34 páginas restantes (colonias indexables + servicios menores) — bk-72cc7764
+  - Problema CTR: "electricista" pos 3.2, 108 impr, CTR 2.8% — investigar qué URL y por qué tan bajo
+  - `/servicios/index.html` NO existe → 404 (breadcrumbs rotos site-wide)
+  - Precios en body HTML: 33 páginas (decisión estratégica del dueño)
+  - Heredados: aria-expanded JS toggle (bk-b7465a9a); popup emoji aria-hidden contacto/ (bloqueado); contraste WCAG AA nav-link/btn-primary; skip-link/main (~31-47 págs)
+
 ## 2026-06-27 (Auto Agente diario — 9 fixes 6-blogs/1-servicio: JSON-LD image, JS-IIFE, precio-FAQ, CTR) — PUBLICADO ✅
 Rama `auto/diario-20260626-2000`, merge `1f5f5836` a main (push OK; pre-push **auto-indexó 7 URLs**: 6 blogs + instalacion-contactos). HEALTH CHECK: home/contacto/servicios/blog → 200. ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 7 HTML (dentro del cap de 18).
 
