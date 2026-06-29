@@ -1,61 +1,70 @@
-# Auto Agente Electricista — parte del 2026-06-28
-**Resultado:** arreglé 2 cosas en 15 páginas + 1 enlace interno · publicado
+# Auto Agente Electricista — parte del 2026-06-29
+**Resultado:** arreglé 18 páginas (popup ortografía en servicios) · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 2 cosas: arreglé 2 · 0 necesitan tu decisión hoy · 0 no pude arreglar solo.
+Encontré 1 cosa que arreglar: arreglé 1 · 3 necesitan tu decisión · 0 no pude arreglar solo.
 
 ---
 
-## ✅ Arreglé (2)
+## ✅ Arreglé (1)
 
-- **El popup "¡Espera!" en 15 páginas de servicio tenía errores de tildes y signos de apertura.** El mensaje que aparece cuando el visitante va a salir de tu página decía "Espera!" en vez de "¡Espera!", "Tienes una emergencia de electricidad?" en vez de "¿Tienes una emergencia de electricidad?", y "Contactanos" en vez de "Contáctanos". Son errores pequeños pero afectan la imagen profesional del negocio. Los corregí en las 15 páginas más visitadas de tu sitio. Quedan 34 páginas menores pendientes (las de colonias y servicios de menor tráfico) — las corrijo en las próximas corridas. Páginas corregidas:
-  - https://electricistaculiacanpro.mx/servicios/electricista/
-  - https://electricistaculiacanpro.mx/servicios/emergencia-24-7/
-  - https://electricistaculiacanpro.mx/servicios/electricista-a-domicilio/
-  - https://electricistaculiacanpro.mx/servicios/reparacion-cortocircuitos/
-  - https://electricistaculiacanpro.mx/servicios/no-hay-luz-en-parte-casa/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-electrica/
-  - https://electricistaculiacanpro.mx/servicios/electricista-cerca-de-mi/
-  - https://electricistaculiacanpro.mx/servicios/electricista-comercial/
-  - https://electricistaculiacanpro.mx/servicios/electricista-precios/
-  - https://electricistaculiacanpro.mx/servicios/electricista-zona-norte-culiacan/
-  - https://electricistaculiacanpro.mx/servicios/electricista-zona-sur-culiacan/
-  - https://electricistaculiacanpro.mx/servicios/electricista-zona-oriente-culiacan/
-  - https://electricistaculiacanpro.mx/servicios/electricista-zona-poniente-culiacan/
-  - https://electricistaculiacanpro.mx/servicios/electricista-centro-culiacan/
-  - https://electricistaculiacanpro.mx/servicios/instalacion-contactos/
+**El popup "¡Espera!" en 18 páginas de servicio tenía errores de tildes y signos de apertura — ya están corregidos.**
 
-- **Añadí un enlace entre dos páginas que deberían estar conectadas y no lo estaban.** En la página de "Reparación de Cortocircuitos" (que repara el problema cuando ya ocurrió), ahora hay un enlace al final que lleva a tu artículo de blog "Cómo Evitar un Corto Circuito en Casa". Esto ayuda a Google a entender que ambas páginas hablan del mismo tema y puede mejorar el posicionamiento del artículo del blog, que actualmente aparece en la posición 8 de Google para "cómo evitar un corto circuito en casa" con 15 búsquedas mensuales visibles y 0 clics aún. → https://electricistaculiacanpro.mx/servicios/reparacion-cortocircuitos/
+El mensaje que aparece cuando el visitante va a salir de tu página decía "Espera!" en vez de "¡Espera!", "Tienes una emergencia?" en vez de "¿Tienes una emergencia?" y "Contactanos" en vez de "Contáctanos". Lo corregí en los 17 servicios menores y en la página de colonias (hub). Páginas corregidas:
+
+- https://electricistaculiacanpro.mx/servicios/cambio-cableado-electrico/
+- https://electricistaculiacanpro.mx/servicios/contrato-luz-medidor-cfe/
+- https://electricistaculiacanpro.mx/servicios/dictamen-electrico/
+- https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
+- https://electricistaculiacanpro.mx/servicios/iluminacion-led/
+- https://electricistaculiacanpro.mx/servicios/instalacion-bomba-agua/
+- https://electricistaculiacanpro.mx/servicios/instalacion-calentador-electrico/
+- https://electricistaculiacanpro.mx/servicios/instalacion-camaras-seguridad/
+- https://electricistaculiacanpro.mx/servicios/instalacion-centro-carga/
+- https://electricistaculiacanpro.mx/servicios/instalacion-cercas-electricas/
+- https://electricistaculiacanpro.mx/servicios/instalacion-minisplit/
+- https://electricistaculiacanpro.mx/servicios/instalacion-paneles-solares/
+- https://electricistaculiacanpro.mx/servicios/instalacion-planta-luz-generador/
+- https://electricistaculiacanpro.mx/servicios/instalacion-porton-electrico/
+- https://electricistaculiacanpro.mx/servicios/instalacion-tierra-fisica/
+- https://electricistaculiacanpro.mx/servicios/instalacion-ventiladores-techo/
+- https://electricistaculiacanpro.mx/servicios/mantenimiento-tableros/
+- https://electricistaculiacanpro.mx/servicios/reparacion-minisplit/
+
+Quedan 16 páginas de colonias individuales con el mismo error — las corrijo en la próxima corrida (bk-549b7b15).
 
 ---
 
 ## ⚠️ Encontré pero NO pude arreglar solo (0)
 
-Todo lo que encontré lo pude arreglar.
+Todo lo que encontré lo pude arreglar. (El verificador automático detectó un error en el script de corrección — `¿¿Tienes` con doble signo — y lo corregí antes de publicar.)
 
 ---
 
 ## 🌱 Mejoré / agregué (0)
 
-Sin páginas nuevas hoy: revisé Google Search Console y el sitio ya cubre lo que la gente busca. Las keywords sin página dedicada son automotriz (no es tu giro, ya lo tienes decidido) e inglés (también ya decidido que no). No inventé páginas porque eso dañaría tu posicionamiento.
+Sin páginas nuevas hoy: revisé Google Search Console y el sitio ya cubre lo que la gente busca. Ninguna query nueva justifica una página sin caer en "doorway" (páginas casi idénticas que Google penaliza). Las oportunidades de esta semana son de optimización de los textos que Google muestra, no de páginas nuevas.
 
-**Dato de tráfico:** Tus impresiones en Google subieron 7% este período (más gente te ve), pero los clics bajaron 13% (menos gente entra). Esto significa que los títulos y descripciones que Google muestra no están siendo suficientemente convincentes para que la gente haga clic. En las próximas corridas voy a trabajar en mejorar eso de forma sistemática.
+**Dato de tráfico:** Impresiones +7% pero clics -10% en la última lectura. El problema principal: apareces en posición 2 para "electrica cerca de mi ubicación" (segunda en Google) pero solo el 2.8% de la gente te hace clic — lo normal en posición 2 sería ~15%. Eso se resuelve mejorando la descripción que Google muestra en los resultados de búsqueda, no creando páginas nuevas.
 
 ---
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
 
-- No hubo errores nuevos que documentar hoy — los fixes de hoy son del backlog conocido (el popup con tildes y el enlace faltante). El sistema de detección ya los tenía en lista.
-- (ya van **45 reglas** aprendidas en total — el sitio no tiene errores graves hace varias corridas seguidas)
+El script de corrección hacía tres sustituciones en cadena: la segunda encontraba como blanco el resultado de la primera, produciendo `¿¿Tienes` (signo de interrogación doble). Lo atrapé con el verificador automático antes de publicar, lo corregí y lo documenté en el libro de reglas del sitio para que no se repita. Cuando hago múltiples correcciones en el mismo texto, ahora las aplico en un solo paso en vez de en cadena.
 
 ---
 
-## ⏳ Necesito que tú decidas (0)
+## ⏳ Necesito que tú decidas (3)
 
-Nada pendiente de tu parte hoy.
+1. **¿Creo la página de índice de servicios?** La URL `/servicios/` da error 404 en tu sitio. Los breadcrumbs de todas tus páginas apuntan ahí. ¿Quieres que cree una página de resumen de todos tus servicios?
+
+2. **¿Retiro los precios del cuerpo de las páginas?** Detecté que 33 páginas del sitio muestran precios visibles en el texto. La regla del negocio dice "nunca precio visible en el cuerpo, solo en datos estructurados". ¿Quieres que los retire o prefieres dejarlos?
+
+3. **¿Mejoro la descripción de la home en Google?** La descripción actual no está aprovechando que apareces en posición 2 para búsquedas de emergencia. Tengo encolado un ajuste de la "meta description" (solo el resumen debajo del título en Google — el título no lo toco, sé que ese experimento sigue abierto hasta el 15 de julio). ¿Procedo en la próxima corrida?
 
 ---
 
 ## 📦 ¿Se publicó?
 
-Sí, todo revisado y en vivo. Le avisé a Google para que lo muestre: 15 páginas enviadas para re-indexación automática al publicar.
+Sí, todo revisado y en vivo. Commit `6c2ecb13`, publicado el 2026-06-29. Le avisé a Google para que lo muestre: 18 páginas enviadas para re-indexación automática al publicar.

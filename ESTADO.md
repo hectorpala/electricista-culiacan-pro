@@ -1,5 +1,25 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-29 (Auto Agente diario — 18 popup ortografía servicios+hub / verificador atrapó bug de replace cascada) — PUBLICADO ✅
+Rama `auto/diario-20260629-0017`, merge `3709f447` a main (push OK; pre-push **auto-indexó 18 URLs**). HEALTH CHECK: home/contacto/servicios/blog → 200 (servidor 8099). ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 18 HTML (exactamente al cap). Revisores LLM stalled (mismo problema de streaming); se usaron checkers deterministas directamente.
+
+- **18 SERVICIOS+HUB — Popup ortografía (media, contenido):** Completó el backlog bk-72cc7764 para páginas de servicios. 17 servicios menores (cambio-cableado, contrato-luz-medidor-cfe, dictamen-electrico, iluminacion-led, instalacion-bomba-agua, instalacion-calentador-electrico, instalacion-camaras-seguridad, instalacion-centro-carga, instalacion-cercas-electricas, instalacion-minisplit, instalacion-paneles-solares, instalacion-planta-luz-generador, instalacion-porton-electrico, instalacion-tierra-fisica, instalacion-ventiladores-techo, mantenimiento-tableros, reparacion-minisplit) + hub electricista-colonias-culiacan. Los 3 errores heredados de plantilla: `>Espera!</h3>` → `>¡Espera!</h3>`, `Tienes una emergencia...` → `¿Tienes una emergencia...`, `Contactanos` → `Contáctanos`. **INCIDENTE de aprendizaje:** el script original tenía 3 `str.replace()` en cascada → Variant B encontró "Tienes...Contáctanos" como substring del resultado ya corregido de Variant A → producía `¿¿Tienes` (doble signo). El verificador ronda 1 lo atrapó (ok=false). Se corrigió con un segundo replace `¿¿Tienes`→`¿Tienes`. Verificador ronda 2 ok=true. Nueva regla en REGLAS.md: `OPERACION-PIPELINE/REPLACE-CASCADA`.
+
+- **GSC (FASE 6):** 94 clics, 4679 impr, CTR 2.01%, pos 7.0. Clics -10% vs anterior, impr +7% → CTR sigue siendo el reto. `electricista culiacan` mejoró de pos 7.7 → 4.3 (experimento title 2026-06-22 funcionando — medir hasta 2026-07-15). Sin páginas nuevas: todas las queries tienen página. Backlogs encolados: bk-549b7b15 (popup 16 colonias), bk-a4194608 (CTR home meta), bk-9d8c6176 (CTR emergencia-24-7).
+
+- **VERIFICACIÓN (2 rondas):** Ronda 1: ok=false (bug ¿¿Tienes doble). Ronda 2: **ok=true, 0 problemas** (ci-gate 0 ALTA; validate-landing 18/18 PASO; ¿Tienes simple en todos; 0 mojibake; 0 plomero; 0 borrados; HTTP 200).
+
+- **APRENDIZAJE:** +1 regla nueva (replace-cascada-20260629): `OPERACION-PIPELINE/REPLACE-CASCADA`. Total reglas > 45.
+
+- **PENDIENTE-HUMANO (heredados + actualizados):**
+  - Popup ortografía: 16 colonias indexables pendientes — bk-549b7b15
+  - CTR home meta description: "electrica cerca de mi ubicación" pos 2.1, 36 impr, CTR 2.8% (pos 2 debería dar ~15%) — bk-a4194608
+  - CTR emergencia-24-7: queries "electricistas 24 horas" pos 13.7 — bk-9d8c6176
+  - Experimento title home: medir pos/CTR de "electricista culiacan" ~2026-07-15
+  - `/servicios/index.html` NO existe → 404 (breadcrumbs rotos site-wide)
+  - Precios en body HTML: 33 páginas (decisión estratégica del dueño)
+  - Heredados: aria-expanded JS toggle (bk-b7465a9a); popup emoji aria-hidden contacto/ (bloqueado); contraste WCAG AA nav-link/btn-primary; skip-link/main (~31-47 págs)
+
 ## 2026-06-28 (Auto Agente diario — 2 fixes: popup ortografía 15 páginas + enlace interno blog) — PUBLICADO ✅
 Rama `auto/diario-20260628-1250`, merge `d03e27b7` a main (push OK; pre-push **auto-indexó 15 URLs**). HEALTH CHECK: home/contacto/servicios/blog → 200. ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 15 HTML (dentro del cap de 18). Revisores especializados tuvieron timeout (problema de streaming); se usaron checkers deterministas directamente.
 
