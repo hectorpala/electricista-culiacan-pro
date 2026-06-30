@@ -1,5 +1,25 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-29-nocturna (Auto Agente diario — 16 popup ortografía colonias + CTR home meta) — PUBLICADO ✅
+Rama `auto/diario-20260629-2000`, merge `c026f01b` a main (push OK; pre-push **auto-indexó 17 URLs**: home + 16 colonias). HEALTH CHECK: home/contacto/servicios/blog → 200 (servidor 8102). ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 17 HTML (dentro del cap de 18). Verificador y Aprendiz corrieron en paralelo como subagentes.
+
+- **16 COLONIAS — Popup ortografía (media, contenido):** Completó el backlog bk-549b7b15. Las 16 colonias indexables restantes (centro, chapultepec, guadalupe, infonavit-humaya, la-conquista, la-primavera, las-coloradas, las-quintas, montebello, prados-de-la-conquista, santa-aynes, stanza-toscana, tierra-blanca, tres-rios, villa-universidad, zona-dorada) tenían los 3 errores heredados de plantilla: `>Espera!</h3>` → `>¡Espera!</h3>`, `Tienes una emergencia` → `¿Tienes una emergencia`, `Contactanos` → `Contáctanos`. Script con re.sub + lookbehind `(?<!¿)` para evitar cascada doble-¿. **Popup corregido en todo el sitio** (49 páginas total). 0 mojibake, 0 bug cascada.
+
+- **HOME — CTR meta description (media, SEO):** Completó bk-a4194608. `electrica cerca de mi ubicación` pos 2.2, 31 impr, CTR 3.2% (esperado ~15% en pos 2). Meta description: "cerca de ti" → "cerca de tu ubicación"; "Vamos a domicilio 24/7 con llegada" → "A domicilio 24/7, llegada"; "Técnico certificado 4.8★" → "Técnico experto ★4.8". Las 3 ocurrencias (meta, og:description, twitter:description) actualizadas. Medir CTR en ~3-4 semanas.
+
+- **GSC (FASE 6):** 92 clics, 4483 impr, CTR 2.05%, pos 7.1. Clics -13% vs anterior, impr +2%. Sin páginas nuevas: el sitio cubre la demanda. `electricista culiacan` pos 4.3, CTR 9.4% (OK para pos 4). `electricista` pos 3.3, 103 impr, CTR 3.9% (pendiente). `electricistas 24 horas` pos 13.7 (bk-9d8c6176 — pos 13 no mejora con CTR fix, necesita contenido).
+
+- **APRENDIZAJE:** +1 check nuevo (check 30: popup ortografía en páginas con exit-intent-popup, MEDIA). 2 entradas en HISTORIAL.jsonl. Total reglas > 46.
+
+- **VERIFICACIÓN:** Verificador ok=true, 16/16 popup OK, home CTR OK, ci-gate 0 ALTA, HTTP 200 en 5/5, 0 problemas.
+
+- **PENDIENTE-HUMANO (heredados + actualizados):**
+  - CTR emergencia-24-7: `electricistas 24 horas` pos 13.7 — bk-9d8c6176 (en pos 13 el CTR fix no ayuda; necesita mejora de contenido para subir a pág 1)
+  - `/servicios/index.html` NO existe → 404 (breadcrumbs rotos site-wide)
+  - Precios en body HTML: 33 páginas (decisión estratégica del dueño)
+  - Heredados: aria-expanded JS toggle (bk-b7465a9a); popup emoji aria-hidden contacto/ (bloqueado); contraste WCAG AA nav-link/btn-primary; skip-link/main (~31-47 págs)
+  - Experimento title home: medir pos/CTR de "electricista culiacan" ~2026-07-15
+
 ## 2026-06-29 (Auto Agente diario — 18 popup ortografía servicios+hub / verificador atrapó bug de replace cascada) — PUBLICADO ✅
 Rama `auto/diario-20260629-0017`, merge `3709f447` a main (push OK; pre-push **auto-indexó 18 URLs**). HEALTH CHECK: home/contacto/servicios/blog → 200 (servidor 8099). ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 18 HTML (exactamente al cap). Revisores LLM stalled (mismo problema de streaming); se usaron checkers deterministas directamente.
 
