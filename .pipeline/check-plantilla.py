@@ -77,6 +77,13 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
  29. perf    (media) JS duplicado: IIFE inline (function() en <script> no-JSON-LD) Y TAMBIÉN
                     <script src="main.min.js"> en la misma página → listener del menú duplicado
                     → toggle roto. Los dos patrones son mutuamente excluyentes.  (2026-06-27)
+ 30. contenido(media) Popup exit-intent con ortografía rota heredada de plantilla: '>Espera!</h3>'
+                    (falta ¡), 'Tienes una emergencia' sin ¿ de apertura, o 'Contactanos' sin tilde
+                    (debe ser 'Contáctanos'). Detectado en 15 servicios (2026-06-28), 18 servicios+hub
+                    (2026-06-29 lote 1) y 16 colonias indexables (2026-06-29 lote 2). Solo páginas
+                    con popup presente (id="exit-intent-popup"). Corrección correcta: re.sub con
+                    lookbehind (?<!¿) para evitar doble-¿ (bug de cascada, ver REPLACE-CASCADA).
+                                                                                    (2026-06-29)
 """
 import os
 import re
@@ -890,6 +897,38 @@ def check_page(fpath, t, noindex, redirects):
             'Eliminar el precio del body HTML (hero-subtitle, FAQ, párrafos). Los precios van SOLO '
             'en JSON-LD como priceRange con formato $/$$/$$$ (sin valor numérico). Usar en su lugar '
             '"cotización sin costo" / "agenda una visita" como CTA.')
+
+    # --- 30. popup ortografía rota (media, contenido): el popup exit-intent lleva 3 errores
+    #         heredados de la plantilla origen que nadie veía en el render:
+    #           a) '>Espera!</h3>' en vez de '>¡Espera!</h3>' (falta el ¡ de apertura)
+    #           b) 'Tienes una emergencia' sin el signo '¿' de apertura (debe ser '¿Tienes...')
+    #           c) 'Contactanos' sin tilde (debe ser 'Contáctanos')
+    #         Detectados 2026-06-28 en 15 servicios, 2026-06-29 en 18 servicios+hub y en
+    #         16 colonias indexables. SOLO mira páginas con el popup presente.
+    #         Corrección robusta: re.sub con lookbehind (?<!¿) para no añadir ¿ si ya existe
+    #         (bug de cascada REPLACE-CASCADA, ver REGLAS.md 2026-06-29). NO aplica a páginas
+    #         sin popup (deja de marcar si el popup no está). Idempotente: si ya se corrigió,
+    #         los 3 patrones malos no aparecen y no se emite hallazgo.
+    if re.search(r'id=["\']exit-intent-popup["\']', t, re.I):
+        popup_errors = []
+        # a) 'Espera!' sin ¡ — el texto correcto es '>¡Espera!</h3>'
+        if re.search(r'>Espera!</h3>', t):
+            popup_errors.append("'>Espera!</h3>' (falta ¡ de apertura)")
+        # b) 'Tienes una emergencia' sin '¿' de apertura.
+        #    Usamos lookbehind negativo: si '¿' NO precede a 'Tienes', es error.
+        #    La expresión (?<!¿)Tienes una emergencia detecta el caso malo.
+        if re.search(r'(?<!¿)Tienes una emergencia', t):
+            popup_errors.append("'Tienes una emergencia' sin ¿ de apertura")
+        # c) 'Contactanos' sin tilde (la forma correcta es 'Contáctanos')
+        if re.search(r'Contactanos\b', t):
+            popup_errors.append("'Contactanos' sin tilde (debe ser 'Contáctanos')")
+        if popup_errors:
+            add("media", r, "contenido",
+                "Popup exit-intent con ortografía rota: %s" % "; ".join(popup_errors),
+                "Corregir en el popup: '>¡Espera!</h3>', '¿Tienes una emergencia...?', "
+                "'Contáctanos'. Usar re.sub con lookbehind (?<!¿) para el signo ¿ y NO "
+                "encadenar varias llamadas a str.replace() (bug de cascada REPLACE-CASCADA). "
+                "Ver REGLAS.md 2026-06-29 OPERACION-PIPELINE/REPLACE-CASCADA.")
 
     # --- 29. JS duplicado: IIFE inline + main.min.js coexisten (media, perf): la regla
     #         [2026-06-17] PERF/JS-MINIFICADO obliga a usar main.min.js (no main.js), y la
