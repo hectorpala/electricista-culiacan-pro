@@ -1,22 +1,18 @@
 # Oportunidades GSC — 2026-06-29
 
-**Periodo:** 28 días | **Métricas:** 94 clics · 4679 impr · CTR 2.01% · pos 7.0 | **Cambio:** clics -10%, impr +7%
+| Keyword | Pos | Impr | CTR | Página | Acción | Riesgo |
+|---------|-----|------|-----|--------|--------|--------|
+| electricista culiacan | 4.3 | 89 | 9.4% | / | Observar (CTR OK para pos 4) | — |
+| electrica cerca de mi ubicación | 2.2 | 31 | 3.2% | / | **ENRIQUECER meta** ✅ hoy | bajo |
+| electricista a domicilio cerca de mi | 3.9 | 24 | 4.2% | / | Vigilar | — |
+| electrician near me | 4.2 | 33 | 0% | / | IGNORAR (inglés, off-target) | — |
+| eléctrico automotriz a domicilio culiacán | 9.5 | 17 | 0% | / | IGNORAR (NEGOCIO.md: no automotriz) | — |
+| contactos culiacan | 5.0 | 16 | 0% | /servicios/instalacion-contactos/ | CTR title/meta (ya actualizado 2026-06-27) | bajo |
+| electricista | 10.9 | 25 | 0% | /servicios/electricista/ | Página existe, pos 10.9 | medio |
+| electricistas 24 horas | 13.7 | 15 | 0% | / | Enriquecer emergencia-24-7 (pos 13 = pág 2, CTR fix inútil) | medio |
 
-## Tabla de oportunidades (rankeada por impacto/riesgo)
+**Performance 28 días:** 92 clics · 4483 impr · CTR 2.05% · pos 7.1 (clics -13%, impr +2%)
 
-| Prioridad | Query | Pos | Impr | Clics | CTR | Página | Acción decisor |
-|---|---|---|---|---|---|---|---|
-| 🔴 Alta | electrica cerca de mi ubicación | 2.1 | 36 | 1 | 2.8% | / | ctr-fix home meta (bk-a4194608) |
-| 🟠 Media | electricista culiacan | 4.3 | 90 | 9 | 10% | / | monitorear (experimento title abierto, medir 2026-07-15) |
-| 🟠 Media | electricistas 24 horas | 13.7 | 15 | 0 | 0% | / | ctr-fix emergencia-24-7 title (bk-9d8c6176) |
-| 🟡 Baja | contactos culiacan | 5.0 | 16 | 0 | 0% | /servicios/instalacion-contactos/ | medir (title cambiado 2026-06-28) |
-| 🟡 Baja | como evitar un corto circuito en casa | 8.5 | 14 | 0 | 0% | blog | enlazar (blog→servicio cortocircuitos) |
-| 🟡 Baja | electricista cerca de mi | 12.5 | 15 | 0 | 0% | /servicios/electricista-cerca-de-mi/ | ctr-fix title+meta (pendiente) |
-| ⬛ Ignorar | electrician near me | 4.2 | 33 | 0 | 0% | / | NEGOCIO.md: inglés NO |
-| ⬛ Ignorar | eléctrico automotriz a domicilio culiacán | 9.5 | 17 | 0 | 0% | / | NEGOCIO.md: automotriz NO |
+**Páginas nuevas:** 0 — el sitio cubre toda la demanda visible. Sin huecos de electricidad sin página propia.
 
-## Decisiones del panel decisor-negocio
-- **0 páginas nuevas**: todos los nichos comerciales tienen página. Crear más sería doorway.
-- **Foco en CTR**: el problema es impresiones sin clics, no falta de ranking.
-- **Experimento abierto**: title de home (cambio 2026-06-22) se mide hasta 2026-07-15. NO tocar title.
-- **Backlogs encolados**: bk-a4194608 (home meta), bk-9d8c6176 (emergencia-24-7), bk-549b7b15 (popup 16 colonias).
+**Decisión del sistema:** Hoy = 16 colonias popup + 1 home meta. Cap de 17/18 HTML.
