@@ -1,5 +1,28 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-06-30 (Auto Agente diario — 2 ALTA: contraste WCAG estrellas + CSS no-bloqueante 16 colonias · 1 MEDIA: logo JSON-LD 2 blogs) — PUBLICADO ✅
+Rama `auto/diario-20260630-2000`, merge `51f44ac1` a main (push OK; pre-push auto-indexó 86 URLs). Aprendizaje (2 checks nuevos + 3 reglas) en commit separado `4b28ebbe`. HEALTH CHECK: home/contacto/servicios/blog → 200 (servidor 8110). ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 18 páginas HTML con contenido real tocado (16 colonias + 2 blogs, exactamente al cap) + 689 con bump de versión de CSS (cambio lógico de asset, excluido del cap). 9 revisores corrieron en paralelo como subagentes.
+
+- **CONTRASTE WCAG (alta, a11y, site-wide):** `.rating-stars` (`#FBBC04` ~1.71:1) y `.stars` (`#FFA000` ~2.04:1) en 686/692 páginas (hero + testimonios) fallaban el mínimo WCAG AA de 4.5:1. Corregido a `#B45309` (~5:1) en las 3 hojas CSS en paridad, con bump `?v=20260621→20260630` en 689 páginas y `CACHE_VERSION v16→v17` en sw.js.
+
+- **CSS NO-BLOQUEANTE en 16 colonias indexables (alta, perf):** las únicas 16 colonias que Google realmente indexa cargaban el CSS compartido de forma render-blocking (`<link rel="stylesheet">` directo) mientras el resto del sitio ya usa el patrón no-bloqueante de la home (`media="print" onload` + `<noscript>`). Corregido en las 16.
+
+- **LOGO JSON-LD roto en 2 blogs (media, links):** `como-prevenir-cortocircuitos-casa` y `senales-instalacion-electrica-obsoleta` tenían el campo `logo` del schema apuntando a una ruta con carpeta duplicada (`assets/images/assets/images/...`), archivo inexistente (404 silencioso en el schema). Corregido.
+
+- **GSC (FASE 6):** 98 clics, 4490 impr, CTR 2.18% (↑ desde 2.05%), pos 7.1. Tendencia positiva. Sin páginas nuevas ni optimizaciones ejecutadas hoy: el diff de FASE 5 ya llegó al cap de 18 páginas con las correcciones ALTA. 4 oportunidades de bajo riesgo encoladas al backlog para la próxima corrida (`bk-fbde293f` tap-target skip-link, `bk-22c6bf24` title/description largos, `bk-df162f50` meta X-Frame-Options inválido, `bk-f38bd140` CTR-fix instalacion-contactos). Detalle completo en `.pipeline/oportunidades-20260630.md`.
+
+- **APRENDIZAJE:** +2 checks deterministas (31: ruta duplicada en URL propia; 32: regresión de contraste rating-stars) en check-plantilla.py, ambos probados (cazan el defecto real, 0 falsos positivos). +3 reglas nuevas en REGLAS.md. Más de 49 reglas aprendidas en total.
+
+- **VERIFICACIÓN:** Verificador ok=true, 0 problemas. Confirmó paridad byte a byte de los 3 CSS, los 18 archivos de contenido real, ci-gate 0 ALTA, gate-pagina.py OK en los 18, HTTP 200 en todas las páginas muestreadas, sin precios/borrados/contaminación de email.
+
+- **PENDIENTE-HUMANO (heredados + nuevos):**
+  - CTR emergencia-24-7: `electricistas 24 horas` pos 13.7 — bk-9d8c6176 (necesita mejora de contenido, no solo CTR)
+  - Canibalización interna de "electricista" entre home/electricista/electricista-precios — apuesta de estrategia SEO, no auto-arreglable
+  - Sitemap fantasma en Search Console (`/sitemaps/servicios_colonias_sitemap.xml`, ya no existe en disco) — requiere quitarlo manualmente en la consola de GSC, no hay tool para hacerlo por código
+  - `/servicios/index.html` NO existe → 404 (breadcrumbs rotos site-wide)
+  - Precios en body HTML: 33 páginas (decisión estratégica del dueño)
+  - Heredados: aria-expanded JS toggle (bk-b7465a9a); popup emoji aria-hidden contacto/ (bloqueado); contraste WCAG AA nav-link/btn-primary; skip-link/main (~31-47 págs) + tap-target 44px (bk-fbde293f, nuevo hoy); title/description largos en colonias (bk-22c6bf24, nuevo hoy); meta X-Frame-Options inválido site-wide (bk-df162f50, nuevo hoy, ~692 páginas)
+
 ## 2026-06-29-nocturna (Auto Agente diario — 16 popup ortografía colonias + CTR home meta) — PUBLICADO ✅
 Rama `auto/diario-20260629-2000`, merge `c026f01b` a main (push OK; pre-push **auto-indexó 17 URLs**: home + 16 colonias). HEALTH CHECK: home/contacto/servicios/blog → 200 (servidor 8102). ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 17 HTML (dentro del cap de 18). Verificador y Aprendiz corrieron en paralelo como subagentes.
 
