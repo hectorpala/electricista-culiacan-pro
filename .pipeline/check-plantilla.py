@@ -930,6 +930,23 @@ def check_page(fpath, t, noindex, redirects):
                 "encadenar varias llamadas a str.replace() (bug de cascada REPLACE-CASCADA). "
                 "Ver REGLAS.md 2026-06-29 OPERACION-PIPELINE/REPLACE-CASCADA.")
 
+    # --- 31. ruta con directorio duplicado en URL propia (media, links): al copiar/generar
+    #         una página desde un esqueleto, un placeholder mal armado puede duplicar un
+    #         segmento del path, p.ej. ".../assets/images/assets/images/logo.webp" en vez de
+    #         ".../assets/images/logo.webp". El archivo con la ruta duplicada NO existe en
+    #         disco -> 404 silencioso (no se ve en el render, solo en JSON-LD/href/src).
+    #         Detectado 2026-06-30 en el campo "logo" del JSON-LD de 2 blogs (jsonld-logo-ruta-
+    #         duplicada-20260630). Regex genérico: un segmento de carpeta de 3+ letras que se
+    #         repite consecutivo dos veces en la misma URL propia del dominio.
+    for m in re.finditer(
+            r'electricistaculiacanpro\.mx/([a-z0-9_-]{3,}/[a-z0-9_-]{3,}/)\1',
+            t, re.I):
+        add("media", r, "links",
+            "Ruta con directorio duplicado en una URL propia: .../%s%s..." % (m.group(1), m.group(1)),
+            "Quitar el segmento repetido (el archivo con la ruta duplicada no existe en disco, "
+            "404 silencioso). Ver REGLAS.md 2026-06-30 jsonld-logo-ruta-duplicada.")
+
+
     # --- 29. JS duplicado: IIFE inline + main.min.js coexisten (media, perf): la regla
     #         [2026-06-17] PERF/JS-MINIFICADO obliga a usar main.min.js (no main.js), y la
     #         regla [2026-06-23] PERF/JS-INLINE-IIFE dice que páginas con IIFE inline NO deben
@@ -1025,6 +1042,23 @@ def _css_atoms(css):
     return out
 
 
+def check_css_contraste_regresion():
+    # --- 32. contraste insuficiente en estrellas de calificación (alta, a11y): las clases
+    #         .rating-stars/.stars usaban colores dorado/ámbar claro (#FBBC04 ~1.71:1,
+    #         #FFA000 ~2.04:1 sobre blanco) muy por debajo del mínimo WCAG AA de 4.5:1.
+    #         Corregido 2026-06-30 a #B45309 (~5:1) en las 3 hojas CSS. Este check SOLO
+    #         corre sobre los archivos CSS servidos (styles*.css), no sobre HTML, para
+    #         cazar una REGRESIÓN si alguien reintroduce el color viejo en esas clases.
+    for c in sorted(glob.glob(os.path.join(ROOT, "styles*.css"))):
+        t = read(c)
+        for bad_hex, cls in (("#FBBC04", ".rating-stars"), ("#FFA000", ".stars")):
+            if re.search(re.escape(cls) + r'\{color:' + re.escape(bad_hex), t, re.I):
+                add("alta", rel(c), "a11y",
+                    "Regresión de contraste: %s vuelve a usar %s (~1.7-2:1, falla WCAG AA 4.5:1)" % (cls, bad_hex),
+                    "Volver a #B45309 (~5:1) en las 3 hojas CSS en paridad, versionando ?v= y "
+                    "subiendo CACHE_VERSION en sw.js. Ver REGLAS.md 2026-06-30 contraste-rating-stars.")
+
+
 def check_css_parity():
     css_files = sorted(glob.glob(os.path.join(ROOT, "styles*.css")))
     if len(css_files) < 2:
@@ -1053,6 +1087,7 @@ def main():
             continue  # stub de redireccion (meta-refresh): no es pagina de contenido
         check_page(fpath, t, has_noindex(t), redirects)
     check_css_parity()
+    check_css_contraste_regresion()
 
     # orden estable + asignacion de ids deterministas
     sev_rank = {"alta": 0, "media": 1, "baja": 2}
