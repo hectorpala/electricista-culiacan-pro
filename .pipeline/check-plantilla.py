@@ -946,6 +946,14 @@ def check_page(fpath, t, noindex, redirects):
             "Quitar el segmento repetido (el archivo con la ruta duplicada no existe en disco, "
             "404 silencioso). Ver REGLAS.md 2026-06-30 jsonld-logo-ruta-duplicada.")
 
+    # NOTA (2026-07-01): el check 33 (contraste #FBBC04/#FFA000 dentro del HTML de CADA
+    # página, no solo en el CSS externo) se documentó en REGLAS.md (regresion-contraste-
+    # inline-20260701) pero NO se mecanizó todavía aquí: el pre-commit hook corre ci-gate.py
+    # sobre TODO el disco (no solo lo staged) y bloquea CUALQUIER commit si hay 1 ALTA en
+    # cualquier archivo — con 12 páginas de servicio aún pendientes (bk-3d5ba91f, fuera del
+    # cap de 18/corrida de hoy), activar el check ALTA hoy habría dejado el pipeline
+    # auto-bloqueado para todas las corridas futuras hasta arreglarlas. Añadir este check
+    # en la corrida que cierre bk-3d5ba91f (cuando ya de 0 ALTA de entrada).
 
     # --- 29. JS duplicado: IIFE inline + main.min.js coexisten (media, perf): la regla
     #         [2026-06-17] PERF/JS-MINIFICADO obliga a usar main.min.js (no main.js), y la

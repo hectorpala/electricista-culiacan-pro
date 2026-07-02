@@ -132,6 +132,15 @@ def get_og_url(t):
     c = re.search(r'content=["\']([^"\']+)["\']', m.group(0), re.I)
     return c.group(1).strip() if c else None
 
+def get_twitter_url(t):
+    m = re.search(r'<meta[^>]*(?:property|name)=["\']twitter:url["\'][^>]*>', t, re.I)
+    if not m:
+        m = re.search(r'<meta[^>]*content=["\'][^"\']*["\'][^>]*(?:property|name)=["\']twitter:url["\'][^>]*>', t, re.I)
+    if not m:
+        return None
+    c = re.search(r'content=["\']([^"\']+)["\']', m.group(0), re.I)
+    return c.group(1).strip() if c else None
+
 def has_noindex(t):
     for m in re.finditer(r'<meta[^>]*name=["\'](?:robots|googlebot)["\'][^>]*>', t, re.I):
         c = re.search(r'content=["\']([^"\']*)["\']', m.group(0), re.I)
@@ -315,6 +324,22 @@ def main():
                 add("media", r,
                     "%s (indexable) no emite <meta property=\"og:url\">; inconsistente con el estándar (las hermanas sí lo tienen). Ausente != incorrecto, pero deja la página sin la señal" % loc,
                     "Añadir <meta property=\"og:url\" content=\"%s\"> junto al resto de etiquetas og en el <head>" % ref)
+
+            # 2b: twitter:url == canonical (mismo patron que og:url; hallazgo verificador 2026-07-01,
+            # twitter-url-faltante-2blogs-20260701 -- rompe canonical==og:url==twitter:url).
+            # Las colonias (0/642) NUNCA tuvieron twitter:url en su plantilla -- no es una
+            # inconsistencia ahi, es el diseño de esa plantilla. Solo se exige donde SI es el
+            # estandar real: home, blog y servicios (9/11 blogs y todos los servicios lo tienen).
+            es_colonia = "/electricista-colonias-culiacan/" in url_path
+            tw = get_twitter_url(t)
+            if tw is not None and tw != ref:
+                add("alta", r,
+                    "twitter:url (%s) != canonical (%s) en %s" % (tw, ref, loc),
+                    "Corregir <meta name=\"twitter:url\"> a %s" % ref)
+            elif tw is None and not es_colonia:
+                add("media", r,
+                    "%s (indexable) no emite <meta name=\"twitter:url\">; inconsistente con el estándar (las hermanas sí lo tienen). Ausente != incorrecto, pero deja la página sin la señal" % loc,
+                    "Añadir <meta name=\"twitter:url\" content=\"%s\"> junto al resto de etiquetas twitter en el <head>" % ref)
 
             # 2: BreadcrumbList ultimo item == canonical + 3 niveles en /servicios/ (seo-301..303)
             found = parse_jsonld(t)
