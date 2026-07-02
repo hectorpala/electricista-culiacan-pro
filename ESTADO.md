@@ -1,5 +1,67 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-07-01 (Auto Agente diario — 1 ALTA: regresión de contraste WCAG rating-stars en 18/30 páginas · 7 tareas nuevas a backlog) — PUBLICADO ✅
+Rama `auto/diario-20260701-2001`, merge `15dbeb75` a main (push OK; pre-push auto-indexó 18 URLs).
+Aprendizaje (2 reglas nuevas + 1 check nuevo) en commit separado `20113bcf`. HEALTH CHECK:
+home/contacto/servicios/blog → 200 (servidor 8123). ci-gate 0 ALTA · 34+2 media/baja (33
+precio-en-body + 1 theme-color conocidos + 2 twitter:url nuevos, ambos ya en backlog). 9
+revisores corrieron en paralelo como subagentes.
+
+- **REGRESIÓN DE CONTRASTE WCAG (alta, a11y, 18/30 páginas hoy):** el fix de contraste del
+  2026-06-30 (`#FBBC04`/`#FFA000` → `#B45309`) solo tocó las 3 hojas CSS compartidas. Quedaron
+  30 páginas con el color viejo (~1.71:1, falla WCAG AA) en el `<style>` crítico INLINE de cada
+  página y en atributos `style=""` inline de los testimonios (mayor especificidad, el CSS
+  externo nunca los sobreescribe). Corregidas 18 de 30 hoy (home + 11 blogs + 6 servicios,
+  dentro del cap de 18 páginas/corrida) + el CSS huérfano `assets/css/critical.css`. Las 12
+  páginas de servicio restantes quedaron en `BACKLOG.jsonl` (`bk-3d5ba91f`) para mañana.
+
+- **DESCUBRIMIENTO — auto-fixer roto (media, tooling):** el fixer `tap-target-44` de
+  `auto-fixers.py` busca `.breadcrumb-link` en las 3 hojas CSS compartidas, pero ese selector en
+  realidad vive en el `<style>` crítico inline de CADA página — el fixer es un no-op silencioso
+  que siempre reporta "nada que arreglar" sin haber arreglado nada. Documentado en REGLAS.md,
+  encolado `bk-afcc93f1` (requiere reescribir el fixer, fuera de alcance hoy).
+
+- **GSC (FASE 6):** 100 clics/28d, 4558 impr, CTR 2.19%, pos 7.1 (estable vs. ayer). Sin
+  indexación bloqueada. Canibalización "electricista"/sitemap fantasma siguen pendiente-humano
+  (heredados). Sin páginas nuevas: el diff de FASE 5 ya llegó al cap de 18 páginas. Detalle en
+  `.pipeline/oportunidades-20260701.md`.
+
+- **BACKLOG — 7 tareas nuevas encoladas (ninguna ejecutada hoy, solo triaje):**
+  `bk-3d5ba91f` (12 páginas de servicio con la regresión de contraste, riesgo bajo),
+  `bk-e5b86d92` (geo faltante en 40 colonias indexables, requiere_humano — sin fuente de GPS
+  real en el repo, inventar coords violaría anti-doorway), `bk-038f8c19` (fuentes @font-face
+  duplicadas byte-idénticas, ~47KB extra), `bk-f865534d` (2 blog cards sin variante -420w),
+  `bk-f93458cd` (main.min.js/analytics-events.min.js sin versionar, cambio estructural de 676
+  páginas), `bk-afcc93f1` (tap-target de nav/breadcrumb/footer, ver arriba), `bk-e042beca`
+  (`servicios/index.html` no existe → 404 real, 32 breadcrumbs rotos — candidato de crecimiento),
+  `bk-f07ed321` (2 blogs sin meta twitter:url, hallazgo del verificador).
+
+- **APRENDIZAJE:** 2 reglas nuevas en REGLAS.md (regresion-contraste-inline-20260701,
+  auto-fixer-selector-inexistente-20260701) + 1 check nuevo activo (`check-indexabilidad.py`
+  twitter:url==canonical, excluyendo colonias que nunca tuvieron esa etiqueta por diseño). Un
+  segundo check (check 33 de `check-plantilla.py`, contraste dentro del HTML) quedó ESCRITO pero
+  INACTIVO a propósito: activarlo hoy con 12 páginas aún pendientes habría bloqueado el
+  pre-commit hook (corre sobre todo el disco) para todas las corridas futuras — se activa cuando
+  `bk-3d5ba91f` cierre. Más de 51 reglas aprendidas en total.
+
+- **VERIFICACIÓN:** Verificador ok=true. Confirmó las 18 páginas con HTTP 200, JSON-LD válido,
+  `#FBBC04` ya no aparece en ninguna, `#FFA000` (no tocado) intacto, 0 enlaces rotos, sin
+  precios/tests/borrados/contaminación de email, BACKLOG.jsonl jsonlines íntegro. 4 hallazgos no
+  bloqueantes reportados (documentación de más, 2 preexistentes ya en backlog, 1 CSS huérfano).
+
+- **PENDIENTE-HUMANO (heredados + nuevos):**
+  - Geo faltante en 40 colonias indexables (`bk-e5b86d92`) — requiere coordenadas GPS reales,
+    no hay fuente en el repo y no se pueden inventar (anti-doorway).
+  - Canibalización interna "electricista" entre home/servicios/colonias — apuesta de estrategia
+    SEO, no auto-arreglable.
+  - Sitemap fantasma en Search Console (`/sitemaps/servicios_colonias_sitemap.xml`) — acción
+    manual en la consola, no hay tool por código.
+  - `/servicios/index.html` no existe → 404, 32 breadcrumbs rotos (`bk-e042beca`).
+  - Precios en body HTML: 33 páginas (decisión estratégica del dueño).
+  - Heredados: aria-expanded JS toggle, popup emoji aria-hidden en contacto/, skip-link/tap-
+    target, title/description largos en colonias, meta X-Frame-Options inválido (~50 páginas
+    reales, corregido el conteo de ~692 estimado).
+
 ## 2026-06-30 (Auto Agente diario — 2 ALTA: contraste WCAG estrellas + CSS no-bloqueante 16 colonias · 1 MEDIA: logo JSON-LD 2 blogs) — PUBLICADO ✅
 Rama `auto/diario-20260630-2000`, merge `51f44ac1` a main (push OK; pre-push auto-indexó 86 URLs). Aprendizaje (2 checks nuevos + 3 reglas) en commit separado `4b28ebbe`. HEALTH CHECK: home/contacto/servicios/blog → 200 (servidor 8110). ci-gate 0 ALTA · 34 media/baja (precio-en-body 33 conocidas + google-stub baja). check-indexabilidad 0. 18 páginas HTML con contenido real tocado (16 colonias + 2 blogs, exactamente al cap) + 689 con bump de versión de CSS (cambio lógico de asset, excluido del cap). 9 revisores corrieron en paralelo como subagentes.
 
