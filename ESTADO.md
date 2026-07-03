@@ -1,5 +1,85 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-07-03 (Auto Agente diario — cierra 1 ALTA heredada + 9 fixes nuevos · 0 páginas nuevas) — PUBLICADO ✅
+Rama `auto/diario-20260703-1213`, 3 commits: `986244b5` (fixes) + `7662dd19` (bookkeeping,
+tras hallazgo del verificador) + `8549bbc7` (aprendizaje, separado tras el merge). Merge a main
+`9307bb46` (push OK; pre-push auto-indexó 16 URLs). HEALTH CHECK: home/contacto/servicios/blog
+→ 200 (servidor 8123). ci-gate 0 ALTA · 708 media/baja (34 conocidas + 674 nuevas baja no
+bloqueantes de check 34, ver abajo). 9 revisores + decisor-negocio corrieron en paralelo.
+
+- **CIERRA bk-3d5ba91f (ALTA heredada de 2026-07-01):** las 12 páginas de servicio restantes
+  con `#FBBC04` en `.rating-stars` del `<style>` crítico inline quedaron corregidas a
+  `#B45309`. Cierra por completo la regresión de contraste WCAG iniciada el 2026-06-30.
+  Verificado con Puppeteer (`rgb(180,83,9)`, ~5:1 AA) y `grep -rl FBBC04` = 0 en todo el repo.
+  **Incidente de proceso:** el verificador (ronda 1) detectó que el fix de código se aplicó
+  pero `BACKLOG.jsonl`/`HISTORIAL.jsonl` no se actualizaron en el mismo commit — corregido en
+  un commit separado (`7662dd19`) y reverificado (ronda 2, ok=true).
+
+- **8 fixes nuevos (media/alta), ninguno pendiente:**
+  - twitter:url faltante en 2 blogs (rompía canonical==og:url==twitter:url).
+  - `netlify.toml`: Early Hints (header `Link`) precargaba 3 recursos que la home NO usa
+    (`critical.min.css`, `inter-600.woff2`, `hero-mobile-480w-lite.avif` huérfano) mientras
+    omitía `montserrat-800.woff2` (688 páginas). Corregido a los 3 recursos reales.
+  - `sitemap-images.xml`: quitada entrada a `/servicios/` (404 real conocido, bk-e042beca).
+  - `sitemap.xml`/`sitemap_index.xml`: 86+15 `<lastmod>` desincronizados de la fecha real de
+    git, corregidos.
+  - `sw.js`: precache con `?v=` desactualizado (20260621→20260630) + 3 assets huérfanos
+    quitados + `montserrat-800.woff2` añadido (faltaba). `CACHE_VERSION` v17→v18.
+  - Tap-target <44px en el link "volver" de `terminos/`, `privacidad/` y el hub de colonias
+    (WCAG 2.5.5), corregido a 44px exacto (verificado con Puppeteer).
+  - `index.html`: `.skip-link:focus` sin `min-height`, corregido (fuente de verdad; propagación
+    al resto del sitio encolada `bk-e8643041`).
+
+- **GSC (FASE 6):** 104 clics/28d, 4764 impr, CTR 2.18%, pos 7.1 (estable/positivo vs. ayer).
+  Panel `decisor-negocio` VETÓ optimizar `electricista-precios` (CTR 0% pos 9.7 para
+  "electricista"): interferiría con el experimento de título de la home en curso (medir hasta
+  2026-07-15) y la canibalización ya congelada → encolado `bk-672de88e` requiere_humano.
+  Sin páginas nuevas: el diff de FASE 5 ya llegó al cap de 18 páginas HTML con los fixes
+  ALTA/media de hoy. Detalle en `.pipeline/oportunidades-20260703.md`.
+
+- **BACKLOG — 6 tareas nuevas encoladas (bajo riesgo, próximas corridas) + 1 requiere_humano:**
+  `bk-28159c53` (og:image genérico de emergencia en 20 páginas de servicio no-emergencia),
+  `bk-a4edc2b4` (imágenes hero duplicadas por MD5), `bk-bacf7108` (15 páginas sin variante
+  AVIF de su hero), `bk-a24ec5de` (`instalacion-ventiladores-techo` huérfana),
+  `bk-d0bf38a5` (`contacto/` huérfana), `bk-3bd33864` (color muerto `#FBBF24` en 674 páginas,
+  ver aprendizaje), `bk-672de88e` (requiere_humano, CTR-fix vetado), `bk-e8643041`
+  (propagar fix de skip-link tap-target al resto del sitio).
+
+- **APRENDIZAJE:** 6 reglas nuevas en REGLAS.md + 2 checks nuevos en `check-plantilla.py`:
+  check 33 (contraste `#FBBC04`/`#FFA000` inline por página, ALTA — estaba escrito pero
+  inactivo desde 2026-07-01 esperando el cierre de bk-3d5ba91f; activado hoy, probado
+  caza-malo=1/caza-bueno=0) y check 34 (color muerto `#FBBF24` en `.rating-stars` inline,
+  BAJA a propósito para no auto-bloquear el pre-commit con las 674 páginas afectadas). 7
+  entradas nuevas en HISTORIAL.jsonl. Más de 57 reglas aprendidas en total.
+
+- **VERIFICACIÓN (2 rondas):** Ronda 1: ok=false (bookkeeping de bk-3d5ba91f sin actualizar,
+  código correcto). Ronda 2 (tras el fix): **ok=true, 0 problemas.** Confirmó las 18 páginas
+  HTTP 200, JSON-LD válido, `#FBBC04`=0 site-wide, tap-targets 44px reales (Puppeteer), sw.js/
+  sitemaps válidos, netlify.toml válido con los 3 assets reales en disco, sin precios/tests/
+  borrados/contaminación de email, sin páginas huérfanas nuevas (0 páginas nuevas hoy).
+
+- **NOTA — proceso concurrente detectado (no es un problema, documentado por transparencia):**
+  durante la corrida, `revisor-a11y` detectó cambios sin commitear en el working tree y los
+  interpretó como posible segunda corrida simultánea (riesgo ya documentado en REGLAS.md
+  2026-06-17). Investigado: era el propio trabajo de FASE 5 de esta corrida en curso (aún sin
+  commitear en ese momento), más un proceso `critico-sistema` LEGÍTIMO corriendo en paralelo
+  (meta-observador de solo lectura, semanal, que solo escribe `PROPUESTAS.md`/
+  `.pipeline/ultima-meta.md` — confirmado que NO tocó git ni se mezcló con el commit de hoy).
+  Sin riesgo real, sin acción requerida.
+
+- **PENDIENTE-HUMANO (heredados + nuevos):**
+  - `bk-672de88e` (nuevo): CTR 0% en `electricista-precios` para "electricista" pos 9.7 —
+    decisor-negocio vetó auto-optimizar por interferir con el experimento de título de la home.
+  - Geo faltante en 40 colonias indexables (`bk-e5b86d92`) — requiere coordenadas GPS reales.
+  - Canibalización interna "electricista" entre home/servicios/colonias — apuesta de
+    estrategia SEO, no auto-arreglable.
+  - Sitemap fantasma en Search Console (`/sitemaps/servicios_colonias_sitemap.xml`) — acción
+    manual en la consola, no hay tool por código.
+  - `/servicios/index.html` no existe → 404, 32 breadcrumbs rotos (`bk-e042beca`).
+  - Precios en body HTML: 33 páginas (decisión estratégica del dueño).
+  - Heredados: aria-expanded JS toggle, popup emoji aria-hidden en contacto/, title/description
+    largos en colonias, meta X-Frame-Options inválido (confirmado por revisor-produccion hoy).
+
 ## 2026-07-01 (Auto Agente diario — 1 ALTA: regresión de contraste WCAG rating-stars en 18/30 páginas · 7 tareas nuevas a backlog) — PUBLICADO ✅
 Rama `auto/diario-20260701-2001`, merge `15dbeb75` a main (push OK; pre-push auto-indexó 18 URLs).
 Aprendizaje (2 reglas nuevas + 1 check nuevo) en commit separado `20113bcf`. HEALTH CHECK:
