@@ -137,24 +137,4 @@
         </image:image>
     </url>
 
-    <!-- Servicios Adicionales -->
-    <url>
-        <loc>https://electricistaculiacanpro.mx/servicios/</loc>
-        <image:image>
-            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/electricista-servicio-7-culiacan-800w.webp</image:loc>
-            <image:caption>Servicio de electricista profesional en Culiacán</image:caption>
-            <image:title>Servicios Eléctricos Profesionales</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/electricista-servicio-8-culiacan-800w.webp</image:loc>
-            <image:caption>Electricista certificado trabajando en instalación residencial</image:caption>
-            <image:title>Electricista Certificado Culiacán</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/electricista-servicio-9-culiacan-800w.webp</image:loc>
-            <image:caption>Servicio profesional de electricidad en Culiacán con garantía</image:caption>
-            <image:title>Servicio Eléctrico con Garantía</image:title>
-        </image:image>
-    </url>
-
 </urlset>
