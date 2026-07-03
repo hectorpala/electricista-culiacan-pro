@@ -946,14 +946,38 @@ def check_page(fpath, t, noindex, redirects):
             "Quitar el segmento repetido (el archivo con la ruta duplicada no existe en disco, "
             "404 silencioso). Ver REGLAS.md 2026-06-30 jsonld-logo-ruta-duplicada.")
 
-    # NOTA (2026-07-01): el check 33 (contraste #FBBC04/#FFA000 dentro del HTML de CADA
-    # página, no solo en el CSS externo) se documentó en REGLAS.md (regresion-contraste-
-    # inline-20260701) pero NO se mecanizó todavía aquí: el pre-commit hook corre ci-gate.py
-    # sobre TODO el disco (no solo lo staged) y bloquea CUALQUIER commit si hay 1 ALTA en
-    # cualquier archivo — con 12 páginas de servicio aún pendientes (bk-3d5ba91f, fuera del
-    # cap de 18/corrida de hoy), activar el check ALTA hoy habría dejado el pipeline
-    # auto-bloqueado para todas las corridas futuras hasta arreglarlas. Añadir este check
-    # en la corrida que cierre bk-3d5ba91f (cuando ya de 0 ALTA de entrada).
+    # --- 33. contraste insuficiente #FBBC04/#FFA000 dentro del HTML de CADA página (alta,
+    #         a11y): el check 32 solo mira los CSS compartidos; la regresión real de
+    #         2026-06-30/07-01 vivía en el <style> crítico INLINE de cada página y en
+    #         atributos style="" inline de los testimonios (mayor especificidad, el CSS
+    #         externo nunca los sobreescribe). bk-3d5ba91f (las últimas 12 páginas) se
+    #         cerró 2026-07-03 → el sitio ya da 0 ALTA de entrada, así que este check ya
+    #         puede activarse sin auto-bloquear el pre-commit hook (que corre sobre TODO
+    #         el disco). Ver REGLAS.md regresion-contraste-inline-20260701.
+    for bad_hex in ("#FBBC04", "#FFA000"):
+        if bad_hex in t:
+            add("alta", r, "a11y",
+                "Regresión de contraste dentro del HTML: %s sigue presente (en <style> crítico "
+                "inline o en un atributo style=\"\") — falla WCAG AA 4.5:1" % bad_hex,
+                "Reemplazar por #B45309 (~5:1) en el <style> inline y en cualquier style=\"\" "
+                "de la página. Ver REGLAS.md 2026-07-01 regresion-contraste-inline-20260701.")
+
+    # --- 34. color muerto/latente #FBBF24 en .rating-stars del <style> crítico inline (baja,
+    #         a11y): un TERCER color de bajo contraste (~1.67:1) que nunca formó parte de la
+    #         remediación FBBC04/FFA000. Hoy NO es visible en producción (la hoja externa ya
+    #         corregida a #B45309 gana el empate de especificidad al declararse después en el
+    #         DOM), pero es una bomba latente (flash de carga / riesgo si se reordena
+    #         <style>/<link>). Severidad BAJA a propósito (no ALTA): son ~674 páginas, activarla
+    #         como ALTA auto-bloquearía el pre-commit hook (misma trampa que ya se documentó
+    #         para el check 33). Ver REGLAS.md 2026-07-03 A11Y/COLOR-MUERTO-LATENTE-FBBF24
+    #         (bk-3bd33864, pendiente de lote de corrección).
+    if re.search(r'\.rating-stars\{color:#FBBF24', t, re.I):
+        add("baja", r, "a11y",
+            "Color muerto/latente: .rating-stars{color:#FBBF24} en el <style> crítico inline "
+            "(~1.67:1, nunca migrado a #B45309; hoy no visible porque el CSS externo gana el "
+            "empate de especificidad, pero es riesgo de flash/regresión)",
+            "Reemplazar por #B45309 en el <style> crítico inline, igual que ya se hizo en las "
+            "3 hojas CSS compartidas y en los atributos style=\"\" de testimonios. bk-3bd33864.")
 
     # --- 29. JS duplicado: IIFE inline + main.min.js coexisten (media, perf): la regla
     #         [2026-06-17] PERF/JS-MINIFICADO obliga a usar main.min.js (no main.js), y la
