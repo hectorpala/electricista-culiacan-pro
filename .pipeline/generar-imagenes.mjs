@@ -91,14 +91,15 @@ async function doSVG(img) {
 // ---- llamada a Google Gemini (genera 1 imagen, devuelve Buffer PNG) --------
 async function geminiGenerate(prompt) {
   const key = process.env.GEMINI_API_KEY;
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${key}`;
+  // La key va en HEADER, no en query string (en la URL puede filtrarse a logs/proxies).
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
     generationConfig: { responseModalities: ["IMAGE"], imageConfig: { aspectRatio: ASPECT } },
   };
   const r = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "x-goog-api-key": key },
     body: JSON.stringify(body),
   });
   if (!r.ok) {

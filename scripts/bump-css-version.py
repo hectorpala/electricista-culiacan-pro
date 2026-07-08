@@ -26,9 +26,19 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
+# Token con HORA si el de solo-fecha ya está en uso: dos bumps el mismo día generaban
+# el MISMO ?v= y el segundo cambio de CSS no llegaba a visitantes recurrentes (el SW
+# sí se refresca porque CACHE_VERSION sube en cada corrida, pero el HTTP cache no).
 NEW = sys.argv[1] if len(sys.argv) > 1 else datetime.date.today().strftime("%Y%m%d")
-if not re.fullmatch(r"\d{8}", NEW):
-    sys.exit(f"Versión inválida '{NEW}': usa formato YYYYMMDD (ej. 20260720).")
+if len(sys.argv) <= 1:
+    try:
+        _home = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+        if re.search(r'styles[\w.]*\.css\?v=' + NEW + r'(?!\d)', _home):
+            NEW = datetime.datetime.now().strftime("%Y%m%d%H%M")
+    except OSError:
+        pass
+if not re.fullmatch(r"\d{8}(\d{4})?", NEW):
+    sys.exit(f"Versión inválida '{NEW}': usa YYYYMMDD o YYYYMMDDHHMM (ej. 20260720).")
 
 # 1) HTML: styles*.css(?v=NNN)? -> styles*.css?v=NEW
 CSS_REF = re.compile(r'(styles[^"\']*?\.css)(\?v=\d+)?(["\'])')
@@ -48,11 +58,18 @@ for f in glob.glob("**/*.html", recursive=True):
 sw_path = "sw.js"
 sw = open(sw_path, encoding="utf-8").read()
 m = re.search(r"CACHE_VERSION\s*=\s*'v(\d+)'", sw)
-old_v = int(m.group(1)) if m else 0
+# FALLAR si el patrón no calza: antes asumía v0, no cambiaba nada, e imprimía
+# "v0 -> v1" con exit 0 — falso éxito con el SW sin versionar (cache stale).
+if m is None:
+    sys.exit("❌ sw.js: no encontré CACHE_VERSION = 'vN' — no puedo versionar el cache; NO publiques este bump a medias.")
+old_v = int(m.group(1))
 new_v = old_v + 1
 sw = re.sub(r"CACHE_VERSION\s*=\s*'v\d+'", f"CACHE_VERSION = 'v{new_v}'", sw, count=1)
 sw = CSS_REF.sub(lambda mm: f"{mm.group(1)}?v={NEW}{mm.group(3)}", sw)
 open(sw_path, "w", encoding="utf-8").write(sw)
+# Verificar que sw.js QUEDÓ con la versión nueva (la verificación del paso 3 solo mira HTML).
+if f"CACHE_VERSION = 'v{new_v}'" not in open(sw_path, encoding="utf-8").read():
+    sys.exit("❌ sw.js: el bump de CACHE_VERSION no quedó escrito — revisa antes de publicar.")
 
 # 3) Verificación de uniformidad
 bad = []

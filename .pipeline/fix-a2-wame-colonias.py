@@ -7,7 +7,9 @@ import sys
 from pathlib import Path
 from urllib.parse import quote
 
-ROOT = Path("servicios/electricista-colonias-culiacan")
+# Anclado a __file__: la ruta relativa a cwd daba no-op silencioso con exit 0
+# si se corría desde otro directorio (clase infra-006).
+ROOT = Path(__file__).resolve().parents[1] / "servicios/electricista-colonias-culiacan"
 LEAK = "electricista%20en%2010%20de%20Abril"
 AREA = re.compile(r'"areaServed":\s*\{[^}]*?"name":\s*"([^"]+?),\s*Culiac[aá]n"')
 
@@ -24,12 +26,14 @@ for f in sorted(ROOT.glob("*/index.html")):
     name = m.group(1).strip()
     enc = quote(name, safe="")
     repl = f"electricista%20en%20{enc}"
+    # ORDEN correcto: el no-op legítimo (la propia 10-de-abril, donde repl == LEAK)
+    # se decide ANTES del check de fuga residual — con el orden viejo esa página
+    # caía en "quedó fuga residual" (exit 1) y el `new == src` era inalcanzable.
+    if repl == LEAK:
+        continue
     new = src.replace(LEAK, repl)
     if LEAK in new:
         skipped.append((f, "quedó fuga residual"))
-        continue
-    if new == src:
-        # mismo texto (sería la propia 10-de-abril): no-op legítimo
         continue
     f.write_text(new, encoding="utf-8")
     changed.append((f, name, enc))

@@ -27,7 +27,13 @@ HTML_REPL = [
     ("rgba(34,197,94,0.4)", "rgba(7,94,84,0.35)"),
 ]
 
+import os
+# Anclado a __file__: con rutas relativas a cwd, desde otro directorio tronaba con
+# FileNotFoundError (o pisaría un index.html ajeno si existiera en el cwd).
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 def apply(path, repls):
+    path = os.path.join(_ROOT, path)
     with open(path, encoding="utf-8") as f:
         s = f.read()
     total = 0

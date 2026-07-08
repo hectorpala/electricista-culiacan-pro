@@ -222,15 +222,19 @@ def fix_page(filepath):
             insert_pos = matches[-1].end()
         else:
             # Fallback: insert before </head> minus some space
-            insert_pos = content.find('<!-- Breadcrumb') 
+            insert_pos = content.find('<!-- Breadcrumb')
             if insert_pos == -1:
                 insert_pos = content.find('<!-- Open Graph')
             if insert_pos == -1:
                 insert_pos = content.find('</head>')
-        
-        css_insert = CRITICAL_CSS + '\n    <link rel="stylesheet" href="../../styles.7f293647.css">\n'
-        content = content[:insert_pos] + css_insert + content[insert_pos:]
-        fixes.append("FIX4: Inserted critical CSS inline + styles.7f293647.css")
+        # ABORTAR si ningún anclaje calzó: con insert_pos == -1 el slice inyectaba el
+        # CSS antes del ÚLTIMO carácter del archivo (HTML corrupto y silencioso).
+        if insert_pos == -1:
+            print(f"  ❌ {filepath}: sin anclaje para el CSS crítico (head atípico) — FIX4 omitido, no inyecto a ciegas")
+        else:
+            css_insert = CRITICAL_CSS + '\n    <link rel="stylesheet" href="../../styles.7f293647.css">\n'
+            content = content[:insert_pos] + css_insert + content[insert_pos:]
+            fixes.append("FIX4: Inserted critical CSS inline + styles.7f293647.css")
     
     # FIX 5: Remove direct gtag.js script (Google Analytics loaded directly)
     gtag_pattern = r'\s*<!-- Google tag \(gtag\.js\) -->.*?</script>\s*'

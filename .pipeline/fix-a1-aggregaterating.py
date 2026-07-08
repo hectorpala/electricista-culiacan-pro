@@ -7,7 +7,9 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path("servicios/electricista-colonias-culiacan")
+# Anclado a __file__: la ruta relativa a cwd daba "0 páginas" con exit 0 (falso
+# éxito silencioso) si se corría desde otro directorio (clase infra-006).
+ROOT = Path(__file__).resolve().parents[1] / "servicios/electricista-colonias-culiacan"
 # coincide con: , "aggregateRating": {...sin llaves anidadas...}
 PAT = re.compile(r',\s*"aggregateRating"\s*:\s*\{[^{}]*\}')
 LDJSON = re.compile(

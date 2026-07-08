@@ -106,8 +106,7 @@ def fix_file(filepath, slug, dry_run=False):
          "areaServed":{"@type":"Place","name":"%s, Culiac\u00e1n" % colony},
          "openingHoursSpecification":{"@type":"OpeningHoursSpecification",
             "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-            "opens":"00:00","closes":"23:59"},
-         "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"150"}},
+            "opens":"00:00","closes":"23:59"}},
         {"@type":"BreadcrumbList","itemListElement":[
             {"@type":"ListItem","position":1,"name":"Inicio","item":"https://electricistaculiacanpro.mx/"},
             {"@type":"ListItem","position":2,"name":"Colonias","item":"https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/"},

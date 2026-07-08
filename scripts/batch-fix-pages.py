@@ -48,18 +48,22 @@ def fix_page(filepath, dry_run=False):
     original = content
     fixes = []
 
-    # FIX 1: rel="noopener" on all target="_blank" links that don't have it
-    # Match target="_blank" NOT followed by rel="noopener"
+    # FIX 1: rel="noopener" on all target="_blank" links that don't have it.
+    # OJO (bug corregido 2026-07-07): contar el substring 'rel="noopener"' con comilla
+    # de cierre NO matchea 'rel="noopener noreferrer"', y el lookahead viejo tampoco lo
+    # excluía → correr esto duplicaba el atributo rel= (se perdía noreferrer) en toda
+    # página que ya usara la variante compuesta. Ahora se cuenta con regex y el
+    # lookahead excluye CUALQUIER rel= existente.
     old_count = content.count('target="_blank"')
-    noopener_count = content.count('rel="noopener"')
+    noopener_count = len(re.findall(r'rel="noopener[^"]*"', content))
     if old_count > noopener_count:
         # Add rel="noopener" where missing
         content = re.sub(
-            r'target="_blank"(?!\s*rel="noopener")',
+            r'target="_blank"(?!\s*rel=)',
             'target="_blank" rel="noopener"',
             content
         )
-        new_noopener = content.count('rel="noopener"')
+        new_noopener = len(re.findall(r'rel="noopener[^"]*"', content))
         if new_noopener > noopener_count:
             fixes.append('noopener: added %d' % (new_noopener - noopener_count))
 
