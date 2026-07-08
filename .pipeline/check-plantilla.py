@@ -409,6 +409,18 @@ def check_page(fpath, t, noindex, redirects):
             "Email contaminado de otra plantilla (dominio con 'plomero'): %s" % m_mail.group(0),
             "Reemplazar por el email correcto de electricistaculiacanpro.mx")
 
+    # --- 4c. ANTI-FUGA site-wide (alta, contenido): la palabra "plomero" y el GTM del
+    #     sitio hermano (GTM-W75CRTX5) JAMÁS deben aparecer aquí. gen-landing solo cubre
+    #     la GENERACIÓN; ediciones de colonias/blog no pasaban por ningún guard (port de
+    #     infra-009 del plomero, 2026-07-07).
+    low_t = t.lower()
+    for bad in ("plomero", "gtm-w75crtx5"):
+        if bad in low_t:
+            add("alta", r, "contenido",
+                "FUGA del sitio hermano: la página contiene %r (contaminación de la plantilla origen)" % bad,
+                "Eliminar toda mención/tracking del plomero; esta página es del sitio de ELECTRICIDAD")
+            break
+
     # --- 5. exit-intent-popup sin ARIA (media, a11y)
     mp = re.search(r'<div\b[^>]*id=["\']exit-intent-popup["\'][^>]*>', t, re.I)
     if mp:

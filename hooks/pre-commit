@@ -14,7 +14,8 @@ set -u
 # Aunque el agente desatendido borre algo por error, aquí se ABORTA si un archivo eliminado
 # (staged) sigue referenciado por una página viva o está en el sitemap. Los artefactos huérfanos
 # de verdad (cero referencias, vía limpiar-huerfanos.py) pasan sin problema.
-DELETED=$(git diff --cached --name-only --diff-filter=D 2>/dev/null || true)
+# --no-renames: un `git mv` de página viva salía como R (no D) y burlaba la capa entera.
+DELETED=$(git diff --cached --name-only --no-renames --diff-filter=D 2>/dev/null || true)
 if [ -n "$DELETED" ]; then
   DELPROB=""
   while IFS= read -r f; do
@@ -25,8 +26,12 @@ if [ -n "$DELETED" ]; then
       */index.html) NEEDLE="${f%index.html}" ;;   # página: su URL de directorio
       *)            NEEDLE="$(basename "$f")" ;;   # otros: por basename
     esac
+    # Referencias y sitemap se consultan en el estado BASE (HEAD), no solo en el índice:
+    # un commit que borra la página Y limpia sus referencias/sitemap en el MISMO commit
+    # (justo lo que haría un agente desatendido) pasaba limpio con --cached solo.
     if git grep -l --cached --fixed-strings "$NEEDLE" -- '*.html' '*.xml' '_redirects' >/dev/null 2>&1 \
-       || grep -qF "$NEEDLE" sitemap.xml 2>/dev/null; then
+       || git grep -l --fixed-strings "$NEEDLE" HEAD -- '*.html' '*.xml' '_redirects' >/dev/null 2>&1 \
+       || git show HEAD:sitemap.xml 2>/dev/null | grep -qF "$NEEDLE"; then
       DELPROB="$DELPROB
    - $f (era página indexable / aún referenciado o en el sitemap)"
     fi
@@ -55,6 +60,25 @@ echo ""
 # (más ligera, no v2.0.0) y se excluyen de validate-landing.sh: su validación
 # mecánica la cubre la Capa 1 (check-plantilla + check-indexabilidad).
 STAGED_LANDINGS=$(git diff --cached --name-only --diff-filter=ACM | grep '^servicios/.*/index\.html$' | grep -v '/electricista-colonias-culiacan/')
+
+# --- Capa 2b: gate por página (anti-doorway/anti-fuga) + candado de páginas NUEVAS ---
+# Antes eran VOLUNTARIOS (solo si el agente los invocaba); ahora son estructurales.
+STAGED_PAGES=$(git diff --cached --name-only --no-renames --diff-filter=ACM | grep -E '^(servicios|blog)/.*/index\.html$' || true)
+if [ -n "$STAGED_PAGES" ]; then
+  # shellcheck disable=SC2086
+  if ! python3 .pipeline/gate-pagina.py $STAGED_PAGES; then
+    echo "❌ COMMIT BLOQUEADO: gate-pagina.py (anti-fuga/estructura/anti-doorway) falló."
+    exit 1
+  fi
+fi
+ADDED_PAGES=$(git diff --cached --name-only --no-renames --diff-filter=A | grep -E '^(servicios|blog)/.*/index\.html$' || true)
+if [ -n "$ADDED_PAGES" ]; then
+  # shellcheck disable=SC2086
+  if ! python3 .pipeline/check-pagina-nueva.py $ADDED_PAGES; then
+    echo "❌ COMMIT BLOQUEADO: página nueva con precio visible o testimonio inventado."
+    exit 1
+  fi
+fi
 
 if [ -z "$STAGED_LANDINGS" ]; then
     echo "✅ No hay landings de servicios modificadas; gate OK → commit permitido."

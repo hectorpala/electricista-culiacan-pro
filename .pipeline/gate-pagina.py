@@ -59,6 +59,10 @@ def siblings(path):
         os.path.join(ROOT, "servicios", "*", "index.html"),
         os.path.join(ROOT, "servicios", "electricista-colonias-culiacan", "*", "index.html"),
         os.path.join(ROOT, "blog", "*", "index.html"),
+        # Página suelta indexable: un servicio nuevo que clone /contacto/ no se comparaba.
+        # (La HOME se excluye a propósito: las landings establecidas le dan Jaccard alto
+        # legítimo por diseño de plantilla — lección del port en el plomero.)
+        os.path.join(ROOT, "contacto", "index.html"),
     ]
     out, seen = [], set()
     for pat in pats:
@@ -75,6 +79,24 @@ def main():
         print("Uso: gate-pagina.py <ruta/index.html> [...]"); sys.exit(2)
 
     errors = 0
+
+    # 0) ANTI-FUGA en TODA página recibida (sin excepción): la palabra "plomero" y el GTM
+    #    del sitio hermano (GTM-W75CRTX5) jamás deben publicarse aquí. gen-landing ya lo
+    #    revisa al GENERAR, pero blogs y colonias se saltan validate-landing → una EDICIÓN
+    #    con fuga se publicaba sin guard (port de infra-009 del plomero, 2026-07-07).
+    print("── 0) Anti-fuga (plomero / GTM ajeno) ──")
+    for p in pages:
+        try:
+            raw = open(p, encoding="utf-8", errors="replace").read().lower()
+        except OSError as e:
+            print("  ❌ " + p + " → no pude leer la página (%s)" % e); errors += 1
+            continue
+        fugas = [w for w in ("plomero", "gtm-w75crtx5") if w in raw]
+        if fugas:
+            print("  ❌ FUGA " + p + " → contiene: " + ", ".join(fugas))
+            errors += 1
+        else:
+            print("  ✅ " + p + " → sin fuga")
 
     # 1) validate-landing.sh por página (solo landings de servicio; los blogs usan
     #    otra plantilla y se omiten — su paridad se evalúa contra hermanas de blog).
@@ -109,6 +131,12 @@ def main():
         tv = visible_tokens(p)
         if tv is None:
             print("  ⏭  " + p + " → noindex, no compite por ranking (omitido)")
+            continue
+        # Piso de contenido: una página indexable casi vacía daba Jaccard 0.00 y PASABA
+        # el anti-doorway (conjunto vacío ∩ nada). Mínimo razonable de una landing real.
+        if len(tv) < 150:
+            print("  ❌ VACÍA " + p + " → solo %d tokens visibles únicos (mínimo 150 para indexable)" % len(tv))
+            errors += 1
             continue
         worst = 0.0; worst_sib = None
         for sib in siblings(p):

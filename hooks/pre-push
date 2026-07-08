@@ -1,14 +1,47 @@
 #!/bin/bash
-# Hook VERSIONADO. Auto-indexación en Google Search Console al pushear a main.
-# Robustez: node no siempre está en el PATH de un hook (gotcha documentado en
-# REGLAS.md) → lo añadimos. Y si node o el indexador no existen (otra máquina),
-# se AVISA y se deja pasar el push en vez de abortarlo.
-BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null)
-[ "$BRANCH" != "main" ] && [ "$BRANCH" != "master" ] && exit 0
+# Hook VERSIONADO. DOS trabajos al pushear a main:
+#   1) GATE DETERMINISTA BLOQUEANTE (ci-gate.py, 0 ALTA): antes TODO el bloqueo vivía
+#      solo en pre-commit, saltable con `git commit --no-verify` o con commits hechos
+#      antes de instalar el hook — un push así llegaba a producción sin NINGÚN gate
+#      (auditoría 2026-07-07, port del patrón del plomero).
+#      Se decide por el ref de DESTINO (stdin de git), no por la rama local: un
+#      `git push origin HEAD:main` desde rama lateral también publica a main.
+#      Escape de emergencia (criterio humano explícito):  SKIP_GATE=1 git push
+#   2) Auto-indexación en Google Search Console. NUNCA bloquea el push.
+# Robustez: node no siempre está en el PATH de un hook (gotcha en REGLAS.md).
+
+# stdin de pre-push: "<local_ref> <local_sha> <remote_ref> <remote_sha>" por línea.
+STDIN_REFS=$(cat)
+PUBLICA_MAIN=0
+while read -r L_REF L_SHA R_REF R_SHA; do
+  case "$R_REF" in
+    refs/heads/main|refs/heads/master) PUBLICA_MAIN=1 ;;
+  esac
+done <<EOF
+$STDIN_REFS
+EOF
+[ "$PUBLICA_MAIN" = "1" ] || exit 0
 
 export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
-INDEXER="$HOME/gsc-mcp/auto-index.mjs"
 
+# ── 1) Gate bloqueante ──
+if [ "${SKIP_GATE:-0}" = "1" ]; then
+  echo "⏭  SKIP_GATE=1 — gate pre-push omitido por decisión humana explícita."
+else
+  PY="$(command -v python3 2>/dev/null || echo /usr/bin/python3)"
+  REPO="$(git rev-parse --show-toplevel)"
+  echo "🔒 Gate pre-push (determinista) antes de publicar…"
+  if ! ( cd "$REPO" && "$PY" .pipeline/ci-gate.py ); then
+    echo ""
+    echo "❌ PUSH BLOQUEADO: ci-gate.py encontró hallazgo(s) de severidad ALTA."
+    echo "   (Emergencia, con criterio humano: SKIP_GATE=1 git push)"
+    exit 1
+  fi
+  echo "✅ Gate OK — apto para publicar."
+fi
+
+# ── 2) Auto-indexación (nunca bloquea) ──
+INDEXER="$HOME/gsc-mcp/auto-index.mjs"
 if ! command -v node >/dev/null 2>&1; then
     echo "⚠️ node no disponible en el PATH del hook — se omite auto-indexación GSC (push continúa)."
     exit 0
@@ -17,7 +50,10 @@ if [ ! -f "$INDEXER" ]; then
     echo "⚠️ $INDEXER no existe en esta máquina — se omite auto-indexación GSC (push continúa)."
     exit 0
 fi
-
+# Refrescar el token OAuth primero (el plomero lo hace; sin esto la indexación
+# falla en silencio con token vencido).
+[ -f "$HOME/gsc-mcp/refresh-token.js" ] && node "$HOME/gsc-mcp/refresh-token.js" \
+  || echo "⚠️ refresh-token falló u omitido (sigo; no bloqueo el push)"
 echo "🔍 Auto-indexando cambios en Google..."
 node "$INDEXER" "electricistaculiacanpro.mx" || echo "⚠️ auto-indexación falló (push continúa)."
 exit 0
