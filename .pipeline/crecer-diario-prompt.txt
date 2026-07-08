@@ -105,6 +105,12 @@ tokens). Sigue el skill /expandir-sitio y usa el ORQUESTADOR scripts/crecer.py +
        repite:
          a. `python3 .pipeline/gestor-backlog.py next --max 1 --riesgo-max medio` → toma la tarea de mayor prioridad.
             Si no hay ninguna → sal del loop.
+         a2. Si al leerla determinas que la tarea REQUIERE DECISIÓN HUMANA (dato que solo el dueño tiene, decisión
+            de estrategia/precios, o los 2 expertos del decisor no concuerdan): ciérrala YA con
+            `close --id <id> --estado requiere_humano --nota "<qué debe decidir el dueño>"` y repórtala en la
+            sección "Necesito que tú decidas" del parte. PROHIBIDO dejarla "pendiente": una tarea humana en estado
+            pendiente se vuelve cabeza de la cola y BLOQUEA el loop para siempre (caso bk-e042beca: 7 corridas
+            releyéndola sin drenar nunca la tarea #2).
          b. EJECÚTALA según su tipo (página nueva → paso 3; optimización → mejora directa: title/meta, H2/FAQ,
             enlace interno, schema, perf). Pasa SIEMPRE por el CANDADO (gate-pagina.py) y las reglas de la FASE 5.
          c. Si pasa: `gestor-backlog.py close --id <id> --estado hecho --commit <sha-o-rama>`.
@@ -150,10 +156,19 @@ problema: NO se publica nada; deja la rama, escribe el motivo en ESTADO.md y sal
 
 ==================== FASE 8 — PUBLICAR (solo si la FASE 7 fue 100% verde) ====================
 Candados de publicación (TODOS deben cumplirse): el verificador dio ok=true; el diff toca como máximo 18 archivos
-de PÁGINA HTML (corrida normal: 1–8; un diff mayor en un sitio de ~100 páginas es señal de que algo se salió de
-alcance → lo ve un humano). NO cuentan contra ese cap: un cambio de ASSET compartido (styles*.css + el bump de ?v=
-en las páginas que lo referencian + sw.js — UN cambio lógico aunque toque muchas) ni los borrados de artefactos
-huérfanos que pasaron limpiar-huerfanos.py. Sí se prohíben los borrados ESTRUCTURALES inesperados (una página
+de PÁGINA HTML editados de FORMA LIBRE (corrida normal: 1–8; un diff libre mayor es señal de que algo se salió de
+alcance → lo ve un humano). NO cuentan contra ese cap:
+  (1) un LOTE MECÁNICO VERIFICADO: los archivos que `python3 .pipeline/auto-fixers.py verify --base <ref-base>`
+      certifique como "mecanicos" (recomputa cada archivo desde el ref base aplicando SOLO los fixers registrados
+      y exige igualdad byte a byte + idempotencia). El riesgo real es la IMPREVISIBILIDAD, no el número de
+      archivos: una receta registrada idéntica en 600 páginas es más segura que 10 ediciones a mano. Los archivos
+      que verify marque "libres" SÍ cuentan contra el cap de 18. OJO: auto-fixers.py salta las páginas en
+      CUARENTENA (contenido delgado preexistente que haría fallar gate-pagina y bloquear TODA la corrida) — NO
+      las edites de forma libre tampoco; primero enriquécelas (su tarea vive en el backlog) y al cerrarla quita
+      la página de la lista CUARENTENA de auto-fixers.py;
+  (2) un cambio de ASSET compartido (styles*.css + el bump de ?v= en las páginas que lo referencian + sw.js — UN
+      cambio lógico aunque toque muchas);
+  (3) los borrados de artefactos huérfanos que pasaron limpiar-huerfanos.py. Sí se prohíben los borrados ESTRUCTURALES inesperados (una página
 indexable, una entrada de sitemap, un asset en uso). Si cualquiera falla: NO publiques; deja la rama y explica en
 ESTADO.md. Si pasan TODOS, publica sincronizando ANTES con el remoto (git push --force PROHIBIDO):
   a. `git checkout main`

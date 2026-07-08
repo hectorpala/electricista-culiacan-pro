@@ -1,5 +1,17 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-07-08 (Sesión interactiva con el dueño — lote mecánico verificado, 670 páginas) — PUBLICADO ✅
+Merge a main `970ad008` (batch `7d7e7bb7`, push OK; pre-push auto-indexó 67 URLs). Tres fixes
+site-wide que el cap de 18 tenía bloqueados: estrellitas `#FBBF24`→`#B45309` (674, cierra
+bk-3bd33864), skip-link réplica de la home (668, cierra bk-e8643041), aria-hidden en svg de
+floating-btn (670, cierra bk-08a2d9d5). INFRA nueva: fixers `star-color-inline`/`svg-aria-float`/
+`skip-link` + subcomando `auto-fixers.py verify --base <ref>` (certifica lote mecánico byte a
+byte) + lista CUARENTENA (19 págs con <150 tokens que harían fallar gate-pagina: NO tocarlas,
+enriquecerlas primero — bk-ac57a537). Candado de FASE 8 redefinido: cap de 18 SOLO para edición
+libre; lote mecánico verificado exento. Cola destapada: bk-e042beca (hub servicios) pasó a
+requiere_humano — Héctor decide crear hub o quitar breadcrumb. Pendientes de fixer: 4 págs sin
+</header> (contacto/gracias/privacidad/terminos, edición normal) + 19 en cuarentena.
+
 ## 2026-07-03 (Auto Agente diario — cierra 1 ALTA heredada + 9 fixes nuevos · 0 páginas nuevas) — PUBLICADO ✅
 Rama `auto/diario-20260703-1213`, 3 commits: `986244b5` (fixes) + `7662dd19` (bookkeeping,
 tras hallazgo del verificador) + `8549bbc7` (aprendizaje, separado tras el merge). Merge a main
