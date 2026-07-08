@@ -31,10 +31,22 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
   if [ -n "$OLDPID" ] && kill -0 "$OLDPID" 2>/dev/null; then
     echo "[$(date)] Ya hay una corrida activa (pid $OLDPID); salgo." | tee -a "$MLOG"; exit 0
   fi
-  rm -rf "$LOCK_DIR"; mkdir "$LOCK_DIR" 2>/dev/null || { echo "No tomé el lock; salgo." | tee -a "$MLOG"; exit 0; }
+  # Lock sin pid pero recién creado = otra corrida arrancando (ventana mkdir→pid); no robar.
+  if [ -z "$OLDPID" ]; then
+    LOCK_AGE=$(( $(date +%s) - $(stat -f %m "$LOCK_DIR" 2>/dev/null || echo 0) ))
+    [ "$LOCK_AGE" -lt 120 ] && { echo "[$(date)] Lock sin pid recién creado; salgo." | tee -a "$MLOG"; exit 0; }
+  fi
+  # Robo ATÓMICO vía mv (solo un proceso se lo lleva; evita el doble robo simultáneo).
+  if mv "$LOCK_DIR" "$LOCK_DIR.stale.$$" 2>/dev/null; then
+    rm -rf "$LOCK_DIR.stale.$$"
+  else
+    echo "[$(date)] Otro proceso robó el lock primero; salgo." | tee -a "$MLOG"; exit 0
+  fi
+  mkdir "$LOCK_DIR" 2>/dev/null || { echo "No tomé el lock; salgo." | tee -a "$MLOG"; exit 0; }
 fi
 echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
+RUN_START=$(date +%s)   # para atribuir el consumo de cuota del maratón al ledger
 
 # Resiliencia a NordVPN: espera a que la API vuelva antes de cada unidad (kill switch
 # bloquea la salida al reconectar). curl a /v1/messages da HTTP 405 = conectó.
@@ -64,14 +76,21 @@ while [ "$(date +%s)" -lt "$END" ] && [ "$PASS" -lt "$MAX_PASS" ]; do
   fi
 
   # Orquestador en SONNET (~5x más barato); el juicio crítico vive en subagentes model:opus.
-  "$CLAUDE_CMD" --model sonnet --permission-mode auto -p "$(cat .pipeline/maraton-prompt.txt)" >> "$PLOG" 2>&1 || true
+  # --strict-mcp-config: SOLO el MCP de GSC del proyecto — sin él cargaba TODOS los MCP
+  # del usuario (tradingview, facebook con escritura…) en un agente autónomo sin humano.
+  MCP_GSC="/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/mcp-gsc.json"
+  "$CLAUDE_CMD" --model sonnet --permission-mode auto --mcp-config "$MCP_GSC" --strict-mcp-config -p "$(cat .pipeline/maraton-prompt.txt)" >> "$PLOG" 2>&1 || true
 
   LAST=$(grep -E '^(HECHO|SIN TRABAJO):' "$PLOG" | tail -1)
   echo "    -> ${LAST:-(sin línea de cierre — pasada incompleta)}" | tee -a "$MLOG"
   if echo "$LAST" | grep -q '^SIN TRABAJO'; then
     DRY=$((DRY+1))
+  elif [ -z "$LAST" ]; then
+    # Pasada SIN línea de cierre (claude crasheó) cuenta como seca: antes reseteaba
+    # DRY=0 y un CLI roto quemaba las 20 pasadas sin que el corte "2 secas" actuara.
+    DRY=$((DRY+1))
   else
-    DRY=0; [ -n "$LAST" ] && HECHAS=$((HECHAS+1))
+    DRY=0; HECHAS=$((HECHAS+1))
   fi
   if [ "$DRY" -ge 2 ]; then
     echo "[$(date)] 2 pasadas SIN TRABAJO seguidas -> fin anticipado (sin huecos buenos que hacer)." | tee -a "$MLOG"
@@ -80,5 +99,10 @@ while [ "$(date +%s)" -lt "$END" ] && [ "$PASS" -lt "$MAX_PASS" ]; do
 done
 
 echo "[$(date)] === MARATÓN fin · ${PASS} pasada(s) · ${HECHAS} unidad(es) hecha(s) ===" | tee -a "$MLOG"
+# Registro de consumo de cuota en el ledger (antes el maratón era invisible para el tripwire).
+/usr/local/bin/node "/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/registrar-costo.mjs" \
+  "$HOME/.claude/projects/-Users-openclaw-Sitios-Web-Electricista-Culiac-n" "$RUN_START" \
+  "/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/costos.jsonl" "maraton $STAMP0" >> "$MLOG" 2>&1 \
+  || echo "[$(date)] No pude registrar el consumo del maratón (sigo)." >> "$MLOG"
 # Correo resumen del maratón (mismo IPv4 fix; no bloquea si falla)
 /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs "$MLOG" "Electricista Culiacán (MARATÓN)" "maratón" >> "$MLOG" 2>&1 || true

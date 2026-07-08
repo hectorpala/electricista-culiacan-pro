@@ -26,9 +26,9 @@
         <integer>0</integer>
     </dict>
     <key>StandardOutPath</key>
-    <string>/Users/openclaw/Library/Logs/mantener-sitio/auto-agente-launchd.out.log</string>
+    <string>/Users/openclaw/Library/Logs/mantener-sitio/auto-agente-electricista-launchd.out.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/openclaw/Library/Logs/mantener-sitio/auto-agente-launchd.err.log</string>
+    <string>/Users/openclaw/Library/Logs/mantener-sitio/auto-agente-electricista-launchd.err.log</string>
     <key>RunAtLoad</key>
     <false/>
 </dict>
