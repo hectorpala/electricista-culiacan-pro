@@ -19,6 +19,7 @@ Uso:
   python3 .pipeline/auto-fixers.py run                       # DRY-RUN sobre todo el sitio (no escribe)
   python3 .pipeline/auto-fixers.py run --apply               # aplica y escribe
   python3 .pipeline/auto-fixers.py run --solo og-url [paths] # un fixer / rutas concretas
+  python3 .pipeline/auto-fixers.py verify --base main        # certifica LOTE MECÁNICO (FASE 8)
 """
 import datetime
 import glob
@@ -30,6 +31,34 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 CORRECT_EMAIL = "contacto@electricistaculiacanpro.mx"
 BRAND_THEME = "#E36414"   # theme-color de la home (fuente de verdad)
+
+# ── CUARENTENA (bk pendiente: contenido delgado / fuera de plantilla) ─────────────────────
+# Estas páginas FALLAN gate-pagina.py por razones PREEXISTENTES (<150 tokens visibles únicos,
+# o contacto/: 7 errores de plantilla). Si un fixer las toca, el verificador de FASE 7 las
+# inspecciona, falla, y la corrida ENTERA no publica. Se saltan aquí hasta que el agente las
+# enriquezca (diferenciar-colonia.py / decisor-negocio); al cerrar su tarea de backlog,
+# QUITARLAS de esta lista para que los fixers pendientes (skip-link, etc.) las alcancen.
+CUARENTENA = {
+    "blog/index.html",
+    "contacto/index.html",
+    "servicios/electricista-colonias-culiacan/bachigualato/index.html",
+    "servicios/electricista-colonias-culiacan/campestre/index.html",
+    "servicios/electricista-colonias-culiacan/colinas-de-san-miguel/index.html",
+    "servicios/electricista-colonias-culiacan/el-vallado/index.html",
+    "servicios/electricista-colonias-culiacan/hacienda-del-valle/index.html",
+    "servicios/electricista-colonias-culiacan/jorge-almada/index.html",
+    "servicios/electricista-colonias-culiacan/juntas-de-humaya/index.html",
+    "servicios/electricista-colonias-culiacan/las-americas/index.html",
+    "servicios/electricista-colonias-culiacan/lazaro-cardenas/index.html",
+    "servicios/electricista-colonias-culiacan/libertad/index.html",
+    "servicios/electricista-colonias-culiacan/los-pinos/index.html",
+    "servicios/electricista-colonias-culiacan/nuevo-culiacan/index.html",
+    "servicios/electricista-colonias-culiacan/pemex/index.html",
+    "servicios/electricista-colonias-culiacan/prados-de-la-conquista/index.html",
+    "servicios/electricista-colonias-culiacan/rafael-buelna/index.html",
+    "servicios/electricista-colonias-culiacan/recursos-hidraulicos/index.html",
+    "servicios/electricista-colonias-culiacan/valle-alto/index.html",
+}
 
 
 def es_noindex(h):
@@ -124,6 +153,72 @@ def _fix_color(h):
     return h, n
 
 
+# ── tercer tono latente de estrellitas (bk-3bd33864 / REGLAS.md color-muerto-FBBF24):
+#    el <style> crítico inline de ~674 páginas trae .rating-stars{color:#FBBF24} (1.67:1).
+#    Hoy lo tapa styles.<hash>.css (#B45309, ya corregido), pero es bomba latente (flash de
+#    carga / reorden de hojas). Mismo destino que la remediación FBBC04/FFA000 → #B45309. ──
+def _det_star(h):
+    return "fbbf24" in _sin_svg(h).lower()
+
+def _fix_star(h):
+    n = 0
+    svgs = []
+    def _stash(m):
+        svgs.append(m.group(0))
+        return "\x00SVG%d\x00" % (len(svgs) - 1)
+    h = re.sub(r"<svg\b.*?</svg>", _stash, h, flags=re.S | re.I)
+    h, n = re.subn(r"#FBBF24", "#B45309", h, flags=re.I)
+    h = re.sub(r"\x00SVG(\d+)\x00", lambda m: svgs[int(m.group(1))], h)
+    return h, n
+
+
+# ── SVG decorativo sin aria-hidden en los botones flotantes (bk-08a2d9d5 / REGLAS.md
+#    svg-aria-hidden-cta-20260628): el <a class="floating-btn"> ya trae aria-label; el svg
+#    interior debe llevar aria-hidden="true" (patrón ya aplicado en la home). ──
+_FLOAT_SVG = re.compile(r'(<a[^>]*class="[^"]*floating-btn[^"]*"[^>]*>\s*)<svg(?![^>]*aria-hidden)', re.I)
+
+def _det_svg_float(h):
+    return bool(_FLOAT_SVG.search(h))
+
+def _fix_svg_float(h):
+    return _FLOAT_SVG.subn(r'\g<1><svg aria-hidden="true"', h)
+
+
+# ── skip-link de accesibilidad (bk-e8643041): réplica EXACTA del de la home (fuente de
+#    verdad) en las páginas que no lo tienen. Receta estrecha: (1) <a> pegado tras <body>,
+#    (2) regla .skip-link:focus en el <style> crítico, (3) ancla: id="main-content" en el
+#    primer <main>/<section> tras </header> — si ese elemento ya tiene id, se apunta el
+#    href al id existente en vez de duplicar. Páginas sin </header> NO se tocan (quedan
+#    para edición normal: son 4, caben en el cap de 18). ──
+_SKIP_A = ('<a href="#main-content" class="skip-link" style="position:absolute;top:-40px;left:0;'
+           'background:#1e40af;color:#fff;padding:8px 16px;z-index:100;font-size:14px;'
+           'transition:top .2s">Saltar al contenido</a>')
+_SKIP_CSS = '.skip-link:focus{top:0;min-height:44px;display:flex;align-items:center;box-sizing:border-box}'
+
+def _det_skiplink(h):
+    return ("skip-link" not in h) and ("</header>" in h) and ("<body" in h) and ("</style>" in h)
+
+def _fix_skiplink(h):
+    i = h.find("</header>")
+    m = re.search(r"<(main|section)\b([^>]*)>", h[i:i + 600], re.I)
+    if not m:
+        return h, 0
+    tag_attrs = m.group(2)
+    mid = re.search(r'id=["\']([^"\']+)["\']', tag_attrs)
+    if mid:
+        ancla = mid.group(1)          # ya tiene id → el href apunta ahí
+        skip_a = _SKIP_A.replace("#main-content", "#" + ancla)
+    else:                             # sin id → se le pone main-content (como la home)
+        abs_start = i + m.start()
+        h = h[:abs_start] + "<%s id=\"main-content\"%s>" % (m.group(1), tag_attrs) + h[i + m.end():]
+        skip_a = _SKIP_A
+    h2, n1 = re.subn(r"(<body[^>]*>)", r"\g<1>" + skip_a.replace("\\", "\\\\"), h, count=1, flags=re.I)
+    if not n1:
+        return h, 0
+    h3 = h2.replace("</style>", _SKIP_CSS + "</style>", 1)
+    return h3, 1
+
+
 FIXERS = [
     ("og-url", "og:url faltante en página indexable → copia el canonical (scope: solo indexables)",
      "mecanico", _det_ogurl, _fix_ogurl),
@@ -135,6 +230,12 @@ FIXERS = [
      "mecanico", _det_robots, _fix_robots),
     ("color-off-brand", "color off-brand (azul-no-marca/morado/rojo/verde decorativo) → paleta de marca; azul→#1e40af, rojo→#C2410C, verde→#22c55e; conserva azul de marca/WhatsApp/Google",
      "mecanico", _det_color, _fix_color),
+    ("star-color-inline", "tercer tono latente #FBBF24 de .rating-stars en el <style>/style inline → #B45309 (paridad con styles*.css, WCAG AA)",
+     "mecanico", _det_star, _fix_star),
+    ("svg-aria-float", "svg decorativo sin aria-hidden dentro de <a class=floating-btn aria-label=…> → aria-hidden=true (patrón de la home)",
+     "mecanico", _det_svg_float, _fix_svg_float),
+    ("skip-link", "página sin skip-link → réplica exacta del de la home tras <body> + regla :focus en el CSS crítico + ancla en el primer main/section tras el header",
+     "mecanico", _det_skiplink, _fix_skiplink),
 ]
 
 
@@ -365,7 +466,11 @@ def cmd_run(args):
     asset_ids = {f[0] for f in ASSET_FIXERS}
 
     total = 0
+    saltadas = 0
     for p in paths:
+        if os.path.relpath(p, ROOT) in CUARENTENA:
+            saltadas += 1
+            continue
         try:
             h = open(p, encoding="utf-8").read()
         except Exception:
@@ -389,6 +494,8 @@ def cmd_run(args):
                 print("  ○ %s → %s (dry-run)" % (rel, ", ".join(aplicados)))
 
     print("")
+    if saltadas:
+        print("⏸  %d página(s) en CUARENTENA saltadas (contenido delgado preexistente; ver backlog)." % saltadas)
     if total == 0:
         print("✅ Nada que arreglar: el sitio ya está limpio para estos fixers.")
     else:
@@ -405,6 +512,59 @@ def cmd_run(args):
             sys.exit(1)
 
 
+def cmd_verify(args):
+    """LOTE MECÁNICO VERIFICADO (candado de FASE 8): certifica qué archivos HTML del diff
+    vs --base fueron producidos ÍNTEGRAMENTE por los FIXERS registrados. Para cada HTML
+    cambiado: toma su contenido en el ref base, le aplica SOLO los fixers (mismo orden que
+    `run`) y exige igualdad BYTE A BYTE con el working tree; además exige idempotencia
+    (ningún detector debe seguir disparando sobre el resultado). Un archivo que no calza
+    es edición LIBRE: no invalida el lote, pero cuenta contra el cap de 18.
+    Salida: JSON {mecanicos, libres, archivos_libres} + exit 0 (exit 2 solo si git falla)."""
+    import json as _json
+    import subprocess
+    base = args[args.index("--base") + 1] if "--base" in args else "main"
+
+    def _git(*a):
+        return subprocess.run(["git"] + list(a), capture_output=True, cwd=ROOT)
+
+    diff = _git("diff", "--name-only", base, "--")
+    if diff.returncode != 0:
+        print("❌ git diff falló: %s" % diff.stderr.decode("utf-8", "replace").strip()); sys.exit(2)
+    cambiados = [f for f in diff.stdout.decode("utf-8").splitlines() if f.strip()]
+    html = [f for f in cambiados if f.endswith(".html")]
+    no_html = [f for f in cambiados if not f.endswith(".html")]
+
+    mecanicos, libres = [], []
+    for rel in html:
+        show = _git("show", "%s:%s" % (base, rel))
+        if show.returncode != 0:
+            libres.append((rel, "nuevo en el diff (no existe en %s)" % base)); continue
+        try:
+            h = show.stdout.decode("utf-8")
+            actual = open(os.path.join(ROOT, rel), encoding="utf-8").read()
+        except Exception as e:
+            libres.append((rel, "ilegible: %s" % e)); continue
+        for fid, _, _, det, fix in FIXERS:
+            if det(h):
+                h2, n = fix(h)
+                if n:
+                    h = h2
+        if h != actual:
+            libres.append((rel, "no equivale a base+fixers (hay edición manual)")); continue
+        residuo = [fid for fid, _, _, det, fix in FIXERS if det(actual) and fix(actual)[1]]
+        if residuo:
+            libres.append((rel, "no idempotente: %s sigue disparando" % ",".join(residuo))); continue
+        mecanicos.append(rel)
+
+    for rel, motivo in libres:
+        print("  ✋ LIBRE  %s — %s" % (rel, motivo))
+    if no_html:
+        print("  ℹ️  fuera del lote (no HTML, los juzga el candado normal): %s" % ", ".join(no_html))
+    print(_json.dumps({"base": base, "mecanicos": len(mecanicos), "libres": len(libres),
+                       "archivos_libres": [r for r, _ in libres], "no_html": no_html},
+                      ensure_ascii=False))
+
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help"):
         print(__doc__); sys.exit(0)
@@ -413,6 +573,8 @@ def main():
         cmd_list()
     elif cmd == "run":
         cmd_run(sys.argv[2:])
+    elif cmd == "verify":
+        cmd_verify(sys.argv[2:])
     else:
         print("comando desconocido: %s" % cmd); sys.exit(2)
 
