@@ -101,6 +101,22 @@ tokens). Sigue el skill /expandir-sitio y usa el ORQUESTADOR scripts/crecer.py +
      echo '<spec json>' | python3 .pipeline/gestor-backlog.py add - (servicio de electricidad con demanda → crear,
      riesgo medio/auto; fuera del oficio/ambiguo/dato 100% del dueño → humano, riesgo alto). Si los 2 expertos no
      concuerdan, gana el conservador (humano). Nunca inventes que el dueño ofrece un servicio.
+  1c. RELLENO — detectar y REGENERAR solo (decisión del dueño 2026-07-08: libertad total con candados):
+     Corre `python3 .pipeline/check-relleno.py --json` → páginas indexables VACIA (<150 tokens visibles únicos,
+     el candado las bloquea si se tocan), CASI_VACIA (<200) o CLON (Jaccard ≥0.72 vs una gemela). Misma vara que
+     gate-pagina.py: cero divergencia sensor-candado. Para cada hallazgo SIN tarea previa en el backlog, el
+     decisor-negocio elige UNA de estas acciones (todas AUTO, riesgo medio — NO van a humano):
+       - REGENERAR (colonia con señales GSC o prominente, servicio, blog/index, contacto): reescribir con
+         contenido REAL y específico (diferenciar-colonia.py para colonias; para servicios: FAQ propia, casos
+         del oficio, señales de la zona SIN inventar calles/testimonios/reseñas — regla dura). Meta: ≥250
+         tokens visibles únicos y Jaccard <0.60 vs su gemela más cercana. Si estaba en CUARENTENA de
+         auto-fixers.py, al cerrar la tarea QUITARLA de la lista (los fixers pendientes la alcanzarán solos).
+       - NOINDEX (colonia oscura sin una sola impresión GSC en 28 días — estrategia 2b: Google ya dijo que no
+         la quiere): meta robots noindex + sacarla del sitemap. Es reversible; NUNCA borrar la página.
+     Tope por corrida: máx 5 regeneradas (regla 2b de calidad dirigida) — el resto queda encolado y se drena
+     en corridas siguientes; el noindex de oscuras no tiene tope (es mecánico y reversible). PROHIBIDO
+     "regenerar" rellenando con palabrería genérica: si no hay nada real que decir de esa colonia, la
+     respuesta correcta es NOINDEX, no más relleno — el detector la volvería a cazar de todos modos.
   2. DRENAR EN LOOP (loop-until-dry, SIN tope de 3):
        repite:
          a. `python3 .pipeline/gestor-backlog.py next --max 1 --riesgo-max medio` → toma la tarea de mayor prioridad.
