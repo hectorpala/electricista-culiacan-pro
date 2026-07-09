@@ -1,10 +1,13 @@
 # ESTADO — Electricista Culiacán
 
-## 2026-07-08-tarde (Auto Agente diario — primera corrida real de relleno/huecos: 5 colonias regeneradas + 8 noindex + hub servicios creado · 7 fixes de plantilla) — EN PROCESO DE PUBLICAR
-Rama `auto/diario-20260708-1743`. HEALTH CHECK: home/contacto/servicios/blog → 200 (servidor 8130,
-se reinició una vez a media corrida por corte del subshell, sin pérdida de trabajo). ci-gate 0 ALTA ·
-51 media/baja (todas conocidas). 9 revisores + decisor-negocio + verificador corrieron como
-subagentes en paralelo.
+## 2026-07-08-tarde (Auto Agente diario — primera corrida real de relleno/huecos: 5 colonias regeneradas + 8 noindex + hub servicios creado · 7 fixes de plantilla) — PUBLICADO ✅
+Rama `auto/diario-20260708-1743`, 2 commits (`3b098601` fixes+contenido, `092d5db4` merge --no-ff
+a main). Push OK (`024a9788..092d5db4`); pre-push auto-indexó 13 URLs (home, hub servicios/, 5
+colonias regeneradas, electricista-precios, 5 blogs — correctamente excluyó las 8 colonias
+noindexed). HEALTH CHECK: home/contacto/servicios/blog → 200 (servidor 8130, se reinició una vez
+a media corrida por corte del subshell, sin pérdida de trabajo). ci-gate 0 ALTA · 51 media/baja
+(todas conocidas). 9 revisores + decisor-negocio + verificador corrieron como subagentes en
+paralelo.
 
 - **FASE 5 (5 archivos, edición libre):** skip-link + landmark `id="main-content"` faltante en
   `gracias/`, `terminos/`, `privacidad/` (el lote mecánico del skip-link de hoy en la mañana solo
