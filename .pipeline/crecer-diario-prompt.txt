@@ -117,6 +117,21 @@ tokens). Sigue el skill /expandir-sitio y usa el ORQUESTADOR scripts/crecer.py +
      en corridas siguientes; el noindex de oscuras no tiene tope (es mecánico y reversible). PROHIBIDO
      "regenerar" rellenando con palabrería genérica: si no hay nada real que decir de esa colonia, la
      respuesta correcta es NOINDEX, no más relleno — el detector la volvería a cazar de todos modos.
+  1d. HUECOS — detectar páginas FALTANTES y CREARLAS solo (decisión del dueño 2026-07-08):
+     Corre `python3 .pipeline/check-huecos.py --json` → destinos internos enlazados cuyo archivo NO existe
+     (cubre href relativos Y absolutos del propio dominio — el breadcrumb enlaza el hub con URL absoluta; y
+     una CARPETA sin index.html es un 404 servido). Para cada hueco sin tarea previa, el decisor-negocio
+     elige (AUTO, riesgo medio — NO va a humano):
+       - CREAR la página (default si es servicio de electricidad según NEGOCIO.md, o un índice/hub de
+         navegación): con crear-servicio.py / gen-landing.py, plantilla de la home, contenido real, y
+         gate-pagina.py como siempre. Un hub/índice se construye listando las páginas hijas REALES (cero
+         riesgo doorway: es navegación, no landing clonada). Cuenta contra el tope de 3 páginas nuevas
+         por corrida.
+       - QUITAR el enlace (solo si el decisor concluye que la página NO debe existir: fuera del oficio,
+         NEGOCIO.md la prohíbe): editar las páginas referentes en vez de crear. Esto es edición libre
+         normal (cap de 18).
+     Señal complementaria: la demanda GSC sin página ya vive en el paso 1 — este paso caza lo que el
+     PROPIO SITIO promete y no cumple (breadcrumbs, sitemaps, tarjetas que enlazan a un 404).
   2. DRENAR EN LOOP (loop-until-dry, SIN tope de 3):
        repite:
          a. `python3 .pipeline/gestor-backlog.py next --max 1 --riesgo-max medio` → toma la tarea de mayor prioridad.
