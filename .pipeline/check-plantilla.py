@@ -1018,6 +1018,27 @@ def check_page(fpath, t, noindex, redirects):
             "externo, eliminar el IIFE inline. Los dos son mutuamente excluyentes. "
             "Regla: [2026-06-23] PERF/JS-INLINE-IIFE + [2026-06-27] js-iife-main-doble.")
 
+    # --- 35. botones flotantes tapan la tabla de precios en móvil (media, movil): en toda
+    #         página con .table-wrapper (tabla con scroll horizontal) Y los botones flotantes
+    #         (.floating-btn), en @media(max-width:768px) el .table-wrapper necesita
+    #         padding-right para que la columna derecha de la tabla no quede oculta detrás de
+    #         los botones fijos durante el scroll. Detectado 2026-07-08 por revisor-movil en
+    #         index.html/electricista-precios; el fix inicial solo cubrió esos 2 ejemplos y el
+    #         VERIFICADOR (ronda 1) cazó que el mismo patrón estructural seguía roto en 5 blogs
+    #         con tabla de precios. Ver REGLAS.md 2026-07-08 MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS.
+    has_table_wrapper = bool(re.search(r'\.table-wrapper\{', t))
+    has_floating_btn = bool(re.search(r'\.floating-btn\{', t))
+    has_padding_fix = bool(re.search(
+        r'@media\(max-width:768px\)\{\.table-wrapper\{padding-right:', t))
+    if has_table_wrapper and has_floating_btn and not has_padding_fix:
+        add("media", r, "movil",
+            "Botones flotantes (WhatsApp/Llamar) pueden tapar la tabla con scroll horizontal en "
+            "móvil: falta @media(max-width:768px){.table-wrapper{padding-right:...}} junto al "
+            "resto del CSS crítico de .table-wrapper",
+            "Añadir @media(max-width:768px){.table-wrapper{padding-right:76px}} al <style> crítico "
+            "inline de esta página, igual que index.html. Ver REGLAS.md 2026-07-08 "
+            "MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS.")
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): las 689 paginas sirven styles.7f293647.css (el VIVO, =

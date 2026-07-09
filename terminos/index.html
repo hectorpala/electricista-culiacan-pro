@@ -17,9 +17,11 @@ h2{margin:2rem 0 1rem;color:var(--brand)}
 p,ul{margin-bottom:1rem}
 ul{padding-left:1.5rem}
 a{color:var(--brand)}
+.skip-link:focus{top:0;min-height:44px;display:flex;align-items:center;box-sizing:border-box}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link" style="position:absolute;top:-40px;left:0;background:#1e40af;color:#fff;padding:8px 16px;z-index:100;font-size:14px;transition:top .2s">Saltar al contenido</a>
 <script>
 window.dataLayer = window.dataLayer || [];
 (function() {
@@ -70,7 +72,7 @@ window.dataLayer = window.dataLayer || [];
      height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </noscript>
 
-<div class="container">
+<div class="container" id="main-content">
 <h1>Términos y Condiciones</h1>
 <p>Última actualización: Enero 2026</p>
 <h2>1. Servicios</h2>

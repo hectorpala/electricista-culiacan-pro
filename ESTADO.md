@@ -1,5 +1,53 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-07-08-tarde (Auto Agente diario — primera corrida real de relleno/huecos: 5 colonias regeneradas + 8 noindex + hub servicios creado · 7 fixes de plantilla) — EN PROCESO DE PUBLICAR
+Rama `auto/diario-20260708-1743`. HEALTH CHECK: home/contacto/servicios/blog → 200 (servidor 8130,
+se reinició una vez a media corrida por corte del subshell, sin pérdida de trabajo). ci-gate 0 ALTA ·
+51 media/baja (todas conocidas). 9 revisores + decisor-negocio + verificador corrieron como
+subagentes en paralelo.
+
+- **FASE 5 (5 archivos, edición libre):** skip-link + landmark `id="main-content"` faltante en
+  `gracias/`, `terminos/`, `privacidad/` (el lote mecánico del skip-link de hoy en la mañana solo
+  aplica si hay `</header>`, y estas 3 páginas no tienen — quedaron fuera en silencio). Botones
+  flotantes tapando la tabla de precios en móvil en `index.html` y `electricista-precios/`
+  (hallazgo de revisor-movil con Puppeteer), extendido después a 5 blogs más (ver abajo).
+  `sitemap_index.xml` sin referenciar `sitemap-images.xml` (Google nunca lo descubría solo).
+
+- **FASE 6 — RELLENO (primera corrida real de `check-relleno.py`, infra de hoy en la mañana):**
+  46/86 páginas indexables con señal de relleno. `decisor-negocio` (panel dev+maestro electricista)
+  priorizó por señal real de GSC (`gsc_inspect`): **5 REGENERADAS** (tope de la corrida respetado)
+  — infonavit-humaya (única con impresiones duras: 26 impr, pos 8.6), tres-rios, las-quintas,
+  centro, guadalupe (todas "Enviada e indexada" en GSC) — cada una con un párrafo nuevo + 2 items
+  de lista, ángulo distinto entre sí, sin inventar calles/testimonios/reseñas; tokens 168-198 →
+  253-267, Jaccard 0.47-0.56 → 0.34-0.42. **8 NOINDEX** (sin tope, reversible) — chapultepec,
+  6-de-enero, bugambilias, la-campina, lomas-de-tamazula, stanza-toscana, barrancos, montebello
+  (todas sin indexar/sin señal en GSC) — meta robots + fuera de sitemap.xml. Resto (8 colonias +
+  4 servicios core + 2 ambiguas) encolado en BACKLOG.jsonl para corridas futuras.
+
+- **FASE 6 — HUECOS (primera corrida real de `check-huecos.py`):** confirmó el hueco ya conocido
+  `servicios/index.html` (32 breadcrumbs a 404). Decisión del dueño de hoy en la mañana ya lo
+  autorizaba como auto. Creado el hub completo (plantilla fuente index.html + hub de colonias,
+  32 servicios reales categorizados, JSON-LD WebSite+BreadcrumbList+ItemList, sin precios/overclaim/
+  automotriz) + entrada en sitemap.xml. 34 páginas ya lo enlazan (no huérfano).
+
+- **VERIFICACIÓN (2 rondas):** Ronda 1: `ok=false` — el fix de botones flotantes/tabla de precios
+  solo cubrió los 2 archivos de ejemplo citados por revisor-movil, dejando 5 blogs con el mismo
+  patrón sin arreglar. Corregido (mismo fix, 5 archivos más) + mecanizado como check 35 de
+  `check-plantilla.py` (caza-malo=1, ignora-bueno=0). Ronda 2: **ok=true, 0 problemas.**
+
+- **APRENDIZAJE:** 3 reglas nuevas en REGLAS.md (A11Y/SKIP-LINK-SIN-HEADER,
+  SEO/SITEMAP-IMAGES-NO-DESCUBIERTO, MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS) + 1 check nuevo activo
+  (check 35, probado). 5 entradas nuevas en HISTORIAL.jsonl. Más de 74 reglas aprendidas en total.
+
+- **BACKLOG:** 9 tareas nuevas encoladas (4 enriquecer servicios core, 2 encolar_futuro colonias
+  indexadas sin señal fuerte, 1 optimizar logo responsivo en 45 páginas, 1 optimizar canibalización
+  GSC electricista/home, 1 grupo de 8 colonias CASI_VACIA sin triaje aún). 0 tareas cerradas hoy
+  (el trabajo de hoy vino de los detectores de relleno/huecos, no del loop del backlog).
+
+- **PENDIENTE-HUMANO (heredado, sin cambios hoy):** sitemap fantasma en Search Console (sin tool
+  MCP para borrarlo); canibalización "electricista"; geo faltante en colonias; precios en body
+  (33 páginas, decisión estratégica); experimento de título de la home (medir 2026-07-15).
+
 ## 2026-07-08 (Sesión interactiva con el dueño — lote mecánico verificado, 670 páginas) — PUBLICADO ✅
 Merge a main `970ad008` (batch `7d7e7bb7`, push OK; pre-push auto-indexó 67 URLs). Tres fixes
 site-wide que el cap de 18 tenía bloqueados: estrellitas `#FBBF24`→`#B45309` (674, cierra
