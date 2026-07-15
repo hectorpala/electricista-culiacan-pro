@@ -1,5 +1,63 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-07-14 (Auto Agente diario — primera corrida real desde el 07-08; 5 intentos previos
+## 07-09/07-13 fallaron por límite de uso/red/timeout sin publicar nada) — PUBLICADO ✅
+Rama `auto/diario-20260714-2002`, 1 commit (`4b930da3` fixes+contenido, merge --no-ff
+a main `87f30cbe`). Push OK (`0975d7c2..87f30cbe`); pre-push auto-indexó 61 URLs. Verificado
+en producción: home + servicios/electricista + blog + contacto → 200, CSS `?v=20260714` sirviendo,
+FAQ nueva visible (6 `<details>`).
+
+**Contexto de arranque:** 5 corridas seguidas (07-09 a 07-13) no publicaron nada por límite de
+uso del plan, caída de red, timeout de background tasks, o un bug de "ya corrí hoy" que saltó
+el 07-12 sin haber corrido realmente. Ningún trabajo de sitio se perdió (nada se había aplicado),
+pero el sitio quedó 6 días sin mantenimiento activo. No se investigó/arregló el wrapper
+`crecer-diario.sh` hoy (fuera de mandato — eso es territorio de `critico-sistema`/`meta-semanal`);
+se documenta aquí para que quede constancia.
+
+**FASE 3 — 9 revisores en paralelo (Opus 4.8 los 5 LLM, Sonnet los 4 deterministas):**
+revisor-seo (3 hallazgos: lastmod desfasado en 61 URLs, sitemap_index desfasado, verif-GSC thin),
+revisor-movil (2, baja: tap-targets secundarios), revisor-a11y (5: contraste real de `.nav-link`
++ 4 más, uno — iframes de maps — resultó FALSO POSITIVO al re-verificar), revisor-perf (3: logo
+de nav pesado — conteo real 14, no 46 — + 2 baja), revisor-links (0), revisor-gsc (4: sitemap
+fantasma 404 en GSC, `electricista-a-domicilio` sin indexar, `electricista-cerca-de-mi` pos 48
+canibalizado por home, colonias solapan cabecera), revisor-indexabilidad (0), revisor-produccion
+(1, ya conocido: meta X-Frame-Options), revisor-plantilla (51: 42 precio-en-body ya conocidos,
+17 color-muerto en cuarentena, 1 theme-color).
+
+**FASE 5 — arreglado:** contraste `.nav-link` (#f97316→#C2410C, WCAG AA) en los 3 CSS servidos +
+bump `?v=20260714`/sw.js v19→v20; `netlify.toml` con `X-Robots-Tag: noindex` para el archivo de
+verificación de GSC; `sitemap.xml` lastmod sincronizado con git log real en 61 URLs; `sitemap_index.xml`
+actualizado (comentario "40→32 colonias").
+
+**FASE 5 — intentado y REVERTIDO (sin editar validadores para forzar el pase):** quitar el meta
+`X-Frame-Options` inválido de 51 páginas (rompía `validate-landing.sh`, que lo exige; el
+clasificador de seguridad de Claude Code bloqueó la edición del validador — correctamente);
+aligerar el logo del `<nav>` en 14 páginas (rompía el check "Footer logo pro" en páginas sin logo
+de footer separado). Ambos documentados como pendiente humano (`bk-df162f50`, `bk-7f94fb09`).
+Contradicción real descubierta: NEGOCIO.md pide "cotización sin costo" pero ~34 páginas dicen
+"$200 MXN, descontable" — no se tocó (alterar precios sin confirmación está prohibido);
+documentada como `bk-diagprecio2026`, va en la sección de decisiones del dueño.
+
+**FASE 6 — crecer:** cerradas 3 tareas de backlog "zombie" (ya resueltas en corridas anteriores,
+nunca cerradas — `bk-e042beca` hub de servicios, `bk-f07ed321` twitter:url de 2 blogs, más la de
+FAQ); enriquecida `servicios/electricista/index.html` (página #1 en keywords, estaba CASI_VACIA
+sin FAQ) con 6 preguntas reales + FAQPage JSON-LD; pedida reindexación GSC de
+`/servicios/electricista-a-domicilio/`. `check-huecos.py` limpio (0 huecos). No se crearon
+páginas nuevas (sin demanda GSC clara para una página nueva hoy).
+
+**FASE 7 — verificador independiente:** ok=true, 0 problemas (re-corrió ci-gate, verify del lote
+mecánico, HTTP de 9 páginas, JSON-LD, diff de `validate-landing.sh`/`netlify.toml`).
+
+**FASE 9 — infra corregida en `auto-fixers.py`:** `verify` no reconocía el bump de `?v=` como
+mecánico (marcaba 691/691 páginas como "libre", habría bloqueado la publicación completa) ni
+respetaba CUARENTENA al reconstruir; el propio bump tocaba TODAS las páginas vía glob, incluidas
+las 19 en CUARENTENA, lo que re-disparaba su falla preexistente (<150 tokens) en el pre-commit y
+bloqueaba el commit entero — ambos corregidos (el bump ahora también salta CUARENTENA). 6 reglas
+nuevas consolidadas en REGLAS.md (ya van 81 reglas aprendidas en total).
+
+ci-gate 0 ALTA · 51 media/baja (conocidas). `auto-fixers.py verify --base main`: 671 páginas
+mecánicas + 1 libre (`servicios/electricista/index.html`, la del FAQ).
+
 ## 2026-07-08-tarde (Auto Agente diario — primera corrida real de relleno/huecos: 5 colonias regeneradas + 8 noindex + hub servicios creado · 7 fixes de plantilla) — PUBLICADO ✅
 Rama `auto/diario-20260708-1743`, 2 commits (`3b098601` fixes+contenido, `092d5db4` merge --no-ff
 a main). Push OK (`024a9788..092d5db4`); pre-push auto-indexó 13 URLs (home, hub servicios/, 5
