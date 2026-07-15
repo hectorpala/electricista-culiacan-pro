@@ -46,6 +46,14 @@
   [headers.values]
     Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
 
+# Archivo de verificación de Search Console: HTML sin title/description/robots (no se le
+# puede tocar el contenido, rompería la verificación). Se excluye de indexación por header
+# para que Google no lo trate como página thin. Ver HISTORIAL seo-google-verif-noindex-20260714.
+[[headers]]
+  for = "/google0164859d93c23fd0.html"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
 # /assets/ - Cache 30 días + immutable
 [[headers]]
   for = "/assets/*"
