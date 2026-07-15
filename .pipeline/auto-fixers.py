@@ -184,6 +184,20 @@ def _fix_svg_float(h):
     return _FLOAT_SVG.subn(r'\g<1><svg aria-hidden="true"', h)
 
 
+
+
+# ── iframe de Google Maps sin title (HISTORIAL a11y-iframe-maps-title-20260714): sin
+#    nombre accesible, un lector de pantalla lo anuncia como "iframe" sin propósito
+#    (WCAG 4.1.2/2.4.1). Solo toca el embed de maps, no el iframe oculto de GTM. ──
+_MAPS_IFRAME = re.compile(r'(<iframe(?![^>]*\btitle=)[^>]*\bsrc="[^"]*maps/embed[^"]*"[^>]*)(>)', re.I)
+
+def _det_maps_iframe(h):
+    return bool(_MAPS_IFRAME.search(h))
+
+def _fix_maps_iframe(h):
+    return _MAPS_IFRAME.subn(r'\g<1> title="Mapa de ubicación en Culiacán"\g<2>', h)
+
+
 # ── skip-link de accesibilidad (bk-e8643041): réplica EXACTA del de la home (fuente de
 #    verdad) en las páginas que no lo tienen. Receta estrecha: (1) <a> pegado tras <body>,
 #    (2) regla .skip-link:focus en el <style> crítico, (3) ancla: id="main-content" en el
@@ -236,6 +250,8 @@ FIXERS = [
      "mecanico", _det_svg_float, _fix_svg_float),
     ("skip-link", "página sin skip-link → réplica exacta del de la home tras <body> + regla :focus en el CSS crítico + ancla en el primer main/section tras el header",
      "mecanico", _det_skiplink, _fix_skiplink),
+    ("maps-iframe-title", "iframe de Google Maps sin title (nombre accesible) → title=\"Mapa de ubicación en Culiacán\"",
+     "mecanico", _det_maps_iframe, _fix_maps_iframe),
 ]
 
 
@@ -278,6 +294,15 @@ def _bump_css_version_html(version):
     targets.append(os.path.join(ROOT, SW_FILE))
     for p in targets:
         if "/node_modules/" in p or "/.git/" in p:
+            continue
+        # CUARENTENA: no tocarlas ni con el bump — están thin/preexistente-rotas y
+        # cualquier archivo staged en servicios|blog dispara gate-pagina.py en el
+        # pre-commit (Capa 2b), que vuelve a fallar por su condición YA CONOCIDA,
+        # bloqueando el commit ENTERO por un problema que no es de hoy (detectado
+        # 2026-07-14: un bump site-wide limpio quedó bloqueado por las 17 colonias
+        # en cuarentena). Quedan con el ?v= viejo hasta que se enriquezcan y salgan
+        # de CUARENTENA — mismo trato que ya reciben de los FIXERS por página.
+        if os.path.relpath(p, ROOT) in CUARENTENA:
             continue
         try:
             s = open(p, encoding="utf-8").read()
@@ -363,10 +388,22 @@ def _fix_tap_target(css):
     return css, n
 
 
+# ── contraste .nav-link (HISTORIAL a11y-nav-link-contraste-20260714): #f97316 sobre el nav
+#    scrolled/menú móvil (fondo casi-blanco) da ~2.9:1, falla WCAG AA. El CSS crítico inline
+#    de index.html ya usa el color correcto #C2410C (~5.2:1); alinear la hoja externa. ──
+_NAVLINK_COLOR = re.compile(r'([.\w-]*nav-link[.\w-]*\{[^}]*?)color:#f97316', re.I)
+
+def _fix_navlink_contrast(css):
+    return _NAVLINK_COLOR.subn(r'\g<1>color:#C2410C', css)
+
+
 ASSET_FIXERS = [
     ("tap-target-44",
      "tap target <44px en selectores interactivos compartidos (migas) → min-height:44px en los 3 CSS + bump ?v=/sw.js",
      "mecanico", _fix_tap_target),
+    ("nav-link-contrast",
+     "contraste .nav-link #f97316 (~2.9:1, falla WCAG AA) → #C2410C (~5.2:1, paridad con el inline de index.html) en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_navlink_contrast),
 ]
 
 
@@ -524,6 +561,19 @@ def cmd_verify(args):
     import subprocess
     base = args[args.index("--base") + 1] if "--base" in args else "main"
 
+    # Token del último bump de ASSET fixers (?v= en las páginas + sw.js). Un ASSET fixer
+    # (p.ej. tap-target-44, nav-link-contrast) toca el CSS compartido y por cache immutable
+    # obliga a re-versionar ?v= en TODAS las páginas — eso es mecánico también, pero cmd_run
+    # solo reconstruye los FIXERS por página, así que sin esto CUALQUIER bump site-wide
+    # marcaría el lote entero como "libre" (bug real, detectado 2026-07-14: 691/691 libres
+    # tras un bump limpio). Se aplica la MISMA sustitución de _bump_css_version_html al
+    # reconstruido antes de comparar byte a byte.
+    _bump_token = None
+    try:
+        _bump_token = _json.loads(open(BUMP_STATE, encoding="utf-8").read()).get("token")
+    except Exception:
+        pass
+
     def _git(*a):
         return subprocess.run(["git"] + list(a), capture_output=True, cwd=ROOT)
 
@@ -544,14 +594,19 @@ def cmd_verify(args):
             actual = open(os.path.join(ROOT, rel), encoding="utf-8").read()
         except Exception as e:
             libres.append((rel, "ilegible: %s" % e)); continue
-        for fid, _, _, det, fix in FIXERS:
-            if det(h):
-                h2, n = fix(h)
-                if n:
-                    h = h2
+        en_cuarentena = rel in CUARENTENA
+        if not en_cuarentena:
+            for fid, _, _, det, fix in FIXERS:
+                if det(h):
+                    h2, n = fix(h)
+                    if n:
+                        h = h2
+        if _bump_token and re.search(r'styles[\w.]*\.css\?v=\d{8,12}', h):
+            h = re.sub(r'(styles[\w.]*\.css\?v=)\d{8,12}', r'\g<1>' + _bump_token, h)
         if h != actual:
             libres.append((rel, "no equivale a base+fixers (hay edición manual)")); continue
-        residuo = [fid for fid, _, _, det, fix in FIXERS if det(actual) and fix(actual)[1]]
+        residuo = [] if en_cuarentena else [
+            fid for fid, _, _, det, fix in FIXERS if det(actual) and fix(actual)[1]]
         if residuo:
             libres.append((rel, "no idempotente: %s sigue disparando" % ",".join(residuo))); continue
         mecanicos.append(rel)

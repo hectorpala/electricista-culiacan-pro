@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-    <!-- Sitemap Principal (incluye las 40 colonias indexables ya diferenciadas) -->
+    <!-- Sitemap Principal (incluye las 32 colonias indexables ya diferenciadas) -->
     <sitemap>
         <loc>https://electricistaculiacanpro.mx/sitemap.xml</loc>
-        <lastmod>2026-07-03</lastmod>
+        <lastmod>2026-07-14</lastmod>
     </sitemap>
 
     <!-- Sitemap de imágenes (captions/titles curados para Google Images) -->
