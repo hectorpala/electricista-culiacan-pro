@@ -157,6 +157,46 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
 done
 [ "$CLAUDE_OK" = 1 ] || echo "[$STAMP] La corrida de claude terminó con error ($FAIL_KIND); continúo para enviar el parte." >> "$LOG"
 
+# ── RESPALDO CODEX (solo falla por CUOTA): la corrida del día la intenta Codex CLI, que
+# gasta cuota de ChatGPT (independiente de la de Claude). Alcance REDUCIDO a mantenimiento
+# determinista (checkers + auto-fixers + candados), SIN crecimiento ni cambios de contenido
+# — Codex no tiene los subagentes Task ni el MCP de GSC. Prompt: .pipeline/respaldo-codex-prompt.txt
+CODEX_OK=0
+CODEX_TRIED=0
+if [ "$CLAUDE_OK" != 1 ] && [ "$FAIL_KIND" = "limite" ]; then
+  # Binario: el CLI suelto si existe; si no, el que trae la extensión de VS Code de Codex
+  # (su ruta cambia con cada update de la extensión → se resuelve al vuelo, la más nueva).
+  CODEX_BIN=$(command -v codex 2>/dev/null || true)
+  if [ -z "$CODEX_BIN" ]; then
+    CODEX_BIN=$(ls -t "$HOME"/.vscode/extensions/openai.chatgpt-*/bin/macos-aarch64/codex 2>/dev/null | head -1 || true)
+  fi
+  if [ -n "$CODEX_BIN" ] && [ -x "$CODEX_BIN" ]; then
+    CODEX_TRIED=1
+    echo "[$STAMP] >>> RESPALDO CODEX: cuota de Claude agotada; mantenimiento reducido con $("$CODEX_BIN" --version 2>/dev/null | head -1)." >> "$LOG"
+    # Sandbox workspace-write + red habilitada: puede editar el repo y hacer git push, pero
+    # no escribir fuera del workspace. Mismo timeout duro que la corrida normal.
+    "$CODEX_BIN" exec --cd "/Users/openclaw/Sitios Web/Electricista Culiacán" \
+      --sandbox workspace-write -c sandbox_workspace_write.network_access=true \
+      "$(cat .pipeline/respaldo-codex-prompt.txt)" >> "$LOG" 2>&1 &
+    CPID=$!
+    ( sleep $((TIMEOUT_MIN * 60))
+      if kill -0 "$CPID" 2>/dev/null; then
+        echo "[$STAMP] TIMEOUT ${TIMEOUT_MIN}min del respaldo Codex: lo mato (pid $CPID)." >> "$LOG"
+        kill "$CPID" 2>/dev/null; sleep 10; kill -9 "$CPID" 2>/dev/null
+      fi ) &
+    WPID=$!
+    if wait "$CPID"; then
+      CODEX_OK=1
+      echo "[$STAMP] Respaldo Codex terminó OK; el parte del día sale de esta corrida." >> "$LOG"
+    else
+      echo "[$STAMP] El respaldo con Codex TAMBIÉN falló; se manda el aviso de falla normal." >> "$LOG"
+    fi
+    kill "$WPID" 2>/dev/null || true
+  else
+    echo "[$STAMP] Cuota agotada y NO encontré el binario de codex (CLI ni extensión VS Code); sin respaldo." >> "$LOG"
+  fi
+fi
+
 # Registro de consumo de CUOTA de la corrida (no bloqueante): suma los transcripts (sesión
 # + subagentes) de ESTA ventana y anexa una línea a .pipeline/costos.jsonl. Sin esto el
 # tripwire de check-costos.py estaba MUERTO desde el origen (el ledger nunca existió).
@@ -165,13 +205,15 @@ done
   "/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/costos.jsonl" "auto-agente $STAMP" >> "$LOG" 2>&1 \
   || echo "[$STAMP] No pude registrar el consumo de la corrida (sigo)." >> "$LOG"
 
-# Parte por email. Si la corrida tuvo ÉXITO → manda el parte nuevo. Si FALLÓ (cuota/error) →
-# NO mandes el parte viejo (sería un correo engañoso "encontré N" de una corrida anterior);
-# manda un aviso honesto de que no se completó.
-if [ "${CLAUDE_OK:-0}" = 1 ]; then
+# Parte por email. Si la corrida tuvo ÉXITO (Claude o respaldo Codex) → manda el parte nuevo.
+# Si FALLÓ (cuota/error) → NO mandes el parte viejo (sería un correo engañoso "encontré N"
+# de una corrida anterior); manda un aviso honesto de que no se completó.
+if [ "${CLAUDE_OK:-0}" = 1 ] || [ "${CODEX_OK:-0}" = 1 ]; then
+  ETIQUETA="20:00"
+  [ "${CODEX_OK:-0}" = 1 ] && ETIQUETA="20:00 · respaldo Codex"
   /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
     "/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/ultima-corrida.md" \
-    "Auto Agente Electricista" "20:00" >> "$LOG" 2>&1 \
+    "Auto Agente Electricista" "$ETIQUETA" >> "$LOG" 2>&1 \
     || echo "[$STAMP] No se pudo enviar el email del parte (Auto Agente Electricista)." >> "$LOG"
 else
   FAILNOTE="$LOG_DIR/fail-$STAMP.md"
@@ -201,6 +243,8 @@ else
   esac
   printf '# Auto Agente Electricista — corrida NO completada\n**Motivo:** %s.\n**Evidencia (del log):** `%s`\n**Qué sigue:** %s\n\nNo se hizo ni publicó ningún cambio en esta corrida.\n' \
     "$MOTIVO" "$ERRLINE" "$SUGERENCIA" > "$FAILNOTE"
+  # Si además se intentó el respaldo con Codex y también murió, que el correo lo diga.
+  [ "${CODEX_TRIED:-0}" = 1 ] && printf '\n**Respaldo Codex:** también se intentó la corrida con Codex CLI y falló; revisa el log: %s\n' "$LOG" >> "$FAILNOTE"
   /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
     "$FAILNOTE" "Auto Agente Electricista" "no completada" >> "$LOG" 2>&1 \
     || echo "[$STAMP] No se pudo enviar el aviso de falla (Auto Agente Electricista)." >> "$LOG"
@@ -209,7 +253,7 @@ fi
 # A3: marca que YA corrió hoy SOLO si la corrida tuvo éxito. Si falló, NO se marca → el
 # catch-up sí podrá recuperarla hoy (si se marcara siempre, una corrida fallida quedaría sin recuperar).
 # Marcador NAMESPACEADO: el nombre viejo (auto-agente-last-run-day) fue COMPARTIDO con el plomero.
-if [ "${CLAUDE_OK:-0}" = 1 ]; then
+if [ "${CLAUDE_OK:-0}" = 1 ] || [ "${CODEX_OK:-0}" = 1 ]; then
   date +%Y%m%d > "$LOG_DIR/auto-agente-electricista-last-run-day"
 fi
 # Exit 0 explícito: antes el script salía con 1 en toda corrida fallida y launchctl lo
