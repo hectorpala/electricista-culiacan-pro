@@ -44,20 +44,15 @@ CUARENTENA = {
     "servicios/electricista-colonias-culiacan/bachigualato/index.html",
     "servicios/electricista-colonias-culiacan/campestre/index.html",
     "servicios/electricista-colonias-culiacan/colinas-de-san-miguel/index.html",
-    "servicios/electricista-colonias-culiacan/el-vallado/index.html",
     "servicios/electricista-colonias-culiacan/hacienda-del-valle/index.html",
     "servicios/electricista-colonias-culiacan/jorge-almada/index.html",
-    "servicios/electricista-colonias-culiacan/juntas-de-humaya/index.html",
     "servicios/electricista-colonias-culiacan/las-americas/index.html",
     "servicios/electricista-colonias-culiacan/lazaro-cardenas/index.html",
     "servicios/electricista-colonias-culiacan/libertad/index.html",
     "servicios/electricista-colonias-culiacan/los-pinos/index.html",
     "servicios/electricista-colonias-culiacan/nuevo-culiacan/index.html",
     "servicios/electricista-colonias-culiacan/pemex/index.html",
-    "servicios/electricista-colonias-culiacan/prados-de-la-conquista/index.html",
-    "servicios/electricista-colonias-culiacan/rafael-buelna/index.html",
     "servicios/electricista-colonias-culiacan/recursos-hidraulicos/index.html",
-    "servicios/electricista-colonias-culiacan/valle-alto/index.html",
 }
 
 
@@ -233,9 +228,46 @@ def _fix_skiplink(h):
     return h3, 1
 
 
+# ── .breadcrumb-link inline sin tap-target 44px + color #E36414 bajo contraste (~2.9:1,
+#    falla WCAG AA) — MISMA receta ya aplicada a mano el 2026-07-06 en 12 páginas de servicio
+#    (A11Y/BREADCRUMB-CONTRASTE-TAPTARGET), aquí se registra para las 20 restantes + futuras
+#    regresiones. Vive en el <style> crítico INLINE por página (no en el CSS compartido). ──
+_BREADCRUMB_BLOCK = re.compile(r"(\.breadcrumb-link\s*\{)([^}]*)(\})")
+
+def _det_breadcrumb_taptarget(h):
+    m = _BREADCRUMB_BLOCK.search(h)
+    if not m:
+        return False
+    decl = m.group(2)
+    return "color: #E36414" in decl or "color:#E36414" in decl or "min-height" not in decl
+
+def _fix_breadcrumb_taptarget(h):
+    m = _BREADCRUMB_BLOCK.search(h)
+    if not m:
+        return h, 0
+    decl = m.group(2)
+    n = 0
+    if "min-height" not in decl:
+        newdecl = decl.rstrip()
+        if not newdecl.endswith(";"):
+            newdecl += ";"
+        newdecl += "\n            display: inline-flex;\n            align-items: center;\n            min-height: 44px;\n        "
+        decl = newdecl
+        n += 1
+    if "color: #E36414" in decl:
+        decl = decl.replace("color: #E36414", "color: #C2410C", 1)
+        n += 1
+    if not n:
+        return h, 0
+    h2 = h[:m.start()] + m.group(1) + decl + m.group(3) + h[m.end():]
+    return h2, n
+
+
 FIXERS = [
     ("og-url", "og:url faltante en página indexable → copia el canonical (scope: solo indexables)",
      "mecanico", _det_ogurl, _fix_ogurl),
+    ("breadcrumb-taptarget-contrast", "'.breadcrumb-link' inline sin min-height:44px y/o color #E36414 de bajo contraste → +tap-target 44px + color #C2410C (paridad con el patrón ya aplicado 2026-07-06)",
+     "mecanico", _det_breadcrumb_taptarget, _fix_breadcrumb_taptarget),
     ("theme-color", "theme-color placeholder #0066cc → color de marca " + BRAND_THEME,
      "mecanico", _det_theme, _fix_theme),
     ("email", "email contaminado con 'plomero' → " + CORRECT_EMAIL,
@@ -397,6 +429,40 @@ def _fix_navlink_contrast(css):
     return _NAVLINK_COLOR.subn(r'\g<1>color:#C2410C', css)
 
 
+# ── contraste texto var(--brand) #E36414 sobre fondo claro (~3.44:1, falla WCAG AA 4.5:1) en
+#    5 selectores de texto normal (revisor-a11y 2026-07-16): usar var(--brand-dark) #C2410C
+#    (~5.18:1), YA es la variable de marca establecida (no se introduce color nuevo). NO toca
+#    .btn-primary (fondo del CTA principal, cambio de marca site-wide → pendiente humano). ──
+_TEXT_CONTRAST_SELECTORS = [
+    r"\.read-more",
+    r"\.blog-content \.read-more",
+    r"\.faq-item h3",
+    r"\.emergency-action",
+    r"\.pricing-table td:last-child",
+    r"\.pricing-note a",
+]
+
+def _fix_text_contrast_brand_dark(css):
+    n = 0
+    for sel in _TEXT_CONTRAST_SELECTORS:
+        pat = re.compile(r"(" + sel + r"\{[^}]*?)color:var\(--brand\)(?!-)")
+        css, k = pat.subn(r"\g<1>color:var(--brand-dark)", css)
+        n += k
+    return css, n
+
+
+# ── contraste del borde de .contact-form input/textarea (var(--border) #E2E8F0 sobre blanco
+#    ~1.23:1, falla WCAG 1.4.11 non-text contrast ≥3:1) — revisor-a11y 2026-07-16. Solo el
+#    borde por defecto de estos 2 campos; NO se toca la variable --border global (se usa en
+#    otros divisores de menor énfasis donde el cambio no aplica). ──
+_FORM_BORDER = re.compile(
+    r"(\.contact-form input,\.contact-form textarea\{padding:12px;)border:1px solid var\(--border\)"
+)
+
+def _fix_form_border_contrast(css):
+    return _FORM_BORDER.subn(r"\g<1>border:1px solid #94A3B8", css)
+
+
 ASSET_FIXERS = [
     ("tap-target-44",
      "tap target <44px en selectores interactivos compartidos (migas) → min-height:44px en los 3 CSS + bump ?v=/sw.js",
@@ -404,6 +470,12 @@ ASSET_FIXERS = [
     ("nav-link-contrast",
      "contraste .nav-link #f97316 (~2.9:1, falla WCAG AA) → #C2410C (~5.2:1, paridad con el inline de index.html) en los 3 CSS + bump ?v=/sw.js",
      "mecanico", _fix_navlink_contrast),
+    ("text-contrast-brand-dark",
+     "contraste de texto var(--brand) #E36414 (~3.44:1, falla WCAG AA) en .read-more/.faq-item h3/.emergency-action/.pricing-table/.pricing-note → var(--brand-dark) #C2410C (~5.18:1) en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_text_contrast_brand_dark),
+    ("form-border-contrast",
+     "borde de .contact-form input/textarea var(--border) #E2E8F0 (~1.23:1, falla WCAG 1.4.11) → #94A3B8 (~3.1:1) en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_form_border_contrast),
 ]
 
 
