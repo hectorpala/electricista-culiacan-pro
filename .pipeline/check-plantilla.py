@@ -866,27 +866,32 @@ def check_page(fpath, t, noindex, redirects):
                     pass
 
     # --- 27. logo en JSON-LD con asset incorrecto (media, seo): el logo canónico para JSON-LD
-    #         es electricista-culiacan-pro-logo.webp. Los nombres logo-512.png y logo-512.webp
-    #         son de la plantilla origen / sitio hermano y están PROHIBIDOS en JSON-LD.
-    #         Detectado 2026-06-26: index.html tenía "logo-512.png" (y tras fix parcial "logo-512.webp")
-    #         mientras todas las páginas de servicio usaban electricista-culiacan-pro-logo.webp.
-    for m_logo in re.finditer(r'"logo"\s*:\s*\{[^}]*"url"\s*:\s*"([^"]+)"', t, re.S):
+    #         es electricista-culiacan-pro-logo.webp. ALLOWLIST (no denylist): cualquier URL de
+    #         "logo" que NO apunte a ese asset es sospechosa — antes solo se cazaba el nombre
+    #         "logo-512.(png|webp)" (2026-06-26) y eso dejó pasar en silencio otro asset
+    #         genérico de plantilla, "icon-512x512.png", en 4 blogs (detectado 2026-07-16 por
+    #         revisor-seo; el denylist estrecho no lo veía). Ampliado a allowlist para cerrar
+    #         toda esta familia de una vez. Ver REGLAS.md jsonld-logo-asset-generico-20260716.
+    _LOGO_OK = "electricista-culiacan-pro-logo.webp"
+    for m_logo in re.finditer(r'"logo"\s*:\s*\{[^}]*?"url"\s*:\s*"([^"]+)"', t, re.S):
         logo_url = m_logo.group(1)
-        if re.search(r'logo-512\.(png|webp)', logo_url, re.I):
+        if _LOGO_OK not in logo_url:
             add("media", r, "seo",
-                'Logo en JSON-LD usa asset incorrecto: "%s" (debe ser electricista-culiacan-pro-logo.webp)'
-                % logo_url,
-                'Cambiar la URL del logo en el JSON-LD a la ruta de electricista-culiacan-pro-logo.webp '
-                '(el asset canónico de marca). Nunca usar logo-512.png ni logo-512.webp en JSON-LD.')
+                'Logo en JSON-LD usa asset incorrecto: "%s" (debe ser %s)'
+                % (logo_url, _LOGO_OK),
+                'Cambiar la URL del logo en el JSON-LD a la ruta de %s '
+                '(el asset canónico de marca). Ningún otro nombre de archivo es válido en el '
+                'campo "logo" del JSON-LD.' % _LOGO_OK)
     # Alternativa: "logo":"<url>" (string directo, no objeto)
     for m_logo2 in re.finditer(r'"logo"\s*:\s*"([^"]+)"', t):
         logo_url2 = m_logo2.group(1)
-        if re.search(r'logo-512\.(png|webp)', logo_url2, re.I):
+        if _LOGO_OK not in logo_url2:
             add("media", r, "seo",
-                'Logo en JSON-LD usa asset incorrecto: "%s" (debe ser electricista-culiacan-pro-logo.webp)'
-                % logo_url2,
-                'Cambiar la URL del logo en el JSON-LD a la ruta de electricista-culiacan-pro-logo.webp '
-                '(el asset canónico de marca). Nunca usar logo-512.png ni logo-512.webp en JSON-LD.')
+                'Logo en JSON-LD usa asset incorrecto: "%s" (debe ser %s)'
+                % (logo_url2, _LOGO_OK),
+                'Cambiar la URL del logo en el JSON-LD a la ruta de %s '
+                '(el asset canónico de marca). Ningún otro nombre de archivo es válido en el '
+                'campo "logo" del JSON-LD.' % _LOGO_OK)
 
     # --- 28. precio visible en body HTML (media, contenido): NEGOCIO.md prohíbe mostrar precios
     #         ($MXN) en el cuerpo visible de la página. Los precios están SOLO en JSON-LD
