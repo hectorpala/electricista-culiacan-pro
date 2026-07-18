@@ -193,6 +193,19 @@ def _fix_maps_iframe(h):
     return _MAPS_IFRAME.subn(r'\g<1> title="Mapa de ubicación en Culiacán"\g<2>', h)
 
 
+# ── iframe noscript de Google Tag Manager sin title (misma familia que maps-iframe-title,
+#    hallazgo a11y-008 2026-07-17): auditores automáticos (axe frame-title) lo marcan en las
+#    ~692 páginas que lo incluyen. Está oculto (0x0, display:none) así que los lectores de
+#    pantalla lo ignoran en la práctica, pero el nombre accesible es gratis de añadir. ──
+_GTM_IFRAME = re.compile(r'(<iframe(?![^>]*\btitle=)[^>]*\bsrc="https://www\.googletagmanager\.com/ns\.html[^"]*"[^>]*)(>)', re.I)
+
+def _det_gtm_iframe(h):
+    return bool(_GTM_IFRAME.search(h))
+
+def _fix_gtm_iframe(h):
+    return _GTM_IFRAME.subn(r'\g<1> title="Google Tag Manager"\g<2>', h)
+
+
 # ── skip-link de accesibilidad (bk-e8643041): réplica EXACTA del de la home (fuente de
 #    verdad) en las páginas que no lo tienen. Receta estrecha: (1) <a> pegado tras <body>,
 #    (2) regla .skip-link:focus en el <style> crítico, (3) ancla: id="main-content" en el
@@ -284,6 +297,8 @@ FIXERS = [
      "mecanico", _det_skiplink, _fix_skiplink),
     ("maps-iframe-title", "iframe de Google Maps sin title (nombre accesible) → title=\"Mapa de ubicación en Culiacán\"",
      "mecanico", _det_maps_iframe, _fix_maps_iframe),
+    ("gtm-iframe-title", "iframe noscript de Google Tag Manager sin title (nombre accesible) → title=\"Google Tag Manager\"",
+     "mecanico", _det_gtm_iframe, _fix_gtm_iframe),
 ]
 
 
