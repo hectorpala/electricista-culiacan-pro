@@ -1,88 +1,100 @@
-# Auto Agente Electricista — parte del 14 de julio de 2026
-**Resultado:** encontré 8, arreglé 4 · 3 para ti · 1 no pude arreglar solo · publicado
+# Auto Agente Electricista — parte del 21 de julio de 2026
+**Resultado:** encontré 15, arreglé 7 · 3 para ti · 5 no pude arreglar solo · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 8 cosas: arreglé 4 · 3 necesitan tu decisión · 1 no pude arreglar solo.
+Encontré 15 cosas: arreglé 7 · 3 necesitan tu decisión · 5 no pude arreglar solo.
 
-Antes de entrar al detalle: el sistema automático llevaba **6 días sin correr de verdad**
-(del 9 al 13 de julio) — cada noche se disparó, pero falló por límite de uso del plan, un
-corte de internet, o un aviso a medias que se saltó un día por error. No se rompió ni se
-perdió nada del sitio, pero tampoco se le dio mantenimiento en esos días. Hoy sí corrió
-completo y de principio a fin.
+Antes de entrar al detalle: el sistema llevaba **3 días con trabajo bueno atorado sin publicar**
+(desde el 18 de julio) porque una corrida se quedó a medias sin cerrar el día, y otra (19 de
+julio) se cortó antes de guardar sus cambios en Git. Nada se perdió — hoy revisé ese trabajo
+pendiente, confirmé que estaba bien hecho, y lo publiqué junto con lo de hoy.
 
-## ✅ Arreglé (4)
-- El texto del menú de navegación (los links de arriba: Inicio, Servicios, Blog, Contacto)
-  se veía en un naranja claro que es difícil de leer para personas con baja visión sobre
-  fondo blanco (el menú al hacer scroll o en celular). Lo puse en un naranja más oscuro,
-  igual al que ya usa la portada, para que se lea bien en todo el sitio → https://electricistaculiacanpro.mx/
-- El mapa del sitio que le mandamos a Google (el archivo que le dice "estas son mis páginas
-  y cuándo cambiaron por última vez") tenía fechas desactualizadas en 61 páginas — algunas
-  decían que no se habían tocado desde hace más de una semana cuando sí se habían actualizado.
-  Puse las fechas reales para que Google sepa qué revisar primero.
-- Ese mismo mapa tenía un comentario viejo que decía "40 colonias" cuando en realidad hoy
-  son 32 — corregido, es solo un detalle interno pero evita confusión a futuro.
-- El archivo que usa Google para confirmar que el sitio es tuyo (`google...html`) no tenía
-  título ni descripción, así que si Google lo llegaba a mostrar en una búsqueda se vería
-  como una página vacía y rota. Le puse una instrucción para que Google nunca lo muestre en
-  resultados de búsqueda (sin tocar el archivo en sí, para no romper la verificación).
+## ✅ Arreglé (7)
+- Publiqué el trabajo del 18 de julio que se había quedado sin salir a producción: el botón
+  "WhatsApp Emergencia 24/7" de 2 artículos del blog tenía letras blancas sobre un verde que
+  casi no se leía (ahora tiene mejor contraste), 7 páginas de colonias cargaban el diseño de
+  forma que retrasaba la carga de todo lo demás (ya no), y 10 páginas tenían botones/enlaces
+  demasiado chicos para tocar bien con el dedo (ahora miden lo correcto) → https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/ · https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
+- Terminé el cambio que se había quedado a medias el 19 de julio: el título y la descripción
+  de "Electricista" y de "Instalación de Contactos" competían entre sí y con tu página
+  principal por las mismas búsquedas en Google, sin ganar clics ninguna de las dos. Les puse
+  un título más específico a cada una → https://electricistaculiacanpro.mx/servicios/electricista/ · https://electricistaculiacanpro.mx/servicios/instalacion-contactos/
+- En la portada, la lista de "Servicios de Electricidad" (Reparación de cortocircuitos,
+  Instalación de contactos, etc.) tenía los enlaces muy chicos para tocarlos bien con el dedo
+  en el celular. Les di más espacio → https://electricistaculiacanpro.mx/
+- Las páginas de "Términos y Condiciones" y "Política de Privacidad" eran las únicas 2 de
+  todo el sitio sin la imagen que aparece cuando alguien comparte el link en WhatsApp/Facebook
+  — ya la tienen → https://electricistaculiacanpro.mx/terminos/ · https://electricistaculiacanpro.mx/privacidad/
+- Corregí un comentario interno del mapa de sitio que decía "32 colonias" cuando en realidad
+  son 28 (detalle técnico sin impacto visible, pero evita confusión a futuro).
+- Le volví a pedir a Google que revise tu página "Electricista a domicilio" — sigue sin
+  visitarla 4 días después de haberlo pedido la primera vez → https://electricistaculiacanpro.mx/servicios/electricista-a-domicilio/
+- Puse en orden mi propia lista de pendientes: una tarea de una corrida anterior decía
+  "terminada" pero en realidad nunca se hizo (la volví a abrir), y otra pedía un cambio basado
+  en un dato que resultó estar mal interpretado (la descarté con la explicación).
 
-## ⚠️ Encontré pero NO pude arreglar solo (1)
-- Google Search Console todavía tiene registrado un mapa de sitio viejo
-  (`servicios_colonias_sitemap.xml`) que ya no existe en el sitio — da error cada vez que
-  Google intenta leerlo. No es grave (el mapa bueno funciona perfecto), pero para quitar el
-  registro viejo hay que entrar a la consola de Google Search Console a mano (Sitemaps →
-  quitar) — no tengo una herramienta automática para hacerlo yo.
+## ⚠️ Encontré pero NO pude arreglar solo (5)
+- En ~26 páginas, los enlaces de teléfono y correo del bloque "Información de Contacto" son
+  muy chicos para tocarlos bien — es el mismo tipo de arreglo que sí hice en la portada, pero
+  aquí cada página tiene su propio código un poco distinto, así que necesito construir primero
+  una herramienta que lo haga bien en todas a la vez, en vez de arriesgarme a hacerlo a mano y
+  romper algo. Quedó anotado para una próxima corrida.
+- La misma lista de servicios chica de tocar que sí arreglé en tu portada se repite en las 642
+  páginas de colonias (Tres Ríos, Rafael Buelna, etc.) — mismo caso: se necesita una
+  herramienta que lo aplique a todas de forma segura, no editarlas una por una hoy.
+- En unos 229 lugares del sitio, los iconitos de WhatsApp/teléfono no tienen una descripción
+  extra para las personas que usan lector de pantalla (no es grave: el texto junto al icono ya
+  se lee bien, esto es solo una mejora extra). Quedó anotado, prioridad baja.
+- 14 páginas (el blog, contacto, y 12 colonias) siguen mostrando una versión más vieja del
+  diseño, de antes de un arreglo de contraste de colores del 16 de julio. No las pude
+  actualizar hoy porque esas 14 páginas ya tienen muy poco contenido de por sí (están
+  marcadas para reescribirse por completo más adelante) y tocarlas aunque sea un poco hoy
+  hubiera bloqueado la publicación de TODO lo demás. Se van a actualizar junto con su
+  reescritura completa.
+- Tu página "Electricista a domicilio" sigue sin que Google la visite pese a que ya se lo pedí
+  dos veces (17 y 21 de julio) — no es algo que yo pueda forzar, depende de cuándo Google
+  decida rastrearla.
 
-## 🌱 Mejoré / agregué (2)
-- MEJORÉ: la página de "electricista en Culiacán" (la de más tráfico potencial de todo el
-  sitio) estaba muy corta — le agregué 6 preguntas frecuentes reales (qué tipos de trabajo
-  hacemos, en cuánto tiempo llegamos, si trabajamos de noche/fin de semana, la garantía, qué
-  zonas cubrimos, si atendemos casas y negocios) → https://electricistaculiacanpro.mx/servicios/electricista/
-- MEJORÉ: le pedí a Google que vuelva a revisar la página "electricista a domicilio" — la
-  tiene "descubierta" pero nunca la terminó de indexar, así que le urgí a que la mire de nuevo.
+## 🌱 Mejoré / agregué (0)
+Sin páginas nuevas hoy: revisé las oportunidades reales de Google (una búsqueda de "24 horas
+eléctrico urgente" y otra de "electricista cerca de mí") y en ambos casos ya tienes una página
+que cubre exactamente eso — crear una nueva hubiera sido repetir contenido y dañar tu
+posicionamiento. En vez de eso dejé anotado reforzar el enlace interno hacia la página que ya
+existe.
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Cuando cambio el diseño (colores, tamaños) que usan TODAS las páginas, el sitio tiene que
-  "avisarle" al navegador con un número de versión nuevo para que se vea el cambio y no
-  quede guardado el diseño viejo en caché. Hoy descubrí que mi propio sistema de verificación
-  no reconocía ese aviso como un cambio "seguro y automático" y por poco bloquea la
-  publicación completa del día sin decir por qué. Ya está corregido.
-- Antes de quitar algo que un revisor de calidad marcó como "roto", ahora reviso si algún
-  OTRO revisor de calidad exige justo esa misma cosa — hoy casi rompo el sitio quitando una
-  etiqueta vieja de seguridad (inválida, sí, pero otro sistema de control SÍ la exigía) y
-  también un logo más ligero del menú (rompía otra validación). Los dos quedaron sin tocar,
-  documentados para que tú decidas, en vez de forzar el cambio.
-- Dos alertas de hoy resultaron ser falsas alarmas: un revisor dijo que 25 mapas de Google
-  no tenían "nombre para lectores de pantalla" (sí lo tenían, el revisor solo miró mal el
-  código) y otro dijo que 46 páginas tenían un logo pesado (en realidad eran 14, el resto
-  eran usos correctos en otro lugar del código). Aprendí a re-checar los números exactos
-  antes de aplicar un arreglo masivo.
-- Cuando encuentro que lo que dice tu manual de negocio y lo que dice el sitio de verdad NO
-  coinciden en un tema de dinero, no adivino cuál está mal — te lo dejo a ti (ver abajo).
-- Dos tareas pendientes de días anteriores YA estaban resueltas (una página que faltaba y un
-  detalle técnico de 2 artículos del blog) pero nadie las había marcado como terminadas.
-  Ahora reviso primero si una tarea pendiente ya se resolvió sola antes de gastar tiempo
-  rehaciéndola.
-- (ya van 81 reglas aprendidas en total)
+- Cuando una lista de enlaces se ve como texto normal pero en realidad es una lista de
+  navegación (como "Servicios de Electricidad"), los enlaces necesitan un tamaño mínimo para
+  tocarlos bien — no basta con que "se vea como texto", hay que medirlo de verdad.
+- Si dos revisores de calidad distintos reportan el mismo problema con reglas ligeramente
+  distintas (uno dice "muy chico para el dedo", otro dice "muy chico para el lector de
+  pantalla"), es el MISMO defecto — hoy aprendí a juntarlos en una sola tarea en vez de
+  anotarlos dos veces.
+- Antes de cambiar aunque sea un detalle mínimo (como la versión del diseño) en una página que
+  ya tiene poco contenido, hay que revisar primero si esa página está en la lista de "esperar a
+  reescribir" — tocarla aunque sea un poco puede bloquear la publicación de todo el día.
+- Cuando cierro una tarea de mi lista de pendientes como "hecha", tengo que volver a correr la
+  misma revisión que la detectó para confirmar que el síntoma de verdad desapareció — hoy
+  encontré una tarea marcada "hecha" que en realidad nunca se resolvió.
+- Un dato que viene de Google Search Console (por ejemplo "esta página está excluida") no
+  siempre significa lo mismo que "esta página tiene la etiqueta de no-indexar en el sitio" —
+  hoy estuve a punto de aplicar un arreglo basado en esa confusión y lo evité verificando el
+  código real de la página primero.
+- (ya van 88 reglas aprendidas en total)
 
 ## ⏳ Necesito que tú decidas (3)
-- **¿El diagnóstico a domicilio es gratis o cuesta $200?** Tu manual de negocio dice que el
-  sitio debe decir "cotización sin costo" y nunca mostrar precios, pero en ~34 páginas
-  (servicios y artículos del blog) el texto real dice "Diagnóstico desde $200 MXN, se
-  descuenta si contratas". Son dos cosas distintas y no sé cuál es la correcta — si cambio
-  "$200" a "gratis" sin confirmar podría estar prometiendo algo que no es cierto.
-- **¿Quito la etiqueta de seguridad vieja e inválida del código (X-Frame-Options en 51
-  páginas)?** Es ruido técnico real (genera un error en la consola del navegador) y la
-  protección de verdad ya está puesta correctamente en otro lugar del sitio — pero mi propio
-  sistema de revisión de código EXIGE que esa etiqueta esté presente, así que para quitarla
-  también hay que actualizar ese sistema de revisión. Preferí no tocar el "examen" en la
-  misma tarea que necesitaba pasarlo — necesito tu visto bueno para hacer ambos cambios juntos.
-- **¿Uso un logo más ligero en el menú de 14 páginas (ahorra la mitad del peso, ~19KB por
-  página)?** Al probarlo, otro sistema de revisión (que confirma que cada página tiene el
-  logo de marca correcto) falló porque esas 14 páginas no tienen un logo aparte en el pie de
-  página — dependen del logo del menú para esa verificación. Se puede resolver, pero implica
-  tocar ese sistema de revisión también.
+- **¿El diagnóstico a domicilio es gratis o cuesta $200?** Tu manual de negocio dice
+  "cotización sin costo" pero ~34 páginas dicen "Diagnóstico desde $200 MXN, se descuenta si
+  contratas". Sigue sin resolverse desde el 14 de julio — no lo cambio sin que me confirmes
+  cuál es el dato correcto.
+- **¿La colonia "Infonavit Humaya" debe dejar de competir con tu página principal de
+  "Electricista" por la misma búsqueda en Google?** Ahora mismo las dos aparecen en resultados
+  parecidos y ninguna de las dos gana clics — es una decisión de estrategia (a cuál de las dos
+  le conviene más "ganarle" a esa búsqueda), no algo que yo deba decidir solo.
+- **Rotar o revocar la clave que quedó expuesta en el historial de cambios de Git** (detectada
+  el 18 de julio, sigue sin resolverse). No es algo visible en el sitio hoy, pero no debe
+  considerarse segura mientras siga en el historial.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; le avisé a Google para que lo muestre (61 páginas reenviadas
-para revisión).
+Sí, todo revisado por un verificador independiente (que no encontró ningún problema) y ya está
+en vivo; le avisé a Google para que vuelva a revisar la página de "electricista a domicilio".
