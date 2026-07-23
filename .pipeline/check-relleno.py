@@ -38,6 +38,22 @@ _spec.loader.exec_module(_gate)
 UMBRAL_CASI = 200
 UMBRAL_CLON = _gate.UMBRAL_WARN   # 0.72 — la misma banda del anti-doorway
 
+# VERIFICADAS_MANUALMENTE (decisor-negocio, 2026-07-23): estas colonias del piloto
+# 2026-06-17 tienen contenido REAL, único y honesto (172-185 tokens, Jaccard 0.43-0.50
+# contra hermanas — muy lejos del umbral 0.80 de doorway de gate-pagina.py), pero su
+# conteo de tokens únicos cae apenas debajo del umbral CASI_VACIA=200 porque la
+# plantilla de colonia es deliberadamente lean. Un panel dev+electricista confirmó
+# (2026-07-23, hallazgo del auto-diario) que NO son doorways y que enriquecerlas más
+# sería sobre-ingeniería. NO se suprime VACIA ni CLON (serían señal real); solo se
+# ignora CASI_VACIA para estas rutas exactas. Antes de añadir una página nueva aquí,
+# verificar con decisor-negocio (no basta con "está cerca del umbral").
+VERIFICADAS_MANUALMENTE = {
+    "servicios/electricista-colonias-culiacan/rafael-buelna/index.html",
+    "servicios/electricista-colonias-culiacan/el-vallado/index.html",
+    "servicios/electricista-colonias-culiacan/valle-alto/index.html",
+    "servicios/electricista-colonias-culiacan/juntas-de-humaya/index.html",
+}
+
 
 def paginas_indexables():
     pats = [
@@ -72,7 +88,7 @@ def main():
         motivos = []
         if len(tv) < 150:
             motivos.append("VACIA")
-        elif len(tv) < UMBRAL_CASI:
+        elif len(tv) < UMBRAL_CASI and rel not in VERIFICADAS_MANUALMENTE:
             motivos.append("CASI_VACIA")
         worst, worst_sib = 0.0, None
         for s in indexables:

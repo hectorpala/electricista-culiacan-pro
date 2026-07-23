@@ -1044,6 +1044,34 @@ def check_page(fpath, t, noindex, redirects):
             "inline de esta página, igual que index.html. Ver REGLAS.md 2026-07-08 "
             "MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS.")
 
+    # --- 36. iframe noscript de GTM sin title (media, a11y): MISMA FAMILIA que .sr-only
+    #         2026-06-16 / .hero-cta-buttons 2026-06-17 / .floating-btn 2026-06-20 /
+    #         hamburguesa-aria 2026-06-21 — "un fix se aplica a la mayoría de páginas pero
+    #         un subconjunto se queda fuera". El auto-fixer gtm-iframe-title (2026-07-17)
+    #         aplicó title="Google Tag Manager" al iframe noscript en 677 páginas, pero
+    #         14 (blog/index, contacto/index + 12 colonias) lo escaparon; el check-plantilla
+    #         nunca tuvo un check DETERMINISTA propio para esto (solo el fixer detectaba).
+    #         Ver REGLAS.md GTM-IFRAME-TITLE-FAMILIA-REGRESION-20260723.
+    if re.search(r'<iframe(?![^>]*\btitle=)[^>]*\bsrc="https://www\.googletagmanager\.com/ns\.html[^"]*"[^>]*>',
+                 t, re.I):
+        add("media", r, "a11y",
+            "iframe noscript de Google Tag Manager sin title (nombre accesible)",
+            "Añadir title=\"Google Tag Manager\" al <iframe> de googletagmanager.com/ns.html, "
+            "igual que el resto del sitio (auto-fixer gtm-iframe-title). Respetar CUARENTENA si "
+            "la página está en ella (auto-fixers.py) — no bloquear la corrida completa.")
+
+    # --- 37. .footer-nav a sin min-height:44px (baja, movil): tap target insuficiente en el
+    #         footer de blog. Detectado 2026-07-23: blog/index.html era la ÚNICA de 10 páginas
+    #         de blog con la regla .footer-nav a{...} SIN min-height:44px (las otras 9 sí,
+    #         desde un fix previo que no la alcanzó). Misma familia "fix no propagado a todas
+    #         las páginas".
+    m_fn = re.search(r'\.footer-nav a\{([^}]*)\}', t)
+    if m_fn and "min-height:44px" not in m_fn.group(1):
+        add("baja", r, "movil",
+            ".footer-nav a existe pero sin min-height:44px (tap target insuficiente)",
+            "Añadir min-height:44px (+ display:inline-flex;align-items:center) a la regla "
+            ".footer-nav a del <style> crítico inline, igual que las demás páginas de blog.")
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): las 689 paginas sirven styles.7f293647.css (el VIVO, =
