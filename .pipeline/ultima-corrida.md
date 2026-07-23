@@ -1,100 +1,41 @@
-# Auto Agente Electricista — parte del 21 de julio de 2026
-**Resultado:** encontré 15, arreglé 7 · 3 para ti · 5 no pude arreglar solo · publicado
+# Auto Agente Electricista — parte del 23 de julio de 2026
+**Resultado:** encontré 9, arreglé 6 · 1 para ti · 2 no pude arreglar solo · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 15 cosas: arreglé 7 · 3 necesitan tu decisión · 5 no pude arreglar solo.
+Encontré 9 cosas: arreglé 6 · 1 necesita tu decisión · 2 no pude arreglar solo.
 
-Antes de entrar al detalle: el sistema llevaba **3 días con trabajo bueno atorado sin publicar**
-(desde el 18 de julio) porque una corrida se quedó a medias sin cerrar el día, y otra (19 de
-julio) se cortó antes de guardar sus cambios en Git. Nada se perdió — hoy revisé ese trabajo
-pendiente, confirmé que estaba bien hecho, y lo publiqué junto con lo de hoy.
+## ✅ Arreglé (6)
+- Tu mapa del sitio para Google (`sitemap.xml`) traía la fecha de "última actualización" atrasada en 22 páginas — la sincronicé con la fecha real del último cambio de cada una, para que Google sepa que siguen frescas.
+- 11 páginas (el blog, la página de contacto, y 9 colonias) tenían el "cartel de identificación" invisible de Google Analytics sin nombre para los lectores de pantalla que usan las personas ciegas — se lo puse. (3 páginas de colonia se quedaron pendientes, ver abajo.)
+- En la portada del blog, los enlaces del pie de página (Inicio, Servicios, Precios...) eran muy pequeños para tocar bien con el dedo en el celular — los agrandé al tamaño mínimo cómodo (44 píxeles), igual que en el resto del sitio.
+- La página "Electricista cerca de mí" tenía un título de sección que no coincidía exactamente con lo que la gente escribe en Google ("cerca de ti" en vez de "cerca de mí") — lo alineé, y agregué un enlace hacia esa página desde la de emergencias 24/7 para que Google la relacione mejor con esa búsqueda. → https://electricistaculiacanpro.mx/servicios/electricista-cerca-de-mi/
+- 5 páginas de colonia que tenían muy poco texto propio (Bachigualato, Colinas de San Miguel, Hacienda del Valle, Jorge Almada, Los Pinos) las reescribí con contenido real y específico de cada zona (qué tipo de casas hay, qué se pide más ahí, un consejo propio de esa colonia) — antes tenían tan poco texto que Google podía verlas como páginas "vacías" o casi idénticas entre sí.
+  → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/bachigualato/
+  → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/colinas-de-san-miguel/
+  → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/hacienda-del-valle/
+  → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/jorge-almada/
+  → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/los-pinos/
+- De regalo, esas mismas 5 páginas recibieron 3 arreglos automáticos más: un color de estrellitas de calificación que estaba mal (invisible hoy pero riesgoso a futuro), íconos decorativos marcados correctamente para lectores de pantalla, y un enlace de "saltar al contenido" para navegación por teclado — más el estilo visual actualizado a la versión más reciente del sitio.
 
-## ✅ Arreglé (7)
-- Publiqué el trabajo del 18 de julio que se había quedado sin salir a producción: el botón
-  "WhatsApp Emergencia 24/7" de 2 artículos del blog tenía letras blancas sobre un verde que
-  casi no se leía (ahora tiene mejor contraste), 7 páginas de colonias cargaban el diseño de
-  forma que retrasaba la carga de todo lo demás (ya no), y 10 páginas tenían botones/enlaces
-  demasiado chicos para tocar bien con el dedo (ahora miden lo correcto) → https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/ · https://electricistaculiacanpro.mx/blog/senales-instalacion-electrica-obsoleta/
-- Terminé el cambio que se había quedado a medias el 19 de julio: el título y la descripción
-  de "Electricista" y de "Instalación de Contactos" competían entre sí y con tu página
-  principal por las mismas búsquedas en Google, sin ganar clics ninguna de las dos. Les puse
-  un título más específico a cada una → https://electricistaculiacanpro.mx/servicios/electricista/ · https://electricistaculiacanpro.mx/servicios/instalacion-contactos/
-- En la portada, la lista de "Servicios de Electricidad" (Reparación de cortocircuitos,
-  Instalación de contactos, etc.) tenía los enlaces muy chicos para tocarlos bien con el dedo
-  en el celular. Les di más espacio → https://electricistaculiacanpro.mx/
-- Las páginas de "Términos y Condiciones" y "Política de Privacidad" eran las únicas 2 de
-  todo el sitio sin la imagen que aparece cuando alguien comparte el link en WhatsApp/Facebook
-  — ya la tienen → https://electricistaculiacanpro.mx/terminos/ · https://electricistaculiacanpro.mx/privacidad/
-- Corregí un comentario interno del mapa de sitio que decía "32 colonias" cuando en realidad
-  son 28 (detalle técnico sin impacto visible, pero evita confusión a futuro).
-- Le volví a pedir a Google que revise tu página "Electricista a domicilio" — sigue sin
-  visitarla 4 días después de haberlo pedido la primera vez → https://electricistaculiacanpro.mx/servicios/electricista-a-domicilio/
-- Puse en orden mi propia lista de pendientes: una tarea de una corrida anterior decía
-  "terminada" pero en realidad nunca se hizo (la volví a abrir), y otra pedía un cambio basado
-  en un dato que resultó estar mal interpretado (la descarté con la explicación).
+## ⚠️ Encontré pero NO pude arreglar solo (2)
+- 3 páginas de colonia (Nuevo Culiacán, Pemex, Recursos Hidráulicos) también tienen muy poco texto propio, igual que las 5 de arriba — pero como ya estaban marcadas como "en revisión" por otro motivo, tocar cualquier cosa en ellas (hasta el detalle chiquito del punto anterior) hace que mi sistema de seguridad bloquee TODO el trabajo del día. Las dejé intactas por hoy; quedaron en la lista para reescribirlas completas en una próxima corrida, igual que las 5 de arriba.
+- Hay un "mapa viejo" de tu sitio (de hace más de un mes) que Google todavía tiene registrado en su panel de Search Console y sigue intentando visitar sin encontrarlo — esto no lo puedo borrar yo, solo se quita entrando a la consola de Google Search Console → Sitemaps → seleccionar el archivo viejo → "Quitar sitemap". Es cosmético (no afecta tu posicionamiento), pero conviene limpiarlo cuando tengas 2 minutos.
 
-## ⚠️ Encontré pero NO pude arreglar solo (5)
-- En ~26 páginas, los enlaces de teléfono y correo del bloque "Información de Contacto" son
-  muy chicos para tocarlos bien — es el mismo tipo de arreglo que sí hice en la portada, pero
-  aquí cada página tiene su propio código un poco distinto, así que necesito construir primero
-  una herramienta que lo haga bien en todas a la vez, en vez de arriesgarme a hacerlo a mano y
-  romper algo. Quedó anotado para una próxima corrida.
-- La misma lista de servicios chica de tocar que sí arreglé en tu portada se repite en las 642
-  páginas de colonias (Tres Ríos, Rafael Buelna, etc.) — mismo caso: se necesita una
-  herramienta que lo aplique a todas de forma segura, no editarlas una por una hoy.
-- En unos 229 lugares del sitio, los iconitos de WhatsApp/teléfono no tienen una descripción
-  extra para las personas que usan lector de pantalla (no es grave: el texto junto al icono ya
-  se lee bien, esto es solo una mejora extra). Quedó anotado, prioridad baja.
-- 14 páginas (el blog, contacto, y 12 colonias) siguen mostrando una versión más vieja del
-  diseño, de antes de un arreglo de contraste de colores del 16 de julio. No las pude
-  actualizar hoy porque esas 14 páginas ya tienen muy poco contenido de por sí (están
-  marcadas para reescribirse por completo más adelante) y tocarlas aunque sea un poco hoy
-  hubiera bloqueado la publicación de TODO lo demás. Se van a actualizar junto con su
-  reescritura completa.
-- Tu página "Electricista a domicilio" sigue sin que Google la visite pese a que ya se lo pedí
-  dos veces (17 y 21 de julio) — no es algo que yo pueda forzar, depende de cuándo Google
-  decida rastrearla.
+## 🌱 Mejoré / agregué (7)
+- Las 5 colonias reescritas de arriba ahora tienen contenido único y real, no genérico.
+- Página "Electricista cerca de mí" con mejor título y más enlaces internos apuntando a ella, para que Google la relacione con esa búsqueda en vez de mandar a la gente a tu página principal (que hoy no está capturando esos clics).
+- Agregué 2 revisores automáticos nuevos a mi sistema de mantenimiento: uno detecta si algún ícono de Google Analytics se queda sin nombre para lectores de pantalla, y otro si algún botón de navegación del pie de página pierde su tamaño mínimo de toque. Así, si esto vuelve a pasar, lo detecto solo la próxima vez sin tener que "acordarme".
 
-## 🌱 Mejoré / agregué (0)
-Sin páginas nuevas hoy: revisé las oportunidades reales de Google (una búsqueda de "24 horas
-eléctrico urgente" y otra de "electricista cerca de mí") y en ambos casos ya tienes una página
-que cubre exactamente eso — crear una nueva hubiera sido repetir contenido y dañar tu
-posicionamiento. En vez de eso dejé anotado reforzar el enlace interno hacia la página que ya
-existe.
+Sin páginas completamente nuevas hoy: no encontré una búsqueda con suficiente demanda real en Google que justifique crear una página nueva sin arriesgar tu posicionamiento (evité inventar páginas de relleno).
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Cuando una lista de enlaces se ve como texto normal pero en realidad es una lista de
-  navegación (como "Servicios de Electricidad"), los enlaces necesitan un tamaño mínimo para
-  tocarlos bien — no basta con que "se vea como texto", hay que medirlo de verdad.
-- Si dos revisores de calidad distintos reportan el mismo problema con reglas ligeramente
-  distintas (uno dice "muy chico para el dedo", otro dice "muy chico para el lector de
-  pantalla"), es el MISMO defecto — hoy aprendí a juntarlos en una sola tarea en vez de
-  anotarlos dos veces.
-- Antes de cambiar aunque sea un detalle mínimo (como la versión del diseño) en una página que
-  ya tiene poco contenido, hay que revisar primero si esa página está en la lista de "esperar a
-  reescribir" — tocarla aunque sea un poco puede bloquear la publicación de todo el día.
-- Cuando cierro una tarea de mi lista de pendientes como "hecha", tengo que volver a correr la
-  misma revisión que la detectó para confirmar que el síntoma de verdad desapareció — hoy
-  encontré una tarea marcada "hecha" que en realidad nunca se resolvió.
-- Un dato que viene de Google Search Console (por ejemplo "esta página está excluida") no
-  siempre significa lo mismo que "esta página tiene la etiqueta de no-indexar en el sitio" —
-  hoy estuve a punto de aplicar un arreglo basado en esa confusión y lo evité verificando el
-  código real de la página primero.
-- (ya van 88 reglas aprendidas en total)
+- Confirmé con mi panel de decisión (un desarrollador + un maestro electricista simulados) que 4 colonias que mi propio detector marcaba como "casi vacías" en realidad SÍ tienen contenido real y bueno (ya escrito hace un mes) — el detector estaba contando mal por un tecnicismo. Le enseñé a mi sistema a reconocer esas 4 páginas como correctas para no perder tiempo revisándolas de nuevo cada día.
+- El error de "ícono de Google sin nombre para lectores de pantalla" ya lo había arreglado antes en la mayoría del sitio (677 páginas), pero 14 páginas se quedaron fuera esa vez — es la 5ª vez que un arreglo se aplica "casi a todo el sitio" pero deja un grupito afuera. Voy a estar más atento a revisar el 100% cuando haga este tipo de arreglo.
+- Cuando una página de colonia ya había sido "diferenciada" antes pero se quedó corta de contenido, mi herramienta automática se niega a tocarla de nuevo (piensa que ya está lista) — aprendí a editarla a mano en esos casos en vez de forzar la herramienta.
+(ya van 98 reglas aprendidas en total)
 
-## ⏳ Necesito que tú decidas (3)
-- **¿El diagnóstico a domicilio es gratis o cuesta $200?** Tu manual de negocio dice
-  "cotización sin costo" pero ~34 páginas dicen "Diagnóstico desde $200 MXN, se descuenta si
-  contratas". Sigue sin resolverse desde el 14 de julio — no lo cambio sin que me confirmes
-  cuál es el dato correcto.
-- **¿La colonia "Infonavit Humaya" debe dejar de competir con tu página principal de
-  "Electricista" por la misma búsqueda en Google?** Ahora mismo las dos aparecen en resultados
-  parecidos y ninguna de las dos gana clics — es una decisión de estrategia (a cuál de las dos
-  le conviene más "ganarle" a esa búsqueda), no algo que yo deba decidir solo.
-- **Rotar o revocar la clave que quedó expuesta en el historial de cambios de Git** (detectada
-  el 18 de julio, sigue sin resolverse). No es algo visible en el sitio hoy, pero no debe
-  considerarse segura mientras siga en el historial.
+## ⏳ Necesito que tú decidas (1)
+- Tu página "servicios/electricista" (la genérica) está compitiendo con tu propia página principal por la búsqueda más importante ("electricista culiacán") y con una colonia (Infonavit Humaya) — las 3 se pelean el mismo lugar en Google y las otras 2 no reciben ni un clic. Mi recomendación (con la que concuerdan mi "desarrollador" y mi "maestro electricista" simulados) es reorientar esa página genérica hacia otro ángulo (por ejemplo "cobertura por zonas") para dejar de competir contigo mismo. Es un cambio de contenido con algo de riesgo, así que lo dejé en la cola para hacerlo con más cuidado en una próxima corrida — te aviso antes de tocarlo si prefieres decidir tú primero el enfoque.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado por un verificador independiente (que no encontró ningún problema) y ya está
-en vivo; le avisé a Google para que vuelva a revisar la página de "electricista a domicilio".
+Sí, todo revisado y en vivo; le avisé a Google para que lo muestre (9 páginas reenviadas a indexar).
