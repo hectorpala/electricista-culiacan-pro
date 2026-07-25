@@ -1,5 +1,73 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-07-24 (Auto Agente diario — 5 colonias diferenciadas + 6 arreglos + 2 checkers nuevos) — PUBLICADO ✅
+Rama `auto/diario-20260724-2021`, commit `c907e990` + merge --no-ff `18f568cc` a main. Push OK
+(`d0d147e3..18f568cc`); pre-push auto-indexó 76 URLs. Verificado en producción: home + contacto +
+blog + las 7 colonias tocadas → 200. `mcp__gsc__gsc_index` reforzado a mano para las 5 colonias
+nuevas.
+
+**FASE 1 — health check:** servidor `python3 -m http.server 8080`; home/servicios/contacto/blog → 200.
+
+**FASE 3 — 9 revisores en paralelo (Opus 4.8 xhigh, per model-router):** revisor-seo (5: sitemap
+lastmod desfasado 9 URLs, meta-desc/title largos ya conocidos, 28 colonias sin GeoCoordinates
+propias —nuevo—), revisor-movil (3, ya conocidos: tel/mailto contacto, lista servicios colonia,
+.read-more/.footer-nav secundarios), revisor-a11y (4: 481 SVG sin aria-hidden en 66 páginas ya
+conocido, skip-link ausente en 9 páginas CUARENTENA ya conocido, GTM-iframe CUARENTENA ya conocido,
+`.nav-link:hover` contraste 3.56:1 —nuevo—), revisor-perf (2: CSS render-blocking en 5 colonias
+recién indexables —nuevo, ALTA—, logo-512.png huérfano 196KB —nuevo—), revisor-links (0, limpio),
+revisor-gsc (5, todos ya conocidos: sitemap fantasma, cannibalización electricista-culiacan,
+"cerca de mí" diluido, CTR home cero-clicks, tráfico automotriz off-target ya decidido ignorar),
+revisor-indexabilidad (0, limpio, 76 URLs), revisor-produccion (1 ya conocido: X-Frame-Options),
+revisor-plantilla (44, todos ya conocidos: 36 precio-en-body pendiente dueño, 4 gtm-iframe-title
+CUARENTENA, 3 color-muerto CUARENTENA, 1 theme-color stub GSC).
+
+**FASE 5 — arreglado:** 2 fixers mecánicos nuevos en `auto-fixers.py` (`navlink-hover-contrast`
+#ea580c→#C2410C, `readmore-taptarget` +min-height:44px) aplicados en los 3 CSS + bump `?v=20260724`
+en 683 páginas + CACHE_VERSION sw.js. Patrón de carga CSS async (media=print+onload+noscript)
+propagado a mano a 11 páginas de colonia que lo tenían bloqueante (perf-001, severidad alta).
+Sitemap.xml/sitemap_index.xml: lastmod sincronizado en 9 URLs. logo-512.png huérfano eliminado
+(`git rm`, 0 referencias reales confirmadas). ⚠️ Autocrítica: al escribir el script de sync de
+sitemap, un `re.subn` con texto literal fuera de grupo de captura borró 9 líneas `<loc>` — cazado
+de inmediato por `ci-gate.py` (9 ALTA) ANTES de cualquier commit, revertido y reescrito bien. Nunca
+llegó a tocar main ni producción.
+
+**FASE 6 — crecer:** GSC opportunities/performance revisados (sin huecos de página nueva, demanda
+ya cubierta por páginas existentes). `decisor-negocio` (Opus xhigh) evaluó 7 colonias en CUARENTENA:
+5 prominentes (campestre, las-americas, lazaro-cardenas, libertad, nuevo-culiacan) diferenciadas con
+contenido único real vía 5 agentes en paralelo (Sonnet, per model-router) — 128-146→185-226 tokens
+únicos, Jaccard 0.41-0.44; 2 oscuras (pemex, recursos-hidraulicos) pasadas a noindex,follow
+permanente y quitadas de sitemap.xml (76→74 URLs). Tope de 5 diferenciadas/corrida alcanzado.
+`check-huecos.py` limpio (0). `check-relleno.py`: 18 hallazgos, todos ya cubiertos por backlog
+existente. Backlog actualizado: `bk-ac57a537` y `bk-6b6208ef` reducidos a solo 2 páginas restantes
+(blog/index.html, contacto/index.html, siguen en CUARENTENA, quedan para la próxima corrida).
+
+**FASE 7 — verificador independiente (Opus 4.8 xhigh, solo-lectura):** `ok: true, problemas: []`.
+Confirmó alcance (703 archivos, `auto-fixers.py verify` → 677 mecánicos + 12 libres, bajo el cap de
+18), ci-gate 0 ALTA, gate-pagina OK en las 12 colonias tocadas (7 hoy + 5 de ayer aún sin mergear),
+HTTP 200 + JSON-LD + canonical==og:url en todas, patrón CSS async bien formado, sitemap correcto
+(pemex/recursos-hidraulicos ausentes, las 5 nuevas presentes), sin precios tocados, email intacto,
+contenido de las 5 colonias real y sin claims prohibidos, ninguna página nueva huérfana. 2
+observaciones informativas no bloqueantes (twitter:url ausente en colonias —patrón heredado—,
+entrada stale en imagenes-pendientes.json).
+
+**FASE 8 — publicación:** commit `c907e990` en la rama (excluyendo `PROPUESTAS.md` y
+`.pipeline/ultima-meta.md`, ajenos a esta corrida — proceso `critico-sistema` separado). Merge
+`18f568cc`→main, push OK, pre-push auto-indexó 76 URLs. `gsc_index` reforzado a mano para las 5
+colonias nuevas.
+
+**Incidente de entorno (sin impacto en el repo):** durante la FASE 7, el servidor local de
+verificación (puerto 8080) empezó a dar 404 en páginas que sí existían — investigado: otro proceso
+autónomo corriendo en paralelo en la misma máquina (sitio hermano Plomero Culiacán) tomó el puerto
+8080 para sí. Resuelto levantando el servidor de verificación en el puerto 8090. El git de este
+repo nunca se vio afectado.
+
+**FASE 9 — 5 reglas nuevas en REGLAS.md (98→103):** patrón CSS async no propagado a colonias nuevas
+(MECANIZADO check-plantilla.py check 38, caza-malo=1/ignora-bueno=1, sobre el sitio real da 0);
+colonias oscuras noindex es mecánico y no cuenta contra el tope de 5 diferenciadas/corrida; regex
+`subn` pierde texto literal fuera de grupo de captura (lección de mi propio error, cazado por
+ci-gate antes de publicar); colisión de puerto HTTP entre agentes autónomos en la misma máquina (no
+asumir corrupción de datos ante un 404 inesperado, verificar `lsof` primero).
+
 ## 2026-07-23 (Auto Agente diario — 5 colonias diferenciadas + 4 arreglos + 2 checkers nuevos) — PUBLICADO ✅
 Rama `auto/diario-20260723-0902`, 2 commits a main (`f68ad64a` fixes+colonias merge --no-ff
 `e1cfb94f`, más `442a55a6` aprendiz directo a main). Push OK (`57c9b0c6..e1cfb94f` y
