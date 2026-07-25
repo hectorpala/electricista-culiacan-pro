@@ -41,13 +41,13 @@ BRAND_THEME = "#E36414"   # theme-color de la home (fuente de verdad)
 CUARENTENA = {
     "blog/index.html",
     "contacto/index.html",
-    "servicios/electricista-colonias-culiacan/campestre/index.html",
-    "servicios/electricista-colonias-culiacan/las-americas/index.html",
-    "servicios/electricista-colonias-culiacan/lazaro-cardenas/index.html",
-    "servicios/electricista-colonias-culiacan/libertad/index.html",
-    "servicios/electricista-colonias-culiacan/nuevo-culiacan/index.html",
-    "servicios/electricista-colonias-culiacan/pemex/index.html",
-    "servicios/electricista-colonias-culiacan/recursos-hidraulicos/index.html",
+    # campestre, las-americas, lazaro-cardenas, libertad, nuevo-culiacan: diferenciadas
+    # 2026-07-24 (contenido único real, ≥150 tokens, Jaccard <0.44 vs hermanas) — salen de
+    # CUARENTENA en el mismo changeset que las enriquece.
+    # pemex y recursos-hidraulicos: pasadas a noindex 2026-07-24 (decisor-negocio: colonias
+    # oscuras sin notoriedad de búsqueda, Google no las indexaría aunque se diferenciaran).
+    # Ya no aplica CUARENTENA: check-relleno.py y el anti-doorway de gate-pagina.py solo
+    # evalúan páginas INDEXABLES, así que una noindex nunca vuelve a disparar el candado.
 }
 
 
@@ -473,6 +473,29 @@ def _fix_form_border_contrast(css):
     return _FORM_BORDER.subn(r"\g<1>border:1px solid #94A3B8", css)
 
 
+# ── contraste .nav-link:hover (revisor-a11y 2026-07-24): color:#ea580c !important sobre fondo
+#    claro da ~3.56:1, falla WCAG AA 4.5:1 (texto 20px/600 no califica como "grande"). Es una
+#    regla DISTINTA de nav-link-contrast (esa apunta a #f97316 en el estado base/menú móvil);
+#    #ea580c solo aparece en el :hover del nav desktop. Mismo color de reemplazo ya establecido
+#    (#C2410C, ~5.18:1). ──
+_NAVLINK_HOVER_COLOR = re.compile(r'(\.nav-link:hover\{)color:#ea580c')
+
+def _fix_navlink_hover_contrast(css):
+    return _NAVLINK_HOVER_COLOR.subn(r'\g<1>color:#C2410C', css)
+
+
+# ── tap-target .read-more (HISTORIAL movil-tap-target-secundario-20260714, pendiente desde
+#    esa fecha): ~186x27px medido en vivo, bajo el mínimo 44px de WCAG 2.5.8/2.5.5 (aunque
+#    pasa el mínimo AA de 24px). index.html ya trae este mismo min-height:44px en su CSS
+#    crítico inline para #lista-servicios-seo; aquí se replica para .read-more en la hoja
+#    externa (afecta tarjetas de blog/noticias). NO toca color (ya migrado a --brand-dark
+#    por text-contrast-brand-dark) — solo agrega las 3 declaraciones de tap-target. ──
+_READMORE_TAPTARGET = re.compile(r'(\.(?:blog-content \.)?read-more\{)(?!display:inline-flex)')
+
+def _fix_readmore_taptarget(css):
+    return _READMORE_TAPTARGET.subn(r'\g<1>display:inline-flex;align-items:center;min-height:44px;', css)
+
+
 ASSET_FIXERS = [
     ("tap-target-44",
      "tap target <44px en selectores interactivos compartidos (migas) → min-height:44px en los 3 CSS + bump ?v=/sw.js",
@@ -486,6 +509,12 @@ ASSET_FIXERS = [
     ("form-border-contrast",
      "borde de .contact-form input/textarea var(--border) #E2E8F0 (~1.23:1, falla WCAG 1.4.11) → #94A3B8 (~3.1:1) en los 3 CSS + bump ?v=/sw.js",
      "mecanico", _fix_form_border_contrast),
+    ("navlink-hover-contrast",
+     "contraste .nav-link:hover #ea580c (~3.56:1, falla WCAG AA) → #C2410C (~5.18:1) en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_navlink_hover_contrast),
+    ("readmore-taptarget",
+     "tap target .read-more/.blog-content .read-more ~186x27px (<44px, WCAG 2.5.8) → +display:inline-flex;align-items:center;min-height:44px en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_readmore_taptarget),
 ]
 
 

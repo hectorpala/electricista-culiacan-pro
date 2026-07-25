@@ -1072,6 +1072,26 @@ def check_page(fpath, t, noindex, redirects):
             "Añadir min-height:44px (+ display:inline-flex;align-items:center) a la regla "
             ".footer-nav a del <style> crítico inline, igual que las demás páginas de blog.")
 
+    # --- 38. <link rel=stylesheet> del CSS compartido bloqueante en página INDEXABLE (media,
+    #         perf): index.html usa el patrón async de 3 partes (<link ... media="print"
+    #         onload="this.media='all'"> + <noscript><link rel=stylesheet ...></noscript>) para
+    #         no bloquear el render con el CSS compartido. Detectado 2026-07-24: 11 páginas de
+    #         colonia (5 diferenciadas 07-23, 6 diferenciadas/tocadas 07-24) tenían un
+    #         <link rel=stylesheet> crudo y bloqueante — nacieron indexables sin heredar el
+    #         patrón porque diferenciar-colonia.py no lo verifica. Ver REGLAS.md
+    #         PERF/CSS-ASYNC-PATTERN-NO-PROPAGADO-COLONIAS-NUEVAS-20260724.
+    if not noindex:
+        m_css = re.search(r'<link rel="stylesheet" href="[^"]*styles[\w.]*\.css\?v=\d+"[^>]*>', t)
+        if m_css and 'media="print"' not in m_css.group(0):
+            add("media", r, "perf",
+                "CSS compartido cargado con <link rel=stylesheet> bloqueante en vez del patrón "
+                "async de 3 partes (media=print + onload + noscript)",
+                "Reemplazar por el patrón de index.html: "
+                "<link rel=\"stylesheet\" href=\"...css?v=...\" media=\"print\" "
+                "onload=\"this.media='all'\"><noscript><link rel=\"stylesheet\" "
+                "href=\"...css?v=...\"></noscript>. No requiere bump de ?v= si el CSS no cambió, "
+                "solo cómo se carga.")
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): las 689 paginas sirven styles.7f293647.css (el VIVO, =
