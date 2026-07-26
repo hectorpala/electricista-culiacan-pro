@@ -1092,6 +1092,36 @@ def check_page(fpath, t, noindex, redirects):
                 "href=\"...css?v=...\"></noscript>. No requiere bump de ?v= si el CSS no cambió, "
                 "solo cómo se carga.")
 
+    # --- 39. JSON-LD con claves @ vaciadas a cadena vacía (alta, seo): detectado 2026-07-25 en
+    #         contacto/index.html — un edit anterior vació "@context"/"@graph"/"@type"/"@id" a
+    #         "" (posible artefacto de un find&replace mal dirigido), el JSON seguía parseando
+    #         (válido sintácticamente) pero Google descarta el bloque entero por no tener
+    #         @context/@type. Los checkers de JSON existentes solo validan sintaxis, no
+    #         semántica. Ver REGLAS.md jsonld-claves-arroba-vaciadas-20260725.
+    for m_ld in re.finditer(r'<script type="application/ld\+json">(.*?)</script>', t, re.S):
+        block = m_ld.group(1)
+        try:
+            import json as _json
+            data = _json.loads(block)
+        except Exception:
+            continue  # sintaxis inválida ya la caza otro check; no duplicar
+        objs = data if isinstance(data, list) else [data]
+        # @graph puede anidar más objetos
+        flat = []
+        for o in objs:
+            if isinstance(o, dict):
+                flat.append(o)
+                g = o.get("@graph")
+                if isinstance(g, list):
+                    flat.extend(x for x in g if isinstance(x, dict))
+        if flat and not any(("@type" in o or "@context" in o) for o in flat):
+            add("alta", r, "seo",
+                "JSON-LD parsea pero NO tiene ninguna clave @context/@type (posible vaciado "
+                "accidental de las claves @ a cadena vacía) — Google descarta el bloque entero",
+                "Revisar el bloque application/ld+json: las claves deben ser literalmente "
+                "\"@context\", \"@type\", \"@id\", \"@graph\" (no \"\"). Ver caso "
+                "contacto/index.html 2026-07-25.")
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): las 689 paginas sirven styles.7f293647.css (el VIVO, =
