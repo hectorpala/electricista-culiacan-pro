@@ -1,5 +1,89 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-07-25 (Auto Agente diario — 5 hallazgos ALTA + 8 media/baja + versionado JS + FAQ/Review schema real) — PUBLICADO ✅
+Rama `auto/diario-20260725-2001`, commit `e6977363` (correcciones+crecimiento) + `1fe7f4ac` (fix
+sensor JS, verificador) → merge `--no-ff` a main `ba488d74`. Push OK (`6414bb85..ba488d74`),
+pre-push auto-indexó 78 URLs. Aprendiz `574c054d` (reglas+check 39) directo a main. Tras publicar,
+2 arreglos adicionales de FAQPage/Review JSON-LD detectados por revisor-seo se resolvieron con
+extracción mecánica del contenido ya visible: commit `17cfc5f8` directo a main (index.html, sin
+pasar por el ciclo completo de verificador — cambio pequeño, mecánico y verificado con
+gate-pagina.py + parseo JSON antes de publicar). Verificado en producción: home + contacto + blog +
+servicios + tres-rios → 200; email JSON-LD de contacto correcto; FAQPage con 5 preguntas reales;
+Review con los 6 nombres correctos; `main.min.js?v=20260725` y `styles.7f293647.css?v=20260725`
+servidos.
+
+**FASE 1 — health check:** servidor `python3 -m http.server 8080`; home/contacto/servicios/blog → 200.
+
+**FASE 3 — 9 revisores en paralelo (Opus xhigh, per model-router):** revisor-seo (13: 2 ALTA nuevas
+—JSON-LD de contacto con claves `@` vaciadas + email truncado, FAQPage de la home con 13 preguntas
+invisibles—, 1 media nueva —Review schema desalineado de los testimonios—, resto media/baja ya
+conocidos o menores: sitemap lastmod, meta description larga, H1 del hub sin keyword),
+revisor-movil (7: mayoría ya en backlog —footer-nav, breadcrumb, tel/mailto, colonias-links, FAQ—,
+2 nuevos menores —CTA colonias home sin 44px, table-wrapper con scroll fantasma en 2 páginas—),
+revisor-a11y (8: 2 ALTA nuevas —menú móvil offcanvas tabulable cuando cerrado en CSS servido,
+main.min.js desincronizado de main.js con aria-expanded roto—, 4 media —contraste blanco/naranja en
+foco global + tablas de precios + badges—, 2 baja/conocidas), revisor-perf (8: 1 ALTA nueva —AVIF
+del hero más pesado que el WebP en 677 páginas—, 1 media nueva —CSS ?v= rezagado en contacto/blog—,
+6 media/baja: JS sin versionar, ~23MB de artefactos de auditoría públicos, huérfanos, desalineos de
+sizes/precache), revisor-links (2 nuevos: contacto huérfana de enlaces internos, logo sin optimizar
+en 16 colonias), revisor-gsc (12: mayoría ya conocidos, medición clave de la regla de colonias
+2026-06-17 —42% indexación real, últimas diferenciadas sin re-rastrear—), revisor-indexabilidad (0,
+limpio, 78 URLs), revisor-produccion (1 ya conocido: X-Frame-Options meta redundante),
+revisor-plantilla (34: 33 precio-en-body ya conocido/pendiente dueño, 1 baja theme-color en stub GSC).
+
+**FASE 5 — arreglado:** JSON-LD de `contacto/index.html` reconstruido (claves `@context`/`@graph`/
+`@type`/`@id` + email correcto). Hero AVIF re-codificado con `avifenc` (800w reusa un `-lite.avif`
+ya presente sin usar, 1200w re-encodeado q45) — ambos ahora más ligeros que su WebP homólogo,
+verificado visualmente. Menú móvil offcanvas con `visibility:hidden/visible` en los 3 CSS (a11y,
+CSS servido). `main.min.js` parcheado quirúrgicamente para actualizar `aria-expanded` (un re-minify
+completo con terser introdujo un bug nuevo, revertido; el parche dirigido sí funcionó, verificado
+con Puppeteer real: toggle abre/cierra, 0 errores de consola, wa.me intacto). 5 casos de contraste
+blanco/naranja corregidos a `#C2410C` (foco global, `.pricing-table thead`, badges de stats). 16
+colonias con logo de header sin optimizar → `logo-256w.webp` (mecanizado como fixer
+`colonia-logo-optimizado` en `auto-fixers.py`). CSS `?v=` rezagado en contacto/blog sincronizado.
+Sitemap lastmod + comentario de conteo desincronizados corregidos. CTA "Ver todas las colonias" con
+tap-target 44px. Auto-fixers.py: 0 mecánicos pendientes, `limpiar-huerfanos.py`: 0 huérfanos
+seguros. **Autocrítica:** intenté quitar el `<meta http-equiv="X-Frame-Options">` redundante (el
+header real ya vive en netlify.toml) pero rompió `validate-landing.sh` en 51 páginas (busca esa
+cadena literal) — revertido de inmediato, cazado ANTES de commitear.
+
+**FASE 6 — crecer:** decisor-negocio (Opus xhigh) confirmó PAUSAR toda diferenciación de colonias
+nuevas esta corrida (regla dura 2026-06-17: "medir a 3-4 semanas y parar si no rinde" — 42%
+indexación real, últimas 10 diferenciadas sin re-rastrear siquiera). `main.min.js` versionado por
+primera vez (`?v=20260725` en 679 páginas + precache de sw.js, bk-1b42fc8d) — mismo mecanismo que
+el CSS. ctr-fix de emergencia-24-7 descartado (ya resuelto en corrida previa, title/meta ya tienen
+"24 horas"). 2 tareas encoladas para corrida dedicada: curar el hub de colonias (bk-b0d7f986,
+directorio de 643→listado de ~30 indexables + contenido propio) y decidir consolidar/diferenciar
+electricista-a-domicilio (bk-07361cc1, nunca rastreada pese a 660 enlaces entrantes). `check-huecos.py`
+limpio (0). `check-relleno.py`: 17 hallazgos, todos ya en backlog existente.
+
+**FASE 7 — verificador independiente (Opus xhigh, solo-lectura, 2 pasadas):** 1ª pasada `ok:false`
+— detectó que el nuevo `js-bump-state.json` no tenía el sensor de auto-reparo que sí tiene el CSS
+(gap real de infra, arreglado en el acto con `_check_js_bump`/`_do_full_js_bump`, espejo exacto del
+mecanismo CSS, probado con hash falso en dry-run). 2ª pasada `ok:true, problemas: []`: confirmó el
+fix, re-corrió ci-gate (0 ALTA) y `auto-fixers.py verify` (684 mecánicos / 7 libres, dentro del cap
+de 18), probó el sensor con una copia sandbox del estado (sin tocar el repo), confirmó sincronía de
+hash. Los otros 2 hallazgos de la 1ª pasada eran aceptables: `contacto/index.html` sigue delgado
+mismo que en `main` (no es regresión), y `PROPUESTAS.md`/`.pipeline/ultima-meta.md`/
+`.pipeline/costos.jsonl` sin commitear son del proceso `critico-sistema` separado (mismo patrón que
+el 07-24).
+
+**FASE 8 — publicación:** merge `--no-ff` de la rama a main (`e6977363`+`1fe7f4ac` → `ba488d74`),
+push OK, pre-push auto-indexó 78 URLs. Verificado en producción tras propagación del deploy de
+Netlify (~1-2 min): email de contacto correcto, `main.min.js?v=20260725` y
+`styles.7f293647.css?v=20260725` servidos, logo optimizado en las 16 colonias.
+
+**FASE 9 — 5 reglas nuevas en REGLAS.md (97→102) + check-plantilla.py check 39:** JSON-LD con
+claves `@` vaciadas a cadena vacía (MECANIZADO, caza-malo=1/ignora-bueno=0, sitio real=0); AVIF más
+pesado que WebP en `<picture>` (verificar bytes antes de publicar, no mecanizable); deriva
+CSS+JS-compartido vs index.html ampliada a FUENTE→MINIFICADO (6ª/7ª instancia de la familia);
+sensor de auto-reparo debe portarse completo al versionar un asset nuevo (lección del propio
+proceso, cazada por el verificador); cierre de la medición de colonias prevista por la regla del
+dueño 2026-06-17 (resultado: pausar). Tras el commit de aprendiz, 2 arreglos adicionales
+(FAQPage/Review de la home con contenido inventado/desalineado del schema) se resolvieron con
+extracción mecánica del texto ya visible — commit `17cfc5f8` directo a main, verificado con
+gate-pagina.py y confirmado en producción.
+
 ## 2026-07-24 (Auto Agente diario — 5 colonias diferenciadas + 6 arreglos + 2 checkers nuevos) — PUBLICADO ✅
 Rama `auto/diario-20260724-2021`, commit `c907e990` + merge --no-ff `18f568cc` a main. Push OK
 (`d0d147e3..18f568cc`); pre-push auto-indexó 76 URLs. Verificado en producción: home + contacto +
