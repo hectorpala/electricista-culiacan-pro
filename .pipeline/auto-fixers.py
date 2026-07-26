@@ -201,6 +201,26 @@ def _fix_gtm_iframe(h):
     return _GTM_IFRAME.subn(r'\g<1> title="Google Tag Manager"\g<2>', h)
 
 
+# ── logo de header sin optimizar en páginas de colonia (hallazgo links-002 2026-07-25):
+#    626 de las 642 colonias cargan el logo del header con la variante optimizada
+#    (logo-256w.webp, 10.4KB); 16 (justo las prominentes/indexables) quedaron con el
+#    original sin comprimir (electricista-culiacan-pro-logo.webp, 29KB) porque al
+#    promoverlas noindex→indexable se editó el markup y no se propagó el asset optimizado.
+#    Patrón exclusivo de colonias: el path relativo de 3 niveles (../../../) solo aparece
+#    en servicios/electricista-colonias-culiacan/<slug>/; las páginas de servicio (2
+#    niveles, ../../) usan el logo SIN optimizar a propósito en el FOOTER (lo exige
+#    validate-landing.sh), así que este fixer no debe tocarlas — el patrón de 3 niveles
+#    ya las excluye. NO tocar el campo "logo" de JSON-LD (regla jsonld-logo-brand-asset-
+#    20260626): las colonias no declaran ese campo, solo el <img> del header. ──
+_COLONIA_LOGO = re.compile(r'(<img src=")\.\./\.\./\.\./assets/images/electricista-culiacan-pro-logo\.webp(")')
+
+def _det_colonia_logo(h):
+    return bool(_COLONIA_LOGO.search(h))
+
+def _fix_colonia_logo(h):
+    return _COLONIA_LOGO.subn(r'\g<1>../../../assets/images/optimizadas/logo-256w.webp\g<2>', h)
+
+
 # ── skip-link de accesibilidad (bk-e8643041): réplica EXACTA del de la home (fuente de
 #    verdad) en las páginas que no lo tienen. Receta estrecha: (1) <a> pegado tras <body>,
 #    (2) regla .skip-link:focus en el <style> crítico, (3) ancla: id="main-content" en el
@@ -294,6 +314,8 @@ FIXERS = [
      "mecanico", _det_maps_iframe, _fix_maps_iframe),
     ("gtm-iframe-title", "iframe noscript de Google Tag Manager sin title (nombre accesible) → title=\"Google Tag Manager\"",
      "mecanico", _det_gtm_iframe, _fix_gtm_iframe),
+    ("colonia-logo-optimizado", "header <img> de colonia con el logo sin optimizar (29KB) → variante optimizada logo-256w.webp (10.4KB), paridad con las demás colonias (scope: solo servicios/electricista-colonias-culiacan/*, path de 3 niveles)",
+     "mecanico", _det_colonia_logo, _fix_colonia_logo),
 ]
 
 
@@ -364,6 +386,7 @@ def _bump_css_version_html(version):
 # Si al arrancar difiere, un cambio de CSS quedó SIN bump (fixer muerto a medias) → se
 # repara aquí mismo. Sin esto, CSS viejo cacheado 1 año sin ningún sensor.
 BUMP_STATE = os.path.join(ROOT, ".pipeline", "css-bump-state.json")
+JS_BUMP_STATE = os.path.join(ROOT, ".pipeline", "js-bump-state.json")
 
 def _css_hash():
     import hashlib
@@ -684,6 +707,13 @@ def cmd_verify(args):
         _bump_token = _json.loads(open(BUMP_STATE, encoding="utf-8").read()).get("token")
     except Exception:
         pass
+    # Mismo mecanismo que el bump de CSS, pero para main.min.js (bk-1b42fc8d, versionado
+    # 2026-07-25: el JS servido no tenía cache-busting bajo Cache-Control immutable).
+    _js_bump_token = None
+    try:
+        _js_bump_token = _json.loads(open(JS_BUMP_STATE, encoding="utf-8").read()).get("token")
+    except Exception:
+        pass
 
     def _git(*a):
         return subprocess.run(["git"] + list(a), capture_output=True, cwd=ROOT)
@@ -714,6 +744,10 @@ def cmd_verify(args):
                         h = h2
         if _bump_token and re.search(r'styles[\w.]*\.css\?v=\d{8,12}', h):
             h = re.sub(r'(styles[\w.]*\.css\?v=)\d{8,12}', r'\g<1>' + _bump_token, h)
+        if _js_bump_token and re.search(r'main\.min\.js\?v=\d{8,12}', h):
+            h = re.sub(r'(main\.min\.js\?v=)\d{8,12}', r'\g<1>' + _js_bump_token, h)
+        elif _js_bump_token and re.search(r'main\.min\.js"', h) and re.search(r'main\.min\.js\?v=\d{8,12}', actual):
+            h = re.sub(r'main\.min\.js"', 'main.min.js?v=' + _js_bump_token + '"', h)
         if h != actual:
             libres.append((rel, "no equivale a base+fixers (hay edición manual)")); continue
         residuo = [] if en_cuarentena else [
