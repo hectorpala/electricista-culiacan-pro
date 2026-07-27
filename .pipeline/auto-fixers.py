@@ -256,6 +256,96 @@ def _fix_skiplink(h):
     return h3, 1
 
 
+# ── skip-link :focus nunca entra al viewport (revisor-móvil mov-003, 2026-07-26): el <a
+#    class="skip-link"> lleva `top:-40px` en el ATRIBUTO style inline, que por especificidad
+#    gana a la regla de clase `.skip-link:focus{top:0;...}` del <style> crítico — un usuario
+#    de teclado nunca ve el control aunque su tamaño (44px) ya esté bien. Fix mínimo: forzar
+#    top:0 con !important solo en esa regla (no toca el resto de la declaración). ──
+_SKIPLINK_FOCUS = re.compile(r'(\.skip-link:focus\{)top:0;')
+
+def _det_skiplink_focus_important(h):
+    m = _SKIPLINK_FOCUS.search(h)
+    return bool(m) and "top:0 !important" not in h
+
+def _fix_skiplink_focus_important(h):
+    return _SKIPLINK_FOCUS.subn(r'\g<1>top:0 !important;', h)
+
+
+# ── texto blanco invisible en el hero móvil (revisor-a11y a11y-001, 2026-07-26): 14 páginas
+#    de servicio tienen <p style="color: #fff; ...">Atendemos AHORA...</p> justo debajo del
+#    hero, pero @media(max-width:768px) fuerza .hero-content{background:#fff !important} →
+#    texto blanco sobre fondo blanco (1.00:1), invisible en móvil. index.html (fuente de
+#    verdad) no tiene este bloque; el color correcto es el texto oscuro estándar del sitio. ──
+# CORRECCIÓN 2026-07-26 (verificador, misma corrida): la 1ª versión de este fixer cambiaba
+# color:#fff → color:#475569 SIN mirar el breakpoint. `.hero-content` solo tiene
+# background:#fff dentro de @media(max-width:768px) (móvil); en escritorio (>768px) el fondo
+# real es la foto del hero con overlay oscuro semitransparente, donde el texto SÍ debe ser
+# blanco (contraste 11.67:1 con #fff; con #475569 cae a 1.54:1 — regresión, no fix). La receta
+# correcta es responsive: clase + regla en el CSS compartido, solo bajo el breakpoint móvil.
+_HERO_ATENDEMOS = re.compile(
+    r'<p class="hero-atendemos-ahora" style="color: #fff; margin-top: 1rem; font-size: 0\.9rem; text-align: center;">\s*'
+    r'(?:⚡\s*)?<strong>Atendemos AHORA</strong>'
+)
+_HERO_WHITE_TEXT = re.compile(
+    r'<p style="color: #(?:fff|475569)(; margin-top: 1rem; font-size: 0\.9rem; text-align: center;">\s*'
+    r'(?:⚡\s*)?<strong>Atendemos AHORA</strong>)'
+)
+
+def _det_hero_white_text(h):
+    return bool(_HERO_WHITE_TEXT.search(h)) and not _HERO_ATENDEMOS.search(h)
+
+def _fix_hero_white_text(h):
+    return _HERO_WHITE_TEXT.subn(r'<p class="hero-atendemos-ahora" style="color: #fff\g<1>', h)
+
+
+# ── fuentes duplicadas byte a byte (revisor-perf perf-001, 2026-07-26): inter-500.woff2 e
+#    inter-600.woff2 son copias EXACTAS de inter-400.woff2 (mismo SHA256) y montserrat-700.woff2
+#    copia exacta de montserrat-800.woff2, pero cada @font-face apunta a una URL distinta →
+#    el navegador descarga los mismos bytes 3 (Inter) y 2 (Montserrat) veces por página. Como
+#    el contenido YA es idéntico, apuntar todos los pesos a un solo archivo no cambia el
+#    render (0 diferencia visual), solo evita la descarga repetida. Vive en el <style> crítico
+#    INLINE de cada página (no solo en los 3 CSS compartidos). ──
+_FONT_DEDUP_MAP = (
+    ("assets/fonts/inter-500.woff2", "assets/fonts/inter-400.woff2"),
+    ("assets/fonts/inter-600.woff2", "assets/fonts/inter-400.woff2"),
+    ("assets/fonts/montserrat-700.woff2", "assets/fonts/montserrat-800.woff2"),
+)
+
+def _det_font_dedup(h):
+    return any(old in h for old, _ in _FONT_DEDUP_MAP)
+
+def _fix_font_dedup(h):
+    n = 0
+    for old, new in _FONT_DEDUP_MAP:
+        h, k = re.subn(re.escape(old), new, h)
+        n += k
+    return h, n
+
+
+# ── contacto/index.html y privacidad/index.html HUÉRFANAS (revisor-links links-001/002,
+#    revisor-seo seo-001, revisor-gsc gsc-contacto-rastreada-sin-indexar, 2026-07-26): el ÚNICO
+#    href="/contacto/" del sitio es su propio nav (autoenlace); las 687 páginas restantes solo
+#    enlazan #contacto (ancla de la home) y /terminos/ en el footer. privacidad/ recibe 1 solo
+#    inbound (desde terminos/). Se añaden los 2 enlaces al footer, junto a Términos (mismo
+#    patrón/estilo), en TODAS las páginas — soluciona la orfandad sin tocar contacto/index.html
+#    (que sigue en CUARENTENA: su contenido delgado es tarea aparte del backlog). ──
+_FOOTER_TERMINOS = re.compile(
+    r'(Todos los derechos reservados\. \| <a href="/terminos/" style="color:inherit;text-decoration:underline">Términos</a>)(</p>)'
+)
+
+def _det_footer_contacto_privacidad(h):
+    m = _FOOTER_TERMINOS.search(h)
+    if not m:
+        return False
+    return "/contacto/" not in h[m.end():m.end() + 200]
+
+def _fix_footer_contacto_privacidad(h):
+    return _FOOTER_TERMINOS.subn(
+        r'\g<1> | <a href="/contacto/" style="color:inherit;text-decoration:underline">Contacto</a>'
+        r' | <a href="/privacidad/" style="color:inherit;text-decoration:underline">Aviso de Privacidad</a>\g<2>',
+        h)
+
+
 # ── .breadcrumb-link inline sin tap-target 44px + color #E36414 bajo contraste (~2.9:1,
 #    falla WCAG AA) — MISMA receta ya aplicada a mano el 2026-07-06 en 12 páginas de servicio
 #    (A11Y/BREADCRUMB-CONTRASTE-TAPTARGET), aquí se registra para las 20 restantes + futuras
@@ -316,6 +406,14 @@ FIXERS = [
      "mecanico", _det_gtm_iframe, _fix_gtm_iframe),
     ("colonia-logo-optimizado", "header <img> de colonia con el logo sin optimizar (29KB) → variante optimizada logo-256w.webp (10.4KB), paridad con las demás colonias (scope: solo servicios/electricista-colonias-culiacan/*, path de 3 niveles)",
      "mecanico", _det_colonia_logo, _fix_colonia_logo),
+    ("skiplink-focus-important", "'.skip-link:focus{top:0;...}' pierde ante el top:-40px inline del <a> (el control nunca entra al viewport) → top:0 !important",
+     "mecanico", _det_skiplink_focus_important, _fix_skiplink_focus_important),
+    ("hero-white-on-white", "<p style=\"color: #fff\">Atendemos AHORA...</p> invisible sobre .hero-content{background:#fff} en móvil → class=hero-atendemos-ahora + regla responsive en el CSS (oscuro solo bajo @media max-width:768px, blanco en escritorio)",
+     "mecanico", _det_hero_white_text, _fix_hero_white_text),
+    ("font-dedup", "@font-face inline apunta a inter-500/600.woff2 o montserrat-700.woff2 (copias byte-a-byte de inter-400/montserrat-800) → consolida la URL, evita descarga repetida",
+     "mecanico", _det_font_dedup, _fix_font_dedup),
+    ("footer-contacto-privacidad", "footer sin enlace a /contacto/ ni /privacidad/ (páginas huérfanas) → añade ambos junto a Términos, mismo estilo",
+     "mecanico", _det_footer_contacto_privacidad, _fix_footer_contacto_privacidad),
 ]
 
 
@@ -607,6 +705,64 @@ def _fix_readmore_taptarget(css):
     return _READMORE_TAPTARGET.subn(r'\g<1>display:inline-flex;align-items:center;min-height:44px;', css)
 
 
+# ── foco de teclado ANULADO en el formulario de leads (revisor-a11y a11y-002, 2026-07-26):
+#    .contact-form input:focus,.contact-form textarea:focus{outline:none;...} apaga el anillo
+#    de foco global :focus-visible (WCAG 2.4.7) en los 3 campos del ÚNICO formulario de
+#    conversión del sitio; solo queda un cambio de borde ~1.49:1 (falla WCAG 2.4.11 ≥3:1). ──
+_FORM_FOCUS_OUTLINE = re.compile(
+    r'(\.contact-form input:focus,\.contact-form textarea:focus\{)outline:none;'
+)
+
+def _fix_form_focus_outline(css):
+    return _FORM_FOCUS_OUTLINE.subn(r'\g<1>outline:3px solid #C2410C;outline-offset:2px;', css)
+
+
+# ── contraste del CTA de WhatsApp (revisor-a11y a11y-003, 2026-07-26): texto blanco sobre el
+#    primer stop del gradient (#25D366) da 1.98:1 (h3) / 1.84:1 (p) — el peor contraste medido
+#    en el sitio. CORRECCIÓN (verificador, misma corrida): la 1ª versión solo cambió el primer
+#    stop a #075E54 y dejó #128C7E en el segundo — blanco sobre #128C7E da 4.14:1, sigue bajo
+#    4.5:1 para texto normal (el <p> del bloque cae justo en esa zona del gradiente). Se usa
+#    un color SÓLIDO (mismo teal de marca #075E54, contrato 2026-06-21, ya aprobado para el
+#    mismo propósito en .hero-availability): blanco sobre #075E54 = 7.67:1 en TODO el box,
+#    sin depender de en qué punto del gradiente caiga cada línea de texto. NO se toca el botón
+#    flotante de WhatsApp (#25d366 sigue legítimo ahí). ──
+_WHATSAPP_CTA_GRADIENT = re.compile(
+    r'(\.whatsapp-cta-box\{[^}]*background:)linear-gradient\(135deg,#25D366 0%,#128C7E 100%\)'
+)
+_WHATSAPP_CTA_GRADIENT_PARTIAL = re.compile(
+    r'(\.whatsapp-cta-box\{[^}]*background:)linear-gradient\(135deg,#075E54 0%,#128C7E 100%\)'
+)
+
+def _fix_whatsapp_cta_contrast(css):
+    css, n1 = _WHATSAPP_CTA_GRADIENT.subn(r'\g<1>#075E54', css)
+    css, n2 = _WHATSAPP_CTA_GRADIENT_PARTIAL.subn(r'\g<1>#075E54', css)
+    return css, n1 + n2
+
+
+# ── contraparte responsive de hero-white-on-white (corrección 2026-07-26, ver nota arriba):
+#    .hero-atendemos-ahora debe quedar OSCURO solo bajo el mismo @media(max-width:768px) que
+#    pone .hero-content{background:#fff}; en escritorio conserva el color:#fff inline (correcto
+#    sobre el overlay oscuro de la foto). Se inserta la regla junto a .hero-content dentro del
+#    MISMO bloque @media para no crear un @media nuevo. ──
+_HERO_CONTENT_MOBILE = re.compile(
+    r'(\.hero-content\{padding:1\.25rem !important;margin:0 auto 0\.5rem auto !important;'
+    r'background:#fff !important;[^}]*\})'
+)
+
+def _fix_hero_atendemos_css(css):
+    if ".hero-atendemos-ahora" in css:
+        return css, 0
+    return _HERO_CONTENT_MOBILE.subn(r'\g<1>.hero-atendemos-ahora{color:#475569 !important}', css)
+
+
+def _fix_font_dedup_css(css):
+    n = 0
+    for old, new in _FONT_DEDUP_MAP:
+        css, k = re.subn(re.escape(old), new, css)
+        n += k
+    return css, n
+
+
 ASSET_FIXERS = [
     ("tap-target-44",
      "tap target <44px en selectores interactivos compartidos (migas) → min-height:44px en los 3 CSS + bump ?v=/sw.js",
@@ -626,6 +782,18 @@ ASSET_FIXERS = [
     ("readmore-taptarget",
      "tap target .read-more/.blog-content .read-more ~186x27px (<44px, WCAG 2.5.8) → +display:inline-flex;align-items:center;min-height:44px en los 3 CSS + bump ?v=/sw.js",
      "mecanico", _fix_readmore_taptarget),
+    ("form-focus-outline",
+     "foco de teclado anulado en .contact-form input/textarea (outline:none, WCAG 2.4.7/2.4.11) → outline:3px solid #C2410C en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_form_focus_outline),
+    ("whatsapp-cta-contrast",
+     "contraste del CTA de WhatsApp (~1.98:1 blanco sobre #25D366, falla WCAG AA) → #075E54 teal de marca (~7.4:1) en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_whatsapp_cta_contrast),
+    ("font-dedup-css",
+     "@font-face de los 3 CSS apunta a inter-500/600.woff2 o montserrat-700.woff2 (copias byte-a-byte) → consolida la URL en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_font_dedup_css),
+    ("hero-atendemos-ahora-css",
+     "contraparte responsive de hero-white-on-white: .hero-atendemos-ahora oscuro SOLO bajo @media(max-width:768px) (en escritorio el <p> inline sigue #fff, correcto sobre el overlay del hero) en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_hero_atendemos_css),
 ]
 
 

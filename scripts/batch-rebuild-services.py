@@ -12,7 +12,7 @@ import os
 # ============================================================
 CRITICAL_CSS = """    <style>
         @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('../../assets/fonts/inter-400.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
-        @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/inter-600.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
+        @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/inter-400.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
         @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('../../assets/fonts/montserrat-800.woff2') format('woff2');size-adjust:113%;ascent-override:89%;descent-override:24%;line-gap-override:0%}
         :root{--brand:#E36414;--brand-light:#F97316;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--container-max-width:1200px;--container-gutter:24px;--nav-h:74px}
         *{margin:0;padding:0;box-sizing:border-box}

@@ -68,7 +68,7 @@
 
     <style>
         @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('../../assets/fonts/inter-400.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
-        @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/inter-600.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
+        @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/inter-400.woff2') format('woff2');size-adjust:107%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
         @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('../../assets/fonts/montserrat-800.woff2') format('woff2');size-adjust:113%;ascent-override:89%;descent-override:24%;line-gap-override:0%}
         :root{--brand:#E36414;--brand-light:#F97316;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--container-max-width:1200px;--container-gutter:24px;--nav-h:74px}
         *{margin:0;padding:0;box-sizing:border-box}
@@ -110,9 +110,9 @@
         }
         @media (max-width:480px){.hero h1,.hero-subtitle,.hero .btn-primary,.fade-in{animation:none!important;opacity:1!important;transform:none!important}}
         .floating-btn{position:fixed;right:max(18px,env(safe-area-inset-right,18px));width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease,opacity .2s ease;z-index:90;text-decoration:none}.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}.floating-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(249,115,22,0.5)}.floating-call{background:#0f4fa8;bottom:max(18px,env(safe-area-inset-bottom,18px))}.floating-whatsapp{background:#22c55e;bottom:calc(max(18px,env(safe-area-inset-bottom,18px)) + 60px)}body.menu-open .floating-btn{opacity:0;pointer-events:none}
-    .skip-link:focus{top:0;min-height:44px;display:flex;align-items:center;box-sizing:border-box}</style>
-    <link rel="stylesheet" href="../../styles.7f293647.css?v=20260725" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="../../styles.7f293647.css?v=20260725"></noscript>
+    .skip-link:focus{top:0 !important;min-height:44px;display:flex;align-items:center;box-sizing:border-box}</style>
+    <link rel="stylesheet" href="../../styles.7f293647.css?v=202607262108" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="../../styles.7f293647.css?v=202607262108"></noscript>
     <!-- Critical CSS Compartido (v2.0.0) -->
 
     <!-- Non-critical CSS -->
@@ -233,9 +233,9 @@
           "@id": "https://electricistaculiacanpro.mx/servicios/instalacion-tierra-fisica/#faq",
           "mainEntity": [
             { "@type": "Question", "name": "¿Qué es la tierra física y para qué sirve?", "acceptedAnswer": { "@type": "Answer", "text": "La tierra física es un sistema de protección eléctrica que conduce corrientes de falla hacia el suelo, evitando descargas eléctricas peligrosas. Protege personas, equipos electrónicos y electrodomésticos. Es obligatoria por norma CFE." } },
-            { "@type": "Question", "name": "¿Cuánto cuesta instalar tierra física en Culiacán?", "acceptedAnswer": { "@type": "Answer", "text": "Desde $1,500 hasta $3,500 MXN dependiendo de la complejidad. Incluye varilla copperweld, cable, conexión a tablero, medición y certificado." } },
+            { "@type": "Question", "name": "¿Cuánto cuesta instalar tierra física en Culiacán?", "acceptedAnswer": { "@type": "Answer", "text": "El costo varía según la complejidad de la vivienda o negocio. Solicita cotización sin costo para tu caso específico. Incluye varilla copperweld, cable, conexión a tablero, medición de resistencia y constancia." } },
             { "@type": "Question", "name": "¿Cuánto tiempo tarda la instalación?", "acceptedAnswer": { "@type": "Answer", "text": "La instalación completa tarda de 3 a 5 horas en promedio. Incluye inspección, excavación, instalación de varilla, conexión al tablero, medición y pruebas." } },
-            { "@type": "Question", "name": "¿Dan certificado de instalación?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, entregamos certificado con medición de resistencia, materiales utilizados, cumplimiento NOM-001-SEDE, garantía de 90 días y firma del técnico." } }
+            { "@type": "Question", "name": "¿Dan certificado de instalación?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, entregamos una constancia de instalación que incluye datos del inmueble, medición de resistencia obtenida, materiales utilizados, cumplimiento de NOM-001-SEDE, garantía de 90 días y firma del técnico. La verificación oficial para CFE la emite una Unidad de Verificación (UVIE) acreditada; nosotros dejamos tu instalación lista para ese trámite." } }
           ]
         }
       ]
@@ -418,7 +418,7 @@ window.dataLayer = window.dataLayer || [];
                         <span><strong>Llamar:</strong> 667 392 2273</span>
                     </a>
                 </div>
-                <p style="color: #fff; margin-top: 1rem; font-size: 0.9rem; text-align: center;">
+                <p class="hero-atendemos-ahora" style="color: #fff; margin-top: 1rem; font-size: 0.9rem; text-align: center;">
                     ⚡ <strong>Atendemos AHORA</strong> • Respuesta en menos de 10 minutos
                 </p>
             </div>
@@ -524,7 +524,7 @@ window.dataLayer = window.dataLayer || [];
                 </details>
                 <details style="border:1px solid #e2e8f0;border-radius:12px;margin-bottom:1rem;overflow:hidden">
                     <summary style="padding:1.25rem;font-weight:600;cursor:pointer;background:#fff;font-size:1.05rem">¿Cuánto cuesta instalar tierra física en Culiacán?</summary>
-                    <div style="padding:0 1.25rem 1.25rem;color:#475569;line-height:1.7">El costo varía según la complejidad de la vivienda o negocio. Solicita cotización sin costo para tu caso específico. Incluye varilla copperweld, cable, conexión a tablero, medición de resistencia y certificado.</div>
+                    <div style="padding:0 1.25rem 1.25rem;color:#475569;line-height:1.7">El costo varía según la complejidad de la vivienda o negocio. Solicita cotización sin costo para tu caso específico. Incluye varilla copperweld, cable, conexión a tablero, medición de resistencia y constancia.</div>
                 </details>
                 <details style="border:1px solid #e2e8f0;border-radius:12px;margin-bottom:1rem;overflow:hidden">
                     <summary style="padding:1.25rem;font-weight:600;cursor:pointer;background:#fff;font-size:1.05rem">¿Cuánto tiempo tarda la instalación?</summary>
@@ -532,7 +532,7 @@ window.dataLayer = window.dataLayer || [];
                 </details>
                 <details style="border:1px solid #e2e8f0;border-radius:12px;margin-bottom:1rem;overflow:hidden">
                     <summary style="padding:1.25rem;font-weight:600;cursor:pointer;background:#fff;font-size:1.05rem">¿Qué normas CFE cumple la instalación?</summary>
-                    <div style="padding:0 1.25rem 1.25rem;color:#475569;line-height:1.7">Cumplimos la NOM-001-SEDE: resistencia máxima de 25 ohms, varilla copperweld de mínimo 5/8" y 2.4 metros, cable calibre mínimo 8 AWG, conexión sólida al sistema de tierra del tablero. Entregamos certificado de cumplimiento.</div>
+                    <div style="padding:0 1.25rem 1.25rem;color:#475569;line-height:1.7">Cumplimos la NOM-001-SEDE: resistencia máxima de 25 ohms, varilla copperweld de mínimo 5/8" y 2.4 metros, cable calibre mínimo 8 AWG, conexión sólida al sistema de tierra del tablero. Entregamos una constancia de cumplimiento.</div>
                 </details>
                 <details style="border:1px solid #e2e8f0;border-radius:12px;margin-bottom:1rem;overflow:hidden">
                     <summary style="padding:1.25rem;font-weight:600;cursor:pointer;background:#fff;font-size:1.05rem">¿Mi casa necesita tierra física obligatoriamente?</summary>
@@ -661,7 +661,7 @@ window.dataLayer = window.dataLayer || [];
                      loading="lazy"
                      decoding="async">
             </div>
-            <p>&copy; 2026 Electricista Culiacán Pro. Todos los derechos reservados. | <a href="/terminos/" style="color:inherit;text-decoration:underline">Términos</a></p>
+            <p>&copy; 2026 Electricista Culiacán Pro. Todos los derechos reservados. | <a href="/terminos/" style="color:inherit;text-decoration:underline">Términos</a> | <a href="/contacto/" style="color:inherit;text-decoration:underline">Contacto</a> | <a href="/privacidad/" style="color:inherit;text-decoration:underline">Aviso de Privacidad</a></p>
             <p style="margin-top:1rem">Servicio profesional de electricidad en Culiacán, Sinaloa</p>
         </div>
     </footer>
