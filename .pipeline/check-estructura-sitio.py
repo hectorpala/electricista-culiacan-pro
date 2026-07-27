@@ -17,7 +17,7 @@ import os, re, json
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://electricistaculiacanpro.mx"
-SITEMAP = os.path.join(ROOT, "sitemaps", "main_sitemap.xml")
+SITEMAP = os.path.join(ROOT, "sitemap.xml")
 
 hallazgos = []
 _seq = 0
@@ -76,8 +76,15 @@ def main():
             add("media", rel,
                 "%s tiene class=\"hero\" pero le falta el wrapper div.hero-content del estándar (validate-landing/gate FALLAN al editarla)" % loc,
                 "Envolver h1+subtitle+CTA del hero en <div class=\"hero-content\">…</div> como el resto de servicios; verificar visual headless 375/1280")
-    # "analizadas": con el sitemap ilegible este checker imprimía {"hallazgos":[]}
-    # indistinguible de un sitio limpio (verificación ciega).
+    # VERIFICACIÓN CIEGA (2026-07-26, hallazgo del verificador): con el sitemap ilegible o
+    # movido de ruta, este checker imprimía {"hallazgos":[],"analizadas":0} indistinguible de
+    # un sitio limpio (bug real: SITEMAP apuntaba a sitemaps/main_sitemap.xml, ruta que dejó
+    # de existir cuando el sitemap se consolidó a la raíz). Un 0 analizadas ANÓMALO (el sitio
+    # tiene páginas indexables de sobra) ahora se reporta como hallazgo ALTA en vez de callar.
+    if not seen:
+        add("alta", os.path.relpath(SITEMAP, ROOT),
+            "verificación ciega: check-estructura-sitio.py analizó 0 páginas (sitemap ilegible o ruta SITEMAP desactualizada) — no confundir con 'sitio limpio'",
+            "Verificar que SITEMAP apunte al sitemap.xml real (ver robots.txt/sitemap_index.xml) y que exista en disco")
     print(json.dumps({"hallazgos": hallazgos, "analizadas": len(seen)}, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":

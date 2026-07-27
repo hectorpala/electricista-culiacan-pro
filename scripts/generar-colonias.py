@@ -103,7 +103,7 @@ def generate_html(colonia):
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#1E40AF">
 <link rel="preload" href="../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../styles.min.css">
 <link rel="canonical" href="https://{DOMAIN}/colonias/{slug}/">
 <meta property="og:type" content="website">
