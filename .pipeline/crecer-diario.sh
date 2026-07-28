@@ -11,6 +11,12 @@ set -euo pipefail
 # Forzar IPv4: el 2026-06-16 fallaron corrida y correo por IPv6 roto (EHOSTUNREACH).
 export NODE_OPTIONS="--dns-result-order=ipv4first"
 
+# NO cortar las tareas en background a los 600s. El CLI en modo -p espera por defecto
+# solo 10 min a los subagentes lanzados en background y luego imprime "Background tasks
+# still running after 600s; terminating" y SALE CON CODIGO 0, con el verificador a medias.
+# Con 0 espera indefinidamente; el freno real es el TIMEOUT_MIN de abajo.
+export CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0
+
 # launchd arranca con PATH mínimo (sin node) → el MCP de GSC ("command":"node") no
 # arrancaba y el agente quedaba "ciego" de GSC (5 días seguidos). Aseguramos node en PATH.
 export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
@@ -123,6 +129,15 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   WPID=$!
   if wait "$CPID"; then
     kill "$WPID" 2>/dev/null || true
+    # Codigo de salida 0 NO prueba que la corrida termino: el CLI tambien sale 0 cuando MATA
+    # las tareas en background vivas (tipicamente el verificador). Si eso paso, las fases
+    # finales (publicar, aprender, escribir el parte) nunca corrieron -> NO es exito.
+    OUTATT=$(tail -c "+$((OFF + 1))" "$LOG" 2>/dev/null || echo "")
+    if printf '%s' "$OUTATT" | grep -q "Background tasks still running"; then
+      FAIL_KIND="incompleta"
+      echo "[$STAMP] Salio con codigo 0 pero corto tareas en background: las fases finales (verificar/publicar/parte) NO terminaron; no cuenta como exito." >> "$LOG"
+      break
+    fi
     CLAUDE_OK=1; FAIL_KIND=""; break
   fi
   kill "$WPID" 2>/dev/null || true
@@ -205,6 +220,18 @@ fi
   "/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/costos.jsonl" "auto-agente $STAMP" >> "$LOG" 2>&1 \
   || echo "[$STAMP] No pude registrar el consumo de la corrida (sigo)." >> "$LOG"
 
+# CANDADO DE FRESCURA (independiente del LLM): el parte solo vale si lo escribio ESTA corrida.
+# Si su fecha de modificacion es anterior al arranque, la corrida murio antes de la ultima fase
+# y mandarlo seria un correo FALSO (caso plomero 2026-07-26: llego el parte del dia anterior
+# diciendo "publicado" mientras el trabajo seguia sin commitear).
+if [ "${CLAUDE_OK:-0}" = 1 ] || [ "${CODEX_OK:-0}" = 1 ]; then
+  PARTE_MTIME=$(stat -f %m "/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/ultima-corrida.md" 2>/dev/null || echo 0)
+  if [ "$PARTE_MTIME" -lt "$RUN_START" ]; then
+    echo "[$STAMP] El parte no se reescribio en esta corrida (mtime $PARTE_MTIME < inicio $RUN_START): no llego a la fase final; NO mando el parte viejo." >> "$LOG"
+    CLAUDE_OK=0; CODEX_OK=0; FAIL_KIND="incompleta"
+  fi
+fi
+
 # Parte por email. Si la corrida tuvo ÉXITO (Claude o respaldo Codex) → manda el parte nuevo.
 # Si FALLÓ (cuota/error) → NO mandes el parte viejo (sería un correo engañoso "encontré N"
 # de una corrida anterior); manda un aviso honesto de que no se completó.
@@ -234,6 +261,9 @@ else
     permanente)
       MOTIVO="error PERMANENTE de configuración/acceso (p.ej. suscripción deshabilitada o credencial inválida) — reintentar no ayuda"
       SUGERENCIA="Revisa la suscripción/credenciales de Claude; el agente no puede resolver esto solo." ;;
+    incompleta)
+      MOTIVO="la corrida hizo trabajo pero NO llego a terminarlo (se corto en la revision final, antes de publicar y de escribir el parte del dia)"
+      SUGERENCIA="El trabajo NO se perdio: quedo guardado en la rama de la corrida. La proxima corrida lo retoma. Log: $LOG" ;;
     timeout)
       MOTIVO="la corrida excedió el tope duro de tiempo y fue cortada (posible corrida desbocada)"
       SUGERENCIA="Revisa el log para ver en qué fase se atoró: $LOG" ;;
