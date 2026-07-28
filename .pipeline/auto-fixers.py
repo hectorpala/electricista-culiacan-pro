@@ -381,6 +381,32 @@ def _fix_breadcrumb_taptarget(h):
     return h2, n
 
 
+# ── contraste del CTA del popup de salida (revisor-a11y, 2026-07-27): el
+#    <a id="exit-popup-whatsapp"> de #exit-intent-popup lleva `background:#22c55e;color:#fff`
+#    en su ATRIBUTO style inline → 2.28:1 medido con Puppeteer, falla WCAG AA (4.5:1). El
+#    resto del sitio ya migró ese verde al TEAL DE MARCA #075E54 (7.67:1) en el lote de
+#    contraste del 2026-07-26 (whatsapp-cta-contrast / .hero-availability); el popup quedó
+#    fuera. SCOPE ESTRECHO: solo el `background:#22c55e` DENTRO de la etiqueta <a> que lleva
+#    id="exit-popup-whatsapp" — el botón FLOTANTE de WhatsApp (.floating-whatsapp) conserva
+#    #22c55e, que sigue siendo legítimo por contrato de marca (CLAUDE.md), igual que el
+#    .eta-dot. `color:#fff` NO se toca: sobre #075E54 ya da 7.67:1. ──
+_EXIT_POPUP_WA_TAG = re.compile(r'<a\b[^>]*\bid=["\']exit-popup-whatsapp["\'][^>]*>', re.I)
+_EXIT_POPUP_WA_BG = re.compile(r'background:\s*#22c55e', re.I)
+
+def _det_exit_popup_wa_contrast(h):
+    return any(_EXIT_POPUP_WA_BG.search(m.group(0)) for m in _EXIT_POPUP_WA_TAG.finditer(h))
+
+def _fix_exit_popup_wa_contrast(h):
+    n = 0
+    def repl(m):
+        nonlocal n
+        tag, k = _EXIT_POPUP_WA_BG.subn("background:#075E54", m.group(0))
+        n += k
+        return tag
+    h = _EXIT_POPUP_WA_TAG.sub(repl, h)
+    return h, n
+
+
 FIXERS = [
     ("og-url", "og:url faltante en página indexable → copia el canonical (scope: solo indexables)",
      "mecanico", _det_ogurl, _fix_ogurl),
@@ -414,6 +440,8 @@ FIXERS = [
      "mecanico", _det_font_dedup, _fix_font_dedup),
     ("footer-contacto-privacidad", "footer sin enlace a /contacto/ ni /privacidad/ (páginas huérfanas) → añade ambos junto a Términos, mismo estilo",
      "mecanico", _det_footer_contacto_privacidad, _fix_footer_contacto_privacidad),
+    ("exit-popup-whatsapp-contrast", "botón <a id=exit-popup-whatsapp> del popup de salida con background:#22c55e inline (blanco sobre verde = 2.28:1, falla WCAG AA) → #075E54 teal de marca (7.67:1); NO toca el botón flotante de WhatsApp ni .eta-dot (su #22c55e es legítimo)",
+     "mecanico", _det_exit_popup_wa_contrast, _fix_exit_popup_wa_contrast),
 ]
 
 
