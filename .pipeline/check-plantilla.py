@@ -90,6 +90,7 @@ import re
 import json
 import glob
 import unicodedata
+from collections import Counter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # raiz del repo
 BASE = "https://electricistaculiacanpro.mx"
@@ -1190,6 +1191,50 @@ def _css_atoms(css):
     return out
 
 
+def check_css_version_sync():
+    # --- 40. CSS ?v= desincronizado (alta, perf/seo): el sitio versiona el CSS SERVIDO
+    #         (styles.7f293647.css?v=<AAAAMMDDHHMM>) para cache-busting site-wide; cada vez
+    #         que se bumpea ese valor con un script de bump masivo, ALGUNAS páginas quedan
+    #         fuera del glob (a menudo contacto/ y blog/, o páginas que estaban en CUARENTENA)
+    #         y se quedan sirviendo el CSS VIEJO bajo Cache-Control:immutable — REGRESIÓN
+    #         confirmada 3 veces (2026-06-30->07-01 vieja, 2026-07-21, 2026-07-25, 2026-07-27)
+    #         y NINGÚN checker determinista la cazaba: la encontraron 3 revisores LLM
+    #         independientes (seo/perf/links) el mismo día, cada uno re-descubriendo el mismo
+    #         bug por separado. Enfoque elegido (el más simple y robusto: no depende de leer
+    #         CACHE_VERSION de sw.js con su propio parseo/formato, ni de mantener una constante
+    #         hardcodeada que hay que recordar subir a mano cada vez que se bumpea) — MAYORÍA
+    #         SITE-WIDE: por cada página que referencia styles.7f293647.css?v=<N>, se extrae
+    #         N; el valor que aparece en más páginas se toma como la versión "correcta" del
+    #         sitio en esta corrida, y cualquier página con un valor distinto es una fuga del
+    #         bump anterior. Si el sitio está sano, esto da 0 (todas comparten el mismo N); si
+    #         una minoría quedó atrás, esto la caza sin importar cuál sea el valor vigente.
+    ver_re = re.compile(r'styles\.7f293647\.css\?v=(\d+)')
+    por_pagina = {}
+    for fpath in collect_pages():
+        t = read(fpath)
+        if is_stub(t):
+            continue
+        m = ver_re.search(t)
+        if m:
+            por_pagina[fpath] = m.group(1)
+    if not por_pagina:
+        return  # ninguna pagina referencia el CSS versionado asi: nada que comparar
+    conteo = Counter(por_pagina.values())
+    mayoria, _ = conteo.most_common(1)[0]
+    if len(conteo) <= 1:
+        return  # todas coinciden, sitio sano
+    for fpath, v in por_pagina.items():
+        if v != mayoria:
+            add("alta", rel(fpath), "perf",
+                "CSS ?v= desincronizado: %s usa ?v=%s pero el sitio usa ?v=%s" %
+                (rel(fpath), v, mayoria),
+                "Actualizar el href de styles.7f293647.css a ?v=%s (mismo valor que el resto "
+                "del sitio) en esta página. Ver REGLAS.md 2026-07-27 "
+                "css-version-rezagada-paginas-aisladas (regresión confirmada 3 veces: verificar "
+                "SIEMPRE que el script de bump masivo cubra TODAS las páginas, incluidas "
+                "contacto/, blog/ y cualquiera en CUARENTENA)." % mayoria)
+
+
 def check_css_contraste_regresion():
     # --- 32. contraste insuficiente en estrellas de calificación (alta, a11y): las clases
     #         .rating-stars/.stars usaban colores dorado/ámbar claro (#FBBC04 ~1.71:1,
@@ -1236,6 +1281,7 @@ def main():
         check_page(fpath, t, has_noindex(t), redirects)
     check_css_parity()
     check_css_contraste_regresion()
+    check_css_version_sync()
 
     # orden estable + asignacion de ids deterministas
     sev_rank = {"alta": 0, "media": 1, "baja": 2}
