@@ -1,5 +1,115 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-07-27 (Auto Agente diario — 17 arreglos + 51 páginas de contraste WCAG (ALTA) + 3 servicios regenerados + 1 colonia a noindex) — PUBLICADO ✅
+Rama `auto/diario-20260727-2002`, commit `a809a65b` (arreglos+crecimiento) → merge `--no-ff` a main
+`90be5865`. Push OK (`2ab4fb44..90be5865`), pre-push auto-indexó 54 URLs. Aprendiz `092d5579` directo
+a main (5 reglas + checker 40). Verificado en producción: home/contacto/servicios/blog + 6 páginas
+tocadas → 200; CSS `?v=202607262108` sirviendo en contacto/blog; popup de salida en `#075E54`
+(7.67:1); `las-coloradas` con `noindex,follow` confirmado en vivo.
+
+**FASE 1 — health check:** servidor `python3 -m http.server 8099`; home/contacto/servicios/blog → 200.
+
+**FASE 3 — 9 revisores en paralelo (Opus xhigh, per model-router):** revisor-seo (13: 2 ALTA de
+precio — contradicción $300 vs $200 en la home + JSON-LD con precios inventados no visibles, ambas
+a pendiente-humano por la regla de no tocar precios; resto media/baja — ImageObject con dimensiones
+falsas, colonias noindex enlazadas desde indexables, og:image genérica compartida, aggregateRating
+self-serving en 33 servicios, sitemap lastmod regresión 3ª vez), revisor-movil (7: footer mini-nav
+sin tap-target en 20 páginas — variante que el check 37 no cazaba —, ausencia de red de seguridad
+`img{max-width:100%}` global, ambos diferidos a backlog), revisor-a11y (8: 1 ALTA — botón WhatsApp
+del popup de salida en `#22c55e` regresó a 2.28:1 —, contraste regresivo en hub de colonias/3
+blogs/blog-index, skip-link faltante en contacto/blog, 33 páginas sin landmark `<main>`),
+revisor-perf (12: CLS del hero del blog y de 642 logos de colonia por dimensiones falsas, fuente
+huérfana en sw.js y en blog/index.html sin consolidar, CSS ?v= rezagado en contacto/blog, 21
+imágenes + 4 CSS huérfanos, 21MB de logs de auditoría desplegados a producción), revisor-links
+(6: confirma y amplía varios de los anteriores — regresión CSS ?v= 3ª vez, 15 hrefs de la home a
+`/index.html`, 1531 `<img>` con aspect ratio declarado incorrecto), revisor-gsc (12: causa raíz de
+por qué `/servicios/` y `/blog/` nunca se han rastreado — el nav de la home enlazaba con ancla
+`#servicios`, no URL real —, sitemap fantasma registrado en GSC, canibalización confirmada con datos,
+"electricista cerca de mí" con 121 impresiones/28d en posición 61), revisor-indexabilidad (0, limpio,
+78 URLs), revisor-produccion (1 ya conocido: X-Frame-Options meta), revisor-plantilla (34: 33
+precio-en-body pendiente dueño + 1 theme-color en stub GSC, ambos ya conocidos).
+
+**FASE 5 — arreglado (17 puntos + 1 fixer mecánico nuevo):** nav de la home ahora enlaza a
+`/servicios/` de verdad; 15 hrefs internos normalizados; 5 ImageObject con dimensiones reales;
+contacto/blog resincronizados a `?v=202607262108` + skip-link + landmark `<main>` en contacto;
+blog con fuente inter-600→inter-400, contraste `.blog-card`, altura real del hero; `sw.js` con
+fuente huérfana fuera del precache y `CACHE_VERSION` v28→v29; `sitemap.xml`/`sitemap_index.xml`
+resincronizados con git log; contraste corregido en hub de colonias + 3 blogs (tabla-tarifas) + 2
+blogs más (cajas de color, con un ajuste extra no pedido para no dejar una regresión nueva en un
+`<h3>`); FAQPage alineado a su H3 visible; og:image propio en 3 servicios; `critical.css`/
+`critical.min.css` con fuente huérfana corregida; 2 CSS huérfanos borrados. **Fixer nuevo**
+`exit-popup-whatsapp-contrast` en `auto-fixers.py`: 51 páginas con el botón de WhatsApp del popup
+de salida de `#22c55e` (2.28:1) a `#075E54` (7.67:1) — el botón flotante de WhatsApp, que sí debe
+seguir verde, quedó intacto (verificado con Puppeteer). 17 hallazgos más (batches de cientos de
+archivos o con riesgo de reescritura de copy) encolados en BACKLOG.jsonl para corridas futuras.
+
+**FASE 6 — crecer:** `check-huecos.py` limpio (0). `check-relleno.py`: 16 hallazgos — decisor-negocio
+evaluó 14 páginas de contenido delgado (11 colonias + 3 servicios). Veredicto: las 11 colonias tienen
+contenido real bajo la plantilla lean del sitio (4 pasaron a whitelist de `check-relleno.py`, 5 se
+encolan para enriquecer, 2 se evaluaron para noindex). **3 servicios regenerados** con contenido real
+del oficio: `electricista-a-domicilio` (184→251 tokens, prioridad máxima por 660+ enlaces entrantes
+nunca rastreados), `instalacion-contactos` (159→227, de paso se quitó un precio visible que violaba
+NEGOCIO.md), `iluminacion-led` (171→226); Jaccard <0.60 en las 3. **1 colonia a noindex**
+(`las-coloradas`, confirmado 0 impresiones en GSC en 90 y 180 días) con sitemap y 3 enlaces entrantes
+limpiados; **1 noindex CANCELADO** (`santa-aynes` — GSC mostró 49 impresiones reales antes de
+tocarla, se dejó intacta por la condición dura del decisor). 11 tareas más encoladas en BACKLOG.jsonl
+(2 a cola humana: canibalización de `/servicios/electricista/`, sitemap fantasma en la UI de GSC).
+
+**FASE 7 — verificador independiente (Opus xhigh, solo-lectura):** `ok:true`. Re-corrió ci-gate (0
+ALTA), `auto-fixers.py verify --base main` (42 mecánicos/16 libres, dentro del cap de 18), 11 URLs
+HTTP 200 + JSON-LD + canonical==og:url, contraste del popup confirmado con Puppeteer real (7.67:1,
+botón flotante intacto en 690 páginas), 0 precios inventados (solo 1 quitado, correcto), email
+intacto, sitemap sin mismatches vs git log, `las-coloradas`/`santa-aynes` verificadas en ambos
+sentidos. Encontró 1 archivo de respaldo de ayer (`crecer-diario.sh.respaldo-20260726-213026`) que
+no debía entrar al commit — excluido con `git add -u` en vez de `git add -A`.
+
+**FASE 8 — publicación:** merge `--no-ff` de la rama a main (`a809a65b`→`90be5865`), push OK,
+pre-push auto-indexó 54 URLs. `gsc_index` reforzado a mano para las 3 páginas regeneradas.
+Verificado en producción tras el deploy: CSS `?v=202607262108` en contacto/blog, popup en `#075E54`,
+`las-coloradas` con `noindex,follow`.
+
+**FASE 9 — aprendiz (Sonnet high, commit `092d5579` directo a main):** checker nuevo (check 40,
+`check-plantilla.py`) que detecta cualquier página con `?v=` de CSS desincronizado del mayoritario
+del sitio — mecaniza la regresión que 3 revisores LLM independientes redescubrieron por separado en
+3 corridas distintas. 5 reglas nuevas en REGLAS.md (ya van ~113 entre líneas y bloques): nav con
+`href="#ancla"` no cuenta como enlace interno real para Google (causa raíz de por qué `/servicios/`
+nunca se rastreó); fixer `exit-popup-whatsapp-contrast` documentado; matiz de `auto-fixers.py verify`
+(un archivo con fixer + edición manual cuenta como "libre", no "mecánico"); color `#7C2D12` añadido
+al contrato de marca de CLAUDE.md (naranja oscuro legítimo para texto sobre fondos de color).
+
+## 2026-07-26 (Auto Agente diario — 9 hallazgos ALTA arreglados + recorte crawl-budget hub colonias) — PUBLICADO ✅
+Rama `auto/diario-20260726-2013` (inferida), commit `72e70a4c` + merge `2ab4fb44` a main. **Nota de
+bookkeeping (2026-07-27):** esta entrada se escribe un día tarde — la corrida del 07-26 completó y
+publicó correctamente (FASE 1-8), pero su FASE 9 (aprender) se cortó a mitad por el límite de 600s
+de tareas en background del CLI en modo `-p` (sale con código 0 igual, así que no se detectó como
+fallo). El trabajo del aprendiz que sí quedó escrito en disco pero sin commit se cerró la mañana del
+2026-07-27 en el commit `b708b5ff` (6 reglas nuevas en REGLAS.md + 6 entradas en HISTORIAL.jsonl +
+un parche de resiliencia en `crecer-diario.sh` para detectar este mismo corte en el futuro). Esta
+entrada de ESTADO.md, sin embargo, nunca se escribió — se reconstruye aquí a partir del mensaje del
+commit `72e70a4c` para no dejar el historial incompleto.
+
+**FASE 5 (corregir), 9 hallazgos ALTA:** skip-link `:focus` que nunca entraba al viewport por
+especificidad del `top:-40px` inline (691 páginas); texto blanco invisible en el hero móvil de 14
+páginas de servicio; foco de teclado anulado en el formulario de contacto (`outline:none`→`#C2410C`);
+contraste del CTA de WhatsApp 1.98:1→`#075E54` sólido (~7.67:1); fuentes duplicadas byte a byte
+(inter-500/600, montserrat-700) consolidadas en 686 páginas + 3 CSS; `contacto/` y `privacidad/`
+huérfanas → enlace en footer de 686 páginas; FAQPage JSON-LD de `instalacion-tierra-fisica`
+sincronizado con el texto visible; overclaim "certificado"→"constancia" en 3 páginas; H1 desalineado
+del `<title>` corregido en 2 páginas; `check-estructura-sitio.py` corregido (apuntaba a un sitemap
+movido, analizaba 0 páginas en silencio).
+
+**FASE 6 (crecer):** decisor-negocio autorizó recortar el hub de colonias (642→33 enlaces reales, 609
+a texto plano) para liberar crawl budget — 3 hubs del sitio llevaban 4.7 meses sin ser re-rastreados
+pese a cientos de enlaces internos. 8 tareas nuevas encoladas en BACKLOG.jsonl. 0 páginas nuevas.
+
+**FASE 7:** verificador encontró una regresión real (el fix del hero rompía escritorio) + 5
+hallazgos menores; todos corregidos y re-verificados en una 2ª pasada (ok:true).
+
+**FASE 9 (cerrada el 07-27 en `b708b5ff`):** 6 reglas nuevas — regresión de contraste no verificada
+en todos los breakpoints, contraste de gradiente multi-stop, 2ª instancia de checker-ciego por ruta
+hardcodeada, fuentes duplicadas byte a byte, nota de diseño del hook anti-borrado, crawl-budget del
+hub de colonias. Costo de la corrida: 634 401 tokens de salida, ~$322 USD equivalente (`.pipeline/costos.jsonl`).
+
 ## 2026-07-25 (Auto Agente diario — 5 hallazgos ALTA + 8 media/baja + versionado JS + FAQ/Review schema real) — PUBLICADO ✅
 Rama `auto/diario-20260725-2001`, commit `e6977363` (correcciones+crecimiento) + `1fe7f4ac` (fix
 sensor JS, verificador) → merge `--no-ff` a main `ba488d74`. Push OK (`6414bb85..ba488d74`),

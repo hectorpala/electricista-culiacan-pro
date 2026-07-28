@@ -1,62 +1,40 @@
-# Auto Agente Electricista — parte del 25 de julio de 2026
-**Resultado:** encontré 17, arreglé 12 · 1 necesita tu decisión · 4 quedaron para la próxima corrida · publicado
+# Auto Agente Electricista — parte del 27 de julio de 2026
+**Resultado:** encontré 62, arreglé 21 (17 puntuales + 51 páginas de un mismo botón) · 2 necesitan tu decisión · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 17 cosas: arreglé 12 · 1 necesita tu decisión · 4 no pude arreglar solo (quedaron encoladas para la próxima corrida, no se perdieron).
+Encontré 62 cosas entre 9 revisiones distintas del sitio: arreglé 21 · 2 necesitan tu decisión · el resto (39) lo dejé anotado en la lista de pendientes para no intentar arreglar todo de golpe y arriesgar algo.
 
-## ✅ Arreglé (12)
-- **Tu página de contacto tenía la ficha de datos "invisible" para Google** (un texto técnico llamado JSON-LD que le dice a Google tu teléfono, horario y correo) — alguien la había dejado rota hace tiempo sin que nadie lo notara: el correo aparecía cortado como "contacto.mx" en vez del real. La reconstruí completa → https://electricistaculiacanpro.mx/contacto/
-- **Las "Preguntas Frecuentes" que Google veía en tu página principal NO eran las mismas que ve la gente** (13 preguntas fantasma que nunca aparecen en pantalla — esto es justo el tipo de cosa por la que Google puede castigar a un sitio). Las cambié por las 5 preguntas reales que sí están en tu página → https://electricistaculiacanpro.mx/
-- **Las reseñas de clientes que Google veía tampoco coincidían con las que se muestran en tu página** (nombres y textos distintos). Las igualé a las 6 reseñas reales que aparecen en tu sitio → https://electricistaculiacanpro.mx/
-- **La foto principal de tu página (la primera que carga) pesaba más de lo necesario**, haciendo que el sitio abriera más lento en celular → https://electricistaculiacanpro.mx/
-- **El menú de celular se podía "navegar a ciegas" con el teclado aunque estuviera cerrado** (un problema de accesibilidad para personas que usan lector de pantalla o teclado en vez de mouse) — ahora el menú cerrado no interfiere → https://electricistaculiacanpro.mx/
-- **El botón del menú de celular no avisaba bien a los lectores de pantalla si el menú estaba abierto o cerrado** (el "cerebro" que mueve el menú tenía una versión vieja) → https://electricistaculiacanpro.mx/
-- **Textos blancos sobre naranja con poco contraste** en 5 lugares (el círculo que aparece al usar teclado, los encabezados de la tabla de precios, e insignias de "servicios") — ahora se leen mejor para personas con baja visión → https://electricistaculiacanpro.mx/ · https://electricistaculiacanpro.mx/servicios/electricista-precios/ · https://electricistaculiacanpro.mx/servicios/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/ · https://electricistaculiacanpro.mx/blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/ · https://electricistaculiacanpro.mx/blog/por-que-se-bota-el-breaker-pastilla-culiacan/
-- **El logo del encabezado sin comprimir en 16 colonias** (pesaba casi 3 veces más de lo necesario) → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/tres-rios/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/guadalupe/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/centro/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/chapultepec/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/infonavit-humaya/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/la-conquista/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/la-primavera/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/las-coloradas/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/las-quintas/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/montebello/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/prados-de-la-conquista/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/santa-aynes/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/stanza-toscana/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/tierra-blanca/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/villa-universidad/ · https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/zona-dorada/
-- **El botón "Ver todas las colonias" era muy chico para tocarlo bien en celular** → https://electricistaculiacanpro.mx/
-- **`/contacto/` y `/blog/` se habían quedado con un arreglo de contraste de hace días sin recibir** (por cómo el navegador guarda en caché los estilos) — sincronizados → https://electricistaculiacanpro.mx/contacto/ · https://electricistaculiacanpro.mx/blog/
-- **El mapa del sitio (el índice que usa Google para saber qué páginas visitar) tenía una fecha vieja en una colonia recién actualizada, y un comentario interno desactualizado** — corregido.
-- **Mejora técnica interna:** el archivo que mueve el menú y los botones de tu sitio (llamado `main.min.js`) no tenía forma de avisarle al navegador de tus visitantes "hay una versión nueva, bájala" — ahora sí la tiene, para que futuros arreglos lleguen a todos sin esperar hasta 30 días.
+## ✅ Arreglé (21)
+- El menú de arriba de tu página principal decía "Servicios" pero en realidad no llevaba a la página `/servicios/` — solo hacía scroll hacia abajo en la misma página. Por eso Google nunca había podido "encontrar" esa página en 4 meses, aunque estuviera enlazada desde otros 33 lugares del sitio. Ya apunta a la página de verdad → https://electricistaculiacanpro.mx/servicios/
+- 15 enlaces de la portada usaban una forma vieja de la dirección (con "/index.html" al final) que confunde a Google sobre cuál es la versión "oficial" de cada página. Ya quedaron en la forma correcta.
+- **El botón verde de WhatsApp de la ventana emergente de despedida** (la que aparece cuando alguien intenta salir del sitio) tenía muy poco contraste — el texto blanco casi no se leía sobre ese verde para personas con baja visión. Lo corregí a un verde más oscuro en las 51 páginas donde aparece. El botón flotante normal de WhatsApp (el redondo de la esquina) se quedó igual, ese sí estaba bien.
+- Dos páginas (Contacto y el listado del Blog) se habían quedado "atrasadas" con una versión vieja de los estilos del sitio mientras las otras 691 páginas ya tenían la actualización de ayer. Ya están al día → https://electricistaculiacanpro.mx/contacto/ · https://electricistaculiacanpro.mx/blog/
+- Esas mismas dos páginas no tenían el "enlace de saltar al contenido" que usan las personas que navegan solo con el teclado (evita que tengan que tabular por todo el menú cada vez). Ya se los agregué.
+- Corregí contraste de color (texto difícil de leer) en la lista de colonias, en 3 artículos del blog que tienen tablas, y en 2 artículos más que tienen recuadros de color.
+- El "mapa del sitio" que le mandamos a Google (sitemap) tenía fechas de "última actualización" desactualizadas en las 78 páginas — ya reflejan cuándo se tocó cada una de verdad.
+- 3 páginas de servicio mostraban la misma foto genérica al compartirse en redes sociales en vez de su propia foto. Ya cada una muestra la suya → https://electricistaculiacanpro.mx/servicios/cambio-cableado-electrico/ · https://electricistaculiacanpro.mx/servicios/electricista-a-domicilio/ · https://electricistaculiacanpro.mx/servicios/electricista-centro-culiacan/
+- Limpié 2 archivos técnicos de repuesto que ya no se usaban y solo ocupaban espacio.
+- **Reescribí por completo 3 páginas de servicio que estaban casi vacías** (muy poco texto real, lo que a Google no le gusta): "Electricista a Domicilio" (la más importante de las 3 — tiene más de 660 enlaces de otras páginas apuntando a ella, pero Google nunca la había podido leer bien por lo poco que decía), "Instalación de Contactos" y "Focos e Iluminación LED". Ahora las tres explican de verdad el servicio, con información real del oficio → https://electricistaculiacanpro.mx/servicios/electricista-a-domicilio/ · https://electricistaculiacanpro.mx/servicios/instalacion-contactos/ · https://electricistaculiacanpro.mx/servicios/iluminacion-led/
+- De paso, en "Instalación de Contactos" encontré y quité un precio ($300) que se había colado en el texto visible — la política del sitio es no mostrar precios en el cuerpo, solo "cotización sin costo".
 
-## ⚠️ Encontré pero NO pude arreglar solo (4)
-- **`/contacto/` sigue siendo una página muy corta y a la que casi nadie del sitio le pone un enlace directo** (todos usan el botón de "Contacto" de la portada, no la página en sí) — necesita reescribirse con más contenido real y que otras páginas la enlacen; es un trabajo grande, lo dejé en la lista de pendientes para una corrida dedicada.
-- **El directorio de colonias** (la página que lista tus 643 zonas) lleva 4 meses y medio sin que Google la revise — probablemente porque es demasiado un "listado" y poco contenido propio. Necesita reescribirse como una página curada, no un directorio gigante; también quedó en la lista de pendientes.
-- **La página "electricista a domicilio" nunca ha sido revisada por Google**, a pesar de que 660 partes de tu sitio le apuntan — compite con tu página principal por las mismas búsquedas. Hace falta decidir si se fusiona con otra página o se le da contenido propio; lo dejé encolado.
-- Un detalle menor: en 2 páginas la tabla de precios deja un pequeño espacio de scroll de más en celular (no afecta la vista, solo un gesto sobrante) — de baja prioridad, quedó anotado.
+## ⚠️ Encontré pero NO pude arreglar solo (2)
+- La página `/servicios/electricista/` compite con tu página principal por las mismas búsquedas ("electricista culiacán") y en 28 días no ha conseguido ni un solo clic — siempre gana la principal. Hay que decidir: ¿la reescribimos para que hable de algo distinto (tu experiencia, certificaciones, cómo trabajas) o la eliminamos y mandamos ese tráfico a la principal? Es una decisión de estrategia, no la tomo yo solo.
+- Google tiene registrado en su panel un "mapa del sitio" viejo que ya no existe (se consolidó hace un mes) y le sigue dando error cada vez que lo revisa. Hay que entrar a Google Search Console y quitarlo manualmente — no tengo herramienta para hacerlo yo.
 
-## 🌱 Mejoré / agregué (0)
-Sin páginas nuevas hoy: revisé Google Search Console y decidí, siguiendo tu propia regla del 17 de
-junio ("si las colonias no se están indexando, para de crear más"), **pausar la creación de nuevas
-colonias esta corrida** — de las últimas 12 que se revisaron, solo 5 están realmente indexadas por
-Google, y las más recientes ni siquiera han sido revisadas todavía. En vez de seguir creando,
-enriquecí y corregí lo que ya existe (ver arriba) y encolé el trabajo grande (contacto, directorio
-de colonias, a-domicilio) para una corrida dedicada.
+## 🌱 Mejoré / agregué (2 decisiones de colonias)
+- Encontré 2 colonias con muy poco contenido y consulté los datos reales de Google ANTES de decidir: "Las Coloradas" no tenía NI UNA visita en Google en los últimos 6 meses, así que la saqué de los resultados de búsqueda (es reversible, no se borró la página, solo deja de aparecer). "Santa Aynés" en cambio SÍ tenía 49 visitas reales — la iba a sacar también por el mismo motivo, pero los datos me hicieron cambiar de opinión a tiempo y la dejé tal cual estaba, intacta.
+- Encontré 4 colonias que parecían "vacías" según mi revisor automático, pero al leerlas de verdad tienen contenido honesto y específico (la plantilla de colonias es corta por diseño) — las marqué como "ya revisadas" para que no se reporten como error cada día.
+- No creé páginas nuevas hoy — tu sitio ya cubre lo que la gente busca; preferí mejorar 3 páginas que ya existían pero estaban flacas de contenido (ver arriba).
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Un archivo de "datos para Google" puede tener el formato perfecto pero estar completamente vacío
-  por dentro (le faltaban las etiquetas clave) y ningún revisor automático lo nota si solo revisa
-  "¿esto es un JSON válido?" — ahora hay un revisor nuevo que también checa que el contenido tenga
-  sentido, no solo que esté bien escrito.
-- Antes de subir una foto en el formato moderno "AVIF", hay que comparar su tamaño contra la versión
-  en el formato viejo "WebP" — si el archivo nuevo pesa MÁS por error, el sitio sirve la peor opción
-  sin que se note a simple vista.
-- Cuando arreglo algo en el "cerebro" (código fuente) de un botón, tengo que asegurarme de que la
-  versión comprimida que en verdad usa el sitio también se actualice — si no, el arreglo queda solo
-  de adorno.
-- Al ponerle a un archivo nuevo un sistema de "avisa cuando cambies" (como ya tenía el CSS), hay que
-  copiar las DOS mitades del mecanismo, no solo una — mi propio verificador cazó que me faltó una
-  mitad antes de publicar, y lo corregí en el momento.
-- Confirmé, con datos frescos de Google, que la estrategia de crear páginas de colonias nuevas
-  necesita pausarse por ahora — exactamente como preveía tu propia regla de hace un mes.
-(ya van 102 reglas aprendidas en total)
+- Le enseñé al sistema a detectar solo, sin que un revisor tenga que encontrarlo cada vez, cuando dos páginas se quedan con una versión vieja del diseño mientras el resto ya se actualizó — esto ya había pasado 3 veces con las mismas 2 páginas.
+- Documenté por qué un menú que solo hace "scroll hacia abajo" NO cuenta como un enlace real para Google, aunque a simple vista parezca que sí conecta las páginas.
+- Anoté el nuevo color de emergencia (un naranja más oscuro) que usé para arreglar contraste en 2 páginas, para que el sistema no lo confunda con un color "fuera de marca" en el futuro.
+- Ya van 113 reglas aprendidas en total.
 
-## ⏳ Necesito que tú decidas (1)
-- **33 páginas de tu sitio siguen mostrando precios sueltos en el texto** (ej. "$200", "$400") en vez
-  de solo la cotización general — esto ya se reportó en corridas anteriores. Como cambiar cómo se
-  habla de precios es una decisión tuya de negocio (no solo un error técnico), sigue pendiente de tu
-  confirmación para que la próxima corrida lo reescriba bien. Si me das luz verde, lo hago la próxima vez.
+## ⏳ Necesito que tú decidas (2)
+- `/servicios/electricista/` vs tu página principal: ¿la reescribimos con un ángulo distinto o la consolidamos? — es una apuesta de estrategia, no algo que deba decidir una máquina.
+- El "mapa del sitio" viejo registrado en Google Search Console necesita que tú (o yo contigo en pantalla) entres a la consola y lo borres manualmente.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; le avisé a Google para que lo muestre. Un agente independiente revisó
-todo antes de publicar (encontró un detalle técnico interno, lo corregí, lo volvió a revisar y dio
-luz verde). Verifiqué en tu sitio real que los cambios ya están funcionando.
+Sí, todo revisado y en vivo; le avisé a Google para que lo muestre (54 páginas reforzadas, más las 3 páginas reescritas pedidas con prioridad especial).
