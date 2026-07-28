@@ -1,7 +1,7 @@
 /* Critical CSS - LCP Optimized (~5KB) */
 /* Fonts: Only Inter 400 + 600 for fold - with metrics for CLS=0 */
 @font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;size-adjust:100%;ascent-override:90%;descent-override:22%;line-gap-override:0%;src:url('/assets/fonts/inter-400.woff2') format('woff2')}
-@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;size-adjust:100%;ascent-override:90%;descent-override:22%;line-gap-override:0%;src:url('/assets/fonts/inter-600.woff2') format('woff2')}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;size-adjust:100%;ascent-override:90%;descent-override:22%;line-gap-override:0%;src:url('/assets/fonts/inter-400.woff2') format('woff2')}
 
 /* Variables */
 :root{--brand:#E36414;--brand-light:#F97316;--text:#0F172A;--text-light:#475569;--bg:#FFF;--bg-soft:#F8FAFC;--shadow:rgba(15,23,42,.1);--max-w:1200px;--gutter:24px}

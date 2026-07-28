@@ -52,6 +52,15 @@ VERIFICADAS_MANUALMENTE = {
     "servicios/electricista-colonias-culiacan/el-vallado/index.html",
     "servicios/electricista-colonias-culiacan/valle-alto/index.html",
     "servicios/electricista-colonias-culiacan/juntas-de-humaya/index.html",
+    # decisor-negocio 2026-07-27: mismo caso, 167-189 tokens / Jaccard 0.43-0.50,
+    # contenido real y específico verificado (tierra-blanca: cableado improvisado de
+    # colonia antigua; la-primavera: minisplit sin circuito en casas nuevas; la-conquista:
+    # pastillas que se botan con el aire en casas de los 2000; campestre: cerca eléctrica
+    # y portón, ya diferenciada el 2026-07-23).
+    "servicios/electricista-colonias-culiacan/tierra-blanca/index.html",
+    "servicios/electricista-colonias-culiacan/la-primavera/index.html",
+    "servicios/electricista-colonias-culiacan/la-conquista/index.html",
+    "servicios/electricista-colonias-culiacan/campestre/index.html",
 }
 
 
