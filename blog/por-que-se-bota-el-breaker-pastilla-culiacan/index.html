@@ -91,7 +91,7 @@
         .pasos h3{color:var(--brand-dark);font-size:1.25rem;margin-bottom:0.4rem}
         .footer{background:linear-gradient(135deg,#E36414 0%,#C2410C 100%);color:#F8FAFC;padding:4rem 0 2rem;margin-top:4rem;text-align:center}
         .footer p{color:#FCE7D6;font-size:0.95rem}
-    .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}@media(max-width:768px){.table-wrapper{padding-right:76px}}/*floating-btn (paridad index.html — CTA flotante WhatsApp/Llamar; cubre ambas variantes de markup del sitio)*/.floating-btn{position:fixed;right:max(18px,env(safe-area-inset-right,18px));width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease,opacity .2s ease;z-index:90;text-decoration:none}.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.2);filter:brightness(1.05)}.floating-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(249,115,22,.5)}.floating-call,.floating-btn--phone{background:#1e40af;bottom:max(18px,env(safe-area-inset-bottom,18px))}.floating-whatsapp,.floating-btn--whatsapp{background:#22c55e;bottom:calc(max(18px,env(safe-area-inset-bottom,18px)) + 60px)}body.menu-open .floating-btn{opacity:0;pointer-events:none}.skip-link:focus{top:0 !important;min-height:44px;display:flex;align-items:center;box-sizing:border-box}.footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.25rem .5rem}
+    .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}@media(max-width:768px){.table-wrapper{margin-right:76px;padding-right:0}}/*floating-btn (paridad index.html — CTA flotante WhatsApp/Llamar; cubre ambas variantes de markup del sitio)*/.floating-btn{position:fixed;right:max(18px,env(safe-area-inset-right,18px));width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease,opacity .2s ease;z-index:90;text-decoration:none}.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.2);filter:brightness(1.05)}.floating-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(249,115,22,.5)}.floating-call,.floating-btn--phone{background:#1e40af;bottom:max(18px,env(safe-area-inset-bottom,18px))}.floating-whatsapp,.floating-btn--whatsapp{background:#22c55e;bottom:calc(max(18px,env(safe-area-inset-bottom,18px)) + 60px)}body.menu-open .floating-btn{opacity:0;pointer-events:none}.skip-link:focus{top:0 !important;min-height:44px;display:flex;align-items:center;box-sizing:border-box}.footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.25rem .5rem}
 .footer-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 .75rem;color:inherit}
 .contact-item a{display:inline-flex;align-items:center;min-height:44px;padding:0 .5rem}
 </style>
@@ -208,10 +208,10 @@
             <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="/" class="nav-link">Inicio</a></li>
-                <li><a href="/#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="/servicios/" class="nav-link">Servicios</a></li>
                 <li><a href="/#zonas" class="nav-link">Zonas</a></li>
                 <li><a href="/blog/" class="nav-link">Blog</a></li>
-                <li><a href="/#contacto" class="nav-link">Contacto</a></li>
+                <li><a href="/contacto/" class="nav-link">Contacto</a></li>
             </ul>
         </div>
     </nav>
@@ -416,10 +416,10 @@
         <div class="container">
             <nav class="footer-nav">
                 <a href="/">Inicio</a>
-                <a href="/#servicios">Servicios</a>
+                <a href="/servicios/">Servicios</a>
                 <a href="/servicios/electricista-precios/">Precios</a>
                 <a href="/blog/">Blog</a>
-                <a href="/#contacto">Contacto</a>
+                <a href="/contacto/">Contacto</a>
             </nav>
             <p>&copy; 2026 Electricista Culiacán Pro. Todos los derechos reservados. | <a href="/terminos/" style="color:inherit;text-decoration:underline">Términos</a> | <a href="/contacto/" style="color:inherit;text-decoration:underline">Contacto</a> | <a href="/privacidad/" style="color:inherit;text-decoration:underline">Aviso de Privacidad</a></p>
             <p>Servicio profesional de electricidad en Culiacán, Sinaloa · 667 392 2273</p>
@@ -439,7 +439,7 @@
     (function() {
         'use strict';
         var b=document.getElementById('mobile-menu-btn'), m=document.getElementById('nav-menu');
-        if(b&&m){b.addEventListener('click',function(){m.classList.toggle('active');});document.addEventListener('click',function(e){if(!m.contains(e.target)&&!b.contains(e.target))m.classList.remove('active');});}
+        if(b&&m){b.addEventListener('click',function(){(function(){var o=m.classList.toggle('active');document.body.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o?'true':'false');return o;})();});document.addEventListener('click',function(e){if(!m.contains(e.target)&&!b.contains(e.target))(function(){m.classList.remove('active');document.body.classList.remove('menu-open');b.setAttribute('aria-expanded','false');})();});}
         var cf=document.getElementById('contact-form');
         if(cf){cf.addEventListener('submit',function(e){e.preventDefault();var n=document.getElementById('nombre').value,t=document.getElementById('telefono').value,ms=document.getElementById('mensaje').value;var msg='Hola, mi nombre es '+n+'.\nTeléfono: '+t+'\n\nMi breaker: '+ms;window.open('https://wa.me/526673922273?text='+encodeURIComponent(msg),'_blank');});}
         var fc=document.getElementById('floating-cta');

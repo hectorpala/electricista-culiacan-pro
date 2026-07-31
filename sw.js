@@ -10,7 +10,7 @@ const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/styles.7f293647.css?v=202607262108',
-  '/main.min.js?v=20260725',
+  '/main.min.js?v=20260729',
   '/assets/fonts/inter-400.woff2',
   '/assets/fonts/montserrat-800.woff2',
   '/assets/images/optimizadas/hero-electricista-culiacan-800w.webp',

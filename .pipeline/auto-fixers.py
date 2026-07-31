@@ -407,7 +407,152 @@ def _fix_exit_popup_wa_contrast(h):
     return h, n
 
 
+# ── nav-link con ancla de scroll en vez de URL real (revisor-links links-001, revisor-gsc
+#    gsc-hub-servicios-nunca-rastreado, 2026-07-29): el fix de la regla [2026-07-27]
+#    SEO/NAV-ANCLA-NO-ES-ENLACE-INTERNO se aplicó SOLO a index.html — las otras 689 páginas
+#    siguen con href="/#servicios"/href="/#contacto" en su propio nav (ancla de scroll a la
+#    HOME, no una URL real; Googlebot no lo cuenta como enlace interno). Es la causa raíz
+#    confirmada por 3 revisores independientes de por qué /servicios/ lleva 4+ meses sin
+#    rastrear. CUBRE DOS markups: (a) el <a class="nav-link"> del header, y (b) el <a> "pelón"
+#    (sin clase) del <nav class="footer-nav"> del footer de los blogs — MISMA FAMILIA que
+#    footer-nav 2026-07-23/07-27, un segundo lugar donde el mismo patrón vive sin la clase que
+#    el primer barrido asumía. No toca #zonas/#sobre-nosotros (no son páginas reales) ni el
+#    link inline con estilo propio de gracias/index.html (caso único, corregido a mano). Verificador
+#    2026-07-29 (ronda 1) lo cazó: 10 blogs con el <a> del footer sin class="nav-link" seguían
+#    en /#servicios//#contacto tras la 1ª versión de este fixer. CUARENTENA (blog/index.html,
+#    contacto/index.html) se salta como el resto de fixers vía cmd_run. ──
+_NAV_SERVICIOS = re.compile(r'href="/#servicios"(\s+class="nav-link"|>Servicios</a>)')
+_NAV_CONTACTO = re.compile(r'href="/#contacto"(\s+class="nav-link"|>Contacto</a>)')
+
+def _det_navlink_ancla(h):
+    return bool(_NAV_SERVICIOS.search(h) or _NAV_CONTACTO.search(h))
+
+def _fix_navlink_ancla(h):
+    h, n1 = _NAV_SERVICIOS.subn(r'href="/servicios/"\g<1>', h)
+    h, n2 = _NAV_CONTACTO.subn(r'href="/contacto/"\g<1>', h)
+    return h, n1 + n2
+
+
+# ── párrafo del bloque "CTA de Emergencias" sin color explícito (revisor-a11y a11y-001,
+#    2026-07-29): el <p> hereda color:#fff del <section> padre, pero la regla global
+#    p{color:var(--text-light)} (selector de tipo) GANA por especificidad a la herencia →
+#    texto gris #475569 sobre el gradiente naranja (2.42:1, peor que el 2.99:1 del <h2>
+#    vecino que sí lleva color:#FFF explícito). Restaura el color blanco explícito que el
+#    diseño claramente pretendía (mismo <section style="...;color:#fff"> y <h2 style="color:#FFF">
+#    ya lo hacen). NO toca el gradiente de fondo en sí (esa es la decisión de marca pendiente
+#    bk-a259e406, ver hallazgo a11y-005/010: sigue igual de marginal que el h2, no empeora). ──
+_CTA_EMERGENCIA_P = re.compile(r'<p style="(font-size:1\.125rem;margin-bottom:2rem;line-height:1\.7)">')
+
+def _det_cta_emergencia_p_color(h):
+    return bool(_CTA_EMERGENCIA_P.search(h))
+
+def _fix_cta_emergencia_p_color(h):
+    return _CTA_EMERGENCIA_P.subn(r'<p style="color:#fff;\g<1>">', h)
+
+
+# ── botón CTA no-flotante en #22c55e dentro del bloque "CTA de Emergencias" (revisor-a11y
+#    a11y-002, 2026-07-29): #22c55e está reservado por contrato de marca (CLAUDE.md) para el
+#    botón FLOTANTE de WhatsApp; este es un botón normal (btn-primary) que lo tomó prestado y
+#    da 2.28:1 (falla WCAG AA). Mismo criterio ya aplicado al popup de salida 2026-07-27
+#    (exit-popup-whatsapp-contrast): remapea a TEAL DE MARCA #075E54 (7.67:1), sin tocar el
+#    botón flotante real (.floating-whatsapp/.floating-btn--whatsapp, patrón distinto). ──
+_CTA_EMERGENCIA_BTN = re.compile(r'background:#22c55e;box-shadow:0 10px 24px rgba\(37,211,102,0\.3\)')
+
+def _det_cta_emergencia_btn(h):
+    return bool(_CTA_EMERGENCIA_BTN.search(h))
+
+def _fix_cta_emergencia_btn(h):
+    return _CTA_EMERGENCIA_BTN.subn('background:#075E54;box-shadow:0 10px 24px rgba(7,94,84,0.3)', h)
+
+
+# ── var(--brand-light) (#F97316) como color de TEXTO en spans "Ver más/Ver precios →"
+#    (revisor-a11y a11y-004, 2026-07-29): #F97316 nunca alcanza 4.5:1 como texto sobre fondos
+#    claros (2.66-2.80:1). Las 20 páginas afectadas NO declaran --brand-dark en su :root (a
+#    diferencia de index.html), así que usar var(--brand-dark) resolvería a inválido/heredado
+#    — se usa el HEX literal #C2410C (5.02-5.18:1), consistente con el resto del sitio. ──
+_BRAND_LIGHT_TEXT = re.compile(r'style="color:var\(--brand-light\);font-weight:600"')
+
+def _det_brand_light_text(h):
+    return bool(_BRAND_LIGHT_TEXT.search(h))
+
+def _fix_brand_light_text(h):
+    return _BRAND_LIGHT_TEXT.subn('style="color:#C2410C;font-weight:600"', h)
+
+
+# ── menú hamburguesa de blogs sin aria-expanded dinámico (revisor-a11y a11y-003 + revisor-
+#    móvil mov-002, 2026-07-29): 3ª instancia de la familia 2026-06-21/2026-07-25 — el fix de
+#    aria-expanded/menu-open/floating-btn-hide se aplicó al markup (691 páginas) y a
+#    main.min.js, pero estas páginas de blog NO cargan main.min.js: llevan su propia copia
+#    IIFE inline (3 variantes de nombres de variable vistas: mobileMenuBtn/navMenu en var o
+#    const, y la forma minificada b/m) que solo hace .classList.toggle('active'), sin togglear
+#    aria-expanded ni body.menu-open (así el fondo sigue scrolleando y los botones flotantes
+#    no se ocultan). Envuelve la llamada exacta en una IIFE que replica lo que main.js ya hace,
+#    funcionando para las 3 variantes porque captura el NOMBRE REAL de la variable en vez de
+#    asumirlo fijo. NO añade main.min.js (duplicaría listeners, regla 2026-06-27). ──
+_MENU_VAR = re.compile(r"(\w+)\s*=\s*document\.(?:getElementById\(['\"]nav-menu['\"]\)|querySelector\(['\"]\.nav-menu['\"]\))")
+_BTN_VAR = re.compile(r"(\w+)\s*=\s*document\.(?:getElementById\(['\"]mobile-menu-btn['\"]\)|querySelector\(['\"]\.mobile-menu-btn['\"]\))")
+
+def _det_blog_menu_aria(h):
+    mm, mb = _MENU_VAR.search(h), _BTN_VAR.search(h)
+    if not (mm and mb):
+        return False
+    menu = mm.group(1)
+    if ("%s.classList.toggle('active')" % menu) not in h:
+        return False
+    return "setAttribute('aria-expanded'" not in h
+
+def _fix_blog_menu_aria(h):
+    mm, mb = _MENU_VAR.search(h), _BTN_VAR.search(h)
+    if not (mm and mb):
+        return h, 0
+    menu, btn = mm.group(1), mb.group(1)
+    n = 0
+    toggle_old = "%s.classList.toggle('active')" % menu
+    if toggle_old in h:
+        toggle_new = ("(function(){var o=%s.classList.toggle('active');"
+                      "document.body.classList.toggle('menu-open',o);"
+                      "%s.setAttribute('aria-expanded',o?'true':'false');return o;})()") % (menu, btn)
+        h = h.replace(toggle_old, toggle_new, 1)
+        n += 1
+    remove_old = "%s.classList.remove('active')" % menu
+    cnt = h.count(remove_old)
+    if cnt:
+        remove_new = ("(function(){%s.classList.remove('active');"
+                       "document.body.classList.remove('menu-open');"
+                       "%s.setAttribute('aria-expanded','false');})()") % (menu, btn)
+        h = h.replace(remove_old, remove_new)
+        n += cnt
+    return h, n
+
+
+# ── botones flotantes tapan la tabla de precios en móvil (revisor-móvil mov-001, 2026-07-29):
+#    el fix de REGLAS.md 2026-07-08 (`padding-right:76px`) NO funciona porque en un contenedor
+#    con overflow-x:auto el recorte ocurre en el borde de PADDING, no en el de contenido — la
+#    tabla se sigue pintando debajo de los botones. `margin-right` sí reduce el ancho real del
+#    contenedor y saca la tabla de la zona de los flotantes. ──
+_TABLE_WRAPPER_PADDING = re.compile(r'@media\(max-width:768px\)\{\.table-wrapper\{padding-right:76px\}\}')
+
+def _det_table_wrapper_margin(h):
+    return bool(_TABLE_WRAPPER_PADDING.search(h))
+
+def _fix_table_wrapper_margin(h):
+    return _TABLE_WRAPPER_PADDING.subn(
+        '@media(max-width:768px){.table-wrapper{margin-right:76px;padding-right:0}}', h)
+
+
 FIXERS = [
+    ("navlink-ancla-servicios-contacto", "nav-link con href=\"/#servicios\"/\"/#contacto\" (ancla de scroll a la home, no cuenta como enlace interno para Google) → URL real \"/servicios/\"/\"/contacto/\", replicando el fix ya aplicado en index.html",
+     "mecanico", _det_navlink_ancla, _fix_navlink_ancla),
+    ("cta-emergencia-p-color", "<p> del bloque 'CTA de Emergencias' sin color explícito → hereda gris de baja legibilidad (2.42:1) en vez del blanco que el diseño pretendía → color:#fff explícito",
+     "mecanico", _det_cta_emergencia_p_color, _fix_cta_emergencia_p_color),
+    ("cta-emergencia-btn-teal", "botón <a class=btn-primary> del bloque 'CTA de Emergencias' con background:#22c55e (reservado para el flotante de WhatsApp, 2.28:1) → #075E54 teal de marca (7.67:1)",
+     "mecanico", _det_cta_emergencia_btn, _fix_cta_emergencia_btn),
+    ("brand-light-text-contrast", "var(--brand-light) #F97316 usado como color de texto en spans 'Ver más →' (2.66-2.80:1, nunca alcanza 4.5:1) → #C2410C literal (5.0-5.2:1); estas páginas no declaran --brand-dark en su :root",
+     "mecanico", _det_brand_light_text, _fix_brand_light_text),
+    ("blog-menu-aria-expanded", "IIFE inline del menú móvil de blogs solo hace classList.toggle('active') sin aria-expanded/body.menu-open (lector de pantalla siempre anuncia 'contraído', fondo sigue scrolleando) → envuelve la llamada replicando main.js, detectando el nombre real de la variable",
+     "mecanico", _det_blog_menu_aria, _fix_blog_menu_aria),
+    ("table-wrapper-floating-btn-margin", ".table-wrapper{padding-right:76px} no saca la tabla de precios de debajo de los botones flotantes en móvil (el recorte de overflow-x:auto ocurre en el borde de padding) → margin-right:76px;padding-right:0",
+     "mecanico", _det_table_wrapper_margin, _fix_table_wrapper_margin),
     ("og-url", "og:url faltante en página indexable → copia el canonical (scope: solo indexables)",
      "mecanico", _det_ogurl, _fix_ogurl),
     ("breadcrumb-taptarget-contrast", "'.breadcrumb-link' inline sin min-height:44px y/o color #E36414 de bajo contraste → +tap-target 44px + color #C2410C (paridad con el patrón ya aplicado 2026-07-06)",

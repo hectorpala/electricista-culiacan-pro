@@ -1032,18 +1032,25 @@ def check_page(fpath, t, noindex, redirects):
     #         index.html/electricista-precios; el fix inicial solo cubrió esos 2 ejemplos y el
     #         VERIFICADOR (ronda 1) cazó que el mismo patrón estructural seguía roto en 5 blogs
     #         con tabla de precios. Ver REGLAS.md 2026-07-08 MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS.
+    # NOTA 2026-07-29: el fix original (padding-right) NO funciona — en un contenedor con
+    # overflow-x:auto el recorte ocurre en el borde de PADDING, no en el de contenido, así
+    # que la tabla se seguía pintando debajo de los botones (revisor-móvil mov-001). El fix
+    # correcto es margin-right (reduce el ancho real del contenedor). Se acepta cualquiera de
+    # los dos como "ya tiene el bloque @media" para no marcar en falso una página que YA
+    # migró al fix correcto, pero margin-right es el único que de verdad funciona.
     has_table_wrapper = bool(re.search(r'\.table-wrapper\{', t))
     has_floating_btn = bool(re.search(r'\.floating-btn\{', t))
     has_padding_fix = bool(re.search(
-        r'@media\(max-width:768px\)\{\.table-wrapper\{padding-right:', t))
+        r'@media\(max-width:768px\)\{\.table-wrapper\{(?:padding-right|margin-right):', t))
     if has_table_wrapper and has_floating_btn and not has_padding_fix:
         add("media", r, "movil",
             "Botones flotantes (WhatsApp/Llamar) pueden tapar la tabla con scroll horizontal en "
-            "móvil: falta @media(max-width:768px){.table-wrapper{padding-right:...}} junto al "
+            "móvil: falta @media(max-width:768px){.table-wrapper{margin-right:...}} junto al "
             "resto del CSS crítico de .table-wrapper",
-            "Añadir @media(max-width:768px){.table-wrapper{padding-right:76px}} al <style> crítico "
-            "inline de esta página, igual que index.html. Ver REGLAS.md 2026-07-08 "
-            "MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS.")
+            "Añadir @media(max-width:768px){.table-wrapper{margin-right:76px;padding-right:0}} al "
+            "<style> crítico inline de esta página, igual que index.html. padding-right NO funciona "
+            "(el recorte de overflow-x:auto ocurre en el borde de padding). Ver REGLAS.md 2026-07-08 "
+            "y 2026-07-29 MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS.")
 
     # --- 36. iframe noscript de GTM sin title (media, a11y): MISMA FAMILIA que .sr-only
     #         2026-06-16 / .hero-cta-buttons 2026-06-17 / .floating-btn 2026-06-20 /
