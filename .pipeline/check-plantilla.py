@@ -1032,18 +1032,25 @@ def check_page(fpath, t, noindex, redirects):
     #         index.html/electricista-precios; el fix inicial solo cubrió esos 2 ejemplos y el
     #         VERIFICADOR (ronda 1) cazó que el mismo patrón estructural seguía roto en 5 blogs
     #         con tabla de precios. Ver REGLAS.md 2026-07-08 MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS.
+    # NOTA 2026-07-29: el fix original (padding-right) NO funciona — en un contenedor con
+    # overflow-x:auto el recorte ocurre en el borde de PADDING, no en el de contenido, así
+    # que la tabla se seguía pintando debajo de los botones (revisor-móvil mov-001). El fix
+    # correcto es margin-right (reduce el ancho real del contenedor). Se acepta cualquiera de
+    # los dos como "ya tiene el bloque @media" para no marcar en falso una página que YA
+    # migró al fix correcto, pero margin-right es el único que de verdad funciona.
     has_table_wrapper = bool(re.search(r'\.table-wrapper\{', t))
     has_floating_btn = bool(re.search(r'\.floating-btn\{', t))
     has_padding_fix = bool(re.search(
-        r'@media\(max-width:768px\)\{\.table-wrapper\{padding-right:', t))
+        r'@media\(max-width:768px\)\{\.table-wrapper\{(?:padding-right|margin-right):', t))
     if has_table_wrapper and has_floating_btn and not has_padding_fix:
         add("media", r, "movil",
             "Botones flotantes (WhatsApp/Llamar) pueden tapar la tabla con scroll horizontal en "
-            "móvil: falta @media(max-width:768px){.table-wrapper{padding-right:...}} junto al "
+            "móvil: falta @media(max-width:768px){.table-wrapper{margin-right:...}} junto al "
             "resto del CSS crítico de .table-wrapper",
-            "Añadir @media(max-width:768px){.table-wrapper{padding-right:76px}} al <style> crítico "
-            "inline de esta página, igual que index.html. Ver REGLAS.md 2026-07-08 "
-            "MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS.")
+            "Añadir @media(max-width:768px){.table-wrapper{margin-right:76px;padding-right:0}} al "
+            "<style> crítico inline de esta página, igual que index.html. padding-right NO funciona "
+            "(el recorte de overflow-x:auto ocurre en el borde de padding). Ver REGLAS.md 2026-07-08 "
+            "y 2026-07-29 MOVIL/FLOATING-BTN-TAPA-TABLA-PRECIOS.")
 
     # --- 36. iframe noscript de GTM sin title (media, a11y): MISMA FAMILIA que .sr-only
     #         2026-06-16 / .hero-cta-buttons 2026-06-17 / .floating-btn 2026-06-20 /
@@ -1233,6 +1240,34 @@ def check_css_version_sync():
                 "css-version-rezagada-paginas-aisladas (regresión confirmada 3 veces: verificar "
                 "SIEMPRE que el script de bump masivo cubra TODAS las páginas, incluidas "
                 "contacto/, blog/ y cualquiera en CUARENTENA)." % mayoria)
+
+    # --- 40b. main.min.js ?v= desincronizado (misma familia que 40, extendida 2026-08-01):
+    #          el check 40 original solo comparaba el ?v= del CSS; el verificador de la
+    #          corrida 2026-07-29/recuperación 2026-08-01 encontró que contacto/index.html
+    #          era la única página que se quedó en main.min.js?v=<viejo> mientras las otras
+    #          678 ya estaban en el valor nuevo, y ningún checker lo cazaba. Ver REGLAS.md
+    #          2026-08-01 INFRA/BUMP-JS-EN-PRECACHE-SIN-CACHE_VERSION.
+    js_ver_re = re.compile(r'main\.min\.js\?v=(\d+)')
+    js_por_pagina = {}
+    for fpath in collect_pages():
+        t = read(fpath)
+        if is_stub(t):
+            continue
+        m = js_ver_re.search(t)
+        if m:
+            js_por_pagina[fpath] = m.group(1)
+    if js_por_pagina:
+        js_conteo = Counter(js_por_pagina.values())
+        js_mayoria, _ = js_conteo.most_common(1)[0]
+        if len(js_conteo) > 1:
+            for fpath, v in js_por_pagina.items():
+                if v != js_mayoria:
+                    add("alta", rel(fpath), "perf",
+                        "main.min.js ?v= desincronizado: %s usa ?v=%s pero el sitio usa ?v=%s" %
+                        (rel(fpath), v, js_mayoria),
+                        "Actualizar el src de main.min.js a ?v=%s (mismo valor que el resto del "
+                        "sitio) en esta página. Ver REGLAS.md 2026-08-01 "
+                        "BUMP-JS-EN-PRECACHE-SIN-CACHE_VERSION." % js_mayoria)
 
 
 def check_css_contraste_regresion():

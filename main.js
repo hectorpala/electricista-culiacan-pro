@@ -213,7 +213,7 @@
                                       `Mensaje: ${mensaje}`;
                 const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
                 window.open(whatsappURL, '_blank');
-                window.location.href = '/gracias';
+                window.location.href = '/gracias/';
             } else {
                 throw new Error('Netlify form submission failed');
             }
