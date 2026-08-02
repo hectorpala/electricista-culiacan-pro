@@ -456,6 +456,67 @@ def _fix_hero_preload_avif(h):
     return _HERO_PRELOAD_WEBP.subn(repl, h)
 
 
+# ── <meta name=keywords> en páginas indexables (revisor-seo seo-013, 2026-08-01): Google lo
+#    ignora desde 2009, peso muerto en el <head> que además expone el mapa de keywords
+#    objetivo a competidores. Scope: solo indexables (una noindex no necesita limpieza SEO). ──
+_META_KEYWORDS = re.compile(r'<meta name="keywords"[^>]*>')
+
+def _det_meta_keywords(h):
+    return (not es_noindex(h)) and bool(_META_KEYWORDS.search(h))
+
+def _fix_meta_keywords(h):
+    return _META_KEYWORDS.subn('', h)
+
+
+# ── botón secundario "Llamar" del hero con contraste insuficiente (revisor-a11y a11y-002,
+#    2026-08-01): style inline background:#fff;color:#E36414;border:2px solid #E36414 da
+#    3.44:1 (falla AA para texto normal) en 33 páginas. Style de atributo, no toca CSS
+#    compartido → sin bump de ?v=/sw.js. ──
+_LLAMAR_BTN = re.compile(r'background: #fff; color: #E36414; border: 2px solid #E36414;')
+
+def _det_llamar_btn_contrast(h):
+    return bool(_LLAMAR_BTN.search(h))
+
+def _fix_llamar_btn_contrast(h):
+    return _LLAMAR_BTN.subn('background: #fff; color: #C2410C; border: 2px solid #C2410C;', h)
+
+
+# ── bloque "Colonias Cercanas" enlazando a colonias NOINDEX (revisor-seo seo-001, 2026-08-01,
+#    escala bk-ed69bf02): las 642 páginas de colonia replican el MISMO bloque estático de 4
+#    <li> apuntando siempre a {chapultepec, centro, las-quintas, lomas-del-boulevard} — 2 de
+#    ellas noindex, así que las páginas indexables (autoridad) más enlazadas del sitio
+#    (644/638 enlaces entrantes) son invisibles para Google. Fix ACOTADO (no rediseña la
+#    lógica geográfica completa, ver bk-a2a5003c para eso): reemplaza SOLO los 2 destinos
+#    noindex por 2 colonias indexables reales, con auto-exclusión si la propia página ES uno
+#    de los reemplazos (evita auto-enlace, usando el slug propio vía canonical_de). ──
+_CHAPULTEPEC_LI = '<li><a href="/servicios/electricista-colonias-culiacan/chapultepec/">Chapultepec</a></li>'
+_LOMAS_LI = '<li><a href="/servicios/electricista-colonias-culiacan/lomas-del-boulevard/">Lomas del Boulevard</a></li>'
+_COLONIA_REPL_A = ('tres-rios', 'Tres Ríos')
+_COLONIA_REPL_A_FALLBACK = ('zona-dorada', 'Zona Dorada')
+_COLONIA_REPL_B = ('rafael-buelna', 'Rafael Buelna')
+_COLONIA_REPL_B_FALLBACK = ('las-americas', 'Las Américas')
+
+def _det_colonias_cercanas_noindex(h):
+    return _CHAPULTEPEC_LI in h or _LOMAS_LI in h
+
+def _fix_colonias_cercanas_noindex(h):
+    can = canonical_de(h) or ""
+    m = re.search(r'electricista-colonias-culiacan/([a-z0-9-]+)/$', can)
+    own_slug = m.group(1) if m else None
+    a_slug, a_name = _COLONIA_REPL_A_FALLBACK if own_slug == _COLONIA_REPL_A[0] else _COLONIA_REPL_A
+    b_slug, b_name = _COLONIA_REPL_B_FALLBACK if own_slug == _COLONIA_REPL_B[0] else _COLONIA_REPL_B
+    new_a = '<li><a href="/servicios/electricista-colonias-culiacan/%s/">%s</a></li>' % (a_slug, a_name)
+    new_b = '<li><a href="/servicios/electricista-colonias-culiacan/%s/">%s</a></li>' % (b_slug, b_name)
+    n = 0
+    if _CHAPULTEPEC_LI in h:
+        h = h.replace(_CHAPULTEPEC_LI, new_a)
+        n += 1
+    if _LOMAS_LI in h:
+        h = h.replace(_LOMAS_LI, new_b)
+        n += 1
+    return h, n
+
+
 # ── nav-link con ancla de scroll en vez de URL real (revisor-links links-001, revisor-gsc
 #    gsc-hub-servicios-nunca-rastreado, 2026-07-29): el fix de la regla [2026-07-27]
 #    SEO/NAV-ANCLA-NO-ES-ENLACE-INTERNO se aplicó SOLO a index.html — las otras 689 páginas
@@ -594,6 +655,12 @@ FIXERS = [
      "mecanico", _det_gradient_brand_inline, _fix_gradient_brand_inline),
     ("hero-preload-avif", "preload del hero en WebP sin type= mientras el <picture> pinta AVIF primero (doble descarga en el LCP, 32-34 páginas de servicio) → preload a los .avif ya existentes + type=\"image/avif\"",
      "mecanico", _det_hero_preload_avif, _fix_hero_preload_avif),
+    ("meta-keywords-remove", "<meta name=keywords> en páginas indexables (peso muerto, Google lo ignora desde 2009, expone keywords a competidores) → se elimina (scope: solo indexables)",
+     "mecanico", _det_meta_keywords, _fix_meta_keywords),
+    ("llamar-btn-contrast", "botón secundario \"Llamar\" del hero con style inline #E36414 (3.44:1, falla WCAG AA) → #C2410C (5.18:1), 33 páginas",
+     "mecanico", _det_llamar_btn_contrast, _fix_llamar_btn_contrast),
+    ("colonias-cercanas-noindex", "bloque \"Colonias Cercanas\" de las 642 páginas de colonia enlaza a 2 destinos NOINDEX (chapultepec, lomas-del-boulevard, 644/638 enlaces entrantes desperdiciados) → 2 colonias indexables reales, con auto-exclusión si la propia página es el destino",
+     "mecanico", _det_colonias_cercanas_noindex, _fix_colonias_cercanas_noindex),
     ("navlink-ancla-servicios-contacto", "nav-link con href=\"/#servicios\"/\"/#contacto\" (ancla de scroll a la home, no cuenta como enlace interno para Google) → URL real \"/servicios/\"/\"/contacto/\", replicando el fix ya aplicado en index.html",
      "mecanico", _det_navlink_ancla, _fix_navlink_ancla),
     ("cta-emergencia-p-color", "<p> del bloque 'CTA de Emergencias' sin color explícito → hereda gris de baja legibilidad (2.42:1) en vez del blanco que el diseño pretendía → color:#fff explícito",
