@@ -1,5 +1,36 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-08-01 (rescate de la corrida interrumpida del 07-29) — PUBLICADO ✅
+Al arrancar la corrida diaria de hoy, la sesión estaba parada en `auto/diario-20260729-2001`: una
+corrida del 2026-07-29 se había interrumpido a mitad de camino, alguien la recuperó el 2026-07-31
+(commits `614a34d2` + `d962e481`) pero nunca pasó por FASE 7 (verificar) ni FASE 8 (publicar) — 3
+días de trabajo (699 archivos: 5 fixers mecánicos nuevos en ~697 páginas + 3 CSS + sw.js) sin
+publicar. Antes de tocar nada nuevo, se lanzó al **verificador** (Opus xhigh, solo-lectura) sobre
+esa rama para decidir si se podía publicar.
+
+**Veredicto del verificador (`ok:false`, 8 problemas):** ningún hallazgo catastrófico — el ci-gate
+daba 0 ALTA idéntico a main, los 5 fixes del commit estaban completos y sin residuos, 0 páginas
+borradas, 0 precios tocados, email intacto — pero sí: (1) `sw.js` cambió `PRECACHE_ASSETS` a
+`main.min.js?v=20260729` sin subir `CACHE_VERSION` (se quedó en `v29`, idéntica a main → el cliente
+nunca purgaría el JS viejo del caché); (2) `contacto/index.html` fue la única página que se quedó
+en `main.min.js?v=20260725` mientras las otras 678 ya estaban en `?v=20260729` (ningún checker lo
+cazaba, el check 40 solo comparaba el `?v=` del CSS); (3) la memoria (REGLAS.md/HISTORIAL.jsonl/
+ESTADO.md) de la corrida del 07-29 nunca se cerró, y el código ya commiteado en
+`check-plantilla.py` citaba una regla de REGLAS.md con esa fecha que no existía; (4) el mensaje del
+commit decía "+3 CSS" pero ningún `.css` cambió realmente (los fixes viven en el `<style>` crítico
+inline de cada HTML); (5) la rama arrastraba por `git add -A` contenido de otra tarea sin relación
+(`PROPUESTAS.md`/`ultima-meta.md`, de la corrida `critico-sistema` del 2026-07-24, nunca antes
+comiteada) sin mencionarlo — inofensivo (documentación, no afecta el sitio) pero no declarado.
+
+**Corregido antes de publicar:** `contacto/index.html` sincronizado a `main.min.js?v=20260729`;
+`sw.js` `CACHE_VERSION` v29→v30; 7 entradas nuevas en HISTORIAL.jsonl + 8 reglas nuevas en
+REGLAS.md (cierran la memoria de los 5 fixes del 07-29 + 2 lecciones nuevas de esta recuperación);
+mecanizado el check 40b en `check-plantilla.py` (`main.min.js ?v=` ahora se compara igual que el
+CSS). `.pipeline/costos.jsonl` (entrada del 07-30 que estaba sin commitear) incluida en el mismo
+commit. `PROPUESTAS.md`/`ultima-meta.md` se dejaron entrar (documentación legítima de otra
+corrida, sin riesgo) mencionados explícitamente aquí. Re-verificado: `ci-gate.py` 0 ALTA, sitio
+local confirma `contacto/` en `?v=20260729` y `sw.js` en `v30`.
+
 ## 2026-07-27 (Auto Agente diario — 17 arreglos + 51 páginas de contraste WCAG (ALTA) + 3 servicios regenerados + 1 colonia a noindex) — PUBLICADO ✅
 Rama `auto/diario-20260727-2002`, commit `a809a65b` (arreglos+crecimiento) → merge `--no-ff` a main
 `90be5865`. Push OK (`2ab4fb44..90be5865`), pre-push auto-indexó 54 URLs. Aprendiz `092d5579` directo
