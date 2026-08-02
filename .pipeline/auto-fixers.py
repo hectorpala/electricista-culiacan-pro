@@ -407,6 +407,55 @@ def _fix_exit_popup_wa_contrast(h):
     return h, n
 
 
+# ── contraste del CTA principal .btn-primary, contraparte del :root CRÍTICO INLINE (revisor-a11y
+#    a11y-001, 2026-08-01): 44 páginas (index.html + zonas/servicios top-level) duplican --gradient-
+#    brand en su <style> crítico para el render antes de que cargue el CSS async — mismo fix que el
+#    asset fixer gradient-brand-contrast, pero aquí NO requiere bump de ?v= (es HTML propio de cada
+#    página, no el CSS immutable compartido). ──
+_GRADIENT_BRAND_INLINE = re.compile(r'--gradient-brand:linear-gradient\(135deg,#F97316 0%,#E36414 100%\)')
+
+def _det_gradient_brand_inline(h):
+    return bool(_GRADIENT_BRAND_INLINE.search(h))
+
+def _fix_gradient_brand_inline(h):
+    return _GRADIENT_BRAND_INLINE.subn('--gradient-brand:linear-gradient(135deg,#C2410C 0%,#7C2D12 100%)', h)
+
+
+# ── preload del hero en WebP mientras el <picture> pinta AVIF (revisor-perf perf-001,
+#    2026-08-01): el <link rel=preload as=image> de 32-34 páginas de servicio apunta a los
+#    .webp del hero SIN type=, así que el navegador precarga el WebP a prioridad alta mientras
+#    el <picture> (que sí lleva <source type=image/avif> primero) pinta el AVIF — el WebP nunca
+#    se usa, doble descarga en el camino crítico del LCP. index.html ya lo hace bien. Los 3
+#    archivos .avif del hero (500w/800w/1200w) ya existen en disco (recodificados 2026-07-25). ──
+_HERO_PRELOAD_WEBP = re.compile(
+    r'<link rel="preload" as="image"\s*\n(\s*)href="([^"]*hero-electricista-culiacan-)1200w\.webp"\s*\n'
+    r'\s*imagesrcset="[^"]*hero-electricista-culiacan-500w\.webp 500w,\s*\n'
+    r'\s*[^"]*hero-electricista-culiacan-800w\.webp 800w,\s*\n'
+    r'\s*[^"]*hero-electricista-culiacan-1200w\.webp 1200w"\s*\n'
+    r'(\s*)imagesizes="([^"]*)"\s*\n'
+    r'(\s*)fetchpriority="high">'
+)
+
+def _det_hero_preload_avif(h):
+    return bool(_HERO_PRELOAD_WEBP.search(h))
+
+def _fix_hero_preload_avif(h):
+    def repl(m):
+        indent, base, sizes = m.group(1), m.group(2), m.group(4)
+        return (
+            '<link rel="preload" as="image"\n'
+            '%shref="%s500w.avif"\n'
+            '%simagesrcset="%s500w.avif 500w,\n'
+            '%s             %s800w.avif 800w,\n'
+            '%s             %s1200w.avif 1200w"\n'
+            '%simagesizes="%s"\n'
+            '%stype="image/avif"\n'
+            '%sfetchpriority="high">'
+        ) % (indent, base, indent, base, indent, base, indent, base,
+             indent, sizes, indent, indent)
+    return _HERO_PRELOAD_WEBP.subn(repl, h)
+
+
 # ── nav-link con ancla de scroll en vez de URL real (revisor-links links-001, revisor-gsc
 #    gsc-hub-servicios-nunca-rastreado, 2026-07-29): el fix de la regla [2026-07-27]
 #    SEO/NAV-ANCLA-NO-ES-ENLACE-INTERNO se aplicó SOLO a index.html — las otras 689 páginas
@@ -541,6 +590,10 @@ def _fix_table_wrapper_margin(h):
 
 
 FIXERS = [
+    ("gradient-brand-inline", "--gradient-brand duplicado en el <style> crítico inline (44 páginas) con el mismo contraste insuficiente que el asset fixer gradient-brand-contrast → mismos tonos #C2410C→#7C2D12",
+     "mecanico", _det_gradient_brand_inline, _fix_gradient_brand_inline),
+    ("hero-preload-avif", "preload del hero en WebP sin type= mientras el <picture> pinta AVIF primero (doble descarga en el LCP, 32-34 páginas de servicio) → preload a los .avif ya existentes + type=\"image/avif\"",
+     "mecanico", _det_hero_preload_avif, _fix_hero_preload_avif),
     ("navlink-ancla-servicios-contacto", "nav-link con href=\"/#servicios\"/\"/#contacto\" (ancla de scroll a la home, no cuenta como enlace interno para Google) → URL real \"/servicios/\"/\"/contacto/\", replicando el fix ya aplicado en index.html",
      "mecanico", _det_navlink_ancla, _fix_navlink_ancla),
     ("cta-emergencia-p-color", "<p> del bloque 'CTA de Emergencias' sin color explícito → hereda gris de baja legibilidad (2.42:1) en vez del blanco que el diseño pretendía → color:#fff explícito",
@@ -936,6 +989,19 @@ def _fix_font_dedup_css(css):
     return css, n
 
 
+# ── contraste del CTA principal .btn-primary (revisor-a11y a11y-001, 2026-08-01): texto blanco
+#    sobre --gradient-brand (linear-gradient(135deg,#F97316 0%,#E36414 100%)) da 2.80:1/3.44:1 en
+#    cada stop, ninguno alcanza 4.5:1 AA para texto normal — es el botón de conversión de ~690
+#    páginas (WhatsApp, Enviar Cotización, Reseñas). Oscurecido a los DOS tonos ya aprobados por
+#    contrato de marca (CLAUDE.md, REGLAS.md 2026-07-27): #C2410C (5.18:1) → #7C2D12 (9.37:1), sin
+#    introducir ningún color nuevo. También decorativo (::before/::after, .step-number con texto
+#    blanco): mejora, no rompe nada, ninguno depende del tono claro. ──
+_GRADIENT_BRAND = re.compile(r'--gradient-brand:linear-gradient\(135deg,#F97316 0%,#E36414 100%\)')
+
+def _fix_gradient_brand_contrast(css):
+    return _GRADIENT_BRAND.subn('--gradient-brand:linear-gradient(135deg,#C2410C 0%,#7C2D12 100%)', css)
+
+
 ASSET_FIXERS = [
     ("tap-target-44",
      "tap target <44px en selectores interactivos compartidos (migas) → min-height:44px en los 3 CSS + bump ?v=/sw.js",
@@ -967,6 +1033,9 @@ ASSET_FIXERS = [
     ("hero-atendemos-ahora-css",
      "contraparte responsive de hero-white-on-white: .hero-atendemos-ahora oscuro SOLO bajo @media(max-width:768px) (en escritorio el <p> inline sigue #fff, correcto sobre el overlay del hero) en los 3 CSS + bump ?v=/sw.js",
      "mecanico", _fix_hero_atendemos_css),
+    ("gradient-brand-contrast",
+     "contraste de .btn-primary (~690 páginas, texto blanco sobre --gradient-brand #F97316→#E36414, 2.80-3.44:1, falla WCAG AA) → #C2410C→#7C2D12 (5.18-9.37:1), tonos ya aprobados por contrato de marca, en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_gradient_brand_contrast),
 ]
 
 
