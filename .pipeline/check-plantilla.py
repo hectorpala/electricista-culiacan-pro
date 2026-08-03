@@ -518,6 +518,27 @@ def check_page(fpath, t, noindex, redirects):
             "Reemplazar por la paleta: naranja #C2410C / azul de marca #1e40af; verde→#22c55e; "
             "fondos claros #FFF7ED. No tocar el logo de Google (#4285f4/#ea4335 en <path fill> de SVG).")
 
+    # --- 11c. a11y/contraste: gradiente naranja viejo hardcodeado en .btn-primary (2026-08-02)
+    # El 2026-08-01 se corrigió el contraste del CTA principal (texto blanco sobre
+    # linear-gradient(135deg,#F97316→#E36414), 2.80-3.44:1, falla WCAG AA) a
+    # #C2410C→#7C2D12 (5.18-9.37:1) en TODO el sitio — pero el fixer inicial solo cubrió las 44
+    # páginas que usan la variable --gradient-brand; un 2º barrido (verificador independiente)
+    # encontró 676 páginas más con el mismo gradiente hardcodeado DIRECTO en el <style> crítico
+    # inline de .btn-primary (2 variantes 2-stop + 1 de 3-stop con #fba336 intermedio). Regresión
+    # mecanizable: si una página nueva se genera copiando un esqueleto viejo (gen-landing.py,
+    # generar-colonias-v2.py, o un skeleton no actualizado), reintroduce el gradiente de bajo
+    # contraste. Severidad media (no bloquea pre-commit) para no repetir la trampa de 2026-07-03.
+    OLD_GRADIENT = re.compile(
+        r'linear-gradient\(135deg,#[fF]97316 0%,#[eE]36414 100%\)'
+        r'|linear-gradient\(135deg,#fba336 0%,#f97316 45%,#e36414 100%\)'
+    )
+    n_old_gradient = len(OLD_GRADIENT.findall(t))
+    if n_old_gradient:
+        add("media", r, "a11y",
+            "Gradiente naranja viejo de bajo contraste hardcodeado en .btn-primary (×%d) — 2.80-3.44:1, falla WCAG AA" % n_old_gradient,
+            "Reemplazar por linear-gradient(135deg,#C2410C 0%,#7C2D12 100%) (o su variante 3-stop con #C2410C "
+            "en el stop intermedio) — mismo fix que auto-fixers.py:gradient-btn-primary-inline")
+
     # --- 12. telefono NO canonico (alta, links) — contacto roto = leads perdidos
     #         Normaliza a solo digitos (ignora +, espacios y guiones). Si el numero
     #         no es 526673922273 ni 6673922273 -> fuga/placeholder/corrupcion.
