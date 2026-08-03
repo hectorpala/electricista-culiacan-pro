@@ -421,6 +421,32 @@ def _fix_gradient_brand_inline(h):
     return _GRADIENT_BRAND_INLINE.subn('--gradient-brand:linear-gradient(135deg,#C2410C 0%,#7C2D12 100%)', h)
 
 
+# ── .btn-primary con el gradiente ANTIGUO hardcodeado DIRECTO en el <style> crítico inline, sin
+#    pasar por la variable --gradient-brand (revisor-a11y a11y-001, 2026-08-01 — 2ª instancia: el
+#    fixer gradient-brand-inline de arriba solo cubre 44 páginas que declaran --gradient-brand
+#    como custom property; estas 695 páginas escriben el valor directo dentro de la regla
+#    .btn-primary{background:linear-gradient(...)}, verificador independiente 2026-08-02 lo cazó
+#    tras la corrida anterior). 3 variantes vistas: 2-stop minúsculas (644 páginas de colonia),
+#    2-stop mayúsculas (19 páginas de servicio) y 3-stop con un tono claro intermedio #fba336 (32
+#    páginas tipo electricista-centro-culiacan). Mismos tonos ya aprobados por el contrato de
+#    marca (#C2410C→#7C2D12, 5.18-9.37:1); el stop intermedio del 3-stop se remapea también a
+#    #C2410C para no reintroducir el tono claro que fallaba contraste. ──
+_GRADIENT_BTN_OLD = re.compile(
+    r'linear-gradient\(135deg,#[fF]97316 0%,#[eE]36414 100%\)'
+    r'|linear-gradient\(135deg,#fba336 0%,#f97316 45%,#e36414 100%\)'
+)
+
+def _det_gradient_btn_inline(h):
+    return bool(_GRADIENT_BTN_OLD.search(h))
+
+def _fix_gradient_btn_inline(h):
+    def repl(m):
+        if '45%' in m.group(0):
+            return 'linear-gradient(135deg,#C2410C 0%,#C2410C 45%,#7C2D12 100%)'
+        return 'linear-gradient(135deg,#C2410C 0%,#7C2D12 100%)'
+    return _GRADIENT_BTN_OLD.subn(repl, h)
+
+
 # ── preload del hero en WebP mientras el <picture> pinta AVIF (revisor-perf perf-001,
 #    2026-08-01): el <link rel=preload as=image> de 32-34 páginas de servicio apunta a los
 #    .webp del hero SIN type=, así que el navegador precarga el WebP a prioridad alta mientras
@@ -653,6 +679,8 @@ def _fix_table_wrapper_margin(h):
 FIXERS = [
     ("gradient-brand-inline", "--gradient-brand duplicado en el <style> crítico inline (44 páginas) con el mismo contraste insuficiente que el asset fixer gradient-brand-contrast → mismos tonos #C2410C→#7C2D12",
      "mecanico", _det_gradient_brand_inline, _fix_gradient_brand_inline),
+    ("gradient-btn-primary-inline", ".btn-primary con el gradiente naranja viejo hardcodeado DIRECTO (sin variable --gradient-brand) en el <style> crítico inline, 2-stop o 3-stop (695 páginas) → mismos tonos aprobados #C2410C→#7C2D12",
+     "mecanico", _det_gradient_btn_inline, _fix_gradient_btn_inline),
     ("hero-preload-avif", "preload del hero en WebP sin type= mientras el <picture> pinta AVIF primero (doble descarga en el LCP, 32-34 páginas de servicio) → preload a los .avif ya existentes + type=\"image/avif\"",
      "mecanico", _det_hero_preload_avif, _fix_hero_preload_avif),
     ("meta-keywords-remove", "<meta name=keywords> en páginas indexables (peso muerto, Google lo ignora desde 2009, expone keywords a competidores) → se elimina (scope: solo indexables)",
