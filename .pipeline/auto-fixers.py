@@ -407,6 +407,142 @@ def _fix_exit_popup_wa_contrast(h):
     return h, n
 
 
+# ── contraste del CTA principal .btn-primary, contraparte del :root CRÍTICO INLINE (revisor-a11y
+#    a11y-001, 2026-08-01): 44 páginas (index.html + zonas/servicios top-level) duplican --gradient-
+#    brand en su <style> crítico para el render antes de que cargue el CSS async — mismo fix que el
+#    asset fixer gradient-brand-contrast, pero aquí NO requiere bump de ?v= (es HTML propio de cada
+#    página, no el CSS immutable compartido). ──
+_GRADIENT_BRAND_INLINE = re.compile(r'--gradient-brand:linear-gradient\(135deg,#F97316 0%,#E36414 100%\)')
+
+def _det_gradient_brand_inline(h):
+    return bool(_GRADIENT_BRAND_INLINE.search(h))
+
+def _fix_gradient_brand_inline(h):
+    return _GRADIENT_BRAND_INLINE.subn('--gradient-brand:linear-gradient(135deg,#C2410C 0%,#7C2D12 100%)', h)
+
+
+# ── .btn-primary con el gradiente ANTIGUO hardcodeado DIRECTO en el <style> crítico inline, sin
+#    pasar por la variable --gradient-brand (revisor-a11y a11y-001, 2026-08-01 — 2ª instancia: el
+#    fixer gradient-brand-inline de arriba solo cubre 44 páginas que declaran --gradient-brand
+#    como custom property; estas 695 páginas escriben el valor directo dentro de la regla
+#    .btn-primary{background:linear-gradient(...)}, verificador independiente 2026-08-02 lo cazó
+#    tras la corrida anterior). 3 variantes vistas: 2-stop minúsculas (644 páginas de colonia),
+#    2-stop mayúsculas (19 páginas de servicio) y 3-stop con un tono claro intermedio #fba336 (32
+#    páginas tipo electricista-centro-culiacan). Mismos tonos ya aprobados por el contrato de
+#    marca (#C2410C→#7C2D12, 5.18-9.37:1); el stop intermedio del 3-stop se remapea también a
+#    #C2410C para no reintroducir el tono claro que fallaba contraste. ──
+_GRADIENT_BTN_OLD = re.compile(
+    r'linear-gradient\(135deg,#[fF]97316 0%,#[eE]36414 100%\)'
+    r'|linear-gradient\(135deg,#fba336 0%,#f97316 45%,#e36414 100%\)'
+)
+
+def _det_gradient_btn_inline(h):
+    return bool(_GRADIENT_BTN_OLD.search(h))
+
+def _fix_gradient_btn_inline(h):
+    def repl(m):
+        if '45%' in m.group(0):
+            return 'linear-gradient(135deg,#C2410C 0%,#C2410C 45%,#7C2D12 100%)'
+        return 'linear-gradient(135deg,#C2410C 0%,#7C2D12 100%)'
+    return _GRADIENT_BTN_OLD.subn(repl, h)
+
+
+# ── preload del hero en WebP mientras el <picture> pinta AVIF (revisor-perf perf-001,
+#    2026-08-01): el <link rel=preload as=image> de 32-34 páginas de servicio apunta a los
+#    .webp del hero SIN type=, así que el navegador precarga el WebP a prioridad alta mientras
+#    el <picture> (que sí lleva <source type=image/avif> primero) pinta el AVIF — el WebP nunca
+#    se usa, doble descarga en el camino crítico del LCP. index.html ya lo hace bien. Los 3
+#    archivos .avif del hero (500w/800w/1200w) ya existen en disco (recodificados 2026-07-25). ──
+_HERO_PRELOAD_WEBP = re.compile(
+    r'<link rel="preload" as="image"\s*\n(\s*)href="([^"]*hero-electricista-culiacan-)1200w\.webp"\s*\n'
+    r'\s*imagesrcset="[^"]*hero-electricista-culiacan-500w\.webp 500w,\s*\n'
+    r'\s*[^"]*hero-electricista-culiacan-800w\.webp 800w,\s*\n'
+    r'\s*[^"]*hero-electricista-culiacan-1200w\.webp 1200w"\s*\n'
+    r'(\s*)imagesizes="([^"]*)"\s*\n'
+    r'(\s*)fetchpriority="high">'
+)
+
+def _det_hero_preload_avif(h):
+    return bool(_HERO_PRELOAD_WEBP.search(h))
+
+def _fix_hero_preload_avif(h):
+    def repl(m):
+        indent, base, sizes = m.group(1), m.group(2), m.group(4)
+        return (
+            '<link rel="preload" as="image"\n'
+            '%shref="%s500w.avif"\n'
+            '%simagesrcset="%s500w.avif 500w,\n'
+            '%s             %s800w.avif 800w,\n'
+            '%s             %s1200w.avif 1200w"\n'
+            '%simagesizes="%s"\n'
+            '%stype="image/avif"\n'
+            '%sfetchpriority="high">'
+        ) % (indent, base, indent, base, indent, base, indent, base,
+             indent, sizes, indent, indent)
+    return _HERO_PRELOAD_WEBP.subn(repl, h)
+
+
+# ── <meta name=keywords> en páginas indexables (revisor-seo seo-013, 2026-08-01): Google lo
+#    ignora desde 2009, peso muerto en el <head> que además expone el mapa de keywords
+#    objetivo a competidores. Scope: solo indexables (una noindex no necesita limpieza SEO). ──
+_META_KEYWORDS = re.compile(r'<meta name="keywords"[^>]*>')
+
+def _det_meta_keywords(h):
+    return (not es_noindex(h)) and bool(_META_KEYWORDS.search(h))
+
+def _fix_meta_keywords(h):
+    return _META_KEYWORDS.subn('', h)
+
+
+# ── botón secundario "Llamar" del hero con contraste insuficiente (revisor-a11y a11y-002,
+#    2026-08-01): style inline background:#fff;color:#E36414;border:2px solid #E36414 da
+#    3.44:1 (falla AA para texto normal) en 33 páginas. Style de atributo, no toca CSS
+#    compartido → sin bump de ?v=/sw.js. ──
+_LLAMAR_BTN = re.compile(r'background: #fff; color: #E36414; border: 2px solid #E36414;')
+
+def _det_llamar_btn_contrast(h):
+    return bool(_LLAMAR_BTN.search(h))
+
+def _fix_llamar_btn_contrast(h):
+    return _LLAMAR_BTN.subn('background: #fff; color: #C2410C; border: 2px solid #C2410C;', h)
+
+
+# ── bloque "Colonias Cercanas" enlazando a colonias NOINDEX (revisor-seo seo-001, 2026-08-01,
+#    escala bk-ed69bf02): las 642 páginas de colonia replican el MISMO bloque estático de 4
+#    <li> apuntando siempre a {chapultepec, centro, las-quintas, lomas-del-boulevard} — 2 de
+#    ellas noindex, así que las páginas indexables (autoridad) más enlazadas del sitio
+#    (644/638 enlaces entrantes) son invisibles para Google. Fix ACOTADO (no rediseña la
+#    lógica geográfica completa, ver bk-a2a5003c para eso): reemplaza SOLO los 2 destinos
+#    noindex por 2 colonias indexables reales, con auto-exclusión si la propia página ES uno
+#    de los reemplazos (evita auto-enlace, usando el slug propio vía canonical_de). ──
+_CHAPULTEPEC_LI = '<li><a href="/servicios/electricista-colonias-culiacan/chapultepec/">Chapultepec</a></li>'
+_LOMAS_LI = '<li><a href="/servicios/electricista-colonias-culiacan/lomas-del-boulevard/">Lomas del Boulevard</a></li>'
+_COLONIA_REPL_A = ('tres-rios', 'Tres Ríos')
+_COLONIA_REPL_A_FALLBACK = ('zona-dorada', 'Zona Dorada')
+_COLONIA_REPL_B = ('rafael-buelna', 'Rafael Buelna')
+_COLONIA_REPL_B_FALLBACK = ('las-americas', 'Las Américas')
+
+def _det_colonias_cercanas_noindex(h):
+    return _CHAPULTEPEC_LI in h or _LOMAS_LI in h
+
+def _fix_colonias_cercanas_noindex(h):
+    can = canonical_de(h) or ""
+    m = re.search(r'electricista-colonias-culiacan/([a-z0-9-]+)/$', can)
+    own_slug = m.group(1) if m else None
+    a_slug, a_name = _COLONIA_REPL_A_FALLBACK if own_slug == _COLONIA_REPL_A[0] else _COLONIA_REPL_A
+    b_slug, b_name = _COLONIA_REPL_B_FALLBACK if own_slug == _COLONIA_REPL_B[0] else _COLONIA_REPL_B
+    new_a = '<li><a href="/servicios/electricista-colonias-culiacan/%s/">%s</a></li>' % (a_slug, a_name)
+    new_b = '<li><a href="/servicios/electricista-colonias-culiacan/%s/">%s</a></li>' % (b_slug, b_name)
+    n = 0
+    if _CHAPULTEPEC_LI in h:
+        h = h.replace(_CHAPULTEPEC_LI, new_a)
+        n += 1
+    if _LOMAS_LI in h:
+        h = h.replace(_LOMAS_LI, new_b)
+        n += 1
+    return h, n
+
+
 # ── nav-link con ancla de scroll en vez de URL real (revisor-links links-001, revisor-gsc
 #    gsc-hub-servicios-nunca-rastreado, 2026-07-29): el fix de la regla [2026-07-27]
 #    SEO/NAV-ANCLA-NO-ES-ENLACE-INTERNO se aplicó SOLO a index.html — las otras 689 páginas
@@ -541,6 +677,18 @@ def _fix_table_wrapper_margin(h):
 
 
 FIXERS = [
+    ("gradient-brand-inline", "--gradient-brand duplicado en el <style> crítico inline (44 páginas) con el mismo contraste insuficiente que el asset fixer gradient-brand-contrast → mismos tonos #C2410C→#7C2D12",
+     "mecanico", _det_gradient_brand_inline, _fix_gradient_brand_inline),
+    ("gradient-btn-primary-inline", ".btn-primary con el gradiente naranja viejo hardcodeado DIRECTO (sin variable --gradient-brand) en el <style> crítico inline, 2-stop o 3-stop (695 páginas) → mismos tonos aprobados #C2410C→#7C2D12",
+     "mecanico", _det_gradient_btn_inline, _fix_gradient_btn_inline),
+    ("hero-preload-avif", "preload del hero en WebP sin type= mientras el <picture> pinta AVIF primero (doble descarga en el LCP, 32-34 páginas de servicio) → preload a los .avif ya existentes + type=\"image/avif\"",
+     "mecanico", _det_hero_preload_avif, _fix_hero_preload_avif),
+    ("meta-keywords-remove", "<meta name=keywords> en páginas indexables (peso muerto, Google lo ignora desde 2009, expone keywords a competidores) → se elimina (scope: solo indexables)",
+     "mecanico", _det_meta_keywords, _fix_meta_keywords),
+    ("llamar-btn-contrast", "botón secundario \"Llamar\" del hero con style inline #E36414 (3.44:1, falla WCAG AA) → #C2410C (5.18:1), 33 páginas",
+     "mecanico", _det_llamar_btn_contrast, _fix_llamar_btn_contrast),
+    ("colonias-cercanas-noindex", "bloque \"Colonias Cercanas\" de las 642 páginas de colonia enlaza a 2 destinos NOINDEX (chapultepec, lomas-del-boulevard, 644/638 enlaces entrantes desperdiciados) → 2 colonias indexables reales, con auto-exclusión si la propia página es el destino",
+     "mecanico", _det_colonias_cercanas_noindex, _fix_colonias_cercanas_noindex),
     ("navlink-ancla-servicios-contacto", "nav-link con href=\"/#servicios\"/\"/#contacto\" (ancla de scroll a la home, no cuenta como enlace interno para Google) → URL real \"/servicios/\"/\"/contacto/\", replicando el fix ya aplicado en index.html",
      "mecanico", _det_navlink_ancla, _fix_navlink_ancla),
     ("cta-emergencia-p-color", "<p> del bloque 'CTA de Emergencias' sin color explícito → hereda gris de baja legibilidad (2.42:1) en vez del blanco que el diseño pretendía → color:#fff explícito",
@@ -936,6 +1084,19 @@ def _fix_font_dedup_css(css):
     return css, n
 
 
+# ── contraste del CTA principal .btn-primary (revisor-a11y a11y-001, 2026-08-01): texto blanco
+#    sobre --gradient-brand (linear-gradient(135deg,#F97316 0%,#E36414 100%)) da 2.80:1/3.44:1 en
+#    cada stop, ninguno alcanza 4.5:1 AA para texto normal — es el botón de conversión de ~690
+#    páginas (WhatsApp, Enviar Cotización, Reseñas). Oscurecido a los DOS tonos ya aprobados por
+#    contrato de marca (CLAUDE.md, REGLAS.md 2026-07-27): #C2410C (5.18:1) → #7C2D12 (9.37:1), sin
+#    introducir ningún color nuevo. También decorativo (::before/::after, .step-number con texto
+#    blanco): mejora, no rompe nada, ninguno depende del tono claro. ──
+_GRADIENT_BRAND = re.compile(r'--gradient-brand:linear-gradient\(135deg,#F97316 0%,#E36414 100%\)')
+
+def _fix_gradient_brand_contrast(css):
+    return _GRADIENT_BRAND.subn('--gradient-brand:linear-gradient(135deg,#C2410C 0%,#7C2D12 100%)', css)
+
+
 ASSET_FIXERS = [
     ("tap-target-44",
      "tap target <44px en selectores interactivos compartidos (migas) → min-height:44px en los 3 CSS + bump ?v=/sw.js",
@@ -967,6 +1128,9 @@ ASSET_FIXERS = [
     ("hero-atendemos-ahora-css",
      "contraparte responsive de hero-white-on-white: .hero-atendemos-ahora oscuro SOLO bajo @media(max-width:768px) (en escritorio el <p> inline sigue #fff, correcto sobre el overlay del hero) en los 3 CSS + bump ?v=/sw.js",
      "mecanico", _fix_hero_atendemos_css),
+    ("gradient-brand-contrast",
+     "contraste de .btn-primary (~690 páginas, texto blanco sobre --gradient-brand #F97316→#E36414, 2.80-3.44:1, falla WCAG AA) → #C2410C→#7C2D12 (5.18-9.37:1), tonos ya aprobados por contrato de marca, en los 3 CSS + bump ?v=/sw.js",
+     "mecanico", _fix_gradient_brand_contrast),
 ]
 
 

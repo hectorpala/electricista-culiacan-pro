@@ -21,14 +21,11 @@ TEMPLATE_SLUG = '10-de-abril'
 TEMPLATE_ENCODED = '10%20de%20Abril'
 
 POPULAR = [
-    ('chapultepec', 'Chapultepec'),
+    ('tres-rios', 'Tres Ríos'),
     ('centro', 'Centro'),
     ('las-quintas', 'Las Quintas'),
-    ('lomas-del-boulevard', 'Lomas del Boulevard'),
+    ('rafael-buelna', 'Rafael Buelna'),
     ('villa-universidad', 'Villa Universidad'),
-    ('bosques-del-humaya', 'Bosques del Humaya'),
-    ('real-del-valle', 'Real del Valle'),
-    ('country-tres-rios', 'Country Tres Rios'),
     ('guadalupe', 'Guadalupe'),
     ('la-primavera', 'La Primavera'),
 ]
@@ -58,10 +55,10 @@ def generate_page(template, nombre, slug):
     # Update interlinking: rebuild nearby colonies for this specific colony
     nearby = get_nearby(slug)
     old_links = (
-        '<li><a href="/servicios/electricista-colonias-culiacan/chapultepec/">Chapultepec</a></li>'
+        '<li><a href="/servicios/electricista-colonias-culiacan/tres-rios/">Tres Ríos</a></li>'
         '<li><a href="/servicios/electricista-colonias-culiacan/centro/">Centro</a></li>'
         '<li><a href="/servicios/electricista-colonias-culiacan/las-quintas/">Las Quintas</a></li>'
-        '<li><a href="/servicios/electricista-colonias-culiacan/lomas-del-boulevard/">Lomas del Boulevard</a></li>'
+        '<li><a href="/servicios/electricista-colonias-culiacan/rafael-buelna/">Rafael Buelna</a></li>'
     )
     new_links = ''.join(
         '<li><a href="/servicios/electricista-colonias-culiacan/%s/">%s</a></li>' % (s, n)
