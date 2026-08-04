@@ -174,6 +174,47 @@ def _fix_svg_float(h):
     return _FLOAT_SVG.subn(r'\g<1><svg aria-hidden="true"', h)
 
 
+# ── SVG decorativo sin aria-hidden dentro de <a>/<button> con NOMBRE ACCESIBLE de texto
+#    visible (hallazgo a11y-004, corrida 2026-08-03): los CTA de WhatsApp/Llamar del hero,
+#    exit-popup y whatsapp-cta-box ya son autodescriptivos por su texto ("WhatsApp: 667 392
+#    2273", "Llamar Ahora", "Abrir Chat"); el <svg> decorativo dentro NO debe anunciarse aparte.
+#    Distinto de svg-aria-float (botones flotantes icon-only, ya cubiertos arriba y excluidos
+#    aquí por su clase floating-btn). Solo aplica si hay texto visible tras el </svg> — un
+#    control icon-only NO se toca aquí (necesitaría aria-label en el padre, no aria-hidden). ──
+_CTA_SVG = re.compile(r'<(a|button)\b([^>]*)>(\s*)<svg(?![^>]*aria-hidden)([^>]*)>(.*?)</svg>(.*?)</\1>', re.I | re.S)
+
+def _det_svg_cta(h):
+    for m in _CTA_SVG.finditer(h):
+        if 'floating-btn' in m.group(2).lower():
+            continue
+        if re.sub(r'<[^>]+>', '', m.group(6)).strip():
+            return True
+    return False
+
+def _fix_svg_cta(h):
+    count = [0]
+    def repl(m):
+        if 'floating-btn' in m.group(2).lower():
+            return m.group(0)
+        if not re.sub(r'<[^>]+>', '', m.group(6)).strip():
+            return m.group(0)
+        count[0] += 1
+        return re.sub(r'<svg(?![^>]*aria-hidden)', '<svg aria-hidden="true"', m.group(0), count=1, flags=re.I)
+    new_h = _CTA_SVG.sub(repl, h)
+    return new_h, count[0]
+
+
+# ── '.rating-divider' (el separador '·' del badge de reseñas) sin aria-hidden (hallazgo
+#    a11y-007, 2026-08-03): es puramente decorativo (un carácter '·' entre "4.8" y "150+
+#    reseñas"), su bajo contraste (1.33:1) es aceptable SOLO si está fuera del árbol accesible;
+#    hoy se expone al lector de pantalla sin estarlo. ──
+_RATING_DIVIDER = re.compile(r'<span class="rating-divider"(?![^>]*aria-hidden)>', re.I)
+
+def _det_rating_divider(h):
+    return bool(_RATING_DIVIDER.search(h))
+
+def _fix_rating_divider(h):
+    return _RATING_DIVIDER.subn('<span class="rating-divider" aria-hidden="true">', h)
 
 
 # ── iframe de Google Maps sin title (HISTORIAL a11y-iframe-maps-title-20260714): sin
@@ -735,6 +776,10 @@ FIXERS = [
      "mecanico", _det_footer_contacto_privacidad, _fix_footer_contacto_privacidad),
     ("exit-popup-whatsapp-contrast", "botón <a id=exit-popup-whatsapp> del popup de salida con background:#22c55e inline (blanco sobre verde = 2.28:1, falla WCAG AA) → #075E54 teal de marca (7.67:1); NO toca el botón flotante de WhatsApp ni .eta-dot (su #22c55e es legítimo)",
      "mecanico", _det_exit_popup_wa_contrast, _fix_exit_popup_wa_contrast),
+    ("svg-aria-hidden-cta", "svg decorativo sin aria-hidden dentro de <a>/<button> con nombre accesible de TEXTO visible (WhatsApp/Llamar del hero, exit-popup, whatsapp-cta-box) → aria-hidden=true; excluye floating-btn (ya cubierto por svg-aria-float) e iconos sin texto (necesitan aria-label, no se tocan)",
+     "mecanico", _det_svg_cta, _fix_svg_cta),
+    ("rating-divider-aria-hidden", "span.rating-divider ('·' del badge de reseñas, bajo contraste 1.33:1 pero decorativo) sin aria-hidden → aria-hidden=true",
+     "mecanico", _det_rating_divider, _fix_rating_divider),
 ]
 
 
