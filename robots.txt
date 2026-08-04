@@ -24,6 +24,3 @@ Allow: /*.js
 Allow: /*.webp
 Allow: /*.png
 Allow: /*.jpg
-
-# Crawl-delay for politeness
-Crawl-delay: 1
