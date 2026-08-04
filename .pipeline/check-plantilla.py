@@ -623,6 +623,9 @@ def check_page(fpath, t, noindex, redirects):
     for pat_oc, etiqueta in (
         (r"cero\s+riesgo", "cero riesgo"),
         (r"riesgo\s+cero", "riesgo cero"),
+        (r"cero\s+fugas", "cero fugas"),
+        (r"cero\s+fallas", "cero fallas"),
+        (r"cero\s+errores", "cero errores"),
         (r"retorno\s+garantizado", "retorno garantizado"),
         (r"se\s+pagan\s+solos?", "se pagan solos"),
         (r"se\s+paga\s+solo\b", "se paga solo"),
