@@ -1,5 +1,68 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-08-03 (Auto Agente diario completo — 9 revisores + 10 arreglos + 2 fixers a11y nuevos) — PUBLICADO ✅
+Primera corrida del día que completó las 10 fases sin rescate previo. Rama `auto/diario-20260803-2001`,
+2 commits (`acee11e0` arreglos+crecimiento, `b5a451d8` aprendizaje) → merge `--no-ff` a main (`f2f5c092`)
+y push directo del segundo (`b5a451d8`). Push OK (`f55883ca..b5a451d8`), pre-push auto-indexó 58 URLs.
+Verificado en producción: home/robots.txt/electricista-cerca-de-mi (title nuevo) → 200 y confirmados.
+
+**FASE 1 — health check:** servidor `python3 -m http.server 8080`; home/contacto/servicios/blog → 200.
+
+**FASE 3 — 9 revisores en paralelo (Opus xhigh, per model-router):** revisor-seo (18: JSON-LD name con
+sufijo de colonia en 29 páginas, colonia duplicada santa-ines/santa-aynes, 11 meta description
+boilerplate, overclaim "cero fugas" nuevo, dato de años de experiencia contradictorio, sitemap lastmod
+desfasado, 51 nombres de colonia sin tildes en el array del hub, entre otros — 0 ALTA), revisor-movil (8:
+overflow de grid @320px en contacto/gracias, footer-mini-nav y FAQ sin tap-target ya en backlog, falta
+regla global `img{max-width:100%}`, terminos/privacidad sin botones flotantes ni nav), revisor-a11y (8:
+contraste `.rating-score` 4.39:1, `#E36414` como texto en 21 sitios, 205 SVG sin aria-hidden, 32 páginas
+sin landmark `<main>`, badge del hero con contraste no garantizado en escritorio), revisor-perf (10:
+imágenes duplicadas byte-a-byte bajo 17 nombres, sw.js sin el AVIF real del LCP en precache, 3 fuentes
+huérfanas, JSON-LD sin minificar), revisor-links (3: `las-coloradas` inalcanzable en el hub, PWA
+shortcuts fuera de scope, 637 colonias con el mismo bloque "Colonias Cercanas"), revisor-gsc (9: veredicto
+de colonias pendiente 7 semanas — solo ~10% indexadas, recomienda PARAR —, 3 canibalizaciones de keywords
+entre home y páginas dedicadas, sitemap fantasma confirmado 404, colonia noindex con impresiones
+residuales), revisor-indexabilidad (0, limpio, 77 URLs, sin ceguera), revisor-produccion (1 ya conocido:
+X-Frame-Options meta), revisor-plantilla (34: 32 precio-en-body ya conocido/pendiente dueño, 1 gradiente
+viejo en `blog/index.html` en CUARENTENA, 1 baja theme-color stub GSC).
+
+**FASE 5 — arreglado (10 puntos + 2 fixers mecánicos nuevos):** hub de colonias (`las-coloradas` restaurada
+al buscador del cliente, duplicado `santa-ines` quitado); overclaim "cero fugas eléctricas" reescrito en
+`cambio-cableado-electrico`; años de experiencia unificados a "15+" en `instalacion-minisplit`; `Crawl-delay`
+innecesario quitado de `robots.txt`; overflow de grid @320px corregido en `gracias/` (`contacto/` diferido,
+está en CUARENTENA); `sw.js` precachea ahora el AVIF real del hero (LCP) en vez de solo el WebP de fallback,
+`CACHE_VERSION` v31→v32. **2 fixers nuevos** en `auto-fixers.py`: `svg-aria-hidden-cta` (201 SVG decorativos
+con texto visible en 50 páginas) y `rating-divider-aria-hidden` (44 páginas). 32 hallazgos más encolados en
+`BACKLOG.jsonl` (6 a cola humana, 26 auto-ejecutables para corridas futuras).
+
+**FASE 6 — crecer:** `check-huecos.py` limpio (0, 695 páginas). GSC auditado con datos reales (7 tools MCP
+cargadas, `gsc_list_sites` confirma la propiedad). 4 tareas de backlog drenadas: claim "sin costo de visita"
+que contradecía el diagnóstico de $200 (quitado de `electricista-precios` + `servicios/index.html`); title/
+meta/og/twitter de `electricista-cerca-de-mi` reescritos para liderar con la frase exacta de mayor demanda
+del sitio ("Electricista Cerca de Mí", antes anteponía "a Domicilio"). **0 páginas nuevas**: sin hueco real
+(check-huecos limpio) y la estrategia de colonias está en pausa pendiente de que el dueño confirme el
+veredicto GSC (7 semanas de medición real: solo ~10% de las colonias diferenciadas están indexadas).
+
+**FASE 7 — verificador independiente (Opus xhigh, solo-lectura):** `ok:true, problemas:[]`. Confirmó alcance
+(69 archivos: 56 mecánicos vía `auto-fixers.py verify --base main` + 7 libres), ci-gate 0 ALTA, gate-pagina
+OK en las 7 páginas editadas a mano + muestreo, HTTP 200 + JSON-LD + canonical==og:url en las 63 páginas
+tocadas, hub de colonias con 641 entradas (0 duplicados, `las-coloradas` ×1, `santa-ines` ×0, su carpeta
+sigue en disco), `sw.js` con los 11 assets de precache verificados en vivo (200 cada uno), 0 SVG sin nombre
+accesible antes/después del fixer, 0 cambios de precio, email intacto, 0 páginas huérfanas.
+
+**FASE 8 — publicación:** merge `--no-ff` de la rama a main (`acee11e0`→`f2f5c092`), push OK, pre-push
+auto-indexó 58 URLs. Verificado en producción tras propagación: home/robots.txt/electricista-cerca-de-mi
+(title nuevo) → 200.
+
+**FASE 9 — aprendiz (commit `b5a451d8` directo a main):** 4 reglas nuevas en REGLAS.md (CONTENIDO/OVERCLAIM-
+CERO-FUGAS, LINKS/ARRAY-COLONIAS-HUB-DESINCRONIZADO-DE-DISCO, A11Y/SVG-ARIA-HIDDEN-CTA-CON-TEXTO-VISIBLE,
+INFRA/SW-PRECACHE-SIN-EL-RECURSO-LCP-REAL) + check 16 de `check-plantilla.py` ampliado (denylist de overclaim
+"cero riesgo" → también "cero fugas/fallas/errores"), probado caza-malo=3/3 e ignora-bueno=2/2, JSON válido
+tras el cambio.
+
+**Pendiente humano (recordatorio, no resuelto hoy):** `bk-d352f78a`/`bk-488681a1` (fuga "plomero" en 2
+artefactos NO-HTML, borrado bloqueado por el clasificador de seguridad desde 2026-08-02, sigue esperando tu
+autorización explícita) + 4 decisiones nuevas de hoy (ver el parte del correo).
+
 ## 2026-08-02 (rescate de la corrida 2026-08-01 + contraste WCAG completo) — PUBLICADO ✅
 Al arrancar, la sesión estaba en `auto/diario-20260801-2001`: la corrida del 08-01 había hecho 2
 commits (`40df28a4` + `b7852497`, 701 archivos — 6 fixers mecánicos + limpieza SEO) pero nunca
