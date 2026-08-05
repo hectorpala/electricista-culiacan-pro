@@ -59,11 +59,14 @@ body{
 **Font-faces obligatorios (en <style> inline):**
 ```css
 @font-face{font-family:'Inter';font-weight:400;src:url('../../assets/fonts/inter-400.woff2')}
-@font-face{font-family:'Inter';font-weight:500;src:url('../../assets/fonts/inter-500.woff2')}
-@font-face{font-family:'Inter';font-weight:600;src:url('../../assets/fonts/inter-600.woff2')}
-@font-face{font-family:'Montserrat';font-weight:700;src:url('../../assets/fonts/montserrat-700.woff2')}
+@font-face{font-family:'Inter';font-weight:500;src:url('../../assets/fonts/inter-400.woff2')}
+@font-face{font-family:'Inter';font-weight:600;src:url('../../assets/fonts/inter-400.woff2')}
+@font-face{font-family:'Montserrat';font-weight:700;src:url('../../assets/fonts/montserrat-800.woff2')}
 @font-face{font-family:'Montserrat';font-weight:800;src:url('../../assets/fonts/montserrat-800.woff2')}
 ```
+<!-- font-dedup 2026-07-26/2026-08-04: inter-500/inter-600/montserrat-700.woff2 eran duplicados
+     byte-a-byte de inter-400/montserrat-800.woff2. Los archivos duplicados se borraron; el
+     font-weight declarado se conserva pero la URL apunta al archivo real consolidado. -->
 
 **❌ PROHIBIDO:**
 - Usar otras fuentes
@@ -358,9 +361,9 @@ body{
 <style>
   /* Font-faces */
   @font-face{font-family:'Inter';font-weight:400;src:url('../../assets/fonts/inter-400.woff2')}
-  @font-face{font-family:'Inter';font-weight:500;src:url('../../assets/fonts/inter-500.woff2')}
-  @font-face{font-family:'Inter';font-weight:600;src:url('../../assets/fonts/inter-600.woff2')}
-  @font-face{font-family:'Montserrat';font-weight:700;src:url('../../assets/fonts/montserrat-700.woff2')}
+  @font-face{font-family:'Inter';font-weight:500;src:url('../../assets/fonts/inter-400.woff2')}
+  @font-face{font-family:'Inter';font-weight:600;src:url('../../assets/fonts/inter-400.woff2')}
+  @font-face{font-family:'Montserrat';font-weight:700;src:url('../../assets/fonts/montserrat-800.woff2')}
   @font-face{font-family:'Montserrat';font-weight:800;src:url('../../assets/fonts/montserrat-800.woff2')}
 
   /* Variables CSS */

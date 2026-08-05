@@ -136,7 +136,7 @@ El resto (badge 5.0/5, imagen hero, contacto, CTA, estructura completa) debe ser
 - Preloads exactos:
   ```html
   <link rel="preload" href="/assets/fonts/inter-400.woff2" ...>
-  <link rel="preload" href="/assets/fonts/montserrat-700.woff2" ...>
+  <link rel="preload" href="/assets/fonts/montserrat-800.woff2" ...>
   ```
   (Se rechaza cualquier preload a rutas inexistentes).
 
