@@ -532,7 +532,19 @@ def check_page(fpath, t, noindex, redirects):
         r'linear-gradient\(135deg,#[fF]97316 0%,#[eE]36414 100%\)'
         r'|linear-gradient\(135deg,#fba336 0%,#f97316 45%,#e36414 100%\)'
     )
-    n_old_gradient = len(OLD_GRADIENT.findall(t))
+    # 2026-08-04: excluye el falso positivo de una declaración de variable SIN uso —
+    # ej. --gradient-brand:linear-gradient(...) en :root cuando ningún selector del
+    # archivo la aplica (var(--gradient-brand) ausente). Detectado en blog/index.html:
+    # la variable estaba declarada pero .btn-primary no existía en el archivo, así que
+    # 0 elementos renderizaban ese gradiente. Solo cuenta si el match NO es una
+    # declaración de variable, o si la variable SÍ se usa en otro lugar del archivo.
+    usa_var_gradient = "var(--gradient-brand)" in t
+    n_old_gradient = 0
+    for m in OLD_GRADIENT.finditer(t):
+        es_declaracion_var = t[max(0, m.start() - 20):m.start()].endswith("--gradient-brand:")
+        if es_declaracion_var and not usa_var_gradient:
+            continue
+        n_old_gradient += 1
     if n_old_gradient:
         add("media", r, "a11y",
             "Gradiente naranja viejo de bajo contraste hardcodeado en .btn-primary (×%d) — 2.80-3.44:1, falla WCAG AA" % n_old_gradient,
