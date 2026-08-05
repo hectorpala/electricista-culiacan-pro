@@ -56,11 +56,11 @@ Crear o adaptar logo:
 Copiar estos archivos a `assets/fonts/`:
 ```
 assets/fonts/inter-400.woff2
-assets/fonts/inter-500.woff2
-assets/fonts/inter-600.woff2
-assets/fonts/montserrat-700.woff2
 assets/fonts/montserrat-800.woff2
 ```
+(Nota 2026-08-04: inter-500/600 y montserrat-700 eran duplicados byte-a-byte de inter-400/
+montserrat-800 y ya no existen en el repo — usar solo estos 2 archivos, con font-weight
+distinto en el @font-face pero la misma URL.)
 
 **Comando para copiar:**
 ```bash
