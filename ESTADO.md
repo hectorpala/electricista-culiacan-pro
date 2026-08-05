@@ -1,5 +1,75 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-08-04 (Auto Agente diario completo — blog/index.html sale de cuarentena + CSP Clarity + 6 arreglos + 20 hallazgos encolados) — PUBLICADO ✅
+Rama `auto/diario-20260804-2000`, 3 commits en la rama (`a0fa0370` arreglos+crecimiento,
+`89cae329` fix del CSP tras la 1ª pasada del verificador, `101723c0` backlog) → merge `--no-ff`
+a main (`ad6a25fe`) + commit de aprendizaje directo a main (`f773cb25`). 2 push exitosos.
+Pre-push auto-indexó 4 URLs. Verificado en producción: home/blog/iluminacion-led/como-prevenir-
+cortocircuitos → 200; tarjetas corregidas y CSP con clarity.ms confirmados en vivo con curl.
+
+**FASE 1 — health check:** servidor local; home/contacto/servicios/blog → 200.
+
+**FASE 3 — 9 revisores en paralelo (Opus xhigh, per model-router):** revisor-seo (11: 1 ALTA —
+5 tarjetas "zombie" en blog/index.html con título/imagen/enlace del artículo equivocado —, resto
+media/baja: overclaim "Ahorra 80%", sameAs de Maps roto, schema de costos mal formado, precios
+contradictorios en 5 fuentes, sitemap lastmod desincronizado otra vez), revisor-movil (2 media:
+botones flotantes tapan enlaces del footer en ~646 páginas, table-wrapper esconde más tabla de la
+necesaria), revisor-a11y (11, 0 ALTA: contraste `--brand` como texto en ~230 nodos/40 páginas —
+alcance real mayor al registrado en backlog —, `<main>` aún faltante en 32 páginas, popup de
+salida sin trampa de foco, navs sin aria-label, CSS crítico incompleto → texto invisible durante
+la carga), revisor-perf (10: 1 ALTA — CSP bloqueaba Microsoft Clarity en 46 páginas —, resto
+media/baja: mismatch de `sizes` en hero de 642 colonias, imagen de fondo duplicada invisible,
+archivos huérfanos servidos públicamente, iconos duplicados), revisor-links (6, 0 ALTA: enlaces a
+colonias noindex en 6 páginas, colonia huérfana santa-ines sin redirect, PWA shortcuts fuera de
+scope), revisor-gsc (10: veredicto CERRADO de colonias — 0/8 indexadas, 7 semanas vencida — más
+3 hubs nunca rastreados por Google, canibalización en servicios/electricista, sitemap fantasma
+404 aún registrado en GSC), revisor-indexabilidad (0, limpio, 77 URLs), revisor-produccion (1
+media, ya conocido: X-Frame-Options en meta), revisor-plantilla (34: 32 precio-en-body pre-
+existente/NEGOCIO.md, 1 gradiente falso-positivo en blog/index.html, 1 baja theme-color stub GSC).
+
+**FASE 5 — arreglado (8 puntos):** `blog/index.html` sale de CUARENTENA (141→251 tokens, párrafo
+editorial nuevo) + 5 tarjetas zombie corregidas (título/imagen/enlace ahora coinciden con el
+artículo real) + JSON-LD `blogPost` resincronizado + 2 `BlogPosting` que faltaban añadidos +
+`--gradient-brand` muerto eliminado. `_headers`: CSP amplía `script-src`/`connect-src` a
+`clarity.ms` — 1er intento incompleto (solo `www.clarity.ms` en `script-src`, pero el script real
+carga desde `scripts.clarity.ms`), detectado por el verificador en la 1ª pasada y corregido antes
+de publicar. `servicios/iluminacion-led`: "Ahorra 80%"→"Ahorra hasta 80%" (title/og/twitter/H1).
+`blog/como-prevenir-cortocircuitos-casa`: contraste `#C2410C`→`#7C2D12` sobre fondo azul claro.
+`servicios/electricista-colonias-culiacan`: `outline:none` del buscador→foco visible. `_redirects`:
+301 `santa-ines`→`santa-aynes`. 2 fonts duplicados borrados (ya sin referencias) + 3 docs
+actualizados. 20 hallazgos nuevos encolados en `BACKLOG.jsonl` (17 auto riesgo bajo/medio + 3
+requiere_humano: sameAs roto, contradicción de precios, sitemap fantasma en Search Console).
+
+**FASE 6 — crecer:** 0 páginas nuevas — la medición de GSC (7 semanas vencida) dio veredicto
+CERRADO: 0/8 colonias diferenciadas indexadas. Diferenciación de colonias PARADA. `check-huecos`
+limpio (0 huecos). 2 tareas de backlog cerradas (1 stale ya resuelta, 1 limpieza de fonts).
+
+**FASE 7 — verificador independiente (Opus xhigh, solo-lectura), 2 pasadas:** 1ª pasada `ok:false`
+— encontró que el CSP de Clarity quedó incompleto (ver arriba) + 3 docs con fonts borrados
+citados como plantilla. Corregido en un 2º commit (`89cae329`). 2ª pasada `ok:true` — confirmó con
+`curl` al tag real de Clarity que el nuevo CSP cubre todos los dominios, 0 `.html` tocados en el
+2º commit, ci-gate 0 ALTA, las 11 tarjetas de blog/index.html con overlap 1.00 título↔destino real,
+redirect de santa-ines seguro, 0 precios/tests/email tocados.
+
+**FASE 8 — publicación:** merge `--no-ff` (`a0fa0370`+`89cae329`+`101723c0`→`ad6a25fe`), push OK,
+pre-push auto-indexó 4 URLs. Verificado en producción tras propagación: 4 páginas tocadas → 200,
+tarjetas y CSP confirmados en vivo.
+
+**FASE 9 — aprendiz (commit `f773cb25` directo a main):** 5 reglas nuevas en REGLAS.md
+(CONTENIDO/TARJETAS-HUB-DESALINEADAS-DEL-DESTINO, INFRA/CSP-TERCEROS-VERIFICAR-SUBDOMINIOS-REALES-
+NO-ASUMIR, PIPELINE/CHECKER-FALSO-POSITIVO-VARIABLE-CSS-DECLARADA-SIN-USO —mecanizada en check
+11c—, CRECIMIENTO/COLONIAS-VEREDICTO-CERRADO-PARAR) + check-plantilla.py check 11c afinado
+(excluye variables CSS declaradas sin uso), probado caza-malo=1/ignora-bueno=0, JSON válido. 10
+líneas nuevas en HISTORIAL.jsonl.
+
+**Pendiente humano (nuevo hoy):** sameAs de Google Maps roto (necesito la URL real de "Compartir"
+del perfil), contradicción de precios en 5 fuentes distintas (necesito que definas UNA tabla
+canónica), sitemap fantasma 404 en Search Console (acción manual en el panel, no es código),
+confirmación de que se PARE la diferenciación de colonias (dato ya decidido en 2026-06-17, solo
+pido tu confirmación explícita del siguiente paso: ¿noindex del lote sin indexar o seguir
+esperando?). Recordatorio de corridas previas: `bk-d352f78a`/`bk-488681a1` (fuga "plomero" en 2
+artefactos NO-HTML) siguen esperando tu autorización para borrarse.
+
 ## 2026-08-03 (Auto Agente diario completo — 9 revisores + 10 arreglos + 2 fixers a11y nuevos) — PUBLICADO ✅
 Primera corrida del día que completó las 10 fases sin rescate previo. Rama `auto/diario-20260803-2001`,
 2 commits (`acee11e0` arreglos+crecimiento, `b5a451d8` aprendizaje) → merge `--no-ff` a main (`f2f5c092`)

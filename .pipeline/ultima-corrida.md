@@ -1,47 +1,46 @@
-# Auto Agente Electricista — parte del 2026-08-03
-**Resultado:** encontré 22, arreglé 10 · 6 para ti · 6 no pude arreglar solo · publicado
+# Auto Agente Electricista — parte del 2026-08-04
+**Resultado:** encontré 22, arreglé 8 · 4 para ti · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 22 cosas: arreglé 10 · 6 necesitan tu decisión · 6 no pude arreglar solo.
+Encontré 22 cosas: arreglé 8 · 4 necesitan tu decisión · 10 no pude arreglar solo (quedaron anotadas para las próximas corridas).
 
-## ✅ Arreglé (10)
-- El buscador de colonias de tu sitio tenía un error de datos: la colonia "Las Coloradas" no aparecía si alguien la buscaba (aunque su página sí existía), y en cambio salía dos veces un resultado para "Santa Inés" — uno con el nombre bien escrito y otro con un typo viejo. Corregido: ahora Las Coloradas sí aparece, y solo hay un resultado correcto para Santa Inés → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
-- La página de "Cambio de Cableado" prometía "garantía de cero fugas eléctricas" — una promesa absoluta que ningún electricista puede garantizar al 100%. La reescribí a algo real y verificable (garantía de 30 a 90 días respaldada por las pruebas que sí hacemos) → https://electricistaculiacanpro.mx/servicios/cambio-cableado-electrico/
-- La página de instalación de minisplit decía "10+ años de experiencia" mientras el resto del sitio dice "más de 15 años" — corregido para que diga lo mismo en todos lados → https://electricistaculiacanpro.mx/servicios/instalacion-minisplit/
-- El archivo que le dice a Google cómo recorrer tu sitio (robots.txt) traía una instrucción vieja que frenaba a los buscadores Bing y Yahoo a 1 página por segundo, sin ninguna razón (tu sitio es rápido y aguanta más). La quité → https://electricistaculiacanpro.mx/robots.txt
-- En la página de "Gracias" (la que ve alguien después de mandarte un mensaje), el texto se recortaba un poquito en celulares muy angostos (tipo iPhone SE viejo). Corregido → https://electricistaculiacanpro.mx/gracias/
-- El "acelerador" técnico de tu sitio (el que guarda una copia local para que cargue más rápido) estaba guardando la versión pesada de la foto principal en vez de la versión ligera y moderna que en realidad usan el 93% de los celulares. Ahora guarda la correcta.
-- En 50 páginas, arreglé un detalle de accesibilidad: los iconos junto a "WhatsApp: 667 392 2273" y "Llamar Ahora" confundían a las personas ciegas que usan lectores de pantalla (el lector anunciaba el ícono Y el texto por separado). Ahora solo lee el texto, como debe ser.
-- En 44 páginas, el separador "·" entre la calificación "4.8/5" y "Más de 150 clientes satisfechos" también se leía en voz alta sin necesidad — igual corregido para lectores de pantalla.
-- Dos páginas (precios y el listado de servicios) prometían "cotización gratis y sin costo de visita", pero la misma página explica que si se necesita ir a revisar en sitio, cuesta $200 (descontables si contratas). Ese contraste podía sentirse como engaño. Lo cambié a "cotización gratis por WhatsApp", que sí es 100% cierto → https://electricistaculiacanpro.mx/servicios/electricista-precios/ y https://electricistaculiacanpro.mx/servicios/
-- La página "Electricista Cerca de Mí" es la que la gente MÁS busca en Google de todo tu sitio, pero el título empezaba con "Electricista a Domicilio..." en vez de la frase exacta que la gente escribe. Reescribí el título y la descripción para que empiecen con "Electricista Cerca de Mí" → https://electricistaculiacanpro.mx/servicios/electricista-cerca-de-mi/
+## ✅ Arreglé (8)
+- La página de tu blog (el listado con todos los artículos) tenía 5 tarjetas que prometían un tema y llevaban a otro completamente distinto — por ejemplo, una decía "Bajones de luz" pero al hacer clic te llevaba al artículo de "¿Cuándo llamar a un electricista de emergencia?". Corregí las 5 para que el título, la foto y el enlace coincidan con el artículo real, y le agregué un párrafo de introducción para que la página no se viera tan vacía → https://electricistaculiacanpro.mx/blog/
+- El código que le da seguridad a tu sitio (se llama "política de seguridad de contenido") estaba bloqueando sin querer a Microsoft Clarity, la herramienta que graba cómo la gente usa tu página para saber si algo se traba. Lo desbloqueé — mi primer intento no funcionó del todo bien, mi propio verificador lo detectó y lo corregí antes de publicar nada → https://electricistaculiacanpro.mx/
+- La página de iluminación LED prometía "Ahorra 80%" en el título que aparece en Google, pero adentro de la página decía "hasta 80%" (una promesa fija en vez de "hasta cierto porcentaje"). Unifiqué todo a "hasta 80%" para no prometer de más → https://electricistaculiacanpro.mx/servicios/iluminacion-led/
+- En el artículo de cómo prevenir cortocircuitos, un texto naranja sobre fondo azul claro era difícil de leer para personas con baja visión. Lo oscurecí un poco para que se lea bien → https://electricistaculiacanpro.mx/blog/como-prevenir-cortocircuitos-casa/
+- El buscador de colonias había perdido el "marco" que le aparece a los botones cuando alguien navega con el teclado (en vez del mouse) — sin eso, una persona que depende del teclado no sabe en qué casilla está parada. Se lo devolví → https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/
+- Una página vieja de una colonia (con un error de dedo en el nombre desde hace tiempo) se había quedado sin ningún enlace que llevara a ella, flotando sola en el sitio. Puse un reenvío automático hacia la página correcta para que nadie caiga en una página huérfana.
+- Borré 2 archivos de tipografía duplicados que ya no usaba nadie (ocupaban espacio sin ningún beneficio) y actualicé 3 documentos internos que todavía los mencionaban, para que no se vuelvan a copiar por error en el futuro.
+- Uno de mis propios robots de revisión estaba marcando una "alerta falsa" en el blog (un color declarado en el código pero nunca usado de verdad en la página). Le enseñé a distinguir cuándo algo declarado se usa de verdad, para que deje de generar ruido.
 
-## ⚠️ Encontré pero NO pude arreglar solo (6)
-- **32 páginas todavía muestran precios en el texto** (ej. "$200", "$8,000") aunque la regla de tu negocio dice que nunca deben verse precios en el cuerpo de la página (solo en los datos que lee Google). Es un cambio grande y de contenido — prefiero que tú decidas si quieres que los quite todos de un jalón o poco a poco.
-- **51 nombres de colonia en el buscador de tu sitio están sin acentos** (ej. "Culiacan Tres Rios" en vez de "Culiacán Tres Ríos"). Es un cambio de texto en muchos lugares a la vez — lo dejé en la lista de trabajo para hacerlo con cuidado y no cometer un error de tildes.
-- **11 páginas de colonias tienen la misma descripción copiada** (solo cambia el nombre de la colonia) en vez de un texto propio de esa zona — necesitan que alguien escriba contenido único para cada una, lo dejé encolado.
-- **29 páginas de colonias** le dicen a Google que tu negocio se llama "Electricista Culiacán Pro - Tres Ríos" (o el nombre de cada colonia) en vez de simplemente "Electricista Culiacán Pro" en sus datos técnicos — es un detalle técnico que puede confundir a Google sobre cuál es tu negocio real. Ya está identificado y en la lista para corregirlo.
-- Hay **imágenes repetidas** guardadas con nombres distintos en 6 artículos del blog (casi 1MB de descarga extra sin necesidad) — lo dejé anotado para limpiarlo con cuidado.
-- El resto de detalles menores que encontré hoy (títulos largos, alguna imagen genérica, algunos enlaces internos por mejorar) los anoté todos en mi lista de trabajo interna — no se pierden, se van resolviendo en las próximas corridas.
+## ⚠️ Encontré pero NO pude arreglar solo (10)
+- Los botones flotantes de WhatsApp y Llamar tapan los enlaces de "Términos/Contacto/Privacidad" al final de casi 650 páginas cuando alguien llega hasta abajo en el celular — necesita un ajuste de espacio que toca muchas páginas a la vez, lo dejé anotado para hacerlo con cuidado.
+- En unas 40 páginas, cierto texto naranja (preguntas frecuentes, testimonios, la tabla de precios) tiene poco contraste contra el fondo — se lee, pero cuesta trabajo a personas con baja visión. Es un cambio grande, lo dejé para una corrida dedicada.
+- En 33 páginas, durante el primer instante de carga (antes de que termine de cargar el diseño), un botón de "Más información" y otro de WhatsApp se ven casi invisibles por una fracción de segundo. No afecta después de que carga todo, pero lo voy a corregir.
+- El botón "Cerrar" de la ventana emergente de salida no recibe el foco automáticamente cuando alguien navega solo con el teclado — tendría que tabular a ciegas para encontrarlo.
+- En 46 páginas, los menús de navegación no tienen "nombre" para los lectores de pantalla que usan las personas ciegas, así que anuncian "navegación, navegación" sin decir cuál es cuál.
+- En las 642 páginas de colonias, la foto del encabezado a veces se descarga dos veces por un detalle técnico de tamaños — no se nota a simple vista, pero desperdicia datos del celular del visitante.
+- Encontré archivos viejos (una copia sin comprimir del código, y hasta 2 copias completas de tu página principal) que siguen visibles públicamente aunque nadie los usa — no son peligrosos, pero es basura digital que vale la pena limpiar.
+- Unos iconos de la app están duplicados (mismo dibujo, archivos repetidos) y el ícono más grande pesa casi 100KB cuando podría pesar la cuarta parte.
+- 6 enlaces del sitio siguen apuntando a colonias que Google decidió no mostrar en sus resultados — no rompen nada, pero es tráfico que Google ignora de todos modos.
+- En 4 artículos del blog, un dato técnico interno (el "costo estimado" que le mando a Google en un formato especial) está mal escrito como texto en vez de número — Google simplemente lo ignora, no se ve en la página.
 
 ## 🌱 Mejoré / agregué (0)
-Sin páginas nuevas hoy: revisé si faltaba alguna página y no encontré ningún hueco. Sobre crear más páginas de colonias, encontré algo importante — lo explico abajo en "Necesito que decidas".
+Sin páginas nuevas hoy: revisé Google Search Console con datos reales y no encontré ningún hueco de búsqueda que no estés cubriendo ya (fuera de temas que decidiste no ofrecer, como eléctrico automotriz). No inventé páginas porque eso dañaría tu posicionamiento.
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Cuando prohíbo una frase tipo "cero riesgo", tengo que prohibir también sus primas ("cero fugas", "cero fallas", "cero errores") — hoy se me había escapado "cero fugas" en una página. Ya amplié la regla para cazar toda la familia de una vez.
-- El buscador de colonias de tu sitio es una TERCERA lista (además de las carpetas reales y el directorio visible) que también se puede desincronizar — hoy lo estaba. La anoté para revisarla cada vez que se activa o desactiva una colonia.
-- Cuando un ícono decorativo va al lado de texto que ya dice todo (como "Llamar Ahora"), el ícono debe quedar "invisible" para los lectores de pantalla — hice esto en 50 páginas con cuidado de no tocar los pocos casos donde el ícono SÍ es la única pista (esos los dejé para revisión).
-- El "acelerador" técnico del sitio (service worker) hay que revisarlo comparando con lo que la página realmente pide primero, no de memoria — así encontré que guardaba la foto equivocada.
+- Cuando una página tiene "tarjetas" que enlazan a otros artículos del blog, voy a comparar siempre el título de la tarjeta contra el título real del artículo al que lleva — hoy encontré 5 que no coincidían y llevaban meses así.
+- Al desbloquear una herramienta externa (como Microsoft Clarity) en el "candado de seguridad" del sitio, voy a revisar primero a qué direcciones exactas se conecta esa herramienta, en vez de asumir que es solo una — hoy mi primer intento se quedó corto y mi propio verificador lo cachó antes de publicar.
+- Uno de mis robots de revisión daba una alarma falsa por un color declarado pero nunca usado de verdad en una página. Ya le enseñé a distinguir "está escrito" de "se usa de verdad".
+- Confirmé con datos duros de Google (7 semanas de medición, como acordamos) que diferenciar más colonias pequeñas no está funcionando: ninguna de las 8 que se probaron quedó indexada. Ya frené esa estrategia hasta que tú decidas el siguiente paso.
+(ya van 131 reglas aprendidas en total)
 
-(ya van 115 reglas aprendidas en total)
-
-## ⏳ Necesito que tú decides (6)
-- **Sobre seguir creando páginas de colonias:** ya pasaron las 7 semanas que dijiste para medir si funcionaba. Los datos de Google muestran que de 10 colonias revisadas, solo 1 quedó realmente indexada (buscable en Google). Mi recomendación es PARAR de crear más colonias y enfocar el esfuerzo en las páginas que sí te traen visitas reales (como "cerca de mí" o "a domicilio"). ¿Confirmas que paramos?
-- Tu página principal enlaza a 3 colonias (Chapultepec, Montebello, Stanza Toscana) que Google decidió NO mostrar en sus resultados. ¿Quieres que las promueva a "colonias importantes" con más contenido, o que quite esos 3 enlaces de la portada?
-- Encontré 2 archivos técnicos viejos en tu sitio (uno es una copia de tu página principal de hace meses, otro es un fragmento suelto) que están públicos sin necesidad. No los borro sin tu ok — solo dime si los quito o los dejo.
-- Dos páginas de tu sitio (Términos y Privacidad) no tienen los botones de WhatsApp/Llamar ni el menú de navegación que sí tiene el resto del sitio. ¿Es a propósito (son solo texto legal) o prefieres que las iguale al resto?
-- Google todavía tiene registrado en su panel un archivo de tu sitio que ya no existe (un "mapa" viejo). Esto no se arregla en el código, se quita directamente en el panel de Google — te dejo el paso a paso si quieres que te ayude a hacerlo juntos.
-- **Recordatorio de ayer (sigue pendiente):** los 2 archivos con la marca "Plomero" (de tu sitio hermano) que encontré el 2 de agosto siguen ahí — el sistema de seguridad no me deja borrarlos sin tu autorización directa. Avísame y los quito.
+## ⏳ Necesito que tú decidas (4)
+- El enlace de tu ficha de Google (Google Maps/Google Business) que tiene el sitio está roto — en vez de llevar a tu ficha, lleva a la página principal de Google. Necesito que me pases el enlace correcto de "Compartir" de tu ficha para arreglarlo — no puedo adivinarlo.
+- Encontré 5 lugares distintos del sitio con precios diferentes para el mismo servicio (por ejemplo, el diagnóstico aparece como $200 en un lado y $300 en otro). No toco precios sin tu autorización: necesito que me digas cuál es la tabla correcta y de ahí actualizo todo lo demás.
+- Hay un "mapa de tu sitio" viejo registrado en el panel de Google que ya no existe (da error 404) y lleva casi 2 meses ensuciando el reporte de Google. No es algo que se arregle con código — hay que entrar al panel de Search Console y borrarlo manualmente ahí; si quieres te explico paso a paso.
+- Como acordamos hace semanas, si a las 3-4 semanas las colonias nuevas no se indexaban en Google, había que parar de crearlas. Ya pasaron 7 semanas y confirmé con datos: ninguna de las 8 que probamos quedó indexada. Ya detuve la creación de más colonias nuevas — solo necesito que confirmes si quieres que además "apague" (sin borrar) las páginas de colonias que Google decidió no mostrar, o que las deje como están mientras se sigue midiendo.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; le avisé a Google para que lo muestre (58 páginas reindexadas automáticamente).
+Sí, todo revisado y en vivo; le avisé a Google para que lo muestre.
