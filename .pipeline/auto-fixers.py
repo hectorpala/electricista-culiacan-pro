@@ -39,8 +39,10 @@ BRAND_THEME = "#E36414"   # theme-color de la home (fuente de verdad)
 # enriquezca (diferenciar-colonia.py / decisor-negocio); al cerrar su tarea de backlog,
 # QUITARLAS de esta lista para que los fixers pendientes (skip-link, etc.) las alcancen.
 CUARENTENA = {
-    "blog/index.html",
     "contacto/index.html",
+    # blog/index.html: enriquecido 2026-08-04 (párrafo editorial único, 141->251 tokens) +
+    # 5 tarjetas zombie corregidas (título/imagen/JSON-LD apuntaban al artículo equivocado) +
+    # 2 blogPost faltantes añadidos al schema. Sale de CUARENTENA.
     # campestre, las-americas, lazaro-cardenas, libertad, nuevo-culiacan: diferenciadas
     # 2026-07-24 (contenido único real, ≥150 tokens, Jaccard <0.44 vs hermanas) — salen de
     # CUARENTENA en el mismo changeset que las enriquece.

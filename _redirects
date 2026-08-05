@@ -105,3 +105,6 @@
 
 # Consolidación: /directorio/ duplicado -> hub de colonias
 /servicios/electricista-colonias-culiacan/directorio/    /servicios/electricista-colonias-culiacan/    301!
+
+# Consolidación: santa-ines (typo histórico, huérfana desde 2026-08-03) -> santa-aynes (canonical real)
+/servicios/electricista-colonias-culiacan/santa-ines/    /servicios/electricista-colonias-culiacan/santa-aynes/    301!
