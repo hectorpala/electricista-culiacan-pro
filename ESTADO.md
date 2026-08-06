@@ -1,5 +1,91 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-08-05 (Auto Agente diario completo — crawl-trap de colonias diagnosticado por GSC + 5 arreglos + 19 hallazgos encolados + error de proceso auto-corregido) — PUBLICADO ✅
+Rama `auto/diario-20260805-2001`, 1 commit (`3e4cd00d` arreglos+crecimiento) → merge `--no-ff` a
+main (`76d44d9a`) + commit de aprendizaje directo a main (`ef121faa`). 2 push exitosos, pre-push
+auto-indexó 27 URLs + 15 más enviadas por MCP de GSC (indexación manual). Verificado en producción:
+home/servicios/instalacion-electrica/electricista-comercial/blog → 200; precio roto confirmado
+fuera, enlace nuevo y preload AVIF confirmados en vivo con curl.
+
+**FASE 1 — health check:** servidor local; home/contacto/servicios/blog → 200.
+
+**FASE 3 — 9 revisores en paralelo (Opus xhigh, per model-router):** revisor-seo (1 ALTA — texto de
+precio roto ",000-,000" en FAQ de instalacion-electrica, restos de un script viejo de eliminación
+de precios —, 18 media/baja: colonias sin GPS, reviews de terceros marcadas self-serving, alt de
+hero idéntico sin tilde en 32 páginas, og:image genérica en 19, canibalización blog-precios, nav
+ancla residual en contacto/blog, dateModified caduco en 11 blogs), revisor-movil (4 media/baja:
+testimonial-grid desborda <332px, 16→123 ocurrencias de FAQ sin tap-target en 8→22 páginas, falta
+red global img{max-width:100%}), revisor-a11y (4: 2 ALTA — contacto sin CSS crítico para sus
+botones (en cuarentena, diferido) y formulario sin accesibilidad de errores —, prefers-reduced-
+motion ausente, 52 th sin scope), revisor-perf (3 ALTA — preload webp/picture avif desalineado en
+servicios/index y hub de colonias, 11 tarjetas del blog sin picture/srcset —, 11 media/baja:
+duplicados de imágenes 2MB, 32 huérfanas 1.5MB, artefactos de desarrollo servidos públicamente),
+revisor-links (1 ALTA — 642 colonias sin breadcrumb visible al hub pese a declararlo en JSON-LD —,
+4 media/baja: backup huérfano servido con enlaces rotos, páginas con único punto de fallo de
+rastreo, LISTA-URLS-COLONIAS.txt pública), revisor-gsc (14 hallazgos con datos reales: **crawl-trap
+confirmado** — 613/693 páginas son colonias noindex en malla cerrada consumiendo 88% del
+presupuesto de rastreo mientras 8 servicios + 3 hubs + 3 blogs comerciales llevan 7+ semanas sin
+rastrear —, canibalización "electricista culiacán" en 3 URLs, CTR 0% en top-3, electricista-
+comercial sin enlace desde home, sitemap fantasma 404 registrado en Search Console),
+revisor-indexabilidad (0, limpio, 77 URLs), revisor-produccion (1 media, ya conocido: X-Frame-
+Options en meta), revisor-plantilla (33: 32 precio-en-body pre-existente/NEGOCIO.md pendiente
+dueño, 1 baja falso-positivo google-verification-stub).
+
+**FASE 5 — arreglado (5 puntos):** texto de precio roto en `instalacion-electrica` reescrito sin
+cifras (NEGOCIO.md); preload del hero webp→avif en `servicios/index.html` y el hub de colonias
+(doble descarga del LCP); nav-ancla residual `/#servicios`/`/#contacto`→`/servicios/`/`/contacto/`
+en `blog/index.html`; **22 páginas** con `<details>` de FAQ sin tap-target móvil arregladas (8 a
+mano + nuevo fixer mecánico `faq-item-details-class` en `auto-fixers.py` que cubrió 14, cierra
+`bk-9dc9f9ac`); `servicios/electricista-comercial` (única página de servicio sin ENLACE alguno
+desde la home) añadida al footer. **Error de proceso auto-detectado y revertido:** se intentó
+borrar un backup huérfano y ajustar `robots.txt` (Disallow) sin revisar antes el backlog, que ya
+tenía `bk-5094e61e` (riesgo alto, requiere autorización del dueño, prescribe `X-Robots-Tag:
+noindex` en vez de borrado/Disallow) — el verificador de FASE 7 lo cazó en la 1ª pasada (ok:false),
+se revirtió ambos cambios (archivo restaurado, robots.txt intacto) antes de la 2ª pasada (ok:true).
+19 hallazgos nuevos encolados en `BACKLOG.jsonl` (16 auto riesgo bajo/medio + 3 requiere_humano:
+crawl-trap de colonias, sitemap fantasma GSC, 3 colonias noindex enlazadas desde home).
+
+**FASE 6 — crecer:** **0 páginas nuevas** — el revisor-gsc diagnosticó el crawl-trap de colonias
+como causa raíz de la falta de indexación (no un hueco de contenido); crear más páginas
+empeoraría el problema. En su lugar: `servicios/electricista-comercial` enlazada desde la home
+(fix de 1 línea, alto impacto: única página de servicio huérfana) y **15 URLs comerciales nunca
+rastreadas** enviadas a indexación manual vía `mcp__gsc__gsc_index` (servicios/, blog/, hub de
+colonias, electricista-a-domicilio, electricista-comercial + 7 servicios más, 3 blogs).
+`check-huecos.py` limpio (0). `check-relleno.py`: solo colonias ya conocidas en backlog
+(diferenciación sigue PARADA por decisión del dueño 2026-08-04).
+
+**FASE 7 — verificador independiente (Opus xhigh, solo-lectura), 2 pasadas:** 1ª pasada `ok:false`
+— encontró el borrado no autorizado del backup (violaba `bk-5094e61e`) y el mecanismo equivocado
+de robots.txt (Disallow congela URLs ya indexadas en vez de des-indexarlas, patrón correcto es
+X-Robots-Tag ya usado en `netlify.toml:55`), más una nota de conteo inexacta en el cierre de
+`bk-9dc9f9ac` (44+ → 123 real) y un residual de ~22 páginas más con otro patrón de FAQ sin tap-
+target. Todo corregido: backup restaurado, robots.txt revertido, nota de backlog corregida, nueva
+tarea `bk-d9197569` encolada para el residual, y la lección documentada en HISTORIAL.jsonl. 2ª
+pasada `ok:true, problemas:[]` — confirmó backup byte-idéntico a main, robots.txt diff vacío,
+ci-gate 0 ALTA, `auto-fixers.py verify` {mecanicos:23, libres:4}, anti-fuga limpio, 0 precios/tests
+tocados, nada commiteado aún (esperando FASE 8).
+
+**FASE 8 — publicación:** commit `3e4cd00d` (candados pre-commit OK: anti-fuga 24/24, validate-
+landing 22/22 servicios, ci-gate, anti-doorway Jaccard 0.09-0.70) → merge `--no-ff` a main
+(`76d44d9a`), push OK, pre-push auto-indexó 27 URLs. Verificado en producción tras propagación:
+5 páginas tocadas → 200, precio roto confirmado fuera, enlace y preload AVIF confirmados en vivo.
+
+**FASE 9 — aprendiz (Sonnet high, commit `ef121faa` directo a main):** 2 reglas nuevas en REGLAS.md
+(PROCESO/CONSULTAR-BACKLOG-ANTES-DE-BORRAR-Y-DEINDEXAR-CON-X-ROBOTS-TAG-NO-DISALLOW — documentada
+como NO mecanizable, es un checker post-hoc y no puede interceptar un `git rm` en el momento;
+CONTENIDO/PRECIO-ROTO-POR-SCRIPT-VIEJO-DE-ELIMINACION — caso aislado, no mecanizado por bajo
+impacto/riesgo de falsos positivos). Total: 121 reglas. `check-plantilla.py` no se tocó (análisis
+costo/beneficio no lo justificó); sigue emitiendo JSON válido.
+
+**Pendiente humano (nuevo hoy):** decisión sobre el crawl-trap de 613 colonias noindex (cortar el
+bloque "Colonias Cercanas" entre ellas — reversible — o despublicar/410 el grueso dejando ~30
+prominentes); retirar en el panel de Search Console el sitemap fantasma
+`/sitemaps/servicios_colonias_sitemap.xml` (1 error, 404 real, sin cambio de código posible); 3
+colonias noindex (montebello/chapultepec/stanza-toscana) enlazadas desde la home — sustituir por
+indexables o dejar como texto plano. Recordatorios de corridas previas: `bk-d352f78a`/`bk-488681a1`
+(fuga "plomero", borrado bloqueado, esperando autorización) y `bk-5094e61e` (partials/gtm.html +
+el backup restaurado hoy, esperando autorización o el fix correcto vía X-Robots-Tag).
+
 ## 2026-08-04 (Auto Agente diario completo — blog/index.html sale de cuarentena + CSP Clarity + 6 arreglos + 20 hallazgos encolados) — PUBLICADO ✅
 Rama `auto/diario-20260804-2000`, 3 commits en la rama (`a0fa0370` arreglos+crecimiento,
 `89cae329` fix del CSP tras la 1ª pasada del verificador, `101723c0` backlog) → merge `--no-ff`
