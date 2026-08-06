@@ -719,7 +719,32 @@ def _fix_table_wrapper_margin(h):
         '@media(max-width:768px){.table-wrapper{margin-right:76px;padding-right:0}}', h)
 
 
+# ── acordeones FAQ <details><summary> sin tap-target de 44px en móvil (revisor-móvil
+#    mov-002/bk-9dc9f9ac, 2026-07-23/2026-08-05): el <details> inline-styled (background/padding/
+#    border-radius/box-shadow/border-left, IDÉNTICO a la regla base de la clase CSS .faq-item ya
+#    servida en las 3 hojas) no lleva class="faq-item", así que pierde la regla MÓVIL específica
+#    `.faq-item summary{padding:1rem 1.25rem;min-height:48px;display:flex;align-items:center}`
+#    (dentro de @media(max-width:768px)) y el <summary> queda en ~28.5px de alto. Añadir la clase
+#    no cambia nada en escritorio (el inline ya gana sobre la regla base de .faq-item por
+#    especificidad/orden) y arregla el tap-target en móvil sin tocar CSS. ──
+_FAQ_DETAILS_NOCLASS = re.compile(
+    r'<details style="background:#fff;padding:1\.5rem;margin-bottom:1rem;border-radius:12px;'
+    r'box-shadow:0 2px 8px rgba\(0,0,0,0\.1\);border-left:4px solid var\(--brand\)">'
+)
+
+def _det_faq_item_details(h):
+    return bool(_FAQ_DETAILS_NOCLASS.search(h))
+
+def _fix_faq_item_details(h):
+    return _FAQ_DETAILS_NOCLASS.subn(
+        '<details class="faq-item" style="background:#fff;padding:1.5rem;margin-bottom:1rem;'
+        'border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-left:4px solid var(--brand)">',
+        h)
+
+
 FIXERS = [
+    ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
+     "mecanico", _det_faq_item_details, _fix_faq_item_details),
     ("gradient-brand-inline", "--gradient-brand duplicado en el <style> crítico inline (44 páginas) con el mismo contraste insuficiente que el asset fixer gradient-brand-contrast → mismos tonos #C2410C→#7C2D12",
      "mecanico", _det_gradient_brand_inline, _fix_gradient_brand_inline),
     ("gradient-btn-primary-inline", ".btn-primary con el gradiente naranja viejo hardcodeado DIRECTO (sin variable --gradient-brand) en el <style> crítico inline, 2-stop o 3-stop (695 páginas) → mismos tonos aprobados #C2410C→#7C2D12",
