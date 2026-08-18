@@ -1,5 +1,16 @@
 # ESTADO — Electricista Culiacán
 
+## 2026-08-17 (Auto Agente diario — 6 mejoras verificadas, publicación detenida por árbol contaminado) — NO PUBLICADO
+Rama `auto/diario-20260817-2000`. Health check local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. GSC funcional: propiedad correcta listada; 130 clics, 5,738 impresiones, CTR 2.27%, posición 9.9 (+4% clics, +8% impresiones). Producción verificada con Chrome fuera del sandbox: solo el aviso medio conocido de X-Frame-Options en meta.
+
+**Revisión:** `check-contenido.py` analizó 694 páginas sin hallazgos; `check-indexabilidad.py` limpio; `check-plantilla.py` 0 altas y 33 medias/bajas conocidas de precios pendientes del dueño; auto-fixers y limpiar-huerfanos no encontraron cambios seguros. GSC no mostró hueco para página nueva: la demanda principal ya tiene URL; automotriz se ignoró por NEGOCIO.md y colonias siguen pausadas por el veredicto de indexación.
+
+**Arreglado/mejorado:** overclaim “sin riesgo de descarga” en calentador eléctrico reescrito a reducción de riesgo; checker mecanizado para impedir la frase; H1 del hub de colonias alineado con “Electricista por Colonia en Culiacán”; retirados `streetAddress: Servicio a domicilio` y `postalCode: 80000` inventados de cuatro blogs. Se cerraron seis tareas del backlog (tres ya resueltas/stale y tres ejecutadas). 0 páginas nuevas.
+
+**Verificación final de solo lectura:** `ci-gate.py` 0 ALTA; gate-pagina en los 6 HTML: todos pasan, Jaccard máximo 0.61; HTTP local 200; 0 borrados, 0 tests tocados, 0 precios cambiados, email canónico y anti-fuga limpios. Veredicto JSON: `{"ok":false,"problemas":["El diff contra main incluye cambios ajenos preexistentes en automatización/costos y PROPUESTAS.md; el alcance no puede certificarse como una sola intención."]}`.
+
+**Publicación:** detenida. Antes de esta corrida ya estaban modificados 11 archivos de automatización/costos, `PROPUESTAS.md` y dos archivos no rastreados. Se preservaron sin editar ni incluir en el cambio diario. Ante el diff mezclado, no se hizo merge ni push. Pendiente humano vigente: decidir crawl-trap de colonias y retirar el sitemap fantasma desde el panel de Search Console.
+
 ## 2026-08-05 (Auto Agente diario completo — crawl-trap de colonias diagnosticado por GSC + 5 arreglos + 19 hallazgos encolados + error de proceso auto-corregido) — PUBLICADO ✅
 Rama `auto/diario-20260805-2001`, 1 commit (`3e4cd00d` arreglos+crecimiento) → merge `--no-ff` a
 main (`76d44d9a`) + commit de aprendizaje directo a main (`ef121faa`). 2 push exitosos, pre-push

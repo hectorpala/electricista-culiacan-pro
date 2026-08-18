@@ -630,14 +630,15 @@ def check_page(fpath, t, noindex, redirects):
     # --- 16. overclaim absoluto / garantía financiera (media, seo): claims no sostenibles
     #         tipo "cero riesgo", "retorno garantizado", "se pagan solos" — familia de los ya
     #         prohibidos ("sin riesgos para tu familia"/"se pagan solos", remediados 2026-06-17).
-    #         NO se incluye "sin riesgo" a secas: tiene usos legítimos (instrucción de
-    #         seguridad, "sin riesgo de descarga" tras instalar tierra física).
+    #         "sin riesgo" a secas puede aparecer en instrucciones honestas, pero
+    #         "sin riesgo de descarga" promete seguridad absoluta tras una reparación.
     for pat_oc, etiqueta in (
         (r"cero\s+riesgo", "cero riesgo"),
         (r"riesgo\s+cero", "riesgo cero"),
         (r"cero\s+fugas", "cero fugas"),
         (r"cero\s+fallas", "cero fallas"),
         (r"cero\s+errores", "cero errores"),
+        (r"sin\s+riesgo\s+de\s+descarga", "sin riesgo de descarga"),
         (r"retorno\s+garantizado", "retorno garantizado"),
         (r"se\s+pagan\s+solos?", "se pagan solos"),
         (r"se\s+paga\s+solo\b", "se paga solo"),
