@@ -218,7 +218,7 @@
                 throw new Error('Netlify form submission failed');
             }
         } catch (error) {
-            alert('Formulario enviado. Te redirigiremos a WhatsApp.');
+            alert('No pudimos enviar el formulario. Te llevamos a WhatsApp para atenderte de inmediato.');
             const whatsappMessage = `Hola! Solicito cotización de servicios eléctricos:\n\n` +
                                   `Nombre: ${nombre}\n` +
                                   `Teléfono: ${telefono}\n` +
