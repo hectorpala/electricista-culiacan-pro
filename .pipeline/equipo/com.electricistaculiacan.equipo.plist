@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.electricistaculiacan.equipo</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/launchd/bin/EquipoElectricista</string>
+    <string>todo</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>21</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/openclaw/Library/Logs/mantener-sitio/equipo-launchd.out</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/openclaw/Library/Logs/mantener-sitio/equipo-launchd.err</string>
+</dict>
+</plist>

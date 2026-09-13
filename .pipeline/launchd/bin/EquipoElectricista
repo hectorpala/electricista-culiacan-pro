@@ -1,0 +1,4 @@
+#!/bin/bash
+# Wrapper con NOMBRE PROPIO para launchd/BTM (macOS bloquea LaunchAgents que ejecutan /bin/bash
+# directo; con este nombre el item se registra como "EquipoElectricista").
+exec /bin/bash "/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/equipo/correr.sh" "$@"
