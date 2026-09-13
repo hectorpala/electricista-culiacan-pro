@@ -299,6 +299,44 @@ def _fix_skiplink(h):
     return h3, 1
 
 
+# ── .whatsapp-cta-button / .service-cta usados en el markup pero SIN su regla en el <style>
+#    crítico inline (33 páginas: index.html + 32 de servicio) — MISMA FAMILIA que .sr-only
+#    2026-06-16 / .hero-cta-buttons 2026-06-17 / .floating-btn 2026-06-20 / hamburguesa-aria
+#    2026-06-21: el botón CTA de WhatsApp con ícono ("Solicitar por WhatsApp") y el enlace
+#    .service-cta de las tarjetas de servicio (.card.card--img) dependen de reglas que solo
+#    viven en styles.css (servido, cacheado immutable) y no se reflejan en el CSS crítico
+#    inline de cada página — durante la ventana de carga async del CSS externo el botón/tarjeta
+#    se renderiza sin estilo (CTA roto visualmente). Reglas copiadas TAL CUAL de styles.css
+#    (sin los :hover, que no aplican al crítico). Verificado: las 33 páginas afectadas
+#    necesitan AMBOS selectores a la vez (ninguna tiene uno sin el otro), así que se apenda
+#    el bloque completo en una sola pasada. ──
+_SERVICE_CTA_CSS = (
+    '.whatsapp-cta-button{display:inline-flex;align-items:center;gap:0.75rem;padding:1rem 2rem;'
+    'background:#FFFFFF;color:#075E54;font-size:1.125rem;font-weight:700;text-decoration:none;'
+    'border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.3s ease;'
+    'white-space:nowrap}'
+    '.whatsapp-cta-button svg{flex-shrink:0}'
+    '.service-cta{font-size:0.9rem;margin-top:0.5rem}'
+    '.card.card--img .service-cta strong{display:none !important}'
+    '.card.card--img .service-cta{display:block !important;margin:auto 1.5rem 1.5rem 1.5rem !important;'
+    'margin-top:auto !important;padding:0.75rem 1.25rem !important;background:#C2410C !important;'
+    'color:#ffffff !important;text-align:center !important;border-radius:8px !important;'
+    'font-weight:600 !important;font-size:0.95rem !important;text-decoration:none !important;'
+    'transition:background 0.2s ease !important}'
+)
+
+def _det_service_cta_critical(h):
+    st = "\n".join(re.findall(r'<style[^>]*>(.*?)</style>', h, re.S))
+    wa_falta = bool(re.search(r'class="[^"]*whatsapp-cta-button', h)) and '.whatsapp-cta-button' not in st
+    sc_falta = bool(re.search(r'class="[^"]*service-cta', h)) and '.service-cta' not in st
+    return wa_falta or sc_falta
+
+def _fix_service_cta_critical(h):
+    if "</style>" not in h:
+        return h, 0
+    return h.replace("</style>", _SERVICE_CTA_CSS + "</style>", 1), 1
+
+
 # ── skip-link :focus nunca entra al viewport (revisor-móvil mov-003, 2026-07-26): el <a
 #    class="skip-link"> lleva `top:-40px` en el ATRIBUTO style inline, que por especificidad
 #    gana a la regla de clase `.skip-link:focus{top:0;...}` del <style> crítico — un usuario
@@ -787,6 +825,8 @@ FIXERS = [
      "mecanico", _det_svg_float, _fix_svg_float),
     ("skip-link", "página sin skip-link → réplica exacta del de la home tras <body> + regla :focus en el CSS crítico + ancla en el primer main/section tras el header",
      "mecanico", _det_skiplink, _fix_skiplink),
+    ("service-cta-critical-css", ".whatsapp-cta-button/.service-cta usados en el markup pero sin su regla en el <style> crítico inline (33 páginas: index.html + 32 servicios) → apenda las reglas reales de styles.css (sin :hover) antes del </style>",
+     "mecanico", _det_service_cta_critical, _fix_service_cta_critical),
     ("maps-iframe-title", "iframe de Google Maps sin title (nombre accesible) → title=\"Mapa de ubicación en Culiacán\"",
      "mecanico", _det_maps_iframe, _fix_maps_iframe),
     ("gtm-iframe-title", "iframe noscript de Google Tag Manager sin title (nombre accesible) → title=\"Google Tag Manager\"",
