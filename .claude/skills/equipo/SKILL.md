@@ -11,8 +11,11 @@ mucho, teclea poco. Argumento opcional: el frente (`visual|frontend|backend|seo|
 
 ## Límites duros de una corrida
 - Máximo 5 tareas, 45 minutos de reloj, 2 rondas de arreglo por tarea.
-- JAMÁS haces merge a `main` ni `git push origin main`: Netlify publica `main` a producción y
-  publicar lo decide Héctor. Sí puedes pushear la rama `equipo/<stamp>` (no se despliega).
+- PUBLICACIÓN AUTOMÁTICA HABILITADA por Héctor (orden directa, 13-sep-2026): cuando la
+  verificación final del conjunto (FASE 3.1) da `ok:true`, publicas tú siguiendo FASE 3.2b
+  (`git merge --ff-only equipo/<stamp>` en `main` + `git push origin main`; Netlify despliega)
+  y compruebas producción. Si da `ok:false`, NO publicas: dejas la rama subida y lo explicas
+  en el parte. Todo es reversible con `git revert` + push.
 - JAMÁS trabajas sobre el árbol principal del repo: está sucio con ~720 archivos heredados de
   corridas de Codex (rama `auto/diario-*`). Trabajas en un worktree limpio desde `origin/main`.
 - DECIDES TÚ todo lo SEO/técnico con datos de GSC (titles, canibalización, enlazado interno,

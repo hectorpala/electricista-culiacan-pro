@@ -35,6 +35,7 @@ ALLOWED=(
   "Bash(git fetch:*)" "Bash(git worktree:*)" "Bash(git -C:*)" "Bash(git status:*)"
   "Bash(git diff:*)" "Bash(git log:*)" "Bash(git add:*)" "Bash(git commit:*)"
   "Bash(git checkout -- :*)" "Bash(git revert:*)" "Bash(git push -u origin equipo/:*)"
+  "Bash(git merge --ff-only:*)" "Bash(git push origin main)" "Bash(git push:*)"
   "Bash(python3:*)" "Bash(node:*)" "Bash(curl:*)" "Bash(grep:*)" "Bash(ls:*)"
   "Bash(cat:*)" "Bash(head:*)" "Bash(tail:*)" "Bash(wc:*)" "Bash(date:*)"
   "Bash(kill:*)" "Bash(xmllint:*)" "Bash(npm run:*)"
