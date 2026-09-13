@@ -1,3 +1,10 @@
+## 2026-09-13 — EQUIPO NUEVO, corrida 20260913-1147: 5 arreglos verificados, rama subida, NO PUBLICADO (Héctor mergea)
+- Primer ciclo del equipo único (/equipo): pensador opus → 5 tareas; ejecutores sonnet en paralelo; probadores haiku (sonnet en T5); coordinador califica. 16 reportes, 0 reprobados, 2 lecciones escritas.
+- Commits en `equipo/20260913-1147` (desde origin/main limpio): T3 ed089bda netlify Link · T4 7218a6e9 blog picture 4/11 · T1 64d6a969 CSS crítico CTA 33 págs (fixer service-cta-critical-css) · T2 bee27b44 publisher fuera de 6 Review · T5 9d41a818 formulario accesible + bump main.min.js?v=202609131222 en 678 págs + sw v33.
+- Hallazgos: JS sin versionar desde 22-ago (caché inmutable servía JS viejo, corregido); main.js y main.min.js divergidos (bk-e977a123, decidido reconstruir fuente); contacto/ en cuarentena conserva ?v= viejo.
+- Decisiones del coordinador encoladas: bk-4d137878 retitular /contacto/ (canibalización), bk-4e024e09 hub de colonias solo enlaza indexables. Precios visibles siguen en cola humana.
+- Parte completo: `.pipeline/equipo/partes/parte-20260913-1147.md`. Publicar = merge ff de la rama a main (comando en el parte).
+
 # ESTADO — Electricista Culiacán
 
 ## 2026-08-17 (Auto Agente diario — 6 mejoras verificadas, publicación detenida por árbol contaminado) — NO PUBLICADO

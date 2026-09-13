@@ -58,3 +58,4 @@ push/reset`, ni `>`/`>>`/`sed -i`/`rm`/`mv` sobre el repo. Bash es para consulta
 Máximo 5 tareas, ordenadas por impacto/esfuerzo. Menos tareas bien definidas > muchas vagas.
 
 ## Lecciones (las escribe el coordinador; no borrar)
+- [2026-09-13] ESPECIFICACION: antes de escribir un criterio que exige N elementos convertidos, verifica con `ls` que los ASSETS que la tarea necesita existen (ej. T4 pidió 11 `<picture>` con variante -420w.webp y solo 4 imágenes la tenían; el ejecutor solo pudo hacer 4). Si faltan, la tarea debe incluir generarlos o el criterio debe contar solo los posibles.

@@ -15,7 +15,12 @@ mucho, teclea poco. Argumento opcional: el frente (`visual|frontend|backend|seo|
   publicar lo decide Héctor. Sí puedes pushear la rama `equipo/<stamp>` (no se despliega).
 - JAMÁS trabajas sobre el árbol principal del repo: está sucio con ~720 archivos heredados de
   corridas de Codex (rama `auto/diario-*`). Trabajas en un worktree limpio desde `origin/main`.
-- Precios, borrar páginas, redirects, negocio → `requiere_humano`. Sin excepción.
+- DECIDES TÚ todo lo SEO/técnico con datos de GSC (titles, canibalización, enlazado interno,
+  crawl budget, noindex/canonical, redirects técnicos, reconciliar assets, qué tarea conviene
+  para tener más visitas y más llamadas). Anotas cada decisión con su razón y su métrica de
+  éxito en el parte, y la encolas como tarea auto-ejecutable (`riesgo` ≤ medio) para esta o la
+  siguiente corrida. SOLO van a `requiere_humano`: precios visibles, borrar una página que recibe
+  impresiones/clics o está en sitemap, y cualquier cambio de giro fuera de `NEGOCIO.md`.
 - Si un agente reporta "hecho" sin evidencia, lo tratas como NO hecho.
 
 ## FASE 0 — Preparar (tú, sin agentes)
@@ -63,6 +68,14 @@ Cruza evidencia: si el ejecutor dice `hecha` y el probador `PASA`, tú igual mir
    Cada falla se trata como falla de la tarea correspondiente (una ronda de arreglador más) o
    se revierte ese commit con `git revert`.
 2. `git -C "$WT" push -u origin equipo/$STAMP`.
+2b. PUBLICAR solo si Héctor habilitó la publicación automática en "Límites duros" (mientras
+   la regla diga que NO publicas, este paso se salta y el parte trae el comando de merge).
+   Si está habilitada y la verificación final fue `ok:true`: desde un worktree limpio de main
+   (`git worktree add /tmp/electricista-main-$STAMP main`), `git merge --ff-only equipo/$STAMP`
+   y `git push origin main`. Espera ~2 min y comprueba producción: HTTP 200 en `/`,
+   `/servicios/emergencia-24-7/` y `/blog/`, y que UNA evidencia concreta de cada tarea se ve
+   en `curl -s https://electricistaculiacanpro.mx/...` (ej. el token nuevo de main.min.js).
+   Si algo falla en producción: `git revert` del commit culpable + push, y al parte.
 3. Mata el servidor local. `git worktree remove "$WT"` SOLO si todo quedó commiteado y pusheado;
    si no, déjalo y anótalo en el parte.
 4. Cierra en el backlog las tareas hechas: `gestor-backlog.py close --id X --estado hecho --commit SHA`.
@@ -117,3 +130,9 @@ Luego agrega 5-8 líneas en `ESTADO.md` (árbol principal) con el resumen y term
 - [2026-09-13] CONTEXTO: el árbol principal del repo vive en una rama `auto/diario-*` con ~720
   archivos sin commit heredados del Auto Agente de Codex; `main` == `origin/main` == producción.
   Nunca partir de ese árbol: siempre worktree desde `origin/main`.
+- [2026-09-13] HERRAMIENTA: si la sesión del coordinador arrancó FUERA del repo, los
+  `subagent_type: equipo-*` no existen (Agent responde "not found"). Lanzar entonces
+  `subagent_type: general-purpose` con `model:` igual al del agente y con esta primera línea
+  en el prompt: "Eres el agente equipo-<rol>. PRIMERO lee tu definición completa en
+  <ruta>/.claude/agents/equipo-<rol>.md y obedécela al pie de la letra". En corrida
+  desatendida (`correr.sh` hace `cd` al repo) sí se registran; la prueba de humo lo confirmó.

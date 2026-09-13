@@ -53,3 +53,4 @@ cual (no la escondas, no la "explicas").
 "hecha" solo si la evidencia lo demuestra. Decir "listo" sin salida de comando es reprobar.
 
 ## Lecciones (las escribe el coordinador; no borrar)
+- [2026-09-13] HERRAMIENTA: `python3 .pipeline/auto-fixers.py run --solo <fixer> --apply` SIN rutas explícitas entra en `full_run` y dispara el auto-repair de bump de `main.min.js` (?v= en ~679 HTML + sw.js + js-bump-state.json). Pasa SIEMPRE las rutas de los archivos de tu tarea al final del comando; si un comando tocó archivos fuera de tu lista, revierte con `git checkout -- <rutas>` antes de reportar (el ejecutor de T1 lo hizo bien).
