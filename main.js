@@ -89,11 +89,14 @@
     const form = document.getElementById('contact-form');
     if (!form) return;
 
+    // Tomamos el control de la validación (mensajes accesibles propios)
+    // en vez del bocadillo nativo del navegador.
+    form.noValidate = true;
+
     const nombreField = document.getElementById('nombre');
     const telefonoField = document.getElementById('telefono');
     const emailField = document.getElementById('email');
     const mensajeField = document.getElementById('mensaje');
-    const submitBtn = form.querySelector('button[type="submit"]');
 
     const validators = {
         nombre: (value) => value.trim().length >= 2,
@@ -102,60 +105,147 @@
         mensaje: (value) => value.trim().length >= 10
     };
 
+    const errorMessages = {
+        nombre: 'Escribe tu nombre completo (mínimo 2 caracteres).',
+        telefono: 'El teléfono debe tener 10 dígitos.',
+        email: 'Escribe un email válido.',
+        mensaje: 'Describe tu problema o servicio (mínimo 10 caracteres).'
+    };
+
+    const fieldsByKey = {
+        nombre: nombreField,
+        telefono: telefonoField,
+        email: emailField,
+        mensaje: mensajeField
+    };
+
+    // Estilos mínimos de accesibilidad, inyectados una sola vez desde JS
+    // (no se toca ninguna hoja CSS).
+    if (!document.getElementById('form-a11y-css')) {
+        const a11yStyle = document.createElement('style');
+        a11yStyle.id = 'form-a11y-css';
+        a11yStyle.textContent =
+            '.field-error{color:#C2410C;font-size:0.9rem;margin-top:0.25rem;display:block;}' +
+            '.field-error:empty{display:none;}' +
+            '.form-errors{color:#C2410C;font-size:0.9rem;margin:0 0 1rem;}' +
+            '.form-errors:empty{display:none;}';
+        document.head.appendChild(a11yStyle);
+    }
+
+    // Un <span class="field-error"> por campo, dentro de su contenedor.
+    const errorElsByKey = {};
+    Object.keys(fieldsByKey).forEach(function(key) {
+        const field = fieldsByKey[key];
+        const wrapper = field.closest('.form-field') || field.parentNode;
+        const errorId = key + '-error';
+        let errorEl = document.getElementById(errorId);
+        if (!errorEl) {
+            errorEl = document.createElement('span');
+            errorEl.className = 'field-error';
+            errorEl.id = errorId;
+            wrapper.appendChild(errorEl);
+        }
+        field.setAttribute('aria-describedby', errorId);
+        errorElsByKey[key] = errorEl;
+    });
+
+    // Región resumen de errores al inicio del formulario.
+    let formErrors = form.querySelector('.form-errors');
+    if (!formErrors) {
+        formErrors = document.createElement('div');
+        formErrors.className = 'form-errors';
+        formErrors.setAttribute('role', 'alert');
+        formErrors.setAttribute('aria-live', 'polite');
+        form.insertBefore(formErrors, form.firstChild);
+    }
+
+    let submitAttempted = false;
+
     function validateField(field, validatorKey) {
         const value = field.value;
         const fieldWrapper = field.closest('.form-field');
         const isValid = validators[validatorKey](value);
+        const errorEl = errorElsByKey[validatorKey];
 
-        if (value.length === 0) {
+        if (value.length === 0 && !submitAttempted) {
             fieldWrapper.classList.remove('valid', 'invalid');
+            field.removeAttribute('aria-invalid');
+            errorEl.textContent = '';
         } else if (isValid) {
             fieldWrapper.classList.remove('invalid');
             fieldWrapper.classList.add('valid');
+            field.setAttribute('aria-invalid', 'false');
+            errorEl.textContent = '';
         } else {
             fieldWrapper.classList.remove('valid');
             fieldWrapper.classList.add('invalid');
+            field.setAttribute('aria-invalid', 'true');
+            errorEl.textContent = errorMessages[validatorKey];
         }
 
-        updateSubmitButton();
         return isValid;
     }
 
-    function isFormValid() {
-        return validators.nombre(nombreField.value) &&
-               validators.telefono(telefonoField.value) &&
-               validators.email(emailField.value) &&
-               validators.mensaje(mensajeField.value);
-    }
-
-    function updateSubmitButton() {
-        if (isFormValid()) {
-            submitBtn.disabled = false;
-            submitBtn.style.opacity = '1';
-            submitBtn.style.cursor = 'pointer';
-        } else {
-            submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.6';
-            submitBtn.style.cursor = 'not-allowed';
+    // Tras un intento de envío fallido, si el usuario corrige todos los
+    // campos sin volver a enviar, el resumen accesible también se limpia.
+    function refreshFormErrorsSummary() {
+        if (!submitAttempted) return;
+        const stillInvalid = Object.keys(fieldsByKey).some(function(key) {
+            return !validators[key](fieldsByKey[key].value);
+        });
+        if (!stillInvalid) {
+            formErrors.textContent = '';
         }
     }
 
-    nombreField.addEventListener('input', () => validateField(nombreField, 'nombre'));
-    nombreField.addEventListener('blur', () => validateField(nombreField, 'nombre'));
+    nombreField.addEventListener('input', () => { validateField(nombreField, 'nombre'); refreshFormErrorsSummary(); });
+    nombreField.addEventListener('blur', () => { validateField(nombreField, 'nombre'); refreshFormErrorsSummary(); });
 
     telefonoField.addEventListener('input', () => {
         telefonoField.value = telefonoField.value.replace(/\D/g, '');
         validateField(telefonoField, 'telefono');
+        refreshFormErrorsSummary();
     });
-    telefonoField.addEventListener('blur', () => validateField(telefonoField, 'telefono'));
+    telefonoField.addEventListener('blur', () => { validateField(telefonoField, 'telefono'); refreshFormErrorsSummary(); });
 
-    emailField.addEventListener('input', () => validateField(emailField, 'email'));
-    emailField.addEventListener('blur', () => validateField(emailField, 'email'));
+    emailField.addEventListener('input', () => { validateField(emailField, 'email'); refreshFormErrorsSummary(); });
+    emailField.addEventListener('blur', () => { validateField(emailField, 'email'); refreshFormErrorsSummary(); });
 
-    mensajeField.addEventListener('input', () => validateField(mensajeField, 'mensaje'));
-    mensajeField.addEventListener('blur', () => validateField(mensajeField, 'mensaje'));
+    mensajeField.addEventListener('input', () => { validateField(mensajeField, 'mensaje'); refreshFormErrorsSummary(); });
+    mensajeField.addEventListener('blur', () => { validateField(mensajeField, 'mensaje'); refreshFormErrorsSummary(); });
 
-    updateSubmitButton();
+    // Al enviar: si algo es inválido, bloquea el envío, muestra el resumen
+    // accesible y mueve el foco al primer campo con error. Si todo es
+    // válido, deja pasar el envío tal como hoy (lo maneja el otro listener).
+    form.addEventListener('submit', function(e) {
+        submitAttempted = true;
+
+        const results = {
+            nombre: validateField(nombreField, 'nombre'),
+            telefono: validateField(telefonoField, 'telefono'),
+            email: validateField(emailField, 'email'),
+            mensaje: validateField(mensajeField, 'mensaje')
+        };
+
+        const allValid = results.nombre && results.telefono && results.email && results.mensaje;
+
+        if (!allValid) {
+            e.preventDefault();
+            if (typeof e.stopImmediatePropagation === 'function') {
+                e.stopImmediatePropagation();
+            }
+            formErrors.textContent = 'Hay campos con errores: corrige la información marcada antes de enviar.';
+            const firstInvalidKey = Object.keys(results).filter(function(key) {
+                return !results[key];
+            })[0];
+            if (firstInvalidKey) {
+                fieldsByKey[firstInvalidKey].focus();
+            }
+            return false;
+        }
+
+        formErrors.textContent = '';
+    });
 })();
 
 // Multi-layer lead capture: Netlify Forms + localStorage + GA4 + WhatsApp
