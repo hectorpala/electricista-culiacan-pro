@@ -852,6 +852,121 @@ def _fix_colonia_breadcrumb_visible(h):
     return h4, 1
 
 
+# ── enlace interno a /servicios/emergencia-24-7/ faltante en 30/32 páginas de servicio
+#    (bk-b08aec58): esa página tiene la mayor intención comercial del sitio pero solo 2 de
+#    32 páginas de servicio la enlazan desde su propio bloque "Servicios de Electricista en
+#    Culiacán" (<section id="servicios"><div class="grid">…tarjetas…</div></section>).
+#    Añade UNA tarjeta más al final del grid, clonando EXACTAMENTE la estructura de las
+#    vecinas (a.card.card--img > div.service-card > figure.media-box > picture >
+#    source+img > h3 > p > ul.service-list > span.service-cta), con copy propio de
+#    emergencia ("30-60 min" permitido aquí por ser el contexto real de emergencia, ya usado
+#    en la tarjeta vecina "Emergencias Eléctricas"). Sin precios. Scope implícito por
+#    contenido: solo dispara si la página tiene la sección id="servicios" con su grid de
+#    tarjetas y NO contiene ya "emergencia-24-7" (así servicios/index.html sin esa sección,
+#    servicios/emergencia-24-7/ y servicios/electricista-colonias-culiacan/** —que no usan
+#    este bloque— nunca matchean). El prefijo relativo (../../) se detecta del propio bloque
+#    en vez de asumirlo, por si alguna página vecina usara otro. ──
+_SERVICIOS_SECTION_RE = re.compile(r'<section class="section" id="servicios">.*?</section>', re.S)
+_GRID_TAIL_RE = re.compile(r'</a>(\s*</div>\s*</div>\s*)</section>\Z', re.S)
+_REL_PREFIX_RE = re.compile(r'(\.\./\.\./|\./|/)(?=assets/images/optimizadas/)')
+
+_EMERGENCIA_CARD_TPL = (
+    '                <a href="/servicios/emergencia-24-7/" class="card card--img">\n'
+    '                    <div class="service-card">\n'
+    '                        <figure class="media-box">\n'
+    '                            <picture>\n'
+    '                                <source type="image/webp" srcset="%(p)sassets/images/optimizadas/emergencia-electrica-culiacan-420w.webp 420w, %(p)sassets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w" sizes="(max-width:768px) 100vw, 420px">\n'
+    '                                <img src="%(p)sassets/images/optimizadas/emergencia-electrica-culiacan-420w.webp"\n'
+    '                                     srcset="%(p)sassets/images/optimizadas/emergencia-electrica-culiacan-420w.webp 420w, %(p)sassets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w"\n'
+    '                                     sizes="(max-width:768px) 100vw, 420px"\n'
+    '                                     alt="Electricista de emergencia 24 horas en Culiacán"\n'
+    '                                     width="420" height="235"\n'
+    '                                     loading="lazy" decoding="async">\n'
+    '                            </picture>\n'
+    '                        </figure>\n'
+    '                    </div>\n'
+    '                    <h3>Electricista 24 Horas</h3>\n'
+    '                    <p>Apagón repentino, corto circuito u olor a quemado. Atendemos emergencias eléctricas las 24 horas, con llegada en 30-60 minutos a tu domicilio en Culiacán.</p>\n'
+    '                    <ul class="service-list">\n'
+    '                        <li>Apagones y cortos circuitos</li>\n'
+    '                        <li>Atención inmediata las 24 horas</li>\n'
+    '                    </ul>\n'
+    '                    <span class="service-cta">Más Información →</span>\n'
+    '                </a>'
+)
+
+def _det_enlace_emergencia_servicios(h):
+    if 'emergencia-24-7' in h:
+        return False
+    m = _SERVICIOS_SECTION_RE.search(h)
+    if not m:
+        return False
+    return bool(_GRID_TAIL_RE.search(m.group(0)))
+
+def _fix_enlace_emergencia_servicios(h):
+    if 'emergencia-24-7' in h:
+        return h, 0
+    m = _SERVICIOS_SECTION_RE.search(h)
+    if not m:
+        return h, 0
+    section = m.group(0)
+    tail = _GRID_TAIL_RE.search(section)
+    if not tail:
+        return h, 0
+    pref_m = _REL_PREFIX_RE.search(section)
+    prefix = pref_m.group(1) if pref_m else '../../'
+    card = _EMERGENCIA_CARD_TPL % {'p': prefix}
+    cut = tail.start(0) + len('</a>')
+    new_section = section[:cut] + '\n' + card + section[cut:]
+    h2 = h[:m.start()] + new_section + h[m.end():]
+    return h2, 1
+
+
+# ── <picture class="hero-background"> de las 642 páginas de colonia (bk-360e9303): el
+#    <link rel="preload"> del hero declara imagesizes="(max-width:480px) 360px,
+#    (max-width:768px) 480px, 1200px" (los breakpoints reales del hero) pero los 2
+#    <source> del <picture> siguen con sizes="100vw" heredado de una plantilla vieja →
+#    el navegador cree que la imagen ocupa el 100% del viewport y descarga una variante
+#    más grande de la que realmente pinta, además de no coincidir con lo que el preload
+#    ya adelantó (doble descarga en viewports comunes). index.html y servicios/*
+#    (no-colonia) ya usan el mismo valor en preload y <picture>. Fix: copia el valor de
+#    imagesizes de la propia página (no hardcodeado) a TODOS los sizes= dentro del
+#    <picture class="hero-background">, incluido el <img> si trajera uno. Scope
+#    implícito por contenido: el hub (.../electricista-colonias-culiacan/index.html) ya
+#    tiene sizes==imagesizes, así que nunca dispara. ──
+_COLONIA_HERO_PICTURE_RE = re.compile(r'(<picture class="hero-background">)(.*?)(</picture>)', re.S)
+_COLONIA_HERO_IMAGESIZES_RE = re.compile(r'imagesizes="([^"]*)"')
+_COLONIA_HERO_SIZES_ATTR_RE = re.compile(r'sizes="([^"]*)"')
+
+def _det_colonia_hero_sizes(h):
+    m_img = _COLONIA_HERO_IMAGESIZES_RE.search(h)
+    if not m_img:
+        return False
+    m_pic = _COLONIA_HERO_PICTURE_RE.search(h)
+    if not m_pic:
+        return False
+    sizes_vals = _COLONIA_HERO_SIZES_ATTR_RE.findall(m_pic.group(2))
+    if not sizes_vals:
+        return False
+    return any(v != m_img.group(1) for v in sizes_vals)
+
+def _fix_colonia_hero_sizes(h):
+    m_img = _COLONIA_HERO_IMAGESIZES_RE.search(h)
+    if not m_img:
+        return h, 0
+    m_pic = _COLONIA_HERO_PICTURE_RE.search(h)
+    if not m_pic:
+        return h, 0
+    imagesizes = m_img.group(1)
+    inner = m_pic.group(2)
+    new_inner, n = _COLONIA_HERO_SIZES_ATTR_RE.subn(lambda m: 'sizes="%s"' % imagesizes, inner)
+    if n == 0 or new_inner == inner:
+        return h, 0
+    new_pic = m_pic.group(1) + new_inner + m_pic.group(3)
+    h2 = h[:m_pic.start()] + new_pic + h[m_pic.end():]
+    return h2, 1
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -921,6 +1036,10 @@ FIXERS = [
      "mecanico", _det_rating_divider, _fix_rating_divider),
     ("colonia-breadcrumb-visible", "página de colonia (bk-c8e7857e/bk-11769dce) con BreadcrumbList en JSON-LD pero sin ningún <a> visible al hub (noindex,follow SÍ transmite rastreo) → barra visible Inicio›Colonias›<Nombre> extraída del propio JSON-LD (@graph/array plano/pretty-printed) + CSS de emergencia-24-7 + hero padding-top 100px→40px",
      "mecanico", _det_colonia_breadcrumb_visible, _fix_colonia_breadcrumb_visible),
+    ("enlace-emergencia-servicios", "página de servicio (30/32, bk-b08aec58) cuyo bloque \"Servicios de Electricista en Culiacán\" (grid de tarjetas) no enlaza /servicios/emergencia-24-7/ (mayor intención comercial del sitio) → añade una tarjeta más al final del grid, clonando la estructura de las vecinas, con copy propio de emergencia",
+     "mecanico", _det_enlace_emergencia_servicios, _fix_enlace_emergencia_servicios),
+    ("colonia-hero-sizes", "página de colonia (642, bk-360e9303) con sizes=\"100vw\" en los <source> del <picture class=\"hero-background\"> mientras el <link rel=preload> del mismo hero ya declara imagesizes con los breakpoints reales → copia ese imagesizes (leído de la propia página) a los sizes del <picture>, evitando la doble descarga de variantes del hero",
+     "mecanico", _det_colonia_hero_sizes, _fix_colonia_hero_sizes),
 ]
 
 
