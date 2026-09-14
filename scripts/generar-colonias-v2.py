@@ -66,6 +66,16 @@ def generate_page(template, nombre, slug):
     )
     content = content.replace(old_links, new_links)
 
+    # El template (10-de-abril) ya trae el breadcrumb visible Inicio›Colonias›Nombre
+    # (bk-c8e7857e/bk-11769dce, fixer colonia-breadcrumb-visible de auto-fixers.py); el
+    # replace(TEMPLATE_NAME, nombre) de arriba también sustituye el texto dentro de
+    # <span class="breadcrumb-current">, así que las colonias nuevas nacen con el breadcrumb
+    # sin tocar nada más. Aserción defensiva por si el template pierde el bloque.
+    if 'class="breadcrumb"' not in content:
+        raise RuntimeError(
+            'Template sin breadcrumb visible: corre .pipeline/auto-fixers.py '
+            '--solo colonia-breadcrumb-visible sobre %s antes de generar' % TEMPLATE_SLUG)
+
     return content
 
 

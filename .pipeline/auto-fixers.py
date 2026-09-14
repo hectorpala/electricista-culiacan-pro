@@ -780,6 +780,78 @@ def _fix_faq_item_details(h):
         h)
 
 
+# ── breadcrumb visible faltante en las 642 páginas de colonia (bk-c8e7857e/bk-11769dce): cada
+#    colonia YA declara el BreadcrumbList en JSON-LD (schema.org) pero no tiene ningún <a>
+#    visible al hub de colonias — con 'noindex, follow' el enlace SÍ transmite rastreo, así
+#    que perderlo es enlazado interno desperdiciado. Extrae Inicio/Colonias/<Nombre> del propio
+#    JSON-LD de la página (soporta las 3 variantes vistas: @graph, array plano y
+#    pretty-printed/indentado) e inserta la barra visible en la unión exacta
+#    '</nav>\n<header class="hero">' (idéntica en 642/642) + su CSS, copiado tal cual del
+#    bloque "Breadcrumb Styles" de servicios/emergencia-24-7/index.html (líneas 121-166), al
+#    <style> crítico inline + reduce el padding-top del .hero (100px→40px: la barra ya separa
+#    del nav fijo). Scope IMPLÍCITO vía contenido: solo dispara si el propio BreadcrumbList
+#    tiene position 2 name="Colonias" justo antes de position 3 — el hub
+#    (servicios/electricista-colonias-culiacan/index.html) tiene position 2 name="Servicios",
+#    así que nunca matchea (no hace falta mirar la ruta). Sin itemprop/itemscope: el JSON-LD ya
+#    declara el BreadcrumbList, no se duplica structured data. ──
+_COLONIA_BC_NAME3 = re.compile(
+    r'\{\s*"@type":\s*"ListItem",\s*"position":\s*2,\s*"name":\s*"Colonias"[^}]*\}\s*,\s*'
+    r'\{\s*"@type":\s*"ListItem",\s*"position":\s*3,\s*"name":\s*"((?:[^"\\]|\\.)*)"'
+)
+_COLONIA_BC_JUNCTION = '</nav>\n<header class="hero">'
+_COLONIA_HERO_PADDING_OLD = ('.hero{min-height:80vh;position:relative;overflow:hidden;display:flex;'
+                             'align-items:center;justify-content:center;text-align:center;'
+                             'padding:100px 16px 60px}')
+_COLONIA_HERO_PADDING_NEW = ('.hero{min-height:80vh;position:relative;overflow:hidden;display:flex;'
+                             'align-items:center;justify-content:center;text-align:center;'
+                             'padding:40px 16px 60px}')
+# CSS copiado tal cual (minificado) de servicios/emergencia-24-7/index.html líneas 121-166.
+_COLONIA_BC_CSS = (
+    '.breadcrumb-wrapper{background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:0.75rem 0;'
+    'margin-top:80px;position:relative;z-index:10}'
+    '.breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;list-style:none;'
+    'font-size:0.875rem;line-height:1.4;color:#64748b}'
+    '.breadcrumb li{display:flex;align-items:center;gap:0.35rem}'
+    '.breadcrumb-link{color:#C2410C;text-decoration:none;transition:color 0.2s;'
+    'display:inline-flex;align-items:center;min-height:44px}'
+    '.breadcrumb-link:hover{color:#ea580c;text-decoration:underline}'
+    '.breadcrumb-separator{color:#cbd5e0;user-select:none}'
+    '.breadcrumb-current{color:#475569;font-weight:500}'
+)
+
+def _colonia_html_escape(s):
+    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+def _det_colonia_breadcrumb_visible(h):
+    if 'class="breadcrumb"' in h:
+        return False
+    if _COLONIA_BC_JUNCTION not in h or "</style>" not in h:
+        return False
+    return bool(_COLONIA_BC_NAME3.search(h))
+
+def _fix_colonia_breadcrumb_visible(h):
+    if 'class="breadcrumb"' in h:
+        return h, 0
+    m = _COLONIA_BC_NAME3.search(h)
+    if not m or _COLONIA_BC_JUNCTION not in h or "</style>" not in h:
+        return h, 0
+    nombre = _colonia_html_escape(m.group(1))
+    bloque = (
+        '<div class="breadcrumb-wrapper"><div class="container"><nav aria-label="Breadcrumb">'
+        '<ol class="breadcrumb"><li><a href="/" class="breadcrumb-link">Inicio</a>'
+        '<span class="breadcrumb-separator" aria-hidden="true">&#x203A;</span></li>'
+        '<li><a href="/servicios/electricista-colonias-culiacan/" class="breadcrumb-link">Colonias</a>'
+        '<span class="breadcrumb-separator" aria-hidden="true">&#x203A;</span></li>'
+        '<li><span class="breadcrumb-current" aria-current="page">%s</span></li></ol></nav></div></div>'
+    ) % nombre
+    h2 = h.replace(_COLONIA_BC_JUNCTION, "</nav>\n" + bloque + '<header class="hero">', 1)
+    if h2 == h:
+        return h, 0
+    h3, _ = re.subn(re.escape(_COLONIA_HERO_PADDING_OLD), _COLONIA_HERO_PADDING_NEW, h2, count=1)
+    h4 = h3.replace("</style>", _COLONIA_BC_CSS + "</style>", 1)
+    return h4, 1
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -847,6 +919,8 @@ FIXERS = [
      "mecanico", _det_svg_cta, _fix_svg_cta),
     ("rating-divider-aria-hidden", "span.rating-divider ('·' del badge de reseñas, bajo contraste 1.33:1 pero decorativo) sin aria-hidden → aria-hidden=true",
      "mecanico", _det_rating_divider, _fix_rating_divider),
+    ("colonia-breadcrumb-visible", "página de colonia (bk-c8e7857e/bk-11769dce) con BreadcrumbList en JSON-LD pero sin ningún <a> visible al hub (noindex,follow SÍ transmite rastreo) → barra visible Inicio›Colonias›<Nombre> extraída del propio JSON-LD (@graph/array plano/pretty-printed) + CSS de emergencia-24-7 + hero padding-top 100px→40px",
+     "mecanico", _det_colonia_breadcrumb_visible, _fix_colonia_breadcrumb_visible),
 ]
 
 
