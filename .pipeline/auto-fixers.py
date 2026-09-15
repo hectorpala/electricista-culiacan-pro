@@ -967,6 +967,33 @@ def _fix_colonia_hero_sizes(h):
     return h2, 1
 
 
+# ── franja vacía entre el nav fijo y el breadcrumb (674 páginas: 32 servicios + 642
+#    colonias) — el bloque .breadcrumb-wrapper del <style> crítico inline trae
+#    margin-top:80px heredado de la plantilla hermana (compensaba un nav más alto que el
+#    de este sitio); medido: nav bottom real 78-94px (<1024) / 118px (>=1024), body
+#    padding-top 80px. 80px deja un hueco de 42-82px bajo el nav. Se baja a 16px (móvil)
+#    + un @media(min-width:1024px) a 40px (escritorio), dejando el breadcrumb pegado al
+#    nav (0-20px de hueco) sin solaparlo. Expandido en servicios, minificado en colonias;
+#    el regex captura ambas variantes (bloque sin llaves anidadas).
+_BREADCRUMB_GAP_RE = re.compile(r'\.breadcrumb-wrapper\s*\{[^}]*\}')
+_BREADCRUMB_GAP_MARKER = '.breadcrumb-wrapper{margin-top:40px}'
+
+def _det_breadcrumb_gap(h):
+    if _BREADCRUMB_GAP_MARKER in h:
+        return False
+    m = _BREADCRUMB_GAP_RE.search(h)
+    if not m:
+        return False
+    return bool(re.search(r'margin-top:\s*80px', m.group(0)))
+
+def _fix_breadcrumb_gap(h):
+    def repl(m):
+        block = m.group(0)
+        new_block = re.sub(r'margin-top:\s*80px', lambda mm: mm.group(0).replace('80px', '16px'), block, count=1)
+        return new_block + '@media(min-width:1024px){.breadcrumb-wrapper{margin-top:40px}}'
+    return _BREADCRUMB_GAP_RE.subn(repl, h, count=1)
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -1040,6 +1067,8 @@ FIXERS = [
      "mecanico", _det_enlace_emergencia_servicios, _fix_enlace_emergencia_servicios),
     ("colonia-hero-sizes", "página de colonia (642, bk-360e9303) con sizes=\"100vw\" en los <source> del <picture class=\"hero-background\"> mientras el <link rel=preload> del mismo hero ya declara imagesizes con los breakpoints reales → copia ese imagesizes (leído de la propia página) a los sizes del <picture>, evitando la doble descarga de variantes del hero",
      "mecanico", _det_colonia_hero_sizes, _fix_colonia_hero_sizes),
+    ("breadcrumb-gap-nav", "franja vacía entre el nav fijo y el breadcrumb (674 páginas: 32 servicios + 642 colonias) por .breadcrumb-wrapper{margin-top:80px} heredado de la plantilla hermana → 16px + @media(min-width:1024px){margin-top:40px}, pegando el breadcrumb al nav sin solaparlo",
+     "mecanico", _det_breadcrumb_gap, _fix_breadcrumb_gap),
 ]
 
 
