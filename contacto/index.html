@@ -47,6 +47,23 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://electricistaculiacanpro.mx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contacto",
+          "item": "https://electricistaculiacanpro.mx/contacto/"
+        }
+      ]
+    },
+    {
       "@type": "ContactPage",
       "@id": "https://electricistaculiacanpro.mx/contacto/#contactpage",
       "name": "Contacto Electricista Culiacán Pro",
@@ -75,7 +92,54 @@
   ]
 }
 </script>
-<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip-link:focus{top:0 !important;min-height:44px;display:flex;align-items:center;box-sizing:border-box}/*floating-btn (paridad index.html — CTA flotante WhatsApp/Llamar; cubre ambas variantes de markup del sitio)*/.floating-btn{position:fixed;right:max(18px,env(safe-area-inset-right,18px));width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease,opacity .2s ease;z-index:90;text-decoration:none}.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.2);filter:brightness(1.05)}.floating-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(249,115,22,.5)}.floating-call,.floating-btn--phone{background:#1e40af;bottom:max(18px,env(safe-area-inset-bottom,18px))}.floating-whatsapp,.floating-btn--whatsapp{background:#22c55e;bottom:calc(max(18px,env(safe-area-inset-bottom,18px)) + 60px)}body.menu-open .floating-btn{opacity:0;pointer-events:none}</style></head>
+<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip-link:focus{top:0 !important;min-height:44px;display:flex;align-items:center;box-sizing:border-box}/*floating-btn (paridad index.html — CTA flotante WhatsApp/Llamar; cubre ambas variantes de markup del sitio)*/.floating-btn{position:fixed;right:max(18px,env(safe-area-inset-right,18px));width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease,opacity .2s ease;z-index:90;text-decoration:none}.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.2);filter:brightness(1.05)}.floating-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(249,115,22,.5)}.floating-call,.floating-btn--phone{background:#1e40af;bottom:max(18px,env(safe-area-inset-bottom,18px))}.floating-whatsapp,.floating-btn--whatsapp{background:#22c55e;bottom:calc(max(18px,env(safe-area-inset-bottom,18px)) + 60px)}body.menu-open .floating-btn{opacity:0;pointer-events:none}</style>
+    <!-- Breadcrumb Styles -->
+    <style>
+        .breadcrumb-wrapper {
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.75rem 0;
+            margin-top: 16px;
+            position: relative;
+            z-index: 10;
+        }@media(min-width:1024px){.breadcrumb-wrapper{margin-top:40px}}
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            list-style: none;
+            font-size: 0.875rem;
+            line-height: 1.4;
+            color: #64748b;
+        }
+        .breadcrumb li {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .breadcrumb-link {
+            color: #C2410C;
+            text-decoration: none;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
+        .breadcrumb-link:hover {
+            color: #ea580c;
+            text-decoration: underline;
+        }
+        .breadcrumb-separator {
+            color: #cbd5e0;
+            user-select: none;
+        }
+        .breadcrumb-current {
+            color: #475569;
+            font-weight: 500;
+        }
+    </style>
+</head>
 <body>
 <a href="#main-content" class="skip-link" style="position:absolute;top:-40px;left:0;background:#1e40af;color:#fff;padding:8px 16px;z-index:100;font-size:14px;transition:top .2s">Saltar al contenido</a>
 <!-- Google Tag Manager (noscript) -->
@@ -105,10 +169,29 @@ height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Ma
         </div>
     </nav>
 
+    <!-- Breadcrumb HTML Navegable -->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <nav aria-label="Breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <ol class="breadcrumb">
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <a href="https://electricistaculiacanpro.mx/" class="breadcrumb-link" itemprop="item"><span itemprop="name">Inicio</span></a>
+                        <meta itemprop="position" content="1" />
+                        <span class="breadcrumb-separator" aria-hidden="true">&#x203A;</span>
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <span class="breadcrumb-current" itemprop="name" aria-current="page">Contacto</span>
+                        <meta itemprop="position" content="2" />
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <main id="main-content">
     <!-- Contact Section -->
     <section class="section" style="min-height:calc(100vh - 200px);display:grid;place-items:center">
-        <div class="container" style="max-width:700px">
+        <div class="container" style="max-width:700px;min-width:0">
             <h1 style="text-align:center;margin-bottom:2rem">Contactar a un electricista en Culiacán</h1>
             <p style="text-align:center;font-size:1.125rem;margin-bottom:3rem;color:#475569">
                 ¿Necesitas un electricista urgente? Contáctanos ahora por WhatsApp o teléfono.
@@ -164,6 +247,73 @@ height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Ma
                 </div>
             </div>
             <div class="contact-form"><h3>Solicita una Cotización</h3><!-- NOTA: Este formulario depende de Netlify Forms para proteccion CSRF. Si se migra a otro hosting, implementar token CSRF --><form id="contact-form" name="contacto-electricidad" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/gracias/"><input type="hidden" name="bot-field"><input type="hidden" name="form-name" value="contacto-electricidad"><div class="form-field"><label for="nombre" class="sr-only">Nombre completo</label><input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required></div><div class="form-field"><label for="telefono" class="sr-only">Teléfono</label><input type="tel" id="telefono" name="telefono" placeholder="Teléfono (10 dígitos)" required pattern="[0-9]{10}"></div><div class="form-field"><label for="email" class="sr-only">Email</label><input type="email" id="email" name="email" placeholder="Email" required></div><div class="form-field"><label for="mensaje" class="sr-only">Mensaje</label><textarea id="mensaje" name="mensaje" placeholder="Describe tu problema o servicio requerido" rows="4" required minlength="10"></textarea></div><button type="submit" class="btn-primary">Enviar Cotización</button><p class="form-note"><small>También te contactaremos por WhatsApp. Respuesta en menos de 30 minutos.</small></p></form><noscript><p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;"><strong>O contáctanos directamente:</strong><br><a href="https://wa.me/526673922273" target="_blank" rel="noopener noreferrer" class="btn-primary" style="display: inline-block; margin-top: 0.5rem;">Abrir WhatsApp</a></p></noscript></div>
+        </div>
+    </section>
+
+    <!-- Cómo te atendemos paso a paso -->
+    <section class="section">
+        <div class="container" style="max-width:700px">
+            <div class="card">
+                <h2 style="color:#C2410C;font-size:1.5rem;margin-bottom:1.5rem;text-align:center">Cómo te atendemos paso a paso</h2>
+                <p style="color:#475569;margin-bottom:1rem">Contactar a un electricista en Culiacán a través de esta página es sencillo. Así es el proceso, desde que nos escribes hasta que resolvemos tu problema eléctrico:</p>
+                <ol style="color:#475569;padding-left:1.25rem;line-height:1.8">
+                    <li><strong>Nos mandas WhatsApp o nos llamas.</strong> Usa el botón de WhatsApp de esta página o marca directo al 667 392 2273; respondemos en pocos minutos.</li>
+                    <li><strong>Nos describes la falla.</strong> Cuéntanos qué está pasando: sin luz total o parcial, cortocircuito, chispas, olor a quemado o una instalación nueva que necesitas cotizar.</li>
+                    <li><strong>Coordinamos la visita.</strong> Acordamos el horario que te acomode. En <strong>emergencias eléctricas 24/7 llegamos en 30-60 minutos</strong> a cualquier colonia de Culiacán.</li>
+                </ol>
+                <p style="color:#475569;margin-top:1rem">Trabajamos todos los días del año, incluidos sábados, domingos y días festivos, para que tu hogar o negocio nunca se quede sin electricidad por mucho tiempo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Qué datos ayudan a cotizar más rápido -->
+    <section class="section" style="background:#FFF7ED">
+        <div class="container" style="max-width:700px">
+            <div class="card">
+                <h2 style="color:#C2410C;font-size:1.5rem;margin-bottom:1.5rem;text-align:center">Qué datos ayudan a cotizar más rápido</h2>
+                <p style="color:#475569;margin-bottom:1rem">Si nos compartes estos datos desde tu primer mensaje de WhatsApp o llamada, agilizamos la cotización y llegamos mejor preparados con las herramientas y el material adecuado:</p>
+                <ul style="color:#475569;padding-left:1.25rem;line-height:1.8">
+                    <li>Tu <strong>colonia</strong> dentro de Culiacán.</li>
+                    <li>El <strong>tipo de falla</strong>: sin luz total o parcial, cortocircuito, chispas, contacto o apagador que dejó de funcionar.</li>
+                    <li><strong>Desde cuándo</strong> empezó el problema eléctrico.</li>
+                    <li>Si <strong>se bota el breaker</strong> al intentar restablecer la energía.</li>
+                    <li>Una <strong>foto del tablero eléctrico</strong>, si te es posible tomarla.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cobertura en Culiacán -->
+    <section class="section">
+        <div class="container" style="max-width:700px">
+            <div class="card">
+                <h2 style="color:#C2410C;font-size:1.5rem;margin-bottom:1.5rem;text-align:center">Cobertura en Culiacán</h2>
+                <p style="color:#475569;margin-bottom:1rem">Atendemos las cuatro zonas de la ciudad y prácticamente todas sus colonias. Consulta el detalle de cobertura por zona:</p>
+                <ul style="color:#475569;padding-left:1.25rem;line-height:1.8">
+                    <li><a href="/servicios/electricista-zona-norte-culiacan/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">Electricista zona norte de Culiacán</a></li>
+                    <li><a href="/servicios/electricista-zona-sur-culiacan/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">Electricista zona sur de Culiacán</a></li>
+                    <li><a href="/servicios/electricista-zona-poniente-culiacan/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">Electricista zona poniente de Culiacán</a></li>
+                    <li><a href="/servicios/electricista-centro-culiacan/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">Electricista centro de Culiacán</a></li>
+                    <li><a href="/servicios/electricista-colonias-culiacan/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">Cobertura por colonia en Culiacán</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios más solicitados -->
+    <section class="section" style="background:#FFF7ED">
+        <div class="container" style="max-width:700px">
+            <div class="card">
+                <h2 style="color:#C2410C;font-size:1.5rem;margin-bottom:1.5rem;text-align:center">Servicios más solicitados</h2>
+                <p style="color:#475569;margin-bottom:1rem">Estos son los servicios eléctricos que más nos piden por WhatsApp y teléfono en Culiacán:</p>
+                <ul style="color:#475569;padding-left:1.25rem;line-height:1.8">
+                    <li><a href="/servicios/emergencia-24-7/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">Emergencia eléctrica 24/7</a></li>
+                    <li><a href="/servicios/electricista-a-domicilio/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">Electricista a domicilio</a></li>
+                    <li><a href="/servicios/reparacion-cortocircuitos/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">Reparación de cortocircuitos</a></li>
+                    <li><a href="/servicios/no-hay-luz-en-parte-casa/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">No hay luz en parte de la casa</a></li>
+                    <li><a href="/servicios/instalacion-contactos/" style="color:#C2410C;text-decoration:none;display:inline-block;line-height:44px">Instalación de contactos</a></li>
+                </ul>
+            </div>
         </div>
     </section>
     </main>
