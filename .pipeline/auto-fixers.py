@@ -994,6 +994,35 @@ def _fix_breadcrumb_gap(h):
     return _BREADCRUMB_GAP_RE.subn(repl, h, count=1)
 
 
+# ── aggregateRating self-serving en el JSON-LD de las 32 páginas de servicios/<slug>/
+#    (SEO/SCHEMA, REGLAS.md: "NO aggregateRating/Review self-serving"; política ya aplicada
+#    a blog 0/11 y colonias 0/642). Las 32 declaran ratingValue "4.8"/reviewCount "150" sin
+#    ningún nodo "@type":"Review" en la página. index.html SÍ lo conserva (6 Review reales),
+#    así que el detector exige ausencia TOTAL de Review en la página entera para no tocarla
+#    JAMÁS — eso también excluye de forma natural (sin mirar la ruta) a servicios/index.html
+#    y servicios/electricista-colonias-culiacan/index.html, que no declaran aggregateRating.
+#    Cirugía de texto sobre el propio objeto "aggregateRating": {...} (nunca tiene llaves
+#    anidadas: solo @type/ratingValue/reviewCount) en vez de reserializar el JSON-LD completo,
+#    para no arrastrar diffs de formato en el resto de campos (priceRange/telephone/areaServed/
+#    geo intactos). No depende de si el bloque es @graph o array plano: el patrón solo mira el
+#    nodo, no el wrapper, así que maneja ambas formas del sitio por igual. Quita la coma que
+#    antecede al campo (caso real, 32/32: siempre precedido por "priceRange"/"openingHours");
+#    si algún día fuera el PRIMER campo del nodo (sin coma antes), el patrón de reserva quita
+#    la coma que lo SIGUE en su lugar, para nunca dejar una coma colgante. ──
+_AGGRATING_REVIEW_RE = re.compile(r'"@type"\s*:\s*"Review"')
+_AGGRATING_LEAD_RE = re.compile(r',\s*"aggregateRating"\s*:\s*\{[^{}]*\}')
+_AGGRATING_FIRST_RE = re.compile(r'"aggregateRating"\s*:\s*\{[^{}]*\}\s*,\s*')
+
+def _det_jsonld_aggregaterating_servicios(h):
+    return ('aggregateRating' in h) and not _AGGRATING_REVIEW_RE.search(h)
+
+def _fix_jsonld_aggregaterating_servicios(h):
+    h2, n = _AGGRATING_LEAD_RE.subn('', h, count=1)
+    if not n:
+        h2, n = _AGGRATING_FIRST_RE.subn('', h, count=1)
+    return h2, n
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -1069,6 +1098,8 @@ FIXERS = [
      "mecanico", _det_colonia_hero_sizes, _fix_colonia_hero_sizes),
     ("breadcrumb-gap-nav", "franja vacía entre el nav fijo y el breadcrumb (674 páginas: 32 servicios + 642 colonias) por .breadcrumb-wrapper{margin-top:80px} heredado de la plantilla hermana → 16px + @media(min-width:1024px){margin-top:40px}, pegando el breadcrumb al nav sin solaparlo",
      "mecanico", _det_breadcrumb_gap, _fix_breadcrumb_gap),
+    ("jsonld-aggregaterating-servicios", "aggregateRating self-serving (ratingValue 4.8/reviewCount 150) en el JSON-LD de servicios/<slug>/ sin ningún nodo Review en la página (32 páginas) → elimina el campo; conserva index.html (6 Review reales) e intacto priceRange/telephone/areaServed/geo; maneja @graph y array plano por igual",
+     "mecanico", _det_jsonld_aggregaterating_servicios, _fix_jsonld_aggregaterating_servicios),
 ]
 
 
