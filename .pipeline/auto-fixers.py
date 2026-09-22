@@ -74,6 +74,48 @@ def _fix_ogurl(h):
     return re.subn(r'(^[ \t]*)<link[^>]+rel=["\']canonical["\'][^>]*>', repl, h, count=1, flags=re.I | re.M)
 
 
+# twitter:url faltante en página indexable → copia el canonical (mismo scope que og-url: solo
+# indexables). Se inserta inmediatamente después de la última etiqueta twitter:* existente (si
+# no hubiera ninguna, después de og:url; si tampoco, justo antes del canonical), replicando el
+# estilo (self-closing " />" o ">") de la etiqueta vecina y su salto de línea/indentación si la
+# vecina vive en su propia línea, o quedando en línea si las etiquetas van encadenadas sin
+# separador. Nunca un valor hardcodeado (REGLAS.md 2026-06-17 SEO/SOCIAL leak): siempre copia el
+# canonical de ESA página.
+_TWITTER_TAG_RE = re.compile(r'<meta[^>]+name=["\']twitter:[a-zA-Z]+["\'][^>]*>', re.I)
+_OGURL_TAG_RE = re.compile(r'<meta[^>]+property=["\']og:url["\'][^>]*>', re.I)
+_CANONICAL_TAG_RE = re.compile(r'(^[ \t]*)(<link[^>]+rel=["\']canonical["\'][^>]*>)', re.I | re.M)
+
+def _det_twitterurl(h):
+    return (not es_noindex(h)) and canonical_de(h) and 'name="twitter:url"' not in h and "name='twitter:url'" not in h
+
+def _twitterurl_tras(h, match, can):
+    """Inserta <meta name="twitter:url"> justo después de `match`, replicando su estilo de
+    cierre (self-closing " />" o ">") y, si la vecina termina su línea, su indentación."""
+    closer = ' />' if match.group(0).rstrip().endswith('/>') else '>'
+    newtag = '<meta name="twitter:url" content="%s"%s' % (can, closer)
+    end = match.end()
+    if end < len(h) and h[end] == '\n':
+        line_start = h.rfind('\n', 0, match.start()) + 1
+        indent = re.match(r'[ \t]*', h[line_start:match.start()]).group(0)
+        return h[:end] + '\n' + indent + newtag + h[end:]
+    return h[:end] + newtag + h[end:]
+
+def _fix_twitterurl(h):
+    can = canonical_de(h)
+    if not can:
+        return h, 0
+    tw_matches = list(_TWITTER_TAG_RE.finditer(h))
+    if tw_matches:
+        return _twitterurl_tras(h, tw_matches[-1], can), 1
+    og_m = _OGURL_TAG_RE.search(h)
+    if og_m:
+        return _twitterurl_tras(h, og_m, can), 1
+    def repl(m):
+        indent, tag = m.group(1), m.group(2)
+        return indent + '<meta name="twitter:url" content="%s">\n' % can + indent + tag
+    return _CANONICAL_TAG_RE.subn(repl, h, count=1)
+
+
 def _det_theme(h):
     return '#0066cc' in h and 'name="theme-color"' in h
 
@@ -1052,6 +1094,8 @@ FIXERS = [
      "mecanico", _det_table_wrapper_margin, _fix_table_wrapper_margin),
     ("og-url", "og:url faltante en página indexable → copia el canonical (scope: solo indexables)",
      "mecanico", _det_ogurl, _fix_ogurl),
+    ("twitter-url", "twitter:url faltante en página indexable → copia el canonical, insertado tras la última etiqueta twitter:* (o og:url, o antes del canonical) (scope: solo indexables)",
+     "mecanico", _det_twitterurl, _fix_twitterurl),
     ("breadcrumb-taptarget-contrast", "'.breadcrumb-link' inline sin min-height:44px y/o color #E36414 de bajo contraste → +tap-target 44px + color #C2410C (paridad con el patrón ya aplicado 2026-07-06)",
      "mecanico", _det_breadcrumb_taptarget, _fix_breadcrumb_taptarget),
     ("theme-color", "theme-color placeholder #0066cc → color de marca " + BRAND_THEME,
