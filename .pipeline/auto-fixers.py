@@ -1065,6 +1065,33 @@ def _fix_jsonld_aggregaterating_servicios(h):
     return h2, n
 
 
+# ── JSON-LD Electrician.name con sufijo " - <Colonia>" en las 642 páginas de colonia
+#    (servicios/electricista-colonias-culiacan/*/index.html, NUNCA el hub) → "Electricista
+#    Culiacán Pro" a secas: un mismo negocio/teléfono presentado con 642 nombres distintos
+#    diluye la entidad; la zona ya vive en areaServed.name (p.ej. "Tres Ríos, Culiacán").
+#    Cirugía de texto SOLO dentro de <script type="application/ld+json">...</script> (nunca
+#    toca copy visible fuera del script); maneja @graph (639) y array plano (3) por igual
+#    porque el patrón mira el propio campo "name", no el wrapper. La home y los 32 servicios
+#    ya declaran "Electricista Culiacán Pro" sin sufijo (33/33) y no calzan el patrón. ──
+_JSONLD_SCRIPT_RE = re.compile(r'(<script[^>]+application/ld\+json[^>]*>)(.*?)(</script>)', re.S)
+_COLONIA_NAME_SUFFIX_RE = re.compile(r'("name"\s*:\s*")Electricista Culiacán Pro - [^"]+(")')
+
+def _det_jsonld_name_colonia(h):
+    for m in _JSONLD_SCRIPT_RE.finditer(h):
+        if _COLONIA_NAME_SUFFIX_RE.search(m.group(2)):
+            return True
+    return False
+
+def _fix_jsonld_name_colonia(h):
+    total = [0]
+    def repl_script(m):
+        body, n = _COLONIA_NAME_SUFFIX_RE.subn(r'\1Electricista Culiacán Pro\2', m.group(2))
+        total[0] += n
+        return m.group(1) + body + m.group(3)
+    h2 = _JSONLD_SCRIPT_RE.sub(repl_script, h)
+    return h2, total[0]
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -1144,6 +1171,8 @@ FIXERS = [
      "mecanico", _det_breadcrumb_gap, _fix_breadcrumb_gap),
     ("jsonld-aggregaterating-servicios", "aggregateRating self-serving (ratingValue 4.8/reviewCount 150) en el JSON-LD de servicios/<slug>/ sin ningún nodo Review en la página (32 páginas) → elimina el campo; conserva index.html (6 Review reales) e intacto priceRange/telephone/areaServed/geo; maneja @graph y array plano por igual",
      "mecanico", _det_jsonld_aggregaterating_servicios, _fix_jsonld_aggregaterating_servicios),
+    ("jsonld-name-colonia", "JSON-LD Electrician.name con sufijo ' - <Colonia>' en colonias → 'Electricista Culiacán Pro' (entidad única; la zona vive en areaServed)",
+     "mecanico", _det_jsonld_name_colonia, _fix_jsonld_name_colonia),
 ]
 
 
