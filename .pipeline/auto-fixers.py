@@ -738,6 +738,31 @@ def _fix_brand_light_text(h):
     return _BRAND_LIGHT_TEXT.subn('style="color:#C2410C;font-weight:600"', h)
 
 
+# ── var(--brand)/#E36414 como color de TEXTO en atributos style= (pensador 2026-09-23):
+#    591 textos en 41 páginas usan el naranja de marca como color de texto en style= sobre
+#    fondo claro (blanco, #F9F9F9, #F8FAFC, #FFF7ED): contraste 3.27-3.44:1, falla WCAG AA
+#    (4.5). Se remapea a HEX literal #C2410C (≥4.9:1), el naranja de texto del contrato de
+#    marca. Solo la propiedad `color`, NUNCA background-color/border-color (el lookbehind
+#    negativo evita casar esas), y nunca dentro de bloques <style> (solo atributos style=). ──
+_BRAND_TEXT_INLINE_ATTR = re.compile(r'style="([^"]*)"')
+_BRAND_TEXT_INLINE_PROP = re.compile(r'(?<![-\w])color\s*:\s*(?:var\(--brand\)|#[Ee]36414)(?![\w-])')
+
+def _det_brand_text_inline(h):
+    for m in _BRAND_TEXT_INLINE_ATTR.finditer(h):
+        if _BRAND_TEXT_INLINE_PROP.search(m.group(1)):
+            return True
+    return False
+
+def _fix_brand_text_inline(h):
+    n = [0]
+    def _sub_attr(m):
+        val, cnt = _BRAND_TEXT_INLINE_PROP.subn('color:#C2410C', m.group(1))
+        n[0] += cnt
+        return 'style="%s"' % val
+    h2 = _BRAND_TEXT_INLINE_ATTR.sub(_sub_attr, h)
+    return h2, n[0]
+
+
 # ── menú hamburguesa de blogs sin aria-expanded dinámico (revisor-a11y a11y-003 + revisor-
 #    móvil mov-002, 2026-07-29): 3ª instancia de la familia 2026-06-21/2026-07-25 — el fix de
 #    aria-expanded/menu-open/floating-btn-hide se aplicó al markup (691 páginas) y a
@@ -1115,6 +1140,8 @@ FIXERS = [
      "mecanico", _det_cta_emergencia_btn, _fix_cta_emergencia_btn),
     ("brand-light-text-contrast", "var(--brand-light) #F97316 usado como color de texto en spans 'Ver más →' (2.66-2.80:1, nunca alcanza 4.5:1) → #C2410C literal (5.0-5.2:1); estas páginas no declaran --brand-dark en su :root",
      "mecanico", _det_brand_light_text, _fix_brand_light_text),
+    ("brand-text-contrast-inline", "var(--brand)/#E36414 como color de TEXTO en atributos style= (3.27-3.44:1 sobre fondo claro, falla AA) → #C2410C literal (≥4.9:1); solo la propiedad color, nunca background/border",
+     "mecanico", _det_brand_text_inline, _fix_brand_text_inline),
     ("blog-menu-aria-expanded", "IIFE inline del menú móvil de blogs solo hace classList.toggle('active') sin aria-expanded/body.menu-open (lector de pantalla siempre anuncia 'contraído', fondo sigue scrolleando) → envuelve la llamada replicando main.js, detectando el nombre real de la variable",
      "mecanico", _det_blog_menu_aria, _fix_blog_menu_aria),
     ("table-wrapper-floating-btn-margin", ".table-wrapper{padding-right:76px} no saca la tabla de precios de debajo de los botones flotantes en móvil (el recorte de overflow-x:auto ocurre en el borde de padding) → margin-right:76px;padding-right:0",
