@@ -1243,15 +1243,7 @@ def _bump_css_version_html(version):
     for p in targets:
         if "/node_modules/" in p or "/.git/" in p:
             continue
-        # CUARENTENA: no tocarlas ni con el bump — están thin/preexistente-rotas y
-        # cualquier archivo staged en servicios|blog dispara gate-pagina.py en el
-        # pre-commit (Capa 2b), que vuelve a fallar por su condición YA CONOCIDA,
-        # bloqueando el commit ENTERO por un problema que no es de hoy (detectado
-        # 2026-07-14: un bump site-wide limpio quedó bloqueado por las 17 colonias
-        # en cuarentena). Quedan con el ?v= viejo hasta que se enriquezcan y salgan
-        # de CUARENTENA — mismo trato que ya reciben de los FIXERS por página.
-        if os.path.relpath(p, ROOT) in CUARENTENA:
-            continue
+        # el token de cache NO respeta CUARENTENA: check 40 exige el mismo ?v= en todas las páginas (bk-02768d84)
         try:
             s = open(p, encoding="utf-8").read()
         except Exception:
@@ -1346,8 +1338,7 @@ def _bump_js_version_html(version):
     for p in targets:
         if "/node_modules/" in p or "/.git/" in p:
             continue
-        if os.path.relpath(p, ROOT) in CUARENTENA:
-            continue
+        # el token de cache NO respeta CUARENTENA: check 40 exige el mismo ?v= en todas las páginas (bk-02768d84)
         try:
             s = open(p, encoding="utf-8").read()
         except Exception:
