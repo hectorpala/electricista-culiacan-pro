@@ -1117,6 +1117,17 @@ def _fix_jsonld_name_colonia(h):
     return h2, total[0]
 
 
+# ── logo-alt-acento (bk-015c4cc4): alt del logo del header sin tilde ("Culiacan") en 32
+#    páginas de servicio → "Culiacán" (consistencia NAP con index.html). Literal exacto para
+#    no tocar "Culiacan" en URLs/href/title/otros atributos. ──
+def _det_logo_alt_acento(h):
+    return 'alt="Electricista Culiacan Pro - Logo"' in h
+
+def _fix_logo_alt_acento(h):
+    return h.replace('alt="Electricista Culiacan Pro - Logo"', 'alt="Electricista Culiacán Pro - Logo"'), \
+        h.count('alt="Electricista Culiacan Pro - Logo"')
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -1200,6 +1211,8 @@ FIXERS = [
      "mecanico", _det_jsonld_aggregaterating_servicios, _fix_jsonld_aggregaterating_servicios),
     ("jsonld-name-colonia", "JSON-LD Electrician.name con sufijo ' - <Colonia>' en colonias → 'Electricista Culiacán Pro' (entidad única; la zona vive en areaServed)",
      "mecanico", _det_jsonld_name_colonia, _fix_jsonld_name_colonia),
+    ("logo-alt-acento", "alt del logo del header sin tilde 'Electricista Culiacan Pro - Logo' (32 páginas de servicio, bk-015c4cc4) → 'Electricista Culiacán Pro - Logo' (consistencia NAP con index.html); literal exacto, no toca 'Culiacan' en URLs/href/title",
+     "mecanico", _det_logo_alt_acento, _fix_logo_alt_acento),
 ]
 
 
