@@ -1,3 +1,13 @@
+## 2026-09-25 — /equipo (corrida 20260925-2101, frente todo): rescate del 24-sep PUBLICADO (main 1b516bee..ff44625d) + 3 arreglos nuevos PUBLICADOS (main ff44625d..048f44bf)
+
+- La corrida 20260924-2153 murió en su FINAL con 5 commits verificados sin push (T4 bumps sin saltar cuarentena, T1 metas de 11 páginas, T3 alt del logo con tilde en 32 servicios, T2 ETA única 30-60 en 6 páginas, lastmod). Rescate: FINAL sonnet ok:true 34/34 → push + ff a main a las 21:22; producción 7/7. Memoria de esa corrida (calificaciones, backlog, EQUIPO.md) commiteada aquí.
+- Esta corrida (worktree desde ff44625d; pensador opus con GSC 28d: 16 269 impr, 204 clics, CTR 1.25 %, pos 8.3): T1 `ec857943` enlace interno a /servicios/no-hay-luz-en-parte-casa/ desde los blogs del breaker y del apagón + azul de marca en 13 enlaces de texto (3 blogs) · T2 `ae6c6762` fixer `colonia-jsonld-business-id`: @id #business en las 29 colonias indexables (612 noindex intactas) · T3 `f1a397db` hub de colonias + centro sin <a> reales a colonias noindex (13→9) · `048f44bf` lastmod 32 URLs.
+- FINAL (sonnet) ok:true: gate-pagina 33/33, invariantes servidas 33/33, verify 28 mecánicos + 5 libres explicados, intocables y experimento sin diff. Producción 9/9 a los 11 s. Indexación: el pre-push no encontró HTML (último commit = lastmod) y la petición por MCP (gsc_index) fue DENEGADA por permisos → pedir a mano breaker, apagón y a-domicilio.
+- Calificaciones: 10 reportes (1 pensador, 3 ejecutores, 5 probadores, 1 FINAL del rescate), 0 reprobados, 0 arreglador; 1 lección probador (json.loads, reincidencia), 2 coordinador (rescate; 3 tareas en paralelo con stage "solo-T"). Duración 91 min con el rescate.
+- Backlog: hechas bk-9a724668, bk-40c4ce6b (+6 del rescate); nueva bk-111ecc89 (5 páginas sin @id #business: home, contacto, hubs, blog/); bk-62bb0164 parcial (home 6 + zonas 3, humano).
+- Pendiente de Héctor: claim "certificado" (718 usos, 668 páginas) → decidir si existe o autorizar fixer tras el 20-oct; rastreo del blog del breaker (sin rastrear desde el 03-sep) y a-domicilio; enlaces home/zonas a colonias noindex; precios (33); ~720 archivos de Codex. Parte: `.pipeline/equipo/partes/parte-20260925-2101.md`.
+- Métrica: clics a /servicios/no-hay-luz-en-parte-casa/ desde los 2 blogs y su posición en "no hay luz en parte de la casa" en la ventana 26-sep → 24-oct; colonias indexables sin caída de impresiones tras el @id.
+
 ## 2026-09-23 — /equipo (corrida 20260923-2101, frente todo): 3 arreglos PUBLICADOS (main 2cf5d918..4563ae91)
 
 - Worktree limpio desde origin/main; pensador (opus) con GSC real (28d: 15 111 impr, 195 clics, CTR 1.29 %, pos 8.7) → 3 tareas; 8 reportes calificados, 0 reprobados; sin rondas de arreglador. Duración 85 min.
