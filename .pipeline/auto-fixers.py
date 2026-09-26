@@ -1128,6 +1128,31 @@ def _fix_logo_alt_acento(h):
         h.count('alt="Electricista Culiacan Pro - Logo"')
 
 
+# ── colonia-jsonld-business-id (2026-09-25): las 29 colonias INDEXABLES declaran el nodo
+#    Electrician con name+url propios de la colonia en vez de unirse a la entidad única del
+#    sitio (home + 32 servicios + 11 blogs + resto: "@id":"https://electricistaculiacanpro.mx/#business",
+#    "url":"https://electricistaculiacanpro.mx/") → mismo @id/url que el resto de indexables;
+#    areaServed/telephone/address/openingHoursSpecification y el BreadcrumbList quedan
+#    intactos (la URL propia de la colonia ya vive en el BreadcrumbList). El regex exige el
+#    segmento electricista-colonias-culiacan/<slug>/ en la url, así que NUNCA calza el hub
+#    (su propia url no tiene slug tras ese directorio) ni las páginas de servicio (otra
+#    ruta); es_noindex(h) excluye las 612 colonias NOINDEX que comparten el mismo literal.
+#    Maneja @graph y array plano por igual (el patrón mira el nodo, no el wrapper).
+#    Idempotente: tras el fix la url deja de tener el segmento de colonia → el detector da 0. ──
+_COLONIA_BIZ_ID_RE = re.compile(
+    r'"@type":\s*"Electrician",\s*"name":\s*"Electricista Culiacán Pro",\s*'
+    r'"url":\s*"https://electricistaculiacanpro\.mx/servicios/electricista-colonias-culiacan/[a-z0-9-]+/"'
+)
+_COLONIA_BIZ_ID_REPL = ('"@type": "Electrician", "@id": "https://electricistaculiacanpro.mx/#business", '
+                         '"name": "Electricista Culiacán Pro", "url": "https://electricistaculiacanpro.mx/"')
+
+def _det_colonia_jsonld_business_id(h):
+    return (not es_noindex(h)) and bool(_COLONIA_BIZ_ID_RE.search(h))
+
+def _fix_colonia_jsonld_business_id(h):
+    return _COLONIA_BIZ_ID_RE.subn(_COLONIA_BIZ_ID_REPL, h)
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -1213,6 +1238,8 @@ FIXERS = [
      "mecanico", _det_jsonld_name_colonia, _fix_jsonld_name_colonia),
     ("logo-alt-acento", "alt del logo del header sin tilde 'Electricista Culiacan Pro - Logo' (32 páginas de servicio, bk-015c4cc4) → 'Electricista Culiacán Pro - Logo' (consistencia NAP con index.html); literal exacto, no toca 'Culiacan' en URLs/href/title",
      "mecanico", _det_logo_alt_acento, _fix_logo_alt_acento),
+    ("colonia-jsonld-business-id", "nodo Electrician de las 29 colonias INDEXABLES con name+url propios de la colonia en vez de la entidad única del sitio → mismo @id (#business) y url raíz que home/servicios/blog; areaServed/telephone/address/openingHoursSpecification/BreadcrumbList intactos; excluye las 612 colonias NOINDEX (mismo literal) vía es_noindex(h)",
+     "mecanico", _det_colonia_jsonld_business_id, _fix_colonia_jsonld_business_id),
 ]
 
 
