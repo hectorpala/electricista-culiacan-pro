@@ -73,11 +73,14 @@ decide_humano:
 - [2026-09-13] HERRAMIENTA: `auto-fixers.py run --solo <fixer> --apply` SIN rutas dispara bump de JS en 679 HTML; pasar siempre las rutas de la tarea; si pasó, `git checkout --` de lo ajeno antes de reportar.
 - [2026-09-21] CAPACIDAD: un `<a>` nuevo en texto suelto (FAQ, párrafos, "Sobre nosotros") hereda el azul UA #0000EE porque el sitio no tiene regla global `a{}`; lleva SIEMPRE `style="color:#1e40af;text-decoration:underline"` (patrón del footer de blogs) salvo que esté dentro de un componente con regla propia (`.benefits-cta a`, `.site-mini-nav a`, `.pricing-note a`). T3 20260921: 4 enlaces corregidos por el arreglador.
 
+- [2026-09-27] HERRAMIENTA: `gate-pagina.py` SIEMPRE con rutas absolutas literales; invocado como `cd <wt> && python3 .pipeline/gate-pagina.py "$(pwd)/a" "$(pwd)/b"` marcó falso "DOORWAY Jaccard 1.00 vs sí misma" en 11 páginas (T3 20260927); con rutas literales dio 0.34-0.56.
+
 ## Lecciones → arreglador
 
 ## Lecciones → probador
 - [2026-09-13] HERRAMIENTA: "Permission to use Bash has been denied" NO es un veto global: el sandbox rechaza patrones (`cd X && …`, heredocs `<<EOF`, `$(...)`, `${...}`, `for…do`, `NODE_PATH=… node`). Reescribir con `git -C <wt> …` o Write de un script Python/Node en /tmp y `python3 /tmp/x.py`; jamás rendirse ni pedir permiso al coordinador (T5 y FINAL-1 de 20260913-2100 no verificaron nada por esto).
 - [2026-09-13] EVIDENCIA: en "copia exacta" de reglas CSS, comparar el bloque completo normalizado contra styles.css, no solo colores.
+- [2026-09-27] INSTRUCCION: el ALCANCE de una tarea se juzga con `git diff origin/main -- <archivos de la tarea>` y `git diff --name-only origin/main` MENOS los archivos que el coordinador declaró de tareas paralelas; un archivo ajeno modificado en el worktree NO es falla de esta tarea (T2 20260927: FALLA falsa por index.html/contacto/ de T1/T4 pese al aviso explícito).
 - [2026-09-13] INSTRUCCION: "sin cambios vs base" se comprueba SOLO con `git -C <worktree> diff origin/main -- <ruta>` o `git show origin/main:<ruta>`; JAMÁS contra el árbol principal del repo (rama auto/diario-* con ~720 archivos de Codex sin commitear, p.ej. twitter:url añadido allí y ausente en main → FALLA falsa en T2 20260913-2100).
 - [2026-09-17] INSTRUCCION: escribe TU PROPIO script de medición en /tmp; reutilizar el del ejecutor (T4: `/tmp/t4-check.js`) no es verificación independiente, es repetir su evidencia.
 - [2026-09-17] ESPECIFICACION: el @font-face de Inter 600 apunta a `inter-400.woff2` A PROPÓSITO en las 688 páginas (fixer `font-dedup`: los archivos son copias byte a byte, 48 532 B); no es bug, no lo reportes.
