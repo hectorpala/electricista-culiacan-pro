@@ -1153,6 +1153,54 @@ def _fix_colonia_jsonld_business_id(h):
     return _COLONIA_BIZ_ID_RE.subn(_COLONIA_BIZ_ID_REPL, h)
 
 
+# ── colonia-hero-cta-directo (2026-09-28): las 29 colonias INDEXABLES tienen en el hero un
+#    único botón "Solicitar Atención Inmediata" que solo ancla a #contacto (el primer botón real
+#    de WhatsApp queda a ~6200px en móvil). Se reemplaza por el par de botones directos del hero
+#    de la home (WhatsApp btn-primary + Llamar btn-secondary, bloque copiado byte a byte de
+#    index.html). ÚNICA diferencia con la home: el href de WhatsApp es el del botón wa.me de la
+#    sección #contacto de ESA página (su ?text= nombra la colonia). Scope: indexables (las 613
+#    noindex quedan intactas). Idempotente: tras el fix el literal desaparece → det False. ──
+_HERO_CTA_LITERAL = '<a href="#contacto" class="btn-primary">Solicitar Atención Inmediata</a>'
+_HERO_CTA_BLOCK = '''<div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2rem;">
+                    <a href="@@WA@@"
+                       class="btn-primary hover-lift"
+                       target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                        <span><strong>WhatsApp:</strong> 667 392 2273</span>
+                    </a>
+                    <a href="tel:+526673922273"
+                       class="btn-secondary hover-lift"
+                       style="display: inline-flex; align-items: center; gap: 0.5rem; background: #fff; color: #C2410C; border: 2px solid #C2410C; padding: 15px 32px; border-radius: 14px; text-decoration: none; font-weight: 700; min-height: 48px;">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        <span><strong>Llamar:</strong> 667 392 2273</span>
+                    </a>
+                </div>'''
+_HERO_CTA_SECTION_RE = re.compile(r'id="contacto".*?</section>', re.S)
+_HERO_CTA_WA_RE = re.compile(r'href="(https://wa\.me/526673922273\?text=[^"]*)"')
+
+def _hero_cta_wa(h):
+    m = _HERO_CTA_SECTION_RE.search(h)
+    if not m:
+        return None
+    hrefs = _HERO_CTA_WA_RE.findall(m.group(0))
+    return hrefs[0] if len(hrefs) == 1 else None
+
+def _det_colonia_hero_cta_directo(h):
+    return ((not es_noindex(h)) and h.count(_HERO_CTA_LITERAL) == 1
+            and _hero_cta_wa(h) is not None)
+
+def _fix_colonia_hero_cta_directo(h):
+    if not _det_colonia_hero_cta_directo(h):
+        return h, 0
+    block = _HERO_CTA_BLOCK.replace('@@WA@@', _hero_cta_wa(h))
+    return h.replace(_HERO_CTA_LITERAL, block, 1), 1
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -1240,6 +1288,8 @@ FIXERS = [
      "mecanico", _det_logo_alt_acento, _fix_logo_alt_acento),
     ("colonia-jsonld-business-id", "nodo Electrician de las 29 colonias INDEXABLES con name+url propios de la colonia en vez de la entidad única del sitio → mismo @id (#business) y url raíz que home/servicios/blog; areaServed/telephone/address/openingHoursSpecification/BreadcrumbList intactos; excluye las 612 colonias NOINDEX (mismo literal) vía es_noindex(h)",
      "mecanico", _det_colonia_jsonld_business_id, _fix_colonia_jsonld_business_id),
+    ("colonia-hero-cta-directo", "hero de las 29 colonias INDEXABLES con un solo botón 'Solicitar Atención Inmediata' que ancla a #contacto (primer WhatsApp real a ~6200px en móvil) → par de botones directos WhatsApp (btn-primary) + Llamar (btn-secondary) copiado byte a byte del hero de la home; único cambio: el href de WhatsApp es el del botón wa.me de #contacto de esa página; excluye las 613 colonias NOINDEX",
+     "mecanico", _det_colonia_hero_cta_directo, _fix_colonia_hero_cta_directo),
 ]
 
 
