@@ -1,49 +1,56 @@
-"""Barrido del coordinador: invariantes servidas + metas en todas las páginas HTML de un rango de commits.
-uso: python3 _barrido.py <worktree> <puerto> <rango git, ej. origin/main..HEAD>
+#!/usr/bin/env python3
+"""Barrido del coordinador: invariantes servidas por página (EQUIPO.md → invariantes).
+Uso: python3 _barrido.py <ruta/index.html> [...]   (rutas relativas al worktree)
+Comprueba: HTTP 200 en :8097, JSON-LD parsea (nº bloques, nº Question), canonical==og:url==twitter:url,
+0 'plomero', email solo contacto@electricistaculiacanpro.mx, teléfono canónico, ETA única 30-60,
+0 colores prohibidos (#0066cc/#0284c7/#0369a1, rojo #b91c1c/#dc2626/#ef4444), 0 mojibake (Ã/Â/�).
 """
-import sys, subprocess, re, json, urllib.request, html
-
-wt, port, rango = sys.argv[1], sys.argv[2], sys.argv[3]
-files = subprocess.run(["git", "-C", wt, "diff", "--name-only", rango], capture_output=True, text=True).stdout.split()
-htmls = [f for f in files if f.endswith(".html")]
-ETA_RE = re.compile(r"\b(\d{2})\s*(?:-|a|–)\s*(\d{2,3})\s*min", re.I)
-fallas = []
+import sys, re, json, urllib.request
+BASE = "http://127.0.0.1:8097/"
+WT = "/tmp/equipo-electricista-20260930-2100/"
 rows = []
-for f in htmls:
-    url = f"http://127.0.0.1:{port}/" + f[:-len("index.html")] if f.endswith("index.html") else f"http://127.0.0.1:{port}/" + f
+for rel in sys.argv[1:]:
+    rel = rel.replace(WT, "")
+    url = BASE + rel.replace("index.html", "")
+    fallas = []
     try:
         with urllib.request.urlopen(url, timeout=10) as r:
-            code, body = r.status, r.read().decode("utf-8", "replace")
+            code = r.status
+            html = r.read().decode("utf-8", "replace")
     except Exception as e:
-        fallas.append((f, f"HTTP {e}")); rows.append((f, "ERR")); continue
-    p = []
-    if code != 200: p.append(f"http {code}")
-    for m in re.finditer(r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>', body, re.S):
-        try: json.loads(m.group(1))
-        except Exception as e: p.append(f"jsonld {e}")
+        rows.append((rel, f"HTTP ERROR {e}")); continue
+    if code != 200: fallas.append(f"http {code}")
+    blocks = re.findall(r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', html, re.S)
+    nq = 0
+    for i, b in enumerate(blocks):
+        try:
+            d = json.loads(b)
+            nq += len(re.findall(r'"@type"\s*:\s*"Question"', b))
+        except Exception as e:
+            fallas.append(f"jsonld#{i} no parsea: {str(e)[:40]}")
     def meta(pat):
-        m = re.search(pat, body, re.I); return html.unescape(m.group(1)).strip() if m else None
-    canon = meta(r'<link[^>]+rel="canonical"[^>]+href="([^"]+)"')
-    ogu = meta(r'<meta[^>]+property="og:url"[^>]+content="([^"]+)"')
-    twu = meta(r'<meta[^>]+name="twitter:url"[^>]+content="([^"]+)"')
-    if not (canon and canon == ogu and (twu is None or twu == canon)): p.append(f"urls canon={canon} og={ogu} tw={twu}")
-    if re.search(r"plomer", body, re.I): p.append("plomero")
-    for e in set(re.findall(r"[\w.+-]+@[\w-]+\.[\w.]+", body)):
-        if e != "contacto@electricistaculiacanpro.mx" and not e.endswith(".webp") and not e.endswith(".png"): p.append(f"email {e}")
-    for t in set(re.findall(r"wa\.me/(\d+)", body)):
-        if t != "526673922273": p.append(f"wa {t}")
-    for t in set(re.findall(r'tel:\+?(\d+)', body)):
-        if t not in ("526673922273", "6673922273"): p.append(f"tel {t}")
-    for a, b in set(ETA_RE.findall(body)):
-        if (a, b) != ("30", "60"): p.append(f"eta {a}-{b}")
-    if re.search(r"Ã|Â|�", body): p.append("mojibake")
-    title = meta(r"<title>(.*?)</title>")
-    desc = meta(r'<meta[^>]+name="description"[^>]+content="([^"]*)"')
-    ogt = meta(r'<meta[^>]+property="og:title"[^>]+content="([^"]*)"')
-    ogd = meta(r'<meta[^>]+property="og:description"[^>]+content="([^"]*)"')
-    twd = meta(r'<meta[^>]+name="twitter:description"[^>]+content="([^"]*)"')
-    rows.append((f, "OK" if not p else "FALLA", len(title or ""), len(desc or ""), ogt == title, ogd == desc, twd == desc))
-    if p: fallas.append((f, p))
-print(f"páginas: {len(htmls)}  fallan: {len(fallas)}")
-for r in rows: print(r)
-for f, p in fallas: print("FALLA", f, p)
+        m = re.search(pat, html, re.I)
+        return m.group(1).rstrip("/") if m else None
+    can = meta(r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)')
+    og = meta(r'<meta[^>]+property=["\']og:url["\'][^>]+content=["\']([^"\']+)')
+    tw = meta(r'<meta[^>]+name=["\']twitter:url["\'][^>]+content=["\']([^"\']+)')
+    if not (can and can == og == tw): fallas.append(f"url-mismatch can={can} og={og} tw={tw}")
+    if re.search(r'plomer', html, re.I): fallas.append(f"plomero x{len(re.findall(r'plomer', html, re.I))}")
+    emails = set(re.findall(r'[\w.+-]+@[\w-]+\.[\w.]+', html))
+    bad = [e for e in emails if e.lower() != "contacto@electricistaculiacanpro.mx" and not e.endswith(("schema.org", "w3.org"))]
+    if bad: fallas.append(f"email {bad}")
+    nums = set(re.findall(r'(?:wa\.me/|tel:\+?|"telephone"\s*:\s*"\+?)([\d\s-]{8,})', html))
+    badn = [n for n in nums if re.sub(r'\D', '', n) not in ("526673922273", "6673922273")]
+    if badn: fallas.append(f"tel {badn}")
+    etas = set(re.findall(r'(\d{2})\s*[-–a]\s*(\d{2})\s*min', html))
+    bade = [f"{a}-{b}" for a, b in etas if (a, b) != ("30", "60")]
+    if bade: fallas.append(f"eta {sorted(set(bade))}")
+    badc = re.findall(r'#(?:0066cc|0284c7|0369a1|b91c1c|dc2626|ef4444)\b', html, re.I)
+    if badc: fallas.append(f"color-off-brand {sorted(set(badc))}")
+    if re.search(r'Ã|Â|�', html): fallas.append("mojibake")
+    rows.append((rel, "OK" if not fallas else "FALLA " + "; ".join(fallas), len(blocks), nq))
+ok = 0
+for r in rows:
+    print(" | ".join(str(x) for x in r))
+    if len(r) > 1 and r[1] == "OK": ok += 1
+print(f"TOTAL {ok}/{len(rows)} OK")
