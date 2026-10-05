@@ -615,17 +615,9 @@ def check_page(fpath, t, noindex, redirects):
             "Cambiar el src a main.min.js (mismo path, versión minificada que usa index.html). "
             "Tras el cambio verificar que las URLs wa.me no quedaron truncadas")
 
-    # --- 15. rating visible 5.0 (media, seo): el estándar de marca es 4.8 (coherente con
-    #         el aggregateRating del schema). Un span.rating-score ">5.0/5" visible —sobre
-    #         todo en blogs SIN aggregateRating propio— contradice el estándar y se cuela al
-    #         copiar bloques de prueba social. Regresión vista 2026-06-17/18 (servicios) y
-    #         2026-06-19 (6 blogs). OJO: no confundir con "ratingValue":"5" de reviews
-    #         individuales ni con "5.0" dentro de paths SVG (este patrón solo caza el span).
-    if re.search(r'rating-score"\s*>\s*5\.0', t):
-        add("media", r, "seo",
-            'Rating visible "5.0" en span.rating-score (el estándar del sitio es 4.8)',
-            'Cambiar el "5.0" del span.rating-score a "4.8" (el ratingValue del JSON-LD y todo '
-            '"N.N" visible deben coincidir en 4.8). NO tocar "5.0" que sean coordenadas en SVG')
+    # --- 15. (2026-10-04) RETIRADO: exigía 4.8 como "estándar de marca". Esa calificación
+    #         no estaba respaldada por una ficha de Google real; ahora cualquier calificación
+    #         o testimonio visible lo caza check_resenas_inventadas() (alta).
 
     # --- 16. overclaim absoluto / garantía financiera (media, seo): claims no sostenibles
     #         tipo "cero riesgo", "retorno garantizado", "se pagan solos" — familia de los ya
@@ -1344,6 +1336,37 @@ def check_css_parity():
 
 
 # ================================================================ MAIN
+
+def check_resenas_inventadas():
+    """Prohibidas calificaciones/testimonios inventados. (alta, confianza)
+
+    El 2026-10-04 se quitaron del sitio "★★★★★ 4.8/5 · 150+ reseñas" (686 págs), 25
+    secciones de testimonios con nombres, AggregateRating 4.8/150 + Review[] del JSON-LD,
+    sameAs g.page inexistente y "★4.8 en reseñas" de 606 metas: ninguna estaba respaldada
+    por reseñas reales verificables. scripts/generar-colonias.py y otros scripts viejos las
+    metían de plantilla: este check los frena. Si algún día hay reseñas REALES en la ficha de
+    Google, se cambia aquí con el dato real.
+    """
+    pats = [
+        (r'aggregateRating', "aggregateRating en JSON-LD"),
+        (r'"@type"\s*:\s*"Review"', "Review en JSON-LD"),
+        (r'Rese[ñn]a de (Google|Facebook)|Verificado en Google|Calificaci[oó]n Google|g\.page/', "atribución a Google/Facebook"),
+        (r'class="hero-rating', "insignia de calificación"),
+        (r'4[.,]8\s*(/\s*5|★|&#9733;|estrellas)|★\s*4[.,]8', "calificación 4.8"),
+        (r'id="testimonios"|class="(testimonials|testimonial|testimonial-card|testimonial-grid|testimonio)"',
+         "bloque de testimonios"),
+        (r'\b\d{2,3}\+? (clientes|vecinos) satisfechos|\b150\+ reseñas', "cifra de clientes/reseñas"),
+    ]
+    for fpath in collect_pages():
+        t = read(fpath)
+        sin_css = re.sub(r"<style\b.*?</style>", "", t, flags=re.S)
+        for pat, que in pats:
+            if re.search(pat, sin_css):
+                add("alta", rel(fpath), "confianza",
+                    "Reseñas/calificación INVENTADA (%s): el sitio no tiene reseñas reales "
+                    "verificables que la respalden (limpieza 2026-10-04)" % que,
+                    "Quitar el bloque; solo publicar reseñas reales y verificables")
+
 def main():
     redirects = load_redirects()
     for fpath in collect_pages():
@@ -1354,6 +1377,7 @@ def main():
     check_css_parity()
     check_css_contraste_regresion()
     check_css_version_sync()
+    check_resenas_inventadas()
 
     # orden estable + asignacion de ids deterministas
     sev_rank = {"alta": 0, "media": 1, "baja": 2}
