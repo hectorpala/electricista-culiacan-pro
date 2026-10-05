@@ -1,39 +1,36 @@
 #!/usr/bin/env python3
-"""Comprobación de producción tras publicar (corrida 20260930-2100): HTTP 200 en URLs clave
+"""Comprobación de producción tras publicar (corrida 20261004-2100): HTTP 200 en URLs clave
 + UNA evidencia servida por tarea. Reintenta hasta 8 veces (15 s) a que Netlify despliegue."""
 import re, time, urllib.request, sys
 B = "https://electricistaculiacanpro.mx"
 def get(u):
     r = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "equipo-check/1.0", "Cache-Control": "no-cache"}), timeout=20)
     return r.status, r.read().decode("utf-8", "replace")
+RULE = ".btn-primary{display:inline-block;background:linear-gradient(135deg,#C2410C 0%,#7C2D12 100%);color:#fff;border:none;border-radius:12px;padding:16px 32px;font-weight:600;font-size:1rem;text-decoration:none;text-align:center;cursor:pointer;box-shadow:0 4px 16px rgba(227,100,20,.3);min-height:44px}"
 checks = [
     ("home 200", "/", lambda h: True),
     ("emergencia 200", "/servicios/emergencia-24-7/", lambda h: True),
-    ("T1 cuando-llamar: FAQ nueva x2, 0 garantizad, 0 20-40", "/blog/cuando-llamar-electricista-emergencia/",
-     lambda h: h.count("30-60 minutos a emergencias eléctricas reales") == 2 and "garantizad" not in h and not re.search(r"20-40|40-60", h)),
-    ("T1 cuando-llamar: dateModified 2026-09-30", "/blog/cuando-llamar-electricista-emergencia/", lambda h: '"dateModified": "2026-09-30"' in h),
-    ("T1 lluvias: 0 garantizad + dateModified", "/blog/seguridad-electrica-temporada-lluvias/", lambda h: "garantizad" not in h and '"dateModified": "2026-09-30"' in h),
-    ("T2 cerca-de-mi: 30-60 a Las Quintas, 0 cifras viejas", "/servicios/electricista-cerca-de-mi/",
-     lambda h: "llegamos en 30-60 min a Las Quintas" in h and not re.search(r"30-40 min|25-35 min|35-45 min", h)),
-    ("T2 a-domicilio: 30-60 según tráfico, 0 cifras viejas", "/servicios/electricista-a-domicilio/",
-     lambda h: "con llegada en 30-60 minutos, según el tráfico y la zona" in h and not re.search(r"20 y 30|45-60", h)),
-    ("T3 /blog/: 2 wa.me + ?text= propio + tel en header", "/blog/",
-     lambda h: h.count("wa.me/526673922273") == 2 and "vengo%20del%20blog" in h and h.count('href="tel:+526673922273"') == 2),
-    ("sitemap: 5 lastmod 2026-09-30", "/sitemap.xml", lambda h: h.count("<lastmod>2026-09-30</lastmod>") == 5),
+    ("T1 contacto: regla .btn-primary + .btn-whatsapp inline", "/contacto/",
+     lambda h: h.count(RULE + ".btn-whatsapp{background:#075E54;") == 1),
+    ("T1 /blog/: regla .btn-primary inline", "/blog/", lambda h: h.count(RULE) == 1),
+    ("T2 apagones: title nuevo x6, viejo x0, dateModified", "/blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/",
+     lambda h: h.count("Apagón eléctrico en Culiacán: por qué se va la luz y qué hacer") == 6 and "Apagón en Culiacán: por qué" not in h and '"dateModified": "2026-10-04"' in h),
+    ("T3 LED: decisiones", "/blog/ahorro-energia-iluminacion-led/",
+     lambda h: len(re.findall(r"mejores\s+decisiones para tu economía", h)) == 1 and not re.search(r"mejores\s+decisión ", h)),
+    ("sitemap: 77 lastmod 2026-10-04", "/sitemap.xml", lambda h: h.count("<lastmod>2026-10-04</lastmod>") == 77),
 ]
 for intento in range(1, 9):
     res = []
-    for name, path, fn in checks:
+    for nombre, path, fn in checks:
         try:
             st, h = get(B + path)
-            res.append((name, st == 200 and bool(fn(h)), st))
+            ok = st == 200 and fn(h)
         except Exception as e:
-            res.append((name, False, str(e)[:40]))
-    ok = sum(1 for r in res if r[1])
-    print(f"intento {intento}: {ok}/{len(res)} OK")
-    if ok == len(res):
-        for r in res: print("  ✅", r[0])
-        sys.exit(0)
-    if intento < 8: time.sleep(15)
-for r in res: print("  ✅" if r[1] else "  ❌", r[0], r[2])
+            st, ok = f"ERR {e}", False
+        res.append((nombre, st, ok))
+    bad = [r for r in res if not r[2]]
+    print(f"intento {intento}: {len(res)-len(bad)}/{len(res)} OK")
+    for r in res: print("  ", "OK " if r[2] else "FALLA", r[1], r[0])
+    if not bad: sys.exit(0)
+    time.sleep(15)
 sys.exit(1)
