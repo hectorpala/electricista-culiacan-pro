@@ -1,6 +1,6 @@
 /* medicion.js — eventos de GA4 (vía dataLayer → GTM-5Z2QRZ5Q → G-7CML8QYBGQ) para TODAS las
-   páginas, incluidos los blogs que no cargan main.min.js. Misma medición que el sitio del
-   plomero (1/2-oct-2026): generate_lead {metodo, ubicacion, form_name}, faq_open {pregunta},
+   páginas, incluidos los blogs que no cargan main.min.js. Misma medición que el sitio
+   hermano (1/2-oct-2026): generate_lead {metodo, ubicacion, form_name}, faq_open {pregunta},
    web_vital {metrica, valor, rating} y la bandera ?interno=1 para no contar al dueño. */
 /* Visitas del dueño fuera de GA4: abrir una vez cualquier página con ?interno=1 marca ESTE
    navegador (?interno=0 lo desmarca). ga-disable-<ID> es el apagador oficial de Google y GTM lo
