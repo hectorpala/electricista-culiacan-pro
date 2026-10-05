@@ -2,7 +2,7 @@
 // Version: 4.0.0 - Cache optimizado para GitHub Pages
 // GitHub Pages tiene cache de 10min, SW compensa con cache local largo
 
-const CACHE_VERSION = 'v34';
+const CACHE_VERSION = 'v35';
 const CACHE_NAME = `electricista-culiacan-${CACHE_VERSION}`;
 
 // Assets críticos para precache (LCP/FCP)
@@ -10,7 +10,7 @@ const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/styles.7f293647.css?v=20260923',
-  '/main.min.js?v=202609131222',
+  '/main.min.js?v=20261004',
   '/assets/fonts/inter-400.woff2',
   '/assets/fonts/montserrat-800.woff2',
   '/assets/images/optimizadas/hero-electricista-culiacan-500w.avif',

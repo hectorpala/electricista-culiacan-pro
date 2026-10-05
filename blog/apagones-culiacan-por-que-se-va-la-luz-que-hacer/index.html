@@ -194,12 +194,36 @@
     </script>
 
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5Z2QRZ5Q');
-    </script>
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+(function() {
+  // GTM diferido (protege el LCP): carga en la primera interacción o 1.5 s después del load.
+  // El push de 'gtm.js' de arriba es OBLIGATORIO: sin él GA4 no registra la visita.
+  // Sin requestIdleCallback: Safari/iPhone no lo tiene. Mismo cargador que plomeroculiacanpro.mx.
+  var loaded = false;
+  var events = ['scroll', 'click', 'touchstart', 'keydown'];
+  var loadGTM = function() {
+    if (loaded) return;
+    loaded = true;
+    events.forEach(function(e) { window.removeEventListener(e, loadGTM, true); });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5Z2QRZ5Q';
+    document.head.appendChild(s);
+  };
+  events.forEach(function(e) { window.addEventListener(e, loadGTM, {passive: true, capture: true}); });
+  // Microsoft Clarity: 7 s después del load (no afecta LCP).
+  var loadClarity = function() {
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ukonwm7t1p");
+  };
+  var later = function() { setTimeout(loadGTM, 1500); setTimeout(loadClarity, 7000); };
+  if (document.readyState === 'complete') later(); else window.addEventListener('load', later);
+})();
+</script>
 </head>
 <body><a href="#main-content" class="skip-link" style="position:absolute;top:-40px;left:0;background:#1e40af;color:#fff;padding:8px 16px;z-index:100;font-size:14px;transition:top .2s">Saltar al contenido</a>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5Z2QRZ5Q" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
@@ -486,5 +510,6 @@
         document.querySelectorAll('.faq-question').forEach(function(q){q.addEventListener('click',function(){var it=this.parentElement,a=it.classList.contains('active');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('active');});if(!a)it.classList.add('active');});});
     })();
     </script>
+<script src="/medicion.js?v=20261004" defer></script>
 </body>
 </html>
