@@ -4,13 +4,13 @@
     <!-- Sitemap Principal (incluye las colonias indexables ya diferenciadas) -->
     <sitemap>
         <loc>https://electricistaculiacanpro.mx/sitemap.xml</loc>
-        <lastmod>2026-10-04</lastmod>
+        <lastmod>2026-10-05</lastmod>
     </sitemap>
 
     <!-- Sitemap de imágenes (captions/titles curados para Google Images) -->
     <sitemap>
         <loc>https://electricistaculiacanpro.mx/sitemap-images.xml</loc>
-        <lastmod>2026-07-03</lastmod>
+        <lastmod>2026-10-05</lastmod>
     </sitemap>
 
 </sitemapindex>
