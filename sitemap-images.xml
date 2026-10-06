@@ -137,4 +137,34 @@
         </image:image>
     </url>
 
+    <!-- Blog: Cambio de 110 a 220 V para minisplit -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/cambio-110-a-220v-culiacan-cfe/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/blog-220v-culiacan-1200w.webp</image:loc>
+            <image:caption>Electricista instalando un circuito dedicado de 220 V para un minisplit en Culiacán</image:caption>
+            <image:title>Cambio de 110 a 220 V para minisplit</image:title>
+        </image:image>
+    </url>
+
+    <!-- Blog: Olor a quemado en casa: qué hacer -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/olor-a-quemado-en-casa-que-hacer/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/blog-olor-quemado-casa-1200w.webp</image:loc>
+            <image:caption>Electricista inspeccionando un contacto con marcas de calentamiento con la pastilla abajo</image:caption>
+            <image:title>Olor a quemado en casa: qué hacer</image:title>
+        </image:image>
+    </url>
+
+    <!-- Blog: Por qué parpadean las luces de la casa -->
+    <url>
+        <loc>https://electricistaculiacanpro.mx/blog/por-que-parpadean-las-luces-de-mi-casa/</loc>
+        <image:image>
+            <image:loc>https://electricistaculiacanpro.mx/assets/images/optimizadas/blog-luces-parpadean-1200w.webp</image:loc>
+            <image:caption>Electricista revisando con multímetro un foco que parpadea</image:caption>
+            <image:title>Por qué parpadean las luces de la casa</image:title>
+        </image:image>
+    </url>
+
 </urlset>
