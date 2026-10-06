@@ -187,3 +187,22 @@
 
 # Consolidación: santa-ines (typo histórico, huérfana desde 2026-08-03) -> santa-aynes (canonical real)
 /servicios/electricista-colonias-culiacan/santa-ines/    /servicios/electricista-colonias-culiacan/santa-aynes/    301!
+
+# 301: URLs mal escritas con impresiones en GSC que daban 404 (5-oct-2026)
+/blog/apagones-culiacan-por-que-se-va-la-que-hacer/                         /blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/    301!
+/blog/apagones-culiacan-por-que-se-va-luz-que-hacer/                        /blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/    301!
+/blog/apagones-culiacan-por-que-se-va-que-hacer/                            /blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/    301!
+/blog/como-prevenir-cortocircuito-casa/                                     /blog/como-prevenir-cortocircuitos-casa/    301!
+/blog/como-prevenir-cortocircutos-casa/                                     /blog/como-prevenir-cortocircuitos-casa/    301!
+/blog/como-prevenir-cortos-circuito-casa/                                   /blog/como-prevenir-cortocircuitos-casa/    301!
+/blog/por-ch-se-bota-el-breaker-pastilla-culiacan/                          /blog/por-que-se-bota-el-breaker-pastilla-culiacan/    301!
+/blog/por-que-se-bota-breaker-pastilla-culiacan/                            /blog/por-que-se-bota-el-breaker-pastilla-culiacan/    301!
+/blog/por-que-se-bota-la-breaker-pastilla-culiacan/                         /blog/por-que-se-bota-el-breaker-pastilla-culiacan/    301!
+/blog/por-que-se-bota-la-pastilla-breaker-culiacan/                         /blog/por-que-se-bota-el-breaker-pastilla-culiacan/    301!
+/blog/por-que-se-bota-la-pastilla-breaker-pastilla-culiacan/                /blog/por-que-se-bota-el-breaker-pastilla-culiacan/    301!
+/blog/por-que-se-bota-la-pastilla-culiacan/                                 /blog/por-que-se-bota-el-breaker-pastilla-culiacan/    301!
+/blog/por-que-se-bota-la-pastilla-pastilla-culiacan/                        /blog/por-que-se-bota-el-breaker-pastilla-culiacan/    301!
+/blog/por-que-se-bota-le-breaker-pastilla-culiacan/                         /blog/por-que-se-bota-el-breaker-pastilla-culiacan/    301!
+/blog/por-que-se-bota-the-breaker-pastilla-culiacan/                        /blog/por-que-se-bota-el-breaker-pastilla-culiacan/    301!
+/blog/senales-instalacion-obsoleta/                                         /blog/senales-instalacion-electrica-obsoleta/    301!
+/servicios/no-hay-luz-parte-casa/                                           /servicios/no-hay-luz-en-parte-casa/    301!
