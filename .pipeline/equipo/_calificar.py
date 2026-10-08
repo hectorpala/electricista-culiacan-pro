@@ -1,6 +1,6 @@
 """Añade una calificación. uso: python3 _calificar.py '<json de una línea>'"""
 import sys, json
-WT = "/tmp/equipo-electricista-20261004-2100"
+WT = "/tmp/equipo-electricista-20261007-2101"
 d = json.loads(sys.argv[1])
 d["total"] = d["cumplio"] + d["alcance"] + d["honestidad"] + d["evidencia"]
 d["aprobado"] = d["total"] >= 7
