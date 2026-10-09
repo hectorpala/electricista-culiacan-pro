@@ -4,3 +4,4 @@
 :focus-visible{outline:3px solid #C2410C;outline-offset:2px}
 /* C1: scroll horizontal de tablas en móvil — 2026-06-14 */
 .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+@media (max-width:768px){.nav-menu{overflow-y:auto;overscroll-behavior:contain}}
