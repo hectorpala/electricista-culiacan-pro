@@ -1,45 +1,35 @@
 #!/usr/bin/env python3
-"""Reproduce las líneas base del plan del pensador (corrida 20261007-2101)."""
-import re, glob
-WT = "/tmp/equipo-electricista-20261007-2101/"
-TEL = 'href="tel:+526673922273" class="btn-secondary hover-lift"'
-def rd(p): return open(WT + p, encoding="utf-8").read()
-def hero(h): return h[h.find("<header"):h.find("</header>")]
-print("== T1: tel en hero (debe ser 0) y wa.me en hero (1)")
-for p in ["blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/index.html",
-          "blog/cuanto-cuesta-electricista-culiacan/index.html",
-          "blog/breaker-se-bota-causas-soluciones-culiacan/index.html"]:
-    try:
-        h = rd(p)
-    except FileNotFoundError:
-        print("  NO EXISTE", p); continue
-    hh = hero(h)
-    print(f"  {p}: tel-hero={hh.count(TEL)} wa-hero={hh.count('wa.me/526673922273')} btn-whatsapp={hh.count('btn-primary btn-whatsapp')} hero-content={hh.count('hero-content')}")
-ref = [l for l in rd("blog/olor-a-quemado-en-casa-que-hacer/index.html").split("\n") if TEL in l]
-print("  ref olor líneas con TEL:", len(ref), "| strip:", ref[0].strip()[:80] if ref else None)
-print("== blogs breaker: slug real")
-print("  ", [g.replace(WT, "") for g in glob.glob(WT + "blog/*breaker*")])
-print("== T2: cadenas (deben ser 1 en visible; apagones href 0)")
-a = rd("blog/cuando-llamar-electricista-emergencia/index.html")
-b = rd("blog/seguridad-electrica-temporada-lluvias/index.html")
-print("  emergencia: '<p>Una emergencia eléctrica real involucra'", a.count("<p>Una emergencia eléctrica real involucra"),
-      "| 'apagones totales sin explicación'", a.count("apagones totales sin explicación"),
-      "| href apagones", a.count('href="/blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/"'))
-print("  lluvias: '<p>Sí, los apagones y fluctuaciones de voltaje'", b.count("<p>Sí, los apagones y fluctuaciones de voltaje"),
-      "| href apagones", b.count('href="/blog/apagones-culiacan-por-que-se-va-la-luz-que-hacer/"'))
-print("== T3: 3 cadenas en servicios/*")
-S1 = '<p style="color:#475569;margin-bottom:1.5rem">Electricista a domicilio con llegada inmediata. Atención profesional en tu hogar o negocio.</p>'
-S2 = '<p style="color:#475569;margin-bottom:1.5rem">Consulta los precios de servicios eléctricos. Cotizaciones claras y justas con factura incluida.</p>'
-S3 = '<span style="color:#C2410C;font-weight:600">Ver precios →</span>'
-rows = []
-for p in sorted(glob.glob(WT + "servicios/*/index.html")):
-    h = open(p, encoding="utf-8").read()
-    c = (h.count(S1), h.count(S2), h.count(S3))
-    if any(c): rows.append((p.replace(WT, ""), c))
-for r in rows: print("  ", r)
-print("  total páginas con alguna:", len(rows))
-print("== respaldo destinos")
-d = rd("servicios/electricista-a-domicilio/index.html"); pz = rd("servicios/electricista-precios/index.html")
-print("  a-domicilio 'generalmente el mismo día':", d.count("generalmente el mismo día"))
-print("  precios 'costo total antes de iniciar':", len(re.findall(r"costo total antes de iniciar", pz, re.I)), "| 'sin cargos ocultos':", len(re.findall(r"sin cargos ocultos", pz, re.I)), "| CFDI:", pz.count("CFDI"))
-print("  'llegada inmediata' site-wide (html):", sum(open(g, encoding='utf-8').read().count('con llegada inmediata') for g in glob.glob(WT + '**/index.html', recursive=True)))
+"""Reproduce las líneas base del plan del pensador (corrida 20261008-2100)."""
+import re, os, hashlib, collections, glob
+WT = "/tmp/equipo-electricista-20261008-2100/"
+def rd(p): return open(WT + p, encoding="utf-8", errors="ignore").read()
+print("== T1: 3 hojas CSS")
+for f in ["styles.css", "styles.min.css", "styles.7f293647.css"]:
+    s = rd(f)
+    print(f" {f}: md5={hashlib.md5(s.encode()).hexdigest()} nav-menu={s.count('.nav-menu')} overflow-en-nav-menu={len(re.findall(r'\.nav-menu[^{]*\{[^}]*overflow', s))} contiene-regla-nueva={s.count('overflow-y:auto;overscroll-behavior:contain')}")
+print(" sw.js:", re.search(r"CACHE_VERSION\s*=\s*'([^']+)'", rd("sw.js")).group(1))
+c = collections.Counter()
+inline_overflow = 0
+for d, ds, fs in os.walk(WT):
+    if any(x in d for x in ("/.git", "/.pipeline", "/node_modules", "/.claude")): continue
+    for f in fs:
+        if f.endswith(".html"):
+            h = open(os.path.join(d, f), encoding="utf-8", errors="ignore").read()
+            for t in set(re.findall(r"styles[.a-z0-9]*\.css\?v=([0-9]+)", h)): c[t] += 1
+            if re.search(r"\.nav-menu[^{]*\{[^}]*overflow", h): inline_overflow += 1
+print(" ?v= por token:", dict(c), "| páginas con overflow inline en .nav-menu:", inline_overflow)
+ct = rd("contacto/index.html").split("\n")
+print(" contacto l13-14:", [l.strip()[:90] for l in ct[12:14]])
+print("== T2: '800w.webp 420w'")
+hits = [g.replace(WT, "") for g in glob.glob(WT + "**/index.html", recursive=True) if re.search(r"800w\.webp 420w", open(g, encoding="utf-8", errors="ignore").read())]
+print(" páginas:", hits)
+for a in ["mantenimiento-tablero-electrico-culiacan", "prevenir-cortocircuitos-culiacan"]:
+    for w in ("420w", "800w"):
+        p = WT + f"assets/images/optimizadas/{a}-{w}.webp"
+        print(f" {a}-{w}.webp:", os.path.getsize(p) if os.path.exists(p) else "NO EXISTE")
+print("== T3: gracias/")
+g = rd("gracias/index.html")
+print(" regla inline presente:", g.count("min-height:44px}.btn-whatsapp{background:#075E54"), "| a.btn-primary:", len(re.findall(r'<a[^>]+class="btn-primary', g)), "| noindex:", g.count('name="robots" content="noindex, follow"'))
+print(" termina style l26:", g.split("\n")[25].strip()[-120:] if len(g.split("\n")) > 25 else "?")
+cc = rd("contacto/index.html")
+print(" contacto tiene la regla:", cc.count("min-height:44px}.btn-whatsapp{background:#075E54"))

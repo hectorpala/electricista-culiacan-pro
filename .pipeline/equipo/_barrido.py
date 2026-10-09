@@ -7,7 +7,7 @@ Comprueba: HTTP 200 en :8097, JSON-LD parsea (nº bloques, nº Question), canoni
 """
 import sys, re, json, urllib.request
 BASE = "http://127.0.0.1:8097/"
-WT = "/tmp/equipo-electricista-20261007-2101/"
+WT = "/tmp/equipo-electricista-20261008-2100/"
 rows = []
 for rel in sys.argv[1:]:
     rel = rel.replace(WT, "")
