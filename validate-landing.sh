@@ -49,12 +49,20 @@ echo "Validando: $FILE"
 echo "-------------------------------------------"
 
 # 1. Security Headers
+# X-Frame-Options solo vale como header HTTP real (en <meta> el navegador lo
+# ignora y lanza console.error): se exige en _headers/netlify.toml y se prohíbe
+# en la página. Decisión del dueño 10-oct-2026 (bk-df162f50).
+RAIZ="$(cd "$(dirname "$0")" && pwd)"
 if echo "$CONTENT" | grep -q 'X-Content-Type-Options' && \
-   echo "$CONTENT" | grep -q 'X-Frame-Options' && \
-   echo "$CONTENT" | grep -q 'X-XSS-Protection'; then
-    pass "Security headers (X-Content-Type, X-Frame, X-XSS)"
+   echo "$CONTENT" | grep -q 'X-XSS-Protection' && \
+   grep -qi '^[[:space:]]*X-Frame-Options' "$RAIZ/_headers" && \
+   grep -qi 'X-Frame-Options' "$RAIZ/netlify.toml"; then
+    pass "Security headers (X-Content-Type, X-XSS en la página; X-Frame en _headers y netlify.toml)"
 else
-    fail "Faltan security headers (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection)"
+    fail "Faltan security headers (X-Content-Type-Options/X-XSS-Protection en la página o X-Frame-Options en _headers/netlify.toml)"
+fi
+if echo "$CONTENT" | grep -qi 'http-equiv="X-Frame-Options"'; then
+    fail "X-Frame-Options en <meta> es inválido (va como header HTTP en _headers/netlify.toml)"
 fi
 
 # 2. Robots meta
