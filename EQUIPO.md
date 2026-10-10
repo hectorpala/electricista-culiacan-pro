@@ -14,7 +14,7 @@ memoria (leer antes de trabajar, en este orden):
 
 backlog:
   next: python3 .pipeline/gestor-backlog.py next --max 10
-  add: python3 .pipeline/gestor-backlog.py add - <<'EOF' {json} EOF   (--ejemplo para el spec; riesgo alto → cola humana)
+  add: python3 .pipeline/gestor-backlog.py add <ruta.json>   (o `add -` con el JSON por stdin; NO existe `--ejemplo`: el spec es el de `.pipeline/equipo/_bk-*.json` — firma, tipo, objetivo, descripcion, evidencia, impacto, esfuerzo, riesgo, origen; riesgo alto → cola humana)
   close: python3 .pipeline/gestor-backlog.py close --id X --estado hecho|descartado|bloqueado --commit SHA --nota "..."
   approve: python3 .pipeline/gestor-backlog.py approve --id X --riesgo medio --nota "DECISIÓN DEL COORDINADOR: ..."
   stats: python3 .pipeline/gestor-backlog.py stats
@@ -74,6 +74,7 @@ decide_humano:
 - [2026-09-21] ESPECIFICACION: una tarea de CSS servido (bump site-wide) va PRIMERA en el plan o no va: al final de la corrida no cabe en los 60 min (T5 diferida a bk-b1850812). Y la ceremonia es `_do_full_bump` de auto-fixers, no `bump-css-version.py` (ver assets).
 
 ## Lecciones → ejecutor
+- [2026-10-09] PROCESO: receta AVIF que salió 5/5 al primer intento (T1, commit 61903aaa): `dwebp -quiet <n>.webp -o /tmp/<n>.png` + `avifenc -q 45 -s 4 /tmp/<n>.png <n>.avif` → 45-52 % de los bytes del WebP hermano con PSNR 35.6-37.5 dB (`avifdec` + `magick compare -metric PSNR`); aceptar solo si bytes < WebP, mismas dimensiones (`sips -g pixelWidth -g pixelHeight`) y PSNR ≥ 32 dB (REGLAS 2026-07-25). Markup: preload con `type="image/avif"` antes de `fetchpriority` + `<source type="image/avif">` antes del webp (index.html l.5-12 y picture.hero-background). Pendiente en bk-b2b3fa3c (7 blogs, 14 AVIF).
 - [2026-09-23] ESPECIFICACION: un fixer nuevo va con unit test propio (importlib sobre auto-fixers.py: casos positivo, negativo, fuera de contexto e idempotencia) ANTES del `run --apply`; los dos fixers de hoy (brand-text-contrast-inline, jsonld-name-colonia) salieron 12/12 así. Y si dos ejecutores editan auto-fixers.py a la vez, cada uno inserta en la región que le asignó el coordinador (tras un fixer nombrado / al final) y relee si Edit falla.
 - [2026-09-13] HERRAMIENTA: `auto-fixers.py run --solo <fixer> --apply` SIN rutas dispara bump de JS en 679 HTML; pasar siempre las rutas de la tarea; si pasó, `git checkout --` de lo ajeno antes de reportar.
 - [2026-09-21] CAPACIDAD: un `<a>` nuevo en texto suelto (FAQ, párrafos, "Sobre nosotros") hereda el azul UA #0000EE porque el sitio no tiene regla global `a{}`; lleva SIEMPRE `style="color:#1e40af;text-decoration:underline"` (patrón del footer de blogs) salvo que esté dentro de un componente con regla propia (`.benefits-cta a`, `.site-mini-nav a`, `.pricing-note a`). T3 20260921: 4 enlaces corregidos por el arreglador.

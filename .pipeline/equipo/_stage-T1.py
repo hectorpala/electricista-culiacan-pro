@@ -3,7 +3,7 @@
 para los archivos COMPARTIDOS con T2/T3 se stagea HEAD + solo el token ?v= nuevo (hash-object + update-index).
 Uso: python3 _stage-T1.py            (stagea y muestra verificación)"""
 import subprocess, re, sys
-WT = "/tmp/equipo-electricista-20261008-2100"
+WT = "/tmp/equipo-electricista-20261009-2100"
 SHARED = ["blog/ahorro-energia-iluminacion-led/index.html", "blog/seguridad-electrica-temporada-lluvias/index.html",
           "blog/cuando-llamar-electricista-emergencia/index.html", "blog/senales-instalacion-electrica-obsoleta/index.html",
           "blog/mantenimiento-tablero-electrico-preventivo/index.html", "gracias/index.html"]
