@@ -1,0 +1,11 @@
+{
+  "firma": "enlazar::servicios/{contratacion-media-tension-cfe,correccion-factor-de-potencia,paneles-solares-empresas,proyecto-electrico-obra-nueva}/index.html (fixer enlace-emergencia-servicios)",
+  "tipo": "enlazar",
+  "objetivo": "4 páginas B2B del 10-oct sin enlace a /servicios/emergencia-24-7/",
+  "descripcion": "De las 10 B2B nuevas del despliegue ajeno del 10-oct, 4 (contratacion-media-tension-cfe, correccion-factor-de-potencia, paneles-solares-empresas, proyecto-electrico-obra-nueva) no enlazan /servicios/emergencia-24-7/ (0 apariciones) y el fixer registrado `enlace-emergencia-servicios` (bk-b08aec58, aplicado a 30/32 servicios) las detecta pendientes: `auto-fixers.py verify --base origin/main` las marca LIBRE aunque solo lleven el fixer contacto-widget-tap44 (T3 20261011-2246). Aplicar `python3 .pipeline/auto-fixers.py run --solo enlace-emergencia-servicios --apply <las 4 rutas absolutas>` (añade una tarjeta de emergencia al final del grid clonando las vecinas), medir con puppeteer que el grid no desborda a 375 y certificar con verify (las 4 deben salir mecánicas).",
+  "evidencia": "equipo-ejecutor T3 20261011-2246 (/tmp/t3-why.py): verify mecanicos 24 / libres 4 de las 28 por el fixer pendiente; grep -c emergencia-24-7 = 0 en las 4.",
+  "impacto": 2,
+  "esfuerzo": 1,
+  "riesgo": "bajo",
+  "origen": "equipo-coordinador"
+}
