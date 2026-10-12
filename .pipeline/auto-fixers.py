@@ -1201,6 +1201,46 @@ def _fix_colonia_hero_cta_directo(h):
     return h.replace(_HERO_CTA_LITERAL, block, 1), 1
 
 
+# ── enlaces tel:/wa.me/mailto: del bloque "Información de Contacto" de servicios/blogs:
+#    inline sin min-height → 20 px de alto en móvil (tap-target < 44px, bk-103ef582).
+#    SCOPE ESTRECHO: solo el segmento entre `<!-- Información de Contacto -->` y el siguiente
+#    `<!-- Formulario de Contacto -->`; si falta alguno de los dos, no se toca nada. ──
+_CW_START = "<!-- Información de Contacto -->"
+_CW_END = "<!-- Formulario de Contacto -->"
+_CW_ANCHOR = re.compile(r'(<a\s+href="(?:tel:|https://wa\.me/|mailto:)[^"]*"[^>]*?\sstyle=")([^"]*)(")')
+_CW_ADD = ";display:inline-flex;align-items:center;min-height:44px"
+
+def _cw_segment(h):
+    i = h.find(_CW_START)
+    if i < 0:
+        return None
+    j = h.find(_CW_END, i + len(_CW_START))
+    if j < 0:
+        return None
+    return i, j
+
+def _det_contacto_widget_tap44(h):
+    seg = _cw_segment(h)
+    if not seg:
+        return False
+    return any("min-height" not in m.group(2) for m in _CW_ANCHOR.finditer(h[seg[0]:seg[1]]))
+
+def _fix_contacto_widget_tap44(h):
+    seg = _cw_segment(h)
+    if not seg:
+        return h, 0
+    cnt = [0]
+    def rep(m):
+        if "min-height" in m.group(2):
+            return m.group(0)
+        cnt[0] += 1
+        return m.group(1) + m.group(2).rstrip().rstrip(";") + _CW_ADD + m.group(3)
+    new = _CW_ANCHOR.sub(rep, h[seg[0]:seg[1]])
+    if not cnt[0]:
+        return h, 0
+    return h[:seg[0]] + new + h[seg[1]:], cnt[0]
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -1290,6 +1330,8 @@ FIXERS = [
      "mecanico", _det_colonia_jsonld_business_id, _fix_colonia_jsonld_business_id),
     ("colonia-hero-cta-directo", "hero de las 29 colonias INDEXABLES con un solo botón 'Solicitar Atención Inmediata' que ancla a #contacto (primer WhatsApp real a ~6200px en móvil) → par de botones directos WhatsApp (btn-primary) + Llamar (btn-secondary) copiado byte a byte del hero de la home; único cambio: el href de WhatsApp es el del botón wa.me de #contacto de esa página; excluye las 613 colonias NOINDEX",
      "mecanico", _det_colonia_hero_cta_directo, _fix_colonia_hero_cta_directo),
+    ("contacto-widget-tap44", "enlaces tel/wa.me/mailto del bloque 'Información de Contacto' de 30 páginas a 20 px de alto → display:inline-flex;align-items:center;min-height:44px (bk-103ef582)",
+     "mecanico", _det_contacto_widget_tap44, _fix_contacto_widget_tap44),
 ]
 
 
