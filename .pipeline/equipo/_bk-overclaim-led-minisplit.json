@@ -1,0 +1,11 @@
+{
+  "firma": "content-fix::blog/index.html + servicios/instalacion-minisplit/index.html (exageraciones de ahorro y certificación)",
+  "tipo": "content-fix",
+  "objetivo": "blog/index.html (tarjeta LED 'hasta 80%') + servicios/instalacion-minisplit/index.html ('Ahorra hasta 40%', 'garantía certificada', 'Instalación certificada')",
+  "descripcion": "Familia REGLAS 2026-06-19 OVERCLAIM-ABSOLUTO y 2026-06-21 OVERCLAIM-CFE/NOM: (1) blog/index.html, tarjeta del post de LED: 'Cómo la iluminación LED reduce tu recibo de luz hasta 80%' → sin cifra o con la del post ('Cuánto puedes reducir tu recibo de luz con iluminación LED…', ya usada en la home desde 2e6f2e9d). (2) servicios/instalacion-minisplit: H3 'Ahorra hasta 40% en consumo eléctrico' (y la meta description 'Ahorra hasta 40% en luz' — OJO: la description es META; si se toca, es tarea de riesgo medio y dateModified), 'Instalación certificada en 3 horas promedio' y 'garantía certificada' → 'a norma NOM-001-SEDE' / 'garantía por escrito de 30 a 90 días'. Cada reemplazo literal con assert 1; JSON-LD == visible si la FAQ repite el texto.",
+  "evidencia": "equipo-pensador 20261014-2100 (descartado_con_dato: 2 entradas NUEVO para backlog); grep de 'hasta 80%' en blog/index.html = 1; 'certificad' en instalacion-minisplit = 2.",
+  "impacto": 2,
+  "esfuerzo": 1,
+  "riesgo": "bajo",
+  "origen": "equipo-coordinador"
+}

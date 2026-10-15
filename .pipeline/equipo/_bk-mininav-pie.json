@@ -1,0 +1,11 @@
+{
+  "firma": "a11y-tap-target::mini-nav del pie en 30 páginas (fixer nuevo mininav-pie-tap44)",
+  "tipo": "a11y-tap-target",
+  "objetivo": "28 servicios + 2 blogs con <!-- Mini Nav --> + <nav style=\"margin-bottom:2rem\"> (180 anclas a 19 px de alto a 375)",
+  "descripcion": "Actualiza bk-fe698c6f con el censo del 14-oct: son 30 páginas (no 20), 180/180 anclas del mini-nav del pie a 19 px de alto a 375; 2 variantes de style inline: 168 con 'color:#CBD5E1;text-decoration:none' y 12 con ';transition:color 0.2s'. Exige fixer NUEVO en auto-fixers.py (det/fix idempotente + unit test 4 casos ANTES del apply, lección ejecutor 2026-09-23) que añada 'display:inline-flex;align-items:center;min-height:44px' a cada ancla del bloque, `run --solo <id> --apply <30 rutas explícitas>` y `verify` certificando las 30 como mecánicas; puppeteer 30×2 anchos con 44 px y 0 overflow. Va SOLA o como T1 de una corrida (30 páginas + fixer + unit test ≈ 20 min).",
+  "evidencia": "equipo-pensador 20261014-2100: 'bk-fe698c6f mini-nav del pie: VIGENTE y mayor de lo registrado (30 páginas, 180/180 anclas a 19 px)'.",
+  "impacto": 2,
+  "esfuerzo": 2,
+  "riesgo": "medio",
+  "origen": "equipo-coordinador"
+}

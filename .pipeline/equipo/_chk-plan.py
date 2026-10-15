@@ -1,31 +1,29 @@
 #!/usr/bin/env python3
-"""Reproduce las líneas base del plan del pensador (corrida 20261009-2100)."""
-import re, os, glob, shutil, subprocess
-WT = "/tmp/equipo-electricista-20261009-2100/"
-def rd(p): return open(WT + p, encoding="utf-8", errors="ignore").read()
-print("== herramientas:", {t: shutil.which(t) for t in ["dwebp", "avifenc", "magick", "sips", "avifdec"]})
-home = rd("index.html")
-print("== home preload (l.5-12):")
-for l in home.split("\n")[4:12]: print("  ", l.strip()[:200])
-print("== home <source avif>:", re.findall(r'<source type="image/avif"[^>]*>', home)[:2])
-m = re.search(r'<img[^>]*logo-256w\.webp[^>]*>', home); print("== home logo:", m.group(0)[:300] if m else None)
-d = WT + "assets/images/optimizadas/"
-for n in ["logo-128w.webp", "logo-256w.webp"] + [f"{b}-{w}.webp" for b in ["mantenimiento-tablero-electrico-culiacan", "emergencia-electrica-culiacan", "instalacion-minisplit-culiacan"] for w in ("420w", "800w", "1200w")]:
-    print(f"  {n}: {os.path.getsize(d+n) if os.path.exists(d+n) else 'NO EXISTE'}")
-print("== avif existentes:", len(glob.glob(d + "*.avif")), glob.glob(d + "*.avif")[:6])
-print("== sw.js precache logo:", rd("sw.js").count("logo-128w"), rd("sw.js").count("logo-256w"))
-print("== home '420w.webp 420w':", len(re.findall(r"420w\.webp 420w", home)))
-print("== news-grid en una línea:", home.count('class="news-grid"'), [i for i, l in enumerate(home.split("\n"), 1) if 'class="news-grid"' in l])
-for s in ['srcset="/assets/images/optimizadas/mantenimiento-tablero-electrico-culiacan-800w.webp 800w" sizes=',
-          '<img src="/assets/images/optimizadas/mantenimiento-tablero-electrico-culiacan-800w.webp" alt="Por qué se bota el breaker',
-          'srcset="/assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp 800w" sizes=',
-          '<img src="/assets/images/optimizadas/emergencia-electrica-culiacan-800w.webp" alt="Apagón eléctrico en Culiacán',
-          'srcset="/assets/images/optimizadas/instalacion-minisplit-culiacan-800w.webp 800w" sizes=',
-          '<img src="/assets/images/optimizadas/instalacion-minisplit-culiacan-800w.webp" alt="Recibo de luz alto']:
-    print("  T3 count", home.count(s), s[:70])
-print("== blogs: logo-literal / image-avif / preload-webp-hero")
-for f in sorted(glob.glob(WT + "blog/**/index.html", recursive=True)):
-    h = open(f, encoding="utf-8", errors="ignore").read()
-    pre = re.findall(r'<link rel="preload" as="image"[^>]*>', h)
-    print(f"  {h.count('src=\"/assets/images/electricista-culiacan-pro-logo.webp\"')} {h.count('image/avif')} {len(pre)} {f.replace(WT,'')} :: {pre[0][:150] if pre else '-'}")
-print("== otras páginas con el logo 512:", sum(1 for f in glob.glob(WT + "**/index.html", recursive=True) if 'src="/assets/images/electricista-culiacan-pro-logo.webp"' in open(f, encoding="utf-8", errors="ignore").read()))
+"""Cotejo del coordinador del plan 20261014: T1 (tarjetas de blog de la home) y T5 (lista de servicios)."""
+import re, os
+WT = "/tmp/equipo-electricista-20261014-2100"
+h = open(WT + "/index.html", encoding="utf-8").read()
+E = {'senales-instalacion-electrica-obsoleta': 'instalacion-electrica-obsoleta-culiacan',
+     'mantenimiento-tablero-electrico-preventivo': 'mantenimiento-tablero-electrico-culiacan',
+     'ahorro-energia-iluminacion-led': 'ahorro-energia-iluminacion-led-culiacan',
+     'como-prevenir-cortocircuitos-casa': 'prevenir-cortocircuitos-culiacan',
+     'cuando-llamar-electricista-emergencia': 'emergencia-electrica-culiacan'}
+for s, root in E.items():
+    j = h.find('href="./blog/' + s + '/"')
+    a = h[h.rfind('<article', 0, j):h.find('</article>', j)]
+    srcs = re.findall(r'(?:src|srcset)="([^"]+)"', a)
+    post = open(f"{WT}/blog/{s}/index.html", encoding="utf-8").read()
+    h1 = re.search(r'<h1[^>]*>(.*?)</h1>', post, re.S)
+    h1 = re.sub(r'<[^>]+>', '', h1.group(1)).strip() if h1 else None
+    hero = re.search(r'rel="preload" as="image"[^>]*href="([^"]+)"', post)
+    ex = [os.path.exists(f"{WT}/assets/images/optimizadas/{root}-{w}w.webp") for w in (420, 800, 1200)]
+    print(s, "\n  card srcs:", srcs, "\n  H1:", h1, "\n  post preload:", hero.group(1) if hero else None, "\n  variantes 420/800/1200:", ex)
+bi = open(WT + "/blog/index.html", encoding="utf-8").read()
+for s, root in E.items():
+    j = bi.find('/blog/' + s + '/')
+    a = bi[bi.rfind('<article', 0, j):bi.find('</article>', j)] if j > 0 else ''
+    print("blog/index card", s, re.findall(r'src="([^"]+)"', a)[:1], re.findall(r'<h3[^>]*>.*?>(.*?)</a>', a, re.S)[:1])
+u = re.search(r'<ul id="lista-servicios-seo">(.*?)</ul>', h, re.S).group(1)
+print("lista li:", u.count('<li><a '), "enlaces home a 4 destinos:",
+      [h.count('href="/servicios/' + s + '/"') for s in ['instalacion-minisplit', 'mantenimiento-tableros', 'instalacion-tierra-fisica', 'instalacion-ventiladores-techo']])
+print(re.findall(r'<li><a href="/servicios/[^"]+">[^<]+</a></li>', u))

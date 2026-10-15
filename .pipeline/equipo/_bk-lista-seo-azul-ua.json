@@ -1,0 +1,11 @@
+{
+  "firma": "a11y-color-contraste::index.html #lista-servicios-seo (36 enlaces en azul UA #0000EE)",
+  "tipo": "a11y-fix",
+  "objetivo": "index.html, regla inline `#lista-servicios-seo li a{display:inline-flex;align-items:center;min-height:44px}`",
+  "descripcion": "Los 36 enlaces de la lista 'Servicios de Electricidad' de la home (incluidos los 4 añadidos el 14-oct) se renderizan en azul UA rgb(0, 0, 238) porque la regla inline no fija color y el sitio no tiene regla global a{} (EQUIPO.md lección 2026-09-21). CLAUDE.md/REGLAS 2026-06-20: los azules que no son de marca están prohibidos; mapear a #1e40af. Fix de 1 línea: añadir `color:#1e40af` (y, si se quiere, `text-decoration:underline`) a esa regla inline; medir con puppeteer que los 36 dan rgb(30, 64, 175) a 375/1280 y que el contraste sobre el fondo de la sección sigue ≥ 4.5:1. No toca metas ni JSON-LD; la home es la referencia, así que si alguna página clonó la lista, propagar después.",
+  "evidencia": "equipo-ejecutor T4 20261014-2100: puppeteer shell 3 anchos, `#lista-servicios-seo li a` color rgb(0, 0, 238) en la referencia reparacion-minisplit y en los 4 nuevos.",
+  "impacto": 2,
+  "esfuerzo": 1,
+  "riesgo": "bajo",
+  "origen": "equipo-coordinador"
+}
