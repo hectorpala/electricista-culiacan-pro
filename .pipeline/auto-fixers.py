@@ -1241,6 +1241,45 @@ def _fix_contacto_widget_tap44(h):
     return h[:seg[0]] + new + h[seg[1]:], cnt[0]
 
 
+# ── mininav-pie-tap44: los 6 enlaces del mini-nav del pie (`<!-- Mini Nav -->` hasta el primer
+#    `</nav>`) miden 19 px de alto → inline-flex centrado, min 44x44 (bk-3c351732).
+#    SCOPE ESTRECHO: solo ese segmento; si falta el comentario o el `</nav>`, no se toca nada. ──
+_MN_START = "<!-- Mini Nav -->"
+_MN_END = "</nav>"
+_MN_ANCHOR = re.compile(r'(<a\s+href="[^"]*"\s+style=")([^"]*)(")')
+_MN_ADD = ";display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px"
+
+def _mn_segment(h):
+    i = h.find(_MN_START)
+    if i < 0:
+        return None
+    j = h.find(_MN_END, i + len(_MN_START))
+    if j < 0:
+        return None
+    return i, j
+
+def _det_mininav_pie_tap44(h):
+    seg = _mn_segment(h)
+    if not seg:
+        return False
+    return any("min-height" not in m.group(2) for m in _MN_ANCHOR.finditer(h[seg[0]:seg[1]]))
+
+def _fix_mininav_pie_tap44(h):
+    seg = _mn_segment(h)
+    if not seg:
+        return h, 0
+    cnt = [0]
+    def rep(m):
+        if "min-height" in m.group(2):
+            return m.group(0)
+        cnt[0] += 1
+        return m.group(1) + m.group(2).rstrip().rstrip(";") + _MN_ADD + m.group(3)
+    new = _MN_ANCHOR.sub(rep, h[seg[0]:seg[1]])
+    if not cnt[0]:
+        return h, 0
+    return h[:seg[0]] + new + h[seg[1]:], cnt[0]
+
+
 FIXERS = [
     ("faq-item-details-class", "<details> de FAQ con el mismo estilo inline que .faq-item pero sin la clase → pierde el tap-target móvil de 48px del <summary> (revisor-móvil mov-002/bk-9dc9f9ac)",
      "mecanico", _det_faq_item_details, _fix_faq_item_details),
@@ -1332,6 +1371,8 @@ FIXERS = [
      "mecanico", _det_colonia_hero_cta_directo, _fix_colonia_hero_cta_directo),
     ("contacto-widget-tap44", "enlaces tel/wa.me/mailto del bloque 'Información de Contacto' de 30 páginas a 20 px de alto → display:inline-flex;align-items:center;min-height:44px (bk-103ef582)",
      "mecanico", _det_contacto_widget_tap44, _fix_contacto_widget_tap44),
+    ("mininav-pie-tap44", "enlaces del mini-nav del pie de 30 páginas a 19 px de alto → display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px (bk-3c351732)",
+     "mecanico", _det_mininav_pie_tap44, _fix_mininav_pie_tap44),
 ]
 
 
