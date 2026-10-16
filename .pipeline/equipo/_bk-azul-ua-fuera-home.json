@@ -1,0 +1,11 @@
+{
+  "firma": "a11y-color-contraste::enlaces en azul UA #0000EE fuera de la home (26 colonias indexables, 4 zonas + centro, 14 blogs)",
+  "tipo": "a11y-fix",
+  "objetivo": "~26 colonias indexables (7-9 enlaces c/u: lista de servicios y 'Colonias Cercanas'), servicios/electricista-zona-{norte,sur,oriente,poniente}-culiacan + electricista-centro-culiacan (2-6 c/u: tarjetas de colonias), 14 blogs (2-3 c/u: tel 667 392 2273 y mailto del bloque de contacto en .container)",
+  "descripcion": "Censo puppeteer del pensador 20261015 en las 97 URLs del sitemap: tras T1 (8efe33b4, home 48 → 0), quedan enlaces renderizados en azul UA rgb(0, 0, 238) porque no hay regla global a{} y su regla inline no fija color (EQUIPO.md lección 2026-09-21; CLAUDE.md: azul no-marca → #1e40af). Son > 18 archivos → exige FIXER NUEVO en auto-fixers.py (det/fix idempotente + unit test 4 casos ANTES del apply, patrón contacto-widget-tap44 / mininav-pie-tap44), probablemente 3 fixers por familia (colonias: lista de servicios + colonias cercanas; zonas: tarjetas; blogs: tel/mailto del bloque de contacto), aplicados con `run --solo <id> --apply <rutas explícitas>` y certificados con `verify --base origin/main`. Criterio: puppeteer shell en las N × 375/1280: 0 `a` visibles con color rgb(0, 0, 238) que no sean `.logo` (el enlace del logo da falso positivo: su texto lleva color propio); contraste ≥ 4.5:1 sobre el fondo efectivo. Sin bump (style inline). Medir la línea base por página ANTES del apply.",
+  "evidencia": "equipo-pensador 20261015-2100: censo puppeteer 97 URLs (home 48 reales; colonias 7-9 c/u; zonas/centro 2-6; blogs 2-3).",
+  "impacto": 2,
+  "esfuerzo": 2,
+  "riesgo": "medio",
+  "origen": "equipo-coordinador"
+}

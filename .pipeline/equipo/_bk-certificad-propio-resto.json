@@ -1,0 +1,11 @@
+{
+  "firma": "content-fix::'certificad*' propio restante tras 0d2279ef (emergencia-24-7, reparacion-cortocircuitos, instalacion-ventiladores-techo, electricista-comercial)",
+  "tipo": "content-fix",
+  "objetivo": "servicios/emergencia-24-7/index.html (l.~506 'reparación certificada'), servicios/reparacion-cortocircuitos/index.html (l.~536 'Certificación de trabajo seguro'), servicios/instalacion-ventiladores-techo/index.html ('conexión eléctrica certificada' ×4), servicios/electricista-comercial/index.html ('electricista comercial certificado' ×3, parte en metas/H1)",
+  "descripcion": "Censo del pensador 20261015: tras el commit de Héctor 0d2279ef (4-oct, fuera 'certificado' propio; los consejos genéricos se quedan) y las tareas T4/T5 del 15-oct (post LED + minisplit), quedan estos usos en los que el NEGOCIO afirma certificación propia. Reemplazos literales en Python con assert de conteo, patrón REGLAS 2026-06-21 OVERCLAIM-NOM: 'certificada' → 'a norma NOM-001-SEDE' / 'por escrito'; 'Certificación de trabajo seguro' → 'Pruebas de funcionamiento y trabajo seguro'. Dejar las certificaciones de PRODUCTO (breakers/gas R410A certificados). OJO electricista-comercial: si el literal está en title/description/H1 es META → después del 20-oct (congelamiento) y riesgo medio + dateModified si lo hay. Si la FAQ repite el texto, JSON-LD == visible.",
+  "evidencia": "equipo-pensador 20261015-2100 (descartado para hoy por disjunción con T3, que tocaba emergencia y cortocircuitos); bk-c27d6ae5 (humano) cubre la POLÍTICA general de 'certificad*' (718 usos en 668 páginas) — esta tarea es solo la parte inequívoca (afirmación propia).",
+  "impacto": 2,
+  "esfuerzo": 1,
+  "riesgo": "bajo",
+  "origen": "equipo-coordinador"
+}
