@@ -3,8 +3,8 @@
 proyecto: electricista
 repo: /Users/openclaw/Sitios Web/Electricista Culiacán
 produccion: https://electricistaculiacanpro.mx/
-objetivo: más llamadas y WhatsApp (wa.me/526674787021; llamadas 667 392 2273) desde Culiacán; después indexación y CTR en GSC; la home es el activo que convierte (no degradarla).
-# NOTA: WhatsApp cambió a 667 478 7021 el 19-oct-2026 (el 392 2273 quedó bloqueado en WhatsApp; llamadas siguen en 392 2273).
+objetivo: más llamadas y WhatsApp (wa.me/526674787021; llamadas 667 478 7021) desde Culiacán; después indexación y CTR en GSC; la home es el activo que convierte (no degradarla).
+# NOTA: 19-oct-2026: llamadas también pasan a 667 478 7021 (el 392 2273 deja de usarse en el sitio); un solo número para WhatsApp y llamadas.
 propiedad_gsc: https://electricistaculiacanpro.mx/
 
 memoria (leer antes de trabajar, en este orden):
@@ -30,7 +30,7 @@ gate_archivo:
 - python3 .pipeline/gate-pagina.py <ruta/index.html>   → CANDADO OK (validate-landing + ci-gate + anti-doorway Jaccard < 0.80)
 
 invariantes (toda página servida):
-- HTTP 200; JSON-LD parsea; canonical == og:url == twitter:url; 0 apariciones de "plomero" (fuga de la plantilla hermana); email SOLO contacto@electricistaculiacanpro.mx; teléfono (llamadas) 667 392 2273 / wa.me/526674787021 (WhatsApp 667 478 7021); ETA de llegada "30-60 min" (una sola promesa); marca #E36414 (naranja) + azul de marca #1e40af; rojo prohibido → #C2410C; textos de contraste en #C2410C.
+- HTTP 200; JSON-LD parsea; canonical == og:url == twitter:url; 0 apariciones de "plomero" (fuga de la plantilla hermana); email SOLO contacto@electricistaculiacanpro.mx; teléfono (llamadas) 667 478 7021 / wa.me/526674787021 (WhatsApp 667 478 7021); ETA de llegada "30-60 min" (una sola promesa); marca #E36414 (naranja) + azul de marca #1e40af; rojo prohibido → #C2410C; textos de contraste en #C2410C.
 - Las colonias tienen DOS formas de JSON-LD (array plano y @graph): todo script que edite schema maneja ambas. Un href con ${...} es literal de JS.
 - contacto/ está en CUARENTENA en auto-fixers.py (no la tocan los lotes); 19 páginas <150 tokens también.
 
@@ -71,7 +71,7 @@ decide_humano:
 - [2026-10-12] ESPECIFICACION: antes de proponer cambiar el ÚNICO `<img>` con `electricista-culiacan-pro-logo.webp` de una página (el nav en contacto/, servicios/index y el hub), leer `validate-landing.sh` check 5 ("Footer logo pro": grep de esa cadena en TODA la página) y exigir en la tarea el bloque `.footer-logo` de index.html l.944 (lazy) como lleva la plantilla; T2 20261012 salió con criterio "validate PASO" imposible y costó una ronda del ejecutor + una del arreglador.
 - [2026-10-08] ESPECIFICACION: un criterio de `currentSrc`/imagen cargada por página debe excluir (o esperar el otro candidato en) las páginas cuyo HERO ya carga la MISMA imagen en otro tamaño: el navegador reutiliza la ya descargada (T2: mantenimiento-tablero siguió en 800w con el markup correcto). Antes de exigir "-420w en las N", `grep` del asset en el preload/hero de cada página.
 - [2026-10-08] ESPECIFICACION: cuando una tarea convive con un bump site-wide sin commitear, el criterio de "N pares -/+" de las otras tareas cuenta las 2 líneas del ?v= (link + noscript), no 1 (T3: "2 pares" eran 3; el ejecutor lo señaló).
-- [2026-10-06] ESPECIFICACION: un botón nuevo en un hero se especifica con el markup ESTÁNDAR del sitio (REGLAS 2026-06-17 "ESTÁNDAR DEFINITIVO": inline blanco/#C2410C con `<strong>Llamar:</strong> 667 392 2273`, el bloque de `blog/ahorro-energia-iluminacion-led`), nunca `class="btn-secondary"` pelado: en el CSS externo esa clase es slate `#334155` y en un hero naranja rompe la marca (T3 20261006, corregido en el briefing por el coordinador). Antes de proponer un markup, `grep` cómo lo hacen las páginas ya retocadas.
+- [2026-10-06] ESPECIFICACION: un botón nuevo en un hero se especifica con el markup ESTÁNDAR del sitio (REGLAS 2026-06-17 "ESTÁNDAR DEFINITIVO": inline blanco/#C2410C con `<strong>Llamar:</strong> 667 478 7021`, el bloque de `blog/ahorro-energia-iluminacion-led`), nunca `class="btn-secondary"` pelado: en el CSS externo esa clase es slate `#334155` y en un hero naranja rompe la marca (T3 20261006, corregido en el briefing por el coordinador). Antes de proponer un markup, `grep` cómo lo hacen las páginas ya retocadas.
 - [2026-09-28] ESPECIFICACION: un criterio de layout ("a 1280 los dos botones en la misma fila") se fija MIDIENDO primero la referencia con puppeteer: la home apila los botones del hero a 1280 (hero-content 550 px; wa top 1225 / tel 1270) y T2/T3 salieron "parcial" por un criterio imposible de cumplir con la copia byte a byte que la misma tarea exigía.
 - [2026-09-13] ESPECIFICACION: comprobar con `ls assets/images/optimizadas/<nombre>-420w.webp` que existen las variantes antes de exigir N <picture> (T4: 4/11).
 - [2026-09-21] ESPECIFICACION: toda tarea que inserte `<a>` en texto suelto debe exigir el color de marca en el criterio (`getComputedStyle(a).color == rgb(30, 64, 175)`): no hay regla global `a{}` y el enlace sale azul UA #0000EE (T3: 4 enlaces, ronda de arreglador).

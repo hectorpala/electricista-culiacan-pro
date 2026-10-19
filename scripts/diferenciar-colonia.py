@@ -28,7 +28,7 @@ import json, os, re, sys, html
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASEURL = "https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/"
-DESC_OLD = re.compile(r'Electricista profesional en [^."]*\. Emergencias 24/7 con llegada en 30-60 min\. Cotización gratis por WhatsApp\. Llama al 667 392 2273\. ★4\.8 en reseñas\.')
+DESC_OLD = re.compile(r'Electricista profesional en [^."]*\. Emergencias 24/7 con llegada en 30-60 min\. Cotización gratis por WhatsApp\. Llama al 667 478 7021\. ★4\.8 en reseñas\.')
 
 EJEMPLO = {
   "slug": "nombre-colonia",

@@ -187,8 +187,8 @@ find servicios/ -name "index.html" -exec sed -i '' 's|<style>.*</style>|<link re
   "version": "v2.0.0",
   "lastUpdate": "2025-01-28T00:00:00Z",
   "contact": {
-    "phone": "+526673922273",
-    "phoneDisplay": "667 392 2273",
+    "phone": "+526674787021",
+    "phoneDisplay": "667 478 7021",
     "whatsapp": "526674787021",
     "email": "contacto@electricistaculiacanpro.mx"
   },
@@ -241,7 +241,7 @@ find servicios/ -name "index.html" -exec sed -i '' 's|<style>.*</style>|<link re
 **❌ ANTES (hardcoded):**
 ```html
 <a href="https://wa.me/526674787021">WhatsApp</a>
-<a href="tel:+526673922273">Llamar</a>
+<a href="tel:+526674787021">Llamar</a>
 ```
 
 **✅ DESPUÉS (desde config):**
@@ -1245,7 +1245,7 @@ open -a Safari "http://localhost:8080/servicios/[slug]/index.html"
   - [ ] `<span class="online-badge"></span>`
 
 - [ ] **Botón Llamar presente** con:
-  - [ ] `href="tel:+526673922273"`
+  - [ ] `href="tel:+526674787021"`
   - [ ] `id="cta-llamar"`
   - [ ] `class="floating-btn floating-call"`
   - [ ] SVG icon completo (NO emoji 📞)
@@ -1359,7 +1359,7 @@ open -a Safari "http://localhost:8080/servicios/[slug]/index.html"
 **✅ VERIFICAR:**
 ```bash
 # Teléfonos coinciden con config
-jq -r '.contact.phone' config/landing.json  # Debe ser +526673922273
+jq -r '.contact.phone' config/landing.json  # Debe ser +526674787021
 jq -r '.contact.whatsapp' config/landing.json  # Debe ser 526674787021
 ```
 
@@ -1381,7 +1381,7 @@ jq -r '.contact.whatsapp' config/landing.json  # Debe ser 526674787021
 - [ ] **BreadcrumbList schema** presente y coincide con breadcrumb HTML
 - [ ] **Service schema** presente
 - [ ] **LocalBusiness/Electrician schema** presente con:
-  - [ ] Teléfono correcto: +52 667 392 2273
+  - [ ] Teléfono correcto: +52 667 478 7021
   - [ ] Email: contacto@electricistaculiacanpro.mx
   - [ ] Coordenadas: 24.7903, -107.3878
 - [ ] **FAQPage schema** presente (si aplica)
@@ -1523,7 +1523,7 @@ feat(landing): [nombre-de-la-pagina] - implementación completa
 - [x] SEO: Title 50-60 chars, Description 120-155 chars
 - [x] Breadcrumb HTML visible
 - [x] GTM: gtag.js + GTM lazy load + noscript
-- [x] Teléfonos: 667 392 2273 (todos)
+- [x] Teléfonos: 667 478 7021 (todos)
 - [x] Imagen hero: emergencia-electrica-culiacan
 - [x] JSON-LD schemas: WebSite + Breadcrumb + Service + FAQ
 - [x] Responsive mobile: media queries OK

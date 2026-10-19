@@ -40,8 +40,8 @@ for rel in sys.argv[1:]:
     bad = [e for e in emails if e.lower() != "contacto@electricistaculiacanpro.mx" and not e.endswith(("schema.org", "w3.org"))]
     if bad: fallas.append(f"email {bad}")
     nums = set(re.findall(r'(?:tel:\+?|"telephone"\s*:\s*"\+?)([\d\s-]{8,})', html))
-    badn = [n for n in nums if re.sub(r'\D', '', n) not in ("526673922273", "6673922273")]
-    # WhatsApp cambió a 667 478 7021 el 19-oct-2026: wa.me solo con 526674787021
+    badn = [n for n in nums if re.sub(r'\D', '', n) not in ("526674787021", "6674787021")]
+    # 19-oct-2026: un solo número (526674787021) también en wa.me
     wans = set(re.findall(r'wa\.me/([\d\s-]{8,})', html))
     badn += [n for n in wans if re.sub(r'\D', '', n) not in ("526674787021", "6674787021")]
     if badn: fallas.append(f"tel {badn}")

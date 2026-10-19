@@ -60,8 +60,8 @@ def fix_file(filepath, slug, dry_run=False):
 
     # HTML FIX 3: tel:+52
     content = content.replace(
-        'href="tel:6673922273" class="btn-secondary"',
-        'href="tel:+526673922273" class="btn-secondary"')
+        'href="tel:6674787021" class="btn-secondary"',
+        'href="tel:+526674787021" class="btn-secondary"')
 
     # HTML FIX 4: main.min.js
     if 'main.min.js' not in content:
@@ -84,11 +84,11 @@ def fix_file(filepath, slug, dry_run=False):
     # SEO FIX 1: Title con telefono
     content = content.replace(
         '<title>Electricista en %s, Culiac\u00e1n | 24/7</title>' % colony,
-        '<title>Electricista en %s, Culiac\u00e1n | 24/7 | 667 392 2273</title>' % colony)
+        '<title>Electricista en %s, Culiac\u00e1n | 24/7 | 667 478 7021</title>' % colony)
 
     # SEO FIX 2: Meta description con CTA
     old_desc = 'Electricista profesional en %s, Culiac\u00e1n \u00b7 Emergencia 24/7 \u00b7 Llegada 20-30 min \u00b7 Cotizaci\u00f3n gratis WhatsApp \u00b7 4.8\u2605' % colony
-    new_desc = 'Electricista profesional en %s, Culiac\u00e1n. Emergencias 24/7 con llegada en 20-30 min. Cotizaci\u00f3n gratis por WhatsApp. Llama al 667 392 2273. \u26054.8 en rese\u00f1as.' % colony
+    new_desc = 'Electricista profesional en %s, Culiac\u00e1n. Emergencias 24/7 con llegada en 20-30 min. Cotizaci\u00f3n gratis por WhatsApp. Llama al 667 478 7021. \u26054.8 en rese\u00f1as.' % colony
     content = content.replace(old_desc, new_desc)
 
     # SEO FIX 3: og:url + og:image
@@ -101,7 +101,7 @@ def fix_file(filepath, slug, dry_run=False):
         {"@type":"Electrician",
          "name":"Electricista Culiac\u00e1n Pro - %s" % colony,
          "url":"https://electricistaculiacanpro.mx/servicios/electricista-colonias-culiacan/%s/" % slug,
-         "telephone":"+526673922273",
+         "telephone":"+526674787021",
          "address":{"@type":"PostalAddress","addressLocality":"Culiac\u00e1n","addressRegion":"Sinaloa","addressCountry":"MX"},
          "areaServed":{"@type":"Place","name":"%s, Culiac\u00e1n" % colony},
          "openingHoursSpecification":{"@type":"OpeningHoursSpecification",

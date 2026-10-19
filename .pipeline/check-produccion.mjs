@@ -20,7 +20,7 @@ import fs from "fs";
 import { sinAnalitica } from "./sin-analitica.mjs";
 
 const BASE = "https://electricistaculiacanpro.mx";
-const WA_NUMBER = "526674787021"; // WhatsApp (cambió 19-oct-2026; llamadas siguen en 526673922273)
+const WA_NUMBER = "526674787021"; // número único desde 19-oct-2026 (WhatsApp y llamadas)
 const UA = "Mozilla/5.0 (revisor-produccion; +pipeline-mantenimiento)";
 
 const CONSOLE_PAGES = ["/", "/contacto/"];

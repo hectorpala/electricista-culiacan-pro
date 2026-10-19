@@ -149,7 +149,7 @@ Si Google crea un Knowledge Panel:
 │  Pro                     │
 │  ⭐⭐⭐⭐⭐ 4.8 (150)      │
 │                          │
-│  📞 667 392 2273         │
+│  📞 667 478 7021         │
 │  🌐 electricistaculia... │
 └───────────────────────────┘
 ```

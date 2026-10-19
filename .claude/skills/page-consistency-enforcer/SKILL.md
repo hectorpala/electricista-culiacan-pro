@@ -261,7 +261,7 @@ body{
      aria-label="Contactar por WhatsApp">
     <svg width="24" height="24">...</svg>
   </a>
-  <a href="tel:+526673922273"
+  <a href="tel:+526674787021"
      class="floating-btn floating-call"
      aria-label="Llamar ahora">
     <svg width="24" height="24">...</svg>
@@ -325,7 +325,7 @@ body{
       "@type": "Electrician",
       "@id": "https://electricistaculiacanpro.mx/#business",
       "name": "Electricista Culiacán Pro",
-      "telephone": "+52 667 392 2273",
+      "telephone": "+52 667 478 7021",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Culiacán",

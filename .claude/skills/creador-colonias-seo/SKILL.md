@@ -30,7 +30,7 @@ Crea páginas de landing para colonias con todas las optimizaciones de PageSpeed
 - Imagen hero: `hero-electricista-culiacan`
 - Logo: `logo-256w.webp`
 - Ruta imágenes: `assets/images/optimizadas/`
-- Teléfono: 667 392 2273
+- Teléfono: 667 478 7021
 - WhatsApp: 526674787021
 - Colores: naranja (#E36414, #F97316)
 - Servicios: Instalación Eléctrica, Cortocircuitos, Contactos y Apagadores, Tableros, Iluminación, Emergencias 24/7
@@ -41,7 +41,7 @@ Crea páginas de landing para colonias con todas las optimizaciones de PageSpeed
 - Imagen hero: `hero-plomero-visita`
 - Logo: `logo-256.webp`
 - Ruta imágenes: `assets/images/`
-- Teléfono: 667 392 2273
+- Teléfono: 667 478 7021
 - WhatsApp: 526674787021
 - Colores: naranja (#E36414, #F97316)
 - Servicios: Reparación de Fugas, Destape de Drenajes, Instalación Sanitaria, Calentadores, Tinacos y Cisternas, Emergencias 24/7
@@ -229,8 +229,8 @@ https://pagespeed.web.dev/analysis?url=https://{{DOMINIO}}/servicios/{{SERVICIO_
 | `{{HERO_IMG}}` | hero-electricista-culiacan | hero-plomero-visita |
 | `{{LOGO}}` | logo-256w.webp | logo-256.webp |
 | `{{IMG_PATH}}` | optimizadas/ | (vacío) |
-| `{{TELEFONO}}` | 667 392 2273 | 667 392 2273 |
-| `{{TELEFONO_LINK}}` | 6673922273 | 6673922273 |
+| `{{TELEFONO}}` | 667 478 7021 | 667 478 7021 |
+| `{{TELEFONO_LINK}}` | 6674787021 | 6674787021 |
 | `{{WHATSAPP}}` | 526674787021 | 526674787021 |
 
 ---
@@ -243,4 +243,4 @@ https://pagespeed.web.dev/analysis?url=https://{{DOMINIO}}/servicios/{{SERVICIO_
 4. **Verificar que existe el directorio** antes de crear archivo
 5. **Score objetivo: 95+** - Si es menor, revisar checklist
 6. **El btn-secondary (Llamar) SÍ usa azul** (#0f4fa8) - esto es correcto
-7. **Ambos sitios usan el mismo teléfono** - 667 392 2273
+7. **Ambos sitios usan el mismo teléfono** - 667 478 7021

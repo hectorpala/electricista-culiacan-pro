@@ -193,9 +193,9 @@
 
 ## 📱 Teléfonos de Contacto Oficiales
 
-- **Número principal:** 667 392 2273
+- **Número principal:** 667 478 7021
 - **WhatsApp:** https://wa.me/526674787021
-- **Tel URI:** tel:+526673922273
+- **Tel URI:** tel:+526674787021
 
 ---
 

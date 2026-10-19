@@ -38,10 +38,10 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
  11. perf   (baja)  theme-color == #0066cc (placeholder prohibido); o pagina indexable
                     sin meta theme-color alguna.                   (bd9ccadf, fdc89c6c)
  12. links  (alta)  Telefono NO canonico: cualquier wa.me/<digitos>, tel:<...> o
-                    "telephone":"<...>" cuyo numero (solo digitos) no sea 526673922273
-                    ni 6673922273 (wa.me: 526674787021 / 6674787021, WhatsApp
+                    "telephone":"<...>" cuyo numero (solo digitos) no sea 526674787021
+                    ni 6674787021 (wa.me: 526674787021 / 6674787021, WhatsApp
                     cambiado el 19-oct-2026). Caza el placeholder 6677890000, el corrupto
-                    526676673922273 y el tel sin +52.                 (2026-06-17)
+                    526676674787021 y el tel sin +52.                 (2026-06-17)
  13. seo    (media) Overclaim "certificada/certificacion CFE" o "certificado oficial"+
                     "cfe": solo una UVIE acreditada certifica; nosotros entregamos
                     constancia/a norma NOM-001-SEDE.                  (2026-06-17)
@@ -97,12 +97,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # raiz del r
 BASE = "https://electricistaculiacanpro.mx"
 
 # Telefono canonico UNICO del sitio (solo digitos). Se aceptan dos formas:
-# con lada nacional 52 (526673922273, p.ej. wa.me/tel/JSON-LD) y sin ella
-# (6673922273, p.ej. un tel: nacional). Cualquier otro numero = fuga/placeholder/
+# con lada nacional 52 (526674787021, p.ej. wa.me/tel/JSON-LD) y sin ella
+# (6674787021, p.ej. un tel: nacional). Cualquier otro numero = fuga/placeholder/
 # corrupcion. Patrones malos vistos el 2026-06-17: placeholder de plantilla
-# 6677890000, corrupto por digitos duplicados 526676673922273, tel sin +52.
-PHONE_CANONICAL = {"526673922273", "6673922273"}
-# WhatsApp (wa.me) cambió a 667 478 7021 el 19-oct-2026; tel:/telephone siguen en 667 392 2273
+# 6677890000, corrupto por digitos duplicados 526676674787021, tel sin +52.
+PHONE_CANONICAL = {"526674787021", "6674787021"}
+# 19-oct-2026: UN solo número (667 478 7021) para WhatsApp (wa.me) y llamadas (tel:/telephone)
 WA_CANONICAL = {"526674787021", "6674787021"}
 
 # Directorios que NUNCA son paginas servidas del sitio (mismo criterio que
@@ -556,7 +556,7 @@ def check_page(fpath, t, noindex, redirects):
 
     # --- 12. telefono NO canonico (alta, links) — contacto roto = leads perdidos
     #         Normaliza a solo digitos (ignora +, espacios y guiones). Si el numero
-    #         no es 526673922273 ni 6673922273 -> fuga/placeholder/corrupcion.
+    #         no es 526674787021 ni 6674787021 -> fuga/placeholder/corrupcion.
     seen_phones = set()
     for m in re.finditer(
             r'wa\.me/(\+?[\d\s\-]+)'                       # wa.me/<numero>
@@ -574,11 +574,11 @@ def check_page(fpath, t, noindex, redirects):
             continue
         seen_phones.add(digits)
         add("alta", r, "links",
-            "Teléfono no canónico (%s); el número de WhatsApp es 526674787021 y el de llamadas 526673922273"
+            "Teléfono no canónico (%s); el único número del sitio es 526674787021"
             % m.group(0).strip(),
-            "Reemplazar por el canónico: wa.me/526674787021 (WhatsApp) · tel:+526673922273 · "
-            '"telephone":"+526673922273" (display "667 392 2273"). Patrones malos: placeholder '
-            "6677890000, corrupto 526676673922273, tel sin +52")
+            "Reemplazar por el canónico: wa.me/526674787021 (WhatsApp) · tel:+526674787021 · "
+            '"telephone":"+526674787021" (display "667 478 7021"). Patrones malos: placeholder '
+            "6677890000, corrupto 526676674787021, tel sin +52")
 
     # --- 13. overclaim certificación CFE (media — NO bloquea; visibiliza el lote)
     #         Solo una UVIE acreditada emite la verificación oficial para CFE; el
