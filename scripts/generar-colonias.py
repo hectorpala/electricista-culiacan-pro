@@ -15,9 +15,9 @@ COLONIAS_DIR = "colonias"
 FALTANTES_FILE = "colonias-faltantes.json"
 SITEMAP_FILE = "sitemap.xml"
 BLOQUE_SIZE = 15
-PHONE = "667 392 2273"
-PHONE_INTL = "+526673922273"
-# WhatsApp cambió a 667 478 7021 el 19-oct-2026 (el 392 2273 quedó bloqueado en WhatsApp; llamadas siguen en 392 2273)
+PHONE = "667 478 7021"
+PHONE_INTL = "+526674787021"
+# 19-oct-2026: llamadas también pasan a 667 478 7021 (el 392 2273 deja de usarse en el sitio); un solo número para WhatsApp y llamadas
 WA_DISPLAY = "667 478 7021"
 WA_NUM = "526674787021"
 DOMAIN = "electricistaculiacanpro.mx"
@@ -93,7 +93,7 @@ def generate_html(colonia):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Electricista en {nombre}, Culiacan | Servicio 24/7 + Garantia</title>
-<meta name="description" content="Electricista en {tipo_texto} {nombre}, Culiacan. Instalaciones, reparaciones, cortocircuitos, emergencias 24/7. WhatsApp: {WA_DISPLAY}">
+<meta name="description" content="Electricista en {tipo_texto} {nombre}, Culiacan. Instalaciones, reparaciones, cortocircuitos, emergencias 24/7. WhatsApp: {PHONE}">
 <meta http-equiv="content-language" content="es-MX">
 <meta name="geo.region" content="MX-SIN">
 <meta name="geo.placename" content="Culiacan">
@@ -131,12 +131,12 @@ def generate_html(colonia):
 
 <p class="hero-subtitle fade-in">Servicio profesional de electricidad para residentes de {nombre}. Atencion rapida, precios justos y garantia en todos los trabajos.</p>
 <div style="background:#e8f5ff;padding:20px;border-radius:8px;margin:24px 0;border-left:4px solid #1E40AF;"><p style="margin:0;font-size:15px;line-height:1.6;"><strong>Servicios principales:</strong> <a href="../../servicios/emergencia-24-7/" style="color:#1E40AF;">Emergencias 24/7</a>, <a href="../../servicios/instalacion-electrica/" style="color:#1E40AF;">instalacion electrica</a>, <a href="../../servicios/reparacion-cortocircuitos/" style="color:#1E40AF;">reparacion de cortocircuitos</a> y <a href="../../servicios/instalacion-iluminacion/" style="color:#1E40AF;">iluminacion LED</a>.</p></div>
-<p class="hero-contact">WhatsApp: {WA_DISPLAY} · Tel: {PHONE}</p><a href="#contacto" class="btn-primary hover-lift">Solicitar Servicio</a></div></div></header>
+<p class="hero-contact">WhatsApp y llamadas: {PHONE}</p><a href="#contacto" class="btn-primary hover-lift">Solicitar Servicio</a></div></div></header>
 <section class="section section-alt"><div class="container"><h2>¿Por Que Elegirnos en {nombre}?</h2><div class="benefits-grid"><div class="benefit"><div class="benefit-icon">⚡</div><h3>Llegada Rapida</h3><p>30-60 min en emergencias</p></div><div class="benefit"><div class="benefit-icon">💰</div><h3>Precios Justos</h3><p>Cotizacion sin compromiso</p></div><div class="benefit"><div class="benefit-icon">🛡️</div><h3>Garantia Escrita</h3><p>30-90 dias segun trabajo</p></div><div class="benefit"><div class="benefit-icon">🔌</div><h3>Certificacion CFE</h3><p>Normas NOM vigentes</p></div><div class="benefit"><div class="benefit-icon">📄</div><h3>Factura Disponible</h3><p>CFDI para empresas</p></div></div></div></section>
 <section id="servicios" class="section"><div class="container"><h2>Servicios Electricos en {nombre}</h2><div class="grid"><div class="card"><h3>⚡ Instalacion Electrica</h3><p>Cableado, tierra fisica, tableros. Instalaciones nuevas y ampliaciones conforme a normas CFE.</p></div><div class="card"><h3>🔧 Reparacion de Cortocircuitos</h3><p>Deteccion y reparacion de fallas electricas. Servicio de emergencia 24/7.</p></div><div class="card"><h3>🔌 Contactos y Apagadores</h3><p>Instalacion de contactos polarizados, apagadores de escalera, dimmers.</p></div><div class="card"><h3>💡 Iluminacion LED</h3><p>Lamparas, spots empotrados, focos ahorradores. Diseno de iluminacion.</p></div><div class="card"><h3>⚙️ Tableros Electricos</h3><p>Mantenimiento, cambio de breakers, ampliacion de capacidad.</p></div><div class="card"><h3>🚨 Emergencias 24/7</h3><p>Atencion inmediata para cortocircuitos, apagones y cables danados.</p></div></div></div></section>
 <section class="section section-alt"><div class="container"><h2>Cobertura en {nombre}</h2><div class="pricing-content"><div class="pricing-box"><h3>Servicio Profesional en Todo el {tipo_texto}</h3><p><strong>✓ Respuesta Rapida:</strong> Llegamos en 30-60 minutos.</p><p><strong>✓ Cotizacion Gratis:</strong> Diagnostico desde $200 MXN.</p><p><strong>✓ Horario 24/7:</strong> Emergencias cualquier dia.</p><p><strong>✓ Zonas Cercanas:</strong> Atendemos colonias aledañas.</p><p><strong>✓ Garantia:</strong> Todos los trabajos con garantia escrita.</p></div></div></div></section>
 
-<section id="contacto" class="section section-alt"><div class="container"><h2>¿Necesitas Electricista en {nombre}?</h2><div class="final-cta"><p class="cta-text">WhatsApp: <strong>{WA_DISPLAY}</strong> · Llegada en 30-60 min</p><div class="cta-buttons"><a href="https://wa.me/{WA_NUM}?text=Hola,%20necesito%20un%20electricista%20en%20{nombre_encoded}" target="_blank" class="btn-primary">WhatsApp</a><a href="tel:{PHONE_INTL}" class="btn-secondary">Llamar</a></div></div></div></section>
+<section id="contacto" class="section section-alt"><div class="container"><h2>¿Necesitas Electricista en {nombre}?</h2><div class="final-cta"><p class="cta-text">WhatsApp o llamadas: <strong>{PHONE}</strong> · Llegada en 30-60 min</p><div class="cta-buttons"><a href="https://wa.me/{WA_NUM}?text=Hola,%20necesito%20un%20electricista%20en%20{nombre_encoded}" target="_blank" class="btn-primary">WhatsApp</a><a href="tel:{PHONE_INTL}" class="btn-secondary">Llamar</a></div></div></div></section>
 <footer class="footer"><div class="container"><p>&copy; 2025 Electricista Culiacan Pro. Servicio en {nombre}. | <a href="/terminos/">Terminos</a> | <a href="/privacidad/">Privacidad</a></p></div></footer>
 <script>const m=document.querySelector('.mobile-menu-btn'),n=document.querySelector('.nav-menu');m.addEventListener('click',()=>{{n.classList.toggle('active');m.classList.toggle('active')}});document.querySelectorAll('.nav-link').forEach(l=>l.addEventListener('click',()=>{{n.classList.remove('active');m.classList.remove('active')}}));</script>
 <style>.floating-btn{{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}}.floating-btn:hover{{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}}.floating-call{{background:#1E40AF;bottom:18px}}.floating-whatsapp{{background:#25D366;bottom:78px}}</style>

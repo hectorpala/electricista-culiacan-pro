@@ -178,9 +178,9 @@ Las Quintas, Tres Ríos, Centro · Cotización gratis por WhatsApp · Garantía 
 </a>
 
 <!-- Botón secundario llamada -->
-<a href="tel:6673922273">
+<a href="tel:6674787021">
     <svg>Phone Icon</svg>
-    <span><strong>Llamar:</strong> 667 392 2273</span>
+    <span><strong>Llamar:</strong> 667 478 7021</span>
 </a>
 
 <!-- Urgencia -->

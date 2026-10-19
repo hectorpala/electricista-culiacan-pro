@@ -11,7 +11,7 @@ Entra a https://business.google.com con la cuenta del negocio.
 - [ ] **Categoría principal:** "Electricista" (Electrician). Es lo más importante para rankear.
 - [ ] **Categorías secundarias:** agrega "Servicio de instalación eléctrica", "Contratista eléctrico", "Servicio de reparación de aires acondicionados" (si aplica).
 - [ ] **Nombre del negocio:** exactamente "Electricista Culiacán Pro" (sin meter keywords extra, eso viola las reglas).
-- [ ] **Teléfono:** 667 392 2273 (idéntico al de la web — NAP consistente).
+- [ ] **Teléfono:** 667 478 7021 (idéntico al de la web — NAP consistente).
 - [ ] **Sitio web:** https://electricistaculiacanpro.mx/
 - [ ] **Área de servicio:** como es servicio a domicilio, configura "negocio con área de servicio" (sin dirección pública) y agrega **Culiacán** + las colonias/zonas principales.
 - [ ] **Horario:** marca **Abierto 24 horas** (coincide con el "24/7" de la web).

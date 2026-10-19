@@ -68,8 +68,8 @@ def fix_page(filepath, dry_run=False):
             fixes.append('noopener: added %d' % (new_noopener - noopener_count))
 
     # FIX 2: tel:+52 format
-    if 'tel:6673922273' in content:
-        content = content.replace('tel:6673922273', 'tel:+526673922273')
+    if 'tel:6674787021' in content:
+        content = content.replace('tel:6674787021', 'tel:+526674787021')
         fixes.append('tel:+52 format')
 
     # FIX 3: z-index 50->90, 60->90 for floating buttons

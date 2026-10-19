@@ -212,7 +212,7 @@ Reescribe cada benefit con:
 
 ```html
 <p class="benefits-cta">
-    <strong>Agenda tu [servicio] hoy mismo desde WhatsApp o llamada al <a href="tel:6673922273">667 392 2273</a></strong><br>
+    <strong>Agenda tu [servicio] hoy mismo desde WhatsApp o llamada al <a href="tel:6674787021">667 478 7021</a></strong><br>
     <span class="benefits-cta-subtitle">Servicio de [servicio] más confiable de Culiacán</span>
 </p>
 ```
@@ -264,7 +264,7 @@ open servicios/[nuevo-slug]/index.html
 - Navegación, footer
 - **Sección "Nuestros Servicios" COMPLETA**
 - Floating CTAs (estructura, solo texto WhatsApp)
-- Teléfonos (667 392 2273)
+- Teléfonos (667 478 7021)
 - GTM/GA IDs
 - Critical CSS
 - data-template-version="v2.0.0"
@@ -277,7 +277,7 @@ cp -r servicios/reparacion-cortos-circuitos servicios/instalacion-minisplit
 
 # 2. Editar contenido en index.html
 # - Title: "Instalación Minisplit Culiacán | Clima Profesional"
-# - Description: "⚡ Instalación minisplit en Culiacán. Inverter y estándar. Instalación certificada. ¡Llama: 667 392 2273!"
+# - Description: "⚡ Instalación minisplit en Culiacán. Inverter y estándar. Instalación certificada. ¡Llama: 667 478 7021!"
 # - H1: "Instalación de Minisplit en Culiacán | Clima Profesional"
 # - Hero image: emergencia-electrica-culiacan → instalacion-minisplit-culiacan
 # - Benefits: 4 beneficios sobre instalación de clima

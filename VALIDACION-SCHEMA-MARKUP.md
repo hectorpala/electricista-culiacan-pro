@@ -184,7 +184,7 @@ Una vez que el sitio esté en producción e indexado por Google:
 - Mejora UX en resultados de búsqueda
 
 **4. Información de Contacto Destacada** 📞
-- Teléfono clickeable: 667 392 2273
+- Teléfono clickeable: 667 478 7021
 - Horarios: "Abierto 24/7"
 - Área de servicio: Culiacán, Sinaloa
 
