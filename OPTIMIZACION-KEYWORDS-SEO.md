@@ -111,7 +111,7 @@ en 30-60 minutos · Garantía escrita 6 meses.
 
 **Después**:
 ```html
-<title>Electricista Culiacán 24/7 ⚡ Llegada en 30-60 min | WhatsApp 667 392 2273</title>
+<title>Electricista Culiacán 24/7 ⚡ Llegada en 30-60 min | WhatsApp 667 478 7021</title>
 ```
 
 **Keywords agregadas**:
@@ -172,9 +172,9 @@ Las Quintas, Tres Ríos, Centro · Cotización gratis por WhatsApp · Garantía 
 **Después**:
 ```html
 <!-- Botón principal WhatsApp -->
-<a href="https://wa.me/526673922273?text=Hola,%20necesito%20un%20electricista%20urgente">
+<a href="https://wa.me/526674787021?text=Hola,%20necesito%20un%20electricista%20urgente">
     <svg>WhatsApp Icon</svg>
-    <span><strong>WhatsApp:</strong> 667 392 2273</span>
+    <span><strong>WhatsApp:</strong> 667 478 7021</span>
 </a>
 
 <!-- Botón secundario llamada -->

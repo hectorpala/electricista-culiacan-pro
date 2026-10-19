@@ -258,7 +258,7 @@ Buscar en el `<body>` la sección "¿Por qué elegirnos?" con clase `.benefits-g
 - Tiene `<div class="whatsapp-cta-box">` presente
 - Contiene heading: "¿Tienes dudas? Respondemos en 10 minutos"
 - Tiene botón con clase `whatsapp-cta-button` y texto "Abrir Chat"
-- Link apunta a: `https://wa.me/526673922273?text=...` (electricista)
+- Link apunta a: `https://wa.me/526674787021?text=...` (electricista)
 - Está ubicado dentro de `.benefits-grid` (después de los 4 benefits)
 - Usa SVG para iconos (NO emojis)
 
@@ -268,7 +268,7 @@ Buscar en el `<body>` la sección "¿Por qué elegirnos?" con clase `.benefits-g
 - Falta completamente el elemento `.whatsapp-cta-box` - FALLA
 - Texto del heading incorrecto o abreviado - FALLA
 - Botón no dice "Abrir Chat" - FALLA
-- Link no apunta a WhatsApp correcto (526673922273) - FALLA
+- Link no apunta a WhatsApp correcto (526674787021) - FALLA
 - Ubicado fuera de `.benefits-grid` - FALLA
 
 **Si falta o está mal:** Anotar línea exacta y qué falta/está incorrecto.

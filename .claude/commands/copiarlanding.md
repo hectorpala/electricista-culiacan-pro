@@ -157,7 +157,7 @@ Abre `servicios/[nuevo-slug]/index.html` y cambia **SOLO** estos textos:
 #### K) Hero CTAs WhatsApp (líneas 369, 389):
 
 ```html
-<a href="https://wa.me/526673922273?text=Hola,%20necesito%20[servicio]%20en%20Culiacán"
+<a href="https://wa.me/526674787021?text=Hola,%20necesito%20[servicio]%20en%20Culiacán"
 ```
 
 #### L) Benefits H2 (línea 399):
@@ -201,7 +201,7 @@ Reescribe cada benefit con:
         <h3>¿Tienes dudas? Respondemos en 10 minutos</h3>
         <p>Cotiza, agenda o reporta [tipo de servicio] por WhatsApp - cualquier hora del día</p>
     </div>
-    <a href="https://wa.me/526673922273?text=Hola,%20necesito%20[servicio]%20en%20Culiacán" class="whatsapp-cta-button">
+    <a href="https://wa.me/526674787021?text=Hola,%20necesito%20[servicio]%20en%20Culiacán" class="whatsapp-cta-button">
         <!-- Mantén el SVG -->
         Abrir Chat
     </a>
@@ -225,7 +225,7 @@ Reescribe cada benefit con:
 
 Actualizar solo el texto del WhatsApp:
 ```html
-<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20[servicio]%20en%20Culiac%C3%A1n"
+<a href="https://wa.me/526674787021?text=Hola%2C%20necesito%20[servicio]%20en%20Culiac%C3%A1n"
 ```
 
 ### Paso 3: Validar

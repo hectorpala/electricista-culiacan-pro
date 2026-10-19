@@ -3,7 +3,8 @@
 proyecto: electricista
 repo: /Users/openclaw/Sitios Web/Electricista Culiacán
 produccion: https://electricistaculiacanpro.mx/
-objetivo: más llamadas y WhatsApp (wa.me/526673922273) desde Culiacán; después indexación y CTR en GSC; la home es el activo que convierte (no degradarla).
+objetivo: más llamadas y WhatsApp (wa.me/526674787021; llamadas 667 392 2273) desde Culiacán; después indexación y CTR en GSC; la home es el activo que convierte (no degradarla).
+# NOTA: WhatsApp cambió a 667 478 7021 el 19-oct-2026 (el 392 2273 quedó bloqueado en WhatsApp; llamadas siguen en 392 2273).
 propiedad_gsc: https://electricistaculiacanpro.mx/
 
 memoria (leer antes de trabajar, en este orden):
@@ -29,7 +30,7 @@ gate_archivo:
 - python3 .pipeline/gate-pagina.py <ruta/index.html>   → CANDADO OK (validate-landing + ci-gate + anti-doorway Jaccard < 0.80)
 
 invariantes (toda página servida):
-- HTTP 200; JSON-LD parsea; canonical == og:url == twitter:url; 0 apariciones de "plomero" (fuga de la plantilla hermana); email SOLO contacto@electricistaculiacanpro.mx; teléfono 667 392 2273 / wa.me/526673922273; ETA de llegada "30-60 min" (una sola promesa); marca #E36414 (naranja) + azul de marca #1e40af; rojo prohibido → #C2410C; textos de contraste en #C2410C.
+- HTTP 200; JSON-LD parsea; canonical == og:url == twitter:url; 0 apariciones de "plomero" (fuga de la plantilla hermana); email SOLO contacto@electricistaculiacanpro.mx; teléfono (llamadas) 667 392 2273 / wa.me/526674787021 (WhatsApp 667 478 7021); ETA de llegada "30-60 min" (una sola promesa); marca #E36414 (naranja) + azul de marca #1e40af; rojo prohibido → #C2410C; textos de contraste en #C2410C.
 - Las colonias tienen DOS formas de JSON-LD (array plano y @graph): todo script que edite schema maneja ambas. Un href con ${...} es literal de JS.
 - contacto/ está en CUARENTENA en auto-fixers.py (no la tocan los lotes); 19 páginas <150 tokens también.
 
@@ -47,7 +48,7 @@ assets:
 - CSS servido como immutable: cambiar contenido exige bump de ?v= en las referencias. Aplicar el cambio en los 3 CSS (styles.css, styles.min.css, styles.7f293647.css) y bumpear con la ceremonia PROPIA de auto-fixers (escribe `.pipeline/css-bump-state.json`, que `verify` usa para certificar el bump como mecánico):
   `python3 -c "import importlib.util as u,os;s=u.spec_from_file_location('af',os.path.join('.pipeline','auto-fixers.py'));m=u.module_from_spec(s);s.loader.exec_module(m);print(m._do_full_bump('equipo'))"` (desde el worktree; sube ?v= en TODAS las páginas, contacto/ incluida — comprobado 2026-10-08: 695 archivos, la CUARENTENA solo aplica a los fixers de contenido — + CACHE_VERSION de sw.js). NO usar `scripts/bump-css-version.py`: no escribe css-bump-state.json → `verify` marcaría ~690 HTML como libres y el siguiente `auto-fixers.py run --apply` re-bumpearía por auto-reparo (detectado 2026-09-21 al revisar el plan de T5).
 - ESTADO DE BUMP (css-bump-state.json y js-bump-state.json): `verify` reconstruye cada página con el token de AMBOS archivos; si alguien bumpea el JS (o el CSS) por fuera de la ceremonia (commit ajeno 12da3ffe del 4-oct: `main.min.js?v=20261004` sin registrar), TODO bump posterior da ~679 libres y `run --apply` re-bumpea el JS por auto-reparo. Antes de un bump site-wide comprobar que el token de cada json == el que llevan las páginas (`grep -o 'main.min.js?v=[0-9]*' index.html`); si no, realinear el json (token real + sha256 real del asset) en el mismo commit y explicarlo (hecho 2026-10-08).
-- JS: main.js (fuente) y main.min.js (servido) están DIVERGIDOS (bk-e977a123): hasta reconciliarlos, un cambio de JS se parcha quirúrgicamente en main.min.js (REGLAS.md 2026-07-25), se verifica `grep -oE 'wa\.me/[0-9]+' main.min.js` == wa.me/526673922273 y `node --check`, y se bumpea con
+- JS: main.js (fuente) y main.min.js (servido) están DIVERGIDOS (bk-e977a123): hasta reconciliarlos, un cambio de JS se parcha quirúrgicamente en main.min.js (REGLAS.md 2026-07-25), se verifica `grep -oE 'wa\.me/[0-9]+' main.min.js` == wa.me/526674787021 y `node --check`, y se bumpea con
   `python3 -c "import importlib.util as u,os;s=u.spec_from_file_location('af',os.path.join('.pipeline','auto-fixers.py'));m=u.module_from_spec(s);s.loader.exec_module(m);print(m._do_full_js_bump('equipo'))"` (+ subir CACHE_VERSION en sw.js si no lo hizo).
 
 visual: node .pipeline/check-produccion.mjs (producción en vivo, puppeteer) · puppeteer vive SOLO en el ÁRBOL PRINCIPAL (`node_modules/` no se versiona, así que NO existe en el worktree): `require('/Users/openclaw/Sitios Web/Electricista Culiacán/node_modules/puppeteer')` en un script /tmp apuntando al servidor local del worktree; el skip-link se mide así: goto `<url>#main-content` → top ≥ nav fijo). (`check-skip-link.mjs` no existe; retirado 2026-09-23.) · Lanzar SIEMPRE con `headless:'shell'`: en este sandbox `headless:'new'` no dispara requestAnimationFrame y ninguna imagen `loading="lazy"` carga en ninguna página (T1 20261014: 22/22 sin cargar con 'new', 8/8 con 'shell'); `waitUntil:'networkidle2'` puede colgarse tras un clic → `domcontentloaded` + espera corta.

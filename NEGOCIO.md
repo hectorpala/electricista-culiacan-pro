@@ -61,7 +61,7 @@ ELECTRICIDAD (instalación, reparación, mantenimiento eléctrico) cae en el gir
   implique afirmar precios nuevos. `datePublished` NO se toca; `dateModified` = hoy si editas.
 
 ## Datos fijos (derivados, no inventar)
-- Contacto: **contacto@electricistaculiacanpro.mx** · tel/WhatsApp = el de la home (NAP).
+- Contacto: **contacto@electricistaculiacanpro.mx** · tel/WhatsApp = el de la home (NAP). WhatsApp cambió a 667 478 7021 el 19-oct-2026 (el 392 2273 quedó bloqueado en WhatsApp; llamadas siguen en 392 2273).
 - Anti-doorway: Jaccard < 0.80 (lo bloquea `gate-pagina.py`).
 - Marca: azul eléctrico (la home `index.html` es la fuente de verdad del estilo).
 
