@@ -31,7 +31,7 @@ Crea páginas de landing para colonias con todas las optimizaciones de PageSpeed
 - Logo: `logo-256w.webp`
 - Ruta imágenes: `assets/images/optimizadas/`
 - Teléfono: 667 392 2273
-- WhatsApp: 526673922273
+- WhatsApp: 526674787021
 - Colores: naranja (#E36414, #F97316)
 - Servicios: Instalación Eléctrica, Cortocircuitos, Contactos y Apagadores, Tableros, Iluminación, Emergencias 24/7
 
@@ -42,7 +42,7 @@ Crea páginas de landing para colonias con todas las optimizaciones de PageSpeed
 - Logo: `logo-256.webp`
 - Ruta imágenes: `assets/images/`
 - Teléfono: 667 392 2273
-- WhatsApp: 526673922273
+- WhatsApp: 526674787021
 - Colores: naranja (#E36414, #F97316)
 - Servicios: Reparación de Fugas, Destape de Drenajes, Instalación Sanitaria, Calentadores, Tinacos y Cisternas, Emergencias 24/7
 
@@ -231,7 +231,7 @@ https://pagespeed.web.dev/analysis?url=https://{{DOMINIO}}/servicios/{{SERVICIO_
 | `{{IMG_PATH}}` | optimizadas/ | (vacío) |
 | `{{TELEFONO}}` | 667 392 2273 | 667 392 2273 |
 | `{{TELEFONO_LINK}}` | 6673922273 | 6673922273 |
-| `{{WHATSAPP}}` | 526673922273 | 526673922273 |
+| `{{WHATSAPP}}` | 526674787021 | 526674787021 |
 
 ---
 

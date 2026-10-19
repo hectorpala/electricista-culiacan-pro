@@ -189,7 +189,7 @@ find servicios/ -name "index.html" -exec sed -i '' 's|<style>.*</style>|<link re
   "contact": {
     "phone": "+526673922273",
     "phoneDisplay": "667 392 2273",
-    "whatsapp": "526673922273",
+    "whatsapp": "526674787021",
     "email": "contacto@electricistaculiacanpro.mx"
   },
   "location": {
@@ -240,7 +240,7 @@ find servicios/ -name "index.html" -exec sed -i '' 's|<style>.*</style>|<link re
 
 **❌ ANTES (hardcoded):**
 ```html
-<a href="https://wa.me/526673922273">WhatsApp</a>
+<a href="https://wa.me/526674787021">WhatsApp</a>
 <a href="tel:+526673922273">Llamar</a>
 ```
 
@@ -1238,7 +1238,7 @@ open -a Safari "http://localhost:8080/servicios/[slug]/index.html"
 ### 📋 3. Botones Flotantes (OBLIGATORIO)
 
 - [ ] **Botón WhatsApp presente** con:
-  - [ ] `href="https://wa.me/526673922273?text=..."`
+  - [ ] `href="https://wa.me/526674787021?text=..."`
   - [ ] `id="cta-whatsapp"`
   - [ ] `class="floating-btn floating-whatsapp"`
   - [ ] SVG icon completo (NO emoji 💬)
@@ -1360,7 +1360,7 @@ open -a Safari "http://localhost:8080/servicios/[slug]/index.html"
 ```bash
 # Teléfonos coinciden con config
 jq -r '.contact.phone' config/landing.json  # Debe ser +526673922273
-jq -r '.contact.whatsapp' config/landing.json  # Debe ser 526673922273
+jq -r '.contact.whatsapp' config/landing.json  # Debe ser 526674787021
 ```
 
 **❌ SI HAY TELÉFONOS HARDCODED → Cliente recibe datos desactualizados**

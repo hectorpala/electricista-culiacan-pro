@@ -158,9 +158,9 @@ Analiza una landing page y genera un reporte detallado con calificación numéri
   - ✅ Color de botón destacado (naranja #E36414)
 
 - [ ] **WhatsApp links correctos** (3 pts)
-  - ✅ Formato: `https://wa.me/526673922273?text={mensaje}`
+  - ✅ Formato: `https://wa.me/526674787021?text={mensaje}`
   - ✅ Mensaje pre-rellenado con nombre del servicio
-  - ✅ Número correcto (667 392 2273)
+  - ✅ Número correcto (667 478 7021)
 
 #### Navegación y Usabilidad (8 pts)
 - [ ] **Breadcrumbs funcionales** (2 pts)

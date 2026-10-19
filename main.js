@@ -301,7 +301,7 @@
                                       `Teléfono: ${telefono}\n` +
                                       `Email: ${email}\n` +
                                       `Mensaje: ${mensaje}`;
-                const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+                const whatsappURL = `https://wa.me/526674787021?text=${encodeURIComponent(whatsappMessage)}`;
                 window.open(whatsappURL, '_blank');
                 window.location.href = '/gracias/';
             } else {
@@ -314,7 +314,7 @@
                                   `Teléfono: ${telefono}\n` +
                                   `Email: ${email}\n` +
                                   `Mensaje: ${mensaje}`;
-            const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+            const whatsappURL = `https://wa.me/526674787021?text=${encodeURIComponent(whatsappMessage)}`;
             window.location.href = whatsappURL;
         }
     });
@@ -665,7 +665,7 @@ if ('serviceWorker' in navigator) {
             if (selectedService) msg += 'Servicio: ' + selectedService + '\n';
             if (mensaje) msg += 'Detalle: ' + mensaje + '\n';
 
-            var whatsappURL = 'https://wa.me/526673922273?text=' + encodeURIComponent(msg);
+            var whatsappURL = 'https://wa.me/526674787021?text=' + encodeURIComponent(msg);
 
             try {
                 window.dataLayer = window.dataLayer || [];

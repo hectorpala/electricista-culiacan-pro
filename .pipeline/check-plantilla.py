@@ -39,7 +39,8 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     sin meta theme-color alguna.                   (bd9ccadf, fdc89c6c)
  12. links  (alta)  Telefono NO canonico: cualquier wa.me/<digitos>, tel:<...> o
                     "telephone":"<...>" cuyo numero (solo digitos) no sea 526673922273
-                    ni 6673922273. Caza el placeholder 6677890000, el corrupto
+                    ni 6673922273 (wa.me: 526674787021 / 6674787021, WhatsApp
+                    cambiado el 19-oct-2026). Caza el placeholder 6677890000, el corrupto
                     526676673922273 y el tel sin +52.                 (2026-06-17)
  13. seo    (media) Overclaim "certificada/certificacion CFE" o "certificado oficial"+
                     "cfe": solo una UVIE acreditada certifica; nosotros entregamos
@@ -101,6 +102,8 @@ BASE = "https://electricistaculiacanpro.mx"
 # corrupcion. Patrones malos vistos el 2026-06-17: placeholder de plantilla
 # 6677890000, corrupto por digitos duplicados 526676673922273, tel sin +52.
 PHONE_CANONICAL = {"526673922273", "6673922273"}
+# WhatsApp (wa.me) cambió a 667 478 7021 el 19-oct-2026; tel:/telephone siguen en 667 392 2273
+WA_CANONICAL = {"526674787021", "6674787021"}
 
 # Directorios que NUNCA son paginas servidas del sitio (mismo criterio que
 # check-indexabilidad.py).
@@ -564,15 +567,16 @@ def check_page(fpath, t, noindex, redirects):
         digits = re.sub(r'\D', "", raw)
         if not digits:
             continue
-        if digits in PHONE_CANONICAL:
+        es_wa = m.group(0).lower().startswith("wa.me")
+        if digits in (WA_CANONICAL if es_wa else PHONE_CANONICAL):
             continue
         if digits in seen_phones:
             continue
         seen_phones.add(digits)
         add("alta", r, "links",
-            "Teléfono no canónico (%s); el único número del sitio es 526673922273"
+            "Teléfono no canónico (%s); el número de WhatsApp es 526674787021 y el de llamadas 526673922273"
             % m.group(0).strip(),
-            "Reemplazar por el teléfono canónico: wa.me/526673922273 · tel:+526673922273 · "
+            "Reemplazar por el canónico: wa.me/526674787021 (WhatsApp) · tel:+526673922273 · "
             '"telephone":"+526673922273" (display "667 392 2273"). Patrones malos: placeholder '
             "6677890000, corrupto 526676673922273, tel sin +52")
 

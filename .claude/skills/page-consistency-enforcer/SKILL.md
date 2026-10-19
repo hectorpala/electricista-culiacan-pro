@@ -211,7 +211,7 @@ body{
         </svg>
         <h3>¿Tienes dudas? Respondemos en 10 minutos</h3>
         <p>Chatea con nosotros y recibe atención personalizada</p>
-        <a href="https://wa.me/526673922273?text=..."
+        <a href="https://wa.me/526674787021?text=..."
            class="whatsapp-cta-button"
            target="_blank"
            rel="noopener">Abrir Chat</a>
@@ -254,7 +254,7 @@ body{
 ```html
 <!-- Antes del cierre </body> -->
 <div style="position:fixed;bottom:20px;right:20px;z-index:100;display:flex;flex-direction:column;gap:10px">
-  <a href="https://wa.me/526673922273?text=..."
+  <a href="https://wa.me/526674787021?text=..."
      class="floating-btn floating-whatsapp"
      target="_blank"
      rel="noopener"

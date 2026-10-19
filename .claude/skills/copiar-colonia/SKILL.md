@@ -47,7 +47,7 @@ IMPORTANTE: El nombre es "hero-electricista-culiacan-" NO "electricista-culiacan
 # Telefono
 - "667 120 5864" -> "667 392 2273"
 - "6671205864" -> "6673922273"
-- "526671205864" -> "526673922273"
+- "526671205864" -> "526674787021" (WhatsApp; el de llamadas es 526673922273)
 
 # Dominio
 - "plomeroculiacanpro.mx" -> "electricistaculiacanpro.mx"
@@ -116,7 +116,7 @@ Nota: Para zona comercial (Centro), usar 🏢 en vez de 🏠
 - [ ] Hero: hero-electricista-culiacan-*.webp
 - [ ] srcset con rutas relativas ../../../
 - [ ] Telefono: 667 392 2273
-- [ ] WhatsApp: 526673922273
+- [ ] WhatsApp: 526674787021
 - [ ] Dominio: electricistaculiacanpro.mx
 - [ ] Logo: electricista-culiacan-pro-logo.webp
 - [ ] Sin menciones a plomero/plomeria

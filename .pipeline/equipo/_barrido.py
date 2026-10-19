@@ -39,8 +39,11 @@ for rel in sys.argv[1:]:
     emails = set(re.findall(r'[\w.+-]+@[\w-]+\.[\w.]+', html))
     bad = [e for e in emails if e.lower() != "contacto@electricistaculiacanpro.mx" and not e.endswith(("schema.org", "w3.org"))]
     if bad: fallas.append(f"email {bad}")
-    nums = set(re.findall(r'(?:wa\.me/|tel:\+?|"telephone"\s*:\s*"\+?)([\d\s-]{8,})', html))
+    nums = set(re.findall(r'(?:tel:\+?|"telephone"\s*:\s*"\+?)([\d\s-]{8,})', html))
     badn = [n for n in nums if re.sub(r'\D', '', n) not in ("526673922273", "6673922273")]
+    # WhatsApp cambió a 667 478 7021 el 19-oct-2026: wa.me solo con 526674787021
+    wans = set(re.findall(r'wa\.me/([\d\s-]{8,})', html))
+    badn += [n for n in wans if re.sub(r'\D', '', n) not in ("526674787021", "6674787021")]
     if badn: fallas.append(f"tel {badn}")
     etas = set(re.findall(r'(\d{2})\s*[-–a]\s*(\d{2})\s*min', html))
     bade = [f"{a}-{b}" for a, b in etas if (a, b) != ("30", "60")]
